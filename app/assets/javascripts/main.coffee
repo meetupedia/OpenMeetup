@@ -1,2 +1,2 @@
 $ ->
-  $('.tabs').tabs()
+  $('.tabbable').tab()

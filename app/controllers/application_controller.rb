@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   before_filter :set_locale
   helper_method :current_user
 
+  auto_user
+
 private
 
   def current_user

@@ -1,4 +1,6 @@
 Openmeetup::Application.routes.draw do
+  resources :events
+
   resources :groups
 
   resources :users

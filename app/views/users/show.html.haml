@@ -1,3 +1,24 @@
 %h1
   = @user.name
   profilja
+
+.row
+  .span8
+    .tabbable
+      %ul.nav.nav-tabs
+        %li.active
+          %a{:href => '#1', 'data-toggle' => 'tab'} Tartalom
+        %li
+          %a{:href => '#2', 'data-toggle' => 'tab'} Csoportok
+      .tab-content
+        #1.tab-pane.active
+        #2.tab-pane
+          = link_to 'Új csoport létrehozása', new_group_path, :class => 'btn btn-primary'
+
+  .span4
+    .well
+      Követés
+    .well
+      Infó
+    .well
+      Aktivitás
