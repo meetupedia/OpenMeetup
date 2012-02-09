@@ -1,0 +1,8 @@
+hu:
+  menu:
+    exit: 'Kilépés'
+    home: 'Címlap'
+    language: 'Nyelv'
+    login_with_facebook: 'Bejelentkezés Facebookkal'
+    profile: 'Profil'
+    search: 'Keresés'

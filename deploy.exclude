@@ -1,0 +1,9 @@
+deploy.exclude
+deploy.sh
+.git
+.sass-cache
+.tmp*
+config/database.yml
+db/sphinx
+log/*
+tmp

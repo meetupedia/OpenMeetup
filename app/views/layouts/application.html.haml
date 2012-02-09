@@ -1,0 +1,42 @@
+!!!
+%html
+  %head
+    %title OpenMeetup
+    %meta{'http-equiv' => 'content-type', :content => 'text/html; charset=utf-8'}
+    = stylesheet_link_tag 'application', :media => 'all'
+    = csrf_meta_tags
+  %body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          = link_to 'OpenMeetup', root_path, :class => 'brand'
+          .nav-collapse
+            %ul.nav
+              %li{:class => (controller.controller_name == 'root' ? 'active' : '')}= link_to t('menu.home'), root_path
+            %form.navbar-search.pull-left
+              %input{:type => 'text', :class => 'search-query', :placeholder => t('menu.search')}
+            - if current_user
+              %ul.nav.pull-right
+                %li.dropdown
+                  %a.dropdown-toggle{'data-toggle' => 'dropdown'}
+                    = t('menu.language')
+                    %b.caret
+                  %ul.dropdown-menu
+                    %li= link_to 'English', '?locale=en'
+                    %li= link_to 'Magyar', '?locale=hu'
+                %li.dropdown
+                  %a.dropdown-toggle{'data-toggle' => 'dropdown'}
+                    = current_user.name
+                    %b.caret
+                  %ul.dropdown-menu
+                    %li= link_to t('menu.profile'), current_user
+                    %li= link_to t('menu.exit'), signout_path
+            - else
+              %p.navbar-text.pull-right
+                - if Rails.env == 'development'
+                  = link_to 'Π', '/auth/developer'
+                = link_to image_tag('facebook-connect-button.png', :alt => t('menu.login_with_facebook')), '/auth/facebook'
+    #content.container
+      = yield
+    = javascript_include_tag 'application'
+    = yield :scripts
