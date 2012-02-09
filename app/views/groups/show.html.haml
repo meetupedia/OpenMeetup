@@ -1,0 +1,10 @@
+%h1= @group.name
+
+.row
+  .span8
+    = debug @group
+  .span4
+    .well
+      %h3 Aktivitás
+      %table.table.table-striped
+        = render @group.activities.order('created_at DESC').limit(5)

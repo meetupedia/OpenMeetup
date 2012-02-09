@@ -1,0 +1,9 @@
+- case activity.activable.class.name
+  - when 'Group'
+    %tr
+      %td
+        = activity.activable.user.name
+        létrehozta a
+        = activity.activable.name
+        csoportot
+        .date= activity.created_at

@@ -21,4 +21,6 @@
     .well
       Infó
     .well
-      Aktivitás
+      %h3 Aktivitás
+      %table.table.table-striped
+        = render @user.activities.order('created_at DESC').limit(5)

@@ -1,2 +1,11 @@
 .well
   %h1 Ajánló...
+
+.row
+  .span8
+    = link_to 'Új csoport létrehozása', new_group_path, :class => 'btn btn-primary'
+  .span4
+    .well
+      %h3 Összes aktivitás
+      %table.table.table-striped
+        = render Activity.order('created_at DESC').limit(5)

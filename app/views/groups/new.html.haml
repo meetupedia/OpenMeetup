@@ -3,5 +3,5 @@
   %h2 Új csoport létrehozása
 
   = semantic_form_for @group do |f|
-    = f.inputs
+    = f.inputs :name, :description, :location
     = f.buttons

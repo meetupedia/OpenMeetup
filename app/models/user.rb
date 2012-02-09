@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   key :name
   timestamps
 
+  has_many :activities, :dependent => :destroy
+
   def self.create_with_omniauth(auth)
     create! do |user|
       user.provider = auth['provider']

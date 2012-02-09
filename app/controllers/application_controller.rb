@@ -16,4 +16,8 @@ private
     cookies[:locale] = params[:locale] if params[:locale]
     I18n.locale = cookies[:locale] || I18n.default_locale
   end
+
+  def create_activity(item)
+    Activity.create :activable_type => item.class.name, :activable_id => item.id
+  end
 end
