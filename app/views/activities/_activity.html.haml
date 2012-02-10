@@ -4,6 +4,6 @@
       %td
         = activity.activable.user.name
         létrehozta a
-        = activity.activable.name
+        = link_to activity.activable.name, activity.activable
         csoportot
         .date= activity.created_at

@@ -1,7 +1,5 @@
-.well
+%h2 Új csoport létrehozása
 
-  %h2 Új csoport létrehozása
-
-  = semantic_form_for @group do |f|
-    = f.inputs :name, :description, :location
-    = f.buttons
+= semantic_form_for @group do |f|
+  = f.inputs :name, :description, :location
+  = f.buttons

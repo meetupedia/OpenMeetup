@@ -13,14 +13,16 @@
       .tab-content
         #1.tab-pane.active
         #2.tab-pane
-          = link_to 'Új csoport létrehozása', new_group_path, :class => 'btn btn-primary'
+          - if can? :create, Group
+            %p= link_to 'Új csoport létrehozása', new_group_path, :class => 'btn btn-primary'
+          %table.table.table-striped
+            = render @user.groups
 
   .span4
     .well
       Követés
     .well
       Infó
-    .well
-      %h3 Aktivitás
-      %table.table.table-striped
-        = render @user.activities.order('created_at DESC').limit(5)
+    %h3 Aktivitás
+    %table.table.table-striped
+      = render @user.activities.order('created_at DESC').limit(5)

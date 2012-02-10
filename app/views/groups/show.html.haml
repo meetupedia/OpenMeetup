@@ -1,10 +1,12 @@
 %h1= @group.name
 
+- if can? :create_event, @group
+  %p= link_to 'Új esemény létrehozása', new_group_event_path(@group), :class => 'btn btn-primary'
+
 .row
   .span8
     = debug @group
   .span4
-    .well
-      %h3 Aktivitás
-      %table.table.table-striped
-        = render @group.activities.order('created_at DESC').limit(5)
+    %h3 Aktivitás
+    %table.table.table-striped
+      = render @group.activities.order('created_at DESC').limit(5)

@@ -3,9 +3,12 @@
 
 .row
   .span8
-    = link_to 'Új csoport létrehozása', new_group_path, :class => 'btn btn-primary'
+    - if can? :create, Group
+      = link_to 'Új csoport létrehozása', new_group_path, :class => 'btn btn-primary'
+    %h2 Legfrissebb csoportok
+    %table.table.table-striped
+      = render Group.order('created_at DESC').limit(5)
   .span4
-    .well
-      %h3 Összes aktivitás
-      %table.table.table-striped
-        = render Activity.order('created_at DESC').limit(5)
+    %h3 Összes aktivitás
+    %table.table.table-striped
+      = render Activity.order('created_at DESC').limit(5)

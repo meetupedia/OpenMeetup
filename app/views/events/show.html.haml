@@ -1,0 +1,9 @@
+%h1= @event.title
+
+.row
+  .span8
+    = debug @event
+  .span4
+    %h3 Aktivitás
+    %table.table.table-striped
+      = render @event.activities.order('created_at DESC').limit(5)
