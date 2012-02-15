@@ -1,14 +1,8 @@
-= semantic_form_for @event, :url => url do |f|
+= semantic_form_for @event, :url => url, :html => {:class => 'form-horizontal'} do |f|
   = f.semantic_errors
   = f.inputs do
-    = f.input :title, :hint => 'Cím'
+    = f.input :title
     = f.input :description
     = f.input :location
     = f.input :start_time
   = f.buttons
-
-= twitter_bootstrap_form_for @event, :url => url do |f|
-  = f.text_field :title, 'Cím'
-  = f.time_select :start_time, 'Kezdet'
-  = f.actions do
-    = f.submit 'Mentés'
