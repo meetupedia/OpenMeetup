@@ -1,14 +1,3 @@
 %h2 Új esemény létrehozása
 
-= semantic_form_for @event, :url => group_events_path(@group) do |f|
-  = f.inputs do
-    = f.input :title
-    = f.input :description
-    = f.input :location
-    .input
-      = f.label :start_time, 'Kezdete'
-      = f.datetime_select :start_time
-    .input
-      = f.label :end_time, 'Vége'
-      = f.datetime_select :end_time
-  = f.buttons
+= render 'form', :url => group_events_path(@group)

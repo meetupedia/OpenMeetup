@@ -1,10 +1,8 @@
 class GroupsController < InheritedResources::Base
-  load_and_authorize_resource :only => [:new, :create, :edit, :update, :destroy]
+  load_and_authorize_resource :except => [:index, :show]
 
   def create
-    create! do
-      create_activity @group
-      @group
-    end
+    create!
+    create_activity @group
   end
 end

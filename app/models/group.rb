@@ -10,7 +10,13 @@ class Group < ActiveRecord::Base
   has_many :events, :dependent => :destroy
   has_many :group_invitations, :dependent => :nullify
   has_many :memberships, :dependent => :destroy
-  has_many :members, :through => :memberships, :class_name => 'User'
+  has_many :members, :through => :memberships, :source => :user
+
+  after_create :create_admin_membership
+
+  def create_admin_membership
+    Membership.create :group => self, :is_admin => true
+  end
 end
 
 Group.auto_upgrade!

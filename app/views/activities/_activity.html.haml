@@ -2,8 +2,16 @@
   - when 'Group'
     %tr
       %td
-        = activity.activable.user.name
+        = link_to activity.activable.user.name, activity.activable.user
         létrehozta a
         = link_to activity.activable.name, activity.activable
-        csoportot
+        csoportot.
+        .date= activity.created_at
+  - when 'Event'
+    %tr
+      %td
+        = link_to activity.activable.user.name, activity.activable.user
+        létrehozta a
+        = link_to activity.activable.title, activity.activable
+        eseményt.
         .date= activity.created_at

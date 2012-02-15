@@ -15,6 +15,12 @@ class Event < ActiveRecord::Base
   has_many :reviews, :dependent => :destroy
 
   validates :title, :presence => true
+
+  after_create :create_admin_participation
+
+  def create_admin_participation
+    Participation.create :event => self
+  end
 end
 
 Event.auto_upgrade!
