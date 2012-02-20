@@ -7,6 +7,12 @@
   .span8
     %h3 Tagok
     %p= render @group.members
+
+    %p
+      - if membership = @group.membership_for(current_user)
+        = link_to 'Törlöm magam', membership_path(membership), :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-danger'
+      - else
+        = link_to 'Csatlakozás', group_memberships_path(@group), :method => :post, :class => 'btn btn-success'
     = debug @group
   .span4
     %h3 Aktivitás

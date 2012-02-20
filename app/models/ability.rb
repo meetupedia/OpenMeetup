@@ -15,6 +15,11 @@ class Ability
         group.user == current_user
       end
 
+      can :create, Membership
+      can :destroy, Membership do |membership|
+        membership.user == current_user
+      end
+
       can [:update, :destroy], User do |user|
         user == current_user
       end

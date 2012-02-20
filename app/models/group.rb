@@ -17,6 +17,10 @@ class Group < ActiveRecord::Base
   def create_admin_membership
     Membership.create :group => self, :is_admin => true
   end
+
+  def membership_for(user)
+    Membership.find_by_group_id_and_user_id(self.id, user.id)
+  end
 end
 
 Group.auto_upgrade!

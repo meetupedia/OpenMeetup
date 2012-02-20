@@ -3,7 +3,10 @@ Openmeetup::Application.routes.draw do
 
   resources :groups do
     resources :events
+    resources :memberships
   end
+
+  resources :memberships
 
   resources :users
 
