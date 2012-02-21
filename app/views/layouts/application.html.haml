@@ -43,6 +43,14 @@
                   %li= link_to 'Π', '/auth/developer'
                 %li= link_to image_tag('facebook-connect-button.png', :alt => t('menu.login_with_facebook')), '/auth/facebook'
     #content.container
+      - if flash[:notice]
+        .alert.alert-success
+          %a.close(data-dismiss="alert")×
+          = flash[:notice]
+      - if flash[:alert]
+        .alert.alert-error
+          %a.close(data-dismiss="alert")×
+          = flash[:alert]
       = yield
     = javascript_include_tag 'application'
     = yield :scripts

@@ -19,8 +19,7 @@ class Event < ActiveRecord::Base
   after_create :create_admin_participation
 
   def create_admin_participation
-    particiation = Participation.create :event => self
-    Activity.create :activable => particiation
+    Participation.create :event => self
   end
 
   def participation_for(user)

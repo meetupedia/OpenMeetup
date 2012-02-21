@@ -8,6 +8,10 @@ class MembershipsController < InheritedResources::Base
   end
 
   def destroy
-    destroy! { @group }
+    unless @membership.is_admin? or @group.admins.count > 1
+      destroy! { @group }
+    else
+      redirect_to @group, :alert => 'Nem törölheted magad, ha nincsen legalább két admin!'
+    end
   end
 end
