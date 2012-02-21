@@ -15,7 +15,8 @@ class Group < ActiveRecord::Base
   after_create :create_admin_membership
 
   def create_admin_membership
-    Membership.create :group => self, :is_admin => true
+    membership = Membership.create :group => self, :is_admin => true
+    Activity.create :activable => membership
   end
 
   def membership_for(user)

@@ -11,7 +11,7 @@ class Event < ActiveRecord::Base
   has_many :activities, :as => :activable, :dependent => :destroy
   has_many :event_invitations, :dependent => :nullify
   has_many :participations, :dependent => :destroy
-  has_many :participants, :through => :participations, :class_name => 'User'
+  has_many :participants, :through => :participations, :source => :user
   has_many :reviews, :dependent => :destroy
 
   validates :title, :presence => true
@@ -19,7 +19,8 @@ class Event < ActiveRecord::Base
   after_create :create_admin_participation
 
   def create_admin_participation
-    Participation.create :event => self
+    particiation = Participation.create :event => self
+    Activity.create :activable => particiation
   end
 
   def participation_for(user)

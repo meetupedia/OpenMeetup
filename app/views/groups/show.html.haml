@@ -1,23 +1,22 @@
 %h1= @group.name
 
-- if can? :create, Event
-  %p= link_to 'Új esemény létrehozása', new_group_event_path(@group), :class => 'btn btn-primary'
-
 .row
   .span8
     %h3 Események
+    - if can? :create, Event.new(:group => @group)
+      %p= link_to 'Új esemény létrehozása', new_group_event_path(@group), :class => 'btn btn-primary'
     = render @group.events
+    = debug @group
+  .span4
     %h3 Tagok
+    - if current_user
+      - if membership = @group.membership_for(current_user) and can? :destroy, membership
+        %p= link_to 'Törlöm magam', membership_path(membership), :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-danger'
+      - elsif can? :create, Membership
+        %p= link_to 'Csatlakozás', group_memberships_path(@group), :method => :post, :class => 'btn btn-success'
     %p= render @group.members
     %h3 Adminok
     %p= render @group.admins
-    %p
-      - if membership = @group.membership_for(current_user) and can? :destroy, membership
-        = link_to 'Törlöm magam', membership_path(membership), :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-danger'
-      - elsif can? :create, Membership
-        = link_to 'Csatlakozás', group_memberships_path(@group), :method => :post, :class => 'btn btn-success'
-    = debug @group
-  .span4
     %h3 Aktivitás
     %table.table.table-striped
       = render @group.activities.order('created_at DESC').limit(5)
