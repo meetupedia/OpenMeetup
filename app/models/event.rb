@@ -21,6 +21,10 @@ class Event < ActiveRecord::Base
   def create_admin_participation
     Participation.create :event => self
   end
+
+  def participation_for(user)
+    Participation.find_by_event_id_and_user_id(self.id, user.id)
+  end
 end
 
 Event.auto_upgrade!

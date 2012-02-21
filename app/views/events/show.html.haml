@@ -6,6 +6,14 @@
 
 .row
   .span8
+    %h3 Tagok
+    %p= render @event.participants
+
+    %p
+      - if participation = @event.participation_for(current_user) and can? :destroy, participation
+        = link_to 'Törlöm magam', participation_path(participation), :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-danger'
+      - elsif can? :create, Participation
+        = link_to 'Részt veszek', event_participations_path(event), :method => :post, :class => 'btn btn-success'
     = debug @event
   .span4
     %h3 Aktivitás

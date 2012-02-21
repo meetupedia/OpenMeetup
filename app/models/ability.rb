@@ -20,6 +20,11 @@ class Ability
         membership.user == current_user
       end
 
+      can :create, Participation
+      can :destroy, Participation do |participation|
+        participation.user == current_user
+      end
+
       can [:update, :destroy], User do |user|
         user == current_user
       end

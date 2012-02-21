@@ -15,3 +15,19 @@
         = link_to activity.activable.title, activity.activable
         eseményt.
         .date= activity.created_at
+  - when 'Membership'
+    %tr
+      %td
+        = link_to activity.activable.user.name, activity.activable.user
+        tagja lett a
+        = link_to activity.activable.group.name, activity.activable.group
+        csoportnak.
+        .date= activity.created_at
+  - when 'Participation'
+    %tr
+      %td
+        = link_to activity.activable.user.name, activity.activable.user
+        jelentkezett a
+        = link_to activity.activable.event.title, activity.activable.event
+        eseményre.
+        .date= activity.created_at

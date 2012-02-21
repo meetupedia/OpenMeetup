@@ -1,17 +1,20 @@
 %h1= @group.name
 
-- if can? :create_event, @group
+- if can? :create, Event
   %p= link_to 'Új esemény létrehozása', new_group_event_path(@group), :class => 'btn btn-primary'
 
 .row
   .span8
+    %h3 Események
+    = render @group.events
     %h3 Tagok
     %p= render @group.members
-
+    %h3 Adminok
+    %p= render @group.admins
     %p
-      - if membership = @group.membership_for(current_user)
+      - if membership = @group.membership_for(current_user) and can? :destroy, membership
         = link_to 'Törlöm magam', membership_path(membership), :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-danger'
-      - else
+      - elsif can? :create, Membership
         = link_to 'Csatlakozás', group_memberships_path(@group), :method => :post, :class => 'btn btn-success'
     = debug @group
   .span4
