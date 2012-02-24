@@ -3,11 +3,8 @@ class Ability
 
   def initialize(current_user)
     if current_user
-      can :create, Event do |event|
+      can [:create, :update, :destroy], Event do |event|
         event.group.admins.include?(current_user)
-      end
-      can [:update, :destroy], Event do |event|
-        event.user == current_user
       end
 
       can :create, Group

@@ -2,11 +2,11 @@
 
 .row
   .span8
+    = simple_format(@group.description)
     %h3 Események
     - if can? :create, Event.new(:group => @group)
       %p= link_to 'Új esemény létrehozása', new_group_event_path(@group), :class => 'btn btn-primary'
     = render @group.events
-    = debug @group
   .span4
     %h3 Tagok
     - if current_user

@@ -1,7 +1,12 @@
 class Event < ActiveRecord::Base
   key :title
   key :description, :as => :text
-  key :location
+  key :latitude, :as => :float
+  key :longitude, :as => :float
+  key :gmaps, :as => :boolean
+  key :street
+  key :city
+  key :country, :as => :string
   key :start_time, :as => :datetime
   key :end_time, :as => :datetime
   timestamps
@@ -14,9 +19,15 @@ class Event < ActiveRecord::Base
   has_many :participants, :through => :participations, :source => :user
   has_many :reviews, :dependent => :destroy
 
+  acts_as_gmappable
+
   validates :title, :presence => true
 
   after_create :create_admin_participation
+
+  def gmaps4rails_address
+    "#{self.city}, #{self.street}"
+  end
 
   def create_admin_participation
     Participation.create :event => self

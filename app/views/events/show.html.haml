@@ -1,12 +1,19 @@
-%h1= @event.title
+- if can? :edit, @event
+  %p.pull-right= link_to 'Esemény szerkesztése', edit_event_path(@event), :class => 'btn'
 
-%h3
-  Csoport:
-  = link_to @event.group.name, @event.group
+%h1= @event.title
 
 .row
   .span8
-    = debug @event
+    .row
+      .span4
+        %h3
+          Csoport:
+          = link_to @event.group.name, @event.group
+        %strong= @event.gmaps4rails_address
+        = simple_format(@event.description)
+      .span4
+        %p= gmaps4rails @event.to_gmaps4rails
   .span4
     %h3 Résztvevők
     - if current_user
