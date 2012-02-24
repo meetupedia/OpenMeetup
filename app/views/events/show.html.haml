@@ -13,7 +13,7 @@
         %strong= @event.gmaps4rails_address
         = simple_format(@event.description)
       .span4
-        %p= gmaps4rails @event.to_gmaps4rails
+        %p= gmaps :map_options => {:auto_zoom => false, :zoom => 15}, :markers => {:data => @event.to_gmaps4rails}
   .span4
     %h3 Résztvevők
     - if current_user
