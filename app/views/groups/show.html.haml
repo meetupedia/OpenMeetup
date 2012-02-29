@@ -10,10 +10,13 @@
   .span4
     %h3 Tagok
     - if current_user
-      - if membership = @group.membership_for(current_user) and can? :destroy, membership
-        %p= link_to 'Törlöm magam', membership_path(membership), :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-danger'
-      - elsif can? :create, Membership
-        %p= link_to 'Csatlakozás', group_memberships_path(@group), :method => :post, :class => 'btn btn-success'
+      - if can? :set_membership, @group
+        - if @group.membership_for(current_user)
+          %p= link_to '<i class="icon-ok-sign icon-white"></i> Csatlakozás'.html_safe, set_membership_group_path(@group), :confirm => 'Biztosan törlöd?', :class => 'btn btn-success'
+        - else
+          %p= link_to '<i class="icon-plus-sign icon-white"></i> Csatlakozás'.html_safe, set_membership_group_path(@group), :class => 'btn btn-primary'
+    - else
+      %p= link_to '<i class="icon-plus-sign icon-white"></i> Csatlakozás'.html_safe, sign_in_path(set_membership_group_path(@group, :protection => true)), :class => 'btn'
     %p= render @group.members
     %h3 Adminok
     %p= render @group.admins

@@ -41,9 +41,7 @@
                     %li= link_to t('menu.profile'), current_user
                     %li= link_to t('menu.exit'), signout_path
               - else
-                - if Rails.env == 'development'
-                  %li= link_to 'Π', '/auth/developer'
-                %li= link_to image_tag('facebook-connect-button.png', :alt => t('menu.login_with_facebook')), '/auth/facebook'
+                %li= link_to image_tag('facebook-connect-button.png', :alt => t('menu.login_with_facebook')), sign_in_path
     #content.container
       - if flash[:notice]
         .alert.alert-success

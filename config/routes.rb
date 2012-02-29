@@ -1,11 +1,16 @@
 Openmeetup::Application.routes.draw do
   resources :events do
-    resources :participations
+    member do
+      get :set_participation
+    end
   end
 
   resources :groups do
     resources :events
     resources :memberships
+    member do
+      get :set_membership
+    end
   end
 
   resources :memberships
@@ -15,6 +20,7 @@ Openmeetup::Application.routes.draw do
   resources :users
 
   match '/auth/:provider/callback' => 'sessions#create'
+  match '/sign_in/:provider' => 'sessions#sign_in'
   match '/signout' => 'sessions#destroy', :as => :signout
   root :to => 'root#index'
 end

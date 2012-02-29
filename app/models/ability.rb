@@ -6,21 +6,13 @@ class Ability
       can [:create, :update, :destroy], Event do |event|
         event.group.admins.include?(current_user)
       end
+      can :set_participation, Event
 
       can :create, Group
       can [:update, :destroy], Group do |group|
         group.user == current_user
       end
-
-      can :create, Membership
-      can :destroy, Membership do |membership|
-        membership.user == current_user
-      end
-
-      can :create, Participation
-      can :destroy, Participation do |participation|
-        participation.user == current_user
-      end
+      can :set_membership, Group
 
       can [:update, :destroy], User do |user|
         user == current_user

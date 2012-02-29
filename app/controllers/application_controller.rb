@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
 
   auto_user
 
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, :alert => 'Nincsen megfelelő jogosultságod ehhez!'
+  end
+
 private
 
   def current_user
