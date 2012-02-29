@@ -1,6 +1,7 @@
 class MembershipsController < InheritedResources::Base
-  belongs_to :group, :shallow => true
-  load_and_authorize_resource :except => [:index, :show]
+  belongs_to :group, :optional => true
+  load_resource
+  authorize_resource :except => [:index, :show]
 
   def create
     create! { @group }

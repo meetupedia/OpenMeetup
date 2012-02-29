@@ -1,6 +1,7 @@
 class ParticipationsController < InheritedResources::Base
-  belongs_to :event, :shallow => true
-  load_and_authorize_resource :except => [:index, :show]
+  belongs_to :event, :optional => true
+  load_resource
+  authorize_resource :except => [:index, :show]
 
   def create
     create! { @event }
