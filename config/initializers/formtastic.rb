@@ -74,12 +74,12 @@
 
 # You can opt-in to Formtastic's use of the HTML5 `required` attribute on `<input>`, `<select>`
 # and `<textarea>` tags by setting this to false (defaults to true).
-# Formtastic::FormBuilder.use_required_attribute = true
+Formtastic::FormBuilder.use_required_attribute = true
 
 # You can opt-in to new HTML5 browser validations (for things like email and url inputs) by setting
 # this to false. Doing so will add a `novalidate` attribute to the `<form>` tag.
 # See http://diveintohtml5.org/forms.html#validation for more info.
-# Formtastic::FormBuilder.perform_browser_validations = true
+Formtastic::FormBuilder.perform_browser_validations = true
 
 
 Formtastic::Helpers::FormHelper.builder = FormtasticBootstrap::FormBuilder
@@ -89,9 +89,23 @@ module FormtasticBootstrap
     module Base
       module Timeish
 
-        def fragment_input_html(fragment, klass)
-          opts = input_options.merge(:prefix => object_name, :field_name => fragment_name(fragment), :default => value, :include_blank => include_blank?)
+        def fragment_input_html(fragment)
+          opts = input_options.merge(:prefix => fragment_prefix, :field_name => fragment_name(fragment), :default => value, :include_blank => include_blank?)
           template.send(:"select_#{fragment}", value, opts, input_html_options.merge(:id => fragment_id(fragment)))
+        end
+      end
+    end
+
+
+    class DatetimeInput
+
+      def to_html
+        generic_input_wrapping do
+          inline_inputs_div_wrapping do
+            fragments.map do |fragment|
+              fragment_input_html(fragment)
+            end.insert(3, ' &ndash; ').insert(5, ' : ').join.html_safe
+          end
         end
       end
     end

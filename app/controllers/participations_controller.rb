@@ -1,14 +1,22 @@
-class ParticipationsController < InheritedResources::Base
-  belongs_to :event, :optional => true
-  load_resource
+class ParticipationsController < ApplicationController
+  load_resource :event
+  load_resource :participation, :through => :event, :shallow => true
   authorize_resource :except => [:index, :show]
 
   def create
-    create! { @event }
-    create_activity @participation
+    unless @event.participation_for(current_user)
+      @participation.save
+      create_activity @participation
+    end
+    redirect_to @event
   end
 
   def destroy
-    destroy! { @event }
+    @participation.destroy
+    redirect_to @participation.event
+  end
+
+  def set
+    create
   end
 end

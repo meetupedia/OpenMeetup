@@ -1,11 +1,12 @@
 class Event < ActiveRecord::Base
   key :title
+  key :permalink, :index => true
   key :description, :as => :text
   key :latitude, :as => :float
   key :longitude, :as => :float
   key :gmaps, :as => :boolean
   key :street
-  key :city
+  key :city, :index => true
   key :country, :as => :string
   key :start_time, :as => :datetime
   key :end_time, :as => :datetime
@@ -20,8 +21,7 @@ class Event < ActiveRecord::Base
   has_many :reviews, :dependent => :destroy
 
   acts_as_gmappable
-
-  validates :title, :presence => true
+  auto_permalink :title
 
   after_create :create_admin_participation
 

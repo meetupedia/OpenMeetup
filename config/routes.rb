@@ -1,26 +1,23 @@
 Openmeetup::Application.routes.draw do
-  resources :events do
-    member do
-      get :set_participation
+  resources :groups, :shallow => true do
+    resources :events do
+      resources :participations, :shallow => true do
+        collection do
+          get :set
+        end
+      end
+    end
+    resources :memberships, :shallow => true do
+      collection do
+        get :set
+      end
     end
   end
-
-  resources :groups do
-    resources :events
-    resources :memberships
-    member do
-      get :set_membership
-    end
-  end
-
-  resources :memberships
-
-  resources :participations
 
   resources :users
 
   match '/auth/:provider/callback' => 'sessions#create'
-  match '/sign_in/:provider' => 'sessions#sign_in'
-  match '/signout' => 'sessions#destroy', :as => :signout
+  match '/sign_in/:provider' => 'sessions#new', :as => :sign_in
+  match '/sign_out' => 'sessions#destroy', :as => :sign_out
   root :to => 'root#index'
 end

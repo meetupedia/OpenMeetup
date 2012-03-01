@@ -1,5 +1,9 @@
 class SessionsController < ApplicationController
 
+  def new
+    session[:return_to] = params[:return_to]
+  end
+
   def create
     auth = request.env['omniauth.auth']
     user = User.find_by_provider_and_uid(auth['provider'], auth['uid']) || User.create_with_omniauth(auth)
@@ -10,9 +14,5 @@ class SessionsController < ApplicationController
   def destroy
     session[:user_id] = nil
     redirect_to root_url, :notice => 'Sikeres kijelentkezés.'
-  end
-
-  def sign_in
-    session[:return_to] = params[:return_to]
   end
 end

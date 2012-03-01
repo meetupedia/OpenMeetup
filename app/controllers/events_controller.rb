@@ -1,21 +1,20 @@
-class EventsController < InheritedResources::Base
-  belongs_to :group, :optional => true
-  load_resource
+class EventsController < ApplicationController
+  load_resource :group
+  load_resource :event, :through => :group, :shallow => true
   authorize_resource :except => [:index, :show]
 
-  def create
-    create!
-    create_activity @event
+  def new
   end
 
-  def set_participation
-    participation = Participation.find_or_initialize_by_event_id_and_user_id(@event.id, current_user.id)
-    if participation.new_record?
-      participation.save
-      create_activity participation
-    elsif params[:protection].blank?
-      participation.destroy
+  def create
+    if @event.save
+      create_activity @event
+      redirect_to @event
+    else
+      render :new
     end
-    redirect_to @event
+  end
+
+  def show
   end
 end

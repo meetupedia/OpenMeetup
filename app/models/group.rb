@@ -1,7 +1,8 @@
 class Group < ActiveRecord::Base
   key :name
+  key :permalink, :index => true
   key :description, :as => :text
-  key :location
+  key :location, :index => true
   timestamps
 
   belongs_to :user
@@ -11,6 +12,8 @@ class Group < ActiveRecord::Base
   has_many :group_invitations, :dependent => :nullify
   has_many :memberships, :dependent => :destroy
   has_many :members, :through => :memberships, :source => :user
+
+  auto_permalink :name
 
   after_create :create_admin_membership
 
