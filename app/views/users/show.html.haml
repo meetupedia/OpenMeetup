@@ -11,5 +11,3 @@
   .span2
     %h3 Aktivitás
     .list_view= render @user.activities.order('created_at DESC').limit(10)
-
-= debug @user.facebook
