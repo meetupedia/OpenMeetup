@@ -1,5 +1,6 @@
 en:
   menu:
+    about: 'About'
     dashboard: 'Dashboard'
     exit: 'Exit'
     home: 'Home'

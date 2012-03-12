@@ -13,5 +13,3 @@
     .list_view= render @user.activities.order('created_at DESC').limit(10)
 
 = debug @user.facebook
-
-= debug @user.facebook.friends.map(&:identifier)

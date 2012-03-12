@@ -1,5 +1,6 @@
 hu:
   menu:
+    about: 'Rólunk'
     dashboard: 'Vezérlőpult'
     exit: 'Kilépés'
     home: 'Címlap'

@@ -32,6 +32,7 @@ Openmeetup::Application.routes.draw do
     end
   end
 
+  match '/about' => 'root#about', :as => :about
   match '/developer_dashboard' => 'root#developer_dashboard', :as => :developer_dashboard
 
   match '/auth/:provider/callback' => 'sessions#create'

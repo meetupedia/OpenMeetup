@@ -25,6 +25,7 @@
             %form.navbar-search.pull-left
               %input{:type => 'text', :class => 'search-query', :placeholder => t('menu.search')}
             %ul.nav.pull-right
+              %li= link_to t('menu.about'), about_path
               %li.dropdown
                 %a.dropdown-toggle{'data-toggle' => 'dropdown'}
                   = t('menu.language')
