@@ -1,0 +1,18 @@
+%h1.user= @user.name
+
+.row
+  .span2= render 'menu'
+  .span10
+    %h2 Csoportjaim
+
+    - if can? :create, Group
+      %p= link_to 'Új csoport létrehozása', new_group_path, :class => 'btn btn-primary', :rel => 'facebox'
+
+    - if @admined_groups.present?
+      %table.table.table-striped
+        - @admined_groups.each do |group|
+          %tr
+            %th= link_to group.name, group
+            %td= link_to 'Szerkesztés', '#'
+            %td= link_to 'Törlés', '#'
+            %td= link_to 'Meghívó küldése', '#'

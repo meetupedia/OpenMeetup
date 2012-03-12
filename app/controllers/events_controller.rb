@@ -1,7 +1,10 @@
 class EventsController < ApplicationController
   load_resource :group
   load_resource :event, :through => :group, :shallow => true
-  authorize_resource :except => [:index, :show]
+  authorize_resource :except => [:index, :show, :users]
+
+  def show
+  end
 
   def new
   end
@@ -15,6 +18,18 @@ class EventsController < ApplicationController
     end
   end
 
-  def show
+  def edit
+  end
+
+  def update
+    if @event.update_attributes params[:event]
+      redirect_to @event
+    else
+      render :edit
+    end
+  end
+
+  def users
+    @participations = @event.participations.includes(:user).paginate :page => params[:page]
   end
 end

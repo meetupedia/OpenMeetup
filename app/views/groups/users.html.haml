@@ -1,0 +1,9 @@
+%h1.group= link_to @group.name, @group
+
+%h2 Tagok
+
+%p= link_to 'Tagok meghívása', '#', :class => 'btn'
+
+.list_view= render @memberships
+
+= will_paginate @memberships

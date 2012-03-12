@@ -1,4 +1,11 @@
 class UsersController < ApplicationController
   load_resource
-  authorize_resource :except => [:index, :show]
+  authorize_resource :except => [:show]
+
+  def show
+  end
+
+  def dashboard
+    @admined_groups = @user.admined_groups
+  end
 end

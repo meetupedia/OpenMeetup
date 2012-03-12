@@ -1,7 +1,7 @@
 class MembershipsController < ApplicationController
   load_resource :group
   load_resource :membership, :through => :group, :shallow => true
-  authorize_resource :except => [:index, :show]
+  authorize_resource
 
   def create
     unless @group.membership_for(current_user)

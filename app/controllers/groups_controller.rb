@@ -1,8 +1,12 @@
 class GroupsController < ApplicationController
   load_resource
-  authorize_resource :except => [:index, :show]
+  authorize_resource :except => [:index, :show, :users]
+
+  def show
+  end
 
   def new
+    render :layout => false if request.xhr?
   end
 
   def create
@@ -14,6 +18,18 @@ class GroupsController < ApplicationController
     end
   end
 
-  def show
+  def edit
+  end
+
+  def update
+    if @group.update_attributes params[:group]
+      redirect_to @group
+    else
+      render :edit
+    end
+  end
+
+  def users
+    @memberships = @group.memberships.includes(:user).paginate :page => params[:page]
   end
 end

@@ -1,14 +1,9 @@
-.well
-  %h1 Ajánló...
-
 .row
   .span8
     - if can? :create, Group
-      = link_to 'Új csoport létrehozása', new_group_path, :class => 'btn btn-primary'
+      = link_to 'Új csoport létrehozása', new_group_path, :class => 'btn btn-primary', :rel => 'facebox'
     %h2 Legfrissebb csoportok
-    %table.table.table-striped
-      = render Group.order('created_at DESC').limit(5)
+    .list_view= render Group.order('created_at DESC').limit(5)
   .span4
     %h3 Összes aktivitás
-    %table.table.table-striped
-      = render Activity.order('created_at DESC').limit(5)
+    .list_view= render Activity.order('created_at DESC').limit(5)

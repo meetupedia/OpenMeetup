@@ -16,7 +16,12 @@ class Ability
 
       can [:create, :destroy, :set], Participation
 
-      can [:update, :destroy], User do |user|
+      can :create, Review
+      can [:update, :destroy], Review do |review|
+        review.user == current_user
+      end
+
+      can [:update, :destroy, :dashboard], User do |user|
         user == current_user
       end
     else

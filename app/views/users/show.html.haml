@@ -1,28 +1,17 @@
-%h1
-  = @user.name
-  profilja
+%h1.user= @user.name
 
 .row
-  .span8
-    .tabbable
-      %ul.nav.nav-tabs
-        %li.active
-          %a{:href => '#1', 'data-toggle' => 'tab'} Tartalom
-        %li
-          %a{:href => '#2', 'data-toggle' => 'tab'} Csoportok
-      .tab-content
-        #1.tab-pane.active
-        #2.tab-pane
-          - if can? :create, Group
-            %p= link_to 'Új csoport létrehozása', new_group_path, :class => 'btn btn-primary'
-          %table.table.table-striped
-            = render @user.groups
-
+  .span2= render 'menu'
   .span4
-    .well
-      Követés
-    .well
-      Infó
+    %h3 Következő események
+    .list_view= render @user.joined_next_events
+  .span4
+    %h3 Csoportok
+    .list_view= render @user.joined_groups
+  .span2
     %h3 Aktivitás
-    %table.table.table-striped
-      = render @user.activities.order('created_at DESC').limit(5)
+    .list_view= render @user.activities.order('created_at DESC').limit(10)
+
+= debug @user.facebook
+
+= debug @user.facebook.friends.map(&:identifier)

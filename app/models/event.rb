@@ -5,9 +5,10 @@ class Event < ActiveRecord::Base
   key :latitude, :as => :float
   key :longitude, :as => :float
   key :gmaps, :as => :boolean
-  key :street
-  key :city, :index => true
+  key :place
   key :country, :as => :string
+  key :city, :index => true
+  key :street
   key :start_time, :as => :datetime
   key :end_time, :as => :datetime
   timestamps
@@ -23,10 +24,16 @@ class Event < ActiveRecord::Base
   acts_as_gmappable
   auto_permalink :title
 
+  validates :city, :street, :presence => true
+
   after_create :create_admin_participation
 
   def gmaps4rails_address
     "#{self.city}, #{self.street}"
+  end
+
+  def address
+    gmaps4rails_address
   end
 
   def create_admin_participation

@@ -1,0 +1,33 @@
+%h1 Developer dashboard
+
+%table.table.table-striped
+  %tr
+    %th
+    %th All
+    %th Last 24 hours
+    %th % conversion
+  %tr
+    %th Event
+    %td= Event.count
+    %td= Event.where(['created_at > ?', 24.hours.ago]).count
+    %td
+  %tr
+    %th Group
+    %td= Group.count
+    %td= Group.where(['created_at > ?', 24.hours.ago]).count
+    %td
+  %tr
+    %th Membership
+    %td= Membership.count
+    %td= Membership.where(['created_at > ?', 24.hours.ago]).count
+    %td= number_to_percentage 100.0 * Membership.joins('user').where(['user.created_at > ?', 24.hours.ago]).count / Membership.where(['created_at > ?', 24.hours.ago]).count
+  %tr
+    %th Participation
+    %td= Participation.count
+    %td= Participation.where(['created_at > ?', 24.hours.ago]).count
+    %td= number_to_percentage 100.0 * Participation.joins('user').where(['user.created_at > ?', 24.hours.ago]).count / Participation.where(['created_at > ?', 24.hours.ago]).count
+  %tr
+    %th User
+    %td= User.count
+    %td= User.where(['created_at > ?', 24.hours.ago]).count
+    %td

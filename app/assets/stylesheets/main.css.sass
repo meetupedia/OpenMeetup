@@ -8,6 +8,15 @@ body
 
 h1
   margin-bottom: 20px
+  &.event
+    background: url(calendar_alt_stroke_32x32.png) no-repeat 0 4px
+    padding-left: 48px
+  &.group
+    background: url(share_32x32.png) no-repeat 0 4px
+    padding-left: 48px
+  &.user
+    background: url(user_24x32.png) no-repeat 0 4px
+    padding-left: 40px
 
 h2
   margin: 15px 0
@@ -34,12 +43,20 @@ h3
   .gmaps4rails_map
     height: 300px
 
-td.activity
-  padding-left: 40px
-  .avatar
-    margin-left: -40px
-
 .avatar
   display: block
   float: left
-  margin-top: 4px
+  margin-top: 2px
+
+div.list_view
+  border-bottom: 1px solid #cfcfcf
+  > div
+    border-top: 1px solid #cfcfcf
+    padding-bottom: 5px
+    padding-top: 5px
+
+div.activity, div.user, div.review
+  min-height: 36px
+  padding-left: 40px
+  .avatar
+    margin-left: -40px

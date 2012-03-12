@@ -1,5 +1,6 @@
 hu:
   menu:
+    dashboard: 'Vezérlőpult'
     exit: 'Kilépés'
     home: 'Címlap'
     language: 'Nyelv'
@@ -26,6 +27,42 @@ hu:
     time_with_zone:
       formats:
         default: '%Y. %B %e., %H:%M'
+  datetime:
+    distance_in_words:
+      half_a_minute: 'fél perce'
+      less_than_x_seconds:
+        one: 'most'
+        other: 'most'
+      x_seconds:
+        one: '1 másodperce'
+        other: '%{count} másodperce'
+      less_than_x_minutes:
+        one: 'most'
+        other: 'less than %{count} minutes'
+      x_minutes:
+        one: '1 perce'
+        other: '%{count} perce'
+      about_x_hours:
+        one: '1 órája'
+        other: '%{count} órája'
+      x_days:
+        one: '1 napja'
+        other: '%{count} napja'
+      about_x_months:
+        one: '1 hónapja'
+        other: '%{count} hónapja'
+      x_months:
+        one: '1 hónapja'
+        other: '%{count} hónapja'
+      almost_x_years:
+        one: '1 éve'
+        other: '%{count} éve'
+      about_x_years:
+        one: '1 éve'
+        other: '%{count} éve'
+      over_x_years:
+        one: '1 éve'
+        other: '%{count} éve'
   activerecord:
     errors:
       models:

@@ -1,25 +1,29 @@
-%tr
-  %td.activity
-    .avatar= user_avatar activity.activable.user
-    - case activity.activable.class.name
-      - when 'Group'
-        = link_to activity.activable.user.name, activity.activable.user
-        létrehozta a
-        = link_to activity.activable.name, activity.activable
-        csoportot.
-      - when 'Event'
-        = link_to activity.activable.user.name, activity.activable.user
-        létrehozta a
-        = link_to activity.activable.title, activity.activable
-        eseményt.
-      - when 'Membership'
-        = link_to activity.activable.user.name, activity.activable.user
-        tagja lett a
-        = link_to activity.activable.group.name, activity.activable.group
-        csoportnak.
-      - when 'Participation'
-        = link_to activity.activable.user.name, activity.activable.user
-        jelentkezett a
-        = link_to activity.activable.event.title, activity.activable.event
-        eseményre.
-    .date= time_ago_in_words activity.created_at
+= div_for activity do
+  .avatar= user_avatar activity.activable.user
+  - case activity.activable.class.name
+    - when 'Event'
+      = link_to activity.activable.user.name, activity.activable.user
+      létrehozta a
+      = link_to activity.activable.title, activity.activable
+      eseményt.
+    - when 'Follow'
+      = link_to activity.activable.user.name, activity.activable.user
+      követi a
+      = link_to activity.activable.group.name, activity.activable.group
+      csoportot.
+    - when 'Group'
+      = link_to activity.activable.user.name, activity.activable.user
+      létrehozta a
+      = link_to activity.activable.name, activity.activable
+      csoportot.
+    - when 'Membership'
+      = link_to activity.activable.user.name, activity.activable.user
+      tagja lett a
+      = link_to activity.activable.group.name, activity.activable.group
+      csoportnak.
+    - when 'Participation'
+      = link_to activity.activable.user.name, activity.activable.user
+      jelentkezett a
+      = link_to activity.activable.event.title, activity.activable.event
+      eseményre.
+  .date= time_ago_in_words activity.created_at

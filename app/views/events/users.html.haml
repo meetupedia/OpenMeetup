@@ -1,0 +1,9 @@
+%h1.event= link_to @event.title, @event
+
+%h2 Résztvevők
+
+%p= link_to 'Résztvevők meghívása', '#', :class => 'btn'
+
+.list_view= render @participations
+
+= will_paginate @participations

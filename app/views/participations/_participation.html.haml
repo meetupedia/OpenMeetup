@@ -1,0 +1,5 @@
+= div_for participation.user do
+  - if can? :destroy, participation
+    .pull-right= link_to 'Törlés', participation, :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-danger btn-small'
+  .avatar= user_avatar participation.user
+  = link_to participation.user.name, participation.user

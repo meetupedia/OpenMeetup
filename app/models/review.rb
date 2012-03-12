@@ -1,9 +1,10 @@
 class Review < ActiveRecord::Base
-  key :text, :as => :text
+  key :review, :as => :text
+  key :recommendation, :as => :boolean
   timestamps
 
   belongs_to :user
-  belongs_to :event
+  belongs_to :group
 
   has_many :activities, :as => :activable, :dependent => :destroy
 end

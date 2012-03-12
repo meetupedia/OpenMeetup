@@ -1,7 +1,7 @@
 class ParticipationsController < ApplicationController
   load_resource :event
   load_resource :participation, :through => :event, :shallow => true
-  authorize_resource :except => [:index, :show]
+  authorize_resource
 
   def create
     unless @event.participation_for(current_user)

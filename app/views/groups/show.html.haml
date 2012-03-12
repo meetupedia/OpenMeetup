@@ -1,25 +1,37 @@
-%h1= @group.name
+- if can? :edit, @group
+  %p.pull-right= link_to 'Csoport szerkesztése', edit_group_path(@group), :class => 'btn'
+
+%h1.group= @group.name
 
 .row
   .span8
     = simple_format(@group.description)
-    %h3 Események
+    %h2 Értékelések
+    - if can? :create, Review.new(:group => @group)
+      %p= link_to 'Értékelés írása', new_group_review_path(@group), :class => 'btn btn-primary', :rel => 'facebox'
+    .list_view= render @group.reviews.order('created_at DESC').limit(10)
+    %h2 Események
     - if can? :create, Event.new(:group => @group)
-      %p= link_to 'Új esemény létrehozása', new_group_event_path(@group), :class => 'btn btn-primary'
-    = render @group.events
+      %p= link_to 'Új esemény létrehozása', new_group_event_path(@group), :class => 'btn btn-primary', :rel => 'facebox'
+    .list_view= render @group.events
   .span4
     %h3 Tagok
-    - if current_user
-      - if can? :set_membership, @group
-        - if @group.membership_for(current_user)
-          %p= link_to '<i class="icon-ok-sign icon-white"></i> Csatlakozás'.html_safe, set_membership_group_path(@group), :confirm => 'Biztosan törlöd?', :class => 'btn btn-success'
-        - else
-          %p= link_to '<i class="icon-plus-sign icon-white"></i> Csatlakozás'.html_safe, set_membership_group_path(@group), :class => 'btn btn-primary'
-    - else
-      %p= link_to '<i class="icon-plus-sign icon-white"></i> Csatlakozás'.html_safe, sign_in_path(set_membership_group_path(@group, :protection => true)), :class => 'btn'
-    %p= render @group.members
+    %p
+      - if current_user
+        - if membership = @group.membership_for(current_user) and can? :destroy, membership
+          = link_to '<i class="icon-ok-sign icon-white"></i> Csatlakozás'.html_safe, membership, :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-success'
+        - elsif can? :create, Membership
+          = link_to '<i class="icon-plus-sign icon-white"></i> Csatlakozás'.html_safe, group_memberships_path(@group), :method => :post, :class => 'btn btn-primary'
+        - if follow = @group.follow_for(current_user) and can? :destroy, follow
+          = link_to '<i class="icon-ok-sign icon-white"></i> Követés'.html_safe, follow, :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-success'
+        - elsif can? :create, Follow
+          = link_to '<i class="icon-plus-sign icon-white"></i> Követés'.html_safe, group_follows_path(@group), :method => :post, :class => 'btn btn-primary'
+      - else
+        = link_to '<i class="icon-plus-sign icon-white"></i> Csatlakozás'.html_safe, sign_in_path(set_group_memberships_path(@group)), :class => 'btn'
+        = link_to '<i class="icon-plus-sign icon-white"></i> Követés'.html_safe, sign_in_path(set_group_follows_path(@group)), :class => 'btn'
+    %p= render 'users/user_avatars', :users => @group.members.order('memberships.created_at ASC')
+    %p= link_to 'Összes tag', users_group_path(@group)
     %h3 Adminok
-    %p= render @group.admins
+    %p= render 'users/user_avatars', :users => @group.admins.order('memberships.created_at ASC')
     %h3 Aktivitás
-    %table.table.table-striped
-      = render @group.activities.order('created_at DESC').limit(5)
+    .list_view= render @group.activities.order('created_at DESC').limit(5)
