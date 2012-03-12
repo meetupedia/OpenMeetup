@@ -29,6 +29,11 @@ class GroupsController < ApplicationController
     end
   end
 
+  def destroy
+    @group.destroy
+    redirect_to groups_url
+  end
+
   def users
     @memberships = @group.memberships.includes(:user).paginate :page => params[:page]
   end
