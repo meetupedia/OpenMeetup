@@ -34,6 +34,7 @@ Openmeetup::Application.routes.draw do
 
   match '/about' => 'root#about', :as => :about
   match '/developer_dashboard' => 'root#developer_dashboard', :as => :developer_dashboard
+  match '/search' => 'search#index', :as => :search
 
   match '/auth/:provider/callback' => 'sessions#create'
   match '/sign_in/:provider' => 'sessions#new', :as => :sign_in
