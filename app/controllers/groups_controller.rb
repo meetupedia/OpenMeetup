@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class GroupsController < ApplicationController
   load_resource
   authorize_resource :except => [:index, :show, :users]

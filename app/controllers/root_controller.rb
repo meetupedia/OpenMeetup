@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class RootController < ApplicationController
 
   def index

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Membership < ActiveRecord::Base
   key :is_admin, :as => :boolean
   timestamps

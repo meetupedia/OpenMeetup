@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class EventInvitation < ActiveRecord::Base
   key :is_accepted, :as => :boolean
   timestamps

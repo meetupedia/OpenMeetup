@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ParticipationsController < ApplicationController
   load_resource :event
   load_resource :participation, :through => :event, :shallow => true

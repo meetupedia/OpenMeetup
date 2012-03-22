@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Review < ActiveRecord::Base
   key :review, :as => :text
   key :recommendation, :as => :boolean

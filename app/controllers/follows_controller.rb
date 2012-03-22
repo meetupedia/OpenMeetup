@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class FollowsController < ApplicationController
   load_resource :group
   load_resource :follow, :through => :group, :shallow => true

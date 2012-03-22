@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 Openmeetup::Application.routes.draw do
   resources :groups, :shallow => true do
     member do
