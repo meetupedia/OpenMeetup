@@ -13,12 +13,16 @@ class Ability
         group.user == current_user
       end
 
-      can [:create, :destroy, :set], Membership
+      can [:create, :set], Membership
+      can :destroy, Membership do |membership|
+        membership.user_id == current_user.id? or membership.group.admins.include?(current_user)
+      end
 
       can [:create, :set], Participation
       can :destroy, Participation do |participation|
         participation.user_id == current_user.id? or particiation.event.group.admins.include?(current_user)
       end
+
       can :create, Review
       can [:update, :destroy], Review do |review|
         review.user == current_user
