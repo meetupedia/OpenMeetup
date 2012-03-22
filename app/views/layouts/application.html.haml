@@ -22,8 +22,8 @@
           .nav-collapse
             %ul.nav
               %li{:class => (controller.controller_name == 'root' ? 'active' : '')}= link_to t('menu.home'), root_path
-            %form.navbar-search.pull-left
-              %input{:type => 'text', :class => 'search-query', :placeholder => t('menu.search')}
+            %form.navbar-search.pull-left{:action => '/search', :method => 'get'}
+              %input{:type => 'text', :class => 'search-query', :placeholder => t('menu.search'), :name => 'q'}
             %ul.nav.pull-right
               %li= link_to t('menu.about'), about_path
               %li.dropdown
