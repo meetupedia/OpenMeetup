@@ -29,7 +29,7 @@ class Group < ActiveRecord::Base
     :default_url => '/system/:class/missing_:style.png',
     :styles => {
       :normal => ['500x500>', :jpg],
-      :small => ['100x100>', :jpg]
+      :small => ['72x72#', :jpg]
     },
     :convert_options => {:all => '-quality 95 -strip'}
 
