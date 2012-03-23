@@ -5,33 +5,32 @@
 
 .row
   .span8
-    .row
-      .span4
-        %p
-          %strong
-            - if @event.place.present?
-              = @event.place
-              = dot
-            = @event.gmaps4rails_address
-        %p
-          %strong
-            = @event.start_time
-            →
-            = @event.end_time
-        = simple_format(@event.description)
-        .list_view= render @event.group
-      .span4
-        %p= gmaps :map_options => {:auto_zoom => false, :zoom => 15}, :markers => {:data => @event.to_gmaps4rails}
+    %p
+      %strong
+        - if @event.place.present?
+          = @event.place
+          = dot
+        = @event.gmaps4rails_address
+    %p
+      %strong
+        = @event.start_time
+        →
+        = @event.end_time
+    = simple_format(@event.description)
+    .list_view= render @event.group
   .span4
-    %h3 Résztvevők
     - if current_user
-      - if participation = @event.participation_for(current_user) and can? :destroy, participation
+      - if participation = @event.participation_for(current_user)
         %p= link_to '<i class="icon-ok-sign icon-white"></i> Részt veszek'.html_safe, participation_path(participation), :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-success'
-      - elsif can? :create, Participation
+      - else
         %p= link_to '<i class="icon-plus-sign icon-white"></i> Részt veszek'.html_safe, event_participations_path(@event), :method => :post, :class => 'btn btn-primary'
     - else
       %p= link_to '<i class="icon-plus-sign icon-white"></i> Részt veszek'.html_safe, sign_in_path(set_event_participations_path(@event)), :class => 'btn'
+    %h3 Résztvevők
     %p= render 'users/user_avatars', :users => @event.participants.order('participations.created_at ASC')
     %p= link_to 'Összes résztvevő', users_event_path(@event)
+
+    %p= gmaps :map_options => {:auto_zoom => false, :zoom => 15}, :markers => {:data => @event.to_gmaps4rails}
+
     %h3 Aktivitás
     .list_view= render @event.activities.order('created_at DESC').limit(5).includes({:activable => :user})

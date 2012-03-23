@@ -6,3 +6,5 @@
   .span6
     %h2 Ajánlott csoportok
     #groups.list_view= render 'groups/recommended_groups'
+
+    %p= link_to 'Új csoport', new_group_path, :class => 'btn'
