@@ -1,4 +1,5 @@
 # -*- encoding : utf-8 -*-
+
 class Group < ActiveRecord::Base
   key :name
   key :permalink, :index => true
@@ -8,6 +9,7 @@ class Group < ActiveRecord::Base
   key :image_content_type
   key :image_file_size, :as => :integer
   key :image_updated_at, :as => :datetime
+  key :is_closed, :as => :boolean, :default => false
   timestamps
 
   belongs_to :user
@@ -64,12 +66,12 @@ class Group < ActiveRecord::Base
   end
 
   def self.tagged_groups_for(user)
-    self.joins(:tags).where('tags.id' => user.tags).select('groups.*, COUNT(group_taggings.tag_id) AS count').group('groups.id').order('count DESC')
+    self.joins(:tags).where('tags.id' => user.tags, 'groups.is_closed' => false).select('groups.*, COUNT(group_taggings.tag_id) AS count').group('groups.id').order('count DESC')
   end
 
   def self.recommended_groups_for(user, limit = 10)
     tagged_groups = self.tagged_groups_for(user).limit(limit)
-    new_groups = self.order('created_at DESC').limit(limit)
+    new_groups = self.where(:is_closed => false).order('created_at DESC').limit(limit)
     (tagged_groups + (new_groups - tagged_groups))[0...limit]
   end
 end
