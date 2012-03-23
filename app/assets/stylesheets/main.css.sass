@@ -1,13 +1,49 @@
 body
-  font-family: Tahoma, Arial, sans-serif
+  background: #f3f3f3
+  font-family: Arial, sans-serif
 
-.navbar .navbar-inner
+p
+  margin: 9px 0
+
+#footer
+  border-top: 1px solid #ffffff
+  color: #9f9f9f
+  font-size: 11px
+  margin-top: 60px
+  padding: 10px
+  text-align: center
+
+.navbar
+  border-bottom: 1px solid #ffffff
+  color: #2f2f2f
+  .nav > li
+    a
+      color: #2f2f2f
+      text-shadow: none
+      &:hover
+        background: #d7d7d7
+        color: #000000
+  .navbar-inner
+    background: #e7e7e7
+    border-bottom: 1px solid #d7d7d7
+    box-shadow: none
+    -webkit-box-shadow: none
+    .brand
+      color: #2f2f2f
+      font-family: Georgia, serif
+      font-size: 20px
   img
     margin: -3px 0
     vertical-align: top
 
+.navbar-search .search-query
+  background: #f4f4f4
+  border: 1px solid #dfdfdf
+  color: #cfcfcf
+
 h1
   color: #000000
+  font-family: Georgia, serif
   margin-bottom: 20px
   &.event
     background: url(calendar_alt_stroke_32x32.png) no-repeat 0 4px
@@ -20,10 +56,12 @@ h1
     padding-left: 40px
 
 h2
+  font-family: Georgia, serif
   margin: 15px 0
 
 h3
-  margin: 10px 0
+  font-family: Georgia, serif
+  margin: 5px 0
 
 .date
   color: #6f6f6f
@@ -50,9 +88,11 @@ h3
   margin-top: 2px
 
 div.list_view
-  border-bottom: 1px solid #cfcfcf
+  border-bottom: 1px solid #ffffff
+  border-top: 1px solid #cfcfcf
   > div
-    border-top: 1px solid #cfcfcf
+    border-bottom: 1px solid #cfcfcf
+    border-top: 1px solid #ffffff
     padding-bottom: 5px
     padding-top: 5px
 
@@ -62,5 +102,38 @@ div.activity, div.user, div.review
   .avatar
     margin-left: -40px
 
+div.group
+  min-height: 76px
+  .avatar
+    margin-right: 13px
+
 textarea
   height: 160px
+
+.root
+  text-align: center
+  p
+    font-family: Georgia, sans-serif
+    font-size: 20px
+    line-height: 24px
+    img
+      border: 10px solid #ffffff
+      box-shadow: 0 2px 4px #cfcfcf
+      margin: 0 10px 10px 10px
+      -moz-box-shadow: 0 2px 4px #cfcfcf
+      -webkit-box-shadow: 0 2px 4px #cfcfcf
+  .facebook_connect
+    margin-top: 20px
+
+span.tag
+  background: #cfcfcf
+  border-radius: 3px
+  color: #6f6f6f
+  font-size: 11px
+  padding: 3px 6px
+  -webkit-border-radius: 3px
+  -moz-border-radius: 3px
+
+#facebox
+  h1
+    font-size: 20px

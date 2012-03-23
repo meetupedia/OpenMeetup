@@ -20,7 +20,6 @@ class Event < ActiveRecord::Base
   has_many :event_invitations, :dependent => :nullify
   has_many :participations, :dependent => :destroy
   has_many :participants, :through => :participations, :source => :user
-  has_many :reviews, :dependent => :destroy
 
   acts_as_gmappable
   auto_permalink :title

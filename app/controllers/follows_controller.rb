@@ -1,4 +1,5 @@
 # -*- encoding : utf-8 -*-
+
 class FollowsController < ApplicationController
   load_resource :group
   load_resource :follow, :through => :group, :shallow => true
@@ -9,12 +10,16 @@ class FollowsController < ApplicationController
       @follow.save
       create_activity @follow
     end
-    redirect_to @group
+    redirect_to @group unless request.xhr?
   end
 
   def destroy
     @follow.destroy
-    redirect_to @follow.group
+    if request.xhr?
+      render :create
+    else
+      redirect_to @follow.group
+    end
   end
 
   def set

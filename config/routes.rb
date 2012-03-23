@@ -4,7 +4,7 @@ Openmeetup::Application.routes.draw do
     member do
       get :users
     end
-    resources :events do
+    resources :events, :shallow => true do
       member do
         get :users
       end
@@ -27,6 +27,10 @@ Openmeetup::Application.routes.draw do
     resources :reviews
   end
 
+  resources :tags, :shallow => true do
+    resources :taggings
+  end
+
   resources :users do
     member do
       get :dashboard
@@ -36,6 +40,7 @@ Openmeetup::Application.routes.draw do
   match '/about' => 'root#about', :as => :about
   match '/developer_dashboard' => 'root#developer_dashboard', :as => :developer_dashboard
   match '/search' => 'search#index', :as => :search
+  match '/tag_myself' => 'root#tag_myself', :as => :tag_myself
 
   match '/auth/:provider/callback' => 'sessions#create'
   match '/sign_in/:provider' => 'sessions#new', :as => :sign_in

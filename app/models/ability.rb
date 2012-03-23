@@ -8,14 +8,19 @@ class Ability
         event.group.admins.include?(current_user)
       end
 
+      can :create, Follow
+      can :destroy, Follow do |follow|
+        follow.user == current_user
+      end
+
       can :create, Group
       can [:update, :destroy], Group do |group|
-        group.user == current_user
+        group.user == current_user or group.admins.include?(current_user)
       end
 
       can [:create, :set], Membership
       can :destroy, Membership do |membership|
-        membership.user_id == current_user.id? or membership.group.admins.include?(current_user)
+        membership.user_id == current_user.id or membership.group.admins.include?(current_user)
       end
 
       can [:create, :set], Participation
@@ -26,6 +31,11 @@ class Ability
       can :create, Review
       can [:update, :destroy], Review do |review|
         review.user == current_user
+      end
+
+      can :create, Tagging
+      can :destroy, Tagging do |tagging|
+        tagging.user == current_user
       end
 
       can [:update, :destroy, :dashboard], User do |user|

@@ -1,10 +1,13 @@
 # -*- encoding : utf-8 -*-
+
 class User < ActiveRecord::Base
   key :provider
   key :uid
   key :name
   key :permalink
   key :token
+  key :location
+  key :is_admin, :as => :boolean
   timestamps
 
   has_many :activities, :dependent => :destroy
@@ -20,8 +23,12 @@ class User < ActiveRecord::Base
   has_many :memberships, :dependent => :destroy
   has_many :participations, :dependent => :destroy
   has_many :reviews, :dependent => :destroy
+  has_many :taggings, :dependent => :destroy
+  has_many :tags, :through => :taggings
 
   auto_permalink :name
+
+  attr_protected :is_admin
 
   def self.create_with_omniauth(auth)
     create! do |user|

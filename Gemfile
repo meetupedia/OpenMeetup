@@ -24,7 +24,7 @@ gem 'formtastic-bootstrap', :git => 'git://github.com/cgunther/formtastic-bootst
 gem 'tabulous'
 gem 'will_paginate'
 gem 'omniauth-facebook'
-gem 'fb_graph', '2.4.4'
+gem 'fb_graph'
 gem 'gmaps4rails'
 gem 'railhead_autouser'
 gem 'railhead_permalink'

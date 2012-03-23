@@ -1,4 +1,5 @@
 # -*- encoding : utf-8 -*-
+
 class SessionsController < ApplicationController
 
   def new
@@ -9,8 +10,13 @@ class SessionsController < ApplicationController
     auth = request.env['omniauth.auth']
     user = User.find_by_provider_and_uid(auth['provider'], auth['uid']) || User.create_with_omniauth(auth)
     user.update_attributes :token => auth['credentials']['token']
+#    user.update_attributes :location => user.facebook.location if user.facebook.andand.location
     session[:user_id] = user.id
-    redirect_to session[:return_to] || root_url, :notice => 'Sikeres bejelentkezés.'
+    if user.tags.size > 0
+      redirect_to session[:return_to] || root_url
+    else
+      redirect_to tag_myself_url
+    end
   end
 
   def destroy

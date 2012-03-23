@@ -1,0 +1,12 @@
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container
+      :plain
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+      = link_to 'OpenMeetup', root_path, :class => 'brand'
+      %form.navbar-search.pull-left{:action => '/search', :method => 'get'}
+        %input{:type => 'text', :class => 'search-query', :placeholder => t('menu.search'), :name => 'q'}

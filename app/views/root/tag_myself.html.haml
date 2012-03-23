@@ -1,0 +1,8 @@
+%h1 Mi érdekel?
+
+.row
+  .span6
+    = render :partial => 'taggings/button', :collection => Tag.order('name ASC'), :as => :tag
+  .span6
+    %h2 Ajánlott csoportok
+    #groups.list_view= render 'groups/recommended_groups'

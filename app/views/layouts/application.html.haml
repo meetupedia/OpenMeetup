@@ -9,41 +9,43 @@
     = render 'layouts/google_analytics'
     = csrf_meta_tags
   %body
-    .navbar.navbar-fixed-top
-      .navbar-inner
-        .container
-          :plain
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </a>
-          = link_to 'OpenMeetup', root_path, :class => 'brand'
-          .nav-collapse
-            %ul.nav
-              %li{:class => (controller.controller_name == 'root' ? 'active' : '')}= link_to t('menu.home'), root_path
-            %form.navbar-search.pull-left{:action => '/search', :method => 'get'}
-              %input{:type => 'text', :class => 'search-query', :placeholder => t('menu.search'), :name => 'q'}
-            %ul.nav.pull-right
-              %li= link_to t('menu.about'), about_path
-              %li.dropdown
-                %a.dropdown-toggle{'data-toggle' => 'dropdown'}
-                  = t('menu.language')
-                  %b.caret
-                %ul.dropdown-menu
-                  %li= link_to 'English', '?locale=en'
-                  %li= link_to 'Magyar', '?locale=hu'
-              - if current_user
+    - if @header
+      = render @header
+    - else
+      .navbar.navbar-fixed-top
+        .navbar-inner
+          .container
+            :plain
+              <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </a>
+            = link_to 'OpenMeetup', root_path, :class => 'brand'
+            .nav-collapse
+              %ul.nav
+                %li= link_to t('menu.home'), root_path
+              %form.navbar-search.pull-left{:action => '/search', :method => 'get'}
+                %input{:type => 'text', :class => 'search-query', :placeholder => t('menu.search'), :name => 'q'}
+              %ul.nav.pull-right
                 %li.dropdown
                   %a.dropdown-toggle{'data-toggle' => 'dropdown'}
-                    = current_user.name
+                    = t('menu.language')
                     %b.caret
                   %ul.dropdown-menu
-                    %li= link_to t('menu.profile'), current_user
-                    %li= link_to t('menu.dashboard'), dashboard_user_path(current_user)
-                    %li= link_to t('menu.exit'), sign_out_path
-              - else
-                %li= link_to image_tag('facebook-connect-button.png', :alt => t('menu.login_with_facebook')), sign_in_path
+                    %li= link_to 'English', '?locale=en'
+                    %li= link_to 'Magyar', '?locale=hu'
+                - if current_user
+                  %li.dropdown
+                    %a.dropdown-toggle{'data-toggle' => 'dropdown'}
+                      = current_user.name
+                      %b.caret
+                    %ul.dropdown-menu
+                      %li= link_to t('menu.profile'), current_user
+                      %li= link_to t('menu.dashboard'), dashboard_user_path(current_user)
+                      %li= link_to t('menu.exit'), sign_out_path
+                - else
+                  %li= link_to image_tag('facebook-connect-button.png', :alt => t('menu.login_with_facebook')), sign_in_path
     #content.container
       - if flash[:notice]
         .alert.alert-success
@@ -54,5 +56,7 @@
           %a.close(data-dismiss="alert")×
           = flash[:alert]
       = yield
+      #footer
+        © OpenMeetup
     = yield :scripts
     = render 'layouts/uservoice'
