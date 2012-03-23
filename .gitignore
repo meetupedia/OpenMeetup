@@ -3,5 +3,6 @@ config/database.yml
 /db
 /log/*.log
 /tmp
+Gemfile.lock
 /public/assets
 /public/system
