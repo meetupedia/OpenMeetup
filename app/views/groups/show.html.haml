@@ -5,8 +5,11 @@
 
 .row
   .span8
-    - if @group.image.file?
-      %p= link_to(image_tag(@group.image.url(:small), :alt => @group.name, :height => 72, :width => 72, :title => @group.name), @group)
+    .clearfix
+      - if @group.image.file?
+        .avatar= link_to(image_tag(@group.image.url(:small), :alt => @group.name, :height => 72, :width => 72, :title => @group.name), @group)
+
+      = render @group.tags
 
     = simple_format(@group.description)
 

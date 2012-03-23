@@ -38,6 +38,8 @@ class Ability
         tagging.user == current_user
       end
 
+      can :create, Tag
+
       can [:update, :destroy, :dashboard], User do |user|
         user == current_user
       end
