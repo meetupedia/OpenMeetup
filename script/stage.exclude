@@ -1,0 +1,11 @@
+stage.exclude
+stage.sh
+.git
+.sass-cache
+.tmp*
+config/database.yml
+db/sphinx
+log/*
+tmp
+Gemfile.lock
+public/system
