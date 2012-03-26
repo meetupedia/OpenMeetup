@@ -6,3 +6,4 @@ config/database.yml
 Gemfile.lock
 /public/assets
 /public/system
+.sass-cache
