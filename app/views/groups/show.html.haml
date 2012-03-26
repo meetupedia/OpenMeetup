@@ -34,14 +34,11 @@
   .span4
     %p
       - if current_user
-        - if membership = @group.membership_for(current_user) and can? :destroy, membership
-          = link_to '<i class="icon-ok-sign icon-white"></i> Csatlakozás'.html_safe, membership, :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-success'
-        - elsif can? :create, Membership
-          = link_to '<i class="icon-plus-sign icon-black"></i> Csatlakozás'.html_safe, group_memberships_path(@group), :method => :post, :class => 'btn'
+        = render 'memberships/button', :group => @group
         = render 'follows/button', :group => @group
       - else
         = link_to '<i class="icon-plus-sign icon-black"></i> Csatlakozás'.html_safe, sign_in_path(set_group_memberships_path(@group)), :class => 'btn'
-        = link_to '<i class="icon-plus-sign icon-black"></i> Követés'.html_safe, sign_in_path(set_group_follows_path(@group)), :class => 'btn'
+        = link_to '<i class="icon-plus-sign icon-black"></i> Követem'.html_safe, sign_in_path(set_group_follows_path(@group)), :class => 'btn'
     - unless (users = @group.members.order('memberships.created_at ASC')).empty?
       %h3 Tagok
       %p= render 'users/user_avatars', :users => users
