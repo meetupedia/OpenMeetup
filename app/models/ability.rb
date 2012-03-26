@@ -43,6 +43,11 @@ class Ability
       can [:update, :destroy, :dashboard], User do |user|
         user == current_user
       end
+
+      can :create, UserFollow
+      can :destroy, UserFollow do |user_follow|
+        user_follow.user == current_user
+      end
     else
       can :create, User
     end

@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 Openmeetup::Application.routes.draw do
-  resources :groups, :shallow => true do
+  resources :groups do
     member do
       get :users
     end
@@ -27,11 +27,12 @@ Openmeetup::Application.routes.draw do
     resources :reviews
   end
 
-  resources :tags, :shallow => true do
+  resources :tags do
     resources :taggings
   end
 
   resources :users do
+    resources :user_follows, :shallow => true
     member do
       get :dashboard
     end

@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
   has_many :reviews, :dependent => :destroy
   has_many :taggings, :dependent => :destroy
   has_many :tags, :through => :taggings
+  has_many :user_follows, :dependent => :destroy
 
   auto_permalink :name
 
@@ -40,6 +41,14 @@ class User < ActiveRecord::Base
 
   def facebook
     @facebook ||= FbGraph::User.new(self.uid, :access_token => self.token).fetch
+  end
+
+  def user_follow_for(user)
+    UserFollow.find_by_followed_user_id_and_user_id(self.id, user.id)
+  end
+
+  def followed_users
+    User.joins('INNER JOIN user_follows ON user_follows.followed_user_id = users.id').where('user_follows.user_id' => 1)
   end
 end
 

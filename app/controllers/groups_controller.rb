@@ -33,7 +33,7 @@ class GroupsController < ApplicationController
 
   def destroy
     @group.destroy
-    redirect_to groups_url
+    redirect_to root_url
   end
 
   def users
