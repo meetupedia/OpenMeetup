@@ -9,3 +9,4 @@ log/*
 tmp
 Gemfile.lock
 public/system
+config/initializers/omniauth.rb
