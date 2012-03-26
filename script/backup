@@ -1,0 +1,3 @@
+#!/bin/bash
+
+mysqldump -uroot -pwrstcvgo openmeetup > `dirname $_`/../db/openmeetup.sql
