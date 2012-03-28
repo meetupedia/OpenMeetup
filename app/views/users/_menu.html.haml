@@ -1,4 +1,5 @@
-.well{:style => 'padding: 8px 0;'}
-  %ul.nav.nav-list
-    %li{:class => controller.action_name == 'show' ? 'active' : ''}= link_to 'Profil', @user
+%ul.nav.nav-tabs
+  %li{:class => controller.action_name == 'show' ? 'active' : ''}= link_to 'Aktitivás', @user
+  %li{:class => controller.action_name == 'groups' ? 'active' : ''}= link_to 'Csoportok', groups_user_path(@user)
+  - if can? :edit, @user
     %li{:class => controller.action_name == 'dashboard' ? 'active' : ''}= link_to 'Vezérlőpult', dashboard_user_path(@user)

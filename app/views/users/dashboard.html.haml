@@ -1,18 +1,20 @@
 %h1.user= @user.name
 
-.row
-  .span2= render 'menu'
-  .span10
-    %h2 Csoportjaim
+= render 'menu'
 
-    - if can? :create, Group
-      %p= link_to 'Új csoport létrehozása', new_group_path, :class => 'btn btn-primary', :rel => 'facebox'
+%h2 Csoportjaim
 
-    - if @admined_groups.present?
-      %table.table.table-striped
-        - @admined_groups.each do |group|
-          %tr
-            %th= link_to group.name, group
-            %td= link_to 'Szerkesztés', '#'
-            %td= link_to 'Törlés', '#'
-            %td= link_to 'Meghívó küldése', '#'
+- if can? :create, Group
+  %p= link_to 'Új csoport létrehozása', new_group_path, :class => 'btn btn-primary', :rel => 'facebox'
+
+- if @admined_groups.present?
+  %table.table.table-striped
+    - @admined_groups.each do |group|
+      %tr
+        %th= link_to group.name, group
+        %td.right_aligned
+          = link_to 'Meghívó küldése', '#', :class => 'btn btn-mini btn-primary'
+          - if can? :edit, group
+            = link_to 'Szerkesztés', edit_group_path(group), :class => 'btn btn-mini'
+          - if can? :destroy, group
+            = link_to 'Törlés', '#', :class => 'btn btn-mini btn-danger'

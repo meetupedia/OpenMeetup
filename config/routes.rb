@@ -28,13 +28,14 @@ Openmeetup::Application.routes.draw do
   end
 
   resources :tags do
-    resources :taggings
+    resources :taggings, :shallow => true
   end
 
   resources :users do
     resources :user_follows, :shallow => true
     member do
       get :dashboard
+      get :groups
     end
   end
 

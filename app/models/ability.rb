@@ -25,7 +25,7 @@ class Ability
 
       can [:create, :set], Participation
       can :destroy, Participation do |participation|
-        participation.user_id == current_user.id? or particiation.event.group.admins.include?(current_user)
+        participation.user_id == current_user.id? or participation.event.group.admins.include?(current_user)
       end
 
       can :create, Review
