@@ -1,13 +1,16 @@
 # -*- encoding : utf-8 -*-
+
 Openmeetup::Application.routes.draw do
   resources :groups do
     member do
+      get :invited
       get :users
     end
     resources :events, :shallow => true do
       resources :event_invitations, :shallow => true
       member do
         get :users
+        get :invited
       end
       resources :participations, :shallow => true do
         collection do

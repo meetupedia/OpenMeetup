@@ -8,6 +8,9 @@ class Ability
       can [:create, :update, :destroy], Event do |event|
         event.group.admins.include?(current_user)
       end
+      can :invited, Event do |event|
+        event.group.admins.include?(current_user)
+      end
 
       can :create, EventInvitation do |event_invitation|
         event_invitation.event.group.admins.include?(current_user)
@@ -21,6 +24,9 @@ class Ability
       can :create, Group
       can [:update, :destroy], Group do |group|
         group.user == current_user or group.admins.include?(current_user)
+      end
+      can :invited, Group do |group|
+        group.admins.include?(current_user)
       end
 
       can :create, GroupInvitation do |group_invitation|

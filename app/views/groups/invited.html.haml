@@ -1,0 +1,8 @@
+%h1.group= link_to @group.name, @group
+
+%h2 Meghívottak
+
+%table.table.table-striped.table-condensed
+  - @group_invitation_targets.each do |group_invitation_target|
+    %tr
+      %td= group_invitation_target.email

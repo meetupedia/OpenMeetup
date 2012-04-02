@@ -31,6 +31,10 @@ class EventsController < ApplicationController
     end
   end
 
+  def invited
+    @event_invitation_targets = @event.event_invitation_targets.order('created_at DESC')
+  end
+
   def users
     @participations = @event.participations.includes(:user).paginate :page => params[:page]
   end

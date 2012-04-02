@@ -20,7 +20,9 @@
     .list_view= render @event.group
 
     - if can? :create, EventInvitation.new(:event => @event)
-      %p= link_to 'Meghívó küldése', new_event_event_invitation_path(@event), :class => 'btn', :rel => 'facebox'
+      %p
+        = link_to 'Meghívó küldése', new_event_event_invitation_path(@event), :class => 'btn', :rel => 'facebox'
+        = link_to 'Meghívottak', invited_event_path(@event)
 
   .span4
     - if current_user

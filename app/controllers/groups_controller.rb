@@ -36,6 +36,10 @@ class GroupsController < ApplicationController
     redirect_to root_url
   end
 
+  def invited
+    @group_invitation_targets = @group.group_invitation_targets.order('created_at DESC')
+  end
+
   def users
     @memberships = @group.memberships.includes(:user).paginate :page => params[:page]
   end

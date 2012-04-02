@@ -1,0 +1,8 @@
+%h1.event= link_to @event.title, @event
+
+%h2 Meghívottak
+
+%table.table.table-striped.table-condensed
+  - @event_invitation_targets.each do |event_invitation_target|
+    %tr
+      %td= event_invitation_target.email

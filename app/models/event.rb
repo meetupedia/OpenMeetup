@@ -18,6 +18,7 @@ class Event < ActiveRecord::Base
   belongs_to :group
   has_many :activities, :as => :activable, :dependent => :destroy
   has_many :event_invitations, :dependent => :nullify
+  has_many :event_invitation_targets, :dependent => :nullify
   has_many :participations, :dependent => :destroy
   has_many :participants, :through => :participations, :source => :user
 
