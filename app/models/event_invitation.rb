@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
+
 class EventInvitation < ActiveRecord::Base
-  key :is_accepted, :as => :boolean
+  key :emails, :as => :text
+  key :message, :as => :text
   timestamps
 
   belongs_to :user

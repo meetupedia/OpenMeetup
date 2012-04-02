@@ -15,11 +15,12 @@ class GroupInvitationsController < ApplicationController
         group_invitation_target = GroupInvitationTarget.find_or_initialize_by_group_id_and_email(@group.id, email)
         if group_invitation_target.new_record?
           group_invitation_target.group_invitation = @group_invitation
-          group_invitation_target.save
-          GroupMailer.invitation(group_invitation_target.email, group_invitation_target.group_invitation.group, group_invitation_target.group_invitation.message).deliver
+          if group_invitation_target.save
+            GroupMailer.invitation(group_invitation_target.email, group_invitation_target.group_invitation.group, group_invitation_target.group_invitation.message).deliver
+          end
         end
       end
-      redirect_to @group, :notice => 'Meghívó elküldve'
+      redirect_to @group, :notice => 'Meghívó elküldve.'
     else
       render :new
     end

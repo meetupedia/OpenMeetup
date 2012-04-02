@@ -5,6 +5,7 @@ Openmeetup::Application.routes.draw do
       get :users
     end
     resources :events, :shallow => true do
+      resources :event_invitations, :shallow => true
       member do
         get :users
       end

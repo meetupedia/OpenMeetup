@@ -9,6 +9,10 @@ class Ability
         event.group.admins.include?(current_user)
       end
 
+      can :create, EventInvitation do |event_invitation|
+        event_invitation.event.group.admins.include?(current_user)
+      end
+
       can :create, Follow
       can :destroy, Follow do |follow|
         follow.user == current_user

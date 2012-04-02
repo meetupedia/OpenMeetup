@@ -19,6 +19,9 @@
     = simple_format(@event.description)
     .list_view= render @event.group
 
+    - if can? :create, EventInvitation.new(:event => @event)
+      %p= link_to 'Meghívó küldése', new_event_event_invitation_path(@event), :class => 'btn', :rel => 'facebox'
+
   .span4
     - if current_user
       - if participation = @event.participation_for(current_user)
