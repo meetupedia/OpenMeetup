@@ -1,4 +1,5 @@
 # -*- encoding : utf-8 -*-
+
 class Ability
   include CanCan::Ability
 
@@ -16,6 +17,10 @@ class Ability
       can :create, Group
       can [:update, :destroy], Group do |group|
         group.user == current_user or group.admins.include?(current_user)
+      end
+
+      can :create, GroupInvitation do |group_invitation|
+        group_invitation.group.admins.include?(current_user)
       end
 
       can [:create, :set], Membership

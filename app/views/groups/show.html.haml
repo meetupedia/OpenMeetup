@@ -13,6 +13,9 @@
 
     = simple_format(@group.description)
 
+    - if can? :create, GroupInvitation.new(:group => @group)
+      %p= link_to 'Meghívó küldése', new_group_group_invitation_path(@group), :class => 'btn', :rel => 'facebox'
+
     %h2 Események
     .list_view
       - if (events = @group.events).empty?

@@ -1,4 +1,5 @@
 # -*- encoding : utf-8 -*-
+
 class EventsController < ApplicationController
   load_resource :group
   load_resource :event, :through => :group, :shallow => true

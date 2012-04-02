@@ -19,6 +19,7 @@ Openmeetup::Application.routes.draw do
         get :set
       end
     end
+    resources :group_invitations, :shallow => true
     resources :memberships, :shallow => true do
       collection do
         get :set
