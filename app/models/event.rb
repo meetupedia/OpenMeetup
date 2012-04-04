@@ -30,7 +30,7 @@ class Event < ActiveRecord::Base
   after_create :create_admin_participation
 
   def gmaps4rails_address
-    "#{self.city}, #{self.street}"
+    "#{self.street}, #{self.city}"
   end
 
   def address
