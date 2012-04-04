@@ -9,7 +9,7 @@
       - if @group.image.file?
         .avatar= link_to(image_tag(@group.image.url(:small), :alt => @group.name, :height => 72, :width => 72, :title => @group.name), @group)
 
-      = render @group.tags
+      %p= render :partial => 'taggings/button', :collection => @group.tags.order('name ASC'), :as => :tag, :locals => {:mini_buttons => true}
 
     = simple_format(@group.description)
 
