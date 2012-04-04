@@ -9,6 +9,10 @@ module ApplicationHelper
     link_to(image_tag(filename, :alt => user.name, :height => 32, :width => 32, :title => user.name), user)
   end
 
+  def user_link(user)
+    link_to user.name, user
+  end
+
   def sign_in_path(path = nil)
     provider = Rails.env == 'development' ? 'developer' : 'facebook'
     if path

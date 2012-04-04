@@ -21,7 +21,8 @@
 
     - if can? :create, EventInvitation.new(:event => @event)
       %p
-        = link_to 'Meghívó küldése', new_event_event_invitation_path(@event), :class => 'btn', :rel => 'facebox'
+        = link_to 'Meghívó küldése tagoknak', new_event_event_invitation_path(@event, :hide_emails => true), :class => 'btn', :rel => 'facebox'
+        = link_to 'Meghívó küldése küldősőknek', new_event_event_invitation_path(@event), :class => 'btn', :rel => 'facebox'
         = link_to 'Meghívottak', invited_event_path(@event)
 
   .span4

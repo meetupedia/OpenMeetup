@@ -5,5 +5,9 @@
 %table.table.table-striped.table-condensed
   - @event_invitation_targets.each do |event_invitation_target|
     %tr
-      %td= event_invitation_target.email
+      %td
+        - if event_invitation_target.email.present?
+          = event_invitation_target.email
+        - elsif event_invitation_target.invited_user.present?
+          = user_link event_invitation_target.invited_user
       %td= event_invitation_target.created_at

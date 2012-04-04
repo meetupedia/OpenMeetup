@@ -2,27 +2,27 @@
   .avatar= user_avatar activity.activable.user
   - case activity.activable.class.name
     - when 'Event'
-      = link_to activity.activable.user.name, activity.activable.user
+      = user_link activity.activable.user
       létrehozta a
       = link_to activity.activable.title, activity.activable
       eseményt.
     - when 'Follow'
-      = link_to activity.activable.user.name, activity.activable.user
+      = user_link activity.activable.user
       követi a
       = link_to activity.activable.group.name, activity.activable.group
       csoportot.
     - when 'Group'
-      = link_to activity.activable.user.name, activity.activable.user
+      = user_link activity.activable.user
       létrehozta a
       = link_to activity.activable.name, activity.activable
       csoportot.
     - when 'Membership'
-      = link_to activity.activable.user.name, activity.activable.user
+      = user_link activity.activable.user
       tagja lett a
       = link_to activity.activable.group.name, activity.activable.group
       csoportnak.
     - when 'Participation'
-      = link_to activity.activable.user.name, activity.activable.user
+      = user_link activity.activable.user
       jelentkezett a
       = link_to activity.activable.event.title, activity.activable.event
       eseményre.

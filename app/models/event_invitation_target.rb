@@ -7,6 +7,7 @@ class EventInvitationTarget < ActiveRecord::Base
 
   belongs_to :event
   belongs_to :event_invitation
+  belongs_to :invited_user, :class_name => 'User'
 end
 
 EventInvitationTarget.auto_upgrade!
