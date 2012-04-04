@@ -13,7 +13,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
-
+gem 'rails-i18n'
 gem 'memcache-client'
 gem 'mini_record'
 gem 'haml'
@@ -30,3 +30,5 @@ gem 'railhead_autouser'
 gem 'railhead_permalink'
 gem 'paperclip'
 gem 'oink'
+gem 'paper_trail'
+gem 'globalize3'

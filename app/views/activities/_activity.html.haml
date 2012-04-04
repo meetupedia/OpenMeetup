@@ -2,10 +2,7 @@
   .avatar= user_avatar activity.activable.user
   - case activity.activable.class.name
     - when 'Event'
-      = user_link activity.activable.user
-      létrehozta a
-      = link_to activity.activable.title, activity.activable
-      eseményt.
+      = t('activity.event_created', :user => user_link(activity.activable.user), :event => link_to(activity.activable.title, activity.activable)).html_safe
     - when 'Follow'
       = user_link activity.activable.user
       követi a

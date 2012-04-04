@@ -1,6 +1,7 @@
 en:
   menu:
     about: 'About'
+    activity: 'Aktivity'
     dashboard: 'Dashboard'
     exit: 'Exit'
     home: 'Home'
@@ -8,3 +9,15 @@ en:
     login_with_facebook: 'Login with Facebook'
     profile: 'Profile'
     search: 'Search'
+  buttons:
+    follow: 'Follow'
+    following: 'Following'
+  activity:
+    event_created: '%{user} created event %{event}'
+  event:
+    all_participants: 'All participants'
+    already_invited: 'Already invited'
+    edit: 'Edit event'
+    invite_members: 'Invite members'
+    invite_other_people: 'Invite other people'
+    participants: 'Participants'

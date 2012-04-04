@@ -1,6 +1,7 @@
 hu:
   menu:
     about: 'Rólunk'
+    activity: 'Aktivitás'
     dashboard: 'Vezérlőpult'
     exit: 'Kilépés'
     home: 'Címlap'
@@ -8,69 +9,15 @@ hu:
     login_with_facebook: 'Bejelentkezés Facebookkal'
     profile: 'Profil'
     search: 'Keresés'
-  date:
-    formats:
-      default: '%Y. %B %e.'
-      short: '%b. %e.'
-      long: '%Y. %B %e., %A'
-    day_names: [vasárnap, hétfő, kedd, szerda, csütörtök, péntek, szombat]
-    abbr_day_names: [va, hé, ke, sze, cs, pé, szo]
-    month_names: [~, január, február, március, április, május, június, július, augusztus, szeptember, október, november, december]
-    abbr_month_names: [~, jan, feb, márc, ápr, máj, jún, júl, aug, szept, okt, nov, dec]
-    order:
-      - :year
-      - :month
-      - :day
-  time:
-    formats:
-      default: '%Y. %B %e., %H:%M'
-      short: '%H:%M'
-      long: '%Y. %B %e., %H:%M'
-    am: ''
-    pm: ''
-    time_with_zone:
-      formats:
-        default: '%Y. %B %e., %H:%M'
-  datetime:
-    distance_in_words:
-      half_a_minute: 'fél perce'
-      less_than_x_seconds:
-        one: 'most'
-        other: 'most'
-      x_seconds:
-        one: '1 másodperce'
-        other: '%{count} másodperce'
-      less_than_x_minutes:
-        one: 'most'
-        other: 'less than %{count} minutes'
-      x_minutes:
-        one: '1 perce'
-        other: '%{count} perce'
-      about_x_hours:
-        one: '1 órája'
-        other: '%{count} órája'
-      x_days:
-        one: '1 napja'
-        other: '%{count} napja'
-      about_x_months:
-        one: '1 hónapja'
-        other: '%{count} hónapja'
-      x_months:
-        one: '1 hónapja'
-        other: '%{count} hónapja'
-      almost_x_years:
-        one: '1 éve'
-        other: '%{count} éve'
-      about_x_years:
-        one: '1 éve'
-        other: '%{count} éve'
-      over_x_years:
-        one: '1 éve'
-        other: '%{count} éve'
-  activerecord:
-    errors:
-      models:
-        event:
-          attributes:
-            title:
-              blank: 'A cím nem lehet üres!'
+  buttons:
+    follow: 'Követem'
+    following: 'Követem'
+  activity:
+    event_created: '%{user} létrehozta ezt az eseményt: %{event}'
+  event:
+    all_participants: 'Összes résztvevő'
+    already_invited: 'Meghívottak'
+    edit: 'Esemény szerkesztése'
+    invite_members: 'Meghívó küldése tagoknak'
+    invite_other_people: 'Meghívó küldése külsősöknek'
+    participants: 'Résztvevők'
