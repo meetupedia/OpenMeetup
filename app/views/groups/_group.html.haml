@@ -4,4 +4,4 @@
   .pull-right= render 'follows/button', :group => group
   %h3= link_to group.name, group
   %p= truncate group.description, :length => 256
-  %p= render group.tags
+  %p= render :partial => 'taggings/button', :collection => group.tags.order('name ASC'), :as => :tag, :locals => {:mini_buttons => true}
