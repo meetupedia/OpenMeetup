@@ -8,7 +8,10 @@ class User < ActiveRecord::Base
   key :token
   key :location
   key :is_admin, :as => :boolean
+  key :facebook_friend_ids, :as => :text
   timestamps
+
+  serialize :facebook_friend_ids
 
   has_many :activities, :dependent => :destroy
   has_many :admined_groups, :through => :memberships, :source => :group, :conditions => {'memberships.is_admin' => true}

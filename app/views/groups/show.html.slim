@@ -51,6 +51,10 @@ h1.group= @group.name
     - unless (users = @group.admins.order('memberships.created_at ASC')).empty?
       h3 Adminok
       p= render 'users/user_avatars', :users => users
+    - if current_user and not (users = @group.members.where('users.uid' => current_user.facebook_friend_ids).order('users.permalink ASC')).empty?
+      h3 Facebookos ismerősök
+      p= render 'users/user_avatars', :users => users
+      p= link_to 'Összes tag', users_group_path(@group)
     - unless (activities = @group.activities.order('created_at DESC').limit(5)).empty?
       h3 Aktivitás
       .list_view= render activities

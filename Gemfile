@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.1'
+gem 'rails', '3.2.2'
 
 gem 'mysql2'
 gem 'json'
@@ -14,6 +14,7 @@ end
 
 gem 'jquery-rails'
 gem 'rails-i18n'
+gem 'andand'
 gem 'memcache-client'
 gem 'mini_record'
 gem 'slim'
