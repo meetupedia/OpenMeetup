@@ -13,9 +13,9 @@ h1.event= @event.title
         = @event.gmaps4rails_address
     p
       strong
-        = @event.start_time
-        | →
-        = @event.end_time
+        = l(@event.start_time)
+        = " → "
+        = l(@event.end_time)
     = simple_format(@event.description)
     .list_view= render @event.group
 

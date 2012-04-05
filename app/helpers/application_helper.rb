@@ -1,4 +1,5 @@
 # -*- encoding : utf-8 -*-
+
 module ApplicationHelper
 
   def user_avatar(user)
@@ -6,7 +7,7 @@ module ApplicationHelper
       when 'facebook' then "https://graph.facebook.com/#{user.uid}/picture"
       else 'default_avatar.png'
     end
-    link_to(image_tag(filename, :alt => user.name, :height => 32, :width => 32, :title => user.name), user)
+    link_to(image_tag(filename, :alt => user.name, :height => 32, :width => 32, :title => user.name, :class => 'avatar_image'), user)
   end
 
   def user_link(user)

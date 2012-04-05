@@ -5,3 +5,5 @@
   h3= link_to group.name, group
   p= truncate group.description, :length => 256
   p= render :partial => 'taggings/button', :collection => group.tags.order('name ASC'), :as => :tag, :locals => {:mini_buttons => true}
+  - unless (users = group.members.where('users.uid' => current_user.facebook_friend_ids).order('users.permalink ASC')).empty?
+    p= render 'users/user_avatars', :users => users
