@@ -1,0 +1,14 @@
+- if current_user and not @user == current_user
+  p.pull-right= render 'user_follows/button', :user => @user
+
+h1.user= @user.name
+
+= render 'menu'
+
+.row
+  .span6
+    h3 Aktivitás
+    .list_view= render @user.activities.order('created_at DESC').limit(10)
+  .span6
+    h3 Következő események
+    .list_view= render @user.joined_next_events

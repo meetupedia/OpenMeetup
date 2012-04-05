@@ -1,0 +1,17 @@
+h1
+  | Keresés:
+  = params[:q]
+
+.row
+  .span6
+    - unless @groups.blank?
+      h2 Csoportok
+      .list_view= render @groups
+    - else
+      p Nincsen találat csoportra.
+  .span6
+    - unless @events.blank?
+      h2 Események
+      .list_view= render @events
+    - else
+      p Nincsen találat eseményre.

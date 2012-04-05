@@ -1,0 +1,5 @@
+span(id="user_follow_button_for_user_#{user.id}")
+  - if user_follow = user.user_follow_for(current_user)
+    =' link_to %{<i class="icon-ok-sign icon-white"></i> #{t('buttons.following')}}.html_safe, user_follow, :method => :delete, :class => 'btn btn-success', :remote => true
+  - else
+    =' link_to %{<i class="icon-plus-sign icon-black"></i> #{t('buttons.follow')}}.html_safe, user_user_follows_path(user), :method => :post, :class => 'btn', :remote => true

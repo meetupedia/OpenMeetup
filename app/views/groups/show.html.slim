@@ -1,0 +1,56 @@
+- if can? :edit, @group
+  p.pull-right= link_to 'Csoport szerkesztése', edit_group_path(@group), :class => 'btn btn-mini'
+
+h1.group= @group.name
+
+.row
+  .span8
+    .clearfix
+      - if @group.image.file?
+        .avatar= link_to(image_tag(@group.image.url(:small), :alt => @group.name, :height => 72, :width => 72, :title => @group.name), @group)
+
+      p= render :partial => 'taggings/button', :collection => @group.tags.order('name ASC'), :as => :tag
+
+    = simple_format(@group.description)
+
+    - if can? :create, GroupInvitation.new(:group => @group)
+      p
+        = link_to 'Meghívó küldése', new_group_group_invitation_path(@group), :class => 'btn', :rel => 'facebox'
+        = link_to 'Meghívottak', invited_group_path(@group)
+
+    h2 Események
+    .list_view
+      - if (events = @group.events).empty?
+        p Nincsenek események.
+      - else
+        = render events
+    - if can? :create, Event.new(:group => @group)
+      p= link_to 'Új esemény létrehozása', new_group_event_path(@group), :class => 'btn', :rel => 'facebox'
+
+    h2 Értékelések
+    .list_view
+      - if (reviews = @group.reviews.order('created_at DESC').limit(10)).empty?
+        p Nincsenek értékelések.
+      - else
+        = render reviews
+    - if can? :create, Review.new(:group => @group)
+      p= link_to 'Értékelés írása', new_group_review_path(@group), :class => 'btn', :rel => 'facebox'
+
+  .span4
+    p
+      - if current_user
+        = render 'memberships/button', :group => @group
+        = render 'follows/button', :group => @group
+      - else
+        = link_to '<i class="icon-plus-sign icon-black"></i> Csatlakozás'.html_safe, sign_in_path(set_group_memberships_path(@group)), :class => 'btn'
+        = link_to '<i class="icon-plus-sign icon-black"></i> Követem'.html_safe, sign_in_path(set_group_follows_path(@group)), :class => 'btn'
+    - unless (users = @group.members.order('memberships.created_at ASC')).empty?
+      h3 Tagok
+      p= render 'users/user_avatars', :users => users
+      p= link_to 'Összes tag', users_group_path(@group)
+    - unless (users = @group.admins.order('memberships.created_at ASC')).empty?
+      h3 Adminok
+      p= render 'users/user_avatars', :users => users
+    - unless (activities = @group.activities.order('created_at DESC').limit(5)).empty?
+      h3 Aktivitás
+      .list_view= render activities

@@ -1,0 +1,43 @@
+- if can? :edit, @event
+  p.pull-right= link_to t('event.edit'), edit_event_path(@event), :class => 'btn btn-mini'
+
+h1.event= @event.title
+
+.row
+  .span8
+    p
+      strong
+        - if @event.place.present?
+          = @event.place
+          = dot
+        = @event.gmaps4rails_address
+    p
+      strong
+        = @event.start_time
+        | →
+        = @event.end_time
+    = simple_format(@event.description)
+    .list_view= render @event.group
+
+    - if can? :create, EventInvitation.new(:event => @event)
+      p
+        = link_to t('event.invite_members'), new_event_event_invitation_path(@event, :hide_emails => true), :class => 'btn', :rel => 'facebox'
+        = link_to t('event.invite_other_people'), new_event_event_invitation_path(@event), :class => 'btn', :rel => 'facebox'
+        = link_to t('event.already_invited'), invited_event_path(@event)
+
+  .span4
+    - if current_user
+      - if participation = @event.participation_for(current_user)
+        p= link_to '<i class="icon-ok-sign icon-white"></i> Részt veszek'.html_safe, participation_path(participation), :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-success'
+      - else
+        p= link_to '<i class="icon-plus-sign icon-white"></i> Részt veszek'.html_safe, event_participations_path(@event), :method => :post, :class => 'btn btn-primary'
+    - else
+      p= link_to '<i class="icon-plus-sign icon-white"></i> Részt veszek'.html_safe, sign_in_path(set_event_participations_path(@event)), :class => 'btn'
+    h3= t('event.participants')
+    p= render 'users/user_avatars', :users => @event.participants.order('participations.created_at ASC')
+    p= link_to t('event.all_participants'), users_event_path(@event)
+
+    p= gmaps :map_options => {:auto_zoom => false, :zoom => 15, :auto_adjust => true, :do_clustering => true}, :markers =>  data=(@event.to_gmaps4rails)
+
+    h3= t('menu.activity')
+    .list_view= render @event.activities.order('created_at DESC').limit(5).includes( activable=(:user)

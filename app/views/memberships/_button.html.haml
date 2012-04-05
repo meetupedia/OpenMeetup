@@ -1,5 +1,0 @@
-%span{:id => "membership_button_for_group_#{group.id}"}
-  - if membership = @group.membership_for(current_user) and can? :destroy, membership
-    = link_to '<i class="icon-ok-sign icon-white"></i> Csatlakozás'.html_safe, membership, :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-success'
-  - elsif can? :create, Membership
-    = link_to '<i class="icon-plus-sign icon-black"></i> Csatlakozás'.html_safe, group_memberships_path(@group), :method => :post, :class => 'btn'

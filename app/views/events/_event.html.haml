@@ -1,9 +1,0 @@
-= div_for event do
-  %h3= link_to event.title, event
-  = event.start_time
-  →
-  = event.end_time
-  = dot
-  = event.address
-  = dot
-  = link_to "#{event.participations.size} résztvevő", users_event_path(event)
