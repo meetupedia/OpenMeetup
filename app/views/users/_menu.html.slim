@@ -1,5 +1,5 @@
 ul.nav.nav-tabs
-  li class=(controller.action_name ==)'show' ? 'active' : ''
-  li class=(controller.action_name ==)'groups' ? 'active' : ''
+  li(class="#{controller.action_name == 'show' ? 'active' : ''}")
+  li(class="#{controller.action_name == 'groups' ? 'active' : ''}")
   - if can? :edit, @user
-    li class=(controller.action_name ==)'dashboard' ? 'active' : ''
+    li(class="#{controller.action_name == 'dashboard' ? 'active' : ''}")
