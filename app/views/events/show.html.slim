@@ -1,5 +1,7 @@
 - if can? :edit, @event
-  p.pull-right= link_to t('event.edit'), edit_event_path(@event), :class => 'btn'
+  .adminbox
+    - if can? :edit, @event
+      =' link_to t('event.edit'), edit_event_path(@event), :class => 'btn'
 
 h1.event= @event.title
 
