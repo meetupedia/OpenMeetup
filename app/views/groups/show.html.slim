@@ -2,6 +2,11 @@
   .pull-right= link_to 'Csoport szerkesztése', edit_group_path(@group), :class => 'btn'
 - if can? :create, Event.new(:group => @group)
   .pull-right= link_to 'Új esemény', new_group_event_path(@group), :class => 'btn', :rel => 'facebox'
+- if can? :create, GroupInvitation.new(:group => @group)
+  .pull-right
+    =' link_to 'Meghívottak', invited_group_path(@group)
+    =' link_to 'Ismerősök hozzáadása', new_group_group_invitation_path(@group), :class => 'btn', :rel => 'facebox'
+
 
 h1.group= @group.name
 
@@ -14,11 +19,6 @@ h1.group= @group.name
       p= render :partial => 'taggings/button', :collection => @group.tags.order('name ASC'), :as => :tag
 
     = simple_format(@group.description)
-
-    - if can? :create, GroupInvitation.new(:group => @group)
-      p
-        =' link_to 'Meghívó küldése', new_group_group_invitation_path(@group), :class => 'btn', :rel => 'facebox'
-        =' link_to 'Meghívottak', invited_group_path(@group)
 
     h2 Események
     .list_view
