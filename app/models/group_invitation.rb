@@ -1,7 +1,6 @@
 # -*- encoding : utf-8 -*-
 
 class GroupInvitation < ActiveRecord::Base
-#  key :emails, :as => :text
   key :message, :as => :text
   timestamps
 

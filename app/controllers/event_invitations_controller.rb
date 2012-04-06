@@ -35,7 +35,7 @@ protected
     if event_invitation_target.new_record?
       event_invitation_target.event_invitation = @event_invitation
       if event_invitation_target.save
-        EventMailer.invitation(event_invitation_target.email, event_invitation_target.event_invitation.event, event_invitation_target.event_invitation.message).deliver
+        EventMailer.invitation(current_user, event_invitation_target.email, event_invitation_target.event_invitation.event, event_invitation_target.event_invitation.message).deliver
       end
     end
   end

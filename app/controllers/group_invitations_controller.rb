@@ -16,7 +16,7 @@ class GroupInvitationsController < ApplicationController
         if group_invitation_target.new_record?
           group_invitation_target.group_invitation = @group_invitation
           if group_invitation_target.save
-            GroupMailer.invitation(group_invitation_target.email, group_invitation_target.group_invitation.group, group_invitation_target.group_invitation.message).deliver
+            GroupMailer.invitation(current_user, group_invitation_target.email, group_invitation_target.group_invitation.group, group_invitation_target.group_invitation.message).deliver
           end
         end
       end
