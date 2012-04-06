@@ -5,6 +5,7 @@
   h3= link_to group.name, group
   p= truncate group.description, :length => 256
   p= link_to "#{group.follows.size} követő", group
-  p= render :partial => 'taggings/button', :collection => group.tags.order('name ASC'), :as => :tag, :locals => {:mini_buttons => true}
-  - unless (users = group.members.where('users.uid' => current_user.facebook_friend_ids).order('users.permalink ASC')).empty?
-    p= render 'users/user_avatars', :users => users
+  - unless defined?(hide_tags)
+    p= render :partial => 'taggings/button', :collection => group.tags.order('name ASC'), :as => :tag, :locals => {:mini_buttons => true}
+    - unless (users = group.members.where('users.uid' => current_user.facebook_friend_ids).order('users.permalink ASC')).empty?
+      p= render 'users/user_avatars', :users => users

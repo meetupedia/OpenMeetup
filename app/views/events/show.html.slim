@@ -23,7 +23,7 @@ h1.event= @event.title
         = " → "
         = l(@event.end_time)
     = simple_format(@event.description)
-    .list_view= render @event.group
+    .item_view= render @event.group, :hide_tags => true
 
   .span4
     - if current_user
