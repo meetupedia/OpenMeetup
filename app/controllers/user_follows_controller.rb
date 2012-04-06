@@ -22,5 +22,4 @@ class UserFollowsController < ApplicationController
       redirect_to @user_follow.followed_user
     end
   end
-
 end

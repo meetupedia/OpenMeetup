@@ -8,6 +8,7 @@ class TaggingsController < ApplicationController
   def create
     unless @tag.tagging_for(current_user)
       @tagging.save
+      create_activity @tagging
     end
     redirect_to tag_myself_url unless request.xhr?
   end

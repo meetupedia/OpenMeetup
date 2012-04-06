@@ -22,4 +22,9 @@
     ' jelentkezett a
     =' link_to activity.activable.event.title, activity.activable.event
     ' eseményre.
+  - elsif activity.activable.class.name == 'Tagging'
+    =' user_link activity.activable.user
+    ' követi a
+    =' link_to activity.activable.tag.name, activity.activable.tag
+    ' témakört.
   .date= time_ago_in_words activity.created_at

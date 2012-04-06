@@ -1,5 +1,5 @@
 - if can? :edit, @event
-  p.pull-right= link_to t('event.edit'), edit_event_path(@event), :class => 'btn btn-mini'
+  p.pull-right= link_to t('event.edit'), edit_event_path(@event), :class => 'btn'
 
 h1.event= @event.title
 
@@ -30,7 +30,7 @@ h1.event= @event.title
       - if participation = @event.participation_for(current_user)
         p= link_to '<i class="icon-ok-sign icon-white"></i> Részt veszek'.html_safe, participation_path(participation), :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-success'
       - else
-        p= link_to '<i class="icon-plus-sign icon-white"></i> Részt veszek'.html_safe, event_participations_path(@event), :method => :post, :class => 'btn btn-primary'
+        p= link_to '<i class="icon-plus-sign icon-white"></i> Részt veszek'.html_safe, event_participations_path(@event), :method => :post, :class => 'btn'
     - else
       p= link_to '<i class="icon-plus-sign icon-white"></i> Részt veszek'.html_safe, sign_in_path(set_event_participations_path(@event)), :class => 'btn'
     h3= t('event.participants')
