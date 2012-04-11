@@ -21,3 +21,9 @@ hu:
     invite_members: 'Meghívó küldése tagoknak'
     invite_other_people: 'Meghívó küldése külsősöknek'
     participants: 'Résztvevők'
+
+  date:
+    formats:
+      default: '%Y. %B %e.'
+      short: '%F'
+    first_day_of_week: 1

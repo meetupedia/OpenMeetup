@@ -37,6 +37,8 @@ h1.event= @event.title
     p= render 'users/user_avatars', :users => @event.participants.order('participations.created_at ASC')
     p= link_to t('event.all_participants'), users_event_path(@event)
 
+    .calendar= calendar(@event.start_time, @event.end_time)
+
     p= gmaps :map_options => {:auto_zoom => false, :zoom => 15, :auto_adjust => true, :do_clustering => true}, :markers =>{:data => @event.to_gmaps4rails}
 
     h3= t('menu.activity')

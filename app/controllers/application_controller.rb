@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :set_locale
   helper_method :current_user
+  helper LaterDude::CalendarHelper
 
   auto_user
 

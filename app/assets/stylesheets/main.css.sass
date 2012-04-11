@@ -177,3 +177,32 @@ span.tag
   -moz-border-radius: 0 0 5px 5px
   a
     vertical-align: middle
+
+div.calendar
+  background: #e7e7e7
+  border-radius: 5px
+  display: inline-block
+  padding: 10px
+  margin: 20px 0
+  -webkit-border-radius: 5px
+  -moz-border-radius: 5px
+  .month_names
+    font-family: Georgia, serif
+    font-size: 16px
+  td
+    text-align: right
+    &.otherMonth
+      color: #9f9f9f
+    span
+      background: #ffffff
+      border: 2px solid #e7e7e7
+      display: block
+      min-width: 22px
+      padding: 2px
+      &.on_day
+        background: #005580
+        color: #ffffff
+        font-weight: bold
+    &.today
+      span
+        border: 2px solid #08c

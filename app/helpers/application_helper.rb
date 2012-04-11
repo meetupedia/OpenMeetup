@@ -23,6 +23,13 @@ module ApplicationHelper
     end
   end
 
+  def calendar(start_time, end_time)
+    calendar_for(start_time.year, start_time.month, :current_month => '%Y. %B') do |date|
+      style = (start_time.beginning_of_day <= date and end_time.end_of_day >= date) ? 'on_day' : ''
+      content_tag :span, date.day, :class => style
+    end
+  end
+
   def dot
     ' · '
   end
