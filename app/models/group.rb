@@ -10,6 +10,8 @@ class Group < ActiveRecord::Base
   key :image_file_size, :as => :integer
   key :image_updated_at, :as => :datetime
   key :is_closed, :as => :boolean, :default => false
+  key :url
+  key :facebook_url
   timestamps
 
   belongs_to :user

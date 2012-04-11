@@ -18,6 +18,16 @@ h1.group= @group.name
 
       p= render :partial => 'taggings/button', :collection => @group.tags.order('name ASC'), :as => :tag
 
+    - if @group.url.present?
+      div
+        ' Honlap:
+        = auto_link @group.url
+
+    - if @group.facebook_url.present?
+      div
+        ' Facebook-oldal:
+        = auto_link @group.facebook_url
+
     = simple_format(@group.description)
 
     h2 Események
@@ -39,11 +49,9 @@ h1.group= @group.name
   .span4
     p
       - if current_user
-        /= render 'memberships/button', :group => @group
-        = render 'follows/button', :group => @group
+        = render 'memberships/button', :group => @group
       - else
-        /= link_to '<i class="icon-plus-sign icon-black"></i> Csatlakozás'.html_safe, sign_in_path(set_group_memberships_path(@group)), :class => 'btn'
-        = link_to '<i class="icon-plus-sign icon-black"></i> Követem'.html_safe, sign_in_path(set_group_follows_path(@group)), :class => 'btn'
+        = link_to '<i class="icon-plus-sign icon-black"></i> Követem'.html_safe, sign_in_path(set_group_memberships_path(@group)), :class => 'btn'
     - unless (users = @group.members.order('memberships.created_at ASC')).empty?
       h3 Tagok
       p= render 'users/user_avatars', :users => users

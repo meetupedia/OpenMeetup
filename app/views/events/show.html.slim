@@ -23,7 +23,9 @@ h1.event= @event.title
         = " → "
         = l(@event.end_time)
     = simple_format(@event.description)
-    .item_view= render @event.group, :hide_tags => true
+    .item_view
+      h3= link_to @event.group.name, @event.group
+      p= link_to "#{@event.group.follows.size} követő", @event.group
 
   .span4
     - if current_user
