@@ -6,6 +6,7 @@ class EventsController < ApplicationController
   authorize_resource :except => [:index, :show, :users]
 
   def show
+    @title = @event.title
   end
 
   def new

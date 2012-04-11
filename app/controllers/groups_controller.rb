@@ -5,6 +5,7 @@ class GroupsController < ApplicationController
   authorize_resource :except => [:index, :show, :users]
 
   def show
+    @title = @group.name
   end
 
   def new
