@@ -1,11 +1,12 @@
-- if can? :edit, @event or can? :create, EventInvitation.new(:event => @event)
-  .adminbox
-    - if can? :edit, @event
-      =' link_to t('event.edit'), edit_event_path(@event), :class => 'btn'
-    - if can? :create, EventInvitation.new(:event => @event)
-      =' link_to t('event.invite_members'), new_event_event_invitation_path(@event, :hide_emails => true), :class => 'btn', :rel => 'facebox'
-      =' link_to t('event.invite_other_people'), new_event_event_invitation_path(@event), :class => 'btn', :rel => 'facebox'
-      =' link_to t('event.already_invited'), invited_event_path(@event)
+= content_for :header do
+  - if can? :edit, @event or can? :create, EventInvitation.new(:event => @event)
+    .adminbox
+      - if can? :edit, @event
+        =' link_to t('event.edit'), edit_event_path(@event), :class => 'btn'
+      - if can? :create, EventInvitation.new(:event => @event)
+        =' link_to t('event.invite_members'), new_event_event_invitation_path(@event, :hide_emails => true), :class => 'btn', :rel => 'facebox'
+        =' link_to t('event.invite_other_people'), new_event_event_invitation_path(@event), :class => 'btn', :rel => 'facebox'
+        =' link_to t('event.already_invited'), invited_event_path(@event)
 
 h1.event= @event.title
 

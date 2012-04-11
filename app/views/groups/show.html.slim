@@ -1,12 +1,13 @@
-- if can? :edit, @group or can? :create, Event.new(:group => @group) or can? :create, GroupInvitation.new(:group => @group)
-  .adminbox
-    - if can? :edit, @group
-      =' link_to 'Csoport szerkesztése', edit_group_path(@group), :class => 'btn'
-    - if can? :create, Event.new(:group => @group)
-      =' link_to 'Új esemény', new_group_event_path(@group), :class => 'btn', :rel => 'facebox'
-    - if can? :create, GroupInvitation.new(:group => @group)
-      =' link_to 'Ismerősök hozzáadása', new_group_group_invitation_path(@group), :class => 'btn', :rel => 'facebox'
-      =' link_to 'Meghívottak', invited_group_path(@group)
+= content_for :header do
+  - if can? :edit, @group or can? :create, Event.new(:group => @group) or can? :create, GroupInvitation.new(:group => @group)
+    .adminbox
+      - if can? :edit, @group
+        =' link_to 'Csoport szerkesztése', edit_group_path(@group), :class => 'btn'
+      - if can? :create, Event.new(:group => @group)
+        =' link_to 'Új esemény', new_group_event_path(@group), :class => 'btn', :rel => 'facebox'
+      - if can? :create, GroupInvitation.new(:group => @group)
+        =' link_to 'Ismerősök hozzáadása', new_group_group_invitation_path(@group), :class => 'btn', :rel => 'facebox'
+        =' link_to 'Meghívottak', invited_group_path(@group)
 
 h1.group= @group.name
 
