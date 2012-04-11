@@ -11,8 +11,11 @@ class SessionsController < ApplicationController
     user = User.find_by_provider_and_uid(auth['provider'], auth['uid']) || User.create_with_omniauth(auth)
     user.update_attributes :token => auth['credentials']['token']
     unless auth[:provider] == 'developer'
-      user.update_attributes :location => user.facebook.location if user.facebook.andand.location
-      user.update_attributes :facebook_friend_ids => user.facebook.friends.map { |friend| friend.identifier } if user.facebook.andand.friends
+      if user.facebook
+        user.update_attributes :email => user.facebook.email if user.facebook.email
+        user.update_attributes :location => user.facebook.location if user.facebook.location
+        user.update_attributes :facebook_friend_ids => user.facebook.friends.map { |friend| friend.identifier } if user.facebook.friends
+      end
     end
     session[:user_id] = user.id
     if user.tags.size > 0

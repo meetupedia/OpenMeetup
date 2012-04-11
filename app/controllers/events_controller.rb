@@ -12,6 +12,7 @@ class EventsController < ApplicationController
   def new
     @event.start_time = Time.zone.now.beginning_of_day + 19.hours
     @event.end_time = Time.zone.now.beginning_of_day + 22.hours
+    render :layout => false if request.xhr?
   end
 
   def create

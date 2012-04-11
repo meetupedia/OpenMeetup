@@ -12,21 +12,22 @@ h1.event= @event.title
 
 .row
   .span8
-    p
+    div
       strong
         - if @event.place.present?
           = @event.place
           = dot
         = @event.gmaps4rails_address
-    p
+    div
       strong
         = l(@event.start_time)
         = " → "
         = l(@event.end_time)
-    = simple_format(@event.description)
+
     .item_view
       h3= link_to @event.group.name, @event.group
-      p= link_to "#{@event.group.follows.size} követő", @event.group
+
+    = simple_format(@event.description)
 
   .span4
     - if current_user

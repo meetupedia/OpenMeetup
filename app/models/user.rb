@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   key :uid
   key :name
   key :permalink
+  key :email
   key :token
   key :location
   key :is_admin, :as => :boolean

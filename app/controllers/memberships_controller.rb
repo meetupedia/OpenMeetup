@@ -1,4 +1,5 @@
 # -*- encoding : utf-8 -*-
+
 class MembershipsController < ApplicationController
   load_resource :group
   load_resource :membership, :through => :group, :shallow => true
