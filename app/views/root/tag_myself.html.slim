@@ -2,6 +2,8 @@
 
 h1 Mi érdekel?
 
+%p Válaszd ki az érdeklődési köreidet, és mi megmutatjuk a leginkább hozzád illő csoportokat!
+
 .row
   .span6
     = render :partial => 'taggings/button', :collection => Tag.order('name ASC'), :as => :tag

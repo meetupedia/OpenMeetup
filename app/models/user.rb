@@ -12,8 +12,6 @@ class User < ActiveRecord::Base
   key :facebook_friend_ids, :as => :text
   timestamps
 
-  serialize :facebook_friend_ids
-
   has_many :activities, :dependent => :destroy
   has_many :admined_groups, :through => :memberships, :source => :group, :conditions => {'memberships.is_admin' => true}
   has_many :event_invitations, :dependent => :nullify
@@ -32,6 +30,7 @@ class User < ActiveRecord::Base
   has_many :tags, :through => :taggings
   has_many :user_follows, :dependent => :destroy
 
+  serialize :facebook_friend_ids
   auto_permalink :name
 
   attr_protected :is_admin
