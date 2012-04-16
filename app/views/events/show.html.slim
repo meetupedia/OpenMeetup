@@ -12,6 +12,8 @@ h1.event= @event.title
 
 .row
   .span8
+    | <div class="fb-like" data-href="#{event_url(@event)}" data-send="false" data-width="450" data-show-faces="false"></div>
+
     div
       strong
         - if @event.place.present?

@@ -22,6 +22,8 @@ h1.group= @group.name
       - else
         p= render @group.tags
 
+      | <div class="fb-like" data-href="#{group_url(@group)}" data-send="false" data-width="450" data-show-faces="false"></div>
+
     - if @group.url.present?
       div
         ' Honlap:
