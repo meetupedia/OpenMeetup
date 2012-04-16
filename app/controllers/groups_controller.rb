@@ -6,6 +6,7 @@ class GroupsController < ApplicationController
 
   def show
     @title = @group.name
+    @static_follow = true
   end
 
   def new
