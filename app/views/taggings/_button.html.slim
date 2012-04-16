@@ -1,8 +1,5 @@
-- classes = ['btn']
-- classes << ['btn-mini'] if defined?(mini_buttons)
 span(id="tagging_button_for_tag_#{tag.id}")
   - if tagging = tag.tagging_for(current_user)
-    - classes << 'btn-info'
-    =' link_to tag.name, tagging, :method => :delete, :class => classes.join(' '), :remote => true
+    =' link_to tag.name, tagging, :method => :delete, :class => 'btn btn-mini btn-info ', :remote => true
   - else
-    =' link_to tag.name, tag_taggings_path(tag), :method => :post, :class => classes.join(' '), :remote => true
+    =' link_to tag.name, tag_taggings_path(tag), :method => :post, :class => 'btn btn-mini', :remote => true
