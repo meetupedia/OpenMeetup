@@ -35,6 +35,11 @@ class EventsController < ApplicationController
     end
   end
 
+  def destroy
+    @event.destroy
+    redirect_to @event.group, :notice => 'Esemény törölve.'
+  end
+
   def invited
     @event_invitation_targets = @event.event_invitation_targets.order('created_at DESC')
   end

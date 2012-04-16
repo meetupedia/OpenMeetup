@@ -17,7 +17,10 @@ h1.group= @group.name
       - if @group.image.file?
         .avatar= link_to(image_tag(@group.image.url(:small), :alt => @group.name, :height => 72, :width => 72, :title => @group.name), @group)
 
-      p= render :partial => 'taggings/button', :collection => @group.tags.order('name ASC'), :as => :tag
+      - if current_user
+        p= render :partial => 'taggings/button', :collection => @group.tags.order('name ASC'), :as => :tag
+      - else
+        p= render @group.tags
 
     - if @group.url.present?
       div

@@ -18,8 +18,6 @@ class Group < ActiveRecord::Base
   has_many :activities, :as => :activable, :dependent => :destroy
   has_many :admins, :through => :memberships, :source => :user, :conditions => {'memberships.is_admin' => true}
   has_many :events, :dependent => :destroy
-  has_many :follows, :dependent => :destroy
-  has_many :followers, :through => :follows, :source => :user
   has_many :group_invitations, :dependent => :nullify
   has_many :group_invitation_targets, :dependent => :nullify
   has_many :group_taggings, :dependent => :destroy

@@ -27,6 +27,7 @@ class MembershipsController < ApplicationController
   end
 
   def set
+    @membership = @group.memberships.build
     create
   end
 end
