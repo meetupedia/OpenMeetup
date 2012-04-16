@@ -11,6 +11,7 @@ class RootController < ApplicationController
   end
 
   def tag_myself
+    redirect_to root unless current_user
   end
 
   def about

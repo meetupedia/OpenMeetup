@@ -10,13 +10,17 @@ class MembershipsController < ApplicationController
       @membership.save
       create_activity @membership
     end
-    redirect_to @group
+    redirect_to @group unless request.xhr?
   end
 
   def destroy
     unless @membership.is_admin? or @membership.group.admins.count > 1
       @membership.destroy
-      redirect_to @membership.group
+      if request.xhr?
+        render :create
+      else
+        redirect_to @membership.group
+      end
     else
       redirect_to @membership.group, :alert => 'Nem törölheted magad, ha nincsen legalább két admin!'
     end
