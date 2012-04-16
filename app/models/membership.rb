@@ -8,6 +8,8 @@ class Membership < ActiveRecord::Base
   belongs_to :group
 
   has_many :activities, :as => :activable, :dependent => :destroy
+
+  attr_protected :is_admin
 end
 
 Membership.auto_upgrade!

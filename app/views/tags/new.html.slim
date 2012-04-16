@@ -1,6 +1,6 @@
-h2 Új címke
+h1 Új címke
 
-= semantic_form_for @tag do |f|
+= semantic_form_for @tag, :url => group_tags_path(@group) do |f|
   = f.semantic_errors
   = f.inputs :name
   = f.actions

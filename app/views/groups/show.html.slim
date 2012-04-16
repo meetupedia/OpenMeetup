@@ -3,6 +3,7 @@
     .adminbox
       - if can? :edit, @group
         =' link_to 'Csoport szerkesztése', edit_group_path(@group), :class => 'btn'
+        =' link_to 'Címke hozzáadása', new_group_tag_path(@group), :class => 'btn', :rel => 'facebox'
       - if can? :create, Event.new(:group => @group)
         =' link_to 'Új esemény', new_group_event_path(@group), :class => 'btn', :rel => 'facebox'
       - if can? :create, GroupInvitation.new(:group => @group)
