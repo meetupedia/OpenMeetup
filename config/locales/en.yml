@@ -21,3 +21,10 @@ en:
     invite_members: 'Invite members'
     invite_other_people: 'Invite other people'
     participants: 'Participants'
+  footer:
+    about: 'About'
+    termsofservice: 'Terms of service'
+    privacy: 'Privacy'
+    contact: 'Contact'
+    vanity1: '%{usernumber} members and %{groupnumber} groups have joined us.'
+    vanity2: 'We helped %{eventnumber} meetups to happen, %{eventthisweeknumber} meetups this week.'

@@ -54,8 +54,7 @@ html
           a.close(data-dismiss="alert")×
           = flash[:alert]
       = yield
-      #footer
-        | © OpenMeetup
+      = render 'layouts/footer'
     = yield :scripts
     = render 'layouts/uservoice'
     | <div id="fb-root"></div>

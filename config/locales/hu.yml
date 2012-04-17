@@ -22,6 +22,14 @@ hu:
     invite_other_people: 'Meghívó küldése külsősöknek'
     participants: 'Résztvevők'
 
+  footer:
+    about: 'Rólunk'
+    termsofservice: 'Felhasználási feltételek'
+    privacy: 'Adatvédelem'
+    contact: 'Kapcsolat'
+    vanity1: 'Már %{usernumber} ember és %{groupnumber} közösség csatlakozott hozzánk.'
+    vanity2: 'Már %{eventnumber} találkozó létrejöttében segítettünk, %{eventthisweeknumber} találkozó lesz ezen a héten.'
+
   date:
     formats:
       default: '%Y. %B %e.'
