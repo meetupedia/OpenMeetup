@@ -13,8 +13,8 @@ h2 Csoportjaim
       tr
         th= link_to group.name, group
         td.right_aligned
-          = link_to 'Meghívó küldése', new_group_group_invitation_path(group), :class => 'btn btn-mini btn-primary', :rel => 'facebox'
+          =' link_to 'Meghívó küldése', new_group_group_invitation_path(group), :class => 'btn btn-mini btn-primary', :rel => 'facebox'
           - if can? :edit, group
-            = link_to 'Szerkesztés', edit_group_path(group), :class => 'btn btn-mini'
+            =' link_to 'Szerkesztés', edit_group_path(group), :class => 'btn btn-mini'
           - if can? :destroy, group
-            = link_to 'Törlés', '#', :class => 'btn btn-mini btn-danger'
+            =' link_to 'Törlés', '#', :class => 'btn btn-mini btn-danger'

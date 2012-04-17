@@ -9,8 +9,10 @@ class ApplicationController < ActionController::Base
 
   auto_user
 
-  rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, :alert => 'Nincsen megfelelő jogosultságod ehhez!'
+  if Rails.env == 'production'
+    rescue_from CanCan::AccessDenied do |exception|
+      redirect_to root_url, :alert => 'Nincsen megfelelő jogosultságod ehhez!'
+    end
   end
 
 private
@@ -24,7 +26,7 @@ private
   end
 
   def extract_locale_from_accept_language_header
-    request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+    request.env['HTTP_ACCEPT_LANGUAGE'].andand.scan(/^[a-z]{2}/).andand.first
   end
 
   def set_locale

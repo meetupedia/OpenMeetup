@@ -29,6 +29,9 @@ span a.btn
       &:hover
         background: #d7d7d7
         color: #000000
+    .dropdown-toggle .caret, .open.dropdown .caret
+      border-bottom-color: #000000
+      border-top-color: #000000
   .navbar-inner
     background: #e7e7e7
     border-bottom: 1px solid #d7d7d7
@@ -70,11 +73,11 @@ h1
 
 h2
   font-family: Georgia, serif
-  margin: 15px 0
+  margin: 25px 0 15px 0
 
 h3
   font-family: Georgia, serif
-  margin: 5px 0
+  margin: 15px 0 5px 0
 
 .date
   color: #6f6f6f
@@ -111,7 +114,8 @@ div.list_view
     border-top: 1px solid #ffffff
     padding-bottom: 5px
     padding-top: 5px
-
+    h3
+      margin-top: 5px
 div.item_view
   background: #e7e7e7
   border-radius: 5px
@@ -119,7 +123,8 @@ div.item_view
   padding: 2px 12px
   -webkit-border-radius: 5px
   -moz-border-radius: 5px
-
+  h3
+    margin-top: 5px
 
 div.activity, div.user, div.review
   min-height: 36px
@@ -158,8 +163,8 @@ span.tag
   color: #6f6f6f
   font-size: 11px
   padding: 3px 6px
-  -webkit-border-radius: 3px
-  -moz-border-radius: 3px
+  -webkit-border-radius: 4px
+  -moz-border-radius: 4px
 
 #facebox
   h1
@@ -206,3 +211,7 @@ div.calendar
     &.today
       span
         border: 2px solid #08c
+
+#facebox .form-actions
+  margin: 0 -25px -43px -25px
+  padding: 25px

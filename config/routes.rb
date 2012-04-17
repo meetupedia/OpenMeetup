@@ -25,10 +25,9 @@ Openmeetup::Application.routes.draw do
       end
     end
     resources :reviews
-  end
-
-  resources :tags do
-    resources :taggings, :shallow => true
+    resources :tags, :shallow => true do
+      resources :taggings, :shallow => true
+    end
   end
 
   resources :users do

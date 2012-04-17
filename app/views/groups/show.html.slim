@@ -3,6 +3,7 @@
     .adminbox
       - if can? :edit, @group
         =' link_to 'Csoport szerkesztése', edit_group_path(@group), :class => 'btn'
+        =' link_to 'Címke hozzáadása', new_group_tag_path(@group), :class => 'btn', :rel => 'facebox'
       - if can? :create, Event.new(:group => @group)
         =' link_to 'Új esemény', new_group_event_path(@group), :class => 'btn', :rel => 'facebox'
       - if can? :create, GroupInvitation.new(:group => @group)
@@ -17,7 +18,12 @@ h1.group= @group.name
       - if @group.image.file?
         .avatar= link_to(image_tag(@group.image.url(:small), :alt => @group.name, :height => 72, :width => 72, :title => @group.name), @group)
 
-      p= render :partial => 'taggings/button', :collection => @group.tags.order('name ASC'), :as => :tag
+      - if current_user
+        p= render :partial => 'taggings/button', :collection => @group.tags.order('name ASC'), :as => :tag
+      - else
+        p= render @group.tags
+
+      | <div class="fb-like" data-href="#{group_url(@group)}" data-send="false" data-width="450" data-show-faces="false"></div>
 
     - if @group.url.present?
       div

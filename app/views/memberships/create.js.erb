@@ -1,0 +1,1 @@
+$('#membership_button_for_group_<%= @membership.group.id %>').replaceWith('<%= escape_javascript(render('memberships/button', :group => @membership.group)) %>')

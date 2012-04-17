@@ -4,6 +4,7 @@ h1 Mi érdekel?
 
 .row
   .span6
+    p Válaszd ki az érdeklődési köreidet, és mi megmutatjuk a leginkább hozzád illő csoportokat!
     = render :partial => 'taggings/button', :collection => Tag.order('name ASC'), :as => :tag
   .span6
     #groups.list_view= render 'groups/recommended_groups'
