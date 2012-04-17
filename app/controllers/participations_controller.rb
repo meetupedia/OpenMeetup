@@ -8,6 +8,7 @@ class ParticipationsController < ApplicationController
   def create
     unless @event.participation_for(current_user)
       @participation.save
+      @participation.event.absence_for(current_user).andand.destroy
       create_activity @participation
     end
     redirect_to @event
