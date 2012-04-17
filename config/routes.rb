@@ -12,6 +12,11 @@ Openmeetup::Application.routes.draw do
         get :users
         get :invited
       end
+      resources :absences, :shallow => true do
+        collection do
+          get :set
+        end
+      end
       resources :participations, :shallow => true do
         collection do
           get :set

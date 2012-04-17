@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   key :facebook_friend_ids, :as => :text
   timestamps
 
+  has_many :absences, :dependent => :destroy
   has_many :activities, :dependent => :destroy
   has_many :admined_groups, :through => :memberships, :source => :group, :conditions => {'memberships.is_admin' => true}
   has_many :event_invitations, :dependent => :nullify

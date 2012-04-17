@@ -16,6 +16,8 @@ class Event < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :group
+  has_many :absences, :dependent => :destroy
+  has_many :absents, :through => :absences, :source => :user
   has_many :activities, :as => :activable, :dependent => :destroy
   has_many :event_invitations, :dependent => :nullify
   has_many :event_invitation_targets, :dependent => :nullify
@@ -29,8 +31,8 @@ class Event < ActiveRecord::Base
 
   after_create :create_admin_participation
 
-  def gmaps4rails_address
-    "#{self.street}, #{self.city}"
+  def absence_for(user)
+    Absence.find_by_event_id_and_user_id(self.id, user.id)
   end
 
   def address
@@ -39,6 +41,10 @@ class Event < ActiveRecord::Base
 
   def create_admin_participation
     Participation.create :event => self
+  end
+
+  def gmaps4rails_address
+    "#{self.street}, #{self.city}"
   end
 
   def participation_for(user)

@@ -5,6 +5,11 @@ class Ability
 
   def initialize(current_user)
     if current_user
+      can [:create, :set], Absence
+      can :destroy, Absence do |absence|
+        absence.user_id == current_user.id
+      end
+
       can [:create, :update, :destroy], Event do |event|
         event.group.admins.include?(current_user)
       end
