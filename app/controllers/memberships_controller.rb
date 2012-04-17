@@ -9,6 +9,9 @@ class MembershipsController < ApplicationController
     unless @group.membership_for(current_user)
       @membership.save
       create_activity @membership
+      @group.admins.each do |admin|
+        GroupMailer.join(current_user, admin.email, @group).deliver
+      end
     end
     redirect_to @group unless request.xhr?
   end

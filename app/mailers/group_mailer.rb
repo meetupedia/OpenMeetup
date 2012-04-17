@@ -8,4 +8,10 @@ class GroupMailer < ActionMailer::Base
     @message = message
     mail :to => email, :subject => "Meghívó: #{@group.name}"
   end
+
+  def join(user, email, group)
+    @user = user
+    @group = group
+    mail :to => email, :subject => "Csatlakozás: #{@group.name}"
+  end
 end
