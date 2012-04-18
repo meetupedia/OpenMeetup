@@ -1,0 +1,10 @@
+= semantic_form_for @wave || Wave.new(:subject => (defined?(subject) ? subject : '')) do |f|
+  = f.inputs do
+    = f.input :subject
+    - if @recipient_id
+      = hidden_field_tag 'wave_membership[user_id]', @recipient_id
+    - else
+      = label_tag :user_id, 'Címzett'
+      = collection_select :wave_membership, :user_id, (@group.members - [current_user]).sort_by(&:permalink), :id, :name, {:prompt => 'Válassz címzettet!'}
+    div= text_area_tag :body, (defined?(body) ? body : '')
+  = f.actions

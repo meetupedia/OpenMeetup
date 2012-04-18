@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.2'
+gem 'rails', '3.2.3'
 
 gem 'mysql2'
 gem 'json'
@@ -29,7 +29,7 @@ gem 'geocoder'
 gem 'gmaps4rails', '1.4.5'
 gem 'railhead_autouser'
 gem 'railhead_permalink'
-gem 'paperclip'
+gem 'paperclip', '~> 2.7'
 gem 'oink'
 gem 'paper_trail'
 gem 'globalize3'

@@ -1,0 +1,5 @@
+- if wave_membership = wave.wave_membership_for(current_user)
+  - if wave_membership.is_archived?
+    = link_to image_tag('inbox.png', :alt => '', :height => 16, :width => 16), set_archive_wave_membership_path(wave_membership), :class => 'set_archive', :title => 'Vissza a bejövő üzenetek közé', :id => "wave_#{wave.id}_set_archive"
+  - else
+    = link_to image_tag('inbox-document.png', :alt => '', :height => 16, :width => 16), set_archive_wave_membership_path(wave_membership), :class => 'set_archive', :title => 'Archiválás', :id => "wave_#{wave.id}_set_archive"

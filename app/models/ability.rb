@@ -63,6 +63,8 @@ class Ability
       can :destroy, UserFollow do |user_follow|
         user_follow.user == current_user
       end
+
+      can :create, Wave
     else
       can :create, User
     end

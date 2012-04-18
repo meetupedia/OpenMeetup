@@ -8,8 +8,7 @@
       ' <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://openmeetup.net" data-text="Free meetup alternative -->">Tweet</a>
       ' <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
   .footer-left
-    | 2012 © OpenMeetup - 
-    - if rand(1)==1
+    - if rand(1) == 0
       = t('footer.vanity1', :usernumber => link_to(number_with_delimiter(User.count, :delimiter => ".")), :groupnumber => link_to(Group.count)).html_safe
     - else
       = t('footer.vanity2', :eventnumber => link_to(number_with_delimiter(Event.count, :delimiter => ".")), :eventthisweeknumber => link_to(Event.where(['start_time < ?', 7.days.since]).count)).html_safe
