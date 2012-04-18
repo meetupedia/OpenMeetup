@@ -1,0 +1,5 @@
+- if wave_membership = wave.wave_membership_for(current_user)
+  - if wave_membership.is_starred?
+    = link_to image_tag('star.png', :alt => '', :height => 16, :width => 16), set_star_wave_membership_path(wave_membership), :class => 'set_star', :title => 'Csillagozás levétele'
+  - else
+    = link_to image_tag('star_gray.png', :alt => '', :height => 16, :width => 16), set_star_wave_membership_path(wave_membership), :class => 'set_star', :title => 'Csillagozás hozzáadása'

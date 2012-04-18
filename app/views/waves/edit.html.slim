@@ -1,0 +1,17 @@
+h1= @wave.subject
+
+hr
+
+h3 Címzett hozzáadása
+= render 'wave_memberships/new'
+
+hr
+
+h3 Üzenettagság szerkesztése
+= semantic_form_for @wave_membership do |f|
+  = f.inputs :disable_notification
+  = f.actions
+
+hr
+h3 Üzenettagság törlése
+= link_to @wave_membership, 'Üzenettagság törlése', :method => :delete, :confirm => 'Biztosan törlöd?'

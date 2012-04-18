@@ -1,0 +1,7 @@
+.avatars
+  - @wave.users.each do |user|
+    = user_avatar_link user, :small
+
+- if @wave.wave_memberships.size < 2
+  = render 'wave_memberships/new'
+

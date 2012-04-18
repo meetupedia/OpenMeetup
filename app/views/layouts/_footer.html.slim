@@ -1,7 +1,7 @@
 #footer
   .footer-left
-    | 2012 © OpenMeetup - 
-    - if Random.rand(0..1)==1
+    ' 2012 © OpenMeetup –
+    - if rand(1) == 0
       = t('footer.vanity1', :usernumber => link_to(number_with_delimiter(User.count, :delimiter => ".")), :groupnumber => link_to(Group.count)).html_safe
     - else
       = t('footer.vanity2', :eventnumber => link_to(number_with_delimiter(Event.count, :delimiter => ".")), :eventthisweeknumber => link_to(Event.where(['start_time < ?', 7.days.since]).count)).html_safe
