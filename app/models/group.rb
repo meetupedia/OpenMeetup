@@ -25,7 +25,6 @@ class Group < ActiveRecord::Base
   has_many :members, :through => :memberships, :source => :user
   has_many :reviews, :dependent => :destroy
   has_many :tags, :through => :group_taggings
-  has_many :waves, :dependent => :destroy
 
   has_attached_file :image,
     :path => ':rails_root/public/system/:class/:style/:class_:id.:extension',

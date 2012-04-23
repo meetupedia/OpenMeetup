@@ -33,22 +33,6 @@ Openmeetup::Application.routes.draw do
     resources :tags, :shallow => true do
       resources :taggings, :shallow => true
     end
-    resources :waves, :shallow => true do
-      collection do
-        get :all
-        get :own
-        get :starred
-        get :with_user
-      end
-      resources :wave_items, :shallow => true
-      resources :wave_memberships, :shallow => true do
-        member do
-          post :set_archive
-          post :set_delete
-          post :set_star
-        end
-      end
-    end
   end
 
   resources :users do

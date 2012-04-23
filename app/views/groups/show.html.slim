@@ -50,6 +50,8 @@ h1.group= @group.name
     - if can? :create, Review.new(:group => @group)
       p= link_to 'Értékelés írása', new_group_review_path(@group), :class => 'btn', :rel => 'facebox'
 
+    | <div class="fb-comments" data-href="#{group_url(@group)}" data-num-posts="10"></div>
+
   .span4
     p
       - if current_user
