@@ -23,4 +23,8 @@ class UsersController < ApplicationController
   def groups
     @groups = @user.joined_groups.paginate :page => params[:page]
   end
+
+  def facebook_groups
+    @facebook_groups = @user.facebook.groups
+  end
 end

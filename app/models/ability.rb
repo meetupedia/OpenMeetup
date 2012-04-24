@@ -55,7 +55,7 @@ class Ability
 
       can :create, Tag
 
-      can [:update, :destroy, :dashboard], User do |user|
+      can [:update, :destroy, :dashboard, :facebook_groups], User do |user|
         user == current_user
       end
 

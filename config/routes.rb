@@ -39,6 +39,7 @@ Openmeetup::Application.routes.draw do
     resources :user_follows, :shallow => true
     member do
       get :dashboard
+      get :facebook_groups
       get :groups
     end
   end

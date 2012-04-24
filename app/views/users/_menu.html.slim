@@ -3,3 +3,4 @@ ul.nav.nav-tabs
   li(class="#{controller.action_name == 'groups' ? 'active' : ''}")= link_to 'Csoportok', groups_user_path(@user)
   - if can? :edit, @user
     li(class="#{controller.action_name == 'dashboard' ? 'active' : ''}")= link_to 'Vezérlőpult', dashboard_user_path(@user)
+    li(class="#{controller.action_name == 'facebook_groups' ? 'active' : ''}")= link_to 'Facebookos csoportjaim', facebook_groups_user_path(@user)

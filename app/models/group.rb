@@ -2,6 +2,7 @@
 
 class Group < ActiveRecord::Base
   key :name
+  key :facebook_uid
   key :permalink, :index => true
   key :description, :as => :text
   key :location, :index => true
