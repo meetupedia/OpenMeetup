@@ -1,0 +1,11 @@
+h1= @title
+
+= render 'gmedia/gmedia'
+
+- if params[:page]
+  = will_paginate @waves
+
+table= render @waves
+
+= will_paginate @waves
+

@@ -7,6 +7,7 @@
         =' link_to t('event.invite_members'), new_event_event_invitation_path(@event, :hide_emails => true), :class => 'btn', :rel => 'facebox'
         =' link_to t('event.invite_other_people'), new_event_event_invitation_path(@event), :class => 'btn', :rel => 'facebox'
         =' link_to t('event.already_invited'), invited_event_path(@event)
+      =' link_to 'Új üzenet', new_wave_path(:event_id => @event.id), :class => 'btn', :rel => 'facebox'
 
 h1.event= @event.title
 

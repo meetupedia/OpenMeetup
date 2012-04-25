@@ -9,6 +9,7 @@
       - if can? :create, GroupInvitation.new(:group => @group)
         =' link_to 'Ismerősök hozzáadása', new_group_group_invitation_path(@group), :class => 'btn', :rel => 'facebox'
         =' link_to 'Meghívottak', invited_group_path(@group)
+      =' link_to 'Új üzenet', new_wave_path(:group_id => @group.id), :class => 'btn', :rel => 'facebox'
 
 h1.group= @group.name
 

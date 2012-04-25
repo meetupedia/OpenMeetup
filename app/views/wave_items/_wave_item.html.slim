@@ -1,0 +1,7 @@
+= div_for wave_item, :class => 'clearfix' do
+  .avatar= user_avatar wave_item.user
+  .main
+    =' user_link wave_item.user
+    =' time_ago_in_words wave_item.created_at
+
+    p= wave_item.body

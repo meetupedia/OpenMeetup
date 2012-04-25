@@ -27,4 +27,8 @@ class UsersController < ApplicationController
   def facebook_groups
     @facebook_groups = @user.facebook.groups
   end
+
+  def waves
+    @waves = current_user.waves.order('last_changed_at DESC').paginate :page => params[:page]
+  end
 end

@@ -41,7 +41,12 @@ Openmeetup::Application.routes.draw do
       get :dashboard
       get :facebook_groups
       get :groups
+      get :waves
     end
+  end
+
+  resources :waves do
+    resources :wave_items
   end
 
   match '/about' => 'root#about', :as => :about

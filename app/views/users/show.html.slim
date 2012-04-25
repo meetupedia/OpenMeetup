@@ -6,6 +6,7 @@
 
 - if current_user and not @user == current_user
   p.pull-right= render 'user_follows/button', :user => @user
+  p.pull-right= link_to 'Üzenet küldése', new_wave_path(:recipient_id => @user.id), :class => 'btn', :rel => 'facebox'
 
 h1.user= @user.name
 

@@ -1,0 +1,8 @@
+= semantic_form_for @wave do |f|
+  = hidden_field_tag 'wave[recipient_id]', params[:recipient_id]
+  = hidden_field_tag 'wave[group_id]', params[:group_id]
+  = hidden_field_tag 'wave[event_id]', params[:event_id]
+  = f.inputs do
+    = f.input :subject
+    = f.input :body, :as => :text
+  = f.actions

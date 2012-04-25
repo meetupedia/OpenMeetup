@@ -40,6 +40,7 @@ html
                     ul.dropdown-menu
                       li= link_to t('menu.profile'), current_user
                       li= link_to t('menu.dashboard'), dashboard_user_path(current_user)
+                      li= link_to t('menu.messages'), waves_user_path(current_user)
                       li= link_to t('menu.exit'), sign_out_path
                 - else
                   li= link_to image_tag('facebook-connect-button.png', :alt => t('menu.login_with_facebook')), sign_in_path
