@@ -44,18 +44,19 @@ html
                       li= link_to t('menu.exit'), sign_out_path
                 - else
                   li= link_to image_tag('facebook-connect-button.png', :alt => t('menu.login_with_facebook')), sign_in_path
-    #content.container
-      = yield :header
-      - if flash[:notice]
-        .alert.alert-success
-          a.close(data-dismiss="alert")×
-          = flash[:notice]
-      - if flash[:alert]
-        .alert.alert-error
-          a.close(data-dismiss="alert")×
-          = flash[:alert]
-      = yield
-      = render 'layouts/footer'
+    #content
+      .container
+        = yield :header
+        - if flash[:notice]
+          .alert.alert-success
+            a.close(data-dismiss="alert")×
+            = flash[:notice]
+        - if flash[:alert]
+          .alert.alert-error
+            a.close(data-dismiss="alert")×
+            = flash[:alert]
+        = yield
+    = render 'layouts/footer'
     = yield :scripts
     = render 'layouts/uservoice'
     | <div id="fb-root"></div>

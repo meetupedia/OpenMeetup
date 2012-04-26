@@ -1,5 +1,5 @@
 body
-  background: #f3f3f3
+  background: #efefef
   font-family: Arial, sans-serif
 
 td.right_aligned
@@ -11,12 +11,19 @@ p
 span a.btn
   margin-bottom: 5px
 
+.span8, .span6, .span4
+  background: #ffffff
+  border-radius: 5px
+  box-shadow: 0 1px 2px #9f9f9f
+  .wrapper
+    padding: 0 15px
+    .list_view
+      margin: 0 -15px
 #footer
-  border-top: 1px solid #ffffff
+  background: #e7e7e7
   color: #9f9f9f
   font-size: 11px
-  margin-top: 60px
-  margin-bottom: 20px
+  margin-top: 40px
   padding: 10px
   text-align: center
 
@@ -52,25 +59,16 @@ span a.btn
   text-align: left
 
 .navbar
-  border-bottom: 1px solid #ffffff
-  color: #2f2f2f
   .nav > li
     a
-      color: #2f2f2f
+      color: #efefef
       text-shadow: none
       &:hover
-        background: #d7d7d7
-        color: #000000
-    .dropdown-toggle .caret, .open.dropdown .caret
-      border-bottom-color: #000000
-      border-top-color: #000000
+        background: #004460
+        color: #ffffff
   .navbar-inner
-    background: #e7e7e7
-    border-bottom: 1px solid #d7d7d7
-    box-shadow: none
-    -webkit-box-shadow: none
+    background: #005580
     .brand
-      color: #2f2f2f
       font-family: Georgia, serif
       font-size: 20px
   img
@@ -78,9 +76,9 @@ span a.btn
     vertical-align: top
 
 .navbar-search .search-query
-  background: #f4f4f4
-  border: 1px solid #dfdfdf
-  color: #cfcfcf
+  background: #efefef
+  border: 1px solid #cfcfcf
+  color: #6f6f6f
 
 .nav-tabs
   border-color: #cfcfcf
@@ -140,13 +138,9 @@ h3
 
 div.list_view
   > div
-    background: #ffffff
-    border-radius: 5px
+    background: #f7f7f7
     margin-bottom: 10px
-    padding: 5px 10px
-    box-shadow: 0 1px 2px #cfcfcf
-    -moz-box-shadow: 0 1px 2px #cfcfcf
-    -webkit-box-shadow: 0 1px 2px #cfcfcf
+    padding: 5px 15px
     h3
       margin-top: 0
 
@@ -205,12 +199,10 @@ span.tag
 
 div.calendar
   background: #e7e7e7
-  border-radius: 5px
+  border-radius: 0 5px 0 5px
   display: inline-block
   padding: 10px
-  margin-bottom: 20px
-  -webkit-border-radius: 5px
-  -moz-border-radius: 5px
+  margin: -15px -10px 0 0
   .month_names
     font-family: Georgia, serif
     font-size: 16px

@@ -13,50 +13,53 @@ h1.event= @event.title
 
 .row
   .span8
-    h3
-      ' →
-      = link_to @event.group.name, @event.group
+    .wrapper
+      .calendar.pull-right= calendar(@event.start_time, @event.end_time)
 
-    | <div class="fb-like" data-href="#{event_url(@event)}" data-send="false" data-width="450" data-show-faces="false"></div>
+      h3
+        ' →
+        = link_to @event.group.name, @event.group
 
-    .calendar.pull-right= calendar(@event.start_time, @event.end_time)
+      div
+        strong
+          - if @event.place.present?
+            = @event.place
+            = dot
+          = @event.gmaps4rails_address
+      div
+        strong
+          = l(@event.start_time)
+          = " → "
+          = l(@event.end_time)
 
-    div
-      strong
-        - if @event.place.present?
-          = @event.place
-          = dot
-        = @event.gmaps4rails_address
-    div
-      strong
-        = l(@event.start_time)
-        = " → "
-        = l(@event.end_time)
+      = simple_format(@event.description)
 
-    = simple_format(@event.description)
-
-    | <div class="fb-comments" data-href="#{event_url(@event)}" data-num-posts="10"></div>
+      | <div class="fb-comments" data-href="#{event_url(@event)}" data-num-posts="10"></div>
 
 
   .span4
-    p
-      - if current_user
-        - if participation = @event.participation_for(current_user)
-          =' link_to '<i class="icon-ok-sign icon-white"></i> Részt veszek'.html_safe, participation_path(participation), :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-success'
+    .wrapper
+      p
+        - if current_user
+          - if participation = @event.participation_for(current_user)
+            =' link_to '<i class="icon-ok-sign icon-white"></i> Részt veszek'.html_safe, participation_path(participation), :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-success'
+          - else
+            =' link_to '<i class="icon-plus-sign icon-black"></i> Részt veszek'.html_safe, event_participations_path(@event), :method => :post, :class => 'btn'
+          - if absence = @event.absence_for(current_user)
+            =' link_to '<i class="icon-ok-sign icon-white"></i> Nem veszek részt'.html_safe, absence_path(absence), :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-success'
+          - else
+            =' link_to '<i class="icon-plus-sign icon-black"></i> Nem veszek részt'.html_safe, event_absences_path(@event), :method => :post, :class => 'btn'
         - else
-          =' link_to '<i class="icon-plus-sign icon-black"></i> Részt veszek'.html_safe, event_participations_path(@event), :method => :post, :class => 'btn'
-        - if absence = @event.absence_for(current_user)
-          =' link_to '<i class="icon-ok-sign icon-white"></i> Nem veszek részt'.html_safe, absence_path(absence), :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-success'
-        - else
-          =' link_to '<i class="icon-plus-sign icon-black"></i> Nem veszek részt'.html_safe, event_absences_path(@event), :method => :post, :class => 'btn'
-      - else
-        =' link_to '<i class="icon-plus-sign icon-black"></i> Részt veszek'.html_safe, sign_in_path(set_event_participations_path(@event)), :class => 'btn'
-        =' link_to '<i class="icon-plus-sign icon-black"></i> Nem veszek részt'.html_safe, sign_in_path(set_event_absences_path(@event)), :class => 'btn'
-    h3= t('event.participants')
-    p= render 'users/user_avatars', :users => @event.participants.order('participations.created_at ASC')
-    p= link_to t('event.all_participants'), users_event_path(@event)
+          =' link_to '<i class="icon-plus-sign icon-black"></i> Részt veszek'.html_safe, sign_in_path(set_event_participations_path(@event)), :class => 'btn'
+          =' link_to '<i class="icon-plus-sign icon-black"></i> Nem veszek részt'.html_safe, sign_in_path(set_event_absences_path(@event)), :class => 'btn'
 
-    p= gmaps :map_options => {:auto_zoom => false, :zoom => 15, :auto_adjust => true, :do_clustering => true}, :markers =>{:data => @event.to_gmaps4rails}
+      | <div class="fb-like" data-href="#{event_url(@event)}" data-send="false" data-width="450" data-show-faces="false"></div>
 
-    h3= t('menu.activity')
-    .list_view= render @event.activities.order('created_at DESC').limit(5).includes(:activable => :user)
+      h3= t('event.participants')
+      p= render 'users/user_avatars', :users => @event.participants.order('participations.created_at ASC')
+      p= link_to t('event.all_participants'), users_event_path(@event)
+
+      p= gmaps :map_options => {:auto_zoom => false, :zoom => 15, :auto_adjust => true, :do_clustering => true}, :markers =>{:data => @event.to_gmaps4rails}
+
+      h3= t('menu.activity')
+      .list_view= render @event.activities.order('created_at DESC').limit(5).includes(:activable => :user)
