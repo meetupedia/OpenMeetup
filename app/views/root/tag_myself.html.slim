@@ -7,6 +7,6 @@ h1 Mi érdekel?
       p= render :partial => 'taggings/button', :collection => Tag.order('name ASC'), :as => :tag
   .span6
     .wrapper
-      .pull-right= link_to 'Új csoport', new_group_path, :class => 'btn'
+      p.pull-right= link_to 'Új csoport', new_group_path, :class => 'btn'
       h2 Csoportok
       #groups.list_view= render 'groups/recommended_groups'

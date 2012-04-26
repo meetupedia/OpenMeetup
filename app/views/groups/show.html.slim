@@ -37,12 +37,12 @@ h1.group= @group.name
       = simple_format(@group.description)
 
       h2 Események
-      .list_view
-        - if (events = @group.events.order('start_time DESC')).empty?
-          p Nincsenek események.
-        - else
-          = render events
+      - if (events = @group.events.order('start_time DESC')).empty?
+        p Nincsenek események.
+      - else
+        .list_view= render events
 
+    .wrapper
       | <div class="fb-comments" data-href="#{group_url(@group)}" data-num-posts="10"></div>
 
   .span4
@@ -57,7 +57,7 @@ h1.group= @group.name
       ' <g:plusone size="tall"></g:plusone>
       ' <a href="https://twitter.com/share" class="twitter-share-button" data-count="vertical">Tweet</a>
       ' <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
+    .wrapper
       - unless (users = @group.members.order('memberships.created_at ASC')).empty?
         h3 Tagok
         p= render 'users/user_avatars', :users => users
@@ -69,7 +69,8 @@ h1.group= @group.name
         h3 Facebookos ismerősök
         p= render 'users/user_avatars', :users => users
         p= link_to 'Összes tag', users_group_path(@group)
-      - unless (activities = @group.activities.order('created_at DESC').limit(5)).empty?
+    - unless (activities = @group.activities.order('created_at DESC').limit(5)).empty?
+      .wrapper
         h3 Aktivitás
         .list_view= render activities
 

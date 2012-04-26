@@ -1,7 +1,10 @@
 h1.group= link_to @group.name, @group
 
-h2 Tagok
+.row
+  .span12
+    .wrapper
+      h2 Tagok
 
-.list_view= render @memberships
+      .list_view= render @memberships
 
-= will_paginate @memberships
+      = will_paginate @memberships
