@@ -13,7 +13,13 @@ h1.event= @event.title
 
 .row
   .span8
+    h3
+      ' →
+      = link_to @event.group.name, @event.group
+
     | <div class="fb-like" data-href="#{event_url(@event)}" data-send="false" data-width="450" data-show-faces="false"></div>
+
+    .calendar.pull-right= calendar(@event.start_time, @event.end_time)
 
     div
       strong
@@ -26,9 +32,6 @@ h1.event= @event.title
         = l(@event.start_time)
         = " → "
         = l(@event.end_time)
-
-    .item_view
-      h3= link_to @event.group.name, @event.group
 
     = simple_format(@event.description)
 
@@ -52,8 +55,6 @@ h1.event= @event.title
     h3= t('event.participants')
     p= render 'users/user_avatars', :users => @event.participants.order('participations.created_at ASC')
     p= link_to t('event.all_participants'), users_event_path(@event)
-
-    .calendar= calendar(@event.start_time, @event.end_time)
 
     p= gmaps :map_options => {:auto_zoom => false, :zoom => 15, :auto_adjust => true, :do_clustering => true}, :markers =>{:data => @event.to_gmaps4rails}
 
