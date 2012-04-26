@@ -13,7 +13,7 @@ h1.event= @event.title
 
 .row
   .span8
-    .wrapper
+    .wrapper.clearfix
       .calendar.pull-right= calendar(@event.start_time, @event.end_time)
 
       h3
@@ -34,6 +34,8 @@ h1.event= @event.title
 
       = simple_format(@event.description)
 
+    .wrapper
+      h3 Kommentek
       | <div class="fb-comments" data-href="#{event_url(@event)}" data-num-posts="10"></div>
 
 
@@ -53,13 +55,16 @@ h1.event= @event.title
           =' link_to '<i class="icon-plus-sign icon-black"></i> Részt veszek'.html_safe, sign_in_path(set_event_participations_path(@event)), :class => 'btn'
           =' link_to '<i class="icon-plus-sign icon-black"></i> Nem veszek részt'.html_safe, sign_in_path(set_event_absences_path(@event)), :class => 'btn'
 
-      | <div class="fb-like" data-href="#{event_url(@event)}" data-send="false" data-width="450" data-show-faces="false"></div>
 
       h3= t('event.participants')
       p= render 'users/user_avatars', :users => @event.participants.order('participations.created_at ASC')
       p= link_to t('event.all_participants'), users_event_path(@event)
 
+    | <div class="fb-like" data-href="#{event_url(@event)}" data-send="false" data-width="450" data-show-faces="false"></div>
+
+    .wrapper
       p= gmaps :map_options => {:auto_zoom => false, :zoom => 15, :auto_adjust => true, :do_clustering => true}, :markers =>{:data => @event.to_gmaps4rails}
 
+    .wrapper
       h3= t('menu.activity')
       .list_view= render @event.activities.order('created_at DESC').limit(5).includes(:activable => :user)

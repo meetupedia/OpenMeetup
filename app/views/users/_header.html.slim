@@ -1,0 +1,13 @@
+= content_for :header do
+  - if can? :edit, @user
+    .adminbox
+      - if can? :edit, @user
+        =' link_to 'Felhasználó szerkesztése', edit_user_path(@user), :class => 'btn', :rel => 'facebox'
+
+- if current_user and not @user == current_user
+  p.pull-right= render 'user_follows/button', :user => @user
+  p.pull-right= link_to 'Üzenet küldése', new_wave_path(:recipient_id => @user.id), :class => 'btn', :rel => 'facebox'
+
+h1.user= @user.name
+
+= render 'menu'
