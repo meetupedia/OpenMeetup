@@ -1,4 +1,4 @@
-= div_for membership.user do
+= div_for membership.user, :class => 'clearfix' do
   - if can? :destroy, membership
     .pull-right= link_to 'Törlés', membership, :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-danger btn-small'
   .avatar= user_avatar membership.user

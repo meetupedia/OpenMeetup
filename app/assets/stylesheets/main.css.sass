@@ -11,6 +11,9 @@ p
 span a.btn
   margin-bottom: 5px
 
+input[type=text], textarea
+  width: 98%
+
 .wrapper
   background: #ffffff
   border-radius: 5px
@@ -19,6 +22,10 @@ span a.btn
   padding: 5px 15px
   .list_view
     margin: 0 -15px
+  h2:nth-of-type(1)
+    margin-top: 10px
+  h3:nth-of-type(1)
+    margin-top: 5px
 
 #footer
   background: #e7e7e7
@@ -68,6 +75,11 @@ span a.btn
       &:hover
         background: #004460
         color: #ffffff
+    &.dropdown ul li a
+      color: #005580
+      &:hover
+        background: #005580
+        color: #ffffff
   .navbar-inner
     background: #005580
     .brand
@@ -82,8 +94,13 @@ span a.btn
   border: 1px solid #cfcfcf
   color: #6f6f6f
 
-.nav-pills a
-  background: #e7e7e7
+.nav-pills
+  li
+    a
+      background: #ffffff
+      margin-right: 10px
+      &:hover
+        background: #cfcfcf
 
 h1
   color: #000000
@@ -140,10 +157,10 @@ div.list_view
     margin: 10px 0
     padding: 5px 15px
     h3
-      margin-top: 0
+      margin: 0
 
   div.activity, div.user, div.review
-    min-height: 36px
+    min-height: 20px
     padding-left: 55px
     .avatar
       margin: -5px 0 0 -40px
