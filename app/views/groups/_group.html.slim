@@ -8,4 +8,5 @@
   p= truncate group.description, :length => 256
   p= render :partial => 'taggings/button', :collection => group.tags.order('name ASC'), :as => :tag
   - unless (users = group.members.where('users.uid' => current_user.facebook_friend_ids).order('users.permalink ASC')).empty?
+    h5 Facebookos ismerősök a csoportban
     p= render 'users/user_avatars', :users => users
