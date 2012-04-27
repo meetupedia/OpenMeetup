@@ -5,6 +5,11 @@ body
 td.right_aligned
   text-align: right
 
+a
+  color: #005f8f
+  &:hover
+    color: #003f6f
+
 p
   margin: 10px 0
 
@@ -33,39 +38,22 @@ input[type=text], textarea
   color: #9f9f9f
   font-size: 11px
   margin-top: 40px
-  padding: 10px
+  padding: 10px 15px
   text-align: center
 
-.footer-left
-  text-align: left
-  float: left
+  .footer-left
+    float: left
 
-.footer-right
-  text-align: right
-  float: right
+  .footer-right
+    float: right
+    > a
+      padding-left: 10px
 
-.footer-right > a
-  padding-left: 10px
-
-.footer-showlove
-  display: block
-  width: 300px
-  height: 50px
-  margin: auto
-  text-align: center
-
-.footer-google
-  float: left
-  width: 100px
-  text-align: left
-.footer-twitter
-  float: left
-  width: 100px
-  text-align: left
-.footer-facebook
-  float: left
-  width: 100px
-  text-align: left
+  .footer-showlove
+    margin-left: -5px
+    .footer-google, .footer-twitter, .footer-facebook
+      float: left
+      width: 100px
 
 .navbar
   .nav > li
@@ -73,15 +61,15 @@ input[type=text], textarea
       color: #efefef
       text-shadow: none
       &:hover
-        background: #004460
+        background: #003f6f
         color: #ffffff
     &.dropdown ul li a
-      color: #005580
+      color: #005f8f
       &:hover
-        background: #005580
+        background: #005f8f
         color: #ffffff
   .navbar-inner
-    background: #005580
+    background: #005f8f
     .brand
       font-family: Georgia, serif
       font-size: 20px
@@ -232,7 +220,7 @@ div.calendar
       min-width: 22px
       padding: 2px
       &.on_day
-        background: #005580
+        background: #005f8f
         color: #ffffff
         font-weight: bold
     &.today
