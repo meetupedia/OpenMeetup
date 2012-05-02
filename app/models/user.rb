@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
 
   attr_protected :is_admin
 
-  after_save :update_city
+  after_validation :update_city
 
   def self.create_with_omniauth(auth)
     create! do |user|
@@ -63,7 +63,6 @@ class User < ActiveRecord::Base
 
   def update_city
     self.city = City.find_or_create_by_name(self.location)
-    save
   end
 end
 

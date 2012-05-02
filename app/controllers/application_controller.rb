@@ -3,7 +3,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :set_locale
+  before_filter :set_locale, :set_city
   helper_method :current_user, :current_language
   helper LaterDude::CalendarHelper
 
@@ -31,6 +31,10 @@ private
 
   def extract_locale_from_accept_language_header
     request.env['HTTP_ACCEPT_LANGUAGE'].andand.scan(/^[a-z]{2}/).andand.first
+  end
+
+  def set_city
+    cookies[:city] = params[:city] || current_user.andand.city || 'Budapest'
   end
 
   def set_locale

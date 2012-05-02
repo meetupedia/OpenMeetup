@@ -84,12 +84,12 @@ class Group < ActiveRecord::Base
   end
 
   def self.tagged_groups_for(user)
-    self.joins(:tags, :language).where('languages.code' => I18n.locale, 'tags.id' => user.tags, 'groups.is_closed' => false).select('groups.*, COUNT(group_taggings.tag_id) AS count').group('groups.id').order('count DESC')
+    self.joins(:tags, :language, :city).where('cities.id' => user.city_id, 'languages.code' => I18n.locale, 'tags.id' => user.tags, 'groups.is_closed' => false).select('groups.*, COUNT(group_taggings.tag_id) AS count').group('groups.id').order('count DESC')
   end
 
   def self.recommended_groups_for(user, limit = 10)
     tagged_groups = self.tagged_groups_for(user).limit(limit)
-    new_groups = self.joins(:language).where('languages.code' => I18n.locale, :is_closed => false).order('created_at DESC').limit(limit)
+    new_groups = self.joins(:language, :city).where('cities.id' => user.city_id, 'languages.code' => I18n.locale, :is_closed => false).order('created_at DESC').limit(limit)
     (tagged_groups + (new_groups - tagged_groups))[0...limit]
   end
 end
