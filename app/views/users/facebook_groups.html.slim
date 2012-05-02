@@ -1,14 +1,15 @@
 = render 'header'
 
-.list_view
-  - @facebook_groups.each do |facebook_group|
-    div
-      - if group = Group.find_by_facebook_uid(facebook_group.identifier)
-        h3
-          =' link_to group.name, group
-          ' ←
-          = facebook_group.name
-        = render 'memberships/button', :group => group
-      - else
-        h3= facebook_group.name
-        = link_to 'Létrehozás', new_group_path(:group => {:facebook_uid => facebook_group.identifier, :name => facebook_group.name, :description => facebook_group.description, :url => facebook_group.link}), :rel => 'facebox'
+.wrapper
+  .list_view
+    - @facebook_groups.each do |facebook_group|
+      div
+        - if group = Group.find_by_facebook_uid(facebook_group.identifier)
+          h3
+            =' link_to group.name, group
+            ' ←
+            = facebook_group.name
+          = render 'memberships/button', :group => group
+        - else
+          h3= facebook_group.name
+          = link_to 'Létrehozás', new_group_path(:group => {:facebook_uid => facebook_group.identifier, :name => facebook_group.name, :description => facebook_group.description, :url => facebook_group.link}), :rel => 'facebox'
