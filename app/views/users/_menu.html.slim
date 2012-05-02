@@ -2,6 +2,6 @@ ul.nav.nav-pills
   li(class="#{controller.action_name == 'show' ? 'active' : ''}")= link_to 'Aktitivás', @user
   li(class="#{controller.action_name == 'groups' ? 'active' : ''}")= link_to 'Csoportok', groups_user_path(@user)
   - if can? :edit, @user
-    li(class="#{controller.action_name == 'dashboard' ? 'active' : ''}")= link_to 'Vezérlőpult', dashboard_user_path(@user)
     li(class="#{controller.action_name == 'facebook_groups' ? 'active' : ''}")= link_to 'Facebookos csoportjaim', facebook_groups_user_path(@user)
+    li(class="#{controller.action_name == 'dashboard' ? 'active' : ''}")= link_to 'Vezérlőpult', dashboard_user_path(@user)
     li(class="#{controller.action_name == 'waves' ? 'active' : ''}")= link_to 'Üzenetek', waves_user_path(@user)
