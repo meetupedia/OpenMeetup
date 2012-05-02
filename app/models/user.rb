@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
 
   attr_protected :is_admin
 
-  after_validation :update_city
+  after_validation :set_city
 
   def self.create_with_omniauth(auth)
     create! do |user|
@@ -61,8 +61,8 @@ class User < ActiveRecord::Base
     User.joins('INNER JOIN user_follows ON user_follows.followed_user_id = users.id').where('user_follows.user_id' => 1)
   end
 
-  def update_city
-    self.city = City.find_or_create_by_name(self.location)
+  def set_city
+    self.city = City.find_or_create_by_name(self.location || 'Budapest')
   end
 end
 
