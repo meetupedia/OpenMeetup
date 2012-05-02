@@ -4,14 +4,14 @@
     = image_tag 'small1.jpg'
     = image_tag 'small2.jpg'
 
-  p Tanulj valami újat vidám és inspiratív társaságban!
-  p Találd meg a társaságot, amelyre mindig is vágytál!
-  p Találkozz hasonló érdeklődésű emberekkel a lakhelyeden!
-  p Találj új barátokat és hasonló érdeklődésű ismerősöket!
+  p= t('welcome.slogan_1')
+  p= t('welcome.slogan_2')
+  p= t('welcome.find_meetups')
+  p= t('welcome.create_meetup')
 
   .facebook_connect= link_to image_tag('facebook-connect-button.png', :alt => t('menu.login_with_facebook')), sign_in_path
 
-  .comment Nem írunk a Facebook faladra az engedélyed nélkül.
+  .comment =t('welcome.facebook_wont_write_to_your_wall')
 
 hr
 
