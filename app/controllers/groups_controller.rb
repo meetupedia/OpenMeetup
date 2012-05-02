@@ -23,6 +23,7 @@ class GroupsController < ApplicationController
   end
 
   def edit
+    render :layout => false if request.xhr?
   end
 
   def update

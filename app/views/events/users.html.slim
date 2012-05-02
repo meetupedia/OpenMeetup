@@ -1,7 +1,8 @@
 h1.event= link_to @event.title, @event
 
-h2 Résztvevők
+.wrapper
+  h2 Résztvevők
 
-.list_view= render @participations
+  .list_view= render @participations
 
-= will_paginate @participations
+  = will_paginate @participations

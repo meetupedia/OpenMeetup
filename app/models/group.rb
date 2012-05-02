@@ -2,6 +2,7 @@
 
 class Group < ActiveRecord::Base
   key :name
+  key :facebook_uid
   key :permalink, :index => true
   key :description, :as => :text
   key :location, :index => true
@@ -25,7 +26,7 @@ class Group < ActiveRecord::Base
   has_many :members, :through => :memberships, :source => :user
   has_many :reviews, :dependent => :destroy
   has_many :tags, :through => :group_taggings
-  has_many :waves, :dependent => :destroy
+  has_many :waves, :dependent => :nullify
 
   has_attached_file :image,
     :path => ':rails_root/public/system/:class/:style/:class_:id.:extension',

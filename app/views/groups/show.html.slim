@@ -2,80 +2,78 @@
   - if can? :edit, @group or can? :create, Event.new(:group => @group) or can? :create, GroupInvitation.new(:group => @group)
     .adminbox
       - if can? :edit, @group
-        =' link_to 'Csoport szerkesztése', edit_group_path(@group), :class => 'btn'
+        =' link_to 'Csoport szerkesztése', edit_group_path(@group), :class => 'btn', :rel => 'facebox'
         =' link_to 'Címke hozzáadása', new_group_tag_path(@group), :class => 'btn', :rel => 'facebox'
       - if can? :create, Event.new(:group => @group)
         =' link_to 'Új esemény', new_group_event_path(@group), :class => 'btn', :rel => 'facebox'
       - if can? :create, GroupInvitation.new(:group => @group)
         =' link_to 'Ismerősök hozzáadása', new_group_group_invitation_path(@group), :class => 'btn', :rel => 'facebox'
         =' link_to 'Meghívottak', invited_group_path(@group)
+      =' link_to 'Új üzenet', new_wave_path(:group_id => @group.id), :class => 'btn', :rel => 'facebox'
 
 h1.group= @group.name
 
 .row
   .span8
-    .clearfix
-      - if @group.image.file?
-        .avatar= link_to(image_tag(@group.image.url(:small), :alt => @group.name, :height => 72, :width => 72, :title => @group.name), @group)
+    .wrapper
+      .clearfix
+        - if @group.image.file?
+          .avatar= link_to(image_tag(@group.image.url(:small), :alt => @group.name, :height => 72, :width => 72, :title => @group.name), @group)
 
-      - if current_user
-        p= render :partial => 'taggings/button', :collection => @group.tags.order('name ASC'), :as => :tag
-      - else
-        p= render @group.tags
-    - if @group.url.present?
-      div
-        ' Honlap:
-        = auto_link @group.url
+        - if current_user
+          p= render :partial => 'taggings/button', :collection => @group.tags.order('name ASC'), :as => :tag
+        - else
+          p= render @group.tags
+      - if @group.url.present?
+        div
+          ' Honlap:
+          = auto_link @group.url
 
-    - if @group.facebook_url.present?
-      div
-        ' Facebook-oldal:
-        = auto_link @group.facebook_url
+      - if @group.facebook_url.present?
+        div
+          ' Facebook-oldal:
+          = auto_link @group.facebook_url
 
-    = simple_format(@group.description)
+      = simple_format(@group.description)
 
-    h2 Események
-    .list_view
-      - if (events = @group.events).empty?
+      h2 Események
+      - if (events = @group.events.order('start_time DESC')).empty?
         p Nincsenek események.
       - else
-        = render events
+        .list_view= render events
 
-    h2 Értékelések
-    .list_view
-      - if (reviews = @group.reviews.order('created_at DESC').limit(10)).empty?
-        p Nincsenek értékelések.
-      - else
-        = render reviews
-    - if can? :create, Review.new(:group => @group)
-      p= link_to 'Értékelés írása', new_group_review_path(@group), :class => 'btn', :rel => 'facebox'
+    .wrapper
+      h3 Kommentek
+      | <div class="fb-comments" data-href="#{group_url(@group)}" data-num-posts="10"></div>
 
   .span4
-    p
-      - if current_user
-        = render 'memberships/button', :group => @group
-      - else
-        = link_to '<i class="icon-plus-sign icon-black"></i> Követem'.html_safe, sign_in_path(set_group_memberships_path(@group)), :class => 'btn'
+    .wrapper
+      p
+        - if current_user
+          = render 'memberships/button', :group => @group
+        - else
+          = link_to '<i class="icon-plus-sign icon-black"></i> Követem'.html_safe, sign_in_path(set_group_memberships_path(@group)), :class => 'btn'
 
-    ' <div class="fb-like" data-href="#{group_url(@group)}" data-send="false" data-layout="box_count" data-show-faces="false"></div>
-    ' <g:plusone size="tall"></g:plusone>
-    ' <a href="https://twitter.com/share" class="twitter-share-button" data-count="vertical">Tweet</a>
-    ' <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
-    - unless (users = @group.members.order('memberships.created_at ASC')).empty?
-      h3 Tagok
-      p= render 'users/user_avatars', :users => users
-      p= link_to 'Összes tag', users_group_path(@group)
-    - unless (users = @group.admins.order('memberships.created_at ASC')).empty?
-      h3 Szervezők
-      p= render 'users/user_avatars', :users => users
-    - if current_user and not (users = @group.members.where('users.uid' => current_user.facebook_friend_ids).order('users.permalink ASC')).empty?
-      h3 Facebookos ismerősök
-      p= render 'users/user_avatars', :users => users
-      p= link_to 'Összes tag', users_group_path(@group)
+      ' <div class="fb-like" data-href="#{group_url(@group)}" data-send="false" data-layout="box_count" data-show-faces="false"></div>
+      ' <g:plusone size="tall"></g:plusone>
+      ' <a href="https://twitter.com/share" class="twitter-share-button" data-count="vertical">Tweet</a>
+      ' <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    .wrapper
+      - unless (users = @group.members.order('memberships.created_at ASC')).empty?
+        h3 Tagok
+        p= render 'users/user_avatars', :users => users
+        p= link_to 'Összes tag', users_group_path(@group)
+      - unless (users = @group.admins.order('memberships.created_at ASC')).empty?
+        h3 Szervezők
+        p= render 'users/user_avatars', :users => users
+      - if current_user and not (users = @group.members.where('users.uid' => current_user.facebook_friend_ids).order('users.permalink ASC')).empty?
+        h3 Facebookos ismerősök
+        p= render 'users/user_avatars', :users => users
+        p= link_to 'Összes tag', users_group_path(@group)
     - unless (activities = @group.activities.order('created_at DESC').limit(5)).empty?
-      h3 Aktivitás
-      .list_view= render activities
+      .wrapper
+        h3 Aktivitás
+        .list_view= render activities
 
 | <script type="text/javascript">
 |   (function() {

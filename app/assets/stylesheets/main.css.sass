@@ -1,9 +1,14 @@
 body
-  background: #f3f3f3
+  background: #efefef
   font-family: Arial, sans-serif
 
 td.right_aligned
   text-align: right
+
+a
+  color: #005f8f
+  &:hover
+    color: #003f6f
 
 p
   margin: 10px 0
@@ -11,68 +16,63 @@ p
 span a.btn
   margin-bottom: 5px
 
+input[type=text], textarea
+  width: 98%
+
+.wrapper
+  background: #ffffff
+  border-radius: 5px
+  box-shadow: 0 1px 2px #9f9f9f
+  margin-bottom: 20px
+  padding: 5px 15px
+  .list_view
+    margin: 0 -15px
+  h2:nth-of-type(1)
+    margin-top: 10px
+  h3:nth-of-type(1)
+    margin-top: 5px
+
 #footer
-  border-top: 1px solid #ffffff
+  background: #e7e7e7
+  border-radius: 10px 10px 0 0
   color: #9f9f9f
   font-size: 11px
-  margin-top: 60px
-  margin-bottom: 20px
-  padding: 10px
+  margin-top: 40px
+  padding: 10px 15px
   text-align: center
 
-.footer-left
-  text-align: left
-  float: left
-  padding-bottom: 20px
+  .footer-left
+    float: left
+    padding-bottom: 20px
 
-.footer-right
-  text-align: right
-  float: right
-  padding-bottom: 20px
+  .footer-right
+    float: right
+    padding-bottom: 20px
+    > a
+      padding-left: 10px
 
-.footer-right > a
-  padding-left: 10px
-
-.footer-showlove
-  display: block
-  width: 300px
-  height: 50px
-  margin: auto
-  text-align: center
-
-.footer-google
-  float: left
-  width: 100px
-  text-align: left
-.footer-twitter
-  float: left
-  width: 100px
-  text-align: left
-.footer-facebook
-  float: left
-  width: 100px
-  text-align: left
+  .footer-showlove
+    margin-left: -5px
+    .footer-google, .footer-twitter, .footer-facebook
+      float: left
+      width: 100px
 
 .navbar
-  border-bottom: 1px solid #ffffff
-  color: #2f2f2f
   .nav > li
     a
-      color: #2f2f2f
+      color: #efefef
       text-shadow: none
       &:hover
-        background: #d7d7d7
-        color: #000000
-    .dropdown-toggle .caret, .open.dropdown .caret
-      border-bottom-color: #000000
-      border-top-color: #000000
+        background: #003f6f
+        color: #ffffff
+    &.dropdown ul li a
+      color: #005f8f
+      &:hover
+        background: #005f8f
+        color: #ffffff
   .navbar-inner
-    background: #e7e7e7
-    border-bottom: 1px solid #d7d7d7
-    box-shadow: none
-    -webkit-box-shadow: none
+    background: #005f8f
     .brand
-      color: #2f2f2f
       font-family: Georgia, serif
       font-size: 20px
   img
@@ -80,16 +80,17 @@ span a.btn
     vertical-align: top
 
 .navbar-search .search-query
-  background: #f4f4f4
-  border: 1px solid #dfdfdf
-  color: #cfcfcf
+  background: #efefef
+  border: 1px solid #cfcfcf
+  color: #6f6f6f
 
-.nav-tabs
-  border-color: #cfcfcf
-  > .active > a
-    background: #f3f3f3
-    border-color: #cfcfcf
-    border-bottom-color: transparent
+.nav-pills
+  li
+    a
+      background: #ffffff
+      margin-right: 10px
+      &:hover
+        background: #cfcfcf
 
 h1
   color: #000000
@@ -141,34 +142,18 @@ h3
   margin-right: 3px
 
 div.list_view
-  border-bottom: 1px solid #ffffff
-  border-top: 1px solid #cfcfcf
   > div
-    border-bottom: 1px solid #cfcfcf
-    border-top: 1px solid #ffffff
-    padding-bottom: 5px
-    padding-top: 5px
+    background: #f7f7f7
+    margin: 10px 0
+    padding: 5px 15px
     h3
-      margin-top: 5px
-div.item_view
-  background: #e7e7e7
-  border-radius: 5px
-  margin: 10px 0
-  padding: 2px 12px
-  -webkit-border-radius: 5px
-  -moz-border-radius: 5px
-  h3
-    margin-top: 5px
+      margin: 0
 
-div.activity, div.user, div.review
-  min-height: 36px
-  padding-left: 40px
-  .avatar
-    margin-left: -40px
-    margin-right: 0
-
-div.group
-  min-height: 76px
+  div.activity, div.user, div.review
+    min-height: 20px
+    padding-left: 55px
+    .avatar
+      margin: -5px 0 0 -40px
 
 textarea
   height: 160px
@@ -210,7 +195,7 @@ span.tag
 .adminbox
   background: #d7d7d7
   border-radius: 0 0 5px 5px
-  margin: -40px 0 30px 0
+  margin: -30px 0 30px 0
   padding: 6px 6px
   -webkit-border-radius: 0 0 5px 5px
   -moz-border-radius: 0 0 5px 5px
@@ -222,9 +207,7 @@ div.calendar
   border-radius: 5px
   display: inline-block
   padding: 10px
-  margin: 20px 0
-  -webkit-border-radius: 5px
-  -moz-border-radius: 5px
+  margin: 10px 0
   .month_names
     font-family: Georgia, serif
     font-size: 16px
@@ -239,7 +222,7 @@ div.calendar
       min-width: 22px
       padding: 2px
       &.on_day
-        background: #005580
+        background: #005f8f
         color: #ffffff
         font-weight: bold
     &.today

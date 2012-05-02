@@ -1,8 +1,7 @@
 # encoding: UTF-8
 
 class WavesController < ApplicationController
-  load_resource :group
-  load_resource :wave, :through => :group, :shallow => true, :except => [:with_user]
+  load_resource
   authorize_resource
 
   def index
@@ -18,7 +17,7 @@ class WavesController < ApplicationController
         wave_note.destroy
         current_user.reload
       end
-      @wave_items = @wave.wave_items.order('created_at DESC').paginate :include => [{:reply_to => :user}, :user], :page => params[:page]
+      @wave_items = @wave.wave_items.order('created_at DESC').includes(:user).paginate :page => params[:page]
       @title = 'Üzenet: ' + @wave.subject
     else
       flash[:alert] = 'Nem tekintheted meg ezt a folyamot!'
@@ -34,47 +33,19 @@ class WavesController < ApplicationController
   def create
     @wave = Wave.new(params[:wave])
     if @wave.save
-      if params[:wave_membership] and not params[:wave_membership][:user_id].blank? and user = User.find_by_id(params[:wave_membership][:user_id])
-        WaveMembership.create(:user_id => user.id, :wave_id => @wave.id) unless user.blocked_user_ids.include?(current_user.id)
+      if @wave.recipient_id.present? and user = User.find_by_id(@wave.recipient_id)
+        @wave.add_wave_member(user)
       end
-      wave_item = WaveItem.create(:user_id => current_user.id, :wave_id => @wave.id, :body => params[:body]) if params[:body]
+      wave_item = WaveItem.create(:wave_id => @wave.id, :body => @wave.body)
       redirect_to @wave
     else
       render :new
     end
   end
 
-  def edit
-    @wave_membership = @wave.wave_membership_for(current_user)
-    render :layout => false if request.xhr?
-  end
-
   def all
     @waves = Wave.order('last_changed_at DESC').paginate :joins => :wave_memberships, :conditions => {'wave_memberships.user_id' => current_user.id, 'wave_memberships.is_deleted' => false}, :include => [:users, :wave_notes], :page => params[:page]
     @title = 'Összes üzenet'
     render :index
-  end
-
-  def own
-    @waves = current_user.waves.order('last_changed_at DESC').paginate :joins => :wave_memberships, :conditions => {'wave_memberships.user_id' => current_user.id, 'wave_memberships.is_deleted' => false}, :include => [:users, :wave_notes], :page => params[:page]
-    @title = 'Saját üzenetek'
-    render :index
-  end
-
-  def starred
-    @waves = Wave.order('last_changed_at DESC').paginate :joins => :wave_memberships, :conditions => {'wave_memberships.user_id' => current_user.id, 'wave_memberships.is_starred' => true, 'wave_memberships.is_deleted' => false}, :include => [:users, :wave_notes], :page => params[:page]
-    @title = 'Csillagozott üzenetek'
-    render :index
-  end
-
-  def with_user
-    @user = User.find_by_id params[:id]
-    if @user
-      @waves = (Wave.order('last_changed_at DESC').all(:joins => :wave_memberships, :conditions => {'wave_memberships.user_id' => @user.id}, :include => [:users, :wave_notes]) & current_user.joined_waves.all(:include => [:users, :wave_notes])).paginate :per_page => Wave.per_page, :page => params[:page]
-      @title = "Üzenetváltások vele: #{@user.login}"
-      render :index
-    else
-      redirect_to root_url, :alert => 'Nincsen ilyen tag!'
-    end
   end
 end

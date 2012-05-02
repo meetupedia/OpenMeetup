@@ -1,4 +1,5 @@
 = semantic_form_for @group do |f|
   = f.semantic_errors
+  = f.hidden_field :facebook_uid
   = f.inputs :name, :description, :location, :image, :url, :facebook_url, :tags, :is_closed
   = f.actions

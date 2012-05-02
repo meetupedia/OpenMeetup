@@ -5,12 +5,12 @@ class WaveItemsController < ApplicationController
   load_resource :wave_item, :through => :wave, :shallow => true
   authorize_resource
 
+  def new
+    render :layout => false if request.xhr?
+  end
+
   def create
     @wave_item.save
-    if request.xhr?
-      render :layout => false
-    else
-      redirect_to @wave
-    end
+    redirect_to @wave
   end
 end

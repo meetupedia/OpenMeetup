@@ -1,18 +1,18 @@
 h1= @wave.subject
 
-.clearfix
-  = set_button_menu @wave
-  .left= render 'wave_memberships/set_archive', :wave => @wave
-  .left= render 'wave_memberships/set_star', :wave => @wave
-  .left= render 'wave_memberships/set_delete', :wave => @wave
+- if @wave.group
+  h3
+    ' →
+    = link_to @wave.group.name, @wave.group
+- if @wave.event
+  h3
+    ' →
+    = link_to @wave.event.title, @wave.event
 
-#wave_users= render 'wave_memberships/users'
-
-.formbutton
-  = link_to 'Üzenet hozzáfűzése', '#', :class => (@wave.wave_items.size > 0 ? '' : 'expand')
-  .editbox style=((@wave.wave_items.size > 0 ?)'' : 'display: block;')
-    - easy_form_for WaveItem.new, :url => url_for([@wave, :wave_items]) do |f|
-      li= f.text_area :body
-      = f.easy_submit 'Hozzáadás'
-
-= paginate_items @wave_items, :locals => {:wave => @wave}
+.row
+  .span8
+    p= link_to 'Új üzenet', new_wave_wave_item_path(@wave), :class => 'btn', :rel => 'facebox'
+    .list_view= render @wave_items
+  .span4
+    h3 Címzettek
+    p= render 'users/user_avatars', :users => @wave.wave_members

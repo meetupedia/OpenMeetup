@@ -30,6 +30,8 @@ class User < ActiveRecord::Base
   has_many :taggings, :dependent => :destroy
   has_many :tags, :through => :taggings
   has_many :user_follows, :dependent => :destroy
+  has_many :wave_memberships, :dependent => :destroy
+  has_many :waves, :through => :wave_memberships
 
   serialize :facebook_friend_ids
   auto_permalink :name

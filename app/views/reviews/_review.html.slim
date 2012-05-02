@@ -1,12 +1,12 @@
 = div_for review do
   .pull-right
     - if can? :update, review
-      = link_to image_tag('gear.png'), edit_group_review_path(review)
+      =' link_to image_tag('gear.png'), edit_review_path(review)
     - if review.recommendation
-      = image_tag 'tick.png'
+      =' image_tag 'tick.png'
     - else
-      = image_tag 'cross.png'
+      =' image_tag 'cross.png'
   .avatar= user_avatar review.user
-  = link_to review.user.name, review.user
-  = time_ago_in_words review.created_at
+  =' link_to review.user.name, review.user
+  =' time_ago_in_words review.created_at
   = simple_format review.review

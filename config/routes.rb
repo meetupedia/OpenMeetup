@@ -29,25 +29,9 @@ Openmeetup::Application.routes.draw do
         get :set
       end
     end
-    resources :reviews
+    resources :reviews, :shallow => true
     resources :tags, :shallow => true do
       resources :taggings, :shallow => true
-    end
-    resources :waves, :shallow => true do
-      collection do
-        get :all
-        get :own
-        get :starred
-        get :with_user
-      end
-      resources :wave_items, :shallow => true
-      resources :wave_memberships, :shallow => true do
-        member do
-          post :set_archive
-          post :set_delete
-          post :set_star
-        end
-      end
     end
   end
 
@@ -55,8 +39,14 @@ Openmeetup::Application.routes.draw do
     resources :user_follows, :shallow => true
     member do
       get :dashboard
+      get :facebook_groups
       get :groups
+      get :waves
     end
+  end
+
+  resources :waves do
+    resources :wave_items
   end
 
   match '/about' => 'root#about', :as => :about

@@ -1,22 +1,13 @@
-= content_for :header do
-  - if can? :edit, @user
-    .adminbox
-      - if can? :edit, @user
-        =' link_to 'Felhasználó szerkesztése', edit_user_path(@user), :class => 'btn', :rel => 'facebox'
-
-- if current_user and not @user == current_user
-  p.pull-right= render 'user_follows/button', :user => @user
-
-h1.user= @user.name
-
-= render 'menu'
+= render 'header'
 
 p= render @user.tags
 
 .row
   .span6
-    h3 Aktivitás
-    .list_view= render @user.activities.order('created_at DESC').limit(10)
+    .wrapper
+      h3 Aktivitás
+      .list_view= render @user.activities.order('created_at DESC').limit(10)
   .span6
-    h3 Következő események
-    .list_view= render @user.joined_next_events
+    .wrapper
+      h3 Következő események
+      .list_view= render @user.joined_next_events

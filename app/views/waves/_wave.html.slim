@@ -1,15 +1,13 @@
-tr{:class => ((wave_note = wave.wave_notes.select   |wave_note| wave_note.user_id =(= current_user.id }.first) ?)'wave_highlight' : '')
-  td.with_icon= render 'wave_memberships/set_star', :wave => wave
-  td.with_icon= render 'wave_memberships/set_archive', :wave => wave
-  td.with_icon= render 'wave_memberships/set_delete', :wave => wave
-  td.wave_subject
-    h3= link_to wave, wave
-    - if wave_note
-      strong= wave.wave_items.where('created_at >= ?', wave_note.created_at).size.to_s + '/' + wave.wave_items.size.to_s + ' üzenet'
-    - else
-      = wave.wave_items.size.to_s + ' üzenet'
-    = time_ago wave.last_changed_at
-  td.wave_users
-    - wave.users.each do |user|
-      = user_avatar_link user, :small
-    = wave.users.map { |user| user_link user }.join(', ')
+= div_for wave, :class => 'clearfix' do
+  p.pull-right
+    - wave.wave_members.each do |user|
+      = user_avatar user
+  h3= link_to wave.subject, wave
+  =' wave.wave_items.size.to_s + ' üzenet'
+  =' time_ago_in_words wave.last_changed_at
+  - if wave.group
+    ' →
+    = link_to wave.group.name, wave.group
+  - if wave.event
+    ' →
+    = link_to wave.event.title, wave.event

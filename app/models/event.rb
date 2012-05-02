@@ -1,4 +1,5 @@
 # -*- encoding : utf-8 -*-
+
 class Event < ActiveRecord::Base
   key :title
   key :permalink, :index => true
@@ -23,6 +24,7 @@ class Event < ActiveRecord::Base
   has_many :event_invitation_targets, :dependent => :nullify
   has_many :participations, :dependent => :destroy
   has_many :participants, :through => :participations, :source => :user
+  has_many :waves, :dependent => :nullify
 
   acts_as_gmappable
   auto_permalink :title

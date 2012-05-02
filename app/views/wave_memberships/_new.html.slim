@@ -1,4 +1,0 @@
-= semantic_form_for WaveMembership.new, :url => url_for([@wave, :wave_memberships]) do |f|
-  li
-    = f.collection_select :user_id, (current_user.following_users - current_user.blockers).sort_by(&:permalink) - @wave.users, :id, :login, {:prompt => 'Válassz címzettet!'}
-    = f.submit 'Hozzáadás'

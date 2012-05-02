@@ -1,12 +1,12 @@
 # encoding: UTF-8
 
 class WaveMailer < ActionMailer::Base
-  default_url_options[:host] = Settings.host
+  default_url_options[:host] = 'openmeetup.net'
+  default :from => 'noreply@openmeetup.net'
 
-  def warning(wave_note)
-    from Settings.email.noreply
-    recipients wave_note.user.email
-    subject '[Moly] Új üzenetet kaptál!'
-    body :wave_note => wave_note
+  def new_wave_item(wave_item, user)
+    @wave_item = wave_item
+    @user = user
+    mail :to => user.email, :subject => 'Új üzenetet kaptál!'
   end
 end

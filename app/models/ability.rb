@@ -55,7 +55,7 @@ class Ability
 
       can :create, Tag
 
-      can [:update, :destroy, :dashboard], User do |user|
+      can [:update, :destroy, :dashboard, :facebook_groups, :waves], User do |user|
         user == current_user
       end
 
@@ -64,7 +64,16 @@ class Ability
         user_follow.user == current_user
       end
 
-      can :create, Wave
+      can [:index, :show, :create, :edit, :all, :own, :starred, :with_user], Wave
+
+      can :create, WaveItem
+
+      can :create, WaveMembership
+      can [:update, :destroy, :set_archive, :set_delete, :set_star], WaveMembership do |wave_membership|
+        wave_membership.user == current_user
+      end
+
+      can :index, WaveNote
     else
       can :create, User
     end

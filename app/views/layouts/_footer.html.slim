@@ -1,19 +1,19 @@
-#footer
-  .footer-showlove
+#footer.clearfix
+  .footer-showlove.clearfix
     .footer-facebook
-      ' <div class="fb-like" data-href="http://openmeetup.net" data-send="false" data-layout="button_count" data-show-faces="false"></div>
+      | <div class="fb-like" data-href="http://openmeetup.net" data-send="false" data-layout="button_count" data-show-faces="false"></div>
     .footer-google
-      ' <g:plusone href="http://openmeetup.net" size="medium"></g:plusone>
+      | <g:plusone href="http://openmeetup.net" size="medium"></g:plusone>
     .footer-twitter
-      ' <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://openmeetup.net" data-text="Free meetup alternative -->">Tweet</a>
-      ' <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+      | <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://openmeetup.net" data-text="Free meetup alternative -->">Tweet</a>
+      | <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
   .footer-left
     - if rand(1) == 0
       = t('footer.vanity1', :usernumber => link_to(number_with_delimiter(User.count, :delimiter => ".")), :groupnumber => link_to(Group.count)).html_safe
     - else
       = t('footer.vanity2', :eventnumber => link_to(number_with_delimiter(Event.count, :delimiter => ".")), :eventthisweeknumber => link_to(Event.where(['start_time < ?', 7.days.since]).count)).html_safe
   .footer-right
-    = link_to t('footer.about')
-    = link_to t('footer.termsofservice')
-    = link_to t('footer.privacy')
-    = link_to t('footer.contact')
+    =' link_to t('footer.about')
+    =' link_to t('footer.termsofservice')
+    =' link_to t('footer.privacy')
+    =' link_to t('footer.contact')

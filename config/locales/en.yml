@@ -13,6 +13,7 @@ en:
     home: 'Home'
     language: 'Language'
     login_with_facebook: 'Login with Facebook'
+    messages: 'Messages'
     profile: 'Profile'
     search: 'Search'
   buttons:

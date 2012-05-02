@@ -1,0 +1,11 @@
+= render 'header'
+
+.wrapper
+  h2 Üzenetek
+
+  - if params[:page]
+    = will_paginate @waves
+
+  .list_view= render @waves
+
+  = will_paginate @waves

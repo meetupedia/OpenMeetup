@@ -1,7 +1,6 @@
-h1.user= @user.name
+= render 'header'
 
-= render 'menu'
+.wrapper
+  h2 Részvétel csoportokban
 
-h2 Részvétel csoportokban
-
-.list_view= render @groups
+  .list_view= render @groups

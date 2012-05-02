@@ -3,23 +3,31 @@
 class WaveItem < ActiveRecord::Base
   key :body, :as => :text
   timestamps
-
   belongs_to :user
-  belongs_to :wave, :counter_cache => true
-  belongs_to :reply_to, :class_name => 'WaveItem'
+  belongs_to :wave
 
   validates :body, :presence => true
 
-  after_create :create_wave_notes
+  after_create :update_wave, :create_wave_notes, :send_letters
+
+  def update_wave
+    wave.change!
+  end
 
   def create_wave_notes
-    wave.change!
-    wave.wave_memberships.where(:is_archived => true).each { |membership| membership.update_attributes :is_archived => false, :is_deleted => false }
-    wave.wave_memberships.includes(:user).each do |wave_membership|
-      unless wave.wave_note_for(wave_membership.user)
-        WaveNote.create :user_id => wave_membership.user_id, :wave_id => self.wave_id, :created_at => self.created_at, :is_mailed => wave_membership.disable_notification
-      end
+    (wave.wave_members - [user]).each do |user|
+      WaveNote.create :user_id => user.id, :wave_id => wave.id, :created_at => created_at
     end
+  end
+
+  def send_letters
+    (wave.wave_members - [user]).each do |user|
+      WaveMailer.new_wave_item(self, user).deliver if user.email
+    end
+  end
+
+  def self.per_page
+    10
   end
 end
 
