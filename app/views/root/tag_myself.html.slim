@@ -4,7 +4,7 @@ h1 Mi érdekel?
   .span6
     .wrapper
       p Válaszd ki az érdeklődési köreidet, és mi megmutatjuk a leginkább hozzád illő csoportokat!
-      p= render :partial => 'taggings/button', :collection => Tag.order('name ASC'), :as => :tag
+      p= render :partial => 'taggings/button', :collection => Tag.joins(:language).where('languages.code' => I18n.locale).order('name ASC'), :as => :tag
   .span6
     .wrapper
       p.pull-right= link_to 'Új csoport', new_group_path, :class => 'btn'

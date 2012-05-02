@@ -1,5 +1,13 @@
 = semantic_form_for @group do |f|
   = f.semantic_errors
   = f.hidden_field :facebook_uid
-  = f.inputs :name, :description, :location, :image, :url, :facebook_url, :tags, :is_closed
+  = f.inputs do
+    = f.input :name
+    = f.input :description
+    = f.input :location
+    = f.input :image
+    = f.input :url
+    = f.input :facebook_url
+    = f.input :tags, :collection => current_language.tags
+    = f.input :is_closed
   = f.actions

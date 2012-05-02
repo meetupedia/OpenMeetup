@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :set_locale
-  helper_method :current_user
+  helper_method :current_user, :current_language
   helper LaterDude::CalendarHelper
 
   auto_user
@@ -17,12 +17,16 @@ class ApplicationController < ActionController::Base
 
 private
 
-  def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
-  end
-
   def create_activity(item)
     Activity.create :activable_type => item.class.name, :activable_id => item.id
+  end
+
+  def current_language
+    @current_language ||= Language.find_by_code(I18n.locale)
+  end
+
+  def current_user
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
   def extract_locale_from_accept_language_header

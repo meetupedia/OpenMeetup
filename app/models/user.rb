@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   key :facebook_friend_ids, :as => :text
   timestamps
 
+  belongs_to :city
   has_many :absences, :dependent => :destroy
   has_many :activities, :dependent => :destroy
   has_many :admined_groups, :through => :memberships, :source => :group, :conditions => {'memberships.is_admin' => true}
@@ -38,6 +39,8 @@ class User < ActiveRecord::Base
 
   attr_protected :is_admin
 
+  after_save :update_city
+
   def self.create_with_omniauth(auth)
     create! do |user|
       user.provider = auth['provider']
@@ -56,6 +59,11 @@ class User < ActiveRecord::Base
 
   def followed_users
     User.joins('INNER JOIN user_follows ON user_follows.followed_user_id = users.id').where('user_follows.user_id' => 1)
+  end
+
+  def update_city
+    self.city = City.find_or_create_by_name(self.location)
+    save
   end
 end
 
