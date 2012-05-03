@@ -28,7 +28,6 @@ hu:
     invite_members: 'Meghívó küldése tagoknak'
     invite_other_people: 'Meghívó küldése külsősöknek'
     participants: 'Résztvevők'
-
   footer:
     about: 'Rólunk'
     termsofservice: 'Felhasználási feltételek'
@@ -36,6 +35,43 @@ hu:
     contact: 'Kapcsolat'
     vanity1: 'Már %{usernumber} ember és %{groupnumber} közösség csatlakozott hozzánk.'
     vanity2: 'Már %{eventnumber} találkozó létrejöttében segítettünk, %{eventthisweeknumber} találkozó lesz ezen a héten.'
+
+  formtastic:
+    actions:
+      create: 'Küldés'
+      update: 'Küldés'
+    labels:
+      event:
+        city: 'Település'
+        end_time: 'Vége'
+        description: 'Leírás'
+        place: 'Helyszín elnevezése'
+        start_time: 'Kezdete'
+        street: 'Utca, házszám'
+        title: 'Elnevezés'
+      event_invitation:
+        emails: 'E-mail-címek'
+        message: 'Üzenet'
+      group:
+        description: 'Leírás'
+        facebook_url: 'Facebook-oldal'
+        image: 'Kép'
+        is_closed: 'Zárt'
+        location: 'Hely'
+        name: 'Név'
+        tags: 'Címkék'
+        url: 'Honlap'
+      tag:
+        name: 'Címke'
+      user:
+        email: 'E-mail'
+        location: 'Hely'
+        name: 'Név'
+      wave_item:
+        body: 'Szöveg'
+      wave:
+        body: 'Szöveg'
+        subject: 'Tárgy'
 
   date:
     formats:

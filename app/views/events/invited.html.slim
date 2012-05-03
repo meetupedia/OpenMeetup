@@ -1,13 +1,18 @@
 h1.event= link_to @event.title, @event
 
-h2 Meghívottak
+h3
+  ' →
+  = link_to @event.group.name, @event.group
 
-table.table.table-striped.table-condensed
-  - @event_invitation_targets.each do |event_invitation_target|
-    tr
-      td
-        - if event_invitation_target.email.present?
-          = event_invitation_target.email
-        - elsif event_invitation_target.invited_user.present?
-          = user_link event_invitation_target.invited_user
-      td= event_invitation_target.created_at
+.wrapper
+  h2 Meghívottak
+
+  table.table.table-striped.table-condensed
+    - @event_invitation_targets.each do |event_invitation_target|
+      tr
+        td
+          - if event_invitation_target.email.present?
+            = event_invitation_target.email
+          - elsif event_invitation_target.invited_user.present?
+            = user_link event_invitation_target.invited_user
+        td= event_invitation_target.created_at

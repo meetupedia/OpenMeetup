@@ -1,5 +1,9 @@
 h1.event= link_to @event.title, @event
 
+h3
+  ' →
+  = link_to @event.group.name, @event.group
+
 .wrapper
   h2 Résztvevők
 

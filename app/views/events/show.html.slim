@@ -2,7 +2,7 @@
   - if can? :edit, @event or can? :create, EventInvitation.new(:event => @event)
     .adminbox
       - if can? :edit, @event
-        =' link_to t('event.edit'), edit_event_path(@event), :class => 'btn'
+        =' link_to t('event.edit'), edit_event_path(@event), :class => 'btn', :rel => 'facebox'
       - if can? :create, EventInvitation.new(:event => @event)
         =' link_to t('event.invite_members'), new_event_event_invitation_path(@event, :hide_emails => true), :class => 'btn', :rel => 'facebox'
         =' link_to t('event.invite_other_people'), new_event_event_invitation_path(@event), :class => 'btn', :rel => 'facebox'
@@ -11,14 +11,14 @@
 
 h1.event= @event.title
 
+h3
+  ' →
+  = link_to @event.group.name, @event.group
+
 .row
   .span8
     .wrapper.clearfix
       .calendar.pull-right= calendar(@event.start_time, @event.end_time)
-
-      h3
-        ' →
-        = link_to @event.group.name, @event.group
 
       div
         strong
