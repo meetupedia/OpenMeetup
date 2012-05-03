@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
     unless auth[:provider] == 'developer'
       if user.facebook
         user.update_attributes :email => user.facebook.email if user.facebook.email
-        user.update_attributes :location => user.facebook.location if user.facebook.location
+#        user.update_attributes :location => user.facebook.location if user.facebook.location
         user.update_attributes :facebook_friend_ids => user.facebook.friends.map { |friend| friend.identifier } if user.facebook.friends
       end
     end
