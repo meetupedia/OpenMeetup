@@ -1,0 +1,30 @@
+h1 Dashboard
+
+h2
+  ' Események
+.row
+  .span12
+    .wrapper
+      p= render :partial => 'events/event', :collection => Event.all, :as => :event
+
+h2
+  ' Csoportok
+.row
+  .span12
+    .wrapper
+      p= render :partial => 'groups/group', :collection => Group.all, :as => :group
+
+h2
+  ' Ismerősök
+.row
+  .span12
+    .wrapper
+      p= render :partial => 'Users/user', :collection => User.all, :as => :user
+
+h2
+  ' Érdeklődési körök
+.row
+  .span12
+    .wrapper
+      p= render :partial => 'tags/tag', :collection => Tag.all, :as => :tag
+

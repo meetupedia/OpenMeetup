@@ -19,4 +19,7 @@ class RootController < ApplicationController
 
   def developer_dashboard
   end
+
+  def dashboard
+  end
 end
