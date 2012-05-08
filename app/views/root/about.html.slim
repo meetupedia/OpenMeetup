@@ -1,5 +1,4 @@
-- case I18n.locale
-  - when :hu
-    h1 Rólunk
-  - else
-    h1 About
+- if I18n.locale == :hu
+  h1 Rólunk
+- elsif I18n.locale == :en
+  h1 About
