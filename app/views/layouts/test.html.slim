@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title= [@title, 'OpenMeetup'].compact.join(' - ')
+    title= [@title, 'Test'].compact.join(' - ')
     meta(http-equiv="content-type" content="text/html; charset=utf-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     = stylesheet_link_tag 'application', :media => 'all'
@@ -20,7 +20,7 @@ html
             |   <span class="icon-bar"></span>
             |   <span class="icon-bar"></span>
             | </a>
-            = link_to 'OpenMeetup', root_path, :class => 'brand'
+            = link_to 'Test', root_path, :class => 'brand'
             .nav-collapse
               form.navbar-search.pull-left action='/search' method='get'
                 input type='text' class='search-query' placeholder=t('menu.search') name='q'
@@ -44,7 +44,7 @@ html
             a.close(data-dismiss="alert")×
             = flash[:alert]
         = yield
-        = render 'layouts/footer'
+        #footer
+          | Powered by OpenMeetup
     = yield :scripts
-    = render 'layouts/uservoice'
-    = render 'layouts/facebook_connect'
+    = render 'layouts/facebook_connect'    

@@ -3,7 +3,14 @@
 class RootController < ApplicationController
 
   def index
-    if current_user
+    if @organization = current_organization
+      if current_user
+        @title = @organization.name
+        render 'organizations/show'
+      else
+        @header = 'root/index_header'
+      end
+    elsif current_user
       redirect_to tag_myself_url
     else
       @header = 'root/index_header'

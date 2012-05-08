@@ -15,6 +15,7 @@ class GroupsController < ApplicationController
 
   def create
     if @group.save
+      current_organization.groups << @group if current_organization
       create_activity @group
       redirect_to @group
     else

@@ -1,0 +1,11 @@
+h1= @organization.name
+
+.row
+  .span6
+    .wrapper
+      h2
+        ' Csoportok
+        span.counter= @organization.groups.size
+      .list_view= render @organization.groups
+    .wrapper
+      p= link_to 'Új csoport', new_group_path, :class => 'btn'

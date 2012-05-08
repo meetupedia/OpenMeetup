@@ -4,8 +4,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :set_locale, :set_city
-  helper_method :current_user, :current_language
+  helper_method :current_language, :current_organization, :current_user
   helper LaterDude::CalendarHelper
+  layout :set_layout
 
   auto_user
 
@@ -25,6 +26,10 @@ private
     @current_language ||= Language.find_by_code(I18n.locale)
   end
 
+  def current_organization
+    @current_organization ||= Organization.find_by_permalink(request.subdomains.first)
+  end
+
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
@@ -35,6 +40,10 @@ private
 
   def set_city
     cookies[:city] = params[:city] || current_user.andand.city || 'Budapest'
+  end
+
+  def set_layout
+    current_organization.andand.layout_name || 'application'
   end
 
   def set_locale

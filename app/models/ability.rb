@@ -38,6 +38,8 @@ class Ability
         membership.user_id == current_user.id or membership.group.admins.include?(current_user)
       end
 
+      can :show, Organization
+
       can [:create, :set], Participation
       can :destroy, Participation do |participation|
         participation.user_id == current_user.id or participation.event.group.admins.include?(current_user)

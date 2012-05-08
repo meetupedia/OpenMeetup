@@ -17,6 +17,7 @@ class Group < ActiveRecord::Base
 
   belongs_to :city
   belongs_to :language
+  belongs_to :organization
   belongs_to :user
   has_many :activities, :as => :activable, :dependent => :destroy
   has_many :admins, :through => :memberships, :source => :user, :conditions => {'memberships.is_admin' => true}
