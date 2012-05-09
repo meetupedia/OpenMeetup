@@ -7,5 +7,20 @@ h1= @organization.name
         ' Csoportok
         span.counter= @organization.groups.size
       .list_view= render @organization.groups
-    .wrapper
       p= link_to 'Új csoport', new_group_path, :class => 'btn'
+    .wrapper
+      h2
+        ' Címkék
+        span.counter= @organization.tags.size
+      p= render @organization.tags
+  .span6
+    .wrapper
+      h2
+        ' Következő események
+        span.counter= @organization.next_events.size
+      .list_view= render @organization.next_events
+    .wrapper
+      h2
+        ' Facebookos ismerősök
+        span.counter= @organization.facebook_friends(current_user).all.size
+      p= render 'users/user_avatars', :users => @organization.facebook_friends(current_user)

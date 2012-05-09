@@ -27,7 +27,11 @@ private
   end
 
   def current_organization
-    @current_organization ||= Organization.find_by_permalink(request.subdomains.first)
+    @current_organization ||= if Rails.env == 'development'
+      Organization.first
+    else
+      Organization.find_by_permalink(request.subdomains.first)
+    end
   end
 
   def current_user
