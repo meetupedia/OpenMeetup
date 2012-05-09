@@ -1,5 +1,7 @@
 h1= @organization.name
 
+p= render :partial => 'organizations/tag', :collection => @organization.tags
+
 .row
   .span6
     .wrapper
@@ -8,11 +10,6 @@ h1= @organization.name
         span.counter= @organization.groups.size
       .list_view= render @organization.groups
       p= link_to 'Új csoport', new_group_path, :class => 'btn'
-    .wrapper
-      h2
-        ' Címkék
-        span.counter= @organization.tags.size
-      p= render :partial => 'organizations/tag', :collection => @organization.tags
   .span6
     .wrapper
       h2
