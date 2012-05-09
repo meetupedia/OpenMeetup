@@ -35,7 +35,11 @@ Openmeetup::Application.routes.draw do
     end
   end
 
-  resources :organizations
+  resources :organizations do
+    member do
+      get :tag
+    end
+  end
 
   resources :users do
     resources :user_follows, :shallow => true

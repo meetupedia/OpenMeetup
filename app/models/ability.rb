@@ -38,7 +38,7 @@ class Ability
         membership.user_id == current_user.id or membership.group.admins.include?(current_user)
       end
 
-      can :show, Organization
+      can [:show, :tag], Organization
 
       can [:create, :set], Participation
       can :destroy, Participation do |participation|

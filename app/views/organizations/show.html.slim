@@ -12,7 +12,7 @@ h1= @organization.name
       h2
         ' Címkék
         span.counter= @organization.tags.size
-      p= render @organization.tags
+      p= render :partial => 'organizations/tag', :collection => @organization.tags
   .span6
     .wrapper
       h2
