@@ -4,6 +4,7 @@ h1= @organization.name
   .span6
     .wrapper
       p= render :partial => 'organizations/tag', :collection => @organization.tags
+      p= link_to 'Címkeajánló', add_tag_organization_path(@organization)
     .wrapper
       h2
         ' Csoportok

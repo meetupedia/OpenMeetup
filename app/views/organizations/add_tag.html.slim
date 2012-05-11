@@ -1,16 +1,16 @@
 h1 Címkézd fel magad!
 
-.row
-  .span6
-    .wrapper
-      - if @tag
-        p
-          =' link_to @tag.name, url_for(:tag => @tag.permalink), :class => 'btn btn-large btn-success'
-          =' link_to 'Nem érdekel', url_for(:only_path => false), :class => 'btn btn-mini'
-      - else
-        p Nincsen több választható címke!
+.wrapper
+  h2 Ajánlott címke
+  - if @tag
+    p
+      =' link_to @tag.name, url_for(:tag => @tag.permalink), :class => 'btn btn-large btn-success'
+      =' link_to 'Nem érdekel most', url_for(:only_path => false), :class => 'btn btn-mini'
+  - else
+    p Nincsen több választható címke!
 
-  .span6
-    .wrapper
-      h2 Címkéim
-      p= render :partial => 'taggings/button', :collection => current_user.tags, :as => :tag
+.wrapper
+  h2 Címkéim
+  p= render :partial => 'taggings/button', :collection => current_user.tags, :as => :tag
+
+p= link_to '« Vissza', @organization, :class => 'btn btn-mini'
