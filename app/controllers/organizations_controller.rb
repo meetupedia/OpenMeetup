@@ -18,6 +18,6 @@ class OrganizationsController < ApplicationController
       current_user.tags << tag unless tag.tagging_for(current_user)
     end
     unused_tags = (@organization.tags - current_user.tags)
-    @tag = unused_tags[rand(unused_tags.size)]
+    @tag = unused_tags[rand(unused_tags.size) - 1]
   end
 end
