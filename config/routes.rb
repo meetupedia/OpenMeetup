@@ -37,6 +37,7 @@ Openmeetup::Application.routes.draw do
 
   resources :organizations do
     member do
+      get :add_tag
       get :tag
     end
   end

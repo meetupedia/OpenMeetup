@@ -31,4 +31,8 @@ class UsersController < ApplicationController
   def waves
     @waves = current_user.waves.order('last_changed_at DESC').paginate :page => params[:page]
   end
+
+  def tags
+
+  end
 end
