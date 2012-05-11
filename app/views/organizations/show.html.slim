@@ -1,9 +1,9 @@
 h1= @organization.name
 
-p= render :partial => 'organizations/tag', :collection => @organization.tags
-
 .row
   .span6
+    .wrapper
+      p= render :partial => 'organizations/tag', :collection => @organization.tags
     .wrapper
       h2
         ' Csoportok
