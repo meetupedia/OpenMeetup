@@ -10,14 +10,11 @@ h1= @wave.subject
     = link_to @wave.event.title, @wave.event
 
 .row
-  .span3
+  .span4
     .wrapper
       p= link_to 'Új üzenet', new_wave_wave_item_path(@wave), :class => 'btn', :rel => 'facebox'
       h3 Címzettek
       p= render 'users/user_avatars', :users => @wave.wave_members
-  .span6
+  .span8
     .wrapper
       .list_view= render @wave_items
-  .span3
-    .wrapper
-      p Mindenféle...
