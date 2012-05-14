@@ -9,7 +9,7 @@
   - if (users = group.members.limit(13)).size > 0
     p
       = render 'users/user_avatars', :users => users[0..11]
-      - if users.size > 5
+      - if users.size > 12
         = link_to '»', group
   - if current_user and not (users = group.members.where('users.uid' => current_user.facebook_friend_ids).order('users.permalink ASC')).empty?
     h5 Facebookos ismerősök a csoportban
