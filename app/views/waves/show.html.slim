@@ -13,7 +13,6 @@ h1= @wave.subject
   .span4
     .wrapper
       p= link_to 'Új üzenet', new_wave_wave_item_path(@wave), :class => 'btn', :rel => 'facebox'
-    .wrapper
       h3 Címzettek
       p= render 'users/user_avatars', :users => @wave.wave_members
   .span8
