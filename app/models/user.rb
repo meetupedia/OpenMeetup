@@ -62,7 +62,7 @@ class User < ActiveRecord::Base
   end
 
   def set_city
-    self.city = City.find_or_create_by_name(self.location || 'Budapest')
+    self.city = City.find_or_create_by_name(self.location || 'Budapest') if self.location
   end
 end
 
