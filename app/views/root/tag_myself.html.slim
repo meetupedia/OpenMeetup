@@ -11,5 +11,5 @@ h1 Mi érdekel?
     .wrapper
       h2
         ' Csoportok
-        span.counter= current_user.city.name
+        span.counter= current_user.city.andand.name
       #groups.list_view= render 'groups/recommended_groups'

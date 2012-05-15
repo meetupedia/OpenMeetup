@@ -18,6 +18,6 @@
 
 h1.user
   = @user.name
-  span.counter= @user.city.name
+  span.counter= @user.city.andand.name
 
 = render 'menu'
