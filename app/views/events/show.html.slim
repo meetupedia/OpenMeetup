@@ -22,14 +22,13 @@ h3
           =' link_to '<i class="icon-plus-sign icon-black"></i> Nem veszek részt'.html_safe, sign_in_path(set_event_absences_path(@event)), :class => 'btn'
     - if can? :edit, @event or can? :create, EventInvitation.new(:event => @event)
       .wrapper
+        - if can? :create, EventInvitation.new(:event => @event)
+          p= link_to t('event.invite_members'), new_event_event_invitation_path(@event, :hide_emails => true), :class => 'btn btn-primary', :rel => 'facebox'
+          p= link_to t('event.invite_other_people'), new_event_event_invitation_path(@event), :class => 'btn btn-primary', :rel => 'facebox'
+          p= link_to "→ #{t('event.already_invited')}", invited_event_path(@event)
+        p= link_to 'Új üzenet', new_wave_path(:event_id => @event.id), :class => 'btn btn-primary', :rel => 'facebox'
         - if can? :edit, @event
           p= link_to t('event.edit'), edit_event_path(@event), :class => 'btn', :rel => 'facebox'
-        - if can? :create, EventInvitation.new(:event => @event)
-          p
-            =' link_to t('event.invite_members'), new_event_event_invitation_path(@event, :hide_emails => true), :class => 'btn', :rel => 'facebox'
-            =' link_to t('event.invite_other_people'), new_event_event_invitation_path(@event), :class => 'btn', :rel => 'facebox'
-            = link_to t('event.already_invited'), invited_event_path(@event)
-        p= link_to 'Új üzenet', new_wave_path(:event_id => @event.id), :class => 'btn', :rel => 'facebox'
 
     | <div class="fb-like" data-href="#{event_url(@event)}" data-send="false" data-width="450" data-show-faces="false"></div>
 
