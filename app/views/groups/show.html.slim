@@ -1,19 +1,30 @@
-= content_for :header do
-  - if can? :edit, @group or can? :create, Event.new(:group => @group) or can? :create, GroupInvitation.new(:group => @group)
-    .adminbox
-      - if can? :edit, @group
-        =' link_to 'Csoport szerkesztése', edit_group_path(@group), :class => 'btn', :rel => 'facebox'
-        =' link_to 'Címke hozzáadása', new_group_tag_path(@group), :class => 'btn', :rel => 'facebox'
-      - if can? :create, Event.new(:group => @group)
-        =' link_to 'Új esemény', new_group_event_path(@group), :class => 'btn', :rel => 'facebox'
-      - if can? :create, GroupInvitation.new(:group => @group)
-        =' link_to 'Ismerősök hozzáadása', new_group_group_invitation_path(@group), :class => 'btn', :rel => 'facebox'
-        =' link_to 'Meghívottak', invited_group_path(@group)
-      =' link_to 'Új üzenet', new_wave_path(:group_id => @group.id), :class => 'btn', :rel => 'facebox'
-
 h1.group= @group.name
 
 .row
+  .span4
+    .wrapper
+      p
+        - if current_user
+          = render 'memberships/button', :group => @group
+        - else
+          = link_to '<i class="icon-plus-sign icon-black"></i> Követem'.html_safe, sign_in_path(set_group_memberships_path(@group)), :class => 'btn'
+
+    - if can? :edit, @group or can? :create, Event.new(:group => @group) or can? :create, GroupInvitation.new(:group => @group)
+      .wrapper
+        - if can? :edit, @group
+          p= link_to 'Csoport szerkesztése', edit_group_path(@group), :class => 'btn', :rel => 'facebox'
+          p= link_to 'Címke hozzáadása', new_group_tag_path(@group), :class => 'btn', :rel => 'facebox'
+        - if can? :create, Event.new(:group => @group)
+          p= link_to 'Új esemény', new_group_event_path(@group), :class => 'btn', :rel => 'facebox'
+        - if can? :create, GroupInvitation.new(:group => @group)
+          p
+            =' link_to 'Ismerősök hozzáadása', new_group_group_invitation_path(@group), :class => 'btn', :rel => 'facebox'
+            = link_to 'Meghívottak', invited_group_path(@group)
+        p= link_to 'Új üzenet', new_wave_path(:group_id => @group.id), :class => 'btn', :rel => 'facebox'
+    ' <div class="fb-like" data-href="#{group_url(@group)}" data-send="false" data-layout="box_count" data-show-faces="false"></div>
+    ' <g:plusone size="tall"></g:plusone>
+    ' <a href="https://twitter.com/share" class="twitter-share-button" data-count="vertical">Tweet</a>
+    ' <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
   .span8
     .wrapper
       .clearfix
@@ -36,6 +47,7 @@ h1.group= @group.name
 
       = simple_format(@group.description)
 
+    .wrapper
       h2 Események
       - if (events = @group.events.order('start_time DESC')).empty?
         p Nincsenek események.
@@ -43,21 +55,8 @@ h1.group= @group.name
         .list_view= render events
 
     .wrapper
-      h3 Kommentek
+      h2 Kommentek
       | <div class="fb-comments" data-href="#{group_url(@group)}" data-num-posts="10"></div>
-
-  .span4
-    .wrapper
-      p
-        - if current_user
-          = render 'memberships/button', :group => @group
-        - else
-          = link_to '<i class="icon-plus-sign icon-black"></i> Követem'.html_safe, sign_in_path(set_group_memberships_path(@group)), :class => 'btn'
-
-      ' <div class="fb-like" data-href="#{group_url(@group)}" data-send="false" data-layout="box_count" data-show-faces="false"></div>
-      ' <g:plusone size="tall"></g:plusone>
-      ' <a href="https://twitter.com/share" class="twitter-share-button" data-count="vertical">Tweet</a>
-      ' <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
     .wrapper
       - unless (users = @group.members.order('memberships.created_at ASC')).empty?
         h3 Tagok
