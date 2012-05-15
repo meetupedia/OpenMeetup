@@ -17,9 +17,7 @@ class Ability
         event.group.admins.include?(current_user)
       end
 
-      can :create, EventInvitation do |event_invitation|
-        event_invitation.event.group.admins.include?(current_user)
-      end
+      can :create, EventInvitation
 
       can :create, Group
       can [:update, :destroy], Group do |group|
@@ -29,9 +27,7 @@ class Ability
         group.admins.include?(current_user)
       end
 
-      can :create, GroupInvitation do |group_invitation|
-        group_invitation.group.admins.include?(current_user)
-      end
+      can :create, GroupInvitation
 
       can [:create, :set], Membership
       can :destroy, Membership do |membership|
