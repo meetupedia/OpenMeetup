@@ -14,12 +14,12 @@ module ApplicationHelper
     link_to user.name, user
   end
 
-  def sign_in_path(path = nil)
+  def sign_in_path
     provider = Rails.env == 'development' ? 'developer' : 'facebook'
-    if path
-      "/sign_in/#{provider}?return_to=#{path}"
-    else
-      "/auth/#{provider}"
+    case provider
+#      when 'facebook' then "http://openmeetup.net/sign_in/facebook?return_to=http://#{request.domain}"
+      when 'facebook' then '/auth/facebook'
+      when 'developer' then '/auth/developer'
     end
   end
 
