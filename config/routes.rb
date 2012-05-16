@@ -63,7 +63,7 @@ Openmeetup::Application.routes.draw do
   match '/dashboard' => 'root#dashboard', :as => :dashboard
 
   match '/auth/:provider/callback' => 'sessions#create'
-  match '/sign_in/:provider' => 'sessions#new', :as => :sign_in
+  match '/sign_in/:provider' => 'sessions#sign_in', :as => :sign_in
   match '/sign_out' => 'sessions#destroy', :as => :sign_out
   root :to => 'root#index'
 end
