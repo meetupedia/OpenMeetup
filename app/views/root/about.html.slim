@@ -2,3 +2,30 @@
   h1 Rólunk
 - elsif I18n.locale == :en
   h1 About
+
+.row
+  .span10
+    #myCarousel.carousel
+      .carousel-inner
+        .active.item
+          =' image_tag 'carousel_01.jpg'
+          .carousel-caption
+            h4 First Thumbnail label
+            p Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+        .item
+          =' image_tag "carousel_02.jpg"
+          .carousel-caption
+            h4 Second Thumbnail label
+            p Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+        .item
+          =' image_tag "carousel_03.jpg"
+          .carousel-caption
+            h4 Third Thumbnail label
+            p Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.        
+      a.carousel-control.left href="#myCarousel" data-slide="prev" &lsaquo;
+      a.carousel-control.right href="#myCarousel" data-slide="next" &rsaquo;
+    javascript:
+      $(function(){
+        $('.carousel').carousel();
+      });
+  .span2
