@@ -27,11 +27,15 @@ private
   end
 
   def current_organization
-#    @current_organization ||= if Rails.env == 'development'
-#      Organization.first
-#    else
-      Organization.find_by_permalink(request.subdomains.first)
-#    end
+    @current_organization ||= if Rails.env == 'development'
+      Organization.first
+    else
+      if request.domain == 'openmeetup.net'
+        Organization.find_by_permalink(request.subdomains.first)
+      else
+        Organization.find_by_permalink(request.domain.split('.').first)
+      end
+    end
   end
 
   def current_user

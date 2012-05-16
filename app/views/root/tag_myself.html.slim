@@ -3,10 +3,10 @@ h1 Mi érdekel?
 .row
   .span4
     .wrapper
+      p= link_to 'Új csoport', new_group_path, :class => 'btn btn-primary'
+    .wrapper
       p Válaszd ki az érdeklődési köreidet, és mi megmutatjuk a leginkább hozzád illő csoportokat!
       p= render :partial => 'taggings/button', :collection => Tag.joins(:language).where('languages.code' => I18n.locale).order('name ASC'), :as => :tag
-    .wrapper
-      p= link_to 'Új csoport', new_group_path, :class => 'btn'
   .span8
     .wrapper
       h2
