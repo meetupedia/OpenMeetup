@@ -18,7 +18,7 @@ module ApplicationHelper
     provider = Rails.env == 'development' ? 'developer' : 'facebook'
     case provider
 #      when 'facebook' then "http://openmeetup.net/sign_in/facebook?return_to=http://#{request.domain}"
-      when 'facebook', then '/auth/facebook'
+      when 'facebook' then '/auth/facebook'
       when 'developer' then '/auth/developer'
     end
   end
