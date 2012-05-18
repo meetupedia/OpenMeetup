@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
         self.token = omniauth['credentials']['token']
         self.facebook_friend_ids = facebook.friends.map(&:identifier)
       when 'twitter'
-        self.twitter_id = omniauth['uid']
+#        self.twitter_id = omniauth['uid']
     end
   end
 
