@@ -1,7 +1,10 @@
 hu:
   welcome:
-    slogan_1: 'Találkozz hasonló érdeklődésű emberekkel.'
-    slogan_2: 'Találj barátokat.'
+    slogan_01: 'Találkozz hasonló érdeklődésű emberekkel.'
+    slogan_02: 'Találj hobbyt magadnak.'
+    slogan_03: 'Találj barátokat.'
+    slogan_04: 'Találkozz új emberekkel.'
+    slogan_05: 'Legyen szociális életed.'
     find_meetups: 'Meetup-ok Budapest környékén.'
     create_meetup: 'Hozz létre egy meetup csoportot. Ingyen.'
     facebook_wont_write_to_your_wall: 'Nem írunk a Facebook faladra az engedélyed nélkül.'
