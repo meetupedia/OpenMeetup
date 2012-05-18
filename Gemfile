@@ -24,6 +24,7 @@ gem 'formtastic', :git => 'git://github.com/justinfrench/formtastic.git', :branc
 gem 'formtastic-bootstrap', :git => 'git://github.com/cgunther/formtastic-bootstrap.git', :branch => 'bootstrap2-rails3-2-formtastic-2-1'
 gem 'will_paginate'
 gem 'omniauth-facebook'
+gem 'omniauth-twitter'
 gem 'fb_graph'
 gem 'geocoder'
 gem 'gmaps4rails', '1.4.5'

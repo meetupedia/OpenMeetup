@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   has_many :absences, :dependent => :destroy
   has_many :activities, :dependent => :destroy
   has_many :admined_groups, :through => :memberships, :source => :group, :conditions => {'memberships.is_admin' => true}
+  has_many :authentications, :dependent => :destroy
   has_many :event_invitations, :dependent => :nullify
   has_many :event_invitation_targets, :foreign_key => :invited_user_id, :dependent => :destroy
   has_many :events, :dependent => :nullify
@@ -41,11 +42,13 @@ class User < ActiveRecord::Base
 
   after_validation :set_city
 
-  def self.create_with_omniauth(auth)
-    create! do |user|
-      user.provider = auth['provider']
-      user.uid = auth['uid']
-      user.name = auth['info']['name']
+  def apply_omniauth(omniauth)
+    case omniauth['provider']
+      when 'facebook'
+        self.token = omniauth['credentials']['token']
+        self.facebook_friend_ids = facebook.friends.map(&:identifier)
+      when 'twitter'
+        self.twitter_id = omniauth['uid']
     end
   end
 
