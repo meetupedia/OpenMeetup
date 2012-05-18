@@ -52,6 +52,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def authenticated_with(provider)
+    authentications.where(:provider => provider).first
+  end
+
   def facebook
     @facebook ||= FbGraph::User.new(self.uid, :access_token => self.token).fetch
   end

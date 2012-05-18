@@ -28,7 +28,7 @@ class AuthenticationsController < ApplicationController
   def destroy
     @authentication = current_user.authentications.find(params[:id])
     @authentication.destroy
-    redirect_to authentications_url
+    redirect_to dashboard_user_path(current_user)
   end
 
 private
