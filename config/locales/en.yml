@@ -1,7 +1,10 @@
 en:
   welcome:
-    slogan_1: 'Meet up with likeminded people.'
-    slogan_2: 'Make friends.'
+    slogan_01: 'Meet up with likeminded people.'
+    slogan_02: 'Try out new activites.'
+    slogan_03: 'Make friends.'
+    slogan_04: 'Meet new people.'
+    slogan_05: 'Have a social life.'
     find_meetups: 'Find meetups near Budapest.'
     create_meetup: 'Create a meetup group. It is free.'
     facebook_wont_write_to_your_wall: 'We will never post to your wall without your permission.'

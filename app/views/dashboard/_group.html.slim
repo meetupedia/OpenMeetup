@@ -1,0 +1,16 @@
+= div_for group do
+  - if group.image.file?
+    .avatar= link_to(image_tag(group.image.url(:small), :alt => group.name, :height => 72, :width => 72, :title => group.name), group)
+  .pull-right=' render 'memberships/button', :group => group
+  h3= link_to group.name, group
+  p= truncate group.description, :length => 256
+  p= render :partial => 'taggings/button', :collection => group.tags.order('name ASC'), :as => :tag
+  h5=' link_to "#{group.members.size} követő", group
+  - if (users = group.members.limit(13)).size > 0
+    p
+      = render 'users/user_avatars', :users => users[0..11]
+      - if users.size > 12
+        = link_to '»', group
+  - if current_user and not (users = group.members.where('users.uid' => current_user.facebook_friend_ids).order('users.permalink ASC')).empty?
+    h5 Facebookos ismerősök a csoportban
+    p= render 'users/user_avatars', :users => users
