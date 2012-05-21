@@ -20,6 +20,13 @@ en:
     messages: 'Messages'
     profile: 'Profile'
     search: 'Search'
+  user:
+    edit_user: 'Edit user'
+    send_message: 'Message'
+    activity: 'Activity'
+    groups: 'Groups'
+    messages: 'Messages'
+    dashboard: 'Dashboard'
   buttons:
     follow: 'Follow'
     following: 'Following'
@@ -32,6 +39,8 @@ en:
     invite_members: 'Invite members'
     invite_other_people: 'Invite other people'
     participants: 'Participants'
+  group:
+    activity: 'Activity'
   footer:
     about: 'About'
     termsofservice: 'Terms of service'
