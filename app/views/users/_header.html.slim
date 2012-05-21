@@ -19,4 +19,8 @@
 h1.user
   = @user.name
 
+- if @user.is_admin?
+  .pull-right
+    = link_to 'Rendszerbeállítások', system_path, :class => 'btn btn-danger'
+
 = render 'menu'
