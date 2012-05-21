@@ -19,6 +19,6 @@ class SystemController < ApplicationController
 protected
 
   def authenticate_as_admin
-    raise CanCan::AccessDenied unless current_user.is_admin?
+    raise CanCan::AccessDenied unless current_user.andand.is_admin?
   end
 end
