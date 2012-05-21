@@ -1,6 +1,21 @@
 = render 'header'
 
 .wrapper
+  h2 Azonosítók
+  - if authentication = current_user.authenticated_with(:facebook)
+    - if current_user.authentications.size > 1
+      p= link_to 'Facebook-azonosító leválasztása', authentication, :method => :delete, :confirm => 'Are you sure?'
+  - else
+    p.facebook_connect= link_to image_tag('facebook_connect.png', :alt => t('menu.login_with_facebook')), auth_path(:facebook)
+  - if authentication = current_user.authenticated_with(:twitter)
+    - if current_user.authentications.size > 1
+      p= link_to 'Twitter-azonosító leválasztása', authentication, :method => :delete, :confirm => 'Are you sure?'
+  - else
+    p.twitter_connect= link_to image_tag('twitter_connect.png', :alt => t('menu.login_with_twitter')), auth_path(:twitter)
+
+
+
+.wrapper
   h2 Csoportjaim
 
   - if can? :create, Group

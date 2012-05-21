@@ -3,7 +3,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :set_locale, :set_city
+  before_filter :set_locale, :set_city, :set_domain
   helper_method :current_language, :current_organization, :current_user
   helper LaterDude::CalendarHelper
   layout :set_layout
@@ -48,6 +48,11 @@ private
 
   def set_city
     cookies[:city] = params[:city] || current_user.andand.city || 'Budapest'
+  end
+
+  def set_domain
+#    host = request.env['HTTP_HOST'].split(':').first
+#    request.env['rack.session.options'][:domain] = ".#{host}"
   end
 
   def set_layout

@@ -7,7 +7,7 @@ hu:
     slogan_05: 'Legyen szociális életed.'
     find_meetups: 'Meetup-ok Budapest környékén.'
     create_meetup: 'Hozz létre egy meetup csoportot. Ingyen.'
-    facebook_wont_write_to_your_wall: 'Nem írunk a Facebook faladra az engedélyed nélkül.'
+    facebook_wont_write_to_your_wall: 'Nem írunk a Facebook/Twitter-faladra az engedélyed nélkül.'
   menu:
     about: 'Rólunk'
     activity: 'Aktivitás'
@@ -16,6 +16,7 @@ hu:
     home: 'Címlap'
     language: 'Nyelv'
     login_with_facebook: 'Bejelentkezés Facebookkal'
+    login_with_twitter: 'Bejelentkezés Twitterrel'
     messages: 'Üzenetek'
     profile: 'Profil'
     search: 'Keresés'

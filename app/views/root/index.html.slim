@@ -32,6 +32,12 @@
       });
   .span5
     .wrapper
-      .facebook_connect= link_to image_tag('facebook-connect-button.png', :alt => t('menu.login_with_facebook')), sign_in_path
-      .comment =t('welcome.facebook_wont_write_to_your_wall')
+      .facebook_connect= link_to image_tag('facebook_connect.png', :alt => t('menu.login_with_facebook')), auth_path(:facebook)
 
+      .twitter_connect= link_to image_tag('twitter_connect.png', :alt => t('menu.login_with_twitter')), auth_path(:twitter)
+
+      p.comment =t('welcome.facebook_wont_write_to_your_wall')
+
+hr
+
+| <iframe src="http://www.facebook.com/plugins/facepile.php?app_id=107811069346219" scrolling="no" frameborder="0" style="border:none; width:400px;" allowTransparency="true"></iframe>
