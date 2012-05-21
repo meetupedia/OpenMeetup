@@ -42,6 +42,8 @@ Openmeetup::Application.routes.draw do
     end
   end
 
+  resources :passwords
+
   resources :users do
     resources :user_follows, :shallow => true
     member do
@@ -61,6 +63,10 @@ Openmeetup::Application.routes.draw do
   match '/search' => 'search#index', :as => :search
   match '/tag_myself' => 'root#tag_myself', :as => :tag_myself
   match '/dashboard' => 'root#dashboard', :as => :dashboard
+
+  match '/system' => 'system#index', :as => :system
+  match '/reload' => 'system#reload', :as => :reload
+  match '/download_database' => 'system#download_database', :as => :download_database
 
   resources :authentications
   match '/auth/:provider/callback' => 'authentications#create'

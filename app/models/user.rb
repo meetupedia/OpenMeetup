@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   key :name
   key :permalink
   key :email
+  key :persistence_token
   key :token
   key :location
   key :is_admin, :as => :boolean
@@ -37,9 +38,9 @@ class User < ActiveRecord::Base
 
   serialize :facebook_friend_ids
   auto_permalink :name
+  acts_as_authentic
 
   attr_protected :is_admin
-
   after_validation :set_city
 
   def apply_omniauth(omniauth)

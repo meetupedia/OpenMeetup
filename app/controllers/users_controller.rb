@@ -11,6 +11,11 @@ class UsersController < ApplicationController
     render :layout => false if request.xhr?
   end
 
+  def create
+    @user.save
+    redirect_to @user
+  end
+
   def update
     @user.update_attributes params[:user]
     redirect_to @user

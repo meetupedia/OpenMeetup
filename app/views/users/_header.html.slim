@@ -20,4 +20,8 @@ h1.user
   = @user.name
   span.counter= @user.city.andand.name
 
+- if @user.is_admin?
+  .pull-right
+    = link_to 'Rendszerbeállítások', system_path, :class => 'btn btn-danger'
+
 = render 'menu'
