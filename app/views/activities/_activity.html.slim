@@ -1,5 +1,5 @@
 = div_for activity do
-  .avatar= user_avatar activity.activable.user
+  .avatar= user_avatar activity.user
   - if activity.activable.class.name == 'Event'
     = t('activity.event_created', :user => user_link(activity.activable.user), :event => link_to(activity.activable.title, activity.activable)).html_safe
   - elsif activity.activable.class.name == 'Group'
@@ -22,4 +22,7 @@
     ' követi a
     =' link_to activity.activable.tag.name, activity.activable.tag
     ' témakört.
+  - elsif activity.activable.class.name == 'UserFollow'
+    =' user_link activity.activable.user
+    ' követni kezdett egy felhasználót.
   .date= time_ago_in_words activity.created_at
