@@ -1,43 +1,37 @@
-.row
-  .span1
-    | &nbsp;
-  .span6
-    #myCarousel.carousel
-      .carousel-inner
-        .active.item
-          =' image_tag 'carousel_01.png'
-          .carousel-caption
-            h1= t('welcome.slogan_01')
-        .item
-          =' image_tag 'carousel_02.png'
-          .carousel-caption
-            h1= t('welcome.slogan_02')
-        .item
-          =' image_tag 'carousel_03.png'
-          .carousel-caption
-            h1= t('welcome.slogan_03')
-        .item
-          =' image_tag 'carousel_04.png'
-          .carousel-caption
-            h1= t('welcome.slogan_04')
-        .item
-          =' image_tag 'carousel_05.png'
-          .carousel-caption
-            h1= t('welcome.slogan_05')
-      /! a.carousel-control.left href="#myCarousel" data-slide="prev" &lsaquo;
-      /! a.carousel-control.right href="#myCarousel" data-slide="next" &rsaquo;
-    javascript:
-      $(function(){
-        $('.carousel').carousel();
-      });
-  .span5
-    .wrapper
-      .facebook_connect= link_to image_tag('facebook_connect.png', :alt => t('menu.login_with_facebook')), auth_path(:facebook)
+.root
 
-      .twitter_connect= link_to image_tag('twitter_connect.png', :alt => t('menu.login_with_twitter')), auth_path(:twitter)
-
-      p.comment =t('welcome.facebook_wont_write_to_your_wall')
-
-hr
-
-| <iframe src="http://www.facebook.com/plugins/facepile.php?app_id=107811069346219" scrolling="no" frameborder="0" style="border:none; width:400px;" allowTransparency="true"></iframe>
+  .row
+    .span6
+      #myCarousel.carousel
+        .carousel-inner
+          .active.item
+            =' image_tag 'carousel_01.png'
+            .carousel-caption
+              h1= t('welcome.slogan_01')
+          .item
+            =' image_tag 'carousel_02.png'
+            .carousel-caption
+              h1= t('welcome.slogan_02')
+          .item
+            =' image_tag 'carousel_03.png'
+            .carousel-caption
+              h1= t('welcome.slogan_03')
+          .item
+            =' image_tag 'carousel_04.png'
+            .carousel-caption
+              h1= t('welcome.slogan_04')
+          .item
+            =' image_tag 'carousel_05.png'
+            .carousel-caption
+              h1= t('welcome.slogan_05')
+        /! a.carousel-control.left href="#myCarousel" data-slide="prev" &lsaquo;
+        /! a.carousel-control.right href="#myCarousel" data-slide="next" &rsaquo;
+      javascript:
+        $(function(){
+          $('.carousel').carousel();
+        });
+    .span6
+      .wrapper
+        .facebook_connect= link_to image_tag('facebook_connect.png', :alt => t('menu.login_with_facebook')), auth_path(:facebook)
+        .twitter_connect= link_to image_tag('twitter_connect.png', :alt => t('menu.login_with_twitter')), auth_path(:twitter)
+        p.comment =t('welcome.facebook_wont_write_to_your_wall')

@@ -16,6 +16,7 @@ en:
     home: 'Home'
     language: 'Language'
     login_with_facebook: 'Login with Facebook'
+    login_with_twitter: 'Login with Twitter'
     messages: 'Messages'
     profile: 'Profile'
     search: 'Search'
