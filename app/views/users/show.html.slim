@@ -3,11 +3,7 @@
 p= render @user.tags
 
 .row
-  .span6
+  .span12
     .wrapper
-      h3 Aktivitás
+      h2= t('user.activity')
       .list_view= render @user.activities.order('created_at DESC').limit(10)
-  .span6
-    .wrapper
-      h3 Következő események
-      .list_view= render @user.joined_next_events

@@ -10,7 +10,7 @@ hu:
     facebook_wont_write_to_your_wall: 'Nem írunk a Facebook/Twitter-faladra az engedélyed nélkül.'
   menu:
     about: 'Rólunk'
-    activity: 'Aktivitás'
+    activity: 'Napló'
     dashboard: 'Vezérlőpult'
     exit: 'Kilépés'
     home: 'Címlap'
@@ -20,6 +20,13 @@ hu:
     messages: 'Üzenetek'
     profile: 'Profil'
     search: 'Keresés'
+  user:
+    edit_user: 'Felhasználó szerkesztése'
+    send_message: 'Üzenet küldése'
+    activity: 'Napló'
+    groups: 'Csoportok'
+    messages: 'Üzenetek'
+    dashboard: 'Vezérlőpult'
   buttons:
     follow: 'Követem'
     following: 'Követem'
@@ -32,6 +39,8 @@ hu:
     invite_members: 'Meghívó küldése tagoknak'
     invite_other_people: 'Meghívó küldése külsősöknek'
     participants: 'Résztvevők'
+  group:
+    activity: 'Napló'
   footer:
     about: 'Rólunk'
     termsofservice: 'Felhasználási feltételek'

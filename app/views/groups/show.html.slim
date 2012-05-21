@@ -69,7 +69,7 @@ h1.group= @group.name
         p= link_to 'Összes tag', users_group_path(@group)
     - unless (activities = @group.activities.order('created_at DESC').limit(5)).empty?
       .wrapper
-        h3 Aktivitás
+        h3= t('group.activity')
         .list_view= render activities
 
 | <script type="text/javascript">

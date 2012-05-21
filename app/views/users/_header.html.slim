@@ -2,7 +2,7 @@
   - if can? :edit, @user
     .adminbox
       - if can? :edit, @user
-        =' link_to 'Felhasználó szerkesztése', edit_user_path(@user), :class => 'btn', :rel => 'facebox'
+        =' link_to t('user.edit_user'), edit_user_path(@user), :class => 'btn', :rel => 'facebox'
       .pull-right
         .btn-group
           a.btn.dropdown-toggle(data-toggle="dropdown")
@@ -14,11 +14,10 @@
 
 - if current_user and not @user == current_user
   p.pull-right= render 'user_follows/button', :user => @user
-  p.pull-right= link_to 'Üzenet küldése', new_wave_path(:recipient_id => @user.id), :class => 'btn', :rel => 'facebox'
+  p.pull-right= link_to t('user.send_message'), new_wave_path(:recipient_id => @user.id), :class => 'btn', :rel => 'facebox'
 
 h1.user
   = @user.name
-  span.counter= @user.city.andand.name
 
 - if @user.is_admin?
   .pull-right
