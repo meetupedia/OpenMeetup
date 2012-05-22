@@ -26,9 +26,9 @@ hu:
     activity: 'Napló'
     groups: 'Csoportok'
     messages: 'Üzenetek'
-    dashboard: 'Vezérlőpult'
+    dashboard: 'Beállítások'
   buttons:
-    follow: 'Követem'
+    follow: 'Érdekel, szóljatok!'
     following: 'Követem'
   activity:
     event_created: '%{user} létrehozta ezt az eseményt: %{event}'
@@ -66,14 +66,14 @@ hu:
         emails: 'E-mail-címek'
         message: 'Üzenet'
       group:
-        description: 'Leírás'
-        facebook_url: 'Facebook-oldal'
+        description: 'Leírás (pl. A hétvégén majd felmegyünk a hegyekbe)'
+        facebook_url: 'Facebook (pl. http://facebook.com/turazok)'
         image: 'Kép'
-        is_closed: 'Zárt'
-        location: 'Hely'
-        name: 'Név'
+        is_closed: 'Rejtett csoport legyen? (csak a csoport tagok látják, a többiek nem)'
+        location: 'Város (pl. Budapest)'
+        name: 'Név (pl. Túrázók társasága)'
         tags: 'Címkék'
-        url: 'Honlap'
+        url: 'Honlap (pl. http://turazunk.blogspot.com)'
       tag:
         name: 'Címke'
       user:

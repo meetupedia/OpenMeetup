@@ -22,11 +22,11 @@ class UsersController < ApplicationController
   end
 
   def dashboard
-    @admined_groups = @user.admined_groups
   end
 
   def groups
     @groups = @user.joined_groups.paginate :page => params[:page]
+    @admined_groups = @user.admined_groups
   end
 
   def facebook_groups

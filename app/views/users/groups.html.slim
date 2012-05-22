@@ -1,6 +1,23 @@
 = render 'header'
 
 .wrapper
+  h2 Csoportjaim
+
+  - if can? :create, Group
+    p= link_to 'Új csoport létrehozása', new_group_path, :class => 'btn', :rel => 'facebox'
+
+  .list_view
+    - @admined_groups.each do |group|
+      = div_for group do
+        .pull-right
+          =' link_to 'Meghívó küldése', new_group_group_invitation_path(group), :class => 'btn btn-primary', :rel => 'facebox'
+          - if can? :edit, group
+            =' link_to 'Szerkesztés', edit_group_path(group), :class => 'btn'
+          - if can? :destroy, group
+            =' link_to 'Törlés', '#', :class => 'btn btn-danger'
+        h3= link_to group.name, group
+
+.wrapper
   h2= t('user.groups')
 
   .list_view= render @groups

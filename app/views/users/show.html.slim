@@ -1,9 +1,8 @@
 = render 'header'
 
-p= render @user.tags
-
 .row
   .span12
     .wrapper
       h2= t('user.activity')
       .list_view= render @user.activities.order('created_at DESC').limit(10)
+

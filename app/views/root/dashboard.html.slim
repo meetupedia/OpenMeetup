@@ -2,7 +2,7 @@ h1 Vezérlőpult
 
 .wrapper
   h2 Események
-  .list_view= render Event.all
+  .table_view= render :partial => 'dashboard/event', :collection => Event.order('title DESC'), :as => :event
 
 .wrapper
   h2 Csoportok

@@ -37,6 +37,6 @@ private
     unless current_user
       session[:user_id] = user.id
     end
-    redirect_to session[:return_to] || user
+    redirect_to session[:return_to] || root_url
   end
 end
