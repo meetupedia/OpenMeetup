@@ -13,7 +13,7 @@ class UserSessionsController < ApplicationController
 #        UserMailer.confirmation(@user_session.record).deliver
 #        flash[:alert] = "A regisztráció nem lett megerősítve! Küldtünk egy e-mailt a címedre a tennivalókkal."
 #      end
-      redirect_to sign_in_url, :notice => 'Azonosítód elkészült, jelentkezz be!'
+      redirect_to @user_session.record
     else
       flash.now[:alert] = 'Érvénytelen bejelentkezési adatok!'
       render :new
