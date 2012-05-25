@@ -80,6 +80,12 @@ hu:
         email: 'E-mail'
         location: 'Hely'
         name: 'Név'
+        password: 'Jelszó'
+        password_confirmation: 'Jelszó ellenőrzése'
+      user_session:
+        email: 'E-mail'
+        password: 'Jelszó'
+        remember_me: 'Emlékezz rám'
       wave_item:
         body: 'Szöveg'
       wave:
