@@ -47,6 +47,9 @@ Openmeetup::Application.routes.draw do
 
   resources :users do
     resources :user_follows, :shallow => true
+    collection do
+      get :validate_email
+    end
     member do
       get :dashboard
       get :facebook_groups
@@ -71,7 +74,8 @@ Openmeetup::Application.routes.draw do
 
   resources :authentications
   match '/auth/:provider/callback' => 'authentications#create'
-  match '/sign_out' => 'sessions#destroy', :as => :sign_out
+  match '/sign_in' => 'user_sessions#new', :as => :sign_in
+  match '/sign_out' => 'user_sessions#destroy', :as => :sign_out
 
   root :to => 'root#index'
 end

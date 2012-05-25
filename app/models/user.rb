@@ -5,7 +5,8 @@ class User < ActiveRecord::Base
   key :uid
   key :name
   key :permalink
-  key :email
+  key :email, :index => true
+  key :email_confirmed
   key :crypted_password
   key :password_salt
   key :persistence_token

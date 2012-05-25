@@ -38,9 +38,25 @@ private
     end
   end
 
-  def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  def store_location
+    session[:return_to] = request.fullpath
   end
+
+  def redirect_back_or_default(default)
+    redirect_to(session[:return_to] || default)
+    session[:return_to] = nil
+  end
+
+  def current_user_session
+    return @current_user_session if defined?(@current_user_session)
+    @current_user_session = UserSession.find
+  end
+
+  def current_user
+    return @current_user if defined?(@current_user)
+    @current_user = current_user_session && current_user_session.record
+  end
+  helper_method :current_user
 
   def extract_locale_from_accept_language_header
     request.env['HTTP_ACCEPT_LANGUAGE'].andand.scan(/^[a-z]{2}/).andand.first

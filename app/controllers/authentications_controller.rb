@@ -35,7 +35,8 @@ private
 
   def sign_in_and_redirect(user)
     unless current_user
-      session[:user_id] = user.id
+      user_session = UserSession.new(user)
+      user_session.save
     end
     redirect_to session[:return_to] || root_url
   end

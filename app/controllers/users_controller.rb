@@ -2,7 +2,7 @@
 
 class UsersController < ApplicationController
   load_resource
-  authorize_resource :except => [:show, :groups]
+  authorize_resource :except => [:show, :groups, :validate_email]
 
   def show
   end
@@ -36,11 +36,14 @@ class UsersController < ApplicationController
     @facebook_groups = @user.facebook.groups
   end
 
-  def waves
-    @waves = current_user.waves.order('last_changed_at DESC').paginate :page => params[:page]
+  def tags
   end
 
-  def tags
+  def validate_email
+    render :json => !User.find_by_email(params[:user][:email])
+  end
 
+  def waves
+    @waves = current_user.waves.order('last_changed_at DESC').paginate :page => params[:page]
   end
 end

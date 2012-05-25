@@ -1,0 +1,14 @@
+.row
+  .span6.offset3
+    .wrapper
+      h3
+        ' Regisztráció vagy
+        = link_to 'bejelentkezés', sign_in_path
+
+      = semantic_form_for @user do |f|
+        = f.inputs do
+          = f.input :name
+          = f.input :email
+          = f.input :password
+          = f.input :password_confirmation
+        = f.actions
