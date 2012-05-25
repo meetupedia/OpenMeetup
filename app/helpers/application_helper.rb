@@ -14,6 +14,10 @@ module ApplicationHelper
     link_to user.name, user
   end
 
+  def sign_in_path(path = nil)
+    '/auth/facebook'
+  end
+
   def auth_path(provider)
     provider = :developer if Rails.env.development?
     case provider

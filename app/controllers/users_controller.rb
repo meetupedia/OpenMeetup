@@ -7,13 +7,16 @@ class UsersController < ApplicationController
   def show
   end
 
-  def edit
-    render :layout => false if request.xhr?
+  def new
   end
 
   def create
     @user.save
     redirect_to @user
+  end
+
+  def edit
+    render :layout => false if request.xhr?
   end
 
   def update

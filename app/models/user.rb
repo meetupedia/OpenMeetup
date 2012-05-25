@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   key :name
   key :permalink
   key :email
+  key :crypted_password
+  key :password_salt
   key :persistence_token
   key :token
   key :location

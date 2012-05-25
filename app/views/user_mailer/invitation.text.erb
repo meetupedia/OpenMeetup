@@ -1,0 +1,12 @@
+<%= @user.login %> meghívót küldött neked a Molyra: http://moly.hu/
+
+<% unless @message.blank? -%>
+Személyes üzenet: <%= h @message %>
+
+<% end -%>
+Látogasd meg @<%= @user.login %> oldalát: <%= user_url(@user).html_safe %>
+
+Vagy regisztrálj azonnal: <%= signup_url('user[email]' => @email).html_safe %>
+
+Üdvözlettel,
+a Moly csapata

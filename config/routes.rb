@@ -43,6 +43,7 @@ Openmeetup::Application.routes.draw do
   end
 
   resources :passwords
+  resource :user_sessions
 
   resources :users do
     resources :user_follows, :shallow => true
