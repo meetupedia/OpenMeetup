@@ -1,7 +1,7 @@
 .root
 
   .row
-    .span6
+    .span6.offset3
       #myCarousel.carousel
         .carousel-inner
           .active.item
@@ -30,10 +30,11 @@
         $(function(){
           $('.carousel').carousel();
         });
-    .span6
+  .row
+    .span6.offset3
       .wrapper
         .facebook_connect= link_to image_tag('facebook_connect.png', :alt => t('menu.login_with_facebook')), auth_path(:facebook)
-        .twitter_connect= link_to image_tag('twitter_connect.png', :alt => t('menu.login_with_twitter')), auth_path(:twitter)
+        /! .twitter_connect= link_to image_tag('twitter_connect.png', :alt => t('menu.login_with_twitter')), auth_path(:twitter)
         p.comment =t('welcome.facebook_wont_write_to_your_wall')
       .wrapper
         = render 'user_sessions/form'

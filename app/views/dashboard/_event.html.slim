@@ -1,10 +1,4 @@
 = div_for event do
-  h3= link_to event.title, event
-  p
-    = l(event.start_time)
-    = " → "
-    = l(event.end_time)
-    = dot
-    = event.address
-    = dot
-    = link_to "#{event.participations.size} résztvevő", users_event_path(event)
+  td= link_to event.title, event
+  td= l(event.start_time)
+  td= link_to "#{event.participations.size} résztvevő", users_event_path(event)
