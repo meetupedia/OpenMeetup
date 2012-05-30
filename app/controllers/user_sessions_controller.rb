@@ -3,7 +3,7 @@
 class UserSessionsController < ApplicationController
 
   def new
-    @sidebar = false
+    session[:return_to] = params[:return_to]
   end
 
   def create
@@ -13,7 +13,7 @@ class UserSessionsController < ApplicationController
 #        UserMailer.confirmation(@user_session.record).deliver
 #        flash[:alert] = "A regisztráció nem lett megerősítve! Küldtünk egy e-mailt a címedre a tennivalókkal."
 #      end
-      redirect_to @user_session.record
+      redirect_to session[:return_to] || @user_session.record
     else
       flash.now[:alert] = 'Érvénytelen bejelentkezési adatok!'
       render :new

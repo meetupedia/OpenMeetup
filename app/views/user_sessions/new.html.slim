@@ -1,3 +1,6 @@
 .row
   .span6.offset3
     .wrapper.loginbox= render 'form'
+    .wrapper
+      p.facebook_connect= link_to image_tag('facebook_connect.png', :alt => t('menu.login_with_facebook')), auth_path(:facebook)
+      /! p.twitter_connect= link_to image_tag('twitter_connect.png', :alt => t('menu.login_with_twitter')), auth_path(:twitter)

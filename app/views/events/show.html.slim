@@ -18,8 +18,8 @@ h3
           - else
             =' link_to '<i class="icon-plus-sign icon-black"></i> Nem veszek részt'.html_safe, event_absences_path(@event), :method => :post, :class => 'btn'
         - else
-          =' link_to '<i class="icon-plus-sign icon-black"></i> Részt veszek'.html_safe, sign_in_path(set_event_participations_path(@event)), :class => 'btn'
-          =' link_to '<i class="icon-plus-sign icon-black"></i> Nem veszek részt'.html_safe, sign_in_path(set_event_absences_path(@event)), :class => 'btn'
+          =' link_to '<i class="icon-plus-sign icon-black"></i> Részt veszek'.html_safe, new_user_sessions_path(:return_to => set_event_participations_path(@event)), :class => 'btn'
+          =' link_to '<i class="icon-plus-sign icon-black"></i> Nem veszek részt'.html_safe, new_user_sessions_path(:return_to => set_event_absences_path(@event)), :class => 'btn'
     - if can? :edit, @event or can? :create, EventInvitation.new(:event => @event)
       .wrapper
         - if can? :create, EventInvitation.new(:event => @event)

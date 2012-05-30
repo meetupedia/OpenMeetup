@@ -1,10 +1,15 @@
 = div_for group do
   - if group.image.file?
     .avatar= link_to(image_tag(group.image.url(:small), :alt => group.name, :height => 72, :width => 72, :title => group.name), group)
-  .pull-right=' render 'memberships/button', :group => group
+  - if current_user
+    .pull-right=' render 'memberships/button', :group => group
   h3= link_to group.name, group
   p= truncate group.description, :length => 256
-  p= render :partial => 'taggings/button', :collection => group.tags.order('name ASC'), :as => :tag
+  p
+    - if current_user
+      = render :partial => 'taggings/button', :collection => group.tags.order('name ASC'), :as => :tag
+    - else
+      = render group.tags.order('name ASC')
   h5=' link_to "#{group.members.size} követő", group
   - if (users = group.members.limit(13)).size > 0
     p

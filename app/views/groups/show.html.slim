@@ -7,18 +7,19 @@ h1.group= @group.name
         - if current_user
           = render 'memberships/button', :group => @group
         - else
-          = link_to '<i class="icon-plus-sign icon-black"></i> Követem'.html_safe, sign_in_path(set_group_memberships_path(@group)), :class => 'btn'
+          = link_to '<i class="icon-plus-sign icon-black"></i> Követem'.html_safe, new_user_sessions_path(:return_to => set_group_memberships_path(@group)), :class => 'btn'
 
-    .wrapper
-      - if can? :create, Event.new(:group => @group)
-        p= link_to 'Új esemény', new_group_event_path(@group), :class => 'btn btn-primary', :rel => 'facebox'
-      p
-        =' link_to 'Ismerősök hozzáadása', new_group_group_invitation_path(@group), :class => 'btn btn-primary', :rel => 'facebox'
-        = link_to '→ Meghívottak', invited_group_path(@group)
-      - if can? :edit, @group
-        p= link_to 'Új üzenet', new_wave_path(:group_id => @group.id), :class => 'btn btn-primary', :rel => 'facebox'
-        p= link_to 'Címke hozzáadása', new_group_tag_path(@group), :class => 'btn', :rel => 'facebox'
-        p= link_to 'Csoport szerkesztése', edit_group_path(@group), :class => 'btn', :rel => 'facebox'
+    - if current_user
+      .wrapper
+        - if can? :create, Event.new(:group => @group)
+          p= link_to 'Új esemény', new_group_event_path(@group), :class => 'btn btn-primary', :rel => 'facebox'
+        p
+          =' link_to 'Ismerősök hozzáadása', new_group_group_invitation_path(@group), :class => 'btn btn-primary', :rel => 'facebox'
+          = link_to '→ Meghívottak', invited_group_path(@group)
+        - if can? :edit, @group
+          p= link_to 'Új üzenet', new_wave_path(:group_id => @group.id), :class => 'btn btn-primary', :rel => 'facebox'
+          p= link_to 'Címke hozzáadása', new_group_tag_path(@group), :class => 'btn', :rel => 'facebox'
+          p= link_to 'Csoport szerkesztése', edit_group_path(@group), :class => 'btn', :rel => 'facebox'
     ' <div class="fb-like" data-href="#{group_url(@group)}" data-send="false" data-layout="box_count" data-show-faces="false"></div>
     ' <g:plusone size="tall"></g:plusone>
     ' <a href="https://twitter.com/share" class="twitter-share-button" data-count="vertical">Tweet</a>
