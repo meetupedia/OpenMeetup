@@ -1,3 +1,5 @@
+# -*- encoding : utf-8 -*-
+
 class GroupMailer < ActionMailer::Base
   default_url_options[:host] = 'openmeetup.net'
   default :from => 'noreply@openmeetup.net'

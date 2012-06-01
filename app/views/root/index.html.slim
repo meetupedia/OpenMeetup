@@ -1,27 +1,26 @@
-.root
-
-  .row
-    .span6.offset3
+.row
+  .span8
+    .wrapper
       #myCarousel.carousel
         .carousel-inner
           .active.item
-            =' image_tag 'carousel_01.png'
+            =' image_tag 'carousel_01.jpg'
             .carousel-caption
               h1= t('welcome.slogan_01')
           .item
-            =' image_tag 'carousel_02.png'
+            =' image_tag 'carousel_02.jpg'
             .carousel-caption
               h1= t('welcome.slogan_02')
           .item
-            =' image_tag 'carousel_03.png'
+            =' image_tag 'carousel_03.jpg'
             .carousel-caption
               h1= t('welcome.slogan_03')
           .item
-            =' image_tag 'carousel_04.png'
+            =' image_tag 'carousel_04.jpg'
             .carousel-caption
               h1= t('welcome.slogan_04')
           .item
-            =' image_tag 'carousel_05.png'
+            =' image_tag 'carousel_05.jpg'
             .carousel-caption
               h1= t('welcome.slogan_05')
         /! a.carousel-control.left href="#myCarousel" data-slide="prev" &lsaquo;
@@ -30,11 +29,14 @@
         $(function(){
           $('.carousel').carousel();
         });
-  .row
-    .span6.offset3
-      .wrapper
+  .span4
+    .wrapper
+      .root
         .facebook_connect= link_to image_tag('facebook_connect.png', :alt => t('menu.login_with_facebook')), auth_path(:facebook)
-        /! .twitter_connect= link_to image_tag('twitter_connect.png', :alt => t('menu.login_with_twitter')), auth_path(:twitter)
+        / .twitter_connect= link_to image_tag('twitter_connect.png', :alt => t('menu.login_with_twitter')), auth_path(:twitter)
         p.comment =t('welcome.facebook_wont_write_to_your_wall')
-      .wrapper.loginbox
-        = render 'user_sessions/form'
+        hr
+        p
+          =' link_to 'Bejelentkezés', new_user_sessions_path
+          ' |
+          = link_to 'Regisztráció', new_user_path

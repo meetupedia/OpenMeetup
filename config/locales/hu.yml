@@ -51,8 +51,8 @@ hu:
 
   formtastic:
     actions:
-      create: 'Küldés'
-      update: 'Küldés'
+      create: 'Mentés'
+      update: 'Mentés'
     labels:
       event:
         city: 'Település'
@@ -77,6 +77,7 @@ hu:
       tag:
         name: 'Címke'
       user:
+        city: 'Város'
         email: 'E-mail'
         location: 'Hely'
         name: 'Név'

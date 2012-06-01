@@ -99,7 +99,6 @@ input[type=text], textarea
       font-size: 20px
   img
     margin: -3px 0
-    vertical-align: top
 
 .navbar-search .search-query
   background: #efefef
@@ -181,22 +180,13 @@ textarea
   height: 160px
 
 .root
+  margin: 10px 0
   text-align: center
   p
     font-family: Georgia, sans-serif
-    font-size: 20px
-    line-height: 24px
-    img
-      border: 10px solid #ffffff
-      box-shadow: 0 2px 4px #cfcfcf
-      margin: 0 10px 10px 10px
-      -moz-box-shadow: 0 2px 4px #cfcfcf
-      -webkit-box-shadow: 0 2px 4px #cfcfcf
-  .facebook_connect
-    margin: 20px 0 10px 0
-  .comment
-    color: #9f9f9f
-    font-size: 12px
+    &.comment
+      color: #9f9f9f
+      font-size: 12px
 
 span.tag
   background: #cfcfcf
@@ -282,8 +272,10 @@ span.counter
 .btn-full
 //  display: block
 
-.loginbox
-  text-align: left
-
 label.error
   color: #cf0000
+
+.carousel
+  margin: 10px 0
+  img
+    width: 100%

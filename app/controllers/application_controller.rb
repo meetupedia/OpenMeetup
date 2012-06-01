@@ -3,8 +3,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :set_locale, :set_city, :set_domain
-  helper_method :current_language, :current_organization, :current_user
+  before_filter :set_locale, :set_domain
+  helper_method :current_city, :current_language, :current_organization, :current_user
   helper LaterDude::CalendarHelper
   layout :set_layout
 
@@ -27,15 +27,16 @@ private
   end
 
   def current_organization
-    @current_organization ||= if Rails.env == 'development'
-      Organization.first
-    else
-      if request.domain == 'openmeetup.net'
-        Organization.find_by_permalink(request.subdomains.first)
-      else
-        Organization.find_by_permalink(request.domain.split('.').first)
-      end
-    end
+    nil
+#    @current_organization ||= if Rails.env == 'development'
+#      Organization.first
+#    else
+#      if request.domain == 'openmeetup.net'
+#        Organization.find_by_permalink(request.subdomains.first)
+#      else
+#        Organization.find_by_permalink(request.domain.split('.').first)
+#      end
+#    end
   end
 
   def store_location
@@ -45,6 +46,11 @@ private
   def redirect_back_or_default(default)
     redirect_to(session[:return_to] || default)
     session[:return_to] = nil
+  end
+
+  def current_city
+    return @current_city if defined?(@current_city)
+    @current_city = current_user.andand.city
   end
 
   def current_user_session
@@ -63,7 +69,7 @@ private
   end
 
   def set_city
-    cookies[:city] = params[:city] || current_user.andand.city || 'Budapest'
+    redirect_to edit_city_user_path(current_user) if current_user and not current_city
   end
 
   def set_domain

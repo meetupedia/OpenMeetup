@@ -1,0 +1,8 @@
+.row
+  .span6.offset3
+    .wrapper
+      h3 Válassz települést!
+      = semantic_form_for @user do |f|
+        = f.inputs do
+          = f.input :city, :label => false
+        = f.actions

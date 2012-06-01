@@ -3,6 +3,7 @@
 class UsersController < ApplicationController
   load_resource
   authorize_resource :except => [:show, :groups, :validate_email]
+  before_filter :set_city, :except => [:edit, :update, :edit_city]
 
   def show
   end
@@ -25,6 +26,10 @@ class UsersController < ApplicationController
   end
 
   def dashboard
+  end
+
+  def edit_city
+    render :layout => false if request.xhr?
   end
 
   def groups

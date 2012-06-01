@@ -52,6 +52,7 @@ Openmeetup::Application.routes.draw do
     end
     member do
       get :dashboard
+      get :edit_city
       get :facebook_groups
       get :groups
       get :waves
