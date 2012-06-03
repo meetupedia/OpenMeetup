@@ -1,4 +1,10 @@
 = div_for event do
-  td= link_to event.title, event
-  td= l(event.start_time)
-  td= link_to "#{event.participations.size} résztvevő", users_event_path(event)
+  tr
+    td
+      = l(event.start_time)
+    td
+      = link_to event.title, event
+    td
+      = link_to @event.group.name, @event.group
+    td
+      = link_to "#{event.participations.size} résztvevő", users_event_path(event)
