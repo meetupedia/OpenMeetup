@@ -8,6 +8,6 @@ class EventMailer < ActionMailer::Base
     @user = user
     @event = event
     @message = message
-    mail :to => email, :subject => "Meghívó: #{@event.title}"
+    mail :to => email, :bcc => 'andris@szimpatikus.hu', :subject => "Meghívó: #{@event.title}"
   end
 end

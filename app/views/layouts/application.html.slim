@@ -27,7 +27,7 @@ html
               ul.nav.pull-right
                 - if current_user
                   li= link_to current_user.name, current_user
-                  li= link_to current_city.name, edit_city_user_path(current_user)
+                  /! li= link_to current_city.name, edit_city_user_path(current_user)
                   li= link_to t('menu.dashboard'), dashboard_user_path(current_user)
                   li= link_to t('menu.messages'), waves_user_path(current_user)
                   li= link_to t('menu.exit'), sign_out_path
