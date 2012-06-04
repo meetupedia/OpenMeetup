@@ -33,6 +33,7 @@ protected
 
   def save_invitation_target(event_invitation_target)
     if event_invitation_target.new_record?
+      event_invitation_target.email ||= event_invitation_target.invited_user.email
       event_invitation_target.event_invitation = @event_invitation
       if event_invitation_target.save
         EventMailer.invitation(current_user, event_invitation_target.email, event_invitation_target.event_invitation.event, event_invitation_target.event_invitation.message).deliver
