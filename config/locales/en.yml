@@ -20,6 +20,7 @@ en:
     messages: 'Messages'
     profile: 'Profile'
     search: 'Search'
+    organization: 'Organization'
   user:
     edit_user: 'Edit user'
     send_message: 'Message'

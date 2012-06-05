@@ -27,16 +27,15 @@ private
   end
 
   def current_organization
-    nil
-#    @current_organization ||= if Rails.env == 'development'
-#      Organization.first
-#    else
-#      if request.domain == 'openmeetup.net'
-#        Organization.find_by_permalink(request.subdomains.first)
-#      else
-#        Organization.find_by_permalink(request.domain.split('.').first)
-#      end
-#    end
+    @current_organization ||= if Rails.env == 'development'
+      @current_organization ||= Organization.find_by_id(params[:organization]) if params[:organization]
+    else
+      if request.domain == 'openmeetup.net'
+        Organization.find_by_permalink(request.subdomains.first)
+      else
+        Organization.find_by_permalink(request.domain.split('.').first)
+      end
+    end
   end
 
   def store_location

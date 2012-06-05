@@ -9,6 +9,18 @@
       = link_to 'OpenMeetup', root_path, :class => 'brand'
       form.navbar-search.pull-left action='/search' method='get'
         input type='text' class='search-query' placeholder=t('menu.search') name='q'
+
+      - if Rails.env=='development'
+        ul.nav.pull-right
+          li.dropdown
+            a.dropdown-toggle(data-toggle="dropdown")
+              = t('menu.organization')
+              b.caret
+            ul.dropdown-menu
+              li= link_to 'OpenMeetup', "?organization=0"
+              - Organization.find_each do |organization|
+                li= link_to organization.name, "?organization=#{organization.id}"
+
       ul.nav.pull-right
         li.dropdown
           a.dropdown-toggle(data-toggle="dropdown")
@@ -17,3 +29,4 @@
           ul.dropdown-menu
             - Language.order('permalink ASC').find_each do |language|
               li= link_to language.name, "?locale=#{language.code}"
+
