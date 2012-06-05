@@ -3,5 +3,7 @@
  *= require twitter/bootstrap
  *= require formtastic-bootstrap
  *= require gmaps4rails
+ *= require jquery.facebox
+ *= require fancybox
  *= require_tree .
 */

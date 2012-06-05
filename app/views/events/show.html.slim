@@ -59,6 +59,14 @@ h3
       p= link_to t('event.all_participants'), users_event_path(@event)
 
     .wrapper
+      h3 Képek
+      #images= render @event.images
+      = semantic_form_for Image.new, :url => event_images_path(@event) do |f|
+        = f.inputs do
+          = f.file_field :image
+      = render 'images/upload'
+
+    .wrapper
       h3 Kommentek
       | <div class="fb-comments" data-href="#{event_url(@event)}" data-num-posts="10"></div>
 

@@ -29,6 +29,8 @@ class Ability
 
       can :create, GroupInvitation
 
+      can :create, Image
+
       can [:create, :set], Membership
       can :destroy, Membership do |membership|
         membership.user_id == current_user.id or membership.group.admins.include?(current_user)
