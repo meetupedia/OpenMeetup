@@ -14,6 +14,7 @@
     	script: '/events/<%= @event.permalink %>/images',
 		  onComplete: function(event, queueID, fileObj, response, data) {
 		    eval(response);
+		    $('#images a.fancybox').fancybox()
 		  },
     	scriptData: {
         '_http_accept': 'application/javascript',
