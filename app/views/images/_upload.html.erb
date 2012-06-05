@@ -1,0 +1,32 @@
+<script type="text/javascript">
+  <% session_key = Rails.application.config.session_options[:key] -%>
+  $(document).ready(function() {
+
+	  $('#image_image').click(function(event){
+		  event.preventDefault();
+	  });
+
+	  $('#image_image').uploadify({
+    	uploader: '/uploadify/uploadify.swf',
+		  cancelImg: '/uploadify/cancel.png',
+		  multi: true,
+		  auto: true,
+    	script: '/events/<%= @event.permalink %>/images',
+		  onComplete: function(event, queueID, fileObj, response, data) {
+		    eval(response);
+		  },
+    	scriptData: {
+        '_http_accept': 'application/javascript',
+			  'format': 'js',
+        '_method': 'post',
+        '<%= session_key %>': encodeURIComponent('<%= u cookies[session_key] %>'),
+        'authenticity_token': encodeURIComponent('<%= u form_authenticity_token %>')
+      }
+	  });
+
+	  $('#image_submit').click(function(event){
+		  event.preventDefault();
+		  $('#image_image').uploadifyUpload();
+	  });
+  });
+</script>

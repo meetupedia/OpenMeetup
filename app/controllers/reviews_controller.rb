@@ -1,4 +1,5 @@
 # -*- encoding : utf-8 -*-
+
 class ReviewsController < ApplicationController
   load_resource :group
   load_resource :review, :through => :group, :shallow => true
