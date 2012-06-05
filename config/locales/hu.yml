@@ -20,6 +20,7 @@ hu:
     messages: 'Üzenetek'
     profile: 'Profil'
     search: 'Keresés'
+    organization: 'Szervezet'
   user:
     edit_user: 'Felhasználó szerkesztése'
     send_message: 'Üzenet küldése'
