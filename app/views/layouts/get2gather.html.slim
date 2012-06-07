@@ -9,29 +9,8 @@ html
     = render 'layouts/google_analytics'
     = csrf_meta_tags
   body
-    - if @header
-      = render @header
-    - else
-      .navbar.navbar-fixed-top
-        .navbar-inner
-          .container
-            | <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            |   <span class="icon-bar"></span>
-            |   <span class="icon-bar"></span>
-            |   <span class="icon-bar"></span>
-            | </a>
-            = link_to 'Get2Gather', root_path, :class => 'brand'
-            .nav-collapse
-              form.navbar-search.pull-left action='/search' method='get'
-                input type='text' class='search-query' placeholder=t('menu.search') name='q'
-              ul.nav.pull-right
-                - if current_user
-                  li= link_to current_user.name, current_user
-                  /! li= link_to t('menu.dashboard'), dashboard_user_path(current_user)
-                  li= link_to t('menu.messages'), waves_user_path(current_user)
-                  li= link_to t('menu.exit'), sign_out_path
-                - else
-                  li= link_to image_tag('facebook_connect.png', :alt => t('menu.login_with_facebook')), sign_in_path
+    = render 'layouts/header'
+
     #content
       .container
         = yield :header

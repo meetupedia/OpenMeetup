@@ -21,6 +21,8 @@ en:
     profile: 'Profile'
     search: 'Search'
     organization: 'Organization'
+    home: 'Home'
+    login: 'Login'
   user:
     edit_user: 'Edit user'
     send_message: 'Message'

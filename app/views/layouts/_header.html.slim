@@ -12,9 +12,25 @@
       - else
         = link_to 'OpenMeetup', root_path, :class => 'brand'
 
-      - if !@current_organization then
+      .nav-collapse
         form.navbar-search.pull-left action='/search' method='get'
           input type='text' class='search-query' placeholder=t('menu.search') name='q'
+
+      - if !current_user then
+        ul.nav.pull-right
+          li= link_to t('menu.login'), sign_in_path
+
+      - else
+        ul.nav.pull-right
+          li= link_to current_user.name, current_user
+          li= link_to t('menu.home'), root_path
+          li.dropdown
+            a.dropdown-toggle(data-toggle="dropdown")
+              b.caret
+            ul.dropdown-menu
+              li= link_to t('menu.dashboard'), dashboard_user_path(current_user)
+              li= link_to t('menu.messages'), waves_user_path(current_user)
+              li= link_to t('menu.exit'), sign_out_path
 
       - if Rails.env=='development'
         ul.nav.pull-right
@@ -26,8 +42,6 @@
               li= link_to 'OpenMeetup', "?organization=0"
               - Organization.find_each do |organization|
                 li= link_to organization.name, "?organization=#{organization.id}"
-
-      - if !@current_organization then
         ul.nav.pull-right
           li.dropdown
             a.dropdown-toggle(data-toggle="dropdown")
@@ -36,4 +50,3 @@
             ul.dropdown-menu
               - Language.order('permalink ASC').find_each do |language|
                 li= link_to language.name, "?locale=#{language.code}"
-

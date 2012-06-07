@@ -3,18 +3,28 @@
 class RootController < ApplicationController
 
   def index
+
+    # ha szervezet
     if @organization = current_organization
+
+      # ha szervezet + be van lépve
       if current_user
         @title = @organization.name
         render 'organizations/show'
+      
+
+	  # ha szervezet + nincs belépve
       else
-        @header = 'root/index_header'
       end
+
+	# ha nem szervezet + be van lépve
     elsif current_user
       redirect_to tag_myself_url
+
+	# ha nem szervezet + nincs belépve
     else
-      @header = 'root/index_header'
     end
+
   end
 
   def tag_myself

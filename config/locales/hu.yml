@@ -21,6 +21,8 @@ hu:
     profile: 'Profil'
     search: 'Keresés'
     organization: 'Szervezet'
+    home: 'Kezdőlap'
+    login: 'Belépés'
   user:
     edit_user: 'Felhasználó szerkesztése'
     send_message: 'Üzenet küldése'
