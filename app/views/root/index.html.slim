@@ -1,35 +1,35 @@
-.row
-  .span8
-    .wrapper
-      #myCarousel.carousel
-        .carousel-inner
-          .active.item
-            =' image_tag 'carousel_01.jpg'
-            .carousel-caption
-              h1= t('welcome.slogan_01')
-          .item
-            =' image_tag 'carousel_02.jpg'
-            .carousel-caption
-              h1= t('welcome.slogan_02')
-          .item
-            =' image_tag 'carousel_03.jpg'
-            .carousel-caption
-              h1= t('welcome.slogan_03')
-          .item
-            =' image_tag 'carousel_04.jpg'
-            .carousel-caption
-              h1= t('welcome.slogan_04')
-          .item
-            =' image_tag 'carousel_05.jpg'
-            .carousel-caption
-              h1= t('welcome.slogan_05')
-        a.carousel-control.left href="#myCarousel" data-slide="prev" &lsaquo;
-        a.carousel-control.right href="#myCarousel" data-slide="next" &rsaquo;
-      javascript:
-        $(function(){
-          $('.carousel').carousel();
-        });
-  - if !@current_organization then
+- if !@current_organization then
+  .row
+    .span8
+      .wrapper
+        #myCarousel.carousel
+          .carousel-inner
+            .active.item
+              =' image_tag 'carousel_01.jpg'
+              .carousel-caption
+                h1= t('welcome.slogan_01')
+            .item
+              =' image_tag 'carousel_02.jpg'
+              .carousel-caption
+                h1= t('welcome.slogan_02')
+            .item
+              =' image_tag 'carousel_03.jpg'
+              .carousel-caption
+                h1= t('welcome.slogan_03')
+            .item
+              =' image_tag 'carousel_04.jpg'
+              .carousel-caption
+                h1= t('welcome.slogan_04')
+            .item
+              =' image_tag 'carousel_05.jpg'
+              .carousel-caption
+                h1= t('welcome.slogan_05')
+          a.carousel-control.left href="#myCarousel" data-slide="prev" &lsaquo;
+          a.carousel-control.right href="#myCarousel" data-slide="next" &rsaquo;
+        javascript:
+          $(function(){
+            $('.carousel').carousel();
+          });
     .span4
       .wrapper
         .root
@@ -41,8 +41,17 @@
             =' link_to 'Bejelentkezés', new_user_sessions_path
             ' |
             = link_to 'Regisztráció', new_user_path
-  - else
-    .span4
-      .wrapper
-        .root
-          p Ez az oldal csak belső hálózatról érhető el.
+
+- else
+  .row
+    .span12
+      .wrapper.get2gather-images
+        = image_tag('get2gather/get2gather1.jpg', :width => "280")
+        = image_tag('get2gather/get2gather2.jpg', :width => "280")
+        = image_tag('get2gather/get2gather3.jpg', :width => "280")
+        br
+        br
+        .lead.center Ez az oldal csak belső hálózatról érhető el.
+        = image_tag('get2gather/get2gather4.jpg', :width => "280")
+        = image_tag('get2gather/get2gather5.jpg', :width => "280")
+        = image_tag('get2gather/get2gather6.jpg', :width => "280")

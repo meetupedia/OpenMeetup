@@ -6,9 +6,15 @@
       |   <span class="icon-bar"></span>
       |   <span class="icon-bar"></span>
       | </a>
-      = link_to 'OpenMeetup', root_path, :class => 'brand'
-      form.navbar-search.pull-left action='/search' method='get'
-        input type='text' class='search-query' placeholder=t('menu.search') name='q'
+
+      - if @current_organization then
+        = link_to @current_organization.name, root_path, :class => 'brand'
+      - else
+        = link_to 'OpenMeetup', root_path, :class => 'brand'
+
+      - if !@current_organization then
+        form.navbar-search.pull-left action='/search' method='get'
+          input type='text' class='search-query' placeholder=t('menu.search') name='q'
 
       - if Rails.env=='development'
         ul.nav.pull-right
