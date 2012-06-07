@@ -21,12 +21,13 @@
               - Organization.find_each do |organization|
                 li= link_to organization.name, "?organization=#{organization.id}"
 
-      ul.nav.pull-right
-        li.dropdown
-          a.dropdown-toggle(data-toggle="dropdown")
-            = t('menu.language')
-            b.caret
-          ul.dropdown-menu
-            - Language.order('permalink ASC').find_each do |language|
-              li= link_to language.name, "?locale=#{language.code}"
+      - if !@current_organization then
+        ul.nav.pull-right
+          li.dropdown
+            a.dropdown-toggle(data-toggle="dropdown")
+              = t('menu.language')
+              b.caret
+            ul.dropdown-menu
+              - Language.order('permalink ASC').find_each do |language|
+                li= link_to language.name, "?locale=#{language.code}"
 
