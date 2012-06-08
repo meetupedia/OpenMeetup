@@ -56,6 +56,15 @@ h1.group= @group.name
     .wrapper
       h2 Kommentek
       | <div class="fb-comments" data-href="#{group_url(@group)}" data-num-posts="10"></div>
+
+    .wrapper
+      h3 Képek
+      #images= render @group.images
+      = semantic_form_for Image.new, :url => group_images_path(@group) do |f|
+        = f.inputs do
+          = f.file_field :image
+      = render 'images/upload', :item => @group
+
     .wrapper
       - unless (users = @group.members.order('memberships.created_at ASC')).empty?
         h3 Tagok

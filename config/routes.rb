@@ -2,6 +2,7 @@
 
 Openmeetup::Application.routes.draw do
   resources :groups do
+    resources :images, :shallow => true
     member do
       get :invited
       get :users

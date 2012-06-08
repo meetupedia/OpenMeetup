@@ -64,7 +64,7 @@ h3
       = semantic_form_for Image.new, :url => event_images_path(@event) do |f|
         = f.inputs do
           = f.file_field :image
-      = render 'images/upload'
+      = render 'images/upload', :item => @event
 
     .wrapper
       h3 Kommentek

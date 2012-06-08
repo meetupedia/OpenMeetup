@@ -25,6 +25,7 @@ class Group < ActiveRecord::Base
   has_many :group_invitations, :dependent => :nullify
   has_many :group_invitation_targets, :dependent => :nullify
   has_many :group_taggings, :dependent => :destroy
+  has_many :images, :as => :imageable
   has_many :memberships, :dependent => :destroy
   has_many :members, :through => :memberships, :source => :user
   has_many :reviews, :dependent => :destroy

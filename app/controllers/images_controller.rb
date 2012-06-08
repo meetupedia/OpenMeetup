@@ -2,12 +2,14 @@
 
 class ImagesController < ApplicationController
   load_resource :event
-  load_resource :image, :through => :event, :shallow => true
+  load_resource :group
+  load_resource :image, :through => [:event, :group], :shallow => true
 #  authorize_resource
 
   def create
     @image = Image.new(coerce(params)[:image])
-    @image.imageable = @event
+    @image.imageable = @event if @event
+    @image.imageable = @group if @group
     if @image.save
       respond_to do |format|
         format.html { redirect_to @image.imageable }

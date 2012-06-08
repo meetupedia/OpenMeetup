@@ -11,7 +11,7 @@
 		  cancelImg: '/uploadify/cancel.png',
 		  multi: true,
 		  auto: true,
-    	script: '/events/<%= @event.permalink %>/images',
+      script: '<%= url_for item %>/images',
 		  onComplete: function(event, queueID, fileObj, response, data) {
 		    eval(response);
 		    $('#images a.fancybox').fancybox()
