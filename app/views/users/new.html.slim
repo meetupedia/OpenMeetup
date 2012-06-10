@@ -1,10 +1,19 @@
 .row
   .span6.offset3
     .wrapper
-      h3
-        ' Regisztráció |
-        = link_to 'Bejelentkezés', sign_in_path
 
+      ul.nav.nav-tabs
+        li
+          = link_to 'Bejelentkezés', sign_in_path
+        li.active
+          a Regisztráció
+
+      - if !@current_organization then
+        .form-actions
+          .facebook_connect= link_to image_tag('facebook_connect.png', :alt => t('menu.login_with_facebook')), auth_path(:facebook)
+        br
+        br
+  
       = semantic_form_for @user do |f|
         = f.inputs do
           = f.input :name
