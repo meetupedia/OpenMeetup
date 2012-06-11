@@ -1,12 +1,12 @@
 h1 Vezérlőpult
 
-.wrapper
-  h2 Események
-  table= render :partial => 'dashboard/event', :collection => Event.where(:start_time => (Time.now.midnight)..Time.now.midnight + 31.day).order('start_time DESC'), :as => :event
+/! .wrapper
+/!  h2 Események
+/!  table= render :partial => 'dashboard/event', :collection => Event.where(:start_time => (Time.now.midnight)..Time.now.midnight + 31.day).order('start_time DESC'), :as => :event
 
 .wrapper
   h2 Csoportok
-  .list_view= render Group.all
+  table= render :partial => 'dashboard/group', :collection => Group.all, :as => :group
 
 .wrapper
   h2 Ismerősök

@@ -1,16 +1,19 @@
 = div_for group do
   - if group.image.file?
-    .avatar= link_to(image_tag(group.image.url(:small), :alt => group.name, :height => 72, :width => 72, :title => group.name), group)
-  .pull-right=' render 'memberships/button', :group => group
-  h3= link_to group.name, group
-  p= truncate group.description, :length => 256
-  p= render :partial => 'taggings/button', :collection => group.tags.order('name ASC'), :as => :tag
+    - if group.image.url && FileTest.exists?("#{group.image.url}")
+      .avatar= link_to(image_tag(group.image.url(:small), :alt => group.name, :height => 50, :width => 50, :title => group.name), group)
+    - else
+      .avatar= link_to(image_tag('share_32x32.png', :alt => group.name, :height => 50, :width => 50, :title => group.name), group)
+
+  - if current_user
+    .pull-right=' render 'memberships/button', :group => group
+
+  p= link_to group.name, group
+
+  p
+    - if current_user
+      = render :partial => 'dashboard/tag', :collection => group.tags.order('name ASC'), :as => :tag
+    - else
+      = render group.tags.order('name ASC')
+
   h5=' link_to "#{group.members.size} követő", group
-  - if (users = group.members.limit(13)).size > 0
-    p
-      = render 'users/user_avatars', :users => users[0..11]
-      - if users.size > 12
-        = link_to '»', group
-  - if current_user and not (users = group.members.where('users.uid' => current_user.facebook_friend_ids).order('users.permalink ASC')).empty?
-    h5 Facebookos ismerősök a csoportban
-    p= render 'users/user_avatars', :users => users
