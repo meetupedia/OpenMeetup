@@ -4,5 +4,5 @@
 //= require gmaps4rails/googlemaps
 //= require jquery.facebox
 //= require fancybox
-//= require pjax
+//= require jquery.pjax
 //= require_tree .

@@ -21,9 +21,7 @@ html
           .alert.alert-error
             a.close(data-dismiss="alert")×
             = flash[:alert]
-        | <div data-pjax-container>
-        = yield
-        | </div>
+        #pjax= yield
         = render 'layouts/footer'
     = yield :scripts
     = render 'layouts/uservoice'
