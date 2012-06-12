@@ -11,7 +11,7 @@
 		  cancelImg: '/uploadify/cancel.png',
 		  multi: true,
 		  auto: true,
-      script: '<%= url_for item %>/images',
+      script: '<%= polymorphic_url([item, Image]) %>',
 		  onComplete: function(event, queueID, fileObj, response, data) {
 		    eval(response);
 		    $('#images a.fancybox').fancybox()
