@@ -14,7 +14,7 @@
       = t('footer.vanity2', :eventnumber => link_to(number_with_delimiter(Event.count, :delimiter => ".")), :eventthisweeknumber => link_to(Event.where(['start_time < ?', 7.days.since]).count)).html_safe
     p= tr8n_language_strip_tag
   .footer-right
-    =' link_to t('footer.about')
-    =' link_to t('footer.termsofservice')
-    =' link_to t('footer.privacy')
-    =' link_to t('footer.contact')
+    =' link_to tr('About')
+    =' link_to tr('Terms of service')
+    =' link_to tr('Privacy')
+    =' link_to tr('Contact')
