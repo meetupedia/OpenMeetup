@@ -73,6 +73,7 @@ Openmeetup::Application.routes.draw do
   match '/search' => 'search#index', :as => :search
   match '/tag_myself' => 'root#tag_myself', :as => :tag_myself
   match '/dashboard' => 'root#dashboard', :as => :dashboard
+  match '/intro' => 'root#intro', :as => :intro
 
   match '/system' => 'system#index', :as => :system
   match '/reload' => 'system#reload', :as => :reload

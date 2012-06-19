@@ -11,7 +11,7 @@ class RootController < ApplicationController
       if current_user
         @title = @organization.name
         render 'organizations/show'
-      
+
 
 	  # ha szervezet + nincs belépve
       else
@@ -25,6 +25,10 @@ class RootController < ApplicationController
     else
     end
 
+  end
+
+  def intro
+    render :index
   end
 
   def tag_myself
