@@ -33,14 +33,15 @@
     .span4
       .wrapper
         .root
-          .facebook_connect= link_to image_tag('facebook_connect.png', :alt => t('menu.login_with_facebook')), auth_path(:facebook)
-          / .twitter_connect= link_to image_tag('twitter_connect.png', :alt => t('menu.login_with_twitter')), auth_path(:twitter)
-          p.comment =t('welcome.facebook_wont_write_to_your_wall')
+          .facebook_connect= link_to image_tag('facebook_connect.png', :alt => tr('Sign in with Facebook')), auth_path(:facebook)
+          / .twitter_connect= link_to image_tag('twitter_connect.png', :alt => tr('Sign in with Twitter')), auth_path(:twitter)
+          p.comment= tr('We do not write to your Facebook-wall without your permission')
           hr
           p
-            =' link_to 'Bejelentkezés', new_user_sessions_path
+            =' link_to tr('Sign in'), new_user_sessions_path
             ' |
-            = link_to 'Regisztráció', new_user_path
+            = link_to tr('Sign up'), new_user_path
+      .wrapper= tr8n_language_selector_tag
 
 - else
   .row
