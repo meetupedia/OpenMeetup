@@ -1,6 +1,9 @@
 # -*- encoding : utf-8 -*-
 
 Openmeetup::Application.routes.draw do
+  mount WillFilter::Engine => '/will_filter'
+  mount Tr8n::Engine => '/tr8n'
+
   resources :groups do
     resources :images, :shallow => true
     member do

@@ -46,6 +46,22 @@ class User < ActiveRecord::Base
   attr_protected :is_admin
   after_validation :set_city
 
+  def admin?
+    is_admin?
+  end
+
+  def guest?
+    !admin?
+  end
+
+  def mugshot
+    false
+  end
+
+  def link
+    false
+  end
+
   def apply_omniauth(omniauth)
     case omniauth['provider']
       when 'facebook'
