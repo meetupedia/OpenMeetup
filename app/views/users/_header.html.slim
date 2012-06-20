@@ -2,7 +2,6 @@
   p.pull-right= render 'user_follows/button', :user => @user
   p.pull-right= link_to t('user.send_message'), new_wave_path(:recipient_id => @user.id), :class => 'btn', :rel => 'facebox'
 
-
 h1.user
   = @user.name
 
@@ -11,7 +10,7 @@ h1.user
     =' link_to tr('Edit user'), edit_user_path(@user), :class => 'btn', :rel => 'facebox'
 - if @user.is_admin?
   .pull-right
-    = link_to 'Rendszerbeállítások', system_path, :class => 'btn btn-danger'
+    = link_to tr('System settings'), system_path, :class => 'btn btn-danger'
 .pull-right= tr8n_language_selector_tag
 
 = render 'menu'
