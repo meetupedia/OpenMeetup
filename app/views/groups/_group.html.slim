@@ -10,7 +10,7 @@
       = render :partial => 'taggings/button', :collection => group.tags.order('name ASC'), :as => :tag
     - else
       = render group.tags.order('name ASC')
-  h5=' link_to "#{group.members.size} #{tr('member')}", group
+  h5=' link_to "#{group.members.size} #{tr('member')}".html_safe, group
   - if (users = group.members.limit(13)).size > 0
     p
       = render 'users/user_avatars', :users => users[0..11]
