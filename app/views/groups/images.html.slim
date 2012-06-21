@@ -1,7 +1,7 @@
 = render 'header'
 
 .wrapper
-  h2 Képek
+  h2= tr('Images')
 
   = semantic_form_for Image.new, :url => group_images_path(@group) do |f|
     = f.inputs do
