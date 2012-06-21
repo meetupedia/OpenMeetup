@@ -5,8 +5,9 @@ Openmeetup::Application.routes.draw do
   mount Tr8n::Engine => '/tr8n'
 
   resources :groups do
-    resources :images, :shallow => true
     member do
+      get :events
+      get :images
       get :invited
       get :users
     end
@@ -29,6 +30,7 @@ Openmeetup::Application.routes.draw do
       end
     end
     resources :group_invitations, :shallow => true
+    resources :images, :shallow => true
     resources :memberships, :shallow => true do
       collection do
         get :set

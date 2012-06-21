@@ -1,33 +1,9 @@
-h1.group= @group.name
+= render 'header'
 
 .row
-  .span4
-    .wrapper
-      p
-        - if current_user
-          = render 'memberships/button', :group => @group
-        - else
-          = link_to '<i class="icon-plus-sign icon-black"></i> Követem'.html_safe, new_user_sessions_path(:return_to => set_group_memberships_path(@group)), :class => 'btn'
-
-    - if current_user
-      .wrapper
-        - if can? :create, Event.new(:group => @group)
-          p= link_to 'Új esemény', new_group_event_path(@group), :class => 'btn btn-primary', :rel => 'facebox'
-        p
-          =' link_to 'Ismerősök hozzáadása', new_group_group_invitation_path(@group), :class => 'btn btn-primary', :rel => 'facebox'
-          = link_to '→ Meghívottak', invited_group_path(@group)
-        - if can? :edit, @group
-          p= link_to 'Új üzenet', new_wave_path(:group_id => @group.id), :class => 'btn btn-primary', :rel => 'facebox'
-          p= link_to 'Címke hozzáadása', new_group_tag_path(@group), :class => 'btn', :rel => 'facebox'
-          p= link_to 'Csoport szerkesztése', edit_group_path(@group), :class => 'btn', :rel => 'facebox'
-        
-
-    ' <div class="fb-like" data-href="#{group_url(@group)}" data-send="false" data-layout="box_count" data-show-faces="false"></div>
-    ' <g:plusone size="tall"></g:plusone>
-    ' <a href="https://twitter.com/share" class="twitter-share-button" data-count="vertical">Tweet</a>
-    ' <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
   .span8
     .wrapper
+      h2= tr('Public data')
       .clearfix
         - if @group.image.file?
           .avatar= link_to(image_tag(@group.image.url(:small), :alt => @group.name, :height => 72, :width => 72, :title => @group.name), @group)
@@ -49,40 +25,28 @@ h1.group= @group.name
       = simple_format(@group.description)
 
     .wrapper
-      h2 Események
-      - if (events = @group.events.order('start_time DESC')).empty?
-        p Nincsenek események.
-      - else
-        .list_view= render events
-
+      h2= tr('Activity')
+      .list_view= render @group.activities.order('created_at DESC').limit(20)
     .wrapper
-      h2 Kommentek
+      h2= tr('Comments')
       | <div class="fb-comments" data-href="#{group_url(@group)}" data-num-posts="10"></div>
 
-    .wrapper
-      h3 Képek
-      #images= render @group.images
-      = semantic_form_for Image.new, :url => group_images_path(@group) do |f|
-        = f.inputs do
-          = f.file_field :image
-      = render 'images/upload', :item => @group
-
-    .wrapper
-      - unless (users = @group.members.order('memberships.created_at ASC')).empty?
-        h3 Tagok
-        p= render 'users/user_avatars', :users => users
-        p= link_to 'Összes tag', users_group_path(@group)
-      - unless (users = @group.admins.order('memberships.created_at ASC')).empty?
-        h3 Szervezők
-        p= render 'users/user_avatars', :users => users
-      - if current_user and not (users = @group.members.where('users.uid' => current_user.facebook_friend_ids).order('users.permalink ASC')).empty?
-        h3 Facebookos ismerősök
-        p= render 'users/user_avatars', :users => users
-        p= link_to 'Összes tag', users_group_path(@group)
-    - unless (activities = @group.activities.order('created_at DESC').limit(5)).empty?
+  .span4
+    - if @group.images.size > 0
       .wrapper
-        h3= t('group.activity')
-        .list_view= render activities
+        h2= tr('Last image')
+        .clearfix=' link_to image_tag(@group.images.last.image.url(:normal)), images_group_path(@group)
+        p= link_to tr('All images'), images_group_path(@group)
+    - if @group.next_event
+      .wrapper
+        h2= tr('Next event')
+        .list_view= render @group.next_event
+        p= link_to tr('All events'), events_group_path(@group)
+
+    ' <div class="fb-like" data-href="#{group_url(@group)}" data-send="false" data-layout="box_count" data-show-faces="false"></div>
+    ' <g:plusone size="tall"></g:plusone>
+    ' <a href="https://twitter.com/share" class="twitter-share-button" data-count="vertical">Tweet</a>
+    ' <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
 | <script type="text/javascript">
 |   (function() {
