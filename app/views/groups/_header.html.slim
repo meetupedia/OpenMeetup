@@ -11,5 +11,5 @@ h1.group= @group.name
 ul.nav.nav-tabs
   li(class="#{controller.action_name == 'show' ? 'active' : ''}")= link_to tr('Home'), @group
   li(class="#{controller.action_name == 'events' ? 'active' : ''}")= link_to tr('Events'), events_group_path(@group)
-  li(class="#{controller.action_name == 'users' ? 'active' : ''}")= link_to tr('Users'), users_group_path(@group)
+  li(class="#{controller.action_name == 'members' ? 'active' : ''}")= link_to tr('Members'), members_group_path(@group)
   li(class="#{controller.action_name == 'images' ? 'active' : ''}")= link_to tr('Images'), images_group_path(@group)
