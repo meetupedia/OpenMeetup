@@ -1,4 +1,5 @@
 #!/bin/bash
 
 git pull
+bundle
 touch tmp/restart.txt

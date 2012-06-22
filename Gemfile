@@ -12,6 +12,10 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+group :production do
+  gem 'newrelic_rpm'
+end
+
 gem 'jquery-rails'
 gem 'rails-i18n'
 gem 'andand'
