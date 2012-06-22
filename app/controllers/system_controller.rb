@@ -7,7 +7,7 @@ class SystemController < ApplicationController
   end
 
   def reload
-    system "reload"
+    system "script/reload_from_browser"
     redirect_to system_url
   end
 
