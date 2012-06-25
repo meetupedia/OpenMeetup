@@ -12,3 +12,6 @@
   .span4
     .wrapper
       p= link_to tr('Create new group'), new_group_path, :class => 'btn btn-primary'
+    .wrapper
+      h2= tr('Activity')
+      .list_view= render Activity.order('created_at DESC').limit(10)

@@ -5,5 +5,5 @@
   h3= link_to group.name, group
   p= render group.tags.order('name ASC')
   h5
-    =' group.members.size
+    span.members=' group.members.size
     = tr('members')
