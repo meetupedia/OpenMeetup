@@ -5,6 +5,14 @@ class TagsController < ApplicationController
   load_resource :tag, :through => :group, :shallow => true, :except => [:create]
   authorize_resource :except => [:index, :show]
 
+  def index
+    @tags = Tag.where('name LIKE ?', "%#{params[:q]}%")
+    respond_to do |format|
+      format.html
+      format.json { render :json => @tags.map { |tag| {:id => tag.id, :name => tag.name} } }
+    end
+  end
+
   def show
   end
 
