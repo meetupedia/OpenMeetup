@@ -1,6 +1,6 @@
 $('#membership_button_for_group_<%= @membership.group.id %>').replaceWith('<%= escape_javascript(render('memberships/button', :group => @membership.group)) %>')
 <% if @membership.frozen? -%>
-  $('#membership_button_for_group_<%= @membership.group.id %>').closest('.group').removeClass('membered')
+  $('#membership_button_for_group_<%= @membership.group.id %>').closest('.group').removeClass('membered').find('span.members').html('<%= @membership.group.members.size %>')
 <% else %>
-  $('#membership_button_for_group_<%= @membership.group.id %>').closest('.group').addClass('membered')
+  $('#membership_button_for_group_<%= @membership.group.id %>').closest('.group').addClass('membered').find('span.members').html('<%= @membership.group.members.size %>')
 <% end%>
