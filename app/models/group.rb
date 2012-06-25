@@ -93,6 +93,10 @@ class Group < ActiveRecord::Base
     self.joins(:tags, :language, :city).where('cities.id' => user.city_id, 'languages.code' => I18n.locale, 'tags.id' => user.tags, 'groups.is_closed' => false).select('groups.*, COUNT(group_taggings.tag_id) AS count').group('groups.id').order('count DESC')
   end
 
+  def self.per_page
+    20
+  end
+
   def self.recommended_groups_for(user, limit = 10)
     tagged_groups = self.tagged_groups_for(user).limit(limit)
     new_groups = self.joins(:language, :city).where('cities.id' => user.city_id, 'languages.code' => I18n.locale, :is_closed => false).order('created_at DESC').limit(limit)

@@ -51,3 +51,8 @@ en:
     contact: 'Contact'
     vanity1: '%{usernumber} members and %{groupnumber} groups have joined us.'
     vanity2: 'We helped %{eventnumber} meetups to happen, %{eventthisweeknumber} meetups this week.'
+
+  will_paginate:
+    previous_label: '« Previous'
+    next_label: 'Next »'
+    page_gap: '…'
