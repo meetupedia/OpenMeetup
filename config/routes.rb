@@ -1,11 +1,15 @@
 # -*- encoding : utf-8 -*-
 
 Openmeetup::Application.routes.draw do
+  mount WillFilter::Engine => '/will_filter'
+  mount Tr8n::Engine => '/tr8n'
+
   resources :groups do
-    resources :images, :shallow => true
     member do
+      get :events
+      get :images
       get :invited
-      get :users
+      get :members
     end
     resources :events, :shallow => true do
       resources :event_invitations, :shallow => true
@@ -26,6 +30,7 @@ Openmeetup::Application.routes.draw do
       end
     end
     resources :group_invitations, :shallow => true
+    resources :images, :shallow => true
     resources :memberships, :shallow => true do
       collection do
         get :set
@@ -70,6 +75,7 @@ Openmeetup::Application.routes.draw do
   match '/search' => 'search#index', :as => :search
   match '/tag_myself' => 'root#tag_myself', :as => :tag_myself
   match '/dashboard' => 'root#dashboard', :as => :dashboard
+  match '/intro' => 'root#intro', :as => :intro
 
   match '/system' => 'system#index', :as => :system
   match '/reload' => 'system#reload', :as => :reload

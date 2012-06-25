@@ -7,12 +7,12 @@ class SystemController < ApplicationController
   end
 
   def reload
-    system 'script/reload'
+    system "script/reload_from_browser"
     redirect_to system_url
   end
 
   def download_database
-    system 'script/backup'
+    system "script/backup"
     send_file 'db/openmeetup.sql'
   end
 

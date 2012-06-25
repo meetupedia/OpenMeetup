@@ -1,19 +1,20 @@
 h1
-  ' Keresés:
+  = tr('Results')
+  ' :
   = params[:q]
 
 .row
   .span6
     .wrapper
       - unless @groups.blank?
-        h2 Csoportok
+        h2= tr('Groups')
         .list_view= render @groups
       - else
-        p Nincsen találat csoportra.
+        p= tr('Not found.')
   .span6
     .wrapper
       - unless @events.blank?
-        h2 Események
+        h2= tr('Events')
         .list_view= render @events
       - else
-        p Nincsen találat eseményre.
+        p= tr('Not found.')

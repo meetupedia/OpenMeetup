@@ -7,46 +7,26 @@
       |   <span class="icon-bar"></span>
       | </a>
 
-      - if @current_organization then
+      - if @current_organization
         = link_to @current_organization.name, root_path, :class => 'brand'
       - else
         = link_to 'OpenMeetup', root_path, :class => 'brand'
 
       .nav-collapse
         form.navbar-search.pull-left action='/search' method='get'
-          input type='text' class='search-query' placeholder=t('menu.search') name='q'
+          input type='text' class='search-query' placeholder=tr('Search') name='q'
 
-      - if !current_user then
-        ul.nav.pull-right
-          li= link_to t('menu.login'), sign_in_path
-
-      - else
-        ul.nav.pull-right
+      ul.nav.pull-right
+        - unless current_user
+          li= link_to tr('Sign in'), sign_in_path
+          li= link_to tr('Sign up'), new_user_path
+        - else
           li= link_to current_user.name, current_user
-          li= link_to t('menu.home'), root_path
+          li= link_to tr('Home'), root_path
           li.dropdown
             a.dropdown-toggle(data-toggle="dropdown")
               b.caret
             ul.dropdown-menu
-              li= link_to t('menu.dashboard'), dashboard_user_path(current_user)
-              li= link_to t('menu.messages'), waves_user_path(current_user)
-              li= link_to t('menu.exit'), sign_out_path
-
-      - if Rails.env=='development'
-        ul.nav.pull-right
-          li.dropdown
-            a.dropdown-toggle(data-toggle="dropdown")
-              = t('menu.organization')
-              b.caret
-            ul.dropdown-menu
-              li= link_to 'OpenMeetup', "?organization=0"
-              - Organization.find_each do |organization|
-                li= link_to organization.name, "?organization=#{organization.id}"
-        ul.nav.pull-right
-          li.dropdown
-            a.dropdown-toggle(data-toggle="dropdown")
-              = t('menu.language')
-              b.caret
-            ul.dropdown-menu
-              - Language.order('permalink ASC').find_each do |language|
-                li= link_to language.name, "?locale=#{language.code}"
+              li= link_to tr('Dashboard'), dashboard_user_path(current_user)
+              li= link_to tr('Messages'), waves_user_path(current_user)
+              li= link_to tr('Sign out'), sign_out_path

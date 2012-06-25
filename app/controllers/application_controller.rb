@@ -18,6 +18,24 @@ class ApplicationController < ActionController::Base
 
 private
 
+  def current_locale
+    if params[:locale]
+      session[:locale] = params[:locale]
+      session[:save_locale] = true
+    elsif !current_user.guest? and !current_user.locale.nil?
+      session[:locale] = current_user.locale
+    elsif session[:locale] == nil
+      session[:locale] = tr8n_user_preffered_locale
+      session[:save_locale] = (session[:locale] != Tr8n::Config.default_locale)
+    end
+    if session[:save_locale] and not current_user.guest?
+      current_user.changed_language!(session[:locale])
+      session[:save_locale] = nil
+    end
+    session[:locale]
+  end
+  helper_method :current_locale
+
   def create_activity(item)
     Activity.create :activable_type => item.class.name, :activable_id => item.id
   end

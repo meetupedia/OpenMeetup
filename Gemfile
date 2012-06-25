@@ -12,6 +12,10 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+group :production do
+  gem 'newrelic_rpm'
+end
+
 gem 'jquery-rails'
 gem 'rails-i18n'
 gem 'andand'
@@ -41,3 +45,7 @@ gem 'exception_notification'
 gem 'authlogic'
 gem 'fancybox-rails'
 gem 'facebox-rails'
+gem 'pjax_rails'
+gem 'kaminari'
+gem 'will_filter'
+gem 'tr8n'

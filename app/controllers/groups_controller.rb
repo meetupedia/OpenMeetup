@@ -2,7 +2,7 @@
 
 class GroupsController < ApplicationController
   load_resource
-  authorize_resource :except => [:index, :show, :users]
+  authorize_resource :except => [:index, :show, :events, :images, :users]
 
   def show
     @title = @group.name
@@ -38,6 +38,13 @@ class GroupsController < ApplicationController
   def destroy
     @group.destroy
     redirect_to dashboard_user_path(current_user)
+  end
+
+  def events
+    @events = @group.events.order('start_time DESC').paginate :page => params[:page]
+  end
+
+  def images
   end
 
   def invited

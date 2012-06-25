@@ -15,7 +15,7 @@ class Image < ActiveRecord::Base
     :default_url => '/system/:class/missing_:style.png',
     :styles => {
       :normal => ['920x920>', :jpg],
-      :small => ['80x80>', :jpg]
+      :small => ['80x80#', :jpg]
     },
     :convert_options => {:all => '-quality 95 -strip'}
 end

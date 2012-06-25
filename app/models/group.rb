@@ -72,6 +72,10 @@ class Group < ActiveRecord::Base
     Membership.find_by_group_id_and_user_id(self.id, user.id)
   end
 
+  def next_event
+    @next_event ||= events.where('start_time > ?', Time.zone.now).order('start_time ASC').first
+  end
+
   def review_for(user)
     Review.find_by_group_id_and_user_id(self.id, user.id)
   end
