@@ -2,7 +2,7 @@
 
 class GroupsController < ApplicationController
   load_resource
-  authorize_resource :except => [:index, :show, :events, :images, :users]
+  authorize_resource :except => [:index, :show, :events, :images, :members]
 
   def show
     @title = @group.name
@@ -51,7 +51,11 @@ class GroupsController < ApplicationController
     @group_invitation_targets = @group.group_invitation_targets.order('created_at DESC')
   end
 
-  def users
+  def members
     @memberships = @group.memberships.includes(:user).paginate :page => params[:page]
+  end
+
+  def waves
+    @waves = @group.waves.order('last_changed_at DESC').paginate :page => params[:page]
   end
 end

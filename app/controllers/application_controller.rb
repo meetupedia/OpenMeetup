@@ -3,20 +3,27 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :set_locale, :set_domain
+  before_filter :set_locale, :set_domain, :copy_flash_to_cookie
   helper_method :current_city, :current_language, :current_organization, :current_user
   helper LaterDude::CalendarHelper
   layout :set_layout
 
   auto_user
 
-  if Rails.env == 'production'
-    rescue_from CanCan::AccessDenied do |exception|
-      redirect_to root_url, :alert => 'Nincsen megfelelő jogosultságod ehhez!'
-    end
+  rescue_from CanCan::AccessDenied do |exception|
+    url = @group
+    url ||= root_url
+    flash[:alert] = 'Nincsen megfelelő jogosultságod ehhez!'
+    redirect_to url
   end
 
 private
+
+  def copy_flash_to_cookie
+    cookies[:flash_notice] = URI.escape(flash[:notice]).to_json if flash[:notice]
+    cookies[:flash_alert] = URI.escape(flash[:alert]).to_json if flash[:alert]
+    flash.clear
+  end
 
   def current_locale
     if params[:locale]

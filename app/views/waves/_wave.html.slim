@@ -3,8 +3,9 @@
     - wave.wave_members.each do |user|
       = user_avatar user
   h3= link_to wave.subject, wave
-  =' wave.wave_items.size.to_s + ' üzenet'
-  =' time_ago_in_words wave.last_changed_at
+  =' wave.wave_items.size
+  =' tr('messages')
+  span.date=' time_ago_in_words wave.last_changed_at
   - if wave.group
     ' →
     = link_to wave.group.name, wave.group
