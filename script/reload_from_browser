@@ -1,5 +1,4 @@
 #!/bin/bash
 
 git pull
-rvm use ree && bundle
 touch tmp/restart.txt
