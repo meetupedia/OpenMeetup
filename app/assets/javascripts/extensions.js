@@ -39,19 +39,15 @@ $(function(){
         break
       default:
         var item = $(this)
-        if (item.val().length < 3){
-          $('#results').html('')
-        } else {
-          item.addClass('loading')
-          $.ajax({
-            url: '/discovery/search',
-            data: {'q': item.val()},
-            success: function(data){
-              item.removeClass('loading')
-              $('#results').html(data)
-            }
-          })
-        }
+        item.addClass('loading')
+        $.ajax({
+          url: '/discovery/search',
+          data: {'q': item.val()},
+          success: function(data){
+            item.removeClass('loading')
+            $('#results').html(data)
+          }
+        })
     }
   }))
 })
