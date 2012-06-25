@@ -35,7 +35,7 @@ class Group < ActiveRecord::Base
   has_attached_file :image,
     :path => ':rails_root/public/system/:class/:style/:class_:id.:extension',
     :url => '/system/:class/:style/:class_:id.:extension',
-    :default_url => '/system/:class/missing_:style.png',
+    :default_url => '/assets/:class_missing_:style.png',
     :styles => {
       :normal => ['500x500>', :jpg],
       :small => ['72x72#', :jpg]

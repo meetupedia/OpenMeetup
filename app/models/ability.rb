@@ -26,6 +26,9 @@ class Ability
       can :invited, Group do |group|
         group.admins.include?(current_user)
       end
+      can :waves, Group do |group|
+        group.members.include?(current_user)
+      end
 
       can :create, GroupInvitation
 
