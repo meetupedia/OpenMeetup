@@ -141,3 +141,8 @@ hu:
       over_x_years:
         one: '1 éve'
         other: '%{count} éve'
+
+  will_paginate:
+    previous_label: '« Előző'
+    next_label: 'Következő »'
+    page_gap: '…'

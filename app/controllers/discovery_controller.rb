@@ -1,8 +1,11 @@
 class DiscoveryController < ApplicationController
 
   def index
-    @groups = Group.joins(:tags).where('groups.name LIKE ? OR tags.name LIKE ?', "%#{params[:q]}%", "#{params[:q]}%").group('groups.id') if params[:q]
-    Rails.logger.info @groups.inspect
+    if params[:q]
+      @groups = Group.joins(:tags).where('groups.name LIKE ? OR tags.name LIKE ?', "%#{params[:q]}%", "#{params[:q]}%").group('groups.id')
+    else
+      @groups = Group.paginate :page => params[:page]
+    end
   end
 
   def search
