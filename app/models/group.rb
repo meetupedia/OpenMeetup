@@ -32,6 +32,8 @@ class Group < ActiveRecord::Base
   has_many :tags, :through => :group_taggings
   has_many :waves, :dependent => :nullify
 
+  attr_reader :tag_tokens
+
   has_attached_file :image,
     :path => ':rails_root/public/system/:class/:style/:class_:id.:extension',
     :url => '/system/:class/:style/:class_:id.:extension',
@@ -81,6 +83,14 @@ class Group < ActiveRecord::Base
 
   def set_city
     self.city = City.find_or_create_by_name(self.location)
+  end
+
+  def tag_tokens=(names)
+    ids = []
+    names.split(',').each do |name|
+      ids << Tag.find_or_create_by_name(name).id
+    end
+    self.tag_ids = ids
   end
 
   def write_language(code = nil)
