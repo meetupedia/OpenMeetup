@@ -1,7 +1,7 @@
 class DiscoveryController < ApplicationController
 
   def index
-    if params[:q]
+    unless params[:q].blank?
       @groups = Group.joins(:tags).where('groups.name LIKE ? OR tags.name LIKE ?', "%#{params[:q]}%", "#{params[:q]}%").group('groups.id')
     else
       @groups = Group.paginate :page => params[:page]
