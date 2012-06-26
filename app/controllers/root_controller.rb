@@ -19,7 +19,7 @@ class RootController < ApplicationController
 
     # ha nem szervezet + be van lépve
     elsif current_user
-      redirect_to tag_myself_url
+      redirect_to '/discovery'
 
     # ha nem szervezet + nincs belépve
     else

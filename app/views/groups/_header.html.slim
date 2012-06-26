@@ -5,7 +5,6 @@ h1.group= @group.name
 - if can? :edit, @group
   .pull-right
     =' link_to tr('New message'), new_wave_path(:group_id => @group.id), :class => 'btn', :rel => 'facebox'
-    =' link_to tr('Add tag'), new_group_tag_path(@group), :class => 'btn', :rel => 'facebox'
     =' link_to tr('Edit group'), edit_group_path(@group), :class => 'btn', :rel => 'facebox'
 
 ul.nav.nav-tabs
@@ -13,3 +12,4 @@ ul.nav.nav-tabs
   li(class="#{controller.action_name == 'events' ? 'active' : ''}")= link_to tr('Events'), events_group_path(@group)
   li(class="#{controller.action_name == 'members' ? 'active' : ''}")= link_to tr('Members'), members_group_path(@group)
   li(class="#{controller.action_name == 'images' ? 'active' : ''}")= link_to tr('Images'), images_group_path(@group)
+  li(class="#{controller.action_name == 'waves' ? 'active' : ''}")= link_to tr('Messages'), waves_group_path(@group)

@@ -8,6 +8,20 @@
     = f.input :image
     = f.input :url
     = f.input :facebook_url
-    = f.input :tags, :collection => current_language.tags
     = f.input :is_closed
+    .control-group
+      = f.label :tag_tokens, tr('Tags')
+      = f.text_field :tag_tokens, 'data-pre' => @group.tags.map { |tag| {:id => tag.id, :name => tag.name} }.to_json
   = f.actions
+
+javascript:
+  $(function() {
+    $('#group_tag_tokens').tokenInput('/tags.json', {
+      allowInsert: true,
+      crossDomain: false,
+      tokenValue: 'name',
+      preventDuplicates: true,
+      prePopulate: $('#group_tag_tokens').data('pre'),
+      theme: 'facebook'
+    })
+  })

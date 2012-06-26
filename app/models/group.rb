@@ -32,11 +32,12 @@ class Group < ActiveRecord::Base
   has_many :tags, :through => :group_taggings
   has_many :waves, :dependent => :nullify
 
+  attr_reader :tag_tokens
+
   has_attached_file :image,
     :path => ':rails_root/public/system/:class/:style/:class_:id.:extension',
     :url => '/system/:class/:style/:class_:id.:extension',
-#    :default_url => '/system/:class/missing_:style.png',
-    :default_url => 'missing_:style.png',
+    :default_url => '/assets/:class_missing_:style.png',
     :styles => {
       :normal => ['500x500>', :jpg],
       :small => ['72x72#', :jpg]
@@ -84,6 +85,14 @@ class Group < ActiveRecord::Base
     self.city = City.find_or_create_by_name(self.location)
   end
 
+  def tag_tokens=(names)
+    ids = []
+    names.split(',').each do |name|
+      ids << Tag.find_or_create_by_name(name).id
+    end
+    self.tag_ids = ids
+  end
+
   def write_language(code = nil)
     code ||= I18n.locale
     self.language = Language.find_or_create_by_code(code)
@@ -92,6 +101,10 @@ class Group < ActiveRecord::Base
 
   def self.tagged_groups_for(user)
     self.joins(:tags, :language, :city).where('cities.id' => user.city_id, 'languages.code' => I18n.locale, 'tags.id' => user.tags, 'groups.is_closed' => false).select('groups.*, COUNT(group_taggings.tag_id) AS count').group('groups.id').order('count DESC')
+  end
+
+  def self.per_page
+    20
   end
 
   def self.recommended_groups_for(user, limit = 10)

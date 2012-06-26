@@ -1,0 +1,9 @@
+= div_for group, :class => (group.membership_for(current_user) ? 'membered' : '') do
+  - if current_user
+    .pull-right=' render 'memberships/button', :group => group
+  .avatar= link_to(image_tag(group.image.url(:small), :alt => group.name, :height => 72, :width => 72, :title => group.name), group)
+  h3= link_to group.name, group
+  p= render group.tags.order('name ASC')
+  h5
+    span.members=' group.members.size
+    = tr('members')

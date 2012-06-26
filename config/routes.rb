@@ -10,6 +10,7 @@ Openmeetup::Application.routes.draw do
       get :images
       get :invited
       get :members
+      get :waves
     end
     resources :events, :shallow => true do
       resources :event_invitations, :shallow => true
@@ -87,4 +88,5 @@ Openmeetup::Application.routes.draw do
   match '/sign_out' => 'user_sessions#destroy', :as => :sign_out
 
   root :to => 'root#index'
+  match ':controller(/:action(/:id))(.:format)'
 end

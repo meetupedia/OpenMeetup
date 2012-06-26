@@ -1,25 +1,11 @@
-//@media all and (min-width: 1025px)
-//  .container
-//    max-width: 940px
-//    .row
-//      margin-left: -20px
-//      .span4
-//        max-width: 300px
-//        margin-left: 20px
-//      .span6
-//        max-width: 460px
-//        margin-left: 20px
-//      .span6
-//        max-width: 600px
-//        margin-left: 20px
-
-
 body
   background: #efeff7
-  font-family: Arial, sans-serif
 
 td.right_aligned
   text-align: right
+
+.center
+  text-align: center
 
 a
   color: #005f8f
@@ -162,6 +148,8 @@ h3
   display: block
   float: left
   margin: 2px 7px 0 0
+  img
+    border: 1px solid #ffffff
 
 .avatar_image
   margin-right: 3px
@@ -173,6 +161,8 @@ div.list_view
     padding: 5px 15px
     h3
       margin: 0
+    &.group.membered
+      background: #cfefbf
 
   div.activity, div.user, div.review
     min-height: 20px
@@ -310,9 +300,6 @@ label.error
     width: 280px
     height: 209px
 
-.center
-  text-align: center
-
 #overlay
   background: #ffff9f
   display: none
@@ -333,3 +320,16 @@ label.error
   :box-shadow 0 1px 1px #cfcf6f
   :-moz-box-shadow 0 1px 1px #cfcf6f
   :-webkit-box-shadow 0 1px 1px #cfcf6f
+
+#flash_notice, #flash_alert
+  display: none
+
+#results
+  div.group
+    min-height: 78px
+  p
+    margin: 5px 0
+
+form#discovery input
+  &.loading
+    background: #efefef
