@@ -47,12 +47,19 @@
   .row
     .span12
       .wrapper.get2gather-images
-        = image_tag('get2gather/get2gather1.jpg', :width => "280")
-        = image_tag('get2gather/get2gather2.jpg', :width => "280")
-        = image_tag('get2gather/get2gather3.jpg', :width => "280")
+        = link_to image_tag('get2gather/get2gather1.jpg'), sign_in_path
+        = link_to image_tag('get2gather/get2gather2.jpg'), sign_in_path
+        = link_to image_tag('get2gather/get2gather3.jpg'), sign_in_path
+
+        = link_to image_tag('get2gather/get2gather4.jpg'), sign_in_path
+        = link_to image_tag('get2gather/get2gather_logo.jpg'), sign_in_path
+        = link_to image_tag('get2gather/get2gather5.jpg'), sign_in_path
+
+        = link_to image_tag('get2gather/get2gather6.jpg'), sign_in_path
+        = link_to image_tag('get2gather/get2gather1.jpg'), sign_in_path
+        = link_to image_tag('get2gather/get2gather2.jpg'), sign_in_path
+
         br
         br
-        .lead.center Ez az oldal csak belső hálózatról érhető el.
-        = image_tag('get2gather/get2gather4.jpg', :width => "280")
-        = image_tag('get2gather/get2gather5.jpg', :width => "280")
-        = image_tag('get2gather/get2gather6.jpg', :width => "280")
+        .lead.center 
+          = tr('Click on the images to enter')
