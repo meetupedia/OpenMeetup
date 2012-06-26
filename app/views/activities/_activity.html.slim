@@ -25,4 +25,11 @@
   - elsif activity.activable.class.name == 'UserFollow'
     =' user_link activity.activable.user
     ' követni kezdett egy felhasználót.
+  - elsif activity.activable.class.name == 'Image'
+    =' user_link activity.activable.user
+    ' feltöltött egy képet.
+    - if activity.activable.imageable.is_a?(Group)
+      p= link_to image_tag(activity.activable.image.url(:small), :alt => '', :height => 80, :width => 80), images_group_path(activity.activable.imageable)
+    - else
+      p= link_to image_tag(activity.activable.image.url(:small), :alt => '', :height => 80, :width => 80), activity.activable.imageable
   .date= time_ago_in_words activity.created_at
