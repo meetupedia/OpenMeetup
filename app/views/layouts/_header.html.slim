@@ -11,6 +11,8 @@
         = link_to @current_organization.name, root_path, :class => 'brand'
       - else
         = link_to 'OpenMeetup', root_path, :class => 'brand'
+      ul.nav.pull-left
+        li(class="#{controller.controller_name =~ /discovery|root/ and controller.action_name == 'index' ? 'active' : ''}")= link_to tr('Home'), root_path
 
       .nav-collapse
         form.navbar-search.pull-left action='/search' method='get'
@@ -18,15 +20,10 @@
 
       ul.nav.pull-right
         - unless current_user
-          li= link_to tr('Sign in'), sign_in_path
-          li= link_to tr('Sign up'), new_user_path
+          li= link_to tr('Sign in'), sign_in_path, 'data-disable-pjax' => true
+          li= link_to tr('Sign up'), new_user_path, 'data-disable-pjax' => true
         - else
-          li= link_to current_user.name, current_user
-          li= link_to tr('Home'), root_path
-          li.dropdown
-            a.dropdown-toggle(data-toggle="dropdown")
-              b.caret
-            ul.dropdown-menu
-              li= link_to tr('Dashboard'), dashboard_user_path(current_user)
-              li= link_to tr('Messages'), waves_user_path(current_user)
-              li= link_to tr('Sign out'), sign_out_path
+          li(class="#{controller.controller_name == 'users' and controller.action_name == 'show' ? 'active' : ''}")= link_to tr('My profile'), current_user
+          li(class="#{controller.controller_name == 'users' and controller.action_name == 'groups' ? 'active' : ''}")= link_to tr('Groups'), groups_user_path(current_user)
+          li(class="#{controller.controller_name == 'users' and controller.action_name == 'messages' ? 'active' : ''}")= link_to tr('Messages'), waves_user_path(current_user)
+          li= link_to tr('Sign out'), sign_out_path, 'data-disable-pjax' => true

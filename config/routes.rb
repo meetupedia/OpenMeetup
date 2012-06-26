@@ -59,10 +59,10 @@ Openmeetup::Application.routes.draw do
       get :validate_email
     end
     member do
-      get :dashboard
       get :edit_city
       get :facebook_groups
       get :groups
+      get :settings
       get :waves
     end
   end
@@ -77,6 +77,7 @@ Openmeetup::Application.routes.draw do
   match '/tag_myself' => 'root#tag_myself', :as => :tag_myself
   match '/dashboard' => 'root#dashboard', :as => :dashboard
   match '/intro' => 'root#intro', :as => :intro
+  match '/discovery' => 'discovery#index', :as => :discovery
 
   match '/system' => 'system#index', :as => :system
   match '/reload' => 'system#reload', :as => :reload

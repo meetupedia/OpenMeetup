@@ -12,7 +12,9 @@
     .control-group
       = f.label :tag_tokens, tr('Tags')
       = f.text_field :tag_tokens, 'data-pre' => @group.tags.map { |tag| {:id => tag.id, :name => tag.name} }.to_json
-  = f.actions
+  = f.actions do
+    =' f.action :submit, :as => :button
+    = link_to tr('Cancel'), discovery_path, :class => 'btn'
 
 javascript:
   $(function() {

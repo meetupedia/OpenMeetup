@@ -1,0 +1,22 @@
+= render 'header'
+
+.row
+  .span6
+    .wrapper
+      h2= tr('Edit user')
+      = semantic_form_for @user do |f|
+        = f.inputs :name, :email, :city, :password, :password_confirmation
+        = f.actions
+  .span6
+    .wrapper
+      h2= tr('Connections')
+      - if authentication = current_user.authenticated_with(:facebook)
+        - if current_user.authentications.size > 1
+          p= link_to tr('Disconnect Facebook'), authentication, :method => :delete, :confirm => tr('Are you sure?')
+      - else
+        p.facebook_connect= link_to image_tag('facebook_connect.png', :alt => tr('Login with Facebook')), auth_path(:facebook)
+      - if authentication = current_user.authenticated_with(:twitter)
+        - if current_user.authentications.size > 1
+          p= link_to tr('Disconnect Twitter'), authentication, :method => :delete, :confirm => tr('Are you sure?')
+      - else
+        p.twitter_connect= link_to image_tag('twitter_connect.png', :alt => tr('Login with Twitter')), auth_path(:twitter)

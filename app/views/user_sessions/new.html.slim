@@ -2,13 +2,12 @@
   .span6.offset3
     ul.nav.nav-tabs
       li.active
-        a Bejelentkezés
-      li
-        = link_to 'Regisztráció', new_user_path
+        a= tr('Sign in')
+      li= link_to tr('Sign up'), new_user_path
 
     .wrapper
       - unless current_organization
-        p.facebook_connect= link_to image_tag('facebook_connect.png', :alt => t('menu.login_with_facebook')), auth_path(:facebook)
+        p.facebook_connect= link_to image_tag('facebook_connect.png', :alt => tr('Login with Facebook')), auth_path(:facebook)
         h3= tr('or')
 
       = semantic_form_for UserSession.new do |f|

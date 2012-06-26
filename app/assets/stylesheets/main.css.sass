@@ -64,6 +64,10 @@ input[type=text], textarea
       &:hover
         background: #003f6f
         color: #ffffff
+    &.active a
+      background: #003f6f
+      &:hover
+        background: #003f6f
     &.dropdown ul li a
       color: #005f8f
       &:hover
@@ -148,8 +152,6 @@ h3
   display: block
   float: left
   margin: 2px 7px 0 0
-  img
-    border: 1px solid #ffffff
 
 .avatar_image
   margin-right: 3px
@@ -271,6 +273,9 @@ span.counter
 label.error
   color: #cf0000
 
+abbr[title=required]
+  color: #cf0000
+
 .carousel
   margin: 10px 0
   img
@@ -324,9 +329,7 @@ label.error
 #flash_notice, #flash_alert
   display: none
 
-#results
-  div.group
-    min-height: 78px
+div.group
   p
     margin: 5px 0
 

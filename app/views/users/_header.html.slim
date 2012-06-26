@@ -5,12 +5,15 @@
 h1.user
   = @user.name
 
-.pull-right
-  - if can? :edit, @user
-    =' link_to tr('Edit user'), edit_user_path(@user), :class => 'btn', :rel => 'facebox'
 - if @user.is_admin?
   .pull-right
     = link_to tr('System settings'), system_path, :class => 'btn btn-danger'
 .pull-right= tr8n_language_selector_tag
 
-= render 'menu'
+ul.nav.nav-tabs
+  li(class="#{controller.action_name == 'show' ? 'active' : ''}")= link_to tr('Activity'), @user
+  li(class="#{controller.action_name == 'groups' ? 'active' : ''}")= link_to tr('Groups'), groups_user_path(@user)
+  - if can? :edit, @user
+    / li(class="#{controller.action_name == 'facebook_groups' ? 'active' : ''}")= link_to 'Facebookos csoportjaim', facebook_groups_user_path(@user)
+    li(class="#{controller.action_name == 'waves' ? 'active' : ''}")= link_to tr('Messages'), waves_user_path(@user)
+    li(class="#{controller.action_name == 'settings' ? 'active' : ''}")= link_to tr('Settings'), settings_user_path(@user)

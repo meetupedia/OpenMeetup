@@ -1,9 +1,9 @@
 h1 Rendszer
 
 .wrapper
-  h3 Újraindítás
-  p= link_to 'Újraindítás', reload_path, :class => 'btn btn-danger', :confirm => 'Biztosan újraindítod a rendszert?'
+  h2= tr('Restart')
+  p= link_to tr('Restart'), reload_path, :class => 'btn btn-danger', :confirm => tr('Restart system?')
 
 .wrapper
-  h3 Adatbázis letöltése
-  p= link_to 'Letöltés', download_database_path, :class => 'btn btn-danger', :confirm => 'Biztosan letöltöd az adatbázist?'
+  h2= tr('Download database')
+  p= link_to tr('Download'), download_database_path, :class => 'btn btn-danger', :confirm => tr('Download database?')
