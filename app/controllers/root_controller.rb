@@ -10,18 +10,18 @@ class RootController < ApplicationController
       # ha szervezet + be van lépve
       if current_user
         @title = @organization.name
-        render 'organizations/show'
+        # render 'organizations/show'
+        redirect_to '/discovery'
 
-
-	  # ha szervezet + nincs belépve
+      # ha szervezet + nincs belépve
       else
       end
 
-	# ha nem szervezet + be van lépve
+    # ha nem szervezet + be van lépve
     elsif current_user
       redirect_to '/discovery'
 
-	# ha nem szervezet + nincs belépve
+    # ha nem szervezet + nincs belépve
     else
     end
 
@@ -32,7 +32,7 @@ class RootController < ApplicationController
   end
 
   def tag_myself
-    redirect_to root_url unless current_user
+    redirect_to '/discovery' unless current_user
   end
 
   def about

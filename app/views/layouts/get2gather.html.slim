@@ -1,16 +1,16 @@
 doctype html
 html
   head
-    title= [@title, 'Get2Gather'].compact.join(' - ')
+    title= [@title, 'Get2Gather x'].compact.join(' - ')
     meta(http-equiv="content-type" content="text/html; charset=utf-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     = stylesheet_link_tag 'application', :media => 'all'
     = javascript_include_tag 'application'
+    = tr8n_scripts_tag
     = render 'layouts/google_analytics'
     = csrf_meta_tags
   body
     = render 'layouts/header'
-
     #content
       .container
         = yield :header
@@ -22,6 +22,6 @@ html
           .alert.alert-error
             a.close(data-dismiss="alert")×
             = flash[:alert]
-        = yield
+        #pjax= yield
     = yield :scripts
-    = render 'layouts/facebook_connect'    
+    = render 'layouts/facebook_connect'

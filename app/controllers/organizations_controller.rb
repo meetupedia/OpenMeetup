@@ -6,6 +6,7 @@ class OrganizationsController < ApplicationController
 
   def show
     @title = @organization.name
+    redirect_to '/discovery'
   end
 
   def tag
