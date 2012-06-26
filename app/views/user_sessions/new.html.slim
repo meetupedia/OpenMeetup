@@ -7,7 +7,7 @@
 
     .wrapper
       - unless current_organization
-        p.facebook_connect= link_to image_tag('facebook_connect.png', :alt => tr('Login with Facebook')), auth_path(:facebook)
+        p.facebook_connect= link_to image_tag('facebook_connect.png', :alt => tr('Sign in with Facebook')), auth_path(:facebook)
         h3= tr('or')
 
       = semantic_form_for UserSession.new do |f|

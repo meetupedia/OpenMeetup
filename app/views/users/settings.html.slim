@@ -14,9 +14,9 @@
         - if current_user.authentications.size > 1
           p= link_to tr('Disconnect Facebook'), authentication, :method => :delete, :confirm => tr('Are you sure?')
       - else
-        p.facebook_connect= link_to image_tag('facebook_connect.png', :alt => tr('Login with Facebook')), auth_path(:facebook)
+        p.facebook_connect= link_to image_tag('facebook_connect.png', :alt => tr('Sign in with Facebook')), auth_path(:facebook)
       - if authentication = current_user.authenticated_with(:twitter)
         - if current_user.authentications.size > 1
           p= link_to tr('Disconnect Twitter'), authentication, :method => :delete, :confirm => tr('Are you sure?')
       - else
-        p.twitter_connect= link_to image_tag('twitter_connect.png', :alt => tr('Login with Twitter')), auth_path(:twitter)
+        p.twitter_connect= link_to image_tag('twitter_connect.png', :alt => tr('Sign in with Twitter')), auth_path(:twitter)
