@@ -11,6 +11,7 @@ class ImagesController < ApplicationController
     @image.imageable = @event if @event
     @image.imageable = @group if @group
     if @image.save
+      create_activity @image
       respond_to do |format|
         format.html { redirect_to @image.imageable }
         format.js
