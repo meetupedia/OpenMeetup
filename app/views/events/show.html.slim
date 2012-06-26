@@ -59,7 +59,7 @@ h3
           - if participation = @event.participation_for(current_user)
             =' link_to '<i class="icon-ok-sign icon-white"></i> Részt veszek'.html_safe, participation_path(participation), :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-success'
           - else
-            =' link_to '<i class="icon-plus-sign icon-black"></i> Részt veszek'.html_safe, event_participations_path(@event), :method => :post, :class => 'btn'
+            =' link_to '<i class="icon-plus-sign icon-white"></i> Részt veszek'.html_safe, event_participations_path(@event), :method => :post, :class => 'btn btn-primary'
           - if absence = @event.absence_for(current_user)
             =' link_to '<i class="icon-ok-sign icon-white"></i> Nem veszek részt'.html_safe, absence_path(absence), :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-success'
           - else
