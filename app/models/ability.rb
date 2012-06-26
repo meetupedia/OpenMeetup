@@ -59,7 +59,7 @@ class Ability
       can :create, Tag
 
       can :edit_city, User
-      can [:update, :destroy, :dashboard, :facebook_groups, :waves], User do |user|
+      can [:update, :destroy, :settings, :facebook_groups, :waves], User do |user|
         user == current_user
       end
 

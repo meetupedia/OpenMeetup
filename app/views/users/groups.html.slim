@@ -1,23 +1,24 @@
 = render 'header'
 
-.wrapper
-  h2 Csoportjaim
+.row
+  .span8
+    .wrapper
+      h2= tr('Memberships')
+      .list_view= render :partial => 'discovery/group', :collection => @groups, :as => :group
+  .span4
+    .wrapper
+      h2= tr('My groups')
 
-  - if can? :create, Group
-    p= link_to 'Új csoport létrehozása', new_group_path, :class => 'btn'
+      - if can? :create, Group
+        p= link_to tr('Create new group'), new_group_path, :class => 'btn btn-primary'
 
-  .list_view
-    - @admined_groups.each do |group|
-      = div_for group do
-        .pull-right
-          =' link_to 'Meghívó küldése', new_group_group_invitation_path(group), :class => 'btn btn-primary', :rel => 'facebox'
-          - if can? :edit, group
-            =' link_to 'Szerkesztés', edit_group_path(group), :class => 'btn'
-          - if can? :destroy, group
-            =' link_to 'Törlés', '#', :class => 'btn btn-danger'
-        h3= link_to group.name, group
-
-.wrapper
-  h2= t('user.groups')
-
-  .list_view= render @groups
+      .list_view
+        - @admined_groups.each do |group|
+          = div_for group do
+            h3= link_to group.name, group
+            p
+              =' link_to tr('Send invitation'), new_group_group_invitation_path(group), :class => 'btn btn-primary btn-mini', :rel => 'facebox'
+              - if can? :edit, group
+                =' link_to tr('Edit'), edit_group_path(group), :class => 'btn btn-mini'
+              - if can? :destroy, group
+                =' link_to tr('Delete'), '#', :class => 'btn btn-danger btn-mini', :confirm => tr('Are you sure?')

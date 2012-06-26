@@ -5,7 +5,7 @@ $ ->
 
   initSystem()
 
-  $('a:not([data-remote]):not([rel="facebox"]):not(.fancybox)').pjax(container: '#pjax', timeout: false)
+  $('a:not([data-disable-pjax]):not([data-remote]):not([rel="facebox"]):not(.fancybox)').pjax(container: '#pjax', timeout: false)
 
   $('#pjax').live 'pjax:success', ->
     initSystem()
@@ -19,3 +19,7 @@ $ ->
     flash = $.parseJSON(decodeURIComponent($.cookie('flash_alert')))
     $('#flash_alert').show().find('span').html(flash)
     $.cookie('flash_alert', null, {path: '/'})
+
+  $('.navbar a').live 'click', ->
+    $('.navbar li').removeClass('active')
+    $(this).closest('li').addClass('active')
