@@ -68,7 +68,7 @@ class User < ActiveRecord::Base
         self.token = omniauth['credentials']['token']
         self.facebook_friend_ids = facebook.friends.map(&:identifier)
       when 'twitter'
-#        self.twitter_id = omniauth['uid']
+        self.twitter_id = omniauth['uid']
     end
   end
 
@@ -78,6 +78,10 @@ class User < ActiveRecord::Base
 
   def facebook
     @facebook ||= FbGraph::User.new(self.uid, :access_token => self.token).fetch
+  end
+
+  def facebook_id
+    @facebook_id ||= authentications.where(:provider => 'facebook').first.andand.uid
   end
 
   def user_follow_for(user)
