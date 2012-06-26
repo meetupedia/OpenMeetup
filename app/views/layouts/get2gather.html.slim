@@ -23,7 +23,5 @@ html
             a.close(data-dismiss="alert")×
             = flash[:alert]
         #pjax= yield
-        - if !@current_organization then
-          = render 'layouts/footer'
     = yield :scripts
     = render 'layouts/facebook_connect'
