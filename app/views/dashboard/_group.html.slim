@@ -1,9 +1,11 @@
 = div_for group do
+  
+  p= group.image
+
   - if group.image.file?
-    - if group.image.url && FileTest.exists?("#{group.image.url}")
-      .avatar= link_to(image_tag(group.image.url(:small), :alt => group.name, :height => 50, :width => 50, :title => group.name), group)
-    - else
-      .avatar= link_to(image_tag('share_32x32.png', :alt => group.name, :height => 50, :width => 50, :title => group.name), group)
+    .avatar= link_to(image_tag(group.image.url(:small), :alt => group.name, :height => 50, :width => 50, :title => group.name), group)
+  - else
+    .avatar= link_to(image_tag('missing_original.png', :alt => group.name, :height => 50, :width => 50, :title => group.name), group)
 
   - if current_user
     .pull-right=' render 'memberships/button', :group => group

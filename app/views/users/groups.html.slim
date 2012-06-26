@@ -4,7 +4,7 @@
   h2 Csoportjaim
 
   - if can? :create, Group
-    p= link_to 'Új csoport létrehozása', new_group_path, :class => 'btn', :rel => 'facebox'
+    p= link_to 'Új csoport létrehozása', new_group_path, :class => 'btn'
 
   .list_view
     - @admined_groups.each do |group|
