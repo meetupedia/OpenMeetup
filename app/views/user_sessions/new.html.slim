@@ -1,3 +1,19 @@
 .row
   .span6.offset3
-    .wrapper.loginbox= render 'form'
+    ul.nav.nav-tabs
+      li.active
+        a Bejelentkezés
+      li
+        = link_to 'Regisztráció', new_user_path
+
+    .wrapper
+      - unless current_organization
+        p.facebook_connect= link_to image_tag('facebook_connect.png', :alt => t('menu.login_with_facebook')), auth_path(:facebook)
+        h3= tr('or')
+
+      = semantic_form_for UserSession.new do |f|
+        = f.inputs do
+          = f.input :email
+          = f.input :password
+          = f.input :remember_me, :as => :boolean
+        = f.actions
