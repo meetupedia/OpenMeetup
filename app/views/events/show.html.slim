@@ -21,41 +21,30 @@ h3
 
 .row
   .span7
-    .clearfix
-      .calendar.pull-right= calendar(@event.start_time, @event.end_time)
+    div
+      strong
+        - if @event.place.present?
+          = @event.place
+          = dot
+        = @event.gmaps4rails_address
+    div
+      strong
+        = l(@event.start_time)
+        = " → "
+        = l(@event.end_time)
 
-      div
-        strong
-          - if @event.place.present?
-            = @event.place
-            = dot
-          = @event.gmaps4rails_address
-      div
-        strong
-          = l(@event.start_time)
-          = " → "
-          = l(@event.end_time)
-
-      = simple_format(@event.description)
+    = simple_format(@event.description)
 
     hr
 
-    p= gmaps :map_options => {:auto_zoom => false, :zoom => 15, :auto_adjust => true, :do_clustering => true}, :markers =>{:data => @event.to_gmaps4rails}
-    - if request.xhr?
-      = yield :scripts
-      coffee:
-        $ ->
-          Gmaps.loadMaps()
 
-    hr
-
-    h3= tr('Participants')
+    h2= tr('Participants')
     p= render 'users/user_avatars', :users => @event.participants.order('participations.created_at ASC')
     p= link_to tr('All Participants'), users_event_path(@event)
 
     hr
 
-    h3= tr('Images')
+    h2= tr('Images')
     #images= render @event.images
     = semantic_form_for Image.new, :url => event_images_path(@event) do |f|
       = f.inputs do
@@ -64,15 +53,24 @@ h3
 
     hr
 
-    h3= tr('Comments')
+    h2= tr('Comments')
     | <div class="fb-comments" data-href="#{event_url(@event)}" data-num-posts="10"></div>
 
     hr
 
-    h3= tr('Activity')
+    h2= tr('Activity')
     .list_view= render @event.activities.order('created_at DESC').limit(5).includes(:activable => :user)
 
   .span4.offset1
+    p= gmaps :map_options => {:auto_zoom => false, :zoom => 15, :auto_adjust => true, :do_clustering => true}, :markers =>{:data => @event.to_gmaps4rails}
+    - if request.xhr?
+      = yield :scripts
+      coffee:
+        $ ->
+          Gmaps.loadMaps()
+
+    .calendar= calendar(@event.start_time, @event.end_time)
+
     - if can? :edit, @event or can? :create, EventInvitation.new(:event => @event)
       - if can? :create, EventInvitation.new(:event => @event)
         p= link_to t('event.invite_members'), new_event_event_invitation_path(@event, :hide_emails => true), :class => 'btn btn-primary', :rel => 'facebox'

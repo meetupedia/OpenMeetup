@@ -5,7 +5,7 @@
     - if current_user and not (users = @group.members.where('users.uid' => current_user.facebook_friend_ids).order('users.permalink ASC')).empty?
       h3= tr('Facebook friends')
       p= render 'users/user_avatars', :users => users
-    h3= tr('Members')
+    h2= tr('Members')
     .list_view= render @memberships
     = will_paginate @memberships
   .span4.offset1
@@ -15,5 +15,5 @@
         = link_to '→ Meghívottak', invited_group_path(@group)
       hr
     - unless (users = @group.admins.order('memberships.created_at ASC')).empty?
-      h3= tr('Admins')
+      h2= tr('Admins')
       p= render 'users/user_avatars', :users => users
