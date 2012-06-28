@@ -4,17 +4,15 @@ h1
   = params[:q]
 
 .row
-  .span6
-    .wrapper
-      - unless @groups.blank?
-        h2= tr('Groups')
-        .list_view= render @groups
-      - else
-        p= tr('Not found.')
-  .span6
-    .wrapper
-      - unless @events.blank?
-        h2= tr('Events')
-        .list_view= render @events
-      - else
-        p= tr('Not found.')
+  .span7
+    - unless @groups.blank?
+      h2= tr('Groups')
+      .list_view= render @groups
+    - else
+      p= tr('Not found.')
+  .span4.offset1
+    - unless @events.blank?
+      h2= tr('Events')
+      .list_view= render @events
+    - else
+      p= tr('Not found.')

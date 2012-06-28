@@ -1,12 +1,10 @@
 = render 'header'
 
 .row
-  .span8
-    .wrapper
-      h2= tr('Activity')
-      .list_view= render @user.activities.order('created_at DESC').limit(10)
-  .span4
-    .wrapper
-      h2= tr('User data')
-      - if @user.facebook_id
-        p= link_to tr('Facebook profile'), "http://www.facebook.com/profile.php?id=#{@user.facebook_id}"
+  .span7
+    h2= tr('Activity')
+    .list_view= render @user.activities.order('created_at DESC').limit(10)
+  .span4.offset1
+    h2= tr('User data')
+    - if @user.facebook_id
+      p= link_to tr('Facebook profile'), "http://www.facebook.com/profile.php?id=#{@user.facebook_id}"

@@ -1,5 +1,4 @@
-.wrapper
-  - unless @groups.blank?
-    .list_view= render :partial => 'group', :collection => @groups
-  - else
-    = tr('No groups found.')
+- unless @groups.blank?
+  .list_view= render :partial => 'group', :collection => @groups
+- else
+  = tr('No groups found.')

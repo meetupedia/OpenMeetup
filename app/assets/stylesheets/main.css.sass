@@ -1,5 +1,6 @@
 body
   background: #efeff7
+  font-family: Arial, sans-serif
 
 td.right_aligned
   text-align: right
@@ -26,9 +27,9 @@ input[type=text], textarea
   border-radius: 5px
   box-shadow: 0 1px 2px #9f9f9f
   margin-bottom: 20px
-  padding: 5px 15px
+  padding: 5px 20px
   .list_view
-    margin: 0 -15px
+    margin: 0 0 0 -20px
 
 .wrapper, #facebox
   h2:nth-of-type(1)
@@ -41,7 +42,6 @@ input[type=text], textarea
   color: #9f9f9f
   font-size: 11px
   padding: 10px 0
-  margin-top: 40px
   bottom: 0px
   .footer-left
     float: left
@@ -96,21 +96,23 @@ input[type=text], textarea
         background: #cfcfcf
 
 ul.nav-tabs
+  margin: 20px -20px
+  padding: 0 20px
   li
     a
-      background: #cfcfdf
+      background: #d7d7df
+      padding: 8px 20px
       &:hover
-        background: #dfdfef
+        background: #cfcfd7
     &.active
       a
-        background: #efeff7
+        background: #ffffff
         &:hover
-          background: #efeff7
+          background: #ffffff
 
 h1
   color: #000000
-  font-family: Georgia, serif
-  margin-bottom: 20px
+  margin: 20px 0
   &.event
     background: url(calendar_alt_stroke_32x32.png) no-repeat 0 4px
     padding-left: 48px
@@ -122,11 +124,11 @@ h1
     padding-left: 40px
 
 h2
-  font-family: Georgia, serif
+  font-weight: normal
   margin: 25px 0 15px 0
 
 h3
-  font-family: Georgia, serif
+  font-weight: normal
   margin: 15px 0 5px 0
 
 .date
@@ -151,26 +153,36 @@ h3
 .avatar
   display: block
   float: left
-  margin: 2px 7px 0 0
+  margin: 2px 15px 0 0
 
 .avatar_image
   margin-right: 3px
 
 div.list_view
   > div
-    background: #e7e7ef
+    background: #f7f7f7
+    border-radius: 0 10px 10px 0
     margin: 10px 0
-    padding: 5px 15px
+    padding: 5px 20px
     h3
       margin: 0
     &.group.membered
-      background: #cfefbf
+      background: #dff7d7
 
   div.activity, div.user, div.review
     min-height: 20px
     padding-left: 55px
     .avatar
       margin: -5px 0 0 -40px
+
+.wrapper
+  padding-bottom: 10px
+  .span4
+    div.list_view
+      margin: 0 -20px 0 0
+      > div
+        border-radius: 10px 0 0 10px
+        min-height: 22px
 
 textarea
   height: 160px
@@ -257,9 +269,9 @@ div.calendar
 
 .wrapper
   .form-actions
-    border-radius: 0 0 5px 5px
-    margin: 0 -15px -23px -15px
-    padding: 15px
+    background: #ffffff
+    border: none
+    padding: 0
   img
     max-width: 100%
 

@@ -1,47 +1,46 @@
 - if !@current_organization then
   .row
     .span8
-      .wrapper
-        #myCarousel.carousel
-          .carousel-inner
-            .active.item
-              =' image_tag 'carousel_01.jpg'
-              .carousel-caption
-                h1= t('welcome.slogan_01')
-            .item
-              =' image_tag 'carousel_02.jpg'
-              .carousel-caption
-                h1= t('welcome.slogan_02')
-            .item
-              =' image_tag 'carousel_03.jpg'
-              .carousel-caption
-                h1= t('welcome.slogan_03')
-            .item
-              =' image_tag 'carousel_04.jpg'
-              .carousel-caption
-                h1= t('welcome.slogan_04')
-            .item
-              =' image_tag 'carousel_05.jpg'
-              .carousel-caption
-                h1= t('welcome.slogan_05')
-          a.carousel-control.left href="#myCarousel" data-slide="prev" &lsaquo;
-          a.carousel-control.right href="#myCarousel" data-slide="next" &rsaquo;
-        javascript:
-          $(function(){
-            $('.carousel').carousel();
-          });
+      #myCarousel.carousel
+        .carousel-inner
+          .active.item
+            =' image_tag 'carousel_01.jpg'
+            .carousel-caption
+              h1= t('welcome.slogan_01')
+          .item
+            =' image_tag 'carousel_02.jpg'
+            .carousel-caption
+              h1= t('welcome.slogan_02')
+          .item
+            =' image_tag 'carousel_03.jpg'
+            .carousel-caption
+              h1= t('welcome.slogan_03')
+          .item
+            =' image_tag 'carousel_04.jpg'
+            .carousel-caption
+              h1= t('welcome.slogan_04')
+          .item
+            =' image_tag 'carousel_05.jpg'
+            .carousel-caption
+              h1= t('welcome.slogan_05')
+        a.carousel-control.left href="#myCarousel" data-slide="prev" &lsaquo;
+        a.carousel-control.right href="#myCarousel" data-slide="next" &rsaquo;
+      javascript:
+        $(function(){
+          $('.carousel').carousel();
+        });
     .span4
-      .wrapper
-        .root
-          .facebook_connect= link_to image_tag('facebook_connect.png', :alt => tr('Sign in with Facebook')), auth_path(:facebook)
-          / .twitter_connect= link_to image_tag('twitter_connect.png', :alt => tr('Sign in with Twitter')), auth_path(:twitter)
-          p.comment= tr('We do not write to your Facebook-wall without your permission')
-          hr
-          p
-            =' link_to tr('Sign in'), new_user_sessions_path
-            ' |
-            = link_to tr('Sign up'), new_user_path
-      .wrapper= tr8n_language_selector_tag
+      .root
+        .facebook_connect= link_to image_tag('facebook_connect.png', :alt => tr('Sign in with Facebook')), auth_path(:facebook)
+        / .twitter_connect= link_to image_tag('twitter_connect.png', :alt => tr('Sign in with Twitter')), auth_path(:twitter)
+        p.comment= tr('We do not write to your Facebook-wall without your permission')
+        hr
+        p
+          =' link_to tr('Sign in'), new_user_sessions_path
+          ' |
+          = link_to tr('Sign up'), new_user_path
+      hr
+      = tr8n_language_selector_tag
 
 - else
   .row

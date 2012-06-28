@@ -1,13 +1,11 @@
 = render 'header'
 
 .row
-  .span8
-    .wrapper
-      h2= tr('Events')
-      = will_paginate @events
-      .list_view= render @events
-      = will_paginate @events
-  .span4
+  .span7
+    h2= tr('Events')
+    = will_paginate @events
+    .list_view= render @events
+    = will_paginate @events
+  .span4.offset1
     - if can? :create, Event.new(:group => @group)
-      .wrapper
-        p= link_to tr('New event'), new_group_event_path(@group), :class => 'btn btn-primary', :rel => 'facebox'
+      p= link_to tr('New event'), new_group_event_path(@group), :class => 'btn btn-primary', :rel => 'facebox'
