@@ -34,8 +34,7 @@
 
   .span4.offset1
     - if @group.images.size > 0
-      h2= tr('Last image')
-      .clearfix=' link_to image_tag(@group.images.last.image.url(:normal)), images_group_path(@group)
+      p= link_to image_tag(@group.images.last.image.url(:normal)), images_group_path(@group)
       p= link_to tr('All images'), images_group_path(@group)
       hr
     - if @group.next_event
