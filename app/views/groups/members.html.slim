@@ -3,7 +3,7 @@
 .row
   .span7
     - if current_user and not (users = @group.members.where('users.uid' => current_user.facebook_friend_ids).order('users.permalink ASC')).empty?
-      h3= tr('Facebook friends')
+      h2= tr('Facebook friends')
       p= render 'users/user_avatars', :users => users
     h2= tr('Members')
     .list_view= render @memberships
