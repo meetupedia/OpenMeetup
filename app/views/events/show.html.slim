@@ -1,3 +1,18 @@
+p.pull-right
+  - if current_user
+    - if participation = @event.participation_for(current_user)
+      =' link_to '<i class="icon-ok-sign icon-white"></i> Részt veszek'.html_safe, participation_path(participation), :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-success'
+    - else
+      =' link_to '<i class="icon-plus-sign icon-white"></i> Részt veszek'.html_safe, event_participations_path(@event), :method => :post, :class => 'btn btn-primary'
+    - if absence = @event.absence_for(current_user)
+      =' link_to '<i class="icon-ok-sign icon-white"></i> Nem veszek részt'.html_safe, absence_path(absence), :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-success'
+    - else
+      =' link_to '<i class="icon-plus-sign icon-black"></i> Nem veszek részt'.html_safe, event_absences_path(@event), :method => :post, :class => 'btn'
+  - else
+    =' link_to '<i class="icon-plus-sign icon-black"></i> Részt veszek'.html_safe, new_user_sessions_path(:return_to => set_event_participations_path(@event)), :class => 'btn'
+    =' link_to '<i class="icon-plus-sign icon-black"></i> Nem veszek részt'.html_safe, new_user_sessions_path(:return_to => set_event_absences_path(@event)), :class => 'btn'
+
+
 h1.event= @event.title
 
 h3
@@ -5,76 +20,65 @@ h3
   = link_to @event.group.name, @event.group
 
 .row
-  .span8
-    .wrapper.clearfix
-      .calendar.pull-right= calendar(@event.start_time, @event.end_time)
+  .span7
+    div
+      strong
+        - if @event.place.present?
+          = @event.place
+          = dot
+        = @event.gmaps4rails_address
+    div
+      strong
+        = l(@event.start_time)
+        = " → "
+        = l(@event.end_time)
 
-      div
-        strong
-          - if @event.place.present?
-            = @event.place
-            = dot
-          = @event.gmaps4rails_address
-      div
-        strong
-          = l(@event.start_time)
-          = " → "
-          = l(@event.end_time)
+    = simple_format(@event.description)
 
-      = simple_format(@event.description)
+    hr
 
-    .wrapper
-      p= gmaps :map_options => {:auto_zoom => false, :zoom => 15, :auto_adjust => true, :do_clustering => true}, :markers =>{:data => @event.to_gmaps4rails}
-      - if request.xhr?
-        = yield :scripts
-        coffee:
-          $ ->
-            Gmaps.loadMaps()
 
-    .wrapper
-      h3= t('event.participants')
-      p= render 'users/user_avatars', :users => @event.participants.order('participations.created_at ASC')
-      p= link_to t('event.all_participants'), users_event_path(@event)
+    h2= tr('Participants')
+    p= render 'users/user_avatars', :users => @event.participants.order('participations.created_at ASC')
+    p= link_to tr('All Participants'), users_event_path(@event)
 
-    .wrapper
-      h3 Képek
-      #images= render @event.images
-      = semantic_form_for Image.new, :url => event_images_path(@event) do |f|
-        = f.inputs do
-          = f.file_field :image
-      = render 'images/upload', :item => @event
+    hr
 
-    .wrapper
-      h3 Kommentek
-      | <div class="fb-comments" data-href="#{event_url(@event)}" data-num-posts="10"></div>
+    h2= tr('Images')
+    #images= render @event.images
+    = semantic_form_for Image.new, :url => event_images_path(@event) do |f|
+      = f.inputs do
+        = f.file_field :image
+    = render 'images/upload', :item => @event
 
-    .wrapper
-      h3= t('menu.activity')
-      .list_view= render @event.activities.order('created_at DESC').limit(5).includes(:activable => :user)
+    hr
 
-  .span4
-    .wrapper
-      p
-        - if current_user
-          - if participation = @event.participation_for(current_user)
-            =' link_to '<i class="icon-ok-sign icon-white"></i> Részt veszek'.html_safe, participation_path(participation), :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-success'
-          - else
-            =' link_to '<i class="icon-plus-sign icon-white"></i> Részt veszek'.html_safe, event_participations_path(@event), :method => :post, :class => 'btn btn-primary'
-          - if absence = @event.absence_for(current_user)
-            =' link_to '<i class="icon-ok-sign icon-white"></i> Nem veszek részt'.html_safe, absence_path(absence), :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-success'
-          - else
-            =' link_to '<i class="icon-plus-sign icon-black"></i> Nem veszek részt'.html_safe, event_absences_path(@event), :method => :post, :class => 'btn'
-        - else
-          =' link_to '<i class="icon-plus-sign icon-black"></i> Részt veszek'.html_safe, new_user_sessions_path(:return_to => set_event_participations_path(@event)), :class => 'btn'
-          =' link_to '<i class="icon-plus-sign icon-black"></i> Nem veszek részt'.html_safe, new_user_sessions_path(:return_to => set_event_absences_path(@event)), :class => 'btn'
+    h2= tr('Comments')
+    | <div class="fb-comments" data-href="#{event_url(@event)}" data-num-posts="10"></div>
+
+    hr
+
+    h2= tr('Activity')
+    .list_view= render @event.activities.order('created_at DESC').limit(5).includes(:activable => :user)
+
+  .span4.offset1
+    p= gmaps :map_options => {:auto_zoom => false, :zoom => 15, :auto_adjust => true, :do_clustering => true}, :markers =>{:data => @event.to_gmaps4rails}
+    - if request.xhr?
+      = yield :scripts
+      coffee:
+        $ ->
+          Gmaps.loadMaps()
+
+    .calendar= calendar(@event.start_time, @event.end_time)
+
     - if can? :edit, @event or can? :create, EventInvitation.new(:event => @event)
-      .wrapper
-        - if can? :create, EventInvitation.new(:event => @event)
-          p= link_to t('event.invite_members'), new_event_event_invitation_path(@event, :hide_emails => true), :class => 'btn btn-primary', :rel => 'facebox'
-          p= link_to t('event.invite_other_people'), new_event_event_invitation_path(@event), :class => 'btn btn-primary', :rel => 'facebox'
-          p= link_to "→ #{t('event.already_invited')}", invited_event_path(@event)
-        p= link_to 'Új üzenet', new_wave_path(:event_id => @event.id), :class => 'btn btn-primary', :rel => 'facebox'
-        - if can? :edit, @event
-          p= link_to t('event.edit'), edit_event_path(@event), :class => 'btn', :rel => 'facebox'
+      - if can? :create, EventInvitation.new(:event => @event)
+        p= link_to t('event.invite_members'), new_event_event_invitation_path(@event, :hide_emails => true), :class => 'btn btn-primary', :rel => 'facebox'
+        p= link_to t('event.invite_other_people'), new_event_event_invitation_path(@event), :class => 'btn btn-primary', :rel => 'facebox'
+        p= link_to "→ #{t('event.already_invited')}", invited_event_path(@event)
+      p= link_to 'Új üzenet', new_wave_path(:event_id => @event.id), :class => 'btn btn-primary', :rel => 'facebox'
+      - if can? :edit, @event
+        p= link_to t('event.edit'), edit_event_path(@event), :class => 'btn', :rel => 'facebox'
+      hr
 
     | <div class="fb-like" data-href="#{event_url(@event)}" data-send="false" data-width="450" data-show-faces="false"></div>

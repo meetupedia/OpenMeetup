@@ -1,12 +1,9 @@
 h1.event= link_to @event.title, @event
 
-h3
+h2
   ' →
   = link_to @event.group.name, @event.group
 
-.wrapper
-  h2 Résztvevők
-
-  .list_view= render @participations
-
-  = will_paginate @participations
+h2= tr('Participants')
+.list_view= render @participations
+= will_paginate @participations

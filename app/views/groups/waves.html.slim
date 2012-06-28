@@ -1,9 +1,8 @@
 = render 'header'
 
 .row
-  .span8
-    .wrapper
-      h2= tr('Messages')
-      = will_paginate @waves
-      .list_view= render @waves
-      = will_paginate @waves
+  .span7
+    h2= tr('Messages')
+    = will_paginate @waves
+    .list_view= render @waves
+    = will_paginate @waves

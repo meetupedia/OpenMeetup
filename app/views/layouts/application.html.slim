@@ -12,7 +12,7 @@ html
   body
     = render 'layouts/header'
     #content
-      .container
+      .container.wrapper
         = yield :header
         #flash_notice.alert.alert-success
           a.close(data-dismiss="alert")×
@@ -21,6 +21,7 @@ html
           a.close(data-dismiss="alert")×
           span
         #pjax= yield
+      .container
         - if !@current_organization then
           = render 'layouts/footer'
     = yield :scripts

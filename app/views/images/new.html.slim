@@ -2,9 +2,8 @@ h1
   ' ←
   = place_link @place
 
-.wrapper
-  h2 Kép feltöltése
-  = semantic_form_for @image, :url => place_images_path(@place) do |f|
-    = f.inputs do
-      = f.input :image
-    = f.actions
+h2 Kép feltöltése
+= semantic_form_for @image, :url => place_images_path(@place) do |f|
+  = f.inputs do
+    = f.input :image
+  = f.actions

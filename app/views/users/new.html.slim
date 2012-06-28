@@ -1,19 +1,19 @@
+ul.nav.nav-tabs
+  li= link_to tr('Sign in'), sign_in_path
+  li.active
+    a= tr('Sign up')
+
 .row
-  .span6.offset3
-    ul.nav.nav-tabs
-      li= link_to tr('Sign in'), sign_in_path
-      li.active
-        a= tr('Sign up')
-
-    .wrapper
-      - unless current_organization
-        p.facebook_connect= link_to image_tag('facebook_connect.png', :alt => tr('Sign in with Facebook')), auth_path(:facebook)
-        h3= tr('or')
-
-      = semantic_form_for @user do |f|
-        = f.inputs do
-          = f.input :name
-          = f.input :email
-          = f.input :password
-          = f.input :password_confirmation
-        = f.actions
+  .span7
+    h2= tr('Sign up with email')
+    = semantic_form_for @user do |f|
+      = f.inputs do
+        = f.input :name
+        = f.input :email
+        = f.input :password
+        = f.input :password_confirmation
+      = f.actions
+  .span4.offset1
+    - unless current_organization
+      h2= tr('Sign up with Facebook')
+      p.facebook_connect= link_to image_tag('facebook_connect.png', :alt => tr('Sign in with Facebook')), auth_path(:facebook)

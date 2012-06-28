@@ -1,48 +1,48 @@
 = render 'header'
 
 .row
-  .span8
-    .wrapper
-      h2= tr('Public data')
-      .clearfix
-        - if @group.image.file?
-          .avatar= link_to(image_tag(@group.image.url(:small), :alt => @group.name, :height => 72, :width => 72, :title => @group.name), @group)
+  .span7
+    .clearfix
+      - if @group.image.file?
+        .avatar= link_to(image_tag(@group.image.url(:small), :alt => @group.name, :height => 72, :width => 72, :title => @group.name), @group)
 
-        - if current_user
-          p= render :partial => 'taggings/button', :collection => @group.tags.order('name ASC'), :as => :tag
-        - else
-          p= render @group.tags
-      - if @group.url.present?
-        div
-          ' Honlap:
-          = auto_link @group.url
+      - if current_user
+        p= render :partial => 'taggings/button', :collection => @group.tags.order('name ASC'), :as => :tag
+      - else
+        p= render @group.tags
+    - if @group.url.present?
+      div
+        ' Honlap:
+        = auto_link @group.url
 
-      - if @group.facebook_url.present?
-        div
-          ' Facebook-oldal:
-          = auto_link @group.facebook_url
+    - if @group.facebook_url.present?
+      div
+        ' Facebook-oldal:
+        = auto_link @group.facebook_url
 
-      = simple_format(@group.description)
+    = simple_format(@group.description)
 
-    .wrapper
-      h2= tr('Activity')
-      .list_view= render @group.activities.order('created_at DESC').limit(20)
-    .wrapper
-      h2= tr('Comments')
-      | <div class="fb-comments" data-href="#{group_url(@group)}" data-num-posts="10"></div>
+    hr
 
-  .span4
+    h2= tr('Activity')
+    .list_view= render @group.activities.order('created_at DESC').limit(20)
+
+    hr
+
+    h2= tr('Comments')
+    | <div class="fb-comments" data-href="#{group_url(@group)}" data-num-posts="10"></div>
+
+  .span4.offset1
     - if @group.images.size > 0
-      .wrapper
-        h2= tr('Last image')
-        .clearfix=' link_to image_tag(@group.images.last.image.url(:normal)), images_group_path(@group)
-        p= link_to tr('All images'), images_group_path(@group)
+      h2= tr('Last image')
+      .clearfix=' link_to image_tag(@group.images.last.image.url(:normal)), images_group_path(@group)
+      p= link_to tr('All images'), images_group_path(@group)
+      hr
     - if @group.next_event
-      .wrapper
-        h2= tr('Next event')
-        .list_view= render @group.next_event
-        p= link_to tr('All events'), events_group_path(@group)
-
+      h2= tr('Next event')
+      .list_view= render @group.next_event
+      p= link_to tr('All events'), events_group_path(@group)
+      hr
     ' <div class="fb-like" data-href="#{group_url(@group)}" data-send="false" data-layout="box_count" data-show-faces="false"></div>
     ' <g:plusone size="tall"></g:plusone>
     ' <a href="https://twitter.com/share" class="twitter-share-button" data-count="vertical">Tweet</a>

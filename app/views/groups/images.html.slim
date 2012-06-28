@@ -1,11 +1,10 @@
 = render 'header'
 
-.wrapper
-  h2= tr('Images')
+h2= tr('Images')
 
-  = semantic_form_for Image.new, :url => group_images_path(@group) do |f|
-    = f.inputs do
-      = f.file_field :image
-  = render 'images/upload', :item => @group
+= semantic_form_for Image.new, :url => group_images_path(@group) do |f|
+  = f.inputs do
+    = f.file_field :image
+= render 'images/upload', :item => @group
 
-  #images= render @group.images.order('created_at ASC')
+#images= render @group.images.order('created_at ASC')

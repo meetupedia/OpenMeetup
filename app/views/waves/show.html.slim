@@ -10,11 +10,9 @@ h1= @wave.subject
     = link_to @wave.event.title, @wave.event
 
 .row
-  .span4
-    .wrapper
-      p= link_to 'Új üzenet', new_wave_wave_item_path(@wave), :class => 'btn', :rel => 'facebox'
-      h3 Címzettek
-      p= render 'users/user_avatars', :users => @wave.wave_members
-  .span8
-    .wrapper
-      .list_view= render @wave_items
+  .span7
+    .list_view= render @wave_items
+  .span4.offset1
+    p= link_to 'Új üzenet', new_wave_wave_item_path(@wave), :class => 'btn', :rel => 'facebox'
+    h3 Címzettek
+    p= render 'users/user_avatars', :users => @wave.wave_members

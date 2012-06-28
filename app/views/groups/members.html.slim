@@ -1,21 +1,19 @@
 = render 'header'
 
 .row
-  .span8
-    .wrapper
-      - if current_user and not (users = @group.members.where('users.uid' => current_user.facebook_friend_ids).order('users.permalink ASC')).empty?
-        h3= tr('Facebook friends')
-        p= render 'users/user_avatars', :users => users
-      h3= tr('Members')
-      .list_view= render @memberships
-      = will_paginate @memberships
-  .span4
+  .span7
+    - if current_user and not (users = @group.members.where('users.uid' => current_user.facebook_friend_ids).order('users.permalink ASC')).empty?
+      h3= tr('Facebook friends')
+      p= render 'users/user_avatars', :users => users
+    h2= tr('Members')
+    .list_view= render @memberships
+    = will_paginate @memberships
+  .span4.offset1
     - if current_user
-      .wrapper
-        p
-          =' link_to 'Ismerősök hozzáadása', new_group_group_invitation_path(@group), :class => 'btn btn-primary', :rel => 'facebox'
-          = link_to '→ Meghívottak', invited_group_path(@group)
-    .wrapper
-      - unless (users = @group.admins.order('memberships.created_at ASC')).empty?
-        h3= tr('Admins')
-        p= render 'users/user_avatars', :users => users
+      p
+        =' link_to 'Ismerősök hozzáadása', new_group_group_invitation_path(@group), :class => 'btn btn-primary', :rel => 'facebox'
+        = link_to '→ Meghívottak', invited_group_path(@group)
+      hr
+    - unless (users = @group.admins.order('memberships.created_at ASC')).empty?
+      h2= tr('Admins')
+      p= render 'users/user_avatars', :users => users
