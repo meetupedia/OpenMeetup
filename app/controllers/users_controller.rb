@@ -2,8 +2,15 @@
 
 class UsersController < ApplicationController
   load_resource
-  authorize_resource :except => [:show, :groups, :validate_email]
+  authorize_resource :except => [:index, :show, :groups, :validate_email]
   before_filter :set_city, :except => [:edit, :update, :edit_city]
+
+  def index
+    @users = User.where('name LIKE ?', "%#{params[:q]}%")
+    respond_to do |format|
+      format.json { render :json => @users.map { |user| {:id => user.id, :name => "#{user.name} (#{user.email})"} } }
+    end
+  end
 
   def show
   end

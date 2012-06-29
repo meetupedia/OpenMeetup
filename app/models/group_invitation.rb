@@ -7,7 +7,7 @@ class GroupInvitation < ActiveRecord::Base
   belongs_to :user
   belongs_to :group
 
-  attr_accessor :emails
+  attr_accessor :ids
 end
 
 GroupInvitation.auto_upgrade!

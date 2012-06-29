@@ -11,8 +11,13 @@ class GroupInvitationsController < ApplicationController
 
   def create
     if @group_invitation.save
-      @group_invitation.emails.split(/\n/).each do |email|
-        group_invitation_target = GroupInvitationTarget.find_or_initialize_by_group_id_and_email(@group.id, email)
+      @group_invitation.ids.split(',').each do |id|
+        if user = User.find_by_id(id)
+          group_invitation_target = GroupInvitationTarget.find_or_initialize_by_group_id_and_invited_user_id(@group.id, user.id)
+          group_invitation_target.email ||= user.email
+        else
+          group_invitation_target = GroupInvitationTarget.find_or_initialize_by_group_id_and_email(@group.id, id)
+        end
         if group_invitation_target.new_record?
           group_invitation_target.group_invitation = @group_invitation
           if group_invitation_target.save
@@ -20,7 +25,7 @@ class GroupInvitationsController < ApplicationController
           end
         end
       end
-      redirect_to @group, :notice => 'Meghívó elküldve.'
+      redirect_to invited_group_path(@group), :notice => 'Meghívó elküldve.'
     else
       render :new
     end
