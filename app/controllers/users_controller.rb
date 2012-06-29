@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   def index
     @users = User.where('name LIKE ?', "%#{params[:q]}%")
     respond_to do |format|
-      format.json { render :json => @users.map { |user| {:id => user.id, :name => "#{user.name} (#{user.email})"} } }
+      format.json { render :json => @users.map { |user| {:id => user.id, :name => user.name} } }
     end
   end
 
