@@ -7,6 +7,7 @@ class GroupInvitationTarget < ActiveRecord::Base
 
   belongs_to :group
   belongs_to :group_invitation
+  belongs_to :invited_user, :class_name => 'User'
 end
 
 GroupInvitationTarget.auto_upgrade!

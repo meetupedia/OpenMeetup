@@ -1,9 +1,19 @@
 h1.group= link_to @group.name, @group
 
-h2 Meghívottak
+.pull-right= link_to tr('Send invitations'), new_group_group_invitation_path(@group), :class => 'btn', :rel => 'facebox'
 
-table.table.table-striped.table-condensed
+h2= tr('Already invited')
+
+= will_paginate @group_invitation_targets
+
+table.table
   - @group_invitation_targets.each do |group_invitation_target|
     tr
-      td= group_invitation_target.email
-      td= group_invitation_target.created_at
+      td
+        - if group_invitation_target.invited_user.present?
+          = user_link group_invitation_target.invited_user
+        - else
+          = group_invitation_target.email
+      td.right_aligned= l(group_invitation_target.created_at)
+
+= will_paginate @group_invitation_targets

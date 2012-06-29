@@ -4,7 +4,7 @@ h3
   ' →
   = link_to @event.group.name, @event.group
 
-h2 Meghívottak
+h2= tr('Already invited')
 
 table.table.table-striped.table-condensed
   - @event_invitation_targets.each do |event_invitation_target|

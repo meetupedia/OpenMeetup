@@ -48,7 +48,7 @@ class GroupsController < ApplicationController
   end
 
   def invited
-    @group_invitation_targets = @group.group_invitation_targets.order('created_at DESC')
+    @group_invitation_targets = @group.group_invitation_targets.order('created_at DESC').page(params[:page])
   end
 
   def members

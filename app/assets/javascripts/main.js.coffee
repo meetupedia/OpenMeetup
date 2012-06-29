@@ -8,6 +8,7 @@ $ ->
   $('a:not([data-disable-pjax]):not([data-remote]):not([rel="facebox"]):not(.fancybox)').pjax(container: '#pjax', timeout: false)
 
   $('#pjax').live 'pjax:success', ->
+    $.facebox.close()
     initSystem()
 
   if $.cookie('flash_notice')
