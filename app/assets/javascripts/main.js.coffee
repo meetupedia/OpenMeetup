@@ -19,7 +19,3 @@ $ ->
     flash = $.parseJSON(decodeURIComponent($.cookie('flash_alert')))
     $('#flash_alert').show().find('span').html(flash)
     $.cookie('flash_alert', null, {path: '/'})
-
-  $('.navbar a').live 'click', ->
-    $('.navbar li').removeClass('active')
-    $(this).closest('li').addClass('active')
