@@ -4,8 +4,16 @@
   .span7
     h2= tr('Edit user')
     = semantic_form_for @user do |f|
-      = f.inputs :name, :email, :city, :password, :password_confirmation
+      = f.inputs do
+        = f.input :name
+        = f.input :email
+        .control-group
+          = f.label :city_id, tr('City')
+          = f.text_field :city_id, 'data-pre' => [@user.city].compact.map { |city| {:id => city.id, :name => city.name} }.to_json
+        = f.input :password
+        = f.input :password_confirmation
       = f.actions
+
   .span4.offset1
     h2= tr('Connections')
     - if authentication = current_user.authenticated_with(:facebook)
@@ -18,3 +26,15 @@
         p= link_to tr('Disconnect Twitter'), authentication, :method => :delete, :confirm => tr('Are you sure?')
     - else
       p.twitter_connect= link_to image_tag('twitter_connect.png', :alt => tr('Sign in with Twitter')), auth_path(:twitter)
+
+javascript:
+  $(function() {
+    $('#user_city_id').tokenInput('/cities.json', {
+      allowInsert: true,
+      crossDomain: false,
+      preventDuplicates: true,
+      prePopulate: $('#user_city_id').data('pre'),
+      tokenLimit: 1,
+      theme: 'facebook'
+    })
+  })
