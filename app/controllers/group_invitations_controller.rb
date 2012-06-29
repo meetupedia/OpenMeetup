@@ -10,24 +10,22 @@ class GroupInvitationsController < ApplicationController
   end
 
   def create
-    if @group_invitation.save
+    unless @group_invitation.ids.blank?
       @group_invitation.ids.split(',').each do |id|
         if user = User.find_by_id(id)
-          group_invitation_target = GroupInvitationTarget.find_or_initialize_by_group_id_and_invited_user_id(@group.id, user.id)
-          group_invitation_target.email ||= user.email
+          group_invitation = GroupInvitation.find_or_initialize_by_group_id_and_invited_user_id(@group.id, user.id)
+          group_invitation.email ||= user.email
         else
-          group_invitation_target = GroupInvitationTarget.find_or_initialize_by_group_id_and_email(@group.id, id)
+          group_invitation = GroupInvitation.find_or_initialize_by_group_id_and_email(@group.id, id)
         end
-        if group_invitation_target.new_record?
-          group_invitation_target.group_invitation = @group_invitation
-          if group_invitation_target.save
-            GroupMailer.invitation(current_user, group_invitation_target.email, group_invitation_target.group_invitation.group, group_invitation_target.group_invitation.message).deliver
+        if group_invitation.new_record?
+          group_invitation.message = @group_invitation.message
+          if group_invitation.save
+            GroupMailer.invitation(current_user, group_invitation).deliver
           end
         end
       end
       redirect_to invited_group_path(@group), :notice => 'Meghívó elküldve.'
-    else
-      render :new
     end
   end
 end

@@ -4,11 +4,11 @@ class GroupMailer < ActionMailer::Base
   default_url_options[:host] = 'openmeetup.net'
   default :from => 'noreply@openmeetup.net'
 
-  def invitation(user, email, group, message)
-    @user = user
-    @group = group
-    @message = message
-    mail :to => email, :subject => "Meghívó: #{@group.name}"
+  def invitation(user, group_invitation)
+    @user = group_invitation.user
+    @group = group_invitation.group
+    @message = group_invitation.message
+    mail :to => group_invitation.email, :subject => "Meghívó: #{@group.name}"
   end
 
   def join(user, email, group)

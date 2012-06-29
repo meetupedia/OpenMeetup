@@ -29,14 +29,14 @@ private
     if params[:locale]
       session[:locale] = params[:locale]
       session[:save_locale] = true
-    elsif !current_user.guest? and !current_user.locale.nil?
+    elsif not current_user.guest? and not current_user.locale.nil?
       session[:locale] = current_user.locale
-    elsif session[:locale] == nil
+    elsif not session[:locale]
       session[:locale] = tr8n_user_preffered_locale
       session[:save_locale] = (session[:locale] != Tr8n::Config.default_locale)
     end
     if session[:save_locale] and not current_user.guest?
-      current_user.changed_language!(session[:locale])
+      current_user.update_attributes :locale => session[:locale]
       session[:save_locale] = nil
     end
     session[:locale]
@@ -106,7 +106,6 @@ private
   end
 
   def set_locale
-    cookies[:locale] = params[:locale] if params[:locale]
-    I18n.locale = cookies[:locale] || extract_locale_from_accept_language_header || I18n.default_locale
+    I18n.locale = current_locale
   end
 end
