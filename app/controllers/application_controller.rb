@@ -29,13 +29,13 @@ private
     if params[:locale]
       session[:locale] = params[:locale]
       session[:save_locale] = true
-    elsif not current_user.guest? and not current_user.locale.nil?
+    elsif current_user
       session[:locale] = current_user.locale
     elsif not session[:locale]
       session[:locale] = tr8n_user_preffered_locale
       session[:save_locale] = (session[:locale] != Tr8n::Config.default_locale)
     end
-    if session[:save_locale] and not current_user.guest?
+    if session[:save_locale] and current_user
       current_user.update_attributes :locale => session[:locale]
       session[:save_locale] = nil
     end
