@@ -18,6 +18,7 @@ end
 
 gem 'jquery-rails'
 gem 'rails-i18n'
+gem 'rails_config'
 gem 'andand'
 gem 'memcache-client'
 gem 'mini_record'

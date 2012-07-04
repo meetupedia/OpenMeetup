@@ -86,7 +86,7 @@ class Group < ActiveRecord::Base
 
   def tag_tokens=(names)
     ids = []
-    names.split(',').each do |name|
+    names.split(/,\s*/).each do |name|
       ids << Tag.find_or_create_by_name(name).id
     end
     self.tag_ids = ids

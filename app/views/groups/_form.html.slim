@@ -5,13 +5,16 @@
     = f.input :name
     = f.input :description
     = f.input :location
-    = f.input :image
-    = f.input :url
-    = f.input :facebook_url
-    = f.input :is_closed
-    .control-group
-      = f.label :tag_tokens, tr('Tags')
-      = f.text_field :tag_tokens, 'data-pre' => @group.tags.map { |tag| {:id => tag.id, :name => tag.name} }.to_json
+  p= link_to_function tr('More options'), "$('#more-options').toggle()", :class => 'function'
+  #more-options
+    = f.inputs do
+      = f.input :image
+      = f.input :url
+      = f.input :facebook_url
+      = f.input :is_closed
+      .control-group
+        = f.label :tag_tokens, tr('Tags')
+        = f.text_field :tag_tokens, 'data-pre' => @group.tags.map { |tag| {:id => tag.id, :name => tag.name} }.to_json
   = f.actions do
     =' f.action :submit, :as => :button
     = link_to tr('Cancel'), discovery_path, :class => 'btn'
