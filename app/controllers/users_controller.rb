@@ -19,8 +19,11 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user.save
-    redirect_to @user
+    if @user.save
+      redirect_to discovery_url
+    else
+      render :new
+    end
   end
 
   def edit

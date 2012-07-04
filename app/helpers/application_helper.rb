@@ -2,6 +2,10 @@
 
 module ApplicationHelper
 
+  def application_title
+    Settings.title
+  end
+
   def user_avatar(user)
     filename = case user.provider
       when 'facebook' then "https://graph.facebook.com/#{user.uid}/picture"

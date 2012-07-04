@@ -1,8 +1,9 @@
 .gitignore
-config/database.yml
+.sass-cache
 /log/*.log
 /tmp
-Gemfile.lock
 /public/assets
 /public/system
-.sass-cache
+config/settings.yml
+config/database.yml
+Gemfile.lock

@@ -7,10 +7,7 @@
       |   <span class="icon-bar"></span>
       | </a>
 
-      - if @current_organization
-        = link_to @current_organization.name, root_path, :class => 'brand'
-      - else
-        = link_to 'OpenMeetup', root_path, :class => 'brand'
+      = link_to application_title, root_path, :class => 'brand'
       ul.nav.pull-left
         li= link_to tr('Home'), root_path
 

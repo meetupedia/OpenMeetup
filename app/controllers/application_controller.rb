@@ -53,13 +53,11 @@ private
 
   def current_organization
     @current_organization ||= if Rails.env == 'development'
-      @current_organization ||= Organization.find_by_id(params[:organization]) if params[:organization]
+      Organization.first
+    elsif request.domain == 'openmeetup.net'
+      Organization.find_by_permalink(request.subdomains.first)
     else
-      if request.domain == 'openmeetup.net'
-        Organization.find_by_permalink(request.subdomains.first)
-      else
-        Organization.find_by_permalink(request.domain.split('.').first)
-      end
+      Organization.find_by_permalink(request.domain.split('.').first)
     end
   end
 
@@ -93,7 +91,7 @@ private
   end
 
   def set_city
-    redirect_to edit_city_user_path(current_user) if current_user and not current_city
+    redirect_to edit_city_user_path(current_user) if current_user and not current_city and not current_organization
   end
 
   def set_domain
