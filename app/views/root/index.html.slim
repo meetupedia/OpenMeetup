@@ -1,4 +1,4 @@
-- if !@current_organization then
+- unless Settings.standalone
   .row
     .span8
       #myCarousel.carousel
@@ -39,13 +39,13 @@
           =' link_to tr('Sign in'), new_user_sessions_path
           ' |
           = link_to tr('Sign up'), new_user_path
-      hr
-      = tr8n_language_selector_tag
-
+      - if  Settings.multilingual
+        hr
+        .tr8n-language-selector.btn= tr8n_language_selector_tag
 - else
   .row
     .span12
-      .wrapper.get2gather-images
+      .get2gather-images
         = link_to image_tag('get2gather/get2gather1.jpg'), sign_in_path
         = link_to image_tag('get2gather/get2gather2.jpg'), sign_in_path
         = link_to image_tag('get2gather/get2gather3.jpg'), sign_in_path
