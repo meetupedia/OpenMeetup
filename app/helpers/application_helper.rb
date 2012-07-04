@@ -3,7 +3,7 @@
 module ApplicationHelper
 
   def application_title
-    Settings.standalone ? Settings.title : 'OpenMeetup'
+    Settings.title
   end
 
   def user_avatar(user)
