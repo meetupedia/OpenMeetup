@@ -4,7 +4,6 @@ h1.group= @group.name
 
 - if can? :edit, @group
   .pull-right
-    =' link_to tr('New message'), new_wave_path(:group_id => @group.id), :class => 'btn', :rel => 'facebox'
     =' link_to tr('Edit group'), edit_group_path(@group), :class => 'btn', :rel => 'facebox'
 
 ul.nav.nav-tabs

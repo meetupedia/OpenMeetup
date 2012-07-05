@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   key :provider
   key :uid
   key :name
+  key :nickname
   key :locale
   key :permalink
   key :email, :index => true

@@ -2,7 +2,7 @@
 
 class UsersController < ApplicationController
   load_resource
-  authorize_resource :except => [:index, :show, :groups, :validate_email]
+  authorize_resource :except => [:index, :show, :activities, :groups, :validate_email]
   before_filter :set_city, :except => [:edit, :update, :edit_city]
 
   def index
@@ -33,6 +33,9 @@ class UsersController < ApplicationController
   def update
     @user.update_attributes params[:user]
     redirect_to @user
+  end
+
+  def activities
   end
 
   def dashboard
