@@ -26,7 +26,6 @@ class User < ActiveRecord::Base
   has_many :event_invitations, :dependent => :nullify
   has_many :event_invitation_targets, :foreign_key => :invited_user_id, :dependent => :destroy
   has_many :events, :dependent => :nullify
-  has_many :follows, :dependent => :destroy
   has_many :group_invitations, :dependent => :nullify
   has_many :groups, :dependent => :nullify
   has_many :joined_events, :through => :participations, :source => :event
