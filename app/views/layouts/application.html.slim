@@ -14,18 +14,17 @@ html
     #content
       .container.wrapper
         = yield :header
-        - unless flash[:notice].blank?
-          #flash_notice.alert.alert-success
+        - if flash[:notice]
+          .alert.alert-success
             a.close(data-dismiss="alert")×
-            span= flash[:notice]
-        - unless flash[:alert0].blank?
-          #flash_alert.alert.alert-error
+            = flash[:notice]
+        - if flash[:alert]
+          .alert.alert-error
             a.close(data-dismiss="alert")×
-            span= flash[:alert]
+            = flash[:alert]
         #pjax= yield
       .container
-        - if !@current_organization then
-          = render 'layouts/footer'
-    = yield :scripts
+      = render 'layouts/footer'
+      = yield :scripts
     = render 'layouts/uservoice'
     = render 'layouts/facebook_connect'

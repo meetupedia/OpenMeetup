@@ -1,15 +1,12 @@
+p.pull-right= link_to tr('New group'), new_group_path, :class => 'btn btn-primary'
+
 h1 Mi érdekel?
 
+p Válaszd ki az érdeklődési köreidet, és mi megmutatjuk a leginkább hozzád illő csoportokat!
+p= render :partial => 'taggings/button', :collection => Tag.joins(:language).where('languages.code' => I18n.locale).order('name ASC'), :as => :tag
 .row
-  .span4
-    .wrapper
-      p= link_to tr('New group'), new_group_path, :class => 'btn btn-primary'
-    .wrapper
-      p Válaszd ki az érdeklődési köreidet, és mi megmutatjuk a leginkább hozzád illő csoportokat!
-      p= render :partial => 'taggings/button', :collection => Tag.joins(:language).where('languages.code' => I18n.locale).order('name ASC'), :as => :tag
-  .span8
-    .wrapper
-      h2
-        =' tr('Groups')
-        / span.counter= current_city.name
-      .list_view= render 'groups/recommended_groups'
+  .span7
+    h2
+      =' tr('Groups')
+      / span.counter= current_city.name
+    .list_view= render 'groups/recommended_groups'

@@ -1,6 +1,6 @@
 #footer
   .clearfix
-    - unless current_organization
+    - unless Settings.standalone
       .footer-left
         - if rand(1) == 0
           = t('footer.vanity1', :usernumber => link_to(number_with_delimiter(User.count, :delimiter => ".")), :groupnumber => link_to(Group.count)).html_safe
