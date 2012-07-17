@@ -10,17 +10,17 @@ class AuthenticationsController < ApplicationController
     elsif current_user
       current_user.authentications.create! :provider => omniauth['provider'], :uid => omniauth['uid']
       current_user.apply_omniauth(omniauth)
-      current_user.save
+      current_user.save(:validate => false)
       redirect_to root_url
     else
       user = User.new :name => omniauth['info']['name'], :email => omniauth['info']['email']
-      user.authentications.build :provider => omniauth['provider'], :uid => omniauth['uid']
-      user.apply_omniauth(omniauth)
-      if user.save
+      if user.save(:validate => false)
+        user.authentications.create :provider => omniauth['provider'], :uid => omniauth['uid']
+        user.apply_omniauth(omniauth)
         sign_in_and_redirect(user)
       else
         session[:omniauth] = omniauth.except('extra')
-        redirect_to root_url
+        redirect_to sign_in_path
       end
     end
   end
@@ -35,9 +35,9 @@ private
 
   def sign_in_and_redirect(user)
     unless current_user
-      user_session = UserSession.new(user)
+      user_session = UserSession.new(User.find_by_single_access_token(user.single_access_token))
       user_session.save
     end
-    redirect_to session[:return_to] || root_url
+    redirect_to session[:return_to] || discovery_url
   end
 end

@@ -1,8 +1,8 @@
 # encoding: UTF-8
 
 class EventMailer < ActionMailer::Base
-  default_url_options[:host] = 'openmeetup.net'
-  default :from => 'noreply@openmeetup.net'
+  default_url_options[:host] = Settings.host
+  default :from => Settings.default_email
 
   def invitation(user, email, event, message)
     @user = user

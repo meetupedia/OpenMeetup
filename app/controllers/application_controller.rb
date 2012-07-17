@@ -20,9 +20,9 @@ class ApplicationController < ActionController::Base
 private
 
   def copy_flash_to_cookie
-    cookies[:flash_notice] = URI.escape(flash[:notice]).to_json if flash[:notice]
-    cookies[:flash_alert] = URI.escape(flash[:alert]).to_json if flash[:alert]
-    flash.clear
+    # cookies[:flash_notice] = URI.escape(flash[:notice]).to_json if flash[:notice]
+    # cookies[:flash_alert] = URI.escape(flash[:alert]).to_json if flash[:alert]
+    # flash.clear
   end
 
   def current_locale

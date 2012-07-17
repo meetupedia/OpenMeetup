@@ -14,12 +14,14 @@ html
     #content
       .container.wrapper
         = yield :header
-        #flash_notice.alert.alert-success
-          a.close(data-dismiss="alert")×
-          span
-        #flash_alert.alert.alert-error
-          a.close(data-dismiss="alert")×
-          span
+        - unless flash[:notice].blank?
+          #flash_notice.alert.alert-success
+            a.close(data-dismiss="alert")×
+            span= flash[:notice]
+        - unless flash[:alert0].blank?
+          #flash_alert.alert.alert-error
+            a.close(data-dismiss="alert")×
+            span= flash[:alert]
         #pjax= yield
       .container
         - if !@current_organization then

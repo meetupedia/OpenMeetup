@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   key :crypted_password
   key :password_salt
   key :persistence_token
+  key :single_access_token
   key :token
   key :location
   key :is_admin, :as => :boolean
@@ -78,7 +79,7 @@ class User < ActiveRecord::Base
   end
 
   def facebook
-    @facebook ||= FbGraph::User.new(self.uid, :access_token => self.token).fetch
+    @facebook ||= FbGraph::User.new(facebook_id, :access_token => self.token).fetch
   end
 
   def facebook_id

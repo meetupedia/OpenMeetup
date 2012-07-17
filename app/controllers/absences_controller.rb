@@ -19,6 +19,7 @@ class AbsencesController < ApplicationController
   end
 
   def set
+    @absence = @event.absences.build
     create
   end
 end
