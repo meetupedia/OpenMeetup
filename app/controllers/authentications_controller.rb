@@ -5,17 +5,15 @@ class AuthenticationsController < ApplicationController
     authentication = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
     if authentication
       authentication.user.apply_omniauth(omniauth)
-      authentication.user.save
       sign_in_and_redirect(authentication.user)
     elsif current_user
       current_user.authentications.create! :provider => omniauth['provider'], :uid => omniauth['uid']
       current_user.apply_omniauth(omniauth)
-      current_user.save(:validate => false)
       redirect_to root_url
     else
       user = User.new :name => omniauth['info']['name'], :email => omniauth['info']['email']
-      if user.save(:validate => false)
-        user.authentications.create :provider => omniauth['provider'], :uid => omniauth['uid']
+      user.authentications.build :provider => omniauth['provider'], :uid => omniauth['uid']
+      if user.save
         user.apply_omniauth(omniauth)
         sign_in_and_redirect(user)
       else

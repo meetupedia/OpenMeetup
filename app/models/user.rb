@@ -1,8 +1,6 @@
 # -*- encoding : utf-8 -*-
 
 class User < ActiveRecord::Base
-  key :provider
-  key :uid
   key :name
   key :nickname
   key :locale
@@ -43,10 +41,18 @@ class User < ActiveRecord::Base
 
   serialize :facebook_friend_ids
   auto_permalink :name
-  acts_as_authentic
+  acts_as_authentic do |c|
+    c.validate_email_field = false
+    c.validate_password_field = false
+  end
 
+  validates :password, :presence => {:if => :password_required?}, :confirmation => true
   attr_protected :is_admin
   after_validation :set_city
+
+  def password_required?
+    authentications.blank?
+  end
 
   def admin?
     is_admin?
@@ -72,6 +78,7 @@ class User < ActiveRecord::Base
       when 'twitter'
         self.twitter_id = omniauth['uid']
     end
+    save
   end
 
   def authenticated_with(provider)
