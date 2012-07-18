@@ -41,16 +41,18 @@
       h2= tr('Next event')
       .list_view= render @group.next_event
       p= link_to tr('All events'), events_group_path(@group)
+    - if Settings.enable_share_buttons
       hr
-    ' <div class="fb-like" data-href="#{group_url(@group)}" data-send="false" data-layout="box_count" data-show-faces="false"></div>
-    ' <g:plusone size="tall"></g:plusone>
-    ' <a href="https://twitter.com/share" class="twitter-share-button" data-count="vertical">Tweet</a>
-    ' <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+      ' <div class="fb-like" data-href="#{group_url(@group)}" data-send="false" data-layout="box_count" data-show-faces="false"></div>
+      ' <g:plusone size="tall"></g:plusone>
+      ' <a href="https://twitter.com/share" class="twitter-share-button" data-count="vertical">Tweet</a>
+      ' <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
-| <script type="text/javascript">
-|   (function() {
-|     var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-|     po.src = 'https://apis.google.com/js/plusone.js';
-|     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-|   })();
-| </script>
+- if Settings.enable_share_buttons
+  | <script type="text/javascript">
+  |   (function() {
+  |     var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+  |     po.src = 'https://apis.google.com/js/plusone.js';
+  |     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  |   })();
+  | </script>
