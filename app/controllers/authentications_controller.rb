@@ -9,12 +9,13 @@ class AuthenticationsController < ApplicationController
     elsif current_user
       current_user.authentications.create! :provider => omniauth['provider'], :uid => omniauth['uid']
       current_user.apply_omniauth(omniauth)
-      redirect_to root_url
+      redirect_to discovery_url
     else
       user = User.new :name => omniauth['info']['name'], :email => omniauth['info']['email']
       user.authentications.build :provider => omniauth['provider'], :uid => omniauth['uid']
       if user.save
         user.apply_omniauth(omniauth)
+        session[:return_to] = tag_myself_url
         sign_in_and_redirect(user)
       else
         session[:omniauth] = omniauth.except('extra')

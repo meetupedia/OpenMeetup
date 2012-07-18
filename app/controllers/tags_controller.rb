@@ -6,10 +6,14 @@ class TagsController < ApplicationController
   authorize_resource :except => [:index, :show]
 
   def index
-    @tags = Tag.where('name LIKE ?', "%#{params[:q]}%")
     respond_to do |format|
-      format.html
-      format.json { render :json => @tags.map { |tag| {:id => tag.id, :name => tag.name} } }
+      format.html do
+        @tags = Tag.order('name ASC')
+      end
+      format.json do
+        @tags = Tag.where('name LIKE ?', "%#{params[:q]}%")
+        render :json => @tags.map { |tag| {:id => tag.id, :name => tag.name} }
+      end
     end
   end
 

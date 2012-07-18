@@ -1,12 +1,14 @@
-p.pull-right= link_to tr('New group'), new_group_path, :class => 'btn btn-primary'
+p.pull-right= link_to tr('Finished this step'), discovery_url, :class => 'btn btn-primary'
 
-h1 Mi érdekel?
+h1= tr('What interests you?')
 
-p Válaszd ki az érdeklődési köreidet, és mi megmutatjuk a leginkább hozzád illő csoportokat!
-p= render :partial => 'taggings/button', :collection => Tag.joins(:language).where('languages.code' => I18n.locale).order('name ASC'), :as => :tag
+p= tr('Select your interests, and we will show you the most suitable groups!')
+
+#taggings= render :partial => 'taggings/button', :collection => Tag.joins(:language).where('languages.code' => I18n.locale).order('name ASC'), :as => :tag
+
+hr
+
 .row
   .span7
-    h2
-      =' tr('Groups')
-      / span.counter= current_city.name
-    .list_view= render 'groups/recommended_groups'
+    h2=' tr('Groups')
+    #groups.list_view= render 'groups/recommended_groups'

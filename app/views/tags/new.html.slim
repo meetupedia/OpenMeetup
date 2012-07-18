@@ -1,6 +1,6 @@
-h1 Címke hozzáadása
+h1= tr('Add new tag')
 
-= semantic_form_for @tag, :url => group_tags_path(@group) do |f|
+= semantic_form_for @tag do |f|
   = f.semantic_errors
   = f.inputs :name
   = f.actions

@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 
   def create
     if @user.save
-      redirect_to discovery_url
+      redirect_to tag_myself_url
     else
       render :new
     end
