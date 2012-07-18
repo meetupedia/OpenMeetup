@@ -5,11 +5,10 @@
     .clearfix
       - if @group.image.file?
         .avatar= link_to(image_tag(@group.image.url(:small), :alt => @group.name, :height => 72, :width => 72, :title => @group.name), @group)
-
-      - if current_user
-        p= render :partial => 'taggings/button', :collection => @group.tags.order('name ASC'), :as => :tag
-      - else
+      - unless (tags = @group.tags).blank?
         p= render @group.tags
+      - else
+        p= tr('No tags yet.')
     - if @group.url.present?
       div
         ' Honlap:
@@ -19,13 +18,24 @@
       div
         ' Facebook-oldal:
         = auto_link @group.facebook_url
+    - unless @group.description.blank?
+      = simple_format(@group.description)
+    - else
+      p= tr('No description yet.')
 
-    = simple_format(@group.description)
+    - unless (users = @group.members.order('users.name ASC')).empty?
+      hr
+      h2= tr('Who we are')
+      p= render 'users/user_avatars', :users => users
+
 
     hr
 
     h2= tr('Activity')
-    .list_view= render @group.activities.order('created_at DESC').limit(20)
+    - unless (activities = @group.activities.order('created_at DESC').limit(20)).blank?
+      .list_view= render activities
+    - else
+      p= tr('No activity yet.')
 
     - if Settings.enable_facebook_comments
       hr
@@ -37,6 +47,8 @@
       p= link_to image_tag(@group.images.last.image.url(:normal)), images_group_path(@group)
       p= link_to tr('All images'), images_group_path(@group)
       hr
+    - else
+      p= tr('No images yet.')
     - if @group.next_event
       h2= tr('Next event')
       .list_view= render @group.next_event

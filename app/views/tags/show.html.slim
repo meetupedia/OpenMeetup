@@ -5,7 +5,7 @@ h1
   ' :
   = @tag.name
 
-p= render @tag
+p= render 'taggings/button', :tag => @tag
 
 - unless (groups = @tag.groups).blank?
   hr
