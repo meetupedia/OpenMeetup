@@ -26,10 +26,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
-    render :layout => false if request.xhr?
-  end
-
   def update
     @user.update_attributes params[:user]
     redirect_to @user
@@ -52,6 +48,9 @@ class UsersController < ApplicationController
 
   def facebook_groups
     @facebook_groups = @user.facebook.groups
+  end
+
+  def settings
   end
 
   def tags
