@@ -105,5 +105,5 @@ hu:
 
   formtastic:
     actions:
-      create: 'Mentés'
+      create: 'Küldés'
       update: 'Mentés'
