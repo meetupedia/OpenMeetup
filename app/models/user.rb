@@ -1,9 +1,8 @@
 # -*- encoding : utf-8 -*-
 
 class User < ActiveRecord::Base
-  key :provider
-  key :uid
   key :name
+  key :nickname
   key :locale
   key :permalink
   key :email, :index => true
@@ -11,6 +10,7 @@ class User < ActiveRecord::Base
   key :crypted_password
   key :password_salt
   key :persistence_token
+  key :single_access_token
   key :token
   key :location
   key :is_admin, :as => :boolean
@@ -25,7 +25,6 @@ class User < ActiveRecord::Base
   has_many :event_invitations, :dependent => :nullify
   has_many :event_invitation_targets, :foreign_key => :invited_user_id, :dependent => :destroy
   has_many :events, :dependent => :nullify
-  has_many :follows, :dependent => :destroy
   has_many :group_invitations, :dependent => :nullify
   has_many :groups, :dependent => :nullify
   has_many :joined_events, :through => :participations, :source => :event
@@ -42,10 +41,18 @@ class User < ActiveRecord::Base
 
   serialize :facebook_friend_ids
   auto_permalink :name
-  acts_as_authentic
+  acts_as_authentic do |c|
+    c.validate_email_field = false
+    c.validate_password_field = false
+  end
 
+  validates :password, :presence => {:if => :password_required?}, :confirmation => true
   attr_protected :is_admin
   after_validation :set_city
+
+  def password_required?
+    authentications.blank?
+  end
 
   def admin?
     is_admin?
@@ -71,6 +78,7 @@ class User < ActiveRecord::Base
       when 'twitter'
         self.twitter_id = omniauth['uid']
     end
+    save
   end
 
   def authenticated_with(provider)
@@ -78,7 +86,7 @@ class User < ActiveRecord::Base
   end
 
   def facebook
-    @facebook ||= FbGraph::User.new(self.uid, :access_token => self.token).fetch
+    @facebook ||= FbGraph::User.new(facebook_id, :access_token => self.token).fetch
   end
 
   def facebook_id

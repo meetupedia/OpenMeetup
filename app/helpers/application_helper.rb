@@ -7,10 +7,8 @@ module ApplicationHelper
   end
 
   def user_avatar(user)
-    filename = case user.provider
-      when 'facebook' then "https://graph.facebook.com/#{user.uid}/picture"
-      else 'default_avatar.png'
-    end
+    filename = 'default_avatar.png'
+    filename = "https://graph.facebook.com/#{user.facebook_id}/picture" if user.facebook_id
     link_to(image_tag(filename, :alt => user.name, :height => 32, :width => 32, :title => user.name, :class => 'avatar_image'), user)
   end
 

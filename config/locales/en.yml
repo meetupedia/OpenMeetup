@@ -56,3 +56,8 @@ en:
     previous_label: '« Previous'
     next_label: 'Next »'
     page_gap: '…'
+
+  formtastic:
+    actions:
+      create: 'Save'
+      update: 'Save'

@@ -30,7 +30,7 @@
 # '<abbr title="required">*</abbr>'. In other words, if you configure formtastic.required
 # in your locale, it will replace the abbr title properly. But if you don't want to use
 # abbr tag, you can simply give a string as below
-# Formtastic::FormBuilder.required_string = "(required)"
+Formtastic::FormBuilder.required_string = %{ <abbr title="#{'required'.trl}">*</abbr>}.html_safe
 
 # Set the string that will be appended to the labels/fieldsets which are optional
 # Defaults to an empty string ("") and also accepts procs (see required_string above)
@@ -92,6 +92,13 @@ module FormtasticBootstrap
         def fragment_input_html(fragment)
           opts = input_options.merge(:prefix => fragment_prefix, :field_name => fragment_name(fragment), :default => value, :include_blank => include_blank?)
           template.send(:"select_#{fragment}", value, opts, input_html_options.merge(:id => fragment_id(fragment)))
+        end
+      end
+
+      module Labelling
+
+        def localized_label
+          Tr8n::Config.current_language.tr(label_from_options || method.to_s.send(FormBuilder.label_str_method))
         end
       end
     end

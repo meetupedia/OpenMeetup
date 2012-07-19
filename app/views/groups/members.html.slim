@@ -2,8 +2,8 @@
 
 .row
   .span7
-    - unless current_organization
-      - if current_user and not (users = @group.members.where('users.uid' => current_user.facebook_friend_ids).order('users.permalink ASC')).empty?
+    - if Settings.enable_facebook_login
+      - if current_user and not (users = @group.members.joins(:authentications).where('authentications.uid' => current_user.facebook_friend_ids, 'authentications.provider' => 'facebook').order('users.permalink ASC')).empty?
         h2= tr('Facebook friends')
         p= render 'users/user_avatars', :users => users
     h2= tr('Members')

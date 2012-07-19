@@ -1,1 +1,15 @@
-= render @tag
+.pull-right= link_to tr('All tags'), tags_path, :class => 'btn'
+
+h1
+  = tr('Tag')
+  ' :
+  = @tag.name
+
+p= render 'taggings/button', :tag => @tag
+
+- unless (groups = @tag.groups).blank?
+  hr
+  .row
+    .span7
+      h2= tr('Groups')
+      .list_view= render groups

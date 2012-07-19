@@ -20,6 +20,7 @@ class ParticipationsController < ApplicationController
   end
 
   def set
+    @participation = @event.participations.build
     create
   end
 end

@@ -9,11 +9,15 @@ ul.nav.nav-tabs
     = semantic_form_for @user do |f|
       = f.inputs do
         = f.input :name
+        = f.input :nickname
         = f.input :email
         = f.input :password
         = f.input :password_confirmation
       = f.actions
   .span4.offset1
-    - unless current_organization
+    - if Settings.enable_facebook_login
       h2= tr('Sign up with Facebook')
-      p.facebook_connect= link_to image_tag('facebook_connect.png', :alt => tr('Sign in with Facebook')), auth_path(:facebook)
+      p= link_to image_tag('facebook_connect.png', :alt => tr('Sign up with Facebook')), auth_path(:facebook)
+    - if Settings.enable_twitter_login
+      h2= tr('Sign up with Twitter')
+      p= link_to image_tag('twitter_connect.png', :alt => tr('Sign up with Twitter')), auth_path(:twitter)

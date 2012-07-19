@@ -21,6 +21,6 @@
           li= link_to tr('Sign up'), new_user_path, 'data-disable-pjax' => true
         - else
           li= link_to tr('My profile'), current_user
-          li= link_to tr('Groups'), groups_user_path(current_user)
+          li= link_to tr('My groups'), groups_user_path(current_user)
           li= link_to tr('Messages'), waves_user_path(current_user)
           li= link_to tr('Sign out'), sign_out_path, 'data-disable-pjax' => true

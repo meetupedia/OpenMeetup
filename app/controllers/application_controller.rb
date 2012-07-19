@@ -1,12 +1,11 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :set_locale, :set_domain, :copy_flash_to_cookie
-  helper_method :current_city, :current_language, :current_organization, :current_user
+  helper_method :current_city, :current_language, :current_user
   helper LaterDude::CalendarHelper
-  layout :set_layout
 
   auto_user
 
@@ -20,9 +19,9 @@ class ApplicationController < ActionController::Base
 private
 
   def copy_flash_to_cookie
-    cookies[:flash_notice] = URI.escape(flash[:notice]).to_json if flash[:notice]
-    cookies[:flash_alert] = URI.escape(flash[:alert]).to_json if flash[:alert]
-    flash.clear
+    # cookies[:flash_notice] = URI.escape(flash[:notice]).to_json if flash[:notice]
+    # cookies[:flash_alert] = URI.escape(flash[:alert]).to_json if flash[:alert]
+    # flash.clear
   end
 
   def current_locale
@@ -51,18 +50,15 @@ private
     @current_language ||= Language.find_by_code(I18n.locale)
   end
 
-  def current_organization
-    @current_organization ||= if Rails.env == 'development'
-      Organization.first
-    elsif request.domain == 'openmeetup.net'
-      Organization.find_by_permalink(request.subdomains.first)
-    else
-      Organization.find_by_permalink(request.domain.split('.').first)
-    end
-  end
-
   def store_location
     session[:return_to] = request.fullpath
+  end
+
+  def authenticate
+    unless current_user
+      store_location
+      redirect_to sign_in_url
+    end
   end
 
   def redirect_back_or_default(default)
@@ -91,16 +87,12 @@ private
   end
 
   def set_city
-    redirect_to edit_city_user_path(current_user) if current_user and not current_city and not current_organization
+    redirect_to edit_city_user_path(current_user) if current_user and not current_city and not Settings.standalone
   end
 
   def set_domain
 #    host = request.env['HTTP_HOST'].split(':').first
 #    request.env['rack.session.options'][:domain] = ".#{host}"
-  end
-
-  def set_layout
-    current_organization.andand.layout_name || 'application'
   end
 
   def set_locale
