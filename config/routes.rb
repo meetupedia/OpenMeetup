@@ -53,6 +53,8 @@ Openmeetup::Application.routes.draw do
   resources :passwords
   resource :user_sessions
 
+  resources :tags
+
   resources :users do
     resources :user_follows, :shallow => true
     collection do
@@ -60,6 +62,7 @@ Openmeetup::Application.routes.draw do
     end
     member do
       get :edit_city
+      get :activities
       get :facebook_groups
       get :groups
       get :settings

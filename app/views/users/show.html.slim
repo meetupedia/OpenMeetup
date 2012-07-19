@@ -2,9 +2,17 @@
 
 .row
   .span7
-    h2= tr('Activity')
-    .list_view= render @user.activities.order('created_at DESC').limit(10)
-  .span4.offset1
     h2= tr('User data')
+    table.table
+      tr
+        th= tr('Name')
+        td= @user.name
+      tr
+        th= tr('Nickname')
+        td
+          - if not @user.nickname.blank?
+            = @user.nickname
+          - elsif can? :edit, @user
+            = link_to '?', settings_user_path(@user)
     - if @user.facebook_id
       p= link_to tr('Facebook profile'), "http://www.facebook.com/profile.php?id=#{@user.facebook_id}"

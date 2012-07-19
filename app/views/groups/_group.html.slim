@@ -14,6 +14,6 @@
       = render 'users/user_avatars', :users => users[0..11]
       - if users.size > 12
         = link_to '»', group
-  - if current_user and not (users = group.members.where('users.uid' => current_user.facebook_friend_ids).order('users.permalink ASC')).empty?
+  - if Settings.enable_facebook_login and current_user and not (users = group.members.joins(:authentications).where('authentications.uid' => current_user.facebook_friend_ids, 'authentications.provider' => 'facebook').order('users.permalink ASC')).empty?
     h5= tr('Joined Facebook friends')
     p= render 'users/user_avatars', :users => users

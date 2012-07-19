@@ -1,4 +1,7 @@
+# encoding: UTF-8
+
 class DiscoveryController < ApplicationController
+  before_filter :authenticate
 
   def index
     unless params[:q].blank?

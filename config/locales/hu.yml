@@ -52,50 +52,6 @@ hu:
     vanity1: 'Már %{usernumber} ember és %{groupnumber} közösség csatlakozott hozzánk.'
     vanity2: 'Már %{eventnumber} találkozó létrejöttében segítettünk, %{eventthisweeknumber} találkozó lesz ezen a héten.'
 
-  formtastic:
-    actions:
-      create: 'Mentés'
-      update: 'Mentés'
-    labels:
-      event:
-        city: 'Település'
-        end_time: 'Vége'
-        description: 'Leírás'
-        place: 'Helyszín elnevezése'
-        start_time: 'Kezdete'
-        street: 'Utca, házszám'
-        title: 'Elnevezés'
-      event_invitation:
-        emails: 'E-mail-címek'
-        message: 'Üzenet'
-      group:
-        description: 'Leírás (pl. A hétvégén majd felmegyünk a hegyekbe)'
-        facebook_url: 'Facebook (pl. http://facebook.com/turazok)'
-        image: 'Kép'
-        is_closed: 'Rejtett csoport legyen? (csak a csoport tagok látják, a többiek nem)'
-        location: 'Város (pl. Budapest)'
-        name: 'Név (pl. Túrázók társasága)'
-        tags: 'Címkék'
-        url: 'Honlap (pl. http://turazunk.blogspot.com)'
-      tag:
-        name: 'Címke'
-      user:
-        city: 'Város'
-        email: 'E-mail'
-        location: 'Hely'
-        name: 'Név'
-        password: 'Jelszó'
-        password_confirmation: 'Jelszó ellenőrzése'
-      user_session:
-        email: 'E-mail'
-        password: 'Jelszó'
-        remember_me: 'Emlékezz rám'
-      wave_item:
-        body: 'Szöveg'
-      wave:
-        body: 'Szöveg'
-        subject: 'Tárgy'
-
   date:
     formats:
       default: '%Y. %B %e.'
@@ -146,3 +102,8 @@ hu:
     previous_label: '« Előző'
     next_label: 'Következő »'
     page_gap: '…'
+
+  formtastic:
+    actions:
+      create: 'Mentés'
+      update: 'Mentés'

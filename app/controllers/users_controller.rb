@@ -2,7 +2,7 @@
 
 class UsersController < ApplicationController
   load_resource
-  authorize_resource :except => [:index, :show, :groups, :validate_email]
+  authorize_resource :except => [:index, :show, :activities, :groups, :validate_email]
   before_filter :set_city, :except => [:edit, :update, :edit_city]
 
   def index
@@ -20,19 +20,18 @@ class UsersController < ApplicationController
 
   def create
     if @user.save
-      redirect_to discovery_url
+      redirect_to tag_myself_url
     else
       render :new
     end
   end
 
-  def edit
-    render :layout => false if request.xhr?
-  end
-
   def update
     @user.update_attributes params[:user]
     redirect_to @user
+  end
+
+  def activities
   end
 
   def dashboard
@@ -49,6 +48,9 @@ class UsersController < ApplicationController
 
   def facebook_groups
     @facebook_groups = @user.facebook.groups
+  end
+
+  def settings
   end
 
   def tags
