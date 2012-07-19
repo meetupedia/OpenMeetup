@@ -59,7 +59,7 @@ class User < ActiveRecord::Base
   end
 
   def guest?
-    !admin?
+    false
   end
 
   def mugshot
