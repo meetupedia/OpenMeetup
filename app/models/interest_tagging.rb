@@ -7,4 +7,4 @@ class InterestTagging < ActiveRecord::Base
   belongs_to :user
 end
 
-GroupTagging.auto_upgrade!
+InterestTagging.auto_upgrade!

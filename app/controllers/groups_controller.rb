@@ -36,7 +36,7 @@ class GroupsController < ApplicationController
 
   def destroy
     @group.destroy
-    redirect_to dashboard_user_path(current_user)
+    redirect_to groups_user_path(current_user)
   end
 
   def events

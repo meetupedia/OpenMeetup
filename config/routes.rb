@@ -43,6 +43,10 @@ Openmeetup::Application.routes.draw do
     end
   end
 
+  resources :interests do
+    resources :interest_taggings, :shallow => true
+  end
+
   resources :organizations do
     member do
       get :add_tag

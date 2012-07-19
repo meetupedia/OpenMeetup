@@ -3,7 +3,13 @@
 class Interest < ActiveRecord::Base
   key :name
   key :permalink
+  key :image_file_name
+  key :image_content_type
+  key :image_file_size, :as => :integer
+  key :image_updated_at, :as => :datetime
   timestamps
+
+  has_many :interest_taggings
 
   auto_permalink :name
 
@@ -15,6 +21,10 @@ class Interest < ActiveRecord::Base
       :normal => ['128x128#', :jpg]
     },
     :convert_options => {:all => '-quality 95 -strip'}
+
+  def interest_tagging_for(user)
+    InterestTagging.find_by_interest_id_and_user_id(self.id, user.id)
+  end
 end
 
 Interest.auto_upgrade!

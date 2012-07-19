@@ -46,12 +46,12 @@ class User < ActiveRecord::Base
     c.validate_password_field = false
   end
 
-  validates :crypted_password, :presence => {:if => :password_required?}, :confirmation => true
+  validates :password, :presence => {:if => :password_required?}, :confirmation => true
   attr_protected :is_admin
   after_validation :set_city
 
   def password_required?
-    authentications.blank?
+    authentications.blank? and crypted_password.blank?
   end
 
   def admin?

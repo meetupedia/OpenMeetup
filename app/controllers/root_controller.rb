@@ -21,5 +21,6 @@ class RootController < ApplicationController
   end
 
   def tag_myself
+    redirect_to discovery_url if Interest.count == 0
   end
 end
