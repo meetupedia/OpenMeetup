@@ -4,7 +4,7 @@ class RootController < ApplicationController
   before_filter :authenticate, :only => [:tag_myself]
 
   def index
-    redirect_to discovery_url
+    redirect_to discovery_url if current_user
   end
 
   def intro
