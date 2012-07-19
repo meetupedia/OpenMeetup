@@ -46,10 +46,10 @@
     - if @group.images.size > 0
       p= link_to image_tag(@group.images.last.image.url(:normal)), images_group_path(@group)
       p= link_to tr('All images'), images_group_path(@group)
-      hr
     - else
       p= tr('No images yet.')
     - if @group.next_event
+      hr
       h2= tr('Next event')
       .list_view= render @group.next_event
       p= link_to tr('All events'), events_group_path(@group)
