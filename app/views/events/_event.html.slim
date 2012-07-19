@@ -7,4 +7,4 @@
     = dot
     = event.address
     = dot
-    = link_to "#{event.participations.size} #{tr('participants')}", users_event_path(event)
+    = link_to "#{event.participations.size} #{tr('participants')}".html_safe, users_event_path(event)
