@@ -159,13 +159,11 @@ ActiveRecord::Schema.define(:version => 20120618082322) do
     t.string   "facebook_uid"
     t.integer  "language_id"
     t.integer  "city_id"
-    t.integer  "organization_id"
   end
 
   add_index "groups", ["city_id"], :name => "index_groups_on_city_id"
   add_index "groups", ["language_id"], :name => "index_groups_on_language_id"
   add_index "groups", ["location"], :name => "index_groups_on_location"
-  add_index "groups", ["organization_id"], :name => "index_groups_on_organization_id"
   add_index "groups", ["permalink"], :name => "index_groups_on_permalink"
   add_index "groups", ["user_id"], :name => "index_groups_on_user_id"
 
@@ -200,14 +198,6 @@ ActiveRecord::Schema.define(:version => 20120618082322) do
 
   add_index "memberships", ["group_id"], :name => "index_memberships_on_group_id"
   add_index "memberships", ["user_id"], :name => "index_memberships_on_user_id"
-
-  create_table "organizations", :force => true do |t|
-    t.string "name"
-    t.string "permalink"
-    t.string "layout_name"
-    t.text   "layout"
-    t.text   "stylesheets"
-  end
 
   create_table "participations", :force => true do |t|
     t.datetime "created_at"
