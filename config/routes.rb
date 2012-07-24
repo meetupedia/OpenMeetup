@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 
 Openmeetup::Application.routes.draw do
   mount WillFilter::Engine => '/will_filter'
@@ -76,9 +76,7 @@ Openmeetup::Application.routes.draw do
   match '/search' => 'search#index', :as => :search
   match '/dashboard' => 'root#dashboard', :as => :dashboard
   match '/intro' => 'root#intro', :as => :intro
-  match '/discovery' => 'discovery#index', :as => :discovery
 
-  match '/system' => 'system#index', :as => :system
   match '/reload' => 'system#reload', :as => :reload
   match '/download_database' => 'system#download_database', :as => :download_database
 
