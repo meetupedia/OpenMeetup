@@ -10,7 +10,7 @@ class TaggingsController < ApplicationController
       @tagging.save
       create_activity @tagging
     end
-    redirect_to tag_myself_url unless request.xhr?
+    redirect_to interests_url unless request.xhr?
   end
 
   def destroy
@@ -18,7 +18,7 @@ class TaggingsController < ApplicationController
     if request.xhr?
       render :create
     else
-      redirect_to tag_myself_url
+      redirect_to interests_url
     end
   end
 end

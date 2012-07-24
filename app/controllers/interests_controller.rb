@@ -4,9 +4,13 @@ class InterestsController < ApplicationController
   load_resource
   authorize_resource
 
+  def index
+    redirect_to discovery_url if Interest.count == 0
+  end
+
   def create
     @interest.save
-    redirect_to tag_myself_url
+    redirect_to interests_url
   end
 
   def edit
@@ -14,6 +18,6 @@ class InterestsController < ApplicationController
 
   def update
     @interest.update_attributes params[:interest]
-    redirect_to tag_myself_url
+    redirect_to interests_url
   end
 end

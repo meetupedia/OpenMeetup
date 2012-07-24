@@ -74,7 +74,6 @@ Openmeetup::Application.routes.draw do
   match '/about' => 'root#about', :as => :about
   match '/developer_dashboard' => 'root#developer_dashboard', :as => :developer_dashboard
   match '/search' => 'search#index', :as => :search
-  match '/tag_myself' => 'root#tag_myself', :as => :tag_myself
   match '/dashboard' => 'root#dashboard', :as => :dashboard
   match '/intro' => 'root#intro', :as => :intro
   match '/discovery' => 'discovery#index', :as => :discovery
