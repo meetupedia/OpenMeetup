@@ -75,8 +75,10 @@ Openmeetup::Application.routes.draw do
   match '/developer_dashboard' => 'root#developer_dashboard', :as => :developer_dashboard
   match '/search' => 'search#index', :as => :search
   match '/dashboard' => 'root#dashboard', :as => :dashboard
-  match '/intro' => 'root#intro', :as => :intro
 
+  match '/discovery' => 'discovery#index', :as => :discovery
+
+  match '/system' => 'system#index', :as => :system
   match '/reload' => 'system#reload', :as => :reload
   match '/download_database' => 'system#download_database', :as => :download_database
 
