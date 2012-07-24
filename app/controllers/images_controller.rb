@@ -4,7 +4,7 @@ class ImagesController < ApplicationController
   load_resource :event
   load_resource :group
   load_resource :image, :through => [:event, :group], :shallow => true
-#  authorize_resource
+  authorize_resource
 
   def create
     @image = Image.new(coerce(params)[:image])
