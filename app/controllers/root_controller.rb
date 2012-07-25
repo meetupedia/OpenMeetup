@@ -1,7 +1,6 @@
 # encoding: UTF-8
 
 class RootController < ApplicationController
-  before_filter :authenticate, :only => [:tag_myself]
 
   def index
     redirect_to discovery_url if current_user
@@ -18,8 +17,5 @@ class RootController < ApplicationController
   end
 
   def dashboard
-  end
-
-  def tag_myself
   end
 end

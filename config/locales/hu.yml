@@ -20,7 +20,6 @@ hu:
     messages: 'Üzenetek'
     profile: 'Profil'
     search: 'Keresés'
-    organization: 'Szervezet'
     home: 'Kezdőlap'
     login: 'Belépés'
   user:

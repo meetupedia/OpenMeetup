@@ -51,7 +51,7 @@ class User < ActiveRecord::Base
   after_validation :set_city
 
   def password_required?
-    authentications.blank?
+    authentications.blank? and crypted_password.blank?
   end
 
   def admin?
@@ -59,7 +59,7 @@ class User < ActiveRecord::Base
   end
 
   def guest?
-    !admin?
+    false
   end
 
   def mugshot

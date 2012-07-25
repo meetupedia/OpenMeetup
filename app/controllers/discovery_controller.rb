@@ -2,6 +2,7 @@
 
 class DiscoveryController < ApplicationController
   before_filter :authenticate
+  before_filter :set_city
 
   def index
     unless params[:q].blank?

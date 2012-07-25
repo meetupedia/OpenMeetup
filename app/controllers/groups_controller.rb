@@ -15,7 +15,6 @@ class GroupsController < ApplicationController
 
   def create
     if @group.save
-      current_organization.groups << @group if current_organization
       create_activity @group
       redirect_to @group
     else
@@ -37,7 +36,7 @@ class GroupsController < ApplicationController
 
   def destroy
     @group.destroy
-    redirect_to dashboard_user_path(current_user)
+    redirect_to groups_user_path(current_user)
   end
 
   def events

@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 
   def create
     if @user.save
-      redirect_to tag_myself_url
+      redirect_to interests_url
     else
       render :new
     end
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
 
   def update
     @user.update_attributes params[:user]
-    redirect_to @user
+    redirect_back_or_default @user
   end
 
   def activities

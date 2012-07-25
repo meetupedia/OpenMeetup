@@ -15,7 +15,7 @@ class AuthenticationsController < ApplicationController
       user.authentications.build :provider => omniauth['provider'], :uid => omniauth['uid']
       if user.save
         user.apply_omniauth(omniauth)
-        session[:return_to] = tag_myself_url
+        session[:return_to] = interests_url
         sign_in_and_redirect(user)
       else
         session[:omniauth] = omniauth.except('extra')

@@ -27,10 +27,8 @@ class Event < ActiveRecord::Base
   has_many :participants, :through => :participations, :source => :user
   has_many :waves, :dependent => :nullify
 
-  acts_as_gmappable
+  acts_as_gmappable :validation => false
   auto_permalink :title
-
-  validates :city, :street, :presence => true
 
   after_create :create_admin_participation
 
@@ -44,6 +42,10 @@ class Event < ActiveRecord::Base
 
   def create_admin_participation
     Participation.create :event => self
+  end
+
+  def geocode?
+    city.present? and street.present?
   end
 
   def gmaps4rails_address
