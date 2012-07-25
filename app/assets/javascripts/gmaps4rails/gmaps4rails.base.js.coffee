@@ -1,6 +1,9 @@
 Gmaps = {}
 
-Gmaps.loadMaps = -> 
+Gmaps.triggerOldOnload = ->
+  Gmaps.oldOnload() if typeof(Gmaps.oldOnload) == 'function'
+
+Gmaps.loadMaps = ->
   #loop through all variable names.
   #there should only be maps inside so it trigger their load function
   for key, value of Gmaps
@@ -15,7 +18,8 @@ class @Gmaps4Rails
 
   constructor: ->
     #map config
-    @map =  null               #contains the map we're working on
+    @map =  null               #DEPRECATED: will still contain a copy of serviceObject below as transition
+    @serviceObject = null      #contains the map we're working on
     @visibleInfoWindow = null  #contains the current opened infowindow
     @userLocation = null       #contains user's location if geolocalization was performed and successful
 
@@ -26,22 +30,22 @@ class @Gmaps4Rails
     @infobox            = -> false  #to let user use custom infoboxes
     @jsTemplate         = false     #to let user create infowindows client side
 
-    @default_map_options = 
+    @default_map_options =
       id: 'map'
       draggable: true
       detect_location: false  # should the browser attempt to use geolocation detection features of HTML5?
       center_on_user: false   # centers map on the location detected through the browser
       center_latitude: 0
-      center_longitude: 0 
+      center_longitude: 0
       zoom: 7
       maxZoom: null
       minZoom: null
       auto_adjust : true      # adjust the map to the markers if set to true
       auto_zoom: true         # zoom given by auto-adjust
-      bounds: []              # adjust map to these limits. Should be [{"lat": , "lng": }]    
+      bounds: []              # adjust map to these limits. Should be [{"lat": , "lng": }]
       raw: {}                  # raw json to pass additional options
 
-    @default_markers_conf = 
+    @default_markers_conf =
       #Marker config
       title: ""
       #MarkerImage config
@@ -50,7 +54,7 @@ class @Gmaps4Rails
       length: 32
       draggable: false         # how to modify: <%= gmaps( "markers" => { "data" => @object.to_gmaps4rails, "options" => { "draggable" => true }}) %>
       #clustering config
-      do_clustering: true      # do clustering if set to true
+      do_clustering: false     # do clustering if set to true
       randomize: false         # Google maps can't display two markers which have the same coordinates. This randomizer enables to prevent this situation from happening.
       max_random_distance: 100 # in meters. Each marker coordinate could be altered by this distance in a random direction
       list_container: null     # id of the ul that will host links to all markers
@@ -65,15 +69,16 @@ class @Gmaps4Rails
     @circles = []            # contains raw data, array of hash
     @markerClusterer = null  # contains all marker clusterers
     @markerImages = []
-  
+
   #tnitializes the map
   initialize : ->
-    @map = @createMap()
-    if (@map_options.detect_location == true or @map_options.center_on_user == true) 
-      @findUserLocation(this)       
+    @serviceObject = @createMap()
+    @map = @serviceObject #beware, soon deprecated
+    if (@map_options.detect_location == true or @map_options.center_on_user == true)
+      @findUserLocation(this)
     #resets sidebar if needed
     @resetSidebarContent()
-      
+
   findUserLocation : (map_object) ->
     if (navigator.geolocation)
       #try to retrieve user's position
@@ -84,9 +89,9 @@ class @Gmaps4Rails
           map_object.centerMapOnUser()
       positionFailure = ->
         map_object.geolocationFailure(true)
-                 
+
       navigator.geolocation.getCurrentPosition( positionSuccessful, positionFailure)
-    else 
+    else
       #failure but the navigator doesn't handle geolocation
       map_object.geolocationFailure(false)
 
@@ -99,18 +104,18 @@ class @Gmaps4Rails
     directionsDisplay = new google.maps.DirectionsRenderer()
     directionsService = new google.maps.DirectionsService()
 
-    directionsDisplay.setMap(@map)
+    directionsDisplay.setMap(@serviceObject)
     #display panel only if required
-    if @direction_conf.display_panel 
+    if @direction_conf.display_panel
       directionsDisplay.setPanel(document.getElementById(@direction_conf.panel_id))
-      
+
     directionsDisplay.setOptions
       suppressMarkers:     false
       suppressInfoWindows: false
       suppressPolylines:   false
-    
-    request = 
-      origin:             @direction_conf.origin 
+
+    request =
+      origin:             @direction_conf.origin
       destination:        @direction_conf.destination
       waypoints:          @direction_conf.waypoints
       optimizeWaypoints:  @direction_conf.optimizeWaypoints
@@ -159,7 +164,7 @@ class @Gmaps4Rails
         radius:        circle.radius
 
       circle.serviceObject = newCircle
-      newCircle.setMap(@map)
+      newCircle.setMap(@serviceObject)
 
   # clear circles
   clear_circles : ->
@@ -181,7 +186,7 @@ class @Gmaps4Rails
       @show_circle @circle
 
   show_circle : (circle) ->
-    circle.serviceObject.setMap(@map)
+    circle.serviceObject.setMap(@serviceObject)
 
   #////////////////////////////////////////////////////
   #///////////////////// POLYGONS /////////////////////
@@ -195,7 +200,7 @@ class @Gmaps4Rails
   #creates a single polygon, triggered by create_polygons
   create_polygon : (polygon) ->
     polygon_coordinates = []
-    
+
     #Polygon points are in an Array, that's why looping is necessary
     for point in polygon
       latlng = @createLatLng(point.lat, point.lng)
@@ -207,7 +212,8 @@ class @Gmaps4Rails
         strokeWeight  = point.strokeWeight  || @polygons_conf.strokeWeight
         fillColor     = point.fillColor     || @polygons_conf.fillColor
         fillOpacity   = point.fillOpacity   || @polygons_conf.fillOpacity
-
+        clickable     = point.clickable     || @polygons_conf.clickable
+        
     #Construct the polygon
     new_poly = new google.maps.Polygon
       paths:          polygon_coordinates
@@ -216,8 +222,8 @@ class @Gmaps4Rails
       strokeWeight:   strokeWeight
       fillColor:      fillColor
       fillOpacity:    fillOpacity
-      clickable:      false
-      map:            @map
+      clickable:      clickable
+      map:            @serviceObject
 
     #save polygon in list
     polygon.serviceObject = new_poly
@@ -225,7 +231,7 @@ class @Gmaps4Rails
   #////////////////////////////////////////////////////
   #/////////////////// POLYLINES //////////////////////
   #////////////////////////////////////////////////////
-  
+
   #replace old markers with new markers on an existing map
   replacePolylines : (new_polylines) ->
     #reset previous polylines and kill them from map
@@ -236,7 +242,7 @@ class @Gmaps4Rails
     @create_polylines()
     #.... and adjust map boundaries
     @adjustMapToBounds()
-  
+
   destroy_polylines : ->
     for polyline in @polylines
       #delete polylines from map
@@ -252,17 +258,16 @@ class @Gmaps4Rails
   #creates a single polyline, triggered by create_polylines
   create_polyline : (polyline) ->
     polyline_coordinates = []
-    
+
     #2 cases here, either we have a coded array of LatLng or we have an Array of LatLng
     for element in polyline
       #if we have a coded array
       if element.coded_array?
         decoded_array = new google.maps.geometry.encoding.decodePath(element.coded_array)
         #loop through every point in the array
-        for point in decoded_array.length
+        for point in decoded_array
           polyline_coordinates.push(point)
-          polyline_coordinates.push(point)
-    
+
       #or we have an array of latlng
       else
         #by convention, a single polyline could be customized in the first array or it uses default values
@@ -270,29 +275,32 @@ class @Gmaps4Rails
           strokeColor   = element.strokeColor   || @polylines_conf.strokeColor
           strokeOpacity = element.strokeOpacity || @polylines_conf.strokeOpacity
           strokeWeight  = element.strokeWeight  || @polylines_conf.strokeWeight
-        
+          clickable     = element.clickable     || @polylines_conf.clickable
+          zIndex        = element.zIndex        || @polylines_conf.zIndex
+
         #add latlng if positions provided
-        if element.lat? && element.lng?	
+        if element.lat? && element.lng?
           latlng = @createLatLng(element.lat, element.lng)
           polyline_coordinates.push(latlng)
 
-    # Construct the polyline		
+    # Construct the polyline
     new_poly = new google.maps.Polyline
       path:         polyline_coordinates
       strokeColor:  strokeColor
       strokeOpacity: strokeOpacity
       strokeWeight: strokeWeight
-      clickable:     false
+      clickable:    clickable
+      zIndex:       zIndex
 
     #save polyline
     polyline.serviceObject = new_poly
-    new_poly.setMap(@map)
+    new_poly.setMap(@serviceObject)
 
   #////////////////////////////////////////////////////
   #///////////////////// MARKERS //////////////////////
   #////////////////////////////////////////////////////
 
-  #creates, clusterizes and adjusts map 
+  #creates, clusterizes and adjusts map
   create_markers : ->
     @createServiceMarkersFromMarkers()
     @clusterize()
@@ -300,42 +308,44 @@ class @Gmaps4Rails
   #create google.maps Markers from data provided by user
   createServiceMarkersFromMarkers : ->
     for marker, index in @markers
-      #extract options, test if value passed or use default
-      Lat = @markers[index].lat
-      Lng = @markers[index].lng
+      if not @markers[index].serviceObject?
+        #extract options, test if value passed or use default
+        Lat = @markers[index].lat
+        Lng = @markers[index].lng
 
-      #alter coordinates if randomize is true
-      if @markers_conf.randomize
-        LatLng = @randomize(Lat, Lng)
-        #retrieve coordinates from the æarray
-        Lat = LatLng[0]
-        Lng = LatLng[1]
-      
-      #save object
-      @markers[index].serviceObject = @createMarker
-        "marker_picture":   if @markers[index].picture  then @markers[index].picture else @markers_conf.picture
-        "marker_width":     if @markers[index].width    then @markers[index].width   else @markers_conf.width
-        "marker_height":    if @markers[index].height   then @markers[index].height  else @markers_conf.length
-        "marker_title":     if @markers[index].title    then @markers[index].title   else null
-        "marker_anchor":    if @markers[index].marker_anchor  then @markers[index].marker_anchor  else null
-        "shadow_anchor":    if @markers[index].shadow_anchor  then @markers[index].shadow_anchor  else null
-        "shadow_picture":   if @markers[index].shadow_picture then @markers[index].shadow_picture else null
-        "shadow_width":     if @markers[index].shadow_width   then @markers[index].shadow_width   else null
-        "shadow_height":    if @markers[index].shadow_height  then @markers[index].shadow_height  else null
-        "marker_draggable": if @markers[index].draggable      then @markers[index].draggable      else @markers_conf.draggable
-        "rich_marker":      if @markers[index].rich_marker    then @markers[index].rich_marker    else null
-        "Lat":              Lat
-        "Lng":              Lng
-        "index":            index
+        #alter coordinates if randomize is true
+        if @markers_conf.randomize
+          LatLng = @randomize(Lat, Lng)
+          #retrieve coordinates from the array
+          Lat = LatLng[0]
+          Lng = LatLng[1]
 
-      #add infowindowstuff if enabled
-      @createInfoWindow(@markers[index])
-      #create sidebar if enabled
-      @createSidebar(@markers[index])
-      
+        #save object
+        @markers[index].serviceObject = @createMarker
+          "marker_picture":   if @markers[index].picture  then @markers[index].picture else @markers_conf.picture
+          "marker_width":     if @markers[index].width    then @markers[index].width   else @markers_conf.width
+          "marker_height":    if @markers[index].height   then @markers[index].height  else @markers_conf.length
+          "marker_title":     if @markers[index].title    then @markers[index].title   else null
+          "marker_anchor":    if @markers[index].marker_anchor  then @markers[index].marker_anchor  else null
+          "shadow_anchor":    if @markers[index].shadow_anchor  then @markers[index].shadow_anchor  else null
+          "shadow_picture":   if @markers[index].shadow_picture then @markers[index].shadow_picture else null
+          "shadow_width":     if @markers[index].shadow_width   then @markers[index].shadow_width   else null
+          "shadow_height":    if @markers[index].shadow_height  then @markers[index].shadow_height  else null
+          "marker_draggable": if @markers[index].draggable      then @markers[index].draggable      else @markers_conf.draggable
+          "rich_marker":      if @markers[index].rich_marker    then @markers[index].rich_marker    else null
+          "zindex":           if @markers[index].zindex         then @markers[index].zindex         else null
+          "Lat":              Lat
+          "Lng":              Lng
+          "index":            index
+
+        #add infowindowstuff if enabled
+        @createInfoWindow(@markers[index])
+        #create sidebar if enabled
+        @createSidebar(@markers[index])
+
     @markers_conf.offset = @markers.length
 
-  #creates Image Anchor Position or return null if nothing passed	
+  #creates Image Anchor Position or return null if nothing passed
   createImageAnchorPosition : (anchorLocation) ->
     if (anchorLocation == null)
       return null
@@ -405,51 +415,50 @@ class @Gmaps4Rails
     if @map_options.auto_adjust or @map_options.bounds isnt null
       @boundsObject = @createLatLngBounds()
 
-    #if autodjust is true, must get bounds from markers polylines etc...
-    if @map_options.auto_adjust
-      #from markers
-      @extendBoundsWithMarkers()
-      
-      #from polylines:
-      for polyline in @polylines        
-        polyline_points = polyline.serviceObject.latLngs.getArray()[0].getArray()
-        for point in polyline_points
-          @boundsObject.extend point
-      
-      #from polygons:
-      for polygon in @polygons
-        polygon_points = polygon.serviceObject.latLngs.getArray()[0].getArray()
-        for point in polygon_points          
-          @boundsObject.extend point
-          
-      #from circles
-      for circle in @circles
-        @boundsObject.extend(circle.serviceObject.getBounds().getNorthEast())
-        @boundsObject.extend(circle.serviceObject.getBounds().getSouthWest())
+      #if autodjust is true, must get bounds from markers polylines etc...
+      if @map_options.auto_adjust
+        #from markers
+        @extendBoundsWithMarkers()
 
-    #in every case, I've to take into account the bounds set up by the user	
-    for bound in @map_options.bounds
-      #create points from bounds provided
-      #TODO:only works with google maps
-      bound = @createLatLng(bound.lat, bound.lng)
-      @boundsObject.extend bound
-    
-    #SECOND_STEP: ajust the map to the bounds
-    if @map_options.auto_adjust or @map_options.bounds.length > 0
+        #from polylines:
+        for polyline in @polylines
+          polyline_points = polyline.serviceObject.latLngs.getArray()[0].getArray()
+          for point in polyline_points
+            @boundsObject.extend point
+
+        #from polygons:
+        for polygon in @polygons
+          polygon_points = polygon.serviceObject.latLngs.getArray()[0].getArray()
+          for point in polygon_points
+            @boundsObject.extend point
+
+        #from circles
+        for circle in @circles
+          @boundsObject.extend(circle.serviceObject.getBounds().getNorthEast())
+          @boundsObject.extend(circle.serviceObject.getBounds().getSouthWest())
+
+      #in every case, I've to take into account the bounds set up by the user
+      for bound in @map_options.bounds
+        #create points from bounds provided
+        #TODO:only works with google maps
+        bound = @createLatLng(bound.lat, bound.lng)
+        @boundsObject.extend bound
+
+      #SECOND_STEP: ajust the map to the bounds
 
       #if autozoom is false, take user info into account
       if !@map_options.auto_zoom
         map_center = @boundsObject.getCenter()
         @map_options.center_latitude  = map_center.lat()
         @map_options.center_longitude = map_center.lng()
-        @map.setCenter(map_center)
-      else   
+        @serviceObject.setCenter(map_center)
+      else
         @fitBounds()
-    
+
   #////////////////////////////////////////////////////
   #/////////////////        KML      //////////////////
   #////////////////////////////////////////////////////
-  
+
   create_kml : ->
     for kml in @kml
       kml.serviceObject = @createKmlLayer kml
@@ -471,7 +480,7 @@ class @Gmaps4Rails
     Lat = parseFloat(Lat0) + (180/Math.PI)*(dy/6378137)
     Lng = parseFloat(Lng0) + ( 90/Math.PI)*(dx/6378137)/Math.cos(Lat0)
     return [Lat, Lng]
-  
+
   mergeObjectWithDefault : (object1, object2) ->
     copy_object1 = {}
     for key, value of object1
@@ -481,12 +490,12 @@ class @Gmaps4Rails
       unless copy_object1[key]?
         copy_object1[key] = value
     return copy_object1
-  
+
   mergeWithDefault : (objectName) ->
     default_object = @["default_" + objectName]
     object = @[objectName]
     @[objectName] = @mergeObjectWithDefault(object, default_object)
     return true
-  
+
   #gives a value between -1 and 1
   random : -> return(Math.random() * 2 -1)

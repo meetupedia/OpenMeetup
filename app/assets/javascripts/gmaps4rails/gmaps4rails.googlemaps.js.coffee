@@ -3,7 +3,7 @@
 #######################################################################################################
 
 class @Gmaps4RailsGoogle extends Gmaps4Rails
- 
+
   constructor: ->
     super
     #Map settings
@@ -13,12 +13,12 @@ class @Gmaps4RailsGoogle extends Gmaps4Rails
       type:                   "ROADMAP" # HYBRID, ROADMAP, SATELLITE, TERRAIN
 
     #markers + info styling
-    @markers_conf = 
+    @markers_conf =
       clusterer_gridSize:      50
       clusterer_maxZoom:       5
       custom_cluster_pictures: null
-      custom_infowindow_class: null 
-    
+      custom_infowindow_class: null
+
     @mergeWithDefault("map_options")
     @mergeWithDefault("markers_conf")
 
@@ -34,14 +34,17 @@ class @Gmaps4RailsGoogle extends Gmaps4Rails
       strokeWeight: 2
       fillColor: "#000000"
       fillOpacity: 0.35
+      clickable: false
 
     #Polyline Styling
     @polylines_conf =         #default style for polylines
       strokeColor: "#FF0000"
       strokeOpacity: 1
       strokeWeight: 2
+      clickable: false
+      zIndex: null
 
-    #Circle Styling 
+    #Circle Styling
     @circles_conf =           #default style for circles
       fillColor: "#00AAFF"
       fillOpacity: 0.35
@@ -52,17 +55,17 @@ class @Gmaps4RailsGoogle extends Gmaps4Rails
       zIndex: null
 
     #Direction Settings
-    @direction_conf = 
+    @direction_conf =
       panel_id:           null
       display_panel:      false
-      origin:             null 
+      origin:             null
       destination:        null
       waypoints:          []       #[{location: "toulouse,fr", stopover: true}, {location: "Clermont-Ferrand, fr", stopover: true}]
       optimizeWaypoints:  false
       unitSystem:         "METRIC" #IMPERIAL
       avoidHighways:      false
       avoidTolls:         false
-      region:             null 
+      region:             null
       travelMode:         "DRIVING" #WALKING, BICYCLING
 
   #////////////////////////////////////////////////////
@@ -79,7 +82,7 @@ class @Gmaps4RailsGoogle extends Gmaps4Rails
     return new google.maps.LatLngBounds()
 
   createMap : ->
-    defaultOptions = 
+    defaultOptions =
       maxZoom:                @map_options.maxZoom
       minZoom:                @map_options.minZoom
       zoom:                   @map_options.zoom
@@ -91,7 +94,7 @@ class @Gmaps4RailsGoogle extends Gmaps4Rails
       draggable:              @map_options.draggable
 
     mergedOptions = @mergeObjectWithDefault @map_options.raw, defaultOptions
-    
+
     return new google.maps.Map document.getElementById(@map_options.id), mergedOptions
 
 
@@ -106,32 +109,33 @@ class @Gmaps4RailsGoogle extends Gmaps4Rails
   #////////////////////////////////////////////////////
 
   createMarker : (args) ->
-    markerLatLng = @createLatLng(args.Lat, args.Lng) 
+    markerLatLng = @createLatLng(args.Lat, args.Lng)
     #Marker sizes are expressed as a Size of X,Y
     if args.marker_picture == "" and args.rich_marker == null
-      defaultOptions = {position: markerLatLng, map: @map, title: args.marker_title, draggable: args.marker_draggable}
-      mergedOptions  = @mergeObjectWithDefault @markers_conf.raw, defaultOptions  
+      defaultOptions = {position: markerLatLng, map: @serviceObject, title: args.marker_title, draggable: args.marker_draggable, zIndex: args.zindex}
+      mergedOptions  = @mergeObjectWithDefault @markers_conf.raw, defaultOptions
       return new google.maps.Marker mergedOptions
 
     if (args.rich_marker != null)
       return new RichMarker({
         position: markerLatLng
-        map:       @map
+        map:       @serviceObject
         draggable: args.marker_draggable
         content:   args.rich_marker
         flat:      if args.marker_anchor == null then false else args.marker_anchor[1]
         anchor:    if args.marker_anchor == null then 0     else args.marker_anchor[0]
+        zIndex:    args.zindex
       })
 
-    #default behavior 
+    #default behavior
     #calculate MarkerImage anchor location
     imageAnchorPosition  = @createImageAnchorPosition args.marker_anchor
     shadowAnchorPosition = @createImageAnchorPosition args.shadow_anchor
     #create or retrieve existing MarkerImages
     markerImage = @createOrRetrieveImage(args.marker_picture, args.marker_width, args.marker_height, imageAnchorPosition)
     shadowImage = @createOrRetrieveImage(args.shadow_picture, args.shadow_width, args.shadow_height, shadowAnchorPosition)
-    defaultOptions = {position: markerLatLng, map: @map, icon: markerImage, title: args.marker_title, draggable: args.marker_draggable, shadow: shadowImage}
-    mergedOptions  = @mergeObjectWithDefault @markers_conf.raw, defaultOptions      
+    defaultOptions = {position: markerLatLng, map: @serviceObject, icon: markerImage, title: args.marker_title, draggable: args.marker_draggable, shadow: shadowImage,  zIndex: args.zindex}
+    mergedOptions  = @mergeObjectWithDefault @markers_conf.raw, defaultOptions
     return new google.maps.Marker mergedOptions
 
   #checks if obj is included in arr Array and returns the position or false
@@ -145,13 +149,13 @@ class @Gmaps4RailsGoogle extends Gmaps4Rails
   createOrRetrieveImage : (currentMarkerPicture, markerWidth, markerHeight, imageAnchorPosition) ->
     return null if (currentMarkerPicture == "" or currentMarkerPicture == null )
 
-    test_image_index = @includeMarkerImage(@markerImages, currentMarkerPicture)   
+    test_image_index = @includeMarkerImage(@markerImages, currentMarkerPicture)
     switch test_image_index
       when false
         markerImage = @createMarkerImage(currentMarkerPicture, @createSize(markerWidth, markerHeight), null, imageAnchorPosition, null )
         @markerImages.push(markerImage)
-        return markerImage    
-        break 
+        return markerImage
+        break
       else
         return @markerImages[test_image_index] if typeof test_image_index == 'number'
         return false
@@ -188,7 +192,7 @@ class @Gmaps4RailsGoogle extends Gmaps4Rails
   #////////////////////////////////////////////////////
 
   createClusterer : (markers_array) ->
-    return new MarkerClusterer( @map, markers_array, {  maxZoom: @markers_conf.clusterer_maxZoom, gridSize: @markers_conf.clusterer_gridSize, styles: @customClusterer() })
+    return new MarkerClusterer( @serviceObject, markers_array, {  maxZoom: @markers_conf.clusterer_maxZoom, gridSize: @markers_conf.clusterer_gridSize, styles: @customClusterer() })
 
   clearClusterer : ->
     @markerClusterer.clearMarkers()
@@ -210,7 +214,7 @@ class @Gmaps4RailsGoogle extends Gmaps4Rails
   #////////////////////////////////////////////////////
 
   #// creates infowindows
-  createInfoWindow : (marker_container) ->    
+  createInfoWindow : (marker_container) ->
     if typeof(@jsTemplate) == "function" or marker_container.description?
       marker_container.description = @jsTemplate(marker_container) if typeof(@jsTemplate) == "function"
       if @markers_conf.custom_infowindow_class != null
@@ -231,8 +235,8 @@ class @Gmaps4RailsGoogle extends Gmaps4Rails
   openInfoWindow : (currentMap, infoWindow, marker) ->
     return ->
       # Close the latest selected marker before opening the current one.
-      currentMap.visibleInfoWindow.close() if currentMap.visibleInfoWindow != null 
-      infoWindow.open(currentMap.map, marker)
+      currentMap.visibleInfoWindow.close() if currentMap.visibleInfoWindow != null
+      infoWindow.open(currentMap.serviceObject, marker)
       currentMap.visibleInfoWindow = infoWindow
 
   #////////////////////////////////////////////////////
@@ -243,7 +247,7 @@ class @Gmaps4RailsGoogle extends Gmaps4Rails
     kml_options = kml.options || {}
     kml_options = @mergeObjectWithDefault(kml_options, @kml_options)
     kml =  new google.maps.KmlLayer( kml.url, kml_options)
-    kml.setMap(@map)
+    kml.setMap(@serviceObject)
     return kml
 
 
@@ -252,8 +256,8 @@ class @Gmaps4RailsGoogle extends Gmaps4Rails
   #////////////////////////////////////////////////////
 
   fitBounds : ->
-    @map.fitBounds(@boundsObject) unless @boundsObject.isEmpty()
+    @serviceObject.fitBounds(@boundsObject) unless @boundsObject.isEmpty()
 
   centerMapOnUser : ->
-    @map.setCenter(@userLocation)
-    
+    @serviceObject.setCenter(@userLocation)
+
