@@ -34,6 +34,7 @@ class Ability
 
       can :create, Image
 
+      can :index, Interest
       can [:create, :update], Interest if current_user.is_admin?
 
       can :create, InterestTagging

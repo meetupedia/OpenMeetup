@@ -62,12 +62,13 @@ h3
     .list_view= render @event.activities.order('created_at DESC').limit(5).includes(:activable => :user)
 
   .span4.offset1
-    p= gmaps :map_options => {:auto_zoom => false, :zoom => 15, :auto_adjust => true, :do_clustering => true}, :markers =>{:data => @event.to_gmaps4rails}
-    - if request.xhr?
-      = yield :scripts
-      coffee:
-        $ ->
-          Gmaps.loadMaps()
+    - if @event.gmaps
+      p= gmaps :map_options => {:auto_zoom => false, :zoom => 15, :auto_adjust => true, :do_clustering => true}, :markers =>{:data => @event.to_gmaps4rails}
+      - if request.xhr?
+        = yield :scripts
+        coffee:
+          $ ->
+            Gmaps.loadMaps()
 
     .calendar= calendar(@event.start_time, @event.end_time)
 

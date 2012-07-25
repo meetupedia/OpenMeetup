@@ -44,7 +44,7 @@
 
   .span4.offset1
     - if @group.images.size > 0
-      p= link_to image_tag(@group.images.last.image.url(:normal)), images_group_path(@group)
+      p= link_to image_tag(@group.images.last.image.url(:normal)), @group.images.last.image.url(:normal), :class => 'fancybox'
       p= link_to tr('All images'), images_group_path(@group)
     - else
       p= tr('No images yet.')
