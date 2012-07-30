@@ -42,7 +42,7 @@ class EventsController < ApplicationController
   end
 
   def invited
-    @event_invitation_targets = @event.event_invitation_targets.order('created_at DESC')
+    @event_invitations = @event.event_invitations.order('created_at DESC').page(params[:page])
   end
 
   def users
