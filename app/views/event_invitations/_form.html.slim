@@ -1,6 +1,20 @@
 = semantic_form_for @event_invitation, :url => url do |f|
   = f.inputs do
-    - unless @hide_emails
-      = f.input :emails, :as => :text
+    .control-event
+      = f.label :ids, tr('Names or emails')
+      = f.text_field :ids
     = f.input :message
-  = f.actions
+  = f.actions do
+    =' f.action :submit, :as => :button
+    = link_to tr('Cancel'), @event, :class => 'btn'
+
+javascript:
+  $(function() {
+    $('#event_invitation_ids').tokenInput('/users.json', {
+      allowInsert: true,
+      crossDomain: false,
+      tokenValue: 'id',
+      preventDuplicates: true,
+      theme: 'facebook'
+    })
+  })

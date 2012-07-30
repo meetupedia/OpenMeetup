@@ -37,7 +37,6 @@ h3
 
     hr
 
-
     h2= tr('Participants')
     p= render 'users/user_avatars', :users => @event.participants.order('participations.created_at ASC')
     p= link_to tr('All Participants'), users_event_path(@event)
@@ -53,10 +52,10 @@ h3
 
     hr
 
-    h2= tr('Comments')
-    | <div class="fb-comments" data-href="#{event_url(@event)}" data-num-posts="10"></div>
-
-    hr
+    - if Settings.enable_facebook_comments
+      h2= tr('Comments')
+      | <div class="fb-comments" data-href="#{event_url(@event)}" data-num-posts="10"></div>
+      hr
 
     h2= tr('Activity')
     .list_view= render @event.activities.order('created_at DESC').limit(5).includes(:activable => :user)
@@ -73,11 +72,11 @@ h3
     .calendar= calendar(@event.start_time, @event.end_time)
 
     - if can? :create, EventInvitation.new(:event => @event)
-      p= link_to t('event.invite_members'), new_event_event_invitation_path(@event, :hide_emails => true), :class => 'btn btn-primary', :rel => 'facebox'
-      p= link_to t('event.invite_other_people'), new_event_event_invitation_path(@event), :class => 'btn btn-primary', :rel => 'facebox'
+      p= link_to tr('Send invitations'), new_event_event_invitation_path(@event), :class => 'btn btn', :rel => 'facebox'
       p= link_to "→ #{t('event.already_invited')}", invited_event_path(@event)
     p= link_to 'Új üzenet', new_wave_path(:event_id => @event.id), :class => 'btn btn-primary', :rel => 'facebox'
     - if can? :edit, @event
       p= link_to t('event.edit'), edit_event_path(@event), :class => 'btn', :rel => 'facebox'
 
-    | <div class="fb-like" data-href="#{event_url(@event)}" data-send="false" data-width="450" data-show-faces="false"></div>
+    - if Settings.enable_share_buttons
+      | <div class="fb-like" data-href="#{event_url(@event)}" data-send="false" data-width="450" data-show-faces="false"></div>

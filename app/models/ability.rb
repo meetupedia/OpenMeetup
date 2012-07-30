@@ -14,19 +14,16 @@ class Ability
         event.group.admins.include?(current_user)
       end
       can :invited, Event do |event|
-        event.group.admins.include?(current_user)
+        event.participants.include?(current_user)
       end
 
       can :create, EventInvitation
 
       can :create, Group
-      can [:update, :destroy], Group do |group|
+      can [:update, :destroy, :invited], Group do |group|
         group.user == current_user or group.admins.include?(current_user)
       end
-      can :invited, Group do |group|
-        group.admins.include?(current_user)
-      end
-      can :waves, Group do |group|
+      can [:invited, :waves], Group do |group|
         group.members.include?(current_user)
       end
 
