@@ -1,5 +1,8 @@
 - if current_user
   .pull-right=' render 'memberships/button', :group => @group
+- else
+  .pull-right=' link_to %{<i class="icon-plus-sign icon-white"></i> #{tr('Join')}}.html_safe, set_group_memberships_path(@group), :class => 'btn btn-primary'
+
 h1.group= @group.name
 
 - if can? :edit, @group
