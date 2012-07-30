@@ -9,7 +9,8 @@
         - if @groups.respond_to?(:total_pages)
           = will_paginate @groups
   .span4.offset1
-    p= link_to tr('Create new group'), new_group_path, :class => 'btn btn-primary'
+    - if can? :create, Group
+      p= link_to tr('Create new group'), new_group_path, :class => 'btn btn-primary'
     hr
     .list_view
       h2= tr('Activity')

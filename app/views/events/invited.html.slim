@@ -1,17 +1,19 @@
 h1.event= link_to @event.title, @event
 
-h3
-  ' →
-  = link_to @event.group.name, @event.group
+.pull-right= link_to tr('Send invitations'), new_event_event_invitation_path(@event), :class => 'btn', :rel => 'facebox'
 
 h2= tr('Already invited')
 
-table.table.table-striped.table-condensed
-  - @event_invitation_targets.each do |event_invitation_target|
+= will_paginate @event_invitations
+
+table.table
+  - @event_invitations.each do |event_invitation|
     tr
       td
-        - if event_invitation_target.email.present?
-          = event_invitation_target.email
-        - elsif event_invitation_target.invited_user.present?
-          = user_link event_invitation_target.invited_user
-      td= event_invitation_target.created_at
+        - if event_invitation.invited_user.present?
+          = user_link event_invitation.invited_user
+        - else
+          = event_invitation.email
+      td.right_aligned= l(event_invitation.created_at)
+
+= will_paginate @event_invitations
