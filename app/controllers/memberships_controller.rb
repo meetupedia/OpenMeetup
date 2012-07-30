@@ -1,9 +1,10 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 
 class MembershipsController < ApplicationController
   load_resource :group
   load_resource :membership, :through => :group, :shallow => true
-  authorize_resource
+  authorize_resource :except => [:set]
+  before_filter :authenticate, :only => [:set]
 
   def create
     unless @group.membership_for(current_user)
