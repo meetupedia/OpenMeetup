@@ -37,7 +37,6 @@ h3
 
     hr
 
-
     h2= tr('Participants')
     p= render 'users/user_avatars', :users => @event.participants.order('participations.created_at ASC')
     p= link_to tr('All Participants'), users_event_path(@event)
@@ -53,10 +52,10 @@ h3
 
     hr
 
-    h2= tr('Comments')
-    | <div class="fb-comments" data-href="#{event_url(@event)}" data-num-posts="10"></div>
-
-    hr
+    - if Settings.enable_facebook_comments
+      h2= tr('Comments')
+      | <div class="fb-comments" data-href="#{event_url(@event)}" data-num-posts="10"></div>
+      hr
 
     h2= tr('Activity')
     .list_view= render @event.activities.order('created_at DESC').limit(5).includes(:activable => :user)
@@ -80,4 +79,5 @@ h3
     - if can? :edit, @event
       p= link_to t('event.edit'), edit_event_path(@event), :class => 'btn', :rel => 'facebox'
 
-    | <div class="fb-like" data-href="#{event_url(@event)}" data-send="false" data-width="450" data-show-faces="false"></div>
+    - if Settings.enable_share_buttons
+      | <div class="fb-like" data-href="#{event_url(@event)}" data-send="false" data-width="450" data-show-faces="false"></div>
