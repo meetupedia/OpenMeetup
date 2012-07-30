@@ -25,19 +25,16 @@ private
   end
 
   def current_locale
-    if params[:locale]
-      session[:locale] = params[:locale]
-      session[:save_locale] = true
+    session[:locale] = if params[:locale]
+      params[:locale]
     elsif current_user
-      session[:locale] = current_user.locale
+      current_user.locale
+    elsif Settings.default_language
+      Settings.default_language
     elsif not session[:locale]
-      session[:locale] = tr8n_user_preffered_locale
-      session[:save_locale] = (session[:locale] != Tr8n::Config.default_locale)
+      tr8n_user_preffered_locale
     end
-    if session[:save_locale] and current_user
-      current_user.update_attributes :locale => session[:locale]
-      session[:save_locale] = nil
-    end
+    current_user.update_attributes :locale => session[:locale] if current_user and not current_user.locale == session[:locale]
     session[:locale]
   end
   helper_method :current_locale
