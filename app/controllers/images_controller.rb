@@ -4,7 +4,7 @@ class ImagesController < ApplicationController
   load_resource :event
   load_resource :group
   load_resource :image, :through => [:event, :group], :shallow => true
-#  authorize_resource
+  authorize_resource
 
   def create
     @image = Image.new(coerce(params)[:image])
@@ -23,11 +23,11 @@ protected
 
   def coerce(params)
     if params[:image].nil?
-      h = Hash.new
-      h[:image] = Hash.new
-      h[:image][:image] = params[:Filedata]
-      h[:image][:image].content_type = MIME::Types.type_for(h[:image][:image].original_filename).to_s
-      h
+      hash = {}
+      hash[:image] = {}
+      hash[:image][:image] = params[:Filedata]
+      hash[:image][:image].content_type = MIME::Types.type_for(hash[:image][:image].original_filename).to_s
+      hash
     else
       params
     end

@@ -1,7 +1,9 @@
 Kedves <%= @user.name %>,
 
-új üzenetet kaptál az OpenMeetupon: <%= @wave_item.wave.subject %>
+új üzenetet kaptál: <%= @wave_item.wave.subject %>
 
 "<%= @wave_item.body %>"
 
 Itt válaszolhatsz: <%= wave_url(@wave_item.wave).html_safe %>
+
+<%= Settings.email_signature %>

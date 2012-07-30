@@ -16,3 +16,6 @@
             = link_to '?', settings_user_path(@user)
     - if @user.facebook_id
       p= link_to tr('Facebook profile'), "http://www.facebook.com/profile.php?id=#{@user.facebook_id}"
+  .span4.offset1
+    h2= tr('Tags')
+    = render @user.tags.order('name ASC')

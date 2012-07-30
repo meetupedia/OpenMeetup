@@ -1,34 +1,32 @@
+<% session_key = Rails.application.config.session_options[:key] -%>
+
 <script type="text/javascript">
-  <% session_key = Rails.application.config.session_options[:key] -%>
-  $(document).ready(function() {
+  $(function(){
+    $('#image_image').live('click', function(){
+      return false
+    })
 
-	  $('#image_image').click(function(event){
-		  event.preventDefault();
-	  });
-
-	  $('#image_image').uploadify({
-	    buttonText: '<%= tr('Upload') %>',
-    	uploader: '/uploadify/uploadify.swf',
-		  cancelImg: '/uploadify/cancel.png',
-		  multi: true,
-		  auto: true,
-      script: '<%= polymorphic_url([item, Image]) %>',
-		  onComplete: function(event, queueID, fileObj, response, data) {
-		    eval(response);
-		    $('#images a.fancybox').fancybox()
-		  },
-    	scriptData: {
+    $('#image_image').uploadify({
+      swf: '/uploadify/uploadify.swf',
+      uploader: '<%= polymorphic_url([item, Image]) %>',
+      buttonText: '<%= tr('Upload') %>',
+      formData: {
         '_http_accept': 'application/javascript',
-			  'format': 'js',
-        '_method': 'post',
-        '<%= session_key %>': encodeURIComponent('<%= u cookies[session_key] %>'),
-        'authenticity_token': encodeURIComponent('<%= u form_authenticity_token %>')
+        'format': 'js',
+        '<%= session_key %>': '<%= cookies[session_key] %>',
+        'authenticity_token': '<%= form_authenticity_token %>'
+      },
+      onUploadSuccess: function(file, data, response) {
+        eval(data)
+        $('#images a.fancybox').fancybox()
       }
-	  });
+    })
 
-	  $('#image_submit').click(function(event){
-		  event.preventDefault();
-		  $('#image_image').uploadifyUpload();
-	  });
-  });
+    $('#image_image').find('span').addClass('btn')
+
+    $('#image_submit').live('click', function(){
+      $('#image_image').uploadifyUpload()
+      return false
+    })
+  })
 </script>

@@ -34,12 +34,18 @@ class Ability
 
       can :create, Image
 
+      can :index, Interest
+      can [:create, :update], Interest if current_user.is_admin?
+
+      can :create, InterestTagging
+      can :destroy, InterestTagging do |interest_tagging|
+        interest_tagging.user_id == current_user.id
+      end
+
       can [:create, :set], Membership
       can :destroy, Membership do |membership|
         membership.user_id == current_user.id or membership.group.admins.include?(current_user)
       end
-
-      can [:show, :add_tag, :tag], Organization
 
       can [:create, :set], Participation
       can :destroy, Participation do |participation|

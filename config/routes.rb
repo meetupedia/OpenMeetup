@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 
 Openmeetup::Application.routes.draw do
   mount WillFilter::Engine => '/will_filter'
@@ -43,11 +43,8 @@ Openmeetup::Application.routes.draw do
     end
   end
 
-  resources :organizations do
-    member do
-      get :add_tag
-      get :tag
-    end
+  resources :interests do
+    resources :interest_taggings, :shallow => true
   end
 
   resources :passwords
@@ -77,9 +74,8 @@ Openmeetup::Application.routes.draw do
   match '/about' => 'root#about', :as => :about
   match '/developer_dashboard' => 'root#developer_dashboard', :as => :developer_dashboard
   match '/search' => 'search#index', :as => :search
-  match '/tag_myself' => 'root#tag_myself', :as => :tag_myself
   match '/dashboard' => 'root#dashboard', :as => :dashboard
-  match '/intro' => 'root#intro', :as => :intro
+
   match '/discovery' => 'discovery#index', :as => :discovery
 
   match '/system' => 'system#index', :as => :system

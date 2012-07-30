@@ -20,7 +20,6 @@ en:
     messages: 'Messages'
     profile: 'Profile'
     search: 'Search'
-    organization: 'Organization'
     home: 'Home'
     login: 'Login'
   user:
