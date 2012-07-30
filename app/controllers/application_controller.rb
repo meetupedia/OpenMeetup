@@ -87,8 +87,10 @@ private
   end
 
   def set_city
-    store_location
-    redirect_to edit_city_user_path(current_user) if current_user and not current_city and not Settings.standalone
+    if not Settings.standalone and current_user and not current_city
+      store_location
+      redirect_to edit_city_user_path(current_user)
+    end
   end
 
   def set_domain
