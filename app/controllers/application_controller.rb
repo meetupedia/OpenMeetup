@@ -34,7 +34,7 @@ private
     elsif not session[:locale]
       tr8n_user_preffered_locale
     end
-    current_user.update_attributes :locale => session[:locale] if current_user and not current_user.locale == session[:locale]
+    current_user.update_attribute :locale, session[:locale] if current_user and not current_user.locale == session[:locale]
     session[:locale]
   end
   helper_method :current_locale
