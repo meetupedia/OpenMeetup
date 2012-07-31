@@ -25,16 +25,17 @@ private
   end
 
   def current_locale
-    session[:locale] = if params[:locale]
-      params[:locale]
-    elsif current_user
-      current_user.locale
-    elsif Settings.default_language
-      Settings.default_language
+    if params[:locale]
+      session[:locale] = params[:locale]
     elsif not session[:locale]
-      tr8n_user_preffered_locale
+      session[:locale] = if current_user.andand.locale
+        current_user.locale
+      elsif Settings.default_language
+        Settings.default_language
+      else
+        tr8n_user_preffered_locale
+      end
     end
-    current_user.update_attribute :locale, session[:locale] if current_user and not current_user.locale == session[:locale]
     session[:locale]
   end
   helper_method :current_locale
@@ -97,5 +98,6 @@ private
 
   def set_locale
     I18n.locale = current_locale
+    current_user.update_attributes :locale => I18n.locale if current_user and not current_user.locale == I18n.locale
   end
 end
