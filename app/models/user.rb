@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 
 class User < ActiveRecord::Base
   key :name
@@ -13,8 +13,11 @@ class User < ActiveRecord::Base
   key :single_access_token
   key :token
   key :location
-  key :is_admin, :as => :boolean
+  key :is_admin, :as => :boolean, :default => false
   key :facebook_friend_ids, :as => :text
+  key :restricted_access, :as => :boolean, :default => false
+  key :i_am_an_organizer, :as => :boolean
+  key :i_am_a_participant, :as => :boolean
   timestamps
 
   belongs_to :city
@@ -51,7 +54,7 @@ class User < ActiveRecord::Base
   after_validation :set_city
 
   def password_required?
-    authentications.blank? and crypted_password.blank?
+    authentications.blank? and crypted_password.blank? and not invited_status
   end
 
   def admin?

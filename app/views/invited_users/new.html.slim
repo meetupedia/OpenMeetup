@@ -1,0 +1,11 @@
+.row
+  .span7
+    h1= tr('Request invitation')
+
+    = semantic_form_for InvitedUser.new do |f|
+      = f.inputs do
+        = f.input :email
+        = f.input :location
+        = f.input :i_am_an_organizer
+        = f.input :i_am_a_participant
+      = f.actions

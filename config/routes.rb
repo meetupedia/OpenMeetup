@@ -45,7 +45,10 @@ Openmeetup::Application.routes.draw do
 
   resources :interests do
     resources :interest_taggings, :shallow => true
+    resources :invited_interest_taggings, :shallow => true
   end
+
+  resources :invited_users
 
   resources :passwords
   resource :user_sessions
