@@ -47,7 +47,7 @@
           .tr8n-language-selector.btn= tr8n_language_selector_tag
     - else
       .root
-        p= link_to tr('Request invitation'), new_invited_user_path, :class => 'btn btn-primary'
+        p= link_to tr('Request invitation'), request_invite_users_path, :class => 'btn btn-primary'
         - if  Settings.multilingual
           hr
           .tr8n-language-selector.btn= tr8n_language_selector_tag

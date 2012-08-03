@@ -1,11 +1,15 @@
+- if Settings.multilingual
+  .tr8n-language-selector.btn.pull-right= tr8n_language_selector_tag
+
 .row
   .span7
     h1= tr('Request invitation')
 
-    = semantic_form_for InvitedUser.new do |f|
+    = semantic_form_for User.new do |f|
       = f.inputs do
-        = f.input :email
+        = f.input :name
         = f.input :location
+        = f.input :email
         = f.input :i_am_an_organizer
         = f.input :i_am_a_participant
       = f.actions

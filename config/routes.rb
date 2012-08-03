@@ -45,10 +45,7 @@ Openmeetup::Application.routes.draw do
 
   resources :interests do
     resources :interest_taggings, :shallow => true
-    resources :invited_interest_taggings, :shallow => true
   end
-
-  resources :invited_users
 
   resources :passwords
   resource :user_sessions
@@ -58,6 +55,7 @@ Openmeetup::Application.routes.draw do
   resources :users do
     resources :user_follows, :shallow => true
     collection do
+      get :request_invite
       get :validate_email
     end
     member do
@@ -78,6 +76,7 @@ Openmeetup::Application.routes.draw do
   match '/developer_dashboard' => 'root#developer_dashboard', :as => :developer_dashboard
   match '/search' => 'search#index', :as => :search
   match '/dashboard' => 'root#dashboard', :as => :dashboard
+  match '/restricted_access' => 'root#restricted_access', :as => :restricted_access
 
   match '/discovery' => 'discovery#index', :as => :discovery
 
