@@ -5,6 +5,7 @@ class City < ActiveRecord::Base
   key :permalink
   key :state
   belongs_to :country
+  has_many :users, :dependent => :nullify
 
   auto_permalink :name
 
