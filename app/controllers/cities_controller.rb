@@ -5,7 +5,7 @@ class CitiesController < ApplicationController
   def index
     @cities = City.where('name LIKE ?', "%#{params[:q]}%")
     respond_to do |format|
-      format.json { render :json => @cities.map { |city| {:id => city.id, :name => city.name} } }
+      format.json { render :json => @cities.map { |city| {:id => city.id, :name => city.display_name} } }
     end
   end
 end

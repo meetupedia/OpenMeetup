@@ -1,9 +1,10 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 
 class InterestTaggingsController < ApplicationController
   load_resource :interest
   load_resource :interest_tagging, :through => :interest, :shallow => true
   authorize_resource
+  skip_before_filter :check_restricted_access
 
   def create
     unless @interest.interest_tagging_for(current_user)

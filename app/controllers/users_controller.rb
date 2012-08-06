@@ -2,8 +2,10 @@
 
 class UsersController < ApplicationController
   load_resource
-  authorize_resource :except => [:index, :show, :activities, :groups, :validate_email]
+  authorize_resource :except => [:index, :show, :activities, :groups, :request_invite, :validate_email]
   before_filter :set_city, :except => [:edit, :update, :edit_city]
+  before_filter :create_city, :only => [:new, :request_invite, :edit_city]
+  skip_before_filter :check_restricted_access, :only => [:create, :request_invite]
 
   def index
     @users = User.where('name LIKE ?', "%#{params[:q]}%")
@@ -19,6 +21,10 @@ class UsersController < ApplicationController
   end
 
   def create
+    if Settings.enable_invite_process
+      @user.invitation_code = SecureRandom.hex(16)
+      @user.restricted_access = true
+    end
     if @user.save
       redirect_to interests_url
     else
@@ -50,6 +56,9 @@ class UsersController < ApplicationController
     @facebook_groups = @user.facebook.groups
   end
 
+  def request_invite
+  end
+
   def settings
   end
 
@@ -62,5 +71,16 @@ class UsersController < ApplicationController
 
   def waves
     @waves = current_user.waves.order('last_changed_at DESC').paginate :page => params[:page]
+  end
+
+protected
+
+  def create_city
+    country = Country.find_or_create_by_name_and_code(request.location.country, request.location.country_code)
+    @city = City.find_or_initialize_by_name_and_country_id(request.location.city, country.id)
+    if @city.new_record?
+      @city.state = request.location.state
+      @city.save
+    end
   end
 end

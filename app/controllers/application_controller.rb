@@ -3,7 +3,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :set_locale, :set_domain, :copy_flash_to_cookie
+  before_filter :set_locale, :set_domain, :copy_flash_to_cookie, :check_restricted_access
   helper_method :current_city, :current_language, :current_user
   helper LaterDude::CalendarHelper
 
@@ -56,6 +56,12 @@ private
     unless current_user
       store_location
       redirect_to sign_in_url
+    end
+  end
+
+  def check_restricted_access
+    if current_user.andand.restricted_access
+      redirect_to root_url
     end
   end
 

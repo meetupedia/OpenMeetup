@@ -16,6 +16,10 @@ group :production do
   gem 'newrelic_rpm'
 end
 
+group :development do
+  gem 'rails-dev-tweaks'
+end
+
 gem 'jquery-rails'
 gem 'rails-i18n'
 gem 'rails_config'

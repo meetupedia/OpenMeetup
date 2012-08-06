@@ -1,9 +1,19 @@
 # encoding: UTF-8
 
 class RootController < ApplicationController
+  skip_before_filter :check_restricted_access, :only => [:index, :restricted_access]
 
   def index
-    redirect_to discovery_url if current_user
+    if current_user
+      unless current_user.restricted_access
+        redirect_to discovery_url
+      else
+        redirect_to restricted_access_url
+      end
+    else
+      template = 'custom/root.index.slim'
+      render template if File.file?(File.join(Rails.root, 'app/views', template))
+    end
   end
 
   def intro
@@ -17,5 +27,8 @@ class RootController < ApplicationController
   end
 
   def dashboard
+  end
+
+  def restricted_access
   end
 end

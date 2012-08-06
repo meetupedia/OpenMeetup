@@ -1,10 +1,9 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 
 class User < ActiveRecord::Base
   key :name
   key :nickname
   key :locale
-  key :permalink
   key :email, :index => true
   key :email_confirmed
   key :crypted_password
@@ -12,9 +11,11 @@ class User < ActiveRecord::Base
   key :persistence_token
   key :single_access_token
   key :token
-  key :location
-  key :is_admin, :as => :boolean
+  key :is_admin, :as => :boolean, :default => false
   key :facebook_friend_ids, :as => :text
+  key :restricted_access, :as => :boolean, :default => false
+  key :invitation_code
+  key :i_am_an_organizer, :as => :boolean
   timestamps
 
   belongs_to :city
@@ -23,7 +24,6 @@ class User < ActiveRecord::Base
   has_many :admined_groups, :through => :memberships, :source => :group, :conditions => {'memberships.is_admin' => true}
   has_many :authentications, :dependent => :destroy
   has_many :event_invitations, :dependent => :nullify
-  has_many :event_invitation_targets, :foreign_key => :invited_user_id, :dependent => :destroy
   has_many :events, :dependent => :nullify
   has_many :group_invitations, :dependent => :nullify
   has_many :groups, :dependent => :nullify
@@ -40,7 +40,6 @@ class User < ActiveRecord::Base
   has_many :waves, :through => :wave_memberships
 
   serialize :facebook_friend_ids
-  auto_permalink :name
   acts_as_authentic do |c|
     c.validate_email_field = false
     c.validate_password_field = false
@@ -51,7 +50,7 @@ class User < ActiveRecord::Base
   after_validation :set_city
 
   def password_required?
-    authentications.blank? and crypted_password.blank?
+    authentications.blank? and crypted_password.blank? and not restricted_access
   end
 
   def admin?

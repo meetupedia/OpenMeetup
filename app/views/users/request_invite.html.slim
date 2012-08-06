@@ -1,0 +1,22 @@
+.row
+  .span7
+    h1= tr('Request invitation')
+
+    = semantic_form_for User.new do |f|
+      = f.inputs do
+        = f.input :email
+        = f.input :city
+        = f.input :i_am_an_organizer
+      = f.actions
+
+javascript:
+  $(function() {
+    $('#user_city_id').tokenInput('/cities.json', {
+      allowInsert: true,
+      crossDomain: false,
+      preventDuplicates: true,
+      prePopulate: #{[@city].compact.map { |city| {:id => city.id, :name => city.display_name} }.to_json.html_safe},
+      tokenLimit: 1,
+      theme: 'facebook'
+    })
+  })
