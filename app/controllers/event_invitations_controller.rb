@@ -6,6 +6,11 @@ class EventInvitationsController < ApplicationController
   authorize_resource :except => [:index, :show, :users]
 
   def new
+    @users = if params[:invite_members]
+      @event.group.members - [current_user]
+    else
+      []
+    end
     render :layout => false if request.xhr?
   end
 
