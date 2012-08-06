@@ -3,7 +3,7 @@
 		h2 Válassz települést!
 		= semantic_form_for @user do |f|
 			= f.inputs do
-			  = f.text_field :city_id, 'data-pre' => [@user.city || @city].compact.map { |city| {:id => city.id, :name => city.name} }.to_json
+			  = f.text_field :city_id
 			= f.actions
 
 javascript:
@@ -12,7 +12,7 @@ javascript:
       allowInsert: true,
       crossDomain: false,
       preventDuplicates: true,
-      prePopulate: $('#user_city_id').data('pre'),
+      prePopulate: #{[@user.city || @city].compact.map { |city| {:id => city.id, :name => city.display_name} }.to_json.html_safe},
       tokenLimit: 1,
       theme: 'facebook'
     })
