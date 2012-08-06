@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   key :persistence_token
   key :single_access_token
   key :token
+  key :location
   key :is_admin, :as => :boolean, :default => false
   key :facebook_friend_ids, :as => :text
   key :restricted_access, :as => :boolean, :default => false
