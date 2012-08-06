@@ -42,12 +42,6 @@
           =' link_to tr('Sign in'), new_user_sessions_path
           ' |
           = link_to tr('Sign up'), new_user_path
-        - if  Settings.multilingual
-          hr
-          .tr8n-language-selector.btn= tr8n_language_selector_tag
     - else
       .root
         p= link_to tr('Request invitation'), request_invite_users_path, :class => 'btn btn-primary'
-        - if  Settings.multilingual
-          hr
-          .tr8n-language-selector.btn= tr8n_language_selector_tag

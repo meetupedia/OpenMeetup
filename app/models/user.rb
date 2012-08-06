@@ -4,7 +4,6 @@ class User < ActiveRecord::Base
   key :name
   key :nickname
   key :locale
-  key :permalink
   key :email, :index => true
   key :email_confirmed
   key :crypted_password
@@ -12,13 +11,11 @@ class User < ActiveRecord::Base
   key :persistence_token
   key :single_access_token
   key :token
-  key :location
   key :is_admin, :as => :boolean, :default => false
   key :facebook_friend_ids, :as => :text
   key :restricted_access, :as => :boolean, :default => false
   key :invitation_code
   key :i_am_an_organizer, :as => :boolean
-  key :i_am_a_participant, :as => :boolean
   timestamps
 
   belongs_to :city
@@ -43,7 +40,6 @@ class User < ActiveRecord::Base
   has_many :waves, :through => :wave_memberships
 
   serialize :facebook_friend_ids
-  auto_permalink :name
   acts_as_authentic do |c|
     c.validate_email_field = false
     c.validate_password_field = false

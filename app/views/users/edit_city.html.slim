@@ -3,7 +3,7 @@
 		h2 Válassz települést!
 		= semantic_form_for @user do |f|
 			= f.inputs do
-			  = f.text_field :city_id, 'data-pre' => [@user.city].compact.map { |city| {:id => city.id, :name => city.name} }.to_json
+			  = f.text_field :city_id, 'data-pre' => [@user.city || @city].compact.map { |city| {:id => city.id, :name => city.name} }.to_json
 			= f.actions
 
 javascript:
