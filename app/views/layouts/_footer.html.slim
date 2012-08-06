@@ -1,15 +1,11 @@
 #footer
   .clearfix
     - unless Settings.standalone
-      .footer-left
-        - if rand(1) == 0
-          = t('footer.vanity1', :usernumber => link_to(number_with_delimiter(User.count, :delimiter => ".")), :groupnumber => link_to(Group.count)).html_safe
-        - else
-          = t('footer.vanity2', :eventnumber => link_to(number_with_delimiter(Event.count, :delimiter => ".")), :eventthisweeknumber => link_to(Event.where(['start_time < ?', 7.days.since]).count)).html_safe
       .footer-showlove
         .footer-facebook
           | <div class="fb-like" data-href="http://openmeetup.net" data-send="false" data-layout="button_count" data-show-faces="false"></div>
         .footer-google
+          | <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
           | <g:plusone href="http://openmeetup.net" size="medium"></g:plusone>
         .footer-twitter
           | <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://openmeetup.net" data-text="Free meetup alternative -->">Tweet</a>
