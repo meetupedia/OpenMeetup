@@ -2,8 +2,9 @@
 
 class UsersController < ApplicationController
   load_resource
-  authorize_resource :except => [:index, :show, :activities, :groups, :validate_email]
+  authorize_resource :except => [:index, :show, :activities, :groups, :request_invite, :validate_email]
   before_filter :set_city, :except => [:edit, :update, :edit_city]
+  skip_before_filter :check_restricted_access, :only => [:create, :request_invite]
 
   def index
     @users = User.where('name LIKE ?', "%#{params[:q]}%")
@@ -19,6 +20,10 @@ class UsersController < ApplicationController
   end
 
   def create
+    if Settings.enable_invite_process
+      @user.invitation_code = SecureRandom.hex(16)
+      @user.restricted_access = true
+    end
     if @user.save
       redirect_to interests_url
     else
@@ -48,6 +53,9 @@ class UsersController < ApplicationController
 
   def facebook_groups
     @facebook_groups = @user.facebook.groups
+  end
+
+  def request_invite
   end
 
   def settings

@@ -4,7 +4,8 @@
 ul.nav.nav-tabs
   li.active
     a= tr('Sign in')
-  li= link_to tr('Sign up'), new_user_path
+  - unless Settings.enable_invite_process
+    li= link_to tr('Sign up'), new_user_path
 
 .row
   .span7

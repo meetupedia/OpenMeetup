@@ -5,7 +5,10 @@
         h1= tr('Face-to-face meetings for')
         h1= tr('local interest groups')
         p= tr('A free and open source alternative to meetup.com')
-        a.btn.btn-primary.btn-large style="padding:18px 30px;font-size:16px" href="#" = tr('Request invite')
+        - unless Settings.enable_invite_process
+          p= link_to tr('Login'), new_user_sessions_path, :class => 'btn btn-primary btn-large' 
+        - else
+          p= link_to tr('Request invite'), request_invite_users_path, :class => 'btn btn-primary btn-large'
 
   .row
     .span6.offset1
@@ -30,7 +33,10 @@
 
   .row
     .span8.offset4 style="padding:60px"
-      a.btn.btn-primary.btn-large style="padding:18px 30px;font-size:16px" href="#" = tr('Request invite')
+      - unless Settings.enable_invite_process
+        p= link_to tr('Login'), new_user_sessions_path, :class => 'btn btn-primary btn-large' 
+      - else
+        p= link_to tr('Request invite'), request_invite_users_path, :class => 'btn btn-primary btn-large'
   
 
 - else
@@ -53,3 +59,4 @@
         br
         .lead.center
           = tr('Click on the images to enter')
+

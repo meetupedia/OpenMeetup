@@ -72,7 +72,9 @@ h3
     .calendar= calendar(@event.start_time, @event.end_time)
 
     - if can? :create, EventInvitation.new(:event => @event)
-      p= link_to tr('Send invitations'), new_event_event_invitation_path(@event), :class => 'btn btn', :rel => 'facebox'
+      p
+        =' link_to tr('Send invitations'), new_event_event_invitation_path(@event), :class => 'btn btn', :rel => 'facebox'
+        = link_to tr('Invite group members'), new_event_event_invitation_path(@event, :invite_members => true), :class => 'btn btn', :rel => 'facebox'
       p= link_to "→ #{t('event.already_invited')}", invited_event_path(@event)
     p= link_to 'Új üzenet', new_wave_path(:event_id => @event.id), :class => 'btn btn-primary', :rel => 'facebox'
     - if can? :edit, @event
