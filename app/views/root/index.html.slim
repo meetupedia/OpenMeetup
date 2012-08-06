@@ -6,7 +6,7 @@
         h1= tr('local interest groups')
         p= tr('A free and open source alternative to meetup.com')
         - unless Settings.enable_invite_process
-          p= link_to tr('Login'), new_user_sessions_path, :class => 'btn btn-primary btn-large' 
+          p= link_to tr('Sign in'), new_user_sessions_path, :class => 'btn btn-primary btn-large'
         - else
           p= link_to tr('Request invite'), request_invite_users_path, :class => 'btn btn-primary btn-large'
 
@@ -19,7 +19,7 @@
       p= tr('Hello world. This is Lorem Ipsun for the wicked.')
       h3= tr('Browse 1000\'s of meetup groups')
       p= tr('Hello world. This is Lorem Ipsun for the wicked.')
-  
+
     .span5
       h2= tr('Meetup organizers')
       h3= tr('Attract new members for your meetup')
@@ -34,10 +34,10 @@
   .row
     .span8.offset4 style="padding:60px"
       - unless Settings.enable_invite_process
-        p= link_to tr('Login'), new_user_sessions_path, :class => 'btn btn-primary btn-large' 
+        p= link_to tr('Login'), new_user_sessions_path, :class => 'btn btn-primary btn-large'
       - else
         p= link_to tr('Request invite'), request_invite_users_path, :class => 'btn btn-primary btn-large'
-  
+
 
 - else
   .row

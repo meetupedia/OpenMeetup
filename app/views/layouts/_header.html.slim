@@ -11,8 +11,9 @@
         = link_to application_title, root_path, :class => 'brand'
         ul.nav.pull-right
           - if  Settings.multilingual
-            .tr8n-language-selector.btn= tr8n_language_selector_tag
-          li= link_to tr('Login'), sign_in_path, 'data-disable-pjax' => true
+            li
+              .tr8n-language-selector.btn= tr8n_language_selector_tag
+          li= link_to tr('Sign in'), sign_in_path, 'data-disable-pjax' => true
 
       - else
         = link_to application_title, root_path, :class => 'brand'
@@ -27,4 +28,3 @@
               li= link_to tr('My groups'), groups_user_path(current_user)
               li= link_to tr('My messages'), waves_user_path(current_user)
             li= link_to tr('Sign out'), sign_out_path, 'data-disable-pjax' => true
-

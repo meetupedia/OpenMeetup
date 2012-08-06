@@ -1,0 +1,29 @@
+development:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: openmeetup_developent
+  pool: 5
+  username:
+  password:
+  socket: /var/run/mysqld/mysqld.sock
+
+test:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: openmeetup_test
+  pool: 5
+  username:
+  password:
+  socket: /var/run/mysqld/mysqld.sock
+
+production:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: openmeetup
+  pool: 5
+  username:
+  password:
+  socket: /var/run/mysqld/mysqld.sock
