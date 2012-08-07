@@ -1,12 +1,14 @@
 .row
   .span10.offset1
-    .hero-unit(style="background: #ffffff; padding: 50px 0;")
+    .hero-unit(style="background: #ffffff; padding: 30px 0;")
       h1= tr('Face-to-face meetings for local interest groups')
       p= tr('A free and opensource alternative to meetup.com')
       - unless Settings.enable_invite_process
         p= link_to tr('Sign in'), new_user_sessions_path, :class => 'btn btn-primary btn-large'
       - else
         p= link_to tr('Request invite'), request_invite_users_path, :class => 'btn btn-primary btn-large'
+
+    hr
 
 .row
   .span5.offset1
@@ -29,7 +31,7 @@
     p= tr('Hello world. This is Lorem Ipsun for the wicked.')
 
 .row
-  .span11.offset1(style="padding: 50px 0;")
+  .span10.offset1(style="padding: 50px 0;")
     - unless Settings.enable_invite_process
       p= link_to tr('Sign in'), new_user_sessions_path, :class => 'btn btn-primary btn-large'
     - else
