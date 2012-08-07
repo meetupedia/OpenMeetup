@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 
-class SearchController < ApplicationController
+class SearchController < CommonController
 
   def index
     @groups = Group.where('name LIKE ? OR description LIKE ?', "%#{params[:q]}%", "%#{params[:q]}%").order('name ASC').limit(10)

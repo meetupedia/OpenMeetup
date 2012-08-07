@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 
-class TaggingsController < ApplicationController
+class TaggingsController < CommonController
   load_resource :tag
   load_resource :tagging, :through => :tag, :shallow => true
   authorize_resource

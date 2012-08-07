@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-class DiscoveryController < ApplicationController
+class DiscoveryController < CommonController
   before_filter :authenticate
   before_filter :set_city
 

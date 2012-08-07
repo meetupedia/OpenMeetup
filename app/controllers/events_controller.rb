@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 
-class EventsController < ApplicationController
+class EventsController < CommonController
   load_resource :group
   load_resource :event, :through => :group, :shallow => true
   authorize_resource :except => [:index, :show, :users]

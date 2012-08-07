@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-class PasswordsController < ApplicationController
+class PasswordsController < CommonController
 
   before_filter :load_user_using_perishable_token, :only => [:edit, :update]
 

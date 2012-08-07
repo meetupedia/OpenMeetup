@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-class WavesController < ApplicationController
+class WavesController < CommonController
   load_resource
   authorize_resource
 

@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 
-class AbsencesController < ApplicationController
+class AbsencesController < CommonController
   load_resource :event
   load_resource :absence, :through => :event, :shallow => true
   authorize_resource

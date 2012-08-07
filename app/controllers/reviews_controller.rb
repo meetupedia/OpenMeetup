@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 
-class ReviewsController < ApplicationController
+class ReviewsController < CommonController
   load_resource :group
   load_resource :review, :through => :group, :shallow => true
   authorize_resource :except => [:index, :show]

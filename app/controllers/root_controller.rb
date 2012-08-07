@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-class RootController < ApplicationController
+class RootController < CommonController
   skip_before_filter :check_restricted_access, :only => [:index, :restricted_access]
 
   def index
