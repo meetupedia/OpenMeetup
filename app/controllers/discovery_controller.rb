@@ -14,6 +14,5 @@ class DiscoveryController < ApplicationController
 
   def search
     index
-    render :layout => false
   end
 end

@@ -44,7 +44,6 @@ class UsersController < ApplicationController
   end
 
   def edit_city
-    render :layout => false if request.xhr?
   end
 
   def groups

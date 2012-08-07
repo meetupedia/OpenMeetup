@@ -11,7 +11,6 @@ class EventInvitationsController < ApplicationController
     else
       []
     end
-    render :layout => false if request.xhr?
   end
 
   def create

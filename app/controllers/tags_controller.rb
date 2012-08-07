@@ -21,7 +21,6 @@ class TagsController < ApplicationController
   end
 
   def new
-    render :layout => false if request.xhr?
   end
 
   def create

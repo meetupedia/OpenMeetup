@@ -6,7 +6,6 @@ class ReviewsController < ApplicationController
   authorize_resource :except => [:index, :show]
 
   def new
-    render :layout => false if request.xhr?
   end
 
   def create

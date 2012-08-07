@@ -6,7 +6,6 @@ class GroupInvitationsController < ApplicationController
   authorize_resource :except => [:index, :show, :users]
 
   def new
-    render :layout => false if request.xhr?
   end
 
   def create

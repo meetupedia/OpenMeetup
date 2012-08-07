@@ -3,6 +3,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  layout :set_layout
   before_filter :set_locale, :set_domain, :copy_flash_to_cookie, :check_restricted_access
   helper_method :current_city, :current_language, :current_user
   helper LaterDude::CalendarHelper
@@ -17,6 +18,14 @@ class ApplicationController < ActionController::Base
   end
 
 private
+
+  def set_layout
+    if request.xhr?
+      false
+    else
+      'application'
+    end
+  end
 
   def copy_flash_to_cookie
     # cookies[:flash_notice] = URI.escape(flash[:notice]).to_json if flash[:notice]

@@ -6,7 +6,6 @@ class WaveItemsController < ApplicationController
   authorize_resource
 
   def new
-    render :layout => false if request.xhr?
   end
 
   def create

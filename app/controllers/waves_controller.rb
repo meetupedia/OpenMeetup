@@ -27,7 +27,6 @@ class WavesController < ApplicationController
 
   def new
     @recipient_id = params[:recipient_id]
-    render :layout => false if request.xhr?
   end
 
   def create
