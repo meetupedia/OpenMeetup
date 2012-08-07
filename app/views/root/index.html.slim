@@ -1,38 +1,28 @@
-.row
-  .span10.offset1
+.row    
+  .span4
     .hero-unit(style="background: #ffffff; padding: 30px 0;")
-      h1= tr('Face-to-face meetings for local interest groups')
-      p= tr('A free and opensource alternative to meetup.com')
+      h1= tr('There is a meetup for that.')
+  .span4 style="padding:30px 0;"
+    .get2gather-images
+      = link_to image_tag('carousel_01.jpg')
+  .span4 style="padding:30px 0;"
+    .get2gather-images
+      = link_to image_tag('carousel_02.jpg'), sign_in_path
+.row
+  .span4
+    .get2gather-images
+      = link_to image_tag('carousel_03.jpg'), sign_in_path
+  .span4
+    .get2gather-images
+      = link_to image_tag('carousel_04.jpg'), sign_in_path
+  .span4
+    .hero-unit(style="background: #ffffff; padding: 50px 15px;")
+      p= tr('Meet friendly people locally, who share the same interest.')
       - unless Settings.enable_invite_process
         p= link_to tr('Sign in'), new_user_sessions_path, :class => 'btn btn-primary btn-large'
       - else
-        p= link_to tr('Request invite'), request_invite_users_path, :class => 'btn btn-primary btn-large'
+        p= link_to tr('Request an invite'), request_invite_users_path, :class => 'btn btn-primary btn-large', :style => 'padding:15px;font-size:17px'
 
     hr
 
-.row
-  .span5.offset1
-    h2= tr('Meetuppers')
-    h3= tr('Browse 1000\'s of meetup groups')
-    p= tr('Hello world. This is Lorem Ipsum for the wicked.')
-    h3= tr('Browse 1000\'s of meetup groups')
-    p= tr('Hello world. This is Lorem Ipsum for the wicked.')
-    h3= tr('Browse 1000\'s of meetup groups')
-    p= tr('Hello world. This is Lorem Ipsum for the wicked.')
-  .span5.offset1
-    h2= tr('Meetup organizers')
-    h3= tr('Attract new members for your meetup')
-    p= tr('Hello world. This is Lorem Ipsum for the wicked.')
-    h3= tr('A group homepage you\'ll be proud of')
-    p= tr('Hello world. This is Lorem Ipsum for the wicked.')
-    h3= tr('Events simplified')
-    p= tr('Hello world. This is Lorem Ipsum for the wicked.')
-    h3= tr('Everyone\'s photos in one place')
-    p= tr('Hello world. This is Lorem Ipsum for the wicked.')
 
-.row
-  .span10.offset1(style="padding: 50px 0;")
-    - unless Settings.enable_invite_process
-      p= link_to tr('Sign in'), new_user_sessions_path, :class => 'btn btn-primary btn-large'
-    - else
-      p= link_to tr('Request invite'), request_invite_users_path, :class => 'btn btn-primary btn-large'
