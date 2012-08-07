@@ -1,62 +1,38 @@
-- unless Settings.standalone
-  .row
-    .span11.offset1
-      .hero-unit style="background:#fff;padding:60px 0px"
-        h1= tr('Face-to-face meetings for')
-        h1= tr('local interest groups')
-        p= tr('A free and open source alternative to meetup.com')
-        - unless Settings.enable_invite_process
-          p= link_to tr('Login'), new_user_sessions_path, :class => 'btn btn-primary btn-large' 
-        - else
-          p= link_to tr('Request invite'), request_invite_users_path, :class => 'btn btn-primary btn-large'
-
-  .row
-    .span6.offset1
-      h2= tr('Meetuppers')
-      h3= tr('Browse 1000\'s of meetup groups')
-      p= tr('Hello world. This is Lorem Ipsun for the wicked.')
-      h3= tr('Browse 1000\'s of meetup groups')
-      p= tr('Hello world. This is Lorem Ipsun for the wicked.')
-      h3= tr('Browse 1000\'s of meetup groups')
-      p= tr('Hello world. This is Lorem Ipsun for the wicked.')
-  
-    .span5
-      h2= tr('Meetup organizers')
-      h3= tr('Attract new members for your meetup')
-      p= tr('Hello world. This is Lorem Ipsun for the wicked.')
-      h3= tr('A group homepage you\'ll be proud of')
-      p= tr('Hello world. This is Lorem Ipsun for the wicked.')
-      h3= tr('Events simplified')
-      p= tr('Hello world. This is Lorem Ipsun for the wicked.')
-      h3= tr('Everyone\'s photos in one place')
-      p= tr('Hello world. This is Lorem Ipsun for the wicked.')
-
-  .row
-    .span8.offset4 style="padding:60px"
+.row
+  .span10.offset1
+    .hero-unit(style="background: #ffffff; padding: 30px 0;")
+      h1= tr('Face-to-face meetings for local interest groups')
+      p= tr('A free and opensource alternative to meetup.com')
       - unless Settings.enable_invite_process
-        p= link_to tr('Login'), new_user_sessions_path, :class => 'btn btn-primary btn-large' 
+        p= link_to tr('Sign in'), new_user_sessions_path, :class => 'btn btn-primary btn-large'
       - else
         p= link_to tr('Request invite'), request_invite_users_path, :class => 'btn btn-primary btn-large'
-  
 
-- else
-  .row
-    .span12
-      .get2gather-images
-        = link_to image_tag('get2gather/get2gather1.jpg'), sign_in_path
-        = link_to image_tag('get2gather/get2gather2.jpg'), sign_in_path
-        = link_to image_tag('get2gather/get2gather3.jpg'), sign_in_path
+    hr
 
-        = link_to image_tag('get2gather/get2gather4.jpg'), sign_in_path
-        = link_to image_tag('get2gather/get2gather_logo.jpg'), sign_in_path
-        = link_to image_tag('get2gather/get2gather5.jpg'), sign_in_path
+.row
+  .span5.offset1
+    h2= tr('Meetuppers')
+    h3= tr('Browse 1000\'s of meetup groups')
+    p= tr('Hello world. This is Lorem Ipsun for the wicked.')
+    h3= tr('Browse 1000\'s of meetup groups')
+    p= tr('Hello world. This is Lorem Ipsun for the wicked.')
+    h3= tr('Browse 1000\'s of meetup groups')
+    p= tr('Hello world. This is Lorem Ipsun for the wicked.')
+  .span5.offset1
+    h2= tr('Meetup organizers')
+    h3= tr('Attract new members for your meetup')
+    p= tr('Hello world. This is Lorem Ipsun for the wicked.')
+    h3= tr('A group homepage you\'ll be proud of')
+    p= tr('Hello world. This is Lorem Ipsun for the wicked.')
+    h3= tr('Events simplified')
+    p= tr('Hello world. This is Lorem Ipsun for the wicked.')
+    h3= tr('Everyone\'s photos in one place')
+    p= tr('Hello world. This is Lorem Ipsun for the wicked.')
 
-        = link_to image_tag('get2gather/get2gather6.jpg'), sign_in_path
-        = link_to image_tag('get2gather/get2gather1.jpg'), sign_in_path
-        = link_to image_tag('get2gather/get2gather2.jpg'), sign_in_path
-
-        br
-        br
-        .lead.center
-          = tr('Click on the images to enter')
-
+.row
+  .span10.offset1(style="padding: 50px 0;")
+    - unless Settings.enable_invite_process
+      p= link_to tr('Sign in'), new_user_sessions_path, :class => 'btn btn-primary btn-large'
+    - else
+      p= link_to tr('Request invite'), request_invite_users_path, :class => 'btn btn-primary btn-large'

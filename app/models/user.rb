@@ -46,6 +46,7 @@ class User < ActiveRecord::Base
     c.validate_password_field = false
   end
 
+  validates :email, :presence => {:if => :password_required?}
   validates :password, :presence => {:if => :password_required?}, :confirmation => true
   attr_protected :is_admin
   after_validation :set_city
