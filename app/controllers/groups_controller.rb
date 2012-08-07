@@ -1,6 +1,6 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 
-class GroupsController < ApplicationController
+class GroupsController < CommonController
   load_resource
   authorize_resource :except => [:index, :show, :events, :images, :members]
 
@@ -10,7 +10,6 @@ class GroupsController < ApplicationController
   end
 
   def new
-    render :layout => false if request.xhr?
   end
 
   def create
@@ -23,7 +22,6 @@ class GroupsController < ApplicationController
   end
 
   def edit
-    render :layout => false if request.xhr?
   end
 
   def update

@@ -1,4 +1,4 @@
-class CitiesController < ApplicationController
+class CitiesController < CommonController
   load_resource
   authorize_resource :except => [:index]
 

@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-class WaveNotesController < ApplicationController
+class WaveNotesController < CommonController
   load_resource
   authorize_resource
 

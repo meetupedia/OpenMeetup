@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-class MembershipsController < ApplicationController
+class MembershipsController < CommonController
   load_resource :group
   load_resource :membership, :through => :group, :shallow => true
   authorize_resource :except => [:set]

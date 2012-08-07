@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 
-class UsersController < ApplicationController
+class UsersController < CommonController
   load_resource
   authorize_resource :except => [:index, :show, :activities, :groups, :request_invite, :validate_email]
   before_filter :set_city, :except => [:edit, :update, :edit_city]
@@ -44,7 +44,6 @@ class UsersController < ApplicationController
   end
 
   def edit_city
-    render :layout => false if request.xhr?
   end
 
   def groups

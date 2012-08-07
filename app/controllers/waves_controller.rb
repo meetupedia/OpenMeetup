@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-class WavesController < ApplicationController
+class WavesController < CommonController
   load_resource
   authorize_resource
 
@@ -27,7 +27,6 @@ class WavesController < ApplicationController
 
   def new
     @recipient_id = params[:recipient_id]
-    render :layout => false if request.xhr?
   end
 
   def create

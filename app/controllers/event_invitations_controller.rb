@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 
-class EventInvitationsController < ApplicationController
+class EventInvitationsController < CommonController
   load_resource :event
   load_resource :event_invitation, :through => :event, :shallow => true
   authorize_resource :except => [:index, :show, :users]
@@ -11,7 +11,6 @@ class EventInvitationsController < ApplicationController
     else
       []
     end
-    render :layout => false if request.xhr?
   end
 
   def create

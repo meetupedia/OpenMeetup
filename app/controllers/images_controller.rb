@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 
-class ImagesController < ApplicationController
+class ImagesController < CommonController
   load_resource :event
   load_resource :group
   load_resource :image, :through => [:event, :group], :shallow => true

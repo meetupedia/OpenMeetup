@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 
-class SystemController < ApplicationController
+class SystemController < CommonController
   before_filter :authenticate_as_admin
 
   def index

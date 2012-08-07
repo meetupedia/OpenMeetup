@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-class InterestTaggingsController < ApplicationController
+class InterestTaggingsController < CommonController
   load_resource :interest
   load_resource :interest_tagging, :through => :interest, :shallow => true
   authorize_resource

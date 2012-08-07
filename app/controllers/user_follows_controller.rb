@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 
-class UserFollowsController < ApplicationController
+class UserFollowsController < CommonController
   load_resource :user
   load_resource :user_follow, :through => :user, :shallow => true, :except => [:create]
   authorize_resource

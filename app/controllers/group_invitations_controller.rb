@@ -1,12 +1,11 @@
 # -*- encoding : utf-8 -*-
 
-class GroupInvitationsController < ApplicationController
+class GroupInvitationsController < CommonController
   load_resource :group
   load_resource :group_invitation, :through => :group, :shallow => true
   authorize_resource :except => [:index, :show, :users]
 
   def new
-    render :layout => false if request.xhr?
   end
 
   def create
