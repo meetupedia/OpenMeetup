@@ -1,3 +1,6 @@
-= div_for user, :class => 'list_item' do
-  .avatar= user_avatar user
-  = link_to user.name, user
+tr
+  td = user_counter
+  td.avatar = user_avatar user
+  td = link_to user.name, user
+  td = user.email
+
