@@ -1,16 +1,13 @@
 $ ->
-  initSystem = ->
-    $('a[rel*=facebox]').facebox()
+  initPage = ->
     $('a.fancybox').fancybox()
 
-  initSystem()
+  initPage()
 
-  # $('a:not([data-disable-pjax]):not([data-remote]):not([rel="facebox"]):not(.fancybox):not(.function)').pjax(container: '#pjax', timeout: false)
-  $('.nav-tabs a').pjax(container: '#pjax', timeout: false)
+  $('.nav-tabs a:not([rel="modal"], .pagination a)').pjax(container: '#pjax', timeout: false)
 
   $('#pjax').live 'pjax:success', ->
-    $.facebox.close()
-    initSystem()
+    initPage()
 
   # if $.cookie('flash_notice')
   #   flash = $.parseJSON(decodeURIComponent($.cookie('flash_notice')))
@@ -22,6 +19,13 @@ $ ->
   #   $('#flash_alert').show().find('span').html(flash)
   #   $.cookie('flash_alert', null, {path: '/'})
 
-$('a.function').live 'click', ->
-  $(this).toggleClass('expanded')
-  false
+  $(document).bind 'modalbox.loaded', ->
+    initPage()
+
+  $('a[rel*=modal], a.modal').live 'click', ->
+    modalbox.create $(this).attr('href')
+    return false
+
+  $('a.function').live 'click', ->
+    $(this).toggleClass('expanded')
+    false

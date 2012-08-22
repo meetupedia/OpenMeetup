@@ -1,4 +1,4 @@
-class AuthenticationsController < ApplicationController
+class AuthenticationsController < CommonController
 
   def create
     omniauth = request.env['omniauth.auth']
@@ -7,10 +7,14 @@ class AuthenticationsController < ApplicationController
       authentication.user.apply_omniauth(omniauth)
       sign_in_and_redirect(authentication.user)
     elsif current_user
-      current_user.authentications.create! :provider => omniauth['provider'], :uid => omniauth['uid']
-      current_user.apply_omniauth(omniauth)
-      redirect_to discovery_url
-    else
+      unless current_user.restricted_access
+        current_user.authentications.create! :provider => omniauth['provider'], :uid => omniauth['uid']
+        current_user.apply_omniauth(omniauth)
+        redirect_to discovery_url
+      else
+        redirect_to request_invite_users_path
+      end
+    elsif not Settings.enable_invite_process
       user = User.new :name => omniauth['info']['name'], :email => omniauth['info']['email']
       user.authentications.build :provider => omniauth['provider'], :uid => omniauth['uid']
       if user.save
@@ -21,6 +25,8 @@ class AuthenticationsController < ApplicationController
         session[:omniauth] = omniauth.except('extra')
         redirect_to sign_in_path
       end
+    else
+      redirect_to root_url
     end
   end
 
@@ -30,13 +36,11 @@ class AuthenticationsController < ApplicationController
     redirect_to dashboard_user_path(current_user)
   end
 
-private
-
   def sign_in_and_redirect(user)
     unless current_user
       user_session = UserSession.new(User.find_by_single_access_token(user.single_access_token))
       user_session.save
     end
-    redirect_to session[:return_to] || discovery_url
+    redirect_back_or_default discovery_url
   end
 end

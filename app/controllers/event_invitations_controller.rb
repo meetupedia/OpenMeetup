@@ -1,12 +1,16 @@
 # -*- encoding : utf-8 -*-
 
-class EventInvitationsController < ApplicationController
+class EventInvitationsController < CommonController
   load_resource :event
   load_resource :event_invitation, :through => :event, :shallow => true
   authorize_resource :except => [:index, :show, :users]
 
   def new
-    render :layout => false if request.xhr?
+    @users = if params[:invite_members]
+      @event.group.members - [current_user]
+    else
+      []
+    end
   end
 
   def create

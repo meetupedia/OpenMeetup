@@ -3,7 +3,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :set_locale, :set_domain, :copy_flash_to_cookie
+  before_filter :set_locale, :set_domain, :copy_flash_to_cookie, :check_restricted_access
   helper_method :current_city, :current_language, :current_user
   helper LaterDude::CalendarHelper
 
@@ -27,16 +27,14 @@ private
   def current_locale
     if params[:locale]
       session[:locale] = params[:locale]
-      session[:save_locale] = true
-    elsif current_user
-      session[:locale] = current_user.locale
     elsif not session[:locale]
-      session[:locale] = tr8n_user_preffered_locale
-      session[:save_locale] = (session[:locale] != Tr8n::Config.default_locale)
-    end
-    if session[:save_locale] and current_user
-      current_user.update_attributes :locale => session[:locale]
-      session[:save_locale] = nil
+      session[:locale] = if current_user.andand.locale
+        current_user.locale
+      elsif Settings.default_language
+        Settings.default_language
+      else
+        tr8n_user_preffered_locale
+      end
     end
     session[:locale]
   end
@@ -61,8 +59,14 @@ private
     end
   end
 
+  def check_restricted_access
+    if current_user.andand.restricted_access
+      redirect_to root_url
+    end
+  end
+
   def redirect_back_or_default(default)
-    redirect_to(session[:return_to] || default)
+    redirect_to session[:return_to] || default
     session[:return_to] = nil
   end
 
@@ -100,5 +104,6 @@ private
 
   def set_locale
     I18n.locale = current_locale
+    current_user.update_attributes :locale => I18n.locale if current_user and not current_user.locale == I18n.locale
   end
 end

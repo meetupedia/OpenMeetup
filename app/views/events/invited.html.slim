@@ -1,6 +1,7 @@
-h1.event= link_to @event.title, @event
+- unless modal_request?
+  h1.event= link_to @event.title, @event
 
-.pull-right= link_to tr('Send invitations'), new_event_event_invitation_path(@event), :class => 'btn', :rel => 'facebox'
+  .pull-right= link_to tr('Send invitations'), new_event_event_invitation_path(@event), :class => 'btn', :rel => 'modal'
 
 h2= tr('Already invited')
 

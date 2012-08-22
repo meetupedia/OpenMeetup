@@ -1,8 +1,9 @@
 # encoding: UTF-8
 
-class InterestsController < ApplicationController
+class InterestsController < CommonController
   load_resource
   authorize_resource
+  skip_before_filter :check_restricted_access
 
   def index
     redirect_to discovery_url if Interest.count == 0

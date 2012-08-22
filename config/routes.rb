@@ -13,17 +13,19 @@ Openmeetup::Application.routes.draw do
       get :waves
     end
     resources :events, :shallow => true do
-      resources :event_invitations, :shallow => true
-      resources :images, :shallow => true
       member do
-        get :users
+        get :images
         get :invited
+        get :map
+        get :users
       end
       resources :absences, :shallow => true do
         collection do
           get :set
         end
       end
+      resources :event_invitations, :shallow => true
+      resources :images, :shallow => true
       resources :participations, :shallow => true do
         collection do
           get :set
@@ -55,6 +57,7 @@ Openmeetup::Application.routes.draw do
   resources :users do
     resources :user_follows, :shallow => true
     collection do
+      get :request_invite
       get :validate_email
     end
     member do
@@ -75,6 +78,7 @@ Openmeetup::Application.routes.draw do
   match '/developer_dashboard' => 'root#developer_dashboard', :as => :developer_dashboard
   match '/search' => 'search#index', :as => :search
   match '/dashboard' => 'root#dashboard', :as => :dashboard
+  match '/restricted_access' => 'root#restricted_access', :as => :restricted_access
 
   match '/discovery' => 'discovery#index', :as => :discovery
 

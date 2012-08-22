@@ -1,4 +1,4 @@
-= div_for group, :class => (group.membership_for(current_user) ? ' membered' : '') do
+= div_for group, :class => "list_item#{group.membership_for(current_user) ? ' membered' : ''}" do
   .clearfix
     - if current_user
       .pull-right=' render 'memberships/button', :group => group

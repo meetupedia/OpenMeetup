@@ -286,8 +286,8 @@ $.TokenList = function (input, url_or_data, settings) {
                     hidden_input.change();
                     return false;
                   } else if (settings.allowInsert) {
-                    hash = {name: $(this).val()}
-                    hash[settings.tokenValue] = hash['name']
+                    hash = {id: $(this).val()}
+                    hash[settings.tokenValue] = hash['id']
                     add_token(hash);
                     hidden_input.change();
                     return false;

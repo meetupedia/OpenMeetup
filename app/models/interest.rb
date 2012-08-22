@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 
 class Interest < ActiveRecord::Base
   key :name
@@ -10,6 +10,7 @@ class Interest < ActiveRecord::Base
   timestamps
 
   has_many :interest_taggings
+  has_many :invited_interest_taggings
 
   auto_permalink :name
 
@@ -24,6 +25,10 @@ class Interest < ActiveRecord::Base
 
   def interest_tagging_for(user)
     InterestTagging.find_by_interest_id_and_user_id(self.id, user.id)
+  end
+
+  def invited_interest_tagging_for(invited_user)
+    InvitedInterestTagging.find_by_interest_id_and_invited_user_id(self.id, invited_user.id)
   end
 end
 

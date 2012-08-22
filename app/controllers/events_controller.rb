@@ -1,9 +1,9 @@
 # -*- encoding : utf-8 -*-
 
-class EventsController < ApplicationController
+class EventsController < CommonController
   load_resource :group
   load_resource :event, :through => :group, :shallow => true
-  authorize_resource :except => [:index, :show, :users]
+  authorize_resource :except => [:index, :show, :images, :map, :users]
 
   def show
     @title = @event.title
@@ -12,7 +12,6 @@ class EventsController < ApplicationController
   def new
     @event.start_time = Time.zone.now.beginning_of_day + 19.hours
     @event.end_time = Time.zone.now.beginning_of_day + 22.hours
-    render :layout => false if request.xhr?
   end
 
   def create
@@ -25,7 +24,6 @@ class EventsController < ApplicationController
   end
 
   def edit
-    render :layout => false if request.xhr?
   end
 
   def update
@@ -41,8 +39,14 @@ class EventsController < ApplicationController
     redirect_to @event.group, :notice => 'Esemény törölve.'
   end
 
+  def images
+  end
+
   def invited
     @event_invitations = @event.event_invitations.order('created_at DESC').page(params[:page])
+  end
+
+  def map
   end
 
   def users

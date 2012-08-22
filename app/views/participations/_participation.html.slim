@@ -1,4 +1,4 @@
-= div_for participation.user, :class => 'clearfix' do
+= div_for participation.user, :class => 'list_item avatar_item clearfix' do
   - if can? :destroy, participation
     .pull-right= link_to 'Törlés', participation, :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-danger'
   .avatar= user_avatar participation.user

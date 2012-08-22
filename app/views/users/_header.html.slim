@@ -1,15 +1,10 @@
-- if current_user and not @user == current_user
-  p.pull-right= render 'user_follows/button', :user => @user
-  p.pull-right= link_to t('user.send_message'), new_wave_path(:recipient_id => @user.id), :class => 'btn', :rel => 'facebox'
-
-h1.user
-  = @user.name
-
-- if @user.is_admin?
-  .pull-right
-    = link_to tr('System settings'), system_path, :class => 'btn btn-danger'
 - if Settings.multilingual
   .tr8n-language-selector.btn.pull-right= tr8n_language_selector_tag
+
+- if current_user and not @user == current_user
+  .pull-right= render 'user_follows/button', :user => @user
+
+h1.user= @user.name
 
 ul.nav.nav-tabs
   li(class="#{controller.action_name == 'show' ? 'active' : ''}")= link_to tr('Profile'), @user
@@ -18,4 +13,14 @@ ul.nav.nav-tabs
   - if can? :edit, @user
     / li(class="#{controller.action_name == 'facebook_groups' ? 'active' : ''}")= link_to 'Facebookos csoportjaim', facebook_groups_user_path(@user)
     li(class="#{controller.action_name == 'waves' ? 'active' : ''}")= link_to tr('Messages'), waves_user_path(@user)
-    li(class="#{controller.action_name == 'settings' ? 'active' : ''}")= link_to tr('Settings'), settings_user_path(@user)
+
+  li.dropdown.pull-right
+    a(class="dropdown-toggle" data-toggle="dropdown" href="#")
+      = image_tag 'cog.png'
+    ul.dropdown-menu
+      - if current_user
+        li= link_to tr('Settings'), settings_user_path(@user)
+      - if current_user and not @user == current_user
+        li= link_to t('user.send_message'), new_wave_path(:recipient_id => @user.id), :rel => 'modal'
+      - if @user.is_admin?
+        li= link_to tr('System settings'), system_path

@@ -1,18 +1,16 @@
-h1= @wave.subject
+- if @wave.group or @wave.event
+  .breadcrumbs.clearfix
+    - if @wave.group
+      = link_to @wave.group.name, @wave.group
+    - if @wave.event
+      = link_to @wave.event.title, @wave.event
 
-- if @wave.group
-  h3
-    ' →
-    = link_to @wave.group.name, @wave.group
-- if @wave.event
-  h3
-    ' →
-    = link_to @wave.event.title, @wave.event
+h1= @wave.subject
 
 .row
   .span7
+    p= link_to 'Új üzenet', new_wave_wave_item_path(@wave), :class => 'btn', :rel => 'modal'
     .list_view= render @wave_items
   .span4.offset1
-    p= link_to 'Új üzenet', new_wave_wave_item_path(@wave), :class => 'btn', :rel => 'facebox'
     h3 Címzettek
     p= render 'users/user_avatars', :users => @wave.wave_members

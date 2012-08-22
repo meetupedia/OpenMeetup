@@ -1,0 +1,47 @@
+div.modal-background {
+  background-color: #ffffff;
+  height: 100%;
+  left: 0;
+  opacity: 0.5;
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 998;
+}
+
+div.modal-window {
+  background: #ffffff;
+  border: 5px solid #a7a7af;
+  border-radius: 5px;
+  box-shadow: 0 0 50px #a7a7af;
+  margin-bottom: 25px;
+  padding: 25px;
+  position: absolute;
+  width: 550px;
+  z-index: 998;
+}
+
+div.modal-loading {
+  text-align: center;
+}
+
+div.modal-close a {
+  position: absolute;
+  right: 3px;
+  top: 3px;
+}
+
+div.modal-close img {
+  padding: 5px;
+  opacity: 0.5;
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+}
+
+div.modal-close img:hover {
+  opacity: 1;
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: alpha(opacity=100);
+}

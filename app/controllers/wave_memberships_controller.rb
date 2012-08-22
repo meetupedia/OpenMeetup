@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-class WaveMembershipsController < ApplicationController
+class WaveMembershipsController < CommonController
   load_resource :wave
   load_resource :wave_membership, :through => :wave, :shallow => true
   authorize_resource

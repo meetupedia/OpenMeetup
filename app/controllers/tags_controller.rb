@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 
-class TagsController < ApplicationController
+class TagsController < CommonController
   load_resource :group
   load_resource :tag, :through => :group, :shallow => true, :except => [:create]
   authorize_resource :except => [:index, :show]
@@ -21,7 +21,6 @@ class TagsController < ApplicationController
   end
 
   def new
-    render :layout => false if request.xhr?
   end
 
   def create

@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-class DiscoveryController < ApplicationController
+class DiscoveryController < CommonController
   before_filter :authenticate
   before_filter :set_city
 
@@ -14,6 +14,5 @@ class DiscoveryController < ApplicationController
 
   def search
     index
-    render :layout => false
   end
 end
