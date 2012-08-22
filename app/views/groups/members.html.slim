@@ -3,7 +3,7 @@
 .row
   .span7
     - if Settings.enable_facebook_login
-      - if current_user and not (users = @group.members.joins(:authentications).where('authentications.uid' => current_user.facebook_friend_ids, 'authentications.provider' => 'facebook').order('users.permalink ASC')).empty?
+      - if current_user and not (users = @group.members.joins(:authentications).where('authentications.uid' => current_user.facebook_friend_ids, 'authentications.provider' => 'facebook').order('users.name ASC')).empty?
         h2= tr('Facebook friends')
         p= render 'users/user_avatars', :users => users
     h2= tr('Members')
