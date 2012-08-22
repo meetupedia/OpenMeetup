@@ -1,6 +1,7 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 
 class Group < ActiveRecord::Base
+  include CommonCommentable
   key :name
   key :facebook_uid
   key :permalink, :index => true

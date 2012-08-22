@@ -1,6 +1,7 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 
 class Event < ActiveRecord::Base
+  include CommonCommentable
   key :title
   key :permalink, :index => true
   key :description, :as => :text
@@ -34,6 +35,10 @@ class Event < ActiveRecord::Base
 
   def absence_for(user)
     Absence.find_by_event_id_and_user_id(self.id, user.id)
+  end
+
+  def name
+    title
   end
 
   def address

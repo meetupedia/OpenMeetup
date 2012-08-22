@@ -1,0 +1,20 @@
+- content_for :bottom do
+  javascript:
+    var map = new GMaps({
+      div: '#{container}',
+    })
+  - items.each do |item|
+    javascript:
+      map.addMarker({
+        lat: #{item.latitude},
+        lng: #{item.longitude},
+        title: '#{item.name}',
+        infoWindow: {
+          content: '#{item.name}'
+        }
+      })
+  javascript:
+    map.fitZoom()
+
+- if request.xhr?
+  = yield :bottom

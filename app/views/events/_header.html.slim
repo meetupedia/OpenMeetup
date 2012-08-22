@@ -1,0 +1,33 @@
+.breadcrumbs.clearfix= link_to @event.group.name, @event.group
+
+.pull-right
+  - if current_user
+    - if participation = @event.participation_for(current_user)
+      =' link_to '<i class="icon-ok-sign icon-white"></i> Részt veszek'.html_safe, participation_path(participation), :method => :delete, :class => 'btn btn-success'
+    - else
+      =' link_to '<i class="icon-plus-sign icon-white"></i> Részt veszek'.html_safe, event_participations_path(@event), :method => :post, :class => 'btn btn-primary'
+    - if absence = @event.absence_for(current_user)
+      =' link_to '<i class="icon-ok-sign icon-white"></i> Nem veszek részt'.html_safe, absence_path(absence), :method => :delete, :class => 'btn btn-success'
+    - else
+      =' link_to '<i class="icon-plus-sign icon-black"></i> Nem veszek részt'.html_safe, event_absences_path(@event), :method => :post, :class => 'btn'
+  - else
+    =' link_to '<i class="icon-plus-sign icon-black"></i> Részt veszek'.html_safe, new_user_sessions_path(:return_to => set_event_participations_path(@event)), :class => 'btn'
+    =' link_to '<i class="icon-plus-sign icon-black"></i> Nem veszek részt'.html_safe, new_user_sessions_path(:return_to => set_event_absences_path(@event)), :class => 'btn'
+
+
+h1.event= @event.title
+
+ul.nav.nav-tabs
+  li(class="#{controller.action_name == 'show' ? 'active' : ''}")= link_to tr('Home'), @event
+  li(class="#{controller.action_name == 'map' ? 'active' : ''}")= link_to tr('Map'), map_event_path(@event)
+  li(class="#{controller.action_name == 'images' ? 'active' : ''}")= link_to tr('Images'), images_event_path(@event)
+
+  li.dropdown.pull-right
+    a(class="dropdown-toggle" data-toggle="dropdown" href="#")
+      = image_tag 'cog.png'
+    ul.dropdown-menu
+      - if can? :edit, @event
+        li= link_to t('event.edit'), edit_event_path(@event), :rel => 'modal'
+      li= link_to 'Új üzenet', new_wave_path(:event_id => @event.id), :rel => 'modal'
+      li= link_to tr('Send invitations'), new_event_event_invitation_path(@event), :rel => 'modal'
+      li= link_to tr('Invite group members'), new_event_event_invitation_path(@event, :invite_members => true), :rel => 'modal'

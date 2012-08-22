@@ -13,17 +13,19 @@ Openmeetup::Application.routes.draw do
       get :waves
     end
     resources :events, :shallow => true do
-      resources :event_invitations, :shallow => true
-      resources :images, :shallow => true
       member do
-        get :users
+        get :images
         get :invited
+        get :map
+        get :users
       end
       resources :absences, :shallow => true do
         collection do
           get :set
         end
       end
+      resources :event_invitations, :shallow => true
+      resources :images, :shallow => true
       resources :participations, :shallow => true do
         collection do
           get :set

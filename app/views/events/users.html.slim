@@ -1,8 +1,7 @@
-h1.event= link_to @event.title, @event
+- unless modal_request?
+  .breadcrumbs.clearfix= link_to @event.group.name, @event.group
 
-h2
-  ' →
-  = link_to @event.group.name, @event.group
+  h1.event= link_to @event.title, @event
 
 h2= tr('Participants')
 .list_view= render @participations

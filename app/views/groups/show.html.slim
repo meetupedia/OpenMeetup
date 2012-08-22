@@ -29,17 +29,17 @@
       p= render 'users/user_avatars', :users => users
 
 
-    hr
-
-    h2= tr('Activity')
-    - unless (activities = @group.activities.order('created_at DESC').limit(20)).blank?
-      .list_view= render activities
-    - else
-      p= tr('No activity yet.')
+    - if @group.comments.size > 0
+      - unless (comments = @group.comments.where(:is_highlighted => true).order('created_at ASC')).blank?
+        h2= tr('Highlighted comments')
+        = render :partial => 'comments/highlighted_comment', :collection => comments, :as => :comment
+      hr
+      h2= tr('Comments')
+      .list_view= render @group.comments.where(:is_highlighted => false, :reply_to_id => nil).order('created_at ASC')
 
     - if Settings.enable_facebook_comments
       hr
-      h2= tr('Comments')
+      h2= tr('Facebook comments')
       | <div class="fb-comments" data-href="#{group_url(@group)}" data-num-posts="10"></div>
 
   .span4.offset1
@@ -53,6 +53,15 @@
       h2= tr('Next event')
       .list_view= render @group.next_event
       p= link_to tr('All events'), events_group_path(@group)
+
+    hr
+
+    h2= tr('Activity')
+    - unless (activities = @group.activities.order('created_at DESC').limit(20)).blank?
+      .list_view= render activities
+    - else
+      p= tr('No activity yet.')
+
     - if Settings.enable_share_buttons
       hr
       ' <div class="fb-like" data-href="#{group_url(@group)}" data-send="false" data-layout="box_count" data-show-faces="false"></div>

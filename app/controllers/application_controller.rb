@@ -106,12 +106,4 @@ private
     I18n.locale = current_locale
     current_user.update_attributes :locale => I18n.locale if current_user and not current_user.locale == I18n.locale
   end
-
-  def redirect_to(url, options = {})
-    if request.xhr?
-      render :text => "window.location = '#{url_for(url)}';"
-    else
-      super url, options
-    end
-  end
 end

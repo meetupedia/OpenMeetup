@@ -16,7 +16,6 @@ class User < ActiveRecord::Base
   key :facebook_friend_ids, :as => :text
   key :restricted_access, :as => :boolean, :default => false
   key :invitation_code
-  key :i_am_an_organizer, :as => :boolean
   timestamps
 
   belongs_to :city

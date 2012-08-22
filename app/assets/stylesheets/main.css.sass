@@ -1,6 +1,6 @@
 body
   background: #efeff7
-  font-family: Arial, sans-serif
+  font: normal 12px/18px Verdana, Arial, sans-serif
 
 td.right_aligned
   text-align: right
@@ -8,13 +8,27 @@ td.right_aligned
 .center
   text-align: center
 
+h1, h2
+  font-family: "Trebuchet MS", Arial, sans-serif
+  font-weight: normal
+
+h2:nth-of-type(1)
+  margin-top: 10px
+
+h3:nth-of-type(1)
+  margin-top: 5px
+
 a
   color: #005f8f
   &:hover
     color: #003f6f
 
 p
+  font-family: Verdana, Arial, sans-serif
   margin: 10px 0
+
+input, button, select, textarea
+  font-family: Verdana, Arial, sans-serif
 
 span a.btn
   margin-bottom: 5px
@@ -24,18 +38,17 @@ input[type=text], textarea
 
 .wrapper
   background: #ffffff
-  box-shadow: 0 0 10px #9f9f9f
+  border-radius: 5px
+  box-shadow: 0 0 3px #9f9f9f
   margin-bottom: 20px
   overflow: hidden
-  padding: 5px 20px
-  .list_view
-    margin: 0 0 0 -20px
+  padding: 5px 20px 20px 20px
 
-.wrapper, #facebox
-  h2:nth-of-type(1)
-    margin-top: 10px
-  h3:nth-of-type(1)
-    margin-top: 5px
+div.activity, div.user, div.review, div.comment
+  min-height: 20px
+  padding-left: 40px
+  .avatar
+    margin: -5px 0 0 -40px
 
 #footer
   border-radius: 10px 10px 0 0
@@ -51,12 +64,12 @@ input[type=text], textarea
       padding-left: 10px
   .footer-showlove
     float: left
-    padding-left: 20px
     .footer-google, .footer-twitter, .footer-facebook
       float: left
       width: 100px
 
 .navbar
+  border-bottom: 1px solid #ffffff
   input
     margin-bottom: 0
   .nav > li
@@ -74,46 +87,47 @@ input[type=text], textarea
         background: #005f8f
         color: #ffffff
   .navbar-inner
-    background: #dfdfe7
-    box-shadow: 0 0 5px #6f6f6f
+    background: #ffffff
+    border-bottom: 1px solid #d7d7df
+    box-shadow: none // 0 0 2px #9f9f9f
     .brand
       color: #000000
-      font-family: Georgia, serif
+      font-family: "Trebuchet MS", Arial, sans-serif
       font-size: 20px
+      &:hover
+        background: #005f8f
+        color: #ffffff
   img
     margin: -3px 0
+
+.dropdown-menu li > a:hover
+  background: #005f8f
 
 .navbar-search .search-query
   background: #efefef
   border: 1px solid #cfcfcf
   color: #6f6f6f
 
-.nav-pills
-  li
-    a
-      background: #ffffff
-      margin-right: 10px
-      &:hover
-        background: #cfcfcf
-
 ul.nav-tabs
   margin: 20px -20px
   padding: 0 20px
-  li
-    a
-      background: #d7d7df
+  > li
+    > a
+      background: #e7e7ef
+      border-bottom-color: #d7d7df
       padding: 8px 20px
       &:hover
-        background: #cfcfd7
+        background: #d7d7df
     &.active
-      a
+      border-color: #d7d7df
+      > a
         background: #ffffff
         &:hover
           background: #ffffff
 
 h1
   color: #000000
-  margin: 20px 0
+  margin: 25px 0
   &.event
     background: url(calendar_alt_stroke_32x32.png) no-repeat 0 4px
     padding-left: 48px
@@ -136,18 +150,8 @@ h3
   color: #6f6f6f
   font-size: .8em
 
-.map_container
-  border: none
-  padding: 0
-  width: inherit
-  box-shadow: none
-
-.gmaps4rails_map
-  width: inherit
-
-.span4
-  .gmaps4rails_map
-    height: 300px
+#map
+  height: 400px
 
 .avatar
   display: block
@@ -157,32 +161,22 @@ h3
 .avatar_image
   margin-right: 3px
 
+div.list_item
+  margin: 10px 0
+  min-height: 20px
+  padding: 5px 10px 5px 20px
+
+div.avatar_item
+  padding-left: 60px
+  .avatar
+    margin: -5px 0 0 -40px
+
 div.list_view
-  > div
+  margin: 0 0 0 -20px
+  div.indent
+    margin-left: 20px
+  div.list_item
     background: #f7f7f7
-    margin: 10px 0
-    padding: 5px 10px 5px 20px
-    h3
-      margin: 0
-
-  div.activity, div.user, div.review
-    min-height: 20px
-    padding-left: 60px
-    .avatar
-      margin: -5px 0 0 -40px
-
-.wrapper
-  padding-bottom: 10px
-  .span4
-    div.list_view
-      margin: 0
-      > div
-        min-height: 22px
-      div.activity, div.user, div.review
-        min-height: 20px
-        padding-left: 40px
-        .avatar
-          margin: -5px 0 0 -40px
 
 textarea
   height: 160px
@@ -191,7 +185,6 @@ textarea
   margin: 10px 0
   text-align: center
   p
-    font-family: Georgia, sans-serif
     &.comment
       color: #9f9f9f
       font-size: 12px
@@ -202,44 +195,32 @@ span.tag
   color: #6f6f6f
   font-size: 11px
   padding: 3px 6px
-  -webkit-border-radius: 4px
-  -moz-border-radius: 4px
+  white-space: nowrap
 
 a.tag
-  background: #9f9f9f
+  background: #cfcfcf
   border-radius: 3px
   color: #ffffff
   font-size: 11px
   font-weight: normal
   line-height: 24px
   padding: 3px 6px
-  -webkit-border-radius: 4px
-  -moz-border-radius: 4px
+  white-space: nowrap
   &:hover
-    background: #7f7f7f
+    background: #9f9f9f
     color: #ffffff
     text-decoration: none
-
-#facebox
-  h1, h2
-    font-size: 20px
-    margin-top: 0
-
-.pull-right a
-  margin-left: 3px
 
 .adminbox
   background: #d7d7d7
   border-radius: 0 0 5px 5px
   margin: -30px 0 30px 0
   padding: 6px 6px
-  -webkit-border-radius: 0 0 5px 5px
-  -moz-border-radius: 0 0 5px 5px
   a
     vertical-align: middle
 
 div.calendar
-  background: #e7e7e7
+  background: #f7f7f7
   border-radius: 5px
   display: inline-block
   padding: 10px
@@ -248,12 +229,12 @@ div.calendar
     font-family: Georgia, serif
     font-size: 16px
   td
-    text-align: right
+    text-align: center
     &.otherMonth
       color: #9f9f9f
     span
       background: #ffffff
-      border: 2px solid #e7e7e7
+      border: 2px solid #f7f7f7
       display: block
       min-width: 30px
       padding: 2px
@@ -264,26 +245,11 @@ div.calendar
         font-weight: bold
     &.today
       span
-        border: 2px solid #08c
-
-#facebox .form-actions
-  margin: 0 -25px -43px -25px
-  padding: 25px
-
-.wrapper
-  .form-actions
-    background: #ffffff
-    border: none
-    padding: 0
-  img
-    max-width: 100%
+        border: 2px solid #008fcf
 
 span.counter
   color: #9f9f9f
   margin-left: 1em
-
-.btn-full
-//  display: block
 
 label.error
   color: #cf0000
@@ -291,34 +257,20 @@ label.error
 abbr[title=required]
   color: #cf0000
 
-.carousel
-  margin: 10px 0
-  img
-    width: 100%
-
 #images
   margin: 20px 0
 
-.get2gather-images
-  text-align: center
+.opening-images
   img
-    margin: 10px
-    -webkit-border-radius: 5px
-    -moz-border-radius: 5px
+    border-radius: 5px
     filter: progid:DXImageTransform.Microsoft.Alpha(opacity=90)
-    -moz-opacity: 0.9
-    opacity: 0.8
-    width: 280px
-    height: 209px
-  img:hover
     margin: 10px
-    -webkit-border-radius: 5px
-    -moz-border-radius: 5px
-    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=100)
-    -moz-opacity: 1
-    opacity: 1
+    opacity: 0.9
     width: 280px
     height: 209px
+    &:hover
+      filter: progid:DXImageTransform.Microsoft.Alpha(opacity=100)
+      opacity: 1
 
 #overlay
   background: #ffff9f
@@ -338,12 +290,7 @@ abbr[title=required]
   :box-shadow 0 1px 1px #cfcf6f
 
 .alert
-  // display: none
   margin-top: 20px
-
-div.group
-  p
-    margin: 5px 0
 
 form#discovery input
   &.loading
@@ -366,9 +313,8 @@ form#discovery input
 a.function
   background: url(menu-collapsed.gif) no-repeat -1px 4px
   padding-left: 12px
-
-a.expanded
-  background: url(menu-expanded.gif) no-repeat -1px 4px
+  &.expanded
+    background: url(menu-expanded.gif) no-repeat -1px 4px
 
 .interest_tagging a
   font-size: 14px
@@ -379,3 +325,37 @@ a.expanded
 
 ul.token-input-list-facebook
   width: 99%
+
+.modal-content h1
+  margin-top: 5px
+
+form
+  margin-bottom: 0px
+  .form-actions
+    background: none
+    border: none
+    margin: 0
+    padding: 0
+
+.breadcrumbs
+  margin: -5px 0 35px -20px
+  a
+    background: #a7a7af
+    border: none
+    color: #ffffff
+    display: block
+    float: left
+    margin-right: 1px
+    padding: 5px 20px
+    &:hover
+      background: #003f5f
+      text-decoration: none
+    &:first-child
+      border-radius: 5px 0 0 0
+
+.dropdown-toggle img
+  vertical-align: top
+  margin-top: 2px
+
+.pull-right.btn
+  margin-left: 5px
