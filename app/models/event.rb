@@ -1,6 +1,7 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 
 class Event < ActiveRecord::Base
+  include CommonCommentable
   key :title
   key :permalink, :index => true
   key :description, :as => :text

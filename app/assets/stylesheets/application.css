@@ -3,7 +3,6 @@
  *= require twitter/bootstrap
  *= require formtastic-bootstrap
  *= require gmaps4rails
- *= require jquery.facebox
  *= require fancybox
  *= require token-input-facebook
  *= require_tree .

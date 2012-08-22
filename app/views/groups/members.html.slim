@@ -11,8 +11,8 @@
     = will_paginate @memberships
   .span4.offset1
     - if current_user
-      p= link_to tr('Send invitations'), new_group_group_invitation_path(@group), :class => 'btn btn', :rel => 'facebox'
-      p= link_to "→ #{tr('Already invited')}".html_safe, invited_group_path(@group)
+      p= link_to tr('Send invitations'), new_group_group_invitation_path(@group), :class => 'btn', :rel => 'modal'
+      p= link_to "→ #{tr('Already invited')}".html_safe, invited_group_path(@group), :rel => 'modal'
       hr
     - unless (users = @group.admins.order('memberships.created_at ASC')).empty?
       h2= tr('Admins')

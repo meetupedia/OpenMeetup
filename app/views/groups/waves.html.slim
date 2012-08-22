@@ -8,6 +8,5 @@
     = will_paginate @waves
   .span4.offset1
     - if can? :edit, @group
-      .pull-right
-        =' link_to tr('New message'), new_wave_path(:group_id => @group.id), :class => 'btn', :rel => 'facebox'
+      .pull-right= link_to tr('New message'), new_wave_path(:group_id => @group.id), :class => 'btn', :rel => 'modal'
 

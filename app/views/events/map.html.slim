@@ -1,0 +1,9 @@
+= render 'header'
+
+- if @event.gmaps
+  p= gmaps :map_options => {:auto_zoom => false, :zoom => 15, :auto_adjust => true, :do_clustering => true}, :markers =>{:data => @event.to_gmaps4rails}
+  - if request.xhr?
+    = yield :scripts
+    coffee:
+      $ ->
+        Gmaps.loadMaps()

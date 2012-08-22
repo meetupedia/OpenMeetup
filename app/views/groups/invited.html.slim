@@ -1,6 +1,7 @@
-h1.group= link_to @group.name, @group
+- unless modal_request?
+  h1.group= link_to @group.name, @group
 
-.pull-right= link_to tr('Send invitations'), new_group_group_invitation_path(@group), :class => 'btn', :rel => 'facebox'
+.pull-right= link_to tr('Send invitations'), new_group_group_invitation_path(@group), :class => 'btn', :rel => 'modal'
 
 h2= tr('Already invited')
 

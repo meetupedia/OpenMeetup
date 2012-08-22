@@ -1,4 +1,4 @@
-= div_for activity do
+= div_for activity, :class => 'list_item avatar_item' do
   .avatar= user_avatar activity.user
   - if activity.activable.class.name == 'Event'
     = t('activity.event_created', :user => user_link(activity.activable.user), :event => link_to(activity.activable.title, activity.activable)).html_safe

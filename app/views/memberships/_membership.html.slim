@@ -1,4 +1,4 @@
-= div_for membership.user, :class => 'clearfix' do
+= div_for membership.user, :class => 'list_item avatar_item clearfix' do
   - if can? :destroy, membership
     .pull-right= link_to tr('Remove'), membership, :method => :delete, :confirm => tr('Are you sure?'), :class => 'btn btn-danger btn-small'
   - if current_user

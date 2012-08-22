@@ -8,4 +8,4 @@
     = will_paginate @events
   .span4.offset1
     - if can? :create, Event.new(:group => @group)
-      p= link_to tr('New event'), new_group_event_path(@group), :class => 'btn btn-primary', :rel => 'facebox'
+      p= link_to tr('New event'), new_group_event_path(@group), :class => 'btn', :rel => 'modal'

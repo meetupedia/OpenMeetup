@@ -5,10 +5,6 @@
 
 h1.group= @group.name
 
-- if can? :edit, @group
-  .pull-right
-    =' link_to tr('Edit group'), edit_group_path(@group), :class => 'btn', :rel => 'facebox'
-
 ul.nav.nav-tabs
   li(class="#{controller.action_name == 'show' ? 'active' : ''}")= link_to tr('Home'), @group
   li(class="#{controller.action_name == 'events' ? 'active' : ''}")= link_to tr('Events'), events_group_path(@group)
@@ -16,3 +12,16 @@ ul.nav.nav-tabs
   li(class="#{controller.action_name == 'images' ? 'active' : ''}")= link_to tr('Images'), images_group_path(@group)
   - if Settings.enable_messages
     li(class="#{controller.action_name == 'waves' ? 'active' : ''}")= link_to tr('Messages'), waves_group_path(@group)
+
+  li.dropdown.pull-right
+    a(class="dropdown-toggle" data-toggle="dropdown" href="#")
+      = image_tag 'cog.png'
+    ul.dropdown-menu
+      - if can? :edit, @group
+        li= link_to tr('Edit group'), edit_group_path(@group), :rel => 'modal'
+      - if can? :create, Event.new(:group => @group)
+        li= link_to tr('New event'), new_group_event_path(@group), :rel => 'modal'
+      - if current_user
+        li= link_to tr('Send invitations'), new_group_group_invitation_path(@group), :rel => 'modal'
+      - if can? :edit, @group
+        li= link_to tr('New message'), new_wave_path(:group_id => @group.id), :rel => 'modal'

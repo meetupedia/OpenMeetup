@@ -16,10 +16,6 @@ group :production do
   gem 'newrelic_rpm'
 end
 
-group :development do
-  gem 'rails-dev-tweaks'
-end
-
 gem 'jquery-rails'
 gem 'rails-i18n'
 gem 'rails_config'
@@ -50,7 +46,6 @@ gem 'rails_autolink'
 gem 'exception_notification'
 gem 'authlogic'
 gem 'fancybox-rails'
-gem 'facebox-rails'
 gem 'pjax_rails'
 gem 'kaminari'
 gem 'will_filter'
