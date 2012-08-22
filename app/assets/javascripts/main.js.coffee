@@ -4,7 +4,7 @@ $ ->
 
   initPage()
 
-  $('a:not([data-disable-pjax]):not([data-remote]):not([rel="modal"]):not(.modal):not(.fancybox):not(.function)').pjax(container: '#pjax', timeout: false)
+  $('.nav-tabs a:not([rel="modal"], .pagination a)').pjax(container: '#pjax', timeout: false)
 
   $('#pjax').live 'pjax:success', ->
     initPage()

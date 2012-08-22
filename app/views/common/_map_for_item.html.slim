@@ -1,0 +1,15 @@
+javascript:
+  var map = new GMaps({
+    div: '#{container}',
+    lat: #{item.latitude},
+    lng: #{item.longitude},
+    zoom: 15
+  })
+  map.addMarker({
+    lat: #{item.latitude},
+    lng: #{item.longitude},
+    title: '#{item.name}',
+    infoWindow: {
+      content: '#{item.name}'
+    }
+  })

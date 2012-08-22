@@ -2,8 +2,6 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require twitter/bootstrap
-//= require gmaps4rails/gmaps4rails.base
-//= require gmaps4rails/gmaps4rails.googlemaps
 //= require fancybox
 //= require jquery.pjax
 //= require_tree .

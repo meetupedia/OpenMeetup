@@ -1,9 +1,6 @@
 = render 'header'
 
+p= @event.gmaps4rails_address
+
 - if @event.gmaps
-  p= gmaps :map_options => {:auto_zoom => false, :zoom => 15, :auto_adjust => true, :do_clustering => true}, :markers =>{:data => @event.to_gmaps4rails}
-  - if request.xhr?
-    = yield :scripts
-    coffee:
-      $ ->
-        Gmaps.loadMaps()
+  #map= render 'common/map_for_item', :item => @event, :container => '#map'

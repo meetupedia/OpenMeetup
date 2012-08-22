@@ -29,3 +29,5 @@ ul.nav.nav-tabs
       - if can? :edit, @event
         li= link_to t('event.edit'), edit_event_path(@event), :rel => 'modal'
       li= link_to 'Új üzenet', new_wave_path(:event_id => @event.id), :rel => 'modal'
+      li= link_to tr('Send invitations'), new_event_event_invitation_path(@event), :rel => 'modal'
+      li= link_to tr('Invite group members'), new_event_event_invitation_path(@event, :invite_members => true), :rel => 'modal'

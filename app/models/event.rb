@@ -37,6 +37,10 @@ class Event < ActiveRecord::Base
     Absence.find_by_event_id_and_user_id(self.id, user.id)
   end
 
+  def name
+    title
+  end
+
   def address
     gmaps4rails_address
   end

@@ -7,7 +7,7 @@
         - if @event.place.present?
           = @event.place
           = dot
-        = @event.gmaps4rails_address
+        = link_to @event.gmaps4rails_address, map_event_path(@event)
     div
       strong
         = l(@event.start_time)
@@ -19,7 +19,7 @@
     hr
 
     - if Settings.enable_facebook_comments
-      h2= tr('Comments')
+      h2= tr('Facebook comments')
       | <div class="fb-comments" data-href="#{event_url(@event)}" data-num-posts="10"></div>
       hr
 
@@ -34,9 +34,9 @@
 
     - if can? :create, EventInvitation.new(:event => @event)
       p
-        =' link_to tr('Send invitations'), new_event_event_invitation_path(@event), :class => 'btn btn', :rel => 'modal'
-        = link_to tr('Invite group members'), new_event_event_invitation_path(@event, :invite_members => true), :class => 'btn btn', :rel => 'modal'
-      p= link_to "→ #{t('event.already_invited')}", invited_event_path(@event)
+        =' link_to tr('Send invitations'), new_event_event_invitation_path(@event), :class => 'btn', :rel => 'modal'
+        = link_to tr('Invite group members'), new_event_event_invitation_path(@event, :invite_members => true), :class => 'btn', :rel => 'modal'
+      p= link_to "→ #{t('event.already_invited')}", invited_event_path(@event), :rel => 'modal'
 
     hr
 
