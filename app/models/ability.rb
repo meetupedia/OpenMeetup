@@ -20,8 +20,8 @@ class Ability
       can :create, EventInvitation
 
       can :create, Group
-      can [:update, :destroy, :invited], Group do |group|
-        group.user == current_user or group.admins.include?(current_user)
+      can [:update, :destroy], Group do |group|
+        group.admins.include?(current_user)
       end
       can [:invited, :waves], Group do |group|
         group.members.include?(current_user)
