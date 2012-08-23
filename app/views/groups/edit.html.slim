@@ -1,5 +1,5 @@
-.pull-right= link_to 'Csoport törlése', @group, :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-danger'
+.pull-right= link_to tr('Delete group'), @group, :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-danger'
 
-h1 Csoport szerkesztése
+h1= tr('Edit group')
 
 = render 'form', :url => @group
