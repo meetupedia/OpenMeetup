@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 
 class UsersController < CommonController
-  load_resource
+  load_resource :except => [:create]
   authorize_resource :except => [:index, :show, :activities, :groups, :request_invite, :validate_email]
   before_filter :set_city, :except => [:edit, :update, :edit_city]
   before_filter :create_city, :only => [:new, :request_invite, :edit_city]
@@ -21,6 +21,12 @@ class UsersController < CommonController
   end
 
   def create
+    city_id = params[:user].delete(:city_id)
+    city = City.find_by_id(city_id)
+    city ||= City.create :name => city_id
+    puts params[:user].inspect
+    @user = User.new params[:user]
+    @user.city = city
     if Settings.enable_invite_process
       @user.invitation_code = SecureRandom.hex(16)
       @user.restricted_access = true
