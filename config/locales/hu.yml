@@ -63,39 +63,17 @@ hu:
   datetime:
     distance_in_words:
       half_a_minute: 'fél perce'
-      less_than_x_seconds:
-        one: 'most'
-        other: 'most'
-      x_seconds:
-        one: '1 másodperce'
-        other: '%{count} másodperce'
-      less_than_x_minutes:
-        one: 'most'
-        other: 'less than %{count} minutes'
-      x_minutes:
-        one: '1 perce'
-        other: '%{count} perce'
-      about_x_hours:
-        one: '1 órája'
-        other: '%{count} órája'
-      x_days:
-        one: '1 napja'
-        other: '%{count} napja'
-      about_x_months:
-        one: '1 hónapja'
-        other: '%{count} hónapja'
-      x_months:
-        one: '1 hónapja'
-        other: '%{count} hónapja'
-      almost_x_years:
-        one: '1 éve'
-        other: '%{count} éve'
-      about_x_years:
-        one: '1 éve'
-        other: '%{count} éve'
-      over_x_years:
-        one: '1 éve'
-        other: '%{count} éve'
+      less_than_x_seconds: 'most'
+      x_seconds: '%{count} másodperce'
+      less_than_x_minutes: '%{count} perce'
+      x_minutes: '%{count} perce'
+      about_x_hours: '%{count} órája'
+      x_days: '%{count} napja'
+      about_x_months: '%{count} hónapja'
+      x_months: '%{count} hónapja'
+      almost_x_years: '%{count} éve'
+      about_x_years: '%{count} éve'
+      over_x_years: '%{count} éve'
 
   will_paginate:
     previous_label: '« Előző'
