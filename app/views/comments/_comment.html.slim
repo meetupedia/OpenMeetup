@@ -1,5 +1,5 @@
 = div_for comment, :class => 'list_item avatar_item' do
-  .pull-right= link_to tr('Reply'), new_group_comment_path(@group, :reply_to_id => comment.id), :rel => 'modal'
+  .pull-right= link_to tr('Reply'), polymorphic_path([:new, comment.commentable, :comment], :reply_to_id => comment.id), :rel => 'modal'
   .avatar= user_avatar comment.user
   =' user_link comment.user
   span.date= time_ago_in_words comment.created_at
