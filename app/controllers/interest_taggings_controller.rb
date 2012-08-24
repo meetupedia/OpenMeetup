@@ -12,7 +12,7 @@ class InterestTaggingsController < CommonController
       tag = Tag.find_or_create_by_name_and_language_id(@interest.name.trl, Language.find_by_code(I18n.locale))
       unless tag.tagging_for(current_user)
         tagging = Tagging.create :tag => tag
-        create_activity tagging
+        create_activity tagging unless current_user.restricted_access?
       end
     end
     redirect_to interests_url unless request.xhr?
