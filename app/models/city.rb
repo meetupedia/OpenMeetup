@@ -10,12 +10,40 @@ class City < ActiveRecord::Base
   auto_permalink :name
 
   def display_name
-    array = if country.andand.name =~ /United States/
-      [name, state, country.andand.name]
+    if country
+      if country.name =~ /United States/
+        "#{name} (#{state}, #{country.name})"
+      else country
+        "#{name} (#{country.name})"
+      end
     else
-      [name, country.andand.name]
+      name
     end
-    array.compact.join(', ')
+  end
+
+  def self.find_or_create_with_country(arg)
+    if arg.is_a?(String)
+      city_name, country_name = $1, $3 if arg =~ /([^(]+)( *\(([^)]+)\))*/
+      city = if city_name =~ /\A\d+\Z/
+        City.find_by_id(city_name)
+      else
+        City.find_by_permalink(city_name)
+      end
+    else
+      city = City.find_by_id(arg)
+    end
+    unless city
+      unless country_name.blank?
+        country = Country.find_by_name(country_name)
+        country ||= Country.create :name => country_name
+      end
+      city = City.create :name => city_name
+      if country
+        city.country = country
+        city.save
+      end
+    end
+    city
   end
 end
 
