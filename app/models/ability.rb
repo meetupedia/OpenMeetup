@@ -11,7 +11,7 @@ class Ability
       end
 
       can [:create, :update, :destroy], Event do |event|
-        event.group.admins.include?(current_user)
+        event.group.admins.include?(current_user) or current_user.is_admin?
       end
       can :invited, Event do |event|
         event.participants.include?(current_user)
@@ -21,7 +21,7 @@ class Ability
 
       can :create, Group
       can [:update, :destroy], Group do |group|
-        group.admins.include?(current_user)
+        group.admins.include?(current_user) or current_user.is_admin?
       end
       can [:invited, :waves], Group do |group|
         group.members.include?(current_user)
