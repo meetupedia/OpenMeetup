@@ -12,6 +12,7 @@ Openmeetup::Application.routes.draw do
       get :members
       get :waves
     end
+    resources :comments, :shallow => true
     resources :events, :shallow => true do
       member do
         get :images
@@ -24,6 +25,7 @@ Openmeetup::Application.routes.draw do
           get :set
         end
       end
+      resources :comments, :shallow => true
       resources :event_invitations, :shallow => true
       resources :images, :shallow => true
       resources :participations, :shallow => true do

@@ -10,6 +10,8 @@ class Ability
         absence.user_id == current_user.id
       end
 
+      can :create, Comment
+
       can [:create, :update, :destroy], Event do |event|
         event.group.admins.include?(current_user) or current_user.is_admin?
       end

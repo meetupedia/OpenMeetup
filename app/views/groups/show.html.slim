@@ -28,14 +28,7 @@
       h2= tr('Who we are')
       p= render 'users/user_avatars', :users => users
 
-
-    - if @group.comments.size > 0
-      - unless (comments = @group.comments.where(:is_highlighted => true).order('created_at ASC')).blank?
-        h2= tr('Highlighted comments')
-        = render :partial => 'comments/highlighted_comment', :collection => comments, :as => :comment
-      hr
-      h2= tr('Comments')
-      .list_view= render @group.comments.where(:is_highlighted => false, :reply_to_id => nil).order('created_at ASC')
+    = render 'comments/comments', :commentable => @group
 
     - if Settings.enable_facebook_comments
       hr
