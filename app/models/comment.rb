@@ -1,7 +1,7 @@
 # encoding: UTF-8
 
 class Comment < ActiveRecord::Base
-  key :comment
+  key :comment, :as => :text
   key :is_highlighted, :as => :boolean, :default => false
   timestamps
 

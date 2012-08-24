@@ -1,0 +1,7 @@
+- unless (comments = commentable.comments.where(:is_highlighted => true).order('created_at ASC')).blank?
+  h2= tr('Highlighted comments')
+  = render :partial => 'comments/highlighted_comment', :collection => comments, :as => :comment
+hr
+h2= tr('Comments')
+p= link_to tr('New comment'), url_for([:new, commentable, :comment]), :rel => 'modal'
+.list_view= render commentable.comments.where(:is_highlighted => false, :reply_to_id => nil).order('created_at ASC')
