@@ -21,10 +21,7 @@ class UsersController < CommonController
   end
 
   def create
-    city_id = params[:user].delete(:city_id)
-    city = City.find_by_id(city_id)
-    city ||= City.create :name => city_id
-    puts params[:user].inspect
+    city = City.find_or_create_with_country(params[:user].delete(:city_id))
     @user = User.new params[:user]
     @user.city = city
     if Settings.enable_invite_process
