@@ -11,6 +11,10 @@ class Group < ActiveRecord::Base
   key :image_content_type
   key :image_file_size, :as => :integer
   key :image_updated_at, :as => :datetime
+  key :header_file_name
+  key :header_content_type
+  key :header_file_size, :as => :integer
+  key :header_updated_at, :as => :datetime
   key :is_closed, :as => :boolean, :default => false
   key :url
   key :facebook_url
@@ -32,6 +36,15 @@ class Group < ActiveRecord::Base
   has_many :waves, :dependent => :nullify
 
   attr_reader :tag_tokens
+
+  has_attached_file :header,
+    :path => ':rails_root/public/system/:class/:attachment/:style/:class_:id.:extension',
+    :url => '/system/:class/:attachment/:style/:class_:id.:extension',
+    :default_url => '/assets/:class_missing_:style.png',
+    :styles => {
+      :normal => ['960>', :jpg]
+    },
+    :convert_options => {:all => '-quality 95 -strip'}
 
   has_attached_file :image,
     :path => ':rails_root/public/system/:class/:style/:class_:id.:extension',
