@@ -16,6 +16,8 @@
 
     = simple_format(@event.description)
 
+    = render 'comments/comments', :commentable => @event
+
     hr
 
     - if Settings.enable_facebook_comments
