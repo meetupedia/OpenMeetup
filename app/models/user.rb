@@ -48,7 +48,6 @@ class User < ActiveRecord::Base
   validates :email, :presence => {:if => :password_required?}
   validates :password, :presence => {:if => :password_required?}, :confirmation => true
   attr_protected :is_admin
-  after_validation :set_city
 
   def password_required?
     authentications.blank? and crypted_password.blank? and not restricted_access
@@ -95,12 +94,22 @@ class User < ActiveRecord::Base
     UserFollow.find_by_followed_user_id_and_user_id(self.id, user.id)
   end
 
+  def follow(user)
+    UserFollow.create :followed_user_id => self.id, :user_id => user.id unless user_follow_for(user)
+  end
+
+  def unfollow(user)
+    user_follow_for(user).andand.destroy
+  end
+
   def followed_users
     User.joins('INNER JOIN user_follows ON user_follows.followed_user_id = users.id').where('user_follows.user_id' => 1)
   end
 
-  def set_city
-    self.city = City.find_or_create_by_name(self.location || 'Budapest') unless self.location.blank?
+  def follow_facebook_friends
+    Authentication.where(:provider => 'facebook', :uid => facebook_friend_ids).includes(:user).each do |authentication|
+      follow(authentication.user)
+    end
   end
 end
 
