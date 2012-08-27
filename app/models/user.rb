@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   key :facebook_friend_ids, :as => :text
   key :restricted_access, :as => :boolean, :default => false
   key :invitation_code
+  key :karma, :as => :integer, :default => 0
   timestamps
 
   belongs_to :city
@@ -106,10 +107,18 @@ class User < ActiveRecord::Base
     User.joins('INNER JOIN user_follows ON user_follows.followed_user_id = users.id').where('user_follows.user_id' => 1)
   end
 
-  def follow_facebook_friends
-    Authentication.where(:provider => 'facebook', :uid => facebook_friend_ids).includes(:user).each do |authentication|
-      follow(authentication.user)
+  def connect_facebook_friends
+    Authentication.where(:provider => 'facebook', :uid => facebook_friend_ids).includes(:user).map(&:user).each do |user|
+      follow(user)
+      user.follow(self)
     end
+  end
+
+  def set_karma
+    karma = user_follows.count * 5 +
+      memberships.count * 10 +
+      memberships(:is_admin => true) * 40
+    update_column :karma, karma
   end
 end
 

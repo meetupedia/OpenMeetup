@@ -14,6 +14,9 @@
             = @user.nickname
           - elsif can? :edit, @user
             = link_to '?', settings_user_path(@user)
+      tr
+        th= tr('Karma')
+        td= @user.karma
     - if @user.facebook_id
       p= link_to tr('Facebook profile'), "http://www.facebook.com/profile.php?id=#{@user.facebook_id}"
   .span4.offset1
