@@ -27,6 +27,9 @@ class RootController < CommonController
   end
 
   def dashboard
+    unless current_user.andand.is_admin?
+      redirect_to root_url
+    end
   end
 
   def restricted_access
