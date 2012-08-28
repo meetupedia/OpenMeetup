@@ -1,18 +1,19 @@
 #footer
   .clearfix
     - unless Settings.standalone
-      .footer-showlove
-        .footer-facebook
-          | <div class="fb-like" data-href="http://openmeetup.net" data-send="false" data-layout="button_count" data-show-faces="false"></div>
-        .footer-google
-          | <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
-          | <g:plusone href="http://openmeetup.net" size="medium"></g:plusone>
-        .footer-twitter
-          | <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://openmeetup.net" data-text="Free meetup alternative -->">Tweet</a>
-          | <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+      - if current_user
+        .footer-showlove
+          .footer-facebook
+            | <div class="fb-like" data-href="http://openmeetup.net" data-send="false" data-layout="button_count" data-show-faces="false"></div>
+          .footer-google
+            | <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+            | <g:plusone href="http://openmeetup.net" size="medium"></g:plusone>
+          .footer-twitter
+            | <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://openmeetup.net" data-text="Free meetup alternative -->">Tweet</a>
+            | <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
       .footer-right
-        =' link_to tr('About')
+        =' link_to tr('About'), 'http://openmeetup.org/'
     - else
       .footer_left
         =' tr('Powered by')
-        = link_to 'OpenMeetup', 'http://openmeetup.net'
+        = link_to 'OpenMeetup', 'http://openmeetup.org/'
