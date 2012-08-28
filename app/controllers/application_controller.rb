@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from CanCan::AccessDenied do |exception|
     url = @group
+    url ||= sign_in_url unless current_user
     url ||= root_url
     flash[:alert] = 'Nincsen megfelelő jogosultságod ehhez!'
     redirect_to url
