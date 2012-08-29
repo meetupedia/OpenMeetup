@@ -1,7 +1,8 @@
 .row
   .span4
-    .hero-unit(style="background: #ffffff; padding: 30px 0;")
-      h1= tr('There is a meetup for that.')
+    .hero-unit(style="background: #ffffff; padding: 25px 0px 0px 10px;")
+      h1= tr('Meetup')
+      p= tr('regular meeting of people who share a particular interest and have connected with each other through a social website')
   .span4(style="padding: 30px 0;")
     .opening-images
       = link_to image_tag('carousel_01.jpg'), request_invite_users_path
@@ -16,12 +17,12 @@
     .opening-images
       = link_to image_tag('carousel_04.jpg'), request_invite_users_path
   .span4
-    .hero-unit(style="background: #ffffff; padding: 50px 15px;")
-      p= tr('Meet friendly people locally, who share the same interest.')
+    .hero-unit(style="background: #ffffff; padding: 60px 15px;")
       - unless Settings.enable_invite_process
         p= link_to tr('Sign in'), new_user_sessions_path, :class => 'btn btn-primary btn-large'
       - else
         p= link_to tr('Request an invite'), request_invite_users_path, :class => 'btn btn-primary btn-large', :style => 'padding: 15px; font-size: 17px;'
+      p= tr('It\'s free and always will be.')
 
 hr
 
