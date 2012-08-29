@@ -85,7 +85,6 @@ private
     return @current_user if defined?(@current_user)
     @current_user = current_user_session && current_user_session.record
   end
-  helper_method :current_user
 
   def extract_locale_from_accept_language_header
     request.env['HTTP_ACCEPT_LANGUAGE'].andand.scan(/^[a-z]{2}/).andand.first

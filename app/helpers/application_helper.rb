@@ -1,6 +1,10 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 
 module ApplicationHelper
+
+  def current_user
+    nil
+  end
 
   def application_title
     Settings.title

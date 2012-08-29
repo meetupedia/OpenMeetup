@@ -1,6 +1,8 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 
 class GroupMailer < ActionMailer::Base
+  helper :application
+  layout 'mailer'
   default_url_options[:host] = Settings.host
   default :from => Settings.default_email
 
@@ -15,5 +17,16 @@ class GroupMailer < ActionMailer::Base
     @user = user
     @group = group
     mail :to => email, :subject => "Csatlakozás: #{@group.name}"
+  end
+
+
+  class Preview < MailView
+
+    def invitation
+      user = User.first
+      group_invitation = GroupInvitation.first
+      mail = GroupMailer.invitation(user, group_invitation)
+      mail
+    end
   end
 end

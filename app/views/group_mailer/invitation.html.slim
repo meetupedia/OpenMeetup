@@ -1,0 +1,19 @@
+h2 Meghívó
+
+p
+  =' @user.name
+  ' meghívott a/az
+  =' link_to @group.name, @group
+  ' nevű csoportba.
+
+p= link_to tr('Join'), set_group_memberships_path(@group), :class => 'btn btn-primary'
+
+.list_view= render @group
+
+- unless @message.blank?
+  h3 Személyes üzenet
+  = simple_format @message
+
+hr
+
+= Settings.email_signature

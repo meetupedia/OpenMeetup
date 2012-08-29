@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 
 class UsersController < CommonController
   load_resource :except => [:create]
@@ -78,11 +78,13 @@ class UsersController < CommonController
 protected
 
   def create_city
-    country = Country.find_or_create_by_name_and_code(request.location.country, request.location.country_code)
-    @city = City.find_or_initialize_by_name_and_country_id(request.location.city, country.id)
-    if @city.new_record?
-      @city.state = request.location.state
-      @city.save
+    if request.location
+      country = Country.find_or_create_by_name_and_code(request.location.country, request.location.country_code)
+      city = City.find_or_initialize_by_name_and_country_id(request.location.city, country.id)
+      if city.new_record?
+        city.state = request.location.state
+        city.save
+      end
     end
   end
 end

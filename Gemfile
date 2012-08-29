@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.6'
+gem 'rails', '3.2.8'
 
 gem 'mysql2'
 gem 'json'
@@ -50,3 +50,5 @@ gem 'pjax_rails'
 gem 'kaminari'
 gem 'will_filter'
 gem 'tr8n'
+gem 'roadie'
+gem 'mail_view'
