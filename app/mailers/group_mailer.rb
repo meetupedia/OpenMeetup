@@ -6,6 +6,7 @@ class GroupMailer < CommonMailer
     @user = group_invitation.user
     @group = group_invitation.group
     @message = group_invitation.message
+    set_locale @user.locale
     mail :to => group_invitation.email, :subject => "Meghívó: #{@group.name}"
   end
 
@@ -22,9 +23,7 @@ class GroupMailer < CommonMailer
       user = User.first
       group_invitation = GroupInvitation.first
       mail = GroupMailer.invitation(user, group_invitation)
-      I18n.with_locale(user.locale) do
-        mail
-      end
+      mail
     end
   end
 end
