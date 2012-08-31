@@ -1,10 +1,6 @@
 # encoding: UTF-8
 
-class UserMailer < ActionMailer::Base
-  helper :application
-  layout 'mailer'
-  default_url_options[:host] = Settings.host
-  default :from => Settings.default_email
+class UserMailer < CommonMailer
 
   def confirmation(user)
     @user = user

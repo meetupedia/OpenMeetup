@@ -1,10 +1,6 @@
 # encoding: UTF-8
 
-class GroupMailer < ActionMailer::Base
-  helper :application
-  layout 'mailer'
-  default_url_options[:host] = Settings.host
-  default :from => Settings.default_email
+class GroupMailer < CommonMailer
 
   def invitation(user, group_invitation)
     @user = group_invitation.user
