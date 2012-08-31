@@ -26,7 +26,9 @@ class GroupMailer < ActionMailer::Base
       user = User.first
       group_invitation = GroupInvitation.first
       mail = GroupMailer.invitation(user, group_invitation)
-      mail
+      I18n.with_locale(user.locale) do
+        mail
+      end
     end
   end
 end
