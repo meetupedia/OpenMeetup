@@ -42,6 +42,10 @@ Openmeetup::Application.routes.draw do
       collection do
         get :set
       end
+      member do
+        put :set_admin
+        put :unset_admin
+      end
     end
     resources :reviews, :shallow => true
     resources :tags, :shallow => true do

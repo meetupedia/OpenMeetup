@@ -49,7 +49,7 @@ class GroupsController < CommonController
   end
 
   def members
-    @memberships = @group.memberships.includes(:user).paginate :page => params[:page]
+    @memberships = @group.memberships.order('is_admin DESC, created_at ASC').includes(:user).paginate :page => params[:page]
   end
 
   def waves
