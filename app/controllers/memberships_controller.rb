@@ -18,7 +18,7 @@ class MembershipsController < CommonController
   end
 
   def destroy
-    unless @membership.is_admin? or @membership.group.admins.count > 1
+    unless @membership.is_admin? and @membership.group.admins.count > 1
       @membership.destroy
       if request.xhr?
         render :create

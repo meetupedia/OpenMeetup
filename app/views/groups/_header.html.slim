@@ -10,6 +10,7 @@
     li(class="#{controller.action_name == 'show' ? 'active' : ''}")= link_to tr('Home'), @group
     li(class="#{controller.action_name == 'events' ? 'active' : ''}")= link_to tr('Events'), events_group_path(@group)
     li(class="#{controller.action_name == 'members' ? 'active' : ''}")= link_to tr('Members'), members_group_path(@group)
+    li(class="#{controller.action_name == 'requested_members' ? 'active' : ''}")= link_to tr('Requests'), requested_members_group_path(@group)
     li(class="#{controller.action_name == 'images' ? 'active' : ''}")= link_to tr('Images'), images_group_path(@group)
     - if Settings.enable_messages
       li(class="#{controller.action_name == 'waves' ? 'active' : ''}")= link_to tr('Messages'), waves_group_path(@group)

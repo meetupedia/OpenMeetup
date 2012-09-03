@@ -52,6 +52,10 @@ class GroupsController < CommonController
     @memberships = @group.memberships.order('is_admin DESC, created_at ASC').includes(:user).paginate :page => params[:page]
   end
 
+  def requested_members
+    @membership_requests = @group.membership_requests.order('created_at ASC').includes(:user).paginate :page => params[:page]
+  end
+
   def waves
     @waves = @group.waves.order('last_changed_at DESC').paginate :page => params[:page]
   end

@@ -4,6 +4,7 @@ Openmeetup::Application.routes.draw do
   mount WillFilter::Engine => '/will_filter'
   mount Tr8n::Engine => '/tr8n'
   mount GroupMailer::Preview => '/group_mailer/mail_view'
+  mount MembershipRequestMailer::Preview => '/membership_request_mailer/mail_view'
   mount UserMailer::Preview => '/user_mailer/mail_view'
 
   resources :groups do
@@ -12,6 +13,7 @@ Openmeetup::Application.routes.draw do
       get :images
       get :invited
       get :members
+      get :requested_members
       get :waves
     end
     resources :comments, :shallow => true
@@ -38,6 +40,11 @@ Openmeetup::Application.routes.draw do
     end
     resources :group_invitations, :shallow => true
     resources :images, :shallow => true
+    resources :membership_requests, :shallow => true do
+      member do
+        put :confirm
+      end
+    end
     resources :memberships, :shallow => true do
       collection do
         get :set

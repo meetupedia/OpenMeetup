@@ -22,7 +22,7 @@ class Ability
       can :create, EventInvitation
 
       can :create, Group
-      can [:update, :destroy], Group do |group|
+      can [:update, :destroy, :requested_members], Group do |group|
         group.admins.include?(current_user) or current_user.is_admin?
       end
       can [:invited, :waves], Group do |group|
@@ -41,7 +41,12 @@ class Ability
         interest_tagging.user_id == current_user.id
       end
 
-      can [:create, :set], Membership
+      can :create, MembershipRequest
+      can [:destroy, :confirm], MembershipRequest do |membership_request|
+        membership_request.user_id == current_user.id or membership_request.group.admins.include?(current_user)
+      end
+
+     can [:create, :set], Membership
       can :destroy, Membership do |membership|
         membership.user_id == current_user.id or membership.group.admins.include?(current_user)
       end
