@@ -7,8 +7,11 @@
     body {
       padding-top: 0;
     }
+    .wrapper-container {
+      padding 20px 0;
+    }
     .wrapper {
-      margin: 20px auto;
+      margin: 0 auto;
       width: 600px;
     }
     .breadcrumbs a {
@@ -18,11 +21,13 @@
   </style>
 </head>
 <body>
-  <div class="wrapper">
-    <div class="breadcrumbs">
-      <a href="<%= Settings.host %>"><%= Settings.title %></a>
+  <div class="wrapper-container">
+    <div class="wrapper">
+      <div class="breadcrumbs">
+        <a href="<%= Settings.host %>"><%= Settings.title %></a>
+      </div>
+      <%= yield %>
     </div>
-    <%= yield %>
   </div>
 </body>
 </html>

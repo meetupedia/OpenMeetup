@@ -91,6 +91,10 @@ class User < ActiveRecord::Base
     @facebook_id ||= authentications.where(:provider => 'facebook').first.andand.uid
   end
 
+  def twitter_id
+    @twitter_id ||= authentications.where(:provider => 'twitter').first.andand.uid
+  end
+
   def user_follow_for(user)
     UserFollow.find_by_followed_user_id_and_user_id(self.id, user.id)
   end

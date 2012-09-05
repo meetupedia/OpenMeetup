@@ -24,6 +24,7 @@ end
 
 
 class CommonMailer < ActionMailer::Base
+  include MailUrlizer
   helper :common
   helper :application
   layout 'mailer'
