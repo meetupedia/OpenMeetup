@@ -1,29 +1,44 @@
-.group_header(style="#{@group.header.file? ? "background: url(#{@group.header.url(:normal)})" : ''}")
-  - if current_user
-    .pull-right=' render 'memberships/button', :group => @group
-  - else
-    .pull-right=' link_to %{<i class="icon-plus-sign icon-white"></i> #{tr('Join')}}.html_safe, set_group_memberships_path(@group), :class => 'btn btn-primary'
+.wrapper
+  .group_header
+    - if current_user
+      .pull-right=' render 'memberships/button', :group => @group
+    - else
+      .pull-right=' link_to %{<i class="icon-plus-sign icon-white"></i> #{tr('Join')}}.html_safe, set_group_memberships_path(@group), :class => 'btn btn-primary'
 
-  h1.group= @group.name
+    - if @group.image.file?
+      .avatar= link_to(image_tag(@group.image.url(:small), :alt => @group.name, :height => 96, :width => 96, :title => @group.name), @group)
 
-  ul.nav.nav-tabs
-    li(class="#{controller.action_name == 'show' ? 'active' : ''}")= link_to tr('Home'), @group
-    li(class="#{controller.action_name == 'events' ? 'active' : ''}")= link_to tr('Events'), events_group_path(@group)
-    li(class="#{controller.action_name == 'members' ? 'active' : ''}")= link_to tr('Members'), members_group_path(@group)
-    li(class="#{controller.action_name == 'requested_members' ? 'active' : ''}")= link_to tr('Requests'), requested_members_group_path(@group)
-    li(class="#{controller.action_name == 'images' ? 'active' : ''}")= link_to tr('Images'), images_group_path(@group)
-    - if Settings.enable_messages
-      li(class="#{controller.action_name == 'waves' ? 'active' : ''}")= link_to tr('Messages'), waves_group_path(@group)
+    h1.group= link_to @group.name, @group
 
-    li.dropdown.pull-right
-      a(class="dropdown-toggle" data-toggle="dropdown" href="#")
-        = image_tag 'cog.png'
-      ul.dropdown-menu
-        - if can? :create, Event.new(:group => @group)
-          li= link_to tr('New event'), new_group_event_path(@group), :rel => 'modal'
-        - if can? :edit, @group
-          li= link_to tr('New message'), new_wave_path(:group_id => @group.id), :rel => 'modal'
-        - if current_user
-          li= link_to tr('Send invitations'), new_group_group_invitation_path(@group), :rel => 'modal'
-        - if can? :edit, @group
-          li= link_to tr('Edit group'), edit_group_path(@group), :rel => 'modal'
+    - unless @group.description.blank?
+      = simple_format(@group.description)
+    - else
+      p= tr('No description yet.')
+
+    - unless (tags = @group.tags).blank?
+      p= render @group.tags
+    - else
+      p= tr('No tags yet.')
+
+    /
+      ul.nav.nav-tabs
+        li(class="#{controller.action_name == 'show' ? 'active' : ''}")= link_to tr('Home'), @group
+        li(class="#{controller.action_name == 'events' ? 'active' : ''}")= link_to tr('Events'), events_group_path(@group)
+        li(class="#{controller.action_name == 'members' ? 'active' : ''}")= link_to tr('Members'), members_group_path(@group)
+        li(class="#{controller.action_name == 'requested_members' ? 'active' : ''}")= link_to tr('Requests'), requested_members_group_path(@group)
+        li(class="#{controller.action_name == 'images' ? 'active' : ''}")= link_to tr('Images'), images_group_path(@group)
+        - if Settings.enable_messages
+          li(class="#{controller.action_name == 'waves' ? 'active' : ''}")= link_to tr('Messages'), waves_group_path(@group)
+
+        li.dropdown.pull-right
+          a(class="dropdown-toggle" data-toggle="dropdown" href="#")
+            = image_tag 'cog.png'
+          ul.dropdown-menu
+            - if can? :create, Event.new(:group => @group)
+              li= link_to tr('New event'), new_group_event_path(@group), :rel => 'modal'
+            - if can? :edit, @group
+              li= link_to tr('New message'), new_wave_path(:group_id => @group.id), :rel => 'modal'
+            - if current_user
+              li= link_to tr('Send invitations'), new_group_group_invitation_path(@group), :rel => 'modal'
+            - if can? :edit, @group
+              li= link_to tr('Edit group'), edit_group_path(@group), :rel => 'modal'

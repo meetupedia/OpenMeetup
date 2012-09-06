@@ -15,7 +15,7 @@ html
   body
     = render 'layouts/header'
     #content
-      .container.wrapper
+      .container
         = yield :header
         - if flash[:notice]
           .alert.alert-success

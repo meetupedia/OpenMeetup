@@ -42,17 +42,14 @@ input[type=text], textarea
   box-shadow: 0 0 3px #9f9f9f
   margin-bottom: 20px
   overflow: hidden
-  padding: 5px 20px 20px 20px
+  padding: 10px 20px 20px 20px
 
 .group_header
-  border-radius: 5px 5px 0 0
-  margin: -5px -20px 20px -20px
-  padding: 20px 20px 0 20px
-  position: relative
-  ul.nav-tabs
-    margin-bottom: 0
+  padding-top: 5px
   h1
-    text-shadow: 0 0 1px #ffffff
+    margin: 0
+  p
+    margin-bottom: 0
 
 div.activity, div.review, div.comment
   min-height: 20px
@@ -376,3 +373,26 @@ form
 .pull-right
   .btn
     margin-left: 5px
+
+ul.tiles
+  :margin 10px -10px 10px 0
+  li
+    :display inline
+    :line-height 20px
+    a
+      :background #e7eff7
+      :border-radius 5px
+      :display inline-block
+      :margin 0 5px 5px 0
+      :overflow hidden
+      :padding 10px 0
+      :width 83px
+      :text-align center
+      &:hover
+        :background #4f5f6f
+        :color #ffffff
+        :text-decoration none
+      span
+        :color #7f9fbf
+        :font-size 20px
+        :display block
