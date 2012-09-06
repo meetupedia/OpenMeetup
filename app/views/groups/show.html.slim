@@ -17,18 +17,14 @@
           ' Facebook-oldal:
           = auto_link @group.facebook_url
 
-      - if Settings.enable_facebook_login
-        - if current_user and not (users = @group.members.joins(:authentications).where('authentications.uid' => current_user.facebook_friend_ids, 'authentications.provider' => 'facebook').order('users.name ASC')).empty?
-          h3= tr('Facebook friends')
-          p= render 'users/user_avatars', :users => users
+      - if current_user and not (users = @group.members.where('users.id' => current_user.followed_users.map(&:id)).order('users.name ASC')).empty?
+        h3= tr('Friends')
+        p= render 'users/user_avatars', :users => users
 
-      - if @group.images.size > 0
-        hr
+    - if @group.images.size > 0
+      .wrapper
         p= link_to image_tag(@group.images.last.image.url(:normal)), @group.images.last.image.url(:normal), :class => 'fancybox'
         p= link_to tr('All images'), images_group_path(@group)
-      /
-        - else
-          p= tr('No images yet.')
 
       /
         - unless (users = @group.members.order('users.name ASC')).empty?
@@ -36,32 +32,35 @@
           h2= tr('Who we are')
           p= render 'users/user_avatars', :users => users
 
-      hr
-
+    .wrapper
       h2= tr('Activity')
       - unless (activities = @group.activities.order('created_at DESC').limit(20)).blank?
         .list_view= render activities
       - else
         p= tr('No activity yet.')
 
-      - if Settings.enable_share_buttons
-        hr
+    - if Settings.enable_share_buttons
+      .wrapper
         ' <div class="fb-like" data-href="#{group_url(@group)}" data-send="false" data-layout="box_count" data-show-faces="false"></div>
         ' <g:plusone size="tall"></g:plusone>
         ' <a href="https://twitter.com/share" class="twitter-share-button" data-count="vertical">Tweet</a>
         ' <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
   .span8
+    - if event = @group.next_event
+      .wrapper
+        h4= link_to event.title, event
+        div
+          = l(event.start_time)
+          = " → "
+          = l(event.end_time)
+        div
+          = event.address
+        div
+          = link_to "#{event.participations.size} #{tr('participants')}".html_safe, users_event_path(event)
+
     .wrapper
-      - if @group.next_event
-        .list_view= render @group.next_event
-
       = render 'comments/comments', :commentable => @group
-
-      - if Settings.enable_facebook_comments
-        hr
-        h2= tr('Facebook comments')
-        | <div class="fb-comments" data-href="#{group_url(@group)}" data-num-posts="10"></div>
 
 - if Settings.enable_share_buttons
   javascript:
