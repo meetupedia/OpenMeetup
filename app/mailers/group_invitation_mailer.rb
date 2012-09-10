@@ -7,6 +7,7 @@ class GroupInvitationMailer < CommonMailer
     @group = group_invitation.group
     @message = group_invitation.message
     @user = group_invitation.user
+    @code = group_invitation.code
     set_locale @user.locale
     mail :to => group_invitation.email, :subject => "Meghívó: #{@group.name}"
   end

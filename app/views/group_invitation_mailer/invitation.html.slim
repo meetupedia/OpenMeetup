@@ -16,6 +16,8 @@ p
 
 p= link_to tr('Join'), set_group_memberships_path(@group), :class => 'btn btn-primary'
 
+p= link_to tr('Registration'), sign_up_path(:code => @code), :class => 'btn'
+
 hr
 
 = Settings.email_signature

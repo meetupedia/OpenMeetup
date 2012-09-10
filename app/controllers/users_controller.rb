@@ -5,7 +5,7 @@ class UsersController < CommonController
   authorize_resource :except => [:index, :show, :activities, :groups, :request_invite, :validate_email]
   before_filter :set_city, :except => [:edit, :update, :edit_city]
   before_filter :create_city, :only => [:new, :request_invite, :edit_city]
-  skip_before_filter :check_restricted_access, :only => [:create, :request_invite]
+  skip_before_filter :check_restricted_access, :only => [:new, :create, :request_invite]
 
   def index
     @users = User.where('name LIKE ?', "%#{params[:q]}%")
@@ -18,13 +18,16 @@ class UsersController < CommonController
   end
 
   def new
+    if Settings.enable_invite_process and not (params[:invitation_code] and GroupInvitation.find_by_code(params[:invitation_code]))
+      render :request_invite
+    end
   end
 
   def create
     city = City.find_or_create_with_country(params[:user].delete(:city_id))
     @user = User.new params[:user]
     @user.city = city
-    if Settings.enable_invite_process
+    if Settings.enable_invite_process and not (params[:invitation_code] and GroupInvitation.find_by_code(params[:invitation_code]))
       @user.invitation_code = SecureRandom.hex(16)
       @user.restricted_access = true
     end

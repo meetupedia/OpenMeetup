@@ -39,7 +39,7 @@ input[type=text], textarea
 .wrapper
   background: #ffffff
   border-radius: 5px
-  box-shadow: 0 0 3px #9f9f9f
+  box-shadow: 0 1px 3px #9f9f9f
   margin-bottom: 20px
   padding: 20px
 
@@ -62,14 +62,14 @@ div.avatar
 div.group.list_item
   position: relative
   div.avatar
-    left: 20px
-    margin: 0
+    background: #e7eff7
+    left: 0
     position: absolute
-    top: 10px
+    top: 0
   div.item_content
-    padding-left: 92px
+    padding-left: 72px
   div.next-event
-    background: #ffffff
+    background: #f7f7f7
     border-radius: 5px
     margin: 10px 0
     padding: 5px 10px
@@ -194,23 +194,26 @@ h3
   margin-right: 3px
 
 div.list_item
-  margin: 10px 0
+  margin-bottom: 10px
   min-height: 20px
   padding: 5px 10px 5px 20px
 
 div.avatar_item
-  padding-left: 60px !important
+  padding-left: 40px !important
   div.avatar
     margin: -5px 0 0 -40px
 
 div.list_view
-  margin: 0 0 0 -20px
+  border-radius: 0 0 5px 5px
+  margin: 20px -20px -20px -20px
+  padding: 10px 20px 10px 20px
+  background: #f7f7f7
   div.indent
     margin-left: 20px
   div.list_item
-    background: #f7f7f7
-  ul.tiles a
     background: #ffffff
+    border-radius: 0 5px 5px 5px
+    box-shadow: 0 1px 1px #cfcfcf
 
 div.item_view
   div.list_item

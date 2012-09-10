@@ -1,20 +1,22 @@
 .row
   .span6
     .wrapper
-    h2= tr('Sign up with email')
-    = semantic_form_for @user do |f|
-      = f.inputs do
-        = f.input :name
-        = f.input :nickname
-        = f.input :email
-        = f.input :password
-        = f.input :password_confirmation
-      = f.actions
+      h2= tr('Sign up with email')
+      = semantic_form_for @user do |f|
+        - if params[:invitation_code]
+          = hidden_field_tag :invitation_code, params[:invitation_code]
+        = f.inputs do
+          = f.input :name
+          = f.input :nickname
+          = f.input :email
+          = f.input :password
+          = f.input :password_confirmation
+        = f.actions
   .span6
     .wrapper
       - if Settings.enable_facebook_login
         h2= tr('Sign up with Facebook')
         p= link_to image_tag('facebook_connect.png', :alt => tr('Sign up with Facebook')), auth_path(:facebook)
       - if Settings.enable_twitter_login
-        h2 tr('Sign up with Twitter')
+        h2= tr('Sign up with Twitter')
         p= link_to image_tag('twitter_connect.png', :alt => tr('Sign up with Twitter')), auth_path(:twitter)

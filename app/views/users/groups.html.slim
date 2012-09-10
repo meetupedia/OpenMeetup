@@ -5,13 +5,16 @@
     .wrapper
       h2= tr('My groups')
 
-      .list_view
-        - @admined_groups.each do |group|
-          = div_for group, :class => 'list_item' do
-            h3= link_to group.name, group
       - if can? :create, Group
         p= link_to tr('Create new group'), new_group_path, :class => 'btn'
+
+      - unless @admined_groups.blank?
+        .list_view
+          - @admined_groups.each do |group|
+            = div_for group, :class => 'list_item' do
+              h3= link_to group.name, group
   .span8
     .wrapper
       h2= tr('Memberships')
-      .list_view= render @groups
+      - unless @groups.blank?
+        .list_view= render @groups
