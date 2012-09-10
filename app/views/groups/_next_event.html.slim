@@ -1,0 +1,24 @@
+.next-event
+  .button-menu
+    - if current_user
+      - if participation = event.participation_for(current_user)
+        =' link_to '<i class="icon-ok-sign icon-white"></i> Részt veszek'.html_safe, participation_path(participation), :method => :delete, :class => 'btn btn-success btn-mini'
+      - else
+        =' link_to '<i class="icon-plus-sign icon-white"></i> Részt veszek'.html_safe, event_participations_path(event), :method => :post, :class => 'btn btn-primary btn-mini'
+    - else
+      =' link_to '<i class="icon-plus-sign icon-black"></i> Részt veszek'.html_safe, new_user_sessions_path(:return_to => set_event_participations_path(event)), :class => 'btn btn-mini'
+  h4
+    = tr('Next event')
+    ' :
+    = link_to event.title, event
+  div
+    = " ▼ "
+    = l(event.start_time)
+    br
+    = " ▲ "
+    = l(event.end_time)
+  div
+    - if event.place.present?
+      = event.place
+      = dot
+    = link_to event.gmaps4rails_address, map_event_path(event), :rel => 'modal'

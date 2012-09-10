@@ -1,16 +1,18 @@
 .row
-  .span7
-    h1= tr('Searching for groups')
-    form action='#{discovery_path}' method='get' id='discovery'
-      input type='text' placeholder=tr('Search') name='q'
-    #results
-      - if @groups
-        = render 'search'
-        - if @groups.respond_to?(:total_pages)
-          = will_paginate @groups
-  .span4.offset1
-    - if can? :create, Group
-      p= link_to tr('Create new group'), new_group_path, :class => 'btn btn-primary'
-    hr
-      h2= tr('Activity')
-      .list_view= render Activity.order('created_at DESC').limit(10)
+  .span8
+    .wrapper
+      h1= tr('Searching for groups')
+      form action='#{discovery_path}' method='get' id='discovery'
+        input type='text' placeholder=tr('Search') name='q'
+      #results
+        - if @groups
+          = render 'search'
+          - if @groups.respond_to?(:total_pages)
+            = will_paginate @groups
+  .span4
+    .wrapper
+      - if can? :create, Group
+        p= link_to tr('Create new group'), new_group_path, :class => 'btn'
+      hr
+        h2= tr('Activity')
+        .list_view= render Activity.order('created_at DESC').limit(10)

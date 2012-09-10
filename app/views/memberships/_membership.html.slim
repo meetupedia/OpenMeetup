@@ -1,11 +1,13 @@
 = div_for membership.user, :class => 'list_item avatar_item clearfix' do
-  - if can? :destroy, membership
-    .pull-right= link_to tr('Remove'), membership, :method => :delete, :confirm => tr('Are you sure?'), :class => 'btn btn-danger'
-  - if can? :set_admin, membership and not membership.group.admins.include?(membership.user)
-    .pull-right= link_to tr('Set admin'), set_admin_membership_path(membership), :method => :put, :confirm => tr('Are you sure?'), :class => 'btn'
-  - if can? :unset_admin, membership and membership.group.admins.include?(membership.user)
-    .pull-right= link_to tr('Remove admin'), unset_admin_membership_path(membership), :method => :put, :confirm => tr('Are you sure?'), :class => 'btn btn-danger'
-  - if current_user
-    .pull-right= render 'user_follows/button', :user => membership.user
+  .button-menu
+    - if can? :destroy, membership
+      = link_to tr('Remove'), membership, :method => :delete, :confirm => tr('Are you sure?'), :class => 'btn btn-danger btn-mini'
+    - if can? :set_admin, membership and not membership.group.admins.include?(membership.user)
+      = link_to tr('Set admin'), set_admin_membership_path(membership), :method => :put, :confirm => tr('Are you sure?'), :class => 'btn btn-mini'
+    - if can? :unset_admin, membership and membership.group.admins.include?(membership.user)
+      = link_to tr('Remove admin'), unset_admin_membership_path(membership), :method => :put, :confirm => tr('Are you sure?'), :class => 'btn btn-danger btn-mini'
   .avatar= user_avatar membership.user
-  = link_to membership.user.name, membership.user
+  =' link_to membership.user.name, membership.user
+  - if membership.is_admin?
+    span.label.label-important=' tr('admin')
+  span.date= l membership.created_at

@@ -15,8 +15,6 @@
               .tr8n-language-selector.btn= tr8n_language_selector_tag
           li= link_to tr('Sign in'), sign_in_path, 'data-disable-pjax' => true
       - else
-        ul.nav.pull-left
-          li= link_to tr('Home'), root_path
         .nav-collapse
           form.navbar-search.pull-left action='/search' method='get'
             input type='text' class='search-query' placeholder=tr('Search') name='q'

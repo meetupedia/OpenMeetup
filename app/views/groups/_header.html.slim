@@ -1,22 +1,21 @@
 .wrapper
   .group_header
     - if current_user
-      .pull-right.btn-group
-        a.btn.dropdown-toggle(data-toggle="dropdown" href="#")
-          =' image_tag 'cog.png'
-          span.caret
-        ul.dropdown-menu
-          - if can? :create, Event.new(:group => @group)
-            li= link_to tr('New event'), new_group_event_path(@group), :rel => 'modal'
-          - if can? :edit, @group
-            li= link_to tr('New message'), new_wave_path(:group_id => @group.id), :rel => 'modal'
-          - if current_user
-            li= link_to tr('Send invitations'), new_group_group_invitation_path(@group), :rel => 'modal'
-          - if can? :edit, @group
-            li= link_to tr('Edit group'), edit_group_path(@group), :rel => 'modal'
-      .pull-right=' render 'memberships/button', :group => @group
+      .button-menu
+        .btn-group.pull-right
+          a.btn.dropdown-toggle(data-toggle="dropdown" href="#")
+            =' image_tag 'cog.png'
+            span.caret
+          ul.dropdown-menu
+            - if can? :create, Event.new(:group => @group)
+              li= link_to tr('New event'), new_group_event_path(@group), :rel => 'modal'
+            - if current_user
+              li= link_to tr('Send invitations'), new_group_group_invitation_path(@group), :rel => 'modal'
+            - if can? :edit, @group
+              li= link_to tr('Edit group'), edit_group_path(@group), :rel => 'modal'
+        =' render 'memberships/button', :group => @group
     - else
-      .pull-right=' link_to %{<i class="icon-plus-sign icon-white"></i> #{tr('Join')}}.html_safe, set_group_memberships_path(@group), :class => 'btn btn-primary'
+      .button-menu=' link_to %{<i class="icon-plus-sign icon-white"></i> #{tr('Join')}}.html_safe, set_group_memberships_path(@group), :class => 'btn btn-primary'
 
     - if @group.image.file?
       .avatar= link_to(image_tag(@group.image.url(:small), :alt => @group.name, :height => 96, :width => 96, :title => @group.name), @group)
@@ -26,12 +25,12 @@
     - unless @group.description.blank?
       p= truncate(@group.description, :length => 120)
     - else
-      p= tr('No description yet.')
+      p.muted= tr('No description yet.')
 
     - unless (tags = @group.tags).blank?
       p= render @group.tags
     - else
-      p= tr('No tags yet.')
+      p.muted= tr('No tags yet.')
 
     /
       ul.nav.nav-tabs

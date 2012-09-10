@@ -1,6 +1,8 @@
-#footer
-  .clearfix
+#footer.clearfix
+  .container
     - unless Settings.standalone
+      .footer-left
+        =' link_to tr('About'), 'http://openmeetup.org/'
       - if current_user
         .footer-showlove
           .footer-facebook
@@ -11,8 +13,6 @@
           .footer-twitter
             | <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://openmeetup.net" data-text="Free meetup alternative -->">Tweet</a>
             | <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-      .footer-right
-        =' link_to tr('About'), 'http://openmeetup.org/'
     - else
       .footer_left
         =' tr('Powered by')

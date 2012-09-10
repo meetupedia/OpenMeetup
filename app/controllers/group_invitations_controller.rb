@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 
 class GroupInvitationsController < CommonController
   load_resource :group
@@ -20,7 +20,7 @@ class GroupInvitationsController < CommonController
         if group_invitation.new_record?
           group_invitation.message = @group_invitation.message
           if group_invitation.save
-            GroupMailer.invitation(current_user, group_invitation).deliver
+            GroupInvitationMailer.invitation(group_invitation).deliver
           end
         end
       end

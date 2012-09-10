@@ -1,18 +1,20 @@
+- current_user = @invited_user
+
 h2 Meghívó
 
 p
-  =' @user.name
+  =' link_to @user.name, @user
   ' meghívott a/az
   =' link_to @group.name, @group
   ' nevű csoportba.
-
-p= link_to tr('Join'), set_group_memberships_path(@group), :class => 'btn btn-primary'
 
 .list_view= render @group
 
 - unless @message.blank?
   h3 Személyes üzenet
   = simple_format @message
+
+p= link_to tr('Join'), set_group_memberships_path(@group), :class => 'btn btn-primary'
 
 hr
 

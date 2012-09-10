@@ -12,11 +12,11 @@ h1, h2, h3
   font-family: "Trebuchet MS", Arial, sans-serif
   font-weight: normal
 
-h2:nth-of-type(1)
-  margin-top: 10px
-
-h3:nth-of-type(1)
+h1:nth-of-type(1), h3:nth-of-type(1)
   margin-top: 5px
+
+h2:nth-of-type(1)
+  margin-top: 0
 
 a
   color: #005f8f
@@ -41,14 +41,38 @@ input[type=text], textarea
   border-radius: 5px
   box-shadow: 0 0 3px #9f9f9f
   margin-bottom: 20px
-  padding: 10px 20px 20px 20px
+  padding: 20px
+
+.modal-content .wrapper
+  border: none
+  box-shadow: none
+  margin: 0
+  padding: 0
 
 .group_header
-  padding-top: 5px
   h1
     margin: 0
   p
     margin-bottom: 0
+
+div.avatar
+  float: left
+  margin-right: 20px
+
+div.group.list_item
+  position: relative
+  div.avatar
+    left: 20px
+    margin: 0
+    position: absolute
+    top: 10px
+  div.item_content
+    padding-left: 92px
+  div.next-event
+    background: #ffffff
+    border-radius: 5px
+    margin: 10px 0
+    padding: 5px 10px
 
 div.activity, div.review, div.comment
   min-height: 20px
@@ -56,14 +80,19 @@ div.activity, div.review, div.comment
   .avatar
     margin: -5px 0 0 -40px
 
+#content
+  border-bottom: 1px solid #d7dfe7
+  padding-bottom: 20px
+
 #footer
-  border-radius: 10px 10px 0 0
+  background: #d7dfe7
   color: #9f9f9f
   font-size: 11px
-  padding: 10px 0px 25px 0px
-  bottom: 0px
+  margin-top: 1px
+  padding: 10px 0px 20px 0px
   .footer-left
     float: left
+    margin-right: 10px
   .footer-right
     float: right
     > a
@@ -72,6 +101,7 @@ div.activity, div.review, div.comment
     float: left
     .footer-google, .footer-twitter, .footer-facebook
       float: left
+      margin-right: 10px
       width: 100px
 
 .navbar
@@ -142,6 +172,7 @@ h1
     padding-left: 48px
   &.user
     background: url(user_24x32.png) no-repeat 0 4px
+    margin-bottom: 10px
     padding-left: 40px
 
 h2
@@ -159,11 +190,6 @@ h3
 #map
   height: 400px
 
-.avatar
-  display: block
-  float: left
-  margin: 2px 15px 0 0
-
 .avatar_image
   margin-right: 3px
 
@@ -174,7 +200,7 @@ div.list_item
 
 div.avatar_item
   padding-left: 60px !important
-  .avatar
+  div.avatar
     margin: -5px 0 0 -40px
 
 div.list_view
@@ -183,6 +209,8 @@ div.list_view
     margin-left: 20px
   div.list_item
     background: #f7f7f7
+  ul.tiles a
+    background: #ffffff
 
 div.item_view
   div.list_item
@@ -246,7 +274,7 @@ div.calendar
       background: #ffffff
       border: 2px solid #f7f7f7
       display: block
-      min-width: 30px
+      min-width: 24px
       padding: 2px
       text-align: center
       &.on_day
@@ -349,7 +377,7 @@ form
     padding: 0
 
 .breadcrumbs
-  margin: -5px 0 35px -20px
+  margin: -20px 0 20px -20px
   position: relative
   a
     background: #a7a7af
@@ -369,15 +397,19 @@ form
   vertical-align: top
   margin-top: 1px
 
-div.pull-right, div.pull-right.btn-group
-  a.btn
+.button-menu
+  float: right
+  .btn, .btn-group
+    display: block
+    float: right
     margin-left: 5px
 
 ul.tiles
-  :margin 10px -10px 10px 0
+  :margin 0 -5px 0 0
   li
     :display inline
     :line-height 20px
+    :margin 0
     a
       :background #e7eff7
       :border-radius 5px

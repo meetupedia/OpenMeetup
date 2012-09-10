@@ -3,6 +3,12 @@
 
   h1.event= link_to @event.title, @event
 
+- if can? :create, EventInvitation.new(:event => @event)
+  .button-menu
+    = link_to tr('Send invitations'), new_event_event_invitation_path(@event), :class => 'btn', :rel => 'modal'
+
 h2= tr('Participants')
+
 .list_view= render @participations
+
 = will_paginate @participations

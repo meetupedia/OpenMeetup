@@ -1,10 +1,9 @@
-span(id="membership_button_for_group_#{group.id}")
-  - if membership = group.membership_for(current_user) and can? :destroy, membership
-    =' link_to %{<i class="icon-ok-sign icon-white"></i> #{tr('Joined')}}.html_safe, membership, :method => :delete, :class => 'btn btn-success', :remote => !@static_follow
-  - elsif group.is_closed?
-    - if membership_request = group.membership_request_for(current_user)
-      =' link_to %{<i class="icon-ok-sign icon-white"></i> #{tr('Requested membership')}}.html_safe, membership_request, :method => :delete, :class => 'btn'
-    - else
-      =' link_to %{<i class="icon-plus-sign icon-white"></i> #{tr('Request membership')}}.html_safe, group_membership_requests_path(group), :method => :post, :class => 'btn btn-primary'
+- if membership = group.membership_for(current_user) and can? :destroy, membership
+  =' link_to %{<i class="icon-ok-sign icon-white"></i> #{tr('Joined')}}.html_safe, membership, :method => :delete, :class => 'btn btn-success', :remote => !@static_follow
+- elsif group.is_closed?
+  - if membership_request = group.membership_request_for(current_user)
+    =' link_to %{<i class="icon-ok-sign icon-white"></i> #{tr('Requested membership')}}.html_safe, membership_request, :method => :delete, :class => 'btn'
   - else
-    =' link_to %{<i class="icon-plus-sign icon-white"></i> #{tr('Join')}}.html_safe, group_memberships_path(group), :method => :post, :class => 'btn btn-primary', :remote => !@static_follow
+    =' link_to %{<i class="icon-plus-sign icon-white"></i> #{tr('Request membership')}}.html_safe, group_membership_requests_path(group), :method => :post, :class => 'btn btn-primary'
+- else
+  =' link_to %{<i class="icon-plus-sign icon-white"></i> #{tr('Join')}}.html_safe, group_memberships_path(group), :method => :post, :class => 'btn btn-primary', :remote => !@static_follow

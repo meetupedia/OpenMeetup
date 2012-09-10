@@ -3,10 +3,8 @@
 .row
   .span4
     .wrapper
-      ul.tiles
-        li= link_to "<span class='menu_count'>#{@group.members.size}</span>#{tr('members')}".html_safe, members_group_path(@group)
-        li= link_to "<span class='menu_count'>#{@group.events.size}</span>#{tr('events')}".html_safe, events_group_path(@group)
-        li= link_to "<span class='menu_count'>#{@group.images.size}</span>#{tr('images')}".html_safe, images_group_path(@group)
+      = render 'groups/tile_menu', :group => @group
+
       - if @group.url.present?
         div
           ' Honlap:
@@ -17,14 +15,10 @@
           ' Facebook-oldal:
           = auto_link @group.facebook_url
 
-      - if current_user and not (users = @group.members.where('users.id' => current_user.followed_users.map(&:id)).order('users.name ASC')).empty?
-        h3= tr('Friends')
-        p= render 'users/user_avatars', :users => users
-
     - if @group.images.size > 0
       .wrapper
-        p= link_to image_tag(@group.images.last.image.url(:normal)), @group.images.last.image.url(:normal), :class => 'fancybox'
-        p= link_to tr('All images'), images_group_path(@group)
+        = link_to image_tag(@group.images.last.image.url(:normal)), @group.images.last.image.url(:normal), :class => 'fancybox'
+        p= link_to tr('All images'), images_group_path(@group), :rel => 'modal'
 
       /
         - unless (users = @group.members.order('users.name ASC')).empty?
@@ -32,12 +26,13 @@
           h2= tr('Who we are')
           p= render 'users/user_avatars', :users => users
 
-    .wrapper
-      h2= tr('Activity')
-      - unless (activities = @group.activities.order('created_at DESC').limit(20)).blank?
-        .list_view= render activities
-      - else
-        p= tr('No activity yet.')
+    /
+      .wrapper
+        h2= tr('Activity')
+        - unless (activities = @group.activities.order('created_at DESC').limit(20)).blank?
+          .list_view= render activities
+        - else
+          p.muted= tr('No activity yet.')
 
     - if Settings.enable_share_buttons
       .wrapper
@@ -49,15 +44,7 @@
   .span8
     - if event = @group.next_event
       .wrapper
-        h4= link_to event.title, event
-        div
-          = l(event.start_time)
-          = " → "
-          = l(event.end_time)
-        div
-          = event.address
-        div
-          = link_to "#{event.participations.size} #{tr('participants')}".html_safe, users_event_path(event)
+        = render 'next_event', :event => event
 
     .wrapper
       = render 'comments/comments', :commentable => @group
