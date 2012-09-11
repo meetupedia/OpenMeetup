@@ -1,14 +1,13 @@
 - unless modal_request?
-  .breadcrumbs.clearfix= link_to @event.group.name, @event.group
+  = render 'header'
 
-  h1.event= link_to @event.title, @event
+.wrapper
+  - if can? :create, EventInvitation.new(:event => @event)
+    .button-menu
+      = link_to tr('Send invitations'), new_event_event_invitation_path(@event), :class => 'btn', :rel => 'modal'
 
-- if can? :create, EventInvitation.new(:event => @event)
-  .button-menu
-    = link_to tr('Send invitations'), new_event_event_invitation_path(@event), :class => 'btn', :rel => 'modal'
+  h2= tr('Participants')
 
-h2= tr('Participants')
+  .list_view= render @participations
 
-.list_view= render @participations
-
-= will_paginate @participations
+  = will_paginate @participations
