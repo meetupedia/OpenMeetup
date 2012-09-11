@@ -26,5 +26,4 @@
       = render @user.tags.order('name ASC')
   .span8
     .wrapper
-      h2= tr('Activity')
-      .list_view= render @user.activities.order('created_at DESC').limit(10)
+      = render 'activities/activities', :activities => @activities

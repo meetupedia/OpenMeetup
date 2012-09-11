@@ -48,11 +48,7 @@
 
     .wrapper
       .button-menu= link_to tr('New post'), polymorphic_path([:new, @group, :post]), :class => 'btn', :rel => 'modal'
-
-      h2= tr('Activity')
-
-      - unless (acitivities = @group.activities.order('created_at DESC')).blank?
-        .list_view= render acitivities
+      = render 'activities/activities', :activities => @activities
 
 - if Settings.enable_share_buttons
   javascript:

@@ -13,6 +13,3 @@
     .wrapper
       - if can? :create, Group
         p= link_to tr('Create new group'), new_group_path, :class => 'btn'
-      hr
-        h2= tr('Activity')
-        .list_view= render Activity.order('created_at DESC').limit(10)

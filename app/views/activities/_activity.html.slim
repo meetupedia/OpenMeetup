@@ -1,6 +1,6 @@
 - if activity.activable.class.name == 'Post'
   = render activity.activable
-- else
+- elsif activity.activable.class.name !~ /Comment/
   = div_for activity, :class => 'list_item avatar_item' do
     .avatar= user_avatar activity.user
     - if activity.activable.class.name == 'Event'
@@ -32,9 +32,9 @@
       =' user_link activity.activable.user
       ' feltöltött egy képet.
       p= link_to image_tag(activity.activable.image.url(:small), :alt => '', :height => 80, :width => 80), activity.activable.image.url(:normal), :class => 'fancybox'
-    - elsif activity.activable.class.name == 'Comment'
-      =' user_link activity.activable.user
-      ' kommentet írt ide:
-      =' link_to activity.activable.commentable.name, activity.activable.commentable
-      p= activity.activable.comment
+    / - elsif activity.activable.class.name == 'Comment'
+    /   =' user_link activity.activable.user
+    /   ' kommentet írt ide:
+    /   =' link_to activity.activable.commentable.name, activity.activable.commentable
+    /   p= activity.activable.comment
     .date= time_ago_in_words activity.created_at
