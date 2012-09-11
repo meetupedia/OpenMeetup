@@ -42,7 +42,7 @@ private
   helper_method :current_locale
 
   def create_activity(item)
-    Activity.create :activable_type => item.class.name, :activable_id => item.id
+    Activity.create :activable_type => item.class.name, :activable_id => item.id, :group => @group
   end
 
   def current_language

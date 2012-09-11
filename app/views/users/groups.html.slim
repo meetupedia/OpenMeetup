@@ -3,7 +3,7 @@
 .row
   .span4
     .wrapper
-      h2= tr('My groups')
+      h2= tr('Groups')
 
       - if can? :create, Group
         p= link_to tr('Create new group'), new_group_path, :class => 'btn'

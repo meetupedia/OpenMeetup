@@ -1,9 +1,4 @@
-- unless (comments = commentable.comments.where(:is_highlighted => true).order('created_at ASC')).blank?
-  h2= tr('Highlighted comments')
-  = render :partial => 'comments/highlighted_comment', :collection => comments, :as => :comment
-
-h2= tr('Comments')
 p= link_to tr('New comment'), polymorphic_path([:new, commentable, :comment]), :rel => 'modal'
 
-- unless (comments = commentable.comments.where(:is_highlighted => false, :reply_to_id => nil).order('created_at ASC')).blank?
-  .list_view= render comments
+- unless (comments = commentable.comments.where(:reply_to_id => nil).order('created_at ASC')).blank?
+  .comments= render comments

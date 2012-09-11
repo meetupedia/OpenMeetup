@@ -38,4 +38,5 @@
     - if @event.place.present?
       = @event.place
       = dot
-    = link_to @event.gmaps4rails_address, map_event_path(@event), :rel => 'modal'
+    - if @event.gmaps4rails_address.present?
+      = link_to @event.gmaps4rails_address, map_event_path(@event), :rel => 'modal'

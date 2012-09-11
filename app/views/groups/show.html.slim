@@ -47,7 +47,12 @@
         = render 'next_event', :event => event
 
     .wrapper
-      = render 'comments/comments', :commentable => @group
+      .button-menu= link_to tr('New post'), polymorphic_path([:new, @group, :post]), :class => 'btn', :rel => 'modal'
+
+      h2= tr('Activity')
+
+      - unless (acitivities = @group.activities.order('created_at DESC')).blank?
+        .list_view= render acitivities
 
 - if Settings.enable_share_buttons
   javascript:

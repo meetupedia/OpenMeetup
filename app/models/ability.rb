@@ -59,6 +59,8 @@ class Ability
         participation.user_id == current_user.id or participation.event.group.admins.include?(current_user)
       end
 
+      can :create, Post
+
       can :create, Review
       can [:update, :destroy], Review do |review|
         review.user == current_user

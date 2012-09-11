@@ -31,7 +31,3 @@
     .wrapper
       h2= tr('Activity')
       .list_view= render @event.activities.order('created_at DESC').limit(5).includes(:activable => :user)
-
-    .wrapper
-      = render 'comments/comments', :commentable => @event
-

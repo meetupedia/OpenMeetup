@@ -3,7 +3,8 @@
 .row
   .span4
     .wrapper
-      h2= tr('User data')
+      ul.tiles
+        li= link_to "<span class='menu_count'>#{@user.memberships.size}</span> #{tr('groups')}".html_safe, groups_user_path(@user)
       table.table
         tr
           th= tr('Name')
