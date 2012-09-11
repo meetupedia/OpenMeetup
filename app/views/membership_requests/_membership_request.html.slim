@@ -1,0 +1,7 @@
+= div_for membership_request.user, :class => 'list_item avatar_item clearfix' do
+  - if can? :destroy, membership_request
+    .pull-right= link_to tr('Remove'), membership_request, :method => :delete, :confirm => tr('Are you sure?'), :class => 'btn btn-danger'
+  - if can? :confirm, membership_request
+    .pull-right= link_to tr('Confirm'), confirm_membership_request_path(membership_request), :method => :put, :confirm => tr('Are you sure?'), :class => 'btn'
+  .avatar= user_avatar membership_request.user
+  = link_to membership_request.user.name, membership_request.user

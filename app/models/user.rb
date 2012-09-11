@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   key :facebook_friend_ids, :as => :text
   key :restricted_access, :as => :boolean, :default => false
   key :invitation_code
+  key :karma, :as => :integer, :default => 0
   timestamps
 
   belongs_to :city
@@ -48,7 +49,6 @@ class User < ActiveRecord::Base
   validates :email, :presence => {:if => :password_required?}
   validates :password, :presence => {:if => :password_required?}, :confirmation => true
   attr_protected :is_admin
-  after_validation :set_city
 
   def password_required?
     authentications.blank? and crypted_password.blank? and not restricted_access
@@ -91,16 +91,38 @@ class User < ActiveRecord::Base
     @facebook_id ||= authentications.where(:provider => 'facebook').first.andand.uid
   end
 
+  def twitter_id
+    @twitter_id ||= authentications.where(:provider => 'twitter').first.andand.uid
+  end
+
   def user_follow_for(user)
     UserFollow.find_by_followed_user_id_and_user_id(self.id, user.id)
+  end
+
+  def follow(user)
+    UserFollow.create :followed_user_id => self.id, :user_id => user.id unless user_follow_for(user)
+  end
+
+  def unfollow(user)
+    user_follow_for(user).andand.destroy
   end
 
   def followed_users
     User.joins('INNER JOIN user_follows ON user_follows.followed_user_id = users.id').where('user_follows.user_id' => 1)
   end
 
-  def set_city
-    self.city = City.find_or_create_by_name(self.location || 'Budapest') unless self.location.blank?
+  def connect_facebook_friends
+    Authentication.where(:provider => 'facebook', :uid => facebook_friend_ids).includes(:user).map(&:user).each do |user|
+      follow(user)
+      user.follow(self)
+    end
+  end
+
+  def set_karma
+    karma = user_follows.count * 5 +
+      memberships.count * 10 +
+      memberships(:is_admin => true) * 40
+    update_column :karma, karma
   end
 end
 

@@ -1,6 +1,8 @@
-= render 'header'
+- unless modal_request?
+  = render 'header'
 
-p= @event.gmaps4rails_address
+.wrapper
+  p= @event.gmaps4rails_address
 
-- if @event.gmaps
-  #map= render 'common/map_for_item', :item => @event, :container => '#map'
+  - if @event.gmaps
+    #map= render 'common/map_for_item', :item => @event, :container => '#map'

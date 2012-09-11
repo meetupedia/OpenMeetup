@@ -1,0 +1,20 @@
+.next-event
+  - if current_user and participation = event.participation_for(current_user)
+    .pull-right
+      span.label.label-success=' tr('I am going')
+
+  h4
+    = tr('Next event')
+    ' :
+    = link_to event.title, event
+  div
+    = " ▼ "
+    = l(event.start_time)
+    br
+    = " ▲ "
+    = l(event.end_time)
+  div
+    - if event.place.present?
+      = event.place
+      = dot
+    = link_to event.gmaps4rails_address, map_event_path(event), :rel => 'modal'

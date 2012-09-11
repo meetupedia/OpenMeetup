@@ -1,8 +1,6 @@
 # encoding: UTF-8
 
-class EventMailer < ActionMailer::Base
-  default_url_options[:host] = Settings.host
-  default :from => Settings.default_email
+class EventMailer < CommonMailer
 
   def invitation(user, event_invitation)
     @user = event_invitation.user

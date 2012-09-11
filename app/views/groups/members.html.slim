@@ -1,19 +1,8 @@
-= render 'header'
+- unless modal_request?
+  = render 'header'
 
-.row
-  .span7
-    - if Settings.enable_facebook_login
-      - if current_user and not (users = @group.members.joins(:authentications).where('authentications.uid' => current_user.facebook_friend_ids, 'authentications.provider' => 'facebook').order('users.name ASC')).empty?
-        h2= tr('Facebook friends')
-        p= render 'users/user_avatars', :users => users
-    h2= tr('Members')
-    .list_view= render @memberships
-    = will_paginate @memberships
-  .span4.offset1
-    - if current_user
-      p= link_to tr('Send invitations'), new_group_group_invitation_path(@group), :class => 'btn', :rel => 'modal'
-      p= link_to "→ #{tr('Already invited')}".html_safe, invited_group_path(@group), :rel => 'modal'
-      hr
-    - unless (users = @group.admins.order('memberships.created_at ASC')).empty?
-      h2= tr('Admins')
-      p= render 'users/user_avatars', :users => users
+.wrapper
+  h2= tr('Members')
+  p= link_to "→ #{tr('Already invited')}".html_safe, invited_group_path(@group), :rel => 'modal'
+  .list_view= render @memberships
+  = will_paginate @memberships

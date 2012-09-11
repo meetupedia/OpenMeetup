@@ -1,19 +1,14 @@
 = div_for group, :class => 'list_item' do
-  - if group.image.file?
-    .avatar= link_to(image_tag(group.image.url(:small), :alt => group.name, :height => 72, :width => 72, :title => group.name), group)
-  h3= link_to group.name, group
-  p= truncate group.description, :length => 256
-  p
-    - if current_user
-      = render :partial => 'taggings/button', :collection => group.tags.order('name ASC'), :as => :tag
-    - else
-      = render group.tags.order('name ASC')
-  h5=' link_to "#{group.members.size} #{tr('members')}".html_safe, group
-  - if (users = group.members.limit(13)).size > 0
-    p
-      = render 'users/user_avatars', :users => users[0..11]
-      - if users.size > 12
-        = link_to '»', group
-  - if Settings.enable_facebook_login and current_user and not (users = group.members.joins(:authentications).where('authentications.uid' => current_user.facebook_friend_ids, 'authentications.provider' => 'facebook').order('users.name ASC')).empty?
-    h5= tr('Joined Facebook friends')
-    p= render 'users/user_avatars', :users => users
+  .avatar= link_to(image_tag(group.image.url(:small), :alt => group.name, :height => 72, :width => 72, :title => group.name), group)
+  .item_content
+    - if current_user and membership = group.membership_for(current_user)
+      .pull-right
+        - if membership.is_admin?
+          span.label.label-success=' tr('member')
+        - else
+          span.label.label-important= tr('admin')
+    h3= link_to group.name, group
+    p= render group.tags.order('name ASC')
+    = render 'groups/tile_menu', :group => group
+    - if event = group.next_event
+      = render 'groups/next_event', :event => event

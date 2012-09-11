@@ -16,9 +16,7 @@
       = f.input :url
       = f.input :facebook_url
       = f.input :is_closed
-  = f.actions do
-    =' f.action :submit, :as => :button
-    = link_to tr('Cancel'), discovery_path, :class => 'btn'
+  = f.actions
 
 javascript:
   $(function() {

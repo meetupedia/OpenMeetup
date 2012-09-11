@@ -1,17 +1,9 @@
 h1 Vezérlőpult
 
-/! .wrapper
-/!  h2 Események
-/!  table= render :partial => 'dashboard/event', :collection => Event.where(:start_time => (Time.now.midnight)..Time.now.midnight + 31.day).order('start_time DESC'), :as => :event
+h2= tr('Members')
+table.table= render :partial => 'dashboard/user', :collection => User.all, :as => :user
 
-/! .wrapper
-/!   h2 Csoportok
-/!   table= render :partial => 'dashboard/group', :collection => Group.all, :as => :group
+hr
 
-.wrapper
-  h2 = tr('Members')
-  table= render :partial => 'dashboard/user', :collection => User.all, :as => :user
-
-.wrapper
-  h2 Érdeklődési körök
-  .list_view= render Tag.all
+h2 Érdeklődési körök
+p= render Tag.all

@@ -1,15 +1,16 @@
-.breadcrumbs.clearfix= link_to tr('All tags'), tags_path
+.row
+  .span8.offset2
+    .wrapper
+      .breadcrumbs.clearfix= link_to tr('All tags'), tags_path
 
-h1
-  = tr('Tag')
-  ' :
-  = @tag.name
+      .pull-right= render 'taggings/button', :tag => @tag
 
-p= render 'taggings/button', :tag => @tag
+      h1
+        = tr('Tag')
+        ' :
+        = @tag.name
 
-- unless (groups = @tag.groups).blank?
-  hr
-  .row
-    .span7
-      h2= tr('Groups')
-      .list_view= render groups
+    - unless (groups = @tag.groups).blank?
+      .wrapper
+        h2= tr('Groups')
+        .list_view= render groups

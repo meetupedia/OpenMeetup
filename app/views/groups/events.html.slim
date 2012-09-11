@@ -1,11 +1,12 @@
-= render 'header'
+- unless modal_request?
+  = render 'header'
 
-.row
-  .span7
-    h2= tr('Events')
-    = will_paginate @events
-    .list_view= render @events
-    = will_paginate @events
-  .span4.offset1
-    - if can? :create, Event.new(:group => @group)
-      p= link_to tr('New event'), new_group_event_path(@group), :class => 'btn', :rel => 'modal'
+.wrapper
+  - if can? :create, Event.new(:group => @group)
+    .pull-right= link_to tr('New event'), new_group_event_path(@group), :class => 'btn', :rel => 'modal'
+
+  h2= tr('Events')
+
+  = will_paginate @events
+  .list_view= render @events
+  = will_paginate @events

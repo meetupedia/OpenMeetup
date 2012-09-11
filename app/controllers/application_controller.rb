@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from CanCan::AccessDenied do |exception|
     url = @group
+    url ||= sign_in_url unless current_user
     url ||= root_url
     flash[:alert] = 'Nincsen megfelelő jogosultságod ehhez!'
     redirect_to url
@@ -41,7 +42,7 @@ private
   helper_method :current_locale
 
   def create_activity(item)
-    Activity.create :activable_type => item.class.name, :activable_id => item.id
+    Activity.create :activable_type => item.class.name, :activable_id => item.id, :group => @group
   end
 
   def current_language
@@ -84,7 +85,6 @@ private
     return @current_user if defined?(@current_user)
     @current_user = current_user_session && current_user_session.record
   end
-  helper_method :current_user
 
   def extract_locale_from_accept_language_header
     request.env['HTTP_ACCEPT_LANGUAGE'].andand.scan(/^[a-z]{2}/).andand.first

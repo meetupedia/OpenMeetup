@@ -1,0 +1,12 @@
+h2 Elfogadott jelentkezés
+
+p
+  ' Elfogadták jelentkezésedet a/az
+  =' link_to @group.name, requested_members_group_path(@group)
+  ' nevű csoportba.
+
+.list_view= render @group
+
+hr
+
+= Settings.email_signature

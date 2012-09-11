@@ -1,12 +1,11 @@
 = render 'header'
 
-.row
-  .span7
-    h2= tr('Messages')
+.wrapper
+  h2= tr('Messages')
 
-    - if params[:page]
-      = will_paginate @waves
-
-    .list_view= render @waves
-
+  - if params[:page]
     = will_paginate @waves
+
+  .list_view= render @waves
+
+  = will_paginate @waves
