@@ -1,10 +1,10 @@
 = div_for event, :class => 'list_item' do
-  h3= link_to event.title, event
-  p
+  h4= link_to event.title, event
+  div
     = l(event.start_time)
     = " → "
     = l(event.end_time)
-    = dot
+  div
     = event.address
-    = dot
+  div
     = link_to "#{event.participations.size} #{tr('participants')}".html_safe, users_event_path(event)

@@ -1,18 +1,19 @@
 # encoding: UTF-8
 
 class CommentsController < CommonController
-  load_resource :event
-  load_resource :group
-  load_resource :comment, :through => [:event, :group], :shallow => true
+  load_resource :post
+  load_resource :comment, :through => :post, :shallow => true
   authorize_resource
 
+  def new
+  end
+
   def create
-    @comment.commentable = @event if @event
-    @comment.commentable = @group if @group
+    @comment.commentable = @post
     if @comment.save
       create_activity @comment
       respond_to do |format|
-        format.html { redirect_to @comment.commentable }
+        format.html { redirect_to @post.postable }
         format.js
       end
     end

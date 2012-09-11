@@ -5,6 +5,7 @@ class GroupsController < CommonController
   authorize_resource :except => [:index, :show, :events, :images, :members]
 
   def show
+    @activities = @group.activities.order('created_at DESC').paginate :page => params[:page]
     @title = @group.name
     @static_follow = true
   end
@@ -49,7 +50,11 @@ class GroupsController < CommonController
   end
 
   def members
-    @memberships = @group.memberships.includes(:user).paginate :page => params[:page]
+    @memberships = @group.memberships.order('is_admin DESC, created_at ASC').includes(:user).paginate :page => params[:page]
+  end
+
+  def requested_members
+    @membership_requests = @group.membership_requests.order('created_at ASC').includes(:user).paginate :page => params[:page]
   end
 
   def waves

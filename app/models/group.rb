@@ -1,7 +1,6 @@
 # encoding: UTF-8
 
 class Group < ActiveRecord::Base
-  include CommonCommentable
   key :name
   key :facebook_uid
   key :permalink, :index => true
@@ -23,14 +22,17 @@ class Group < ActiveRecord::Base
   belongs_to :city
   belongs_to :language
   belongs_to :user
-  has_many :activities, :as => :activable, :dependent => :destroy
+  has_many :activities, :dependent => :destroy
   has_many :admins, :through => :memberships, :source => :user, :conditions => {'memberships.is_admin' => true}
   has_many :events, :dependent => :destroy
   has_many :group_invitations, :dependent => :nullify
   has_many :group_taggings, :dependent => :destroy
   has_many :images, :as => :imageable
+  has_many :membership_requests, :dependent => :destroy
   has_many :memberships, :dependent => :destroy
   has_many :members, :through => :memberships, :source => :user
+  has_many :posts, :as => :postable, :dependent => :destroy
+  has_many :requested_members, :through => :membership_requests, :source => :user
   has_many :reviews, :dependent => :destroy
   has_many :tags, :through => :group_taggings
   has_many :waves, :dependent => :nullify
@@ -83,6 +85,10 @@ class Group < ActiveRecord::Base
 
   def membership_for(user)
     Membership.find_by_group_id_and_user_id(self.id, user.id)
+  end
+
+  def membership_request_for(user)
+    MembershipRequest.find_by_group_id_and_user_id(self.id, user.id)
   end
 
   def next_event

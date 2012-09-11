@@ -1,37 +1,40 @@
-= div_for activity, :class => 'list_item avatar_item' do
-  .avatar= user_avatar activity.user
-  - if activity.activable.class.name == 'Event'
-    = t('activity.event_created', :user => user_link(activity.activable.user), :event => link_to(activity.activable.title, activity.activable)).html_safe
-  - elsif activity.activable.class.name == 'Group'
-    =' user_link activity.activable.user
-    ' létrehozta a
-    =' link_to activity.activable.name, activity.activable
-    ' csoportot.
-  - elsif activity.activable.class.name == 'Membership'
-    =' user_link activity.activable.user
-    ' követi a
-    =' link_to activity.activable.group.name, activity.activable.group
-    ' csoportot.
-  - elsif activity.activable.class.name == 'Participation'
-    =' user_link activity.activable.user
-    ' jelentkezett a
-    =' link_to activity.activable.event.title, activity.activable.event
-    ' eseményre.
-  - elsif activity.activable.class.name == 'Tagging'
-    =' user_link activity.activable.user
-    ' követi a
-    =' link_to activity.activable.tag.name, activity.activable.tag
-    ' témakört.
-  - elsif activity.activable.class.name == 'UserFollow'
-    =' user_link activity.activable.user
-    ' követni kezdett egy felhasználót.
-  - elsif activity.activable.class.name == 'Image'
-    =' user_link activity.activable.user
-    ' feltöltött egy képet.
-    p= link_to image_tag(activity.activable.image.url(:small), :alt => '', :height => 80, :width => 80), activity.activable.image.url(:normal), :class => 'fancybox'
-  - elsif activity.activable.class.name == 'Comment'
-    =' user_link activity.activable.user
-    ' kommentet írt ide:
-    =' link_to activity.activable.commentable.name, activity.activable.commentable
-    p= activity.activable.comment
-  .date= time_ago_in_words activity.created_at
+- if activity.activable.class.name == 'Post'
+  = render activity.activable
+- elsif activity.activable.class.name !~ /Comment/
+  = div_for activity, :class => 'list_item avatar_item' do
+    .avatar= user_avatar activity.user
+    - if activity.activable.class.name == 'Event'
+      = t('activity.event_created', :user => user_link(activity.activable.user), :event => link_to(activity.activable.title, activity.activable)).html_safe
+    - elsif activity.activable.class.name == 'Group'
+      =' user_link activity.activable.user
+      ' létrehozta a
+      =' link_to activity.activable.name, activity.activable
+      ' csoportot.
+    - elsif activity.activable.class.name == 'Membership'
+      =' user_link activity.activable.user
+      ' követi a
+      =' link_to activity.activable.group.name, activity.activable.group
+      ' csoportot.
+    - elsif activity.activable.class.name == 'Participation'
+      =' user_link activity.activable.user
+      ' jelentkezett a
+      =' link_to activity.activable.event.title, activity.activable.event
+      ' eseményre.
+    - elsif activity.activable.class.name == 'Tagging'
+      =' user_link activity.activable.user
+      ' követi a
+      =' link_to activity.activable.tag.name, activity.activable.tag
+      ' témakört.
+    - elsif activity.activable.class.name == 'UserFollow'
+      =' user_link activity.activable.user
+      ' követni kezdett egy felhasználót.
+    - elsif activity.activable.class.name == 'Image'
+      =' user_link activity.activable.user
+      ' feltöltött egy képet.
+      p= link_to image_tag(activity.activable.image.url(:small), :alt => '', :height => 80, :width => 80), activity.activable.image.url(:normal), :class => 'fancybox'
+    / - elsif activity.activable.class.name == 'Comment'
+    /   =' user_link activity.activable.user
+    /   ' kommentet írt ide:
+    /   =' link_to activity.activable.commentable.name, activity.activable.commentable
+    /   p= activity.activable.comment
+    .date= time_ago_in_words activity.created_at

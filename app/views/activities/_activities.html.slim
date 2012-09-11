@@ -1,0 +1,10 @@
+h2= tr('Activity')
+
+- unless activities.blank?
+  .list_view
+    - if params[:page]
+      = will_paginate activities
+    = render activities
+    = will_paginate activities
+- else
+  p.muted= tr('No activity yet.')

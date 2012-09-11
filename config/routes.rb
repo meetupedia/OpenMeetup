@@ -3,6 +3,10 @@
 Openmeetup::Application.routes.draw do
   mount WillFilter::Engine => '/will_filter'
   mount Tr8n::Engine => '/tr8n'
+  mount GroupInvitationMailer::Preview => '/group_invitation_mailer/mail_view'
+  mount GroupMailer::Preview => '/group_mailer/mail_view'
+  mount MembershipRequestMailer::Preview => '/membership_request_mailer/mail_view'
+  mount UserMailer::Preview => '/user_mailer/mail_view'
 
   resources :groups do
     member do
@@ -10,9 +14,10 @@ Openmeetup::Application.routes.draw do
       get :images
       get :invited
       get :members
+      get :requested_members
       get :waves
     end
-    resources :comments, :shallow => true
+    resources :posts, :shallow => true
     resources :events, :shallow => true do
       member do
         get :images
@@ -36,9 +41,18 @@ Openmeetup::Application.routes.draw do
     end
     resources :group_invitations, :shallow => true
     resources :images, :shallow => true
+    resources :membership_requests, :shallow => true do
+      member do
+        put :confirm
+      end
+    end
     resources :memberships, :shallow => true do
       collection do
         get :set
+      end
+      member do
+        put :set_admin
+        put :unset_admin
       end
     end
     resources :reviews, :shallow => true
@@ -52,9 +66,14 @@ Openmeetup::Application.routes.draw do
   end
 
   resources :passwords
-  resource :user_sessions
+
+  resources :posts do
+    resources :comments, :shallow => true
+  end
 
   resources :tags
+
+  resource :user_sessions
 
   resources :users do
     resources :user_follows, :shallow => true
@@ -90,6 +109,7 @@ Openmeetup::Application.routes.draw do
 
   resources :authentications
   match '/auth/:provider/callback' => 'authentications#create'
+  match '/sign_up' => 'users#new', :as => :sign_up
   match '/sign_in' => 'user_sessions#new', :as => :sign_in
   match '/sign_out' => 'user_sessions#destroy', :as => :sign_out
 

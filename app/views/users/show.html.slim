@@ -1,24 +1,29 @@
 = render 'header'
 
 .row
-  .span7
-    h2= tr('User data')
-    table.table
-      tr
-        th= tr('Name')
-        td= @user.name
-      tr
-        th= tr('Nickname')
-        td
-          - if not @user.nickname.blank?
-            = @user.nickname
-          - elsif can? :edit, @user
-            = link_to '?', settings_user_path(@user)
-      tr
-        th= tr('Karma')
-        td= @user.karma
-    - if @user.facebook_id
-      p= link_to tr('Facebook profile'), "http://www.facebook.com/profile.php?id=#{@user.facebook_id}"
-  .span4.offset1
-    h2= tr('Tags')
-    = render @user.tags.order('name ASC')
+  .span4
+    .wrapper
+      ul.tiles
+        li= link_to "<span class='menu_count'>#{@user.memberships.size}</span> #{tr('groups')}".html_safe, groups_user_path(@user)
+      table.table
+        tr
+          th= tr('Name')
+          td= @user.name
+        tr
+          th= tr('Nickname')
+          td
+            - if not @user.nickname.blank?
+              = @user.nickname
+            - elsif can? :edit, @user
+              = link_to '?', settings_user_path(@user)
+        tr
+          th= tr('Karma')
+          td= @user.karma
+      - if @user.facebook_id
+        p= link_to tr('Facebook profile'), "http://www.facebook.com/profile.php?id=#{@user.facebook_id}"
+      - if @user.twitter_id
+        p= link_to tr('Twitter profile'), "http://twitter.com/account/redirect_by_id?id=#{user.twitter_id}"
+      = render @user.tags.order('name ASC')
+  .span8
+    .wrapper
+      = render 'activities/activities', :activities => @activities

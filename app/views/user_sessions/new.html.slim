@@ -1,22 +1,18 @@
-ul.nav.nav-tabs
-  li.active
-    a= tr('Sign in')
-  - unless Settings.enable_invite_process
-    li= link_to tr('Sign up'), new_user_path
-
 .row
-  .span7
-    h2= tr('Sign in with email')
-    = semantic_form_for UserSession.new do |f|
-      = f.inputs do
-        = f.input :email
-        = f.input :password
-        = f.input :remember_me, :as => :boolean
-      = f.actions
-  .span4.offset1
-    - if Settings.enable_facebook_login
-      h2= tr('Sign in with Facebook')
-      p= link_to image_tag('facebook_connect.png', :alt => tr('Sign in with Facebook')), auth_path(:facebook)
-    - if Settings.enable_twitter_login
-      h2= tr('Sign in with Twitter')
-      p= link_to image_tag('twitter_connect.png', :alt => tr('Sign in with Twitter')), auth_path(:twitter)
+  .span6
+    .wrapper
+      h2= tr('Sign in with email')
+      = semantic_form_for UserSession.new do |f|
+        = f.inputs do
+          = f.input :email
+          = f.input :password
+          = f.input :remember_me, :as => :boolean
+        = f.actions
+  .span6
+    .wrapper
+      - if Settings.enable_facebook_login
+        h2= tr('Sign in with Facebook')
+        p= link_to image_tag('facebook_connect.png', :alt => tr('Sign in with Facebook')), auth_path(:facebook)
+      - if Settings.enable_twitter_login
+        h2= tr('Sign in with Twitter')
+        p= link_to image_tag('twitter_connect.png', :alt => tr('Sign in with Twitter')), auth_path(:twitter)

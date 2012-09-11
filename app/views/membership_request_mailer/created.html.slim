@@ -1,0 +1,13 @@
+h2 Request membership
+
+p
+  =' link_to @user.name, @user
+  ' jelentkezett a/az
+  =' link_to @group.name, requested_members_group_path(@group)
+  ' nevű csoportba.
+
+.list_view= render @user
+
+hr
+
+= Settings.email_signature

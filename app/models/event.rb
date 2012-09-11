@@ -53,7 +53,7 @@ class Event < ActiveRecord::Base
   end
 
   def gmaps4rails_address
-    "#{self.street}, #{self.city}"
+    @gmaps4rails_address ||= [self.street, self.city].select(&:present?).join(', ')
   end
 
   def participation_for(user)

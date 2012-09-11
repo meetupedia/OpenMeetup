@@ -1,6 +1,0 @@
-= render 'header'
-
-.row
-  .span7
-    h2= tr('Activity')
-    .list_view= render @user.activities.order('created_at DESC').limit(10)

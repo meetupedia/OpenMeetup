@@ -1,50 +1,44 @@
 .row
   .span4
-    .hero-unit(style="background: #ffffff; padding: 25px 0px 0px 10px;")
-      h1= tr('Meetup')
-      p= tr('regular meeting of people who share a particular interest and have connected with each other through a social website')
-  .span4(style="padding: 30px 0;")
-    .opening-images
-      = link_to image_tag('carousel_01.jpg'), request_invite_users_path
-  .span4(style="padding: 30px 0;")
-    .opening-images
-      = link_to image_tag('carousel_02.jpg'), request_invite_users_path
-.row
-  .span4
-    .opening-images
-      = link_to image_tag('carousel_03.jpg'), request_invite_users_path
-  .span4
-    .opening-images
-      = link_to image_tag('carousel_04.jpg'), request_invite_users_path
-  .span4
-    .hero-unit(style="background: #ffffff; padding: 60px 15px;")
-      - unless Settings.enable_invite_process
-        p= link_to tr('Sign in'), new_user_sessions_path, :class => 'btn btn-primary btn-large'
-      - else
-        p= link_to tr('Request an invite'), request_invite_users_path, :class => 'btn btn-primary btn-large', :style => 'padding: 15px; font-size: 17px;'
-      p= tr('It\'s free and always will be.')
-
-hr
+    .wrapper
+      .hero-unit(style="background: #ffffff; margin: 5px 0 0 0; padding: 0;")
+        h1= tr('Meetup')
+        p= tr('regular meeting of people who share a particular interest and have connected with each other through a social website')
+  .span8
+    .wrapper
+      .opening-images
+        = link_to image_tag('carousel_01.jpg'), request_invite_users_path
+        = link_to image_tag('carousel_02.jpg'), request_invite_users_path
 
 .row
-  .span5.offset1
-    h1= tr('For meetuppers')
-    ul
-      li(style="font-size: 16px; line-height: 26px;")= tr('Meet new people, find new friends')
-      li(style="font-size: 16px; line-height: 26px;")= tr("Browse 1000's of meetup groups")
-      li(style="font-size: 16px; line-height: 26px;")= tr('Never miss an event again')
-      li(style="font-size: 16px; line-height: 26px;")= tr('No more forever alone')
-  .span5.offset1
-    h1= tr('For meetup organizers')
-    ul
-      li(style="font-size: 16px; line-height: 26px;")= tr('Attract new members to your meetup')
-      li(style="font-size: 16px; line-height: 26px;")= tr("A group homepage you'll be proud of")
-      li(style="font-size: 16px; line-height: 26px;")= tr('Events simplified')
-      li(style="font-size: 16px; line-height: 26px;")= tr("Everyone's photos in one place")
+  .span8
+    .wrapper
+      .opening-images
+        = link_to image_tag('carousel_03.jpg'), request_invite_users_path
+        = link_to image_tag('carousel_04.jpg'), request_invite_users_path
+  .span4
+    .wrapper
+      .hero-unit(style="background: #ffffff; margin: 65px 0 66px 0; padding: 0;")
+        - unless Settings.enable_invite_process
+          p= link_to tr('Sign in'), new_user_sessions_path, :class => 'btn btn-primary btn-large'
+        - else
+          p= link_to tr('Request an invite'), request_invite_users_path, :class => 'btn btn-primary btn-large', :style => 'padding: 15px; font-size: 17px;'
+        p= tr('It\'s free and always will be.')
 
 .row
-  .span10.offset1(style="padding: 30px 0; text-align: center")
-    - unless Settings.enable_invite_process
-      p= link_to tr('Sign in'), new_user_sessions_path, :class => 'btn btn-primary btn-large'
-    - else
-      p= link_to tr('Request an invite'), request_invite_users_path, :class => 'btn btn-primary btn-large', :style => 'padding: 15px; font-size: 17px;'
+  .span12
+    .wrapper.clearfix
+      .span5
+        h1= tr('For meetuppers')
+        ul
+          li(style="font-size: 16px; line-height: 26px;")= tr('Meet new people, find new friends')
+          li(style="font-size: 16px; line-height: 26px;")= tr("Browse 1000's of meetup groups")
+          li(style="font-size: 16px; line-height: 26px;")= tr('Never miss an event again')
+          li(style="font-size: 16px; line-height: 26px;")= tr('No more forever alone')
+      .span5.offset1
+        h1= tr('For meetup organizers')
+        ul
+          li(style="font-size: 16px; line-height: 26px;")= tr('Attract new members to your meetup')
+          li(style="font-size: 16px; line-height: 26px;")= tr("A group homepage you'll be proud of")
+          li(style="font-size: 16px; line-height: 26px;")= tr('Events simplified')
+          li(style="font-size: 16px; line-height: 26px;")= tr("Everyone's photos in one place")

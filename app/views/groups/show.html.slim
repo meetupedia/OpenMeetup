@@ -1,72 +1,59 @@
 = render 'header'
 
 .row
-  .span7
-    .clearfix
-      - if @group.image.file?
-        .avatar= link_to(image_tag(@group.image.url(:small), :alt => @group.name, :height => 72, :width => 72, :title => @group.name), @group)
-      - unless (tags = @group.tags).blank?
-        p= render @group.tags
-      - else
-        p= tr('No tags yet.')
-    - if @group.url.present?
-      div
-        ' Honlap:
-        = auto_link @group.url
+  .span4
+    .wrapper
+      = render 'groups/tile_menu', :group => @group
 
-    - if @group.facebook_url.present?
-      div
-        ' Facebook-oldal:
-        = auto_link @group.facebook_url
-    - unless @group.description.blank?
-      = simple_format(@group.description)
-    - else
-      p= tr('No description yet.')
+      - if @group.url.present?
+        div
+          ' Honlap:
+          = auto_link @group.url
 
-    - unless (users = @group.members.order('users.name ASC')).empty?
-      hr
-      h2= tr('Who we are')
-      p= render 'users/user_avatars', :users => users
+      - if @group.facebook_url.present?
+        div
+          ' Facebook-oldal:
+          = auto_link @group.facebook_url
 
-    = render 'comments/comments', :commentable => @group
-
-    - if Settings.enable_facebook_comments
-      hr
-      h2= tr('Facebook comments')
-      | <div class="fb-comments" data-href="#{group_url(@group)}" data-num-posts="10"></div>
-
-  .span4.offset1
     - if @group.images.size > 0
-      p= link_to image_tag(@group.images.last.image.url(:normal)), @group.images.last.image.url(:normal), :class => 'fancybox'
-      p= link_to tr('All images'), images_group_path(@group)
-    - else
-      p= tr('No images yet.')
-    - if @group.next_event
-      hr
-      h2= tr('Next event')
-      .list_view= render @group.next_event
-      p= link_to tr('All events'), events_group_path(@group)
+      .wrapper
+        = link_to image_tag(@group.images.last.image.url(:normal)), @group.images.last.image.url(:normal), :class => 'fancybox'
+        p= link_to tr('All images'), images_group_path(@group), :rel => 'modal'
 
-    hr
+      /
+        - unless (users = @group.members.order('users.name ASC')).empty?
+          hr
+          h2= tr('Who we are')
+          p= render 'users/user_avatars', :users => users
 
-    h2= tr('Activity')
-    - unless (activities = @group.activities.order('created_at DESC').limit(20)).blank?
-      .list_view= render activities
-    - else
-      p= tr('No activity yet.')
+    /
+      .wrapper
+        h2= tr('Activity')
+        - unless (activities = @group.activities.order('created_at DESC').limit(20)).blank?
+          .list_view= render activities
+        - else
+          p.muted= tr('No activity yet.')
 
     - if Settings.enable_share_buttons
-      hr
-      ' <div class="fb-like" data-href="#{group_url(@group)}" data-send="false" data-layout="box_count" data-show-faces="false"></div>
-      ' <g:plusone size="tall"></g:plusone>
-      ' <a href="https://twitter.com/share" class="twitter-share-button" data-count="vertical">Tweet</a>
-      ' <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+      .wrapper
+        ' <div class="fb-like" data-href="#{group_url(@group)}" data-send="false" data-layout="box_count" data-show-faces="false"></div>
+        ' <g:plusone size="tall"></g:plusone>
+        ' <a href="https://twitter.com/share" class="twitter-share-button" data-count="vertical">Tweet</a>
+        ' <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+  .span8
+    - if event = @group.next_event
+      .wrapper
+        = render 'next_event', :event => event
+
+    .wrapper
+      .button-menu= link_to tr('New post'), polymorphic_path([:new, @group, :post]), :class => 'btn', :rel => 'modal'
+      = render 'activities/activities', :activities => @activities
 
 - if Settings.enable_share_buttons
-  | <script type="text/javascript">
-  |   (function() {
-  |     var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-  |     po.src = 'https://apis.google.com/js/plusone.js';
-  |     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  |   })();
-  | </script>
+  javascript:
+    (function() {
+      var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+      po.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+    })();

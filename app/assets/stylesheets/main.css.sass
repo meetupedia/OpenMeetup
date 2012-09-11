@@ -1,5 +1,5 @@
 body
-  background: #efeff7
+  background: #d7dfe7
   font: normal 12px/18px Verdana, Arial, sans-serif
 
 td.right_aligned
@@ -12,11 +12,11 @@ h1, h2, h3
   font-family: "Trebuchet MS", Arial, sans-serif
   font-weight: normal
 
-h2:nth-of-type(1)
-  margin-top: 10px
-
-h3:nth-of-type(1)
+h1:nth-of-type(1), h3:nth-of-type(1)
   margin-top: 5px
+
+h2:nth-of-type(1)
+  margin-top: 0
 
 a
   color: #005f8f
@@ -39,35 +39,52 @@ input[type=text], textarea
 .wrapper
   background: #ffffff
   border-radius: 5px
-  box-shadow: 0 0 3px #9f9f9f
+  box-shadow: 0 1px 3px #9f9f9f
   margin-bottom: 20px
-  overflow: hidden
-  padding: 5px 20px 20px 20px
+  padding: 20px
+
+.modal-content .wrapper
+  border: none
+  box-shadow: none
+  margin: 0
+  padding: 0
 
 .group_header
-  border-radius: 5px 5px 0 0
-  margin: -5px -20px 20px -20px
-  padding: 20px 20px 0 20px
-  position: relative
-  ul.nav-tabs
-    margin-bottom: 0
-  h1
-    text-shadow: 0 0 1px #ffffff
-
-div.activity, div.user, div.review, div.comment
-  min-height: 20px
-  padding-left: 40px
   .avatar
-    margin: -5px 0 0 -40px
+    margin-right: 20px
+  h1
+    margin: 0
+  p
+    margin-bottom: 0
+
+div.group.list_item
+  position: relative
+  div.avatar
+    background: #e7eff7
+    left: 5px
+    position: absolute
+    top: 5px
+  div.item_content
+    margin-left: 72px
+  div.next-event
+    background: #f7f7f7
+    border-radius: 5px
+    margin: 10px 0
+    padding: 5px 10px
+
+#content
+  background: #efeff7
+  padding: 70px 0 20px 0
 
 #footer
-  border-radius: 10px 10px 0 0
+  border-top: 1px solid #efeff7
   color: #9f9f9f
   font-size: 11px
-  padding: 10px 0px 25px 0px
-  bottom: 0px
+  margin-top: 1px
+  padding: 10px 0px 20px 0px
   .footer-left
     float: left
+    margin-right: 10px
   .footer-right
     float: right
     > a
@@ -76,6 +93,7 @@ div.activity, div.user, div.review, div.comment
     float: left
     .footer-google, .footer-twitter, .footer-facebook
       float: left
+      margin-right: 10px
       width: 100px
 
 .navbar
@@ -146,6 +164,7 @@ h1
     padding-left: 48px
   &.user
     background: url(user_24x32.png) no-repeat 0 4px
+    margin-bottom: 10px
     padding-left: 40px
 
 h2
@@ -163,30 +182,39 @@ h3
 #map
   height: 400px
 
-.avatar
-  display: block
+div.avatar
   float: left
-  margin: 2px 15px 0 0
-
-.avatar_image
-  margin-right: 3px
 
 div.list_item
-  margin: 10px 0
+  margin-bottom: 10px
   min-height: 20px
   padding: 5px 10px 5px 20px
 
 div.avatar_item
-  padding-left: 60px
-  .avatar
-    margin: -5px 0 0 -40px
+  min-height: 32px
+  padding-left: 47px !important
+  position: relative
+  div.avatar
+    left: 5px
+    position: absolute
+    top: 5px
 
 div.list_view
-  margin: 0 0 0 -20px
+  border-radius: 0 0 5px 5px
+  margin: 20px -20px -20px -20px
+  padding: 10px 20px 10px 20px
+  background: #f7f7f7
   div.indent
     margin-left: 20px
   div.list_item
+    background: #ffffff
+    border-radius: 0 5px 5px 5px
+    box-shadow: 0 1px 2px #cfcfcf
+
+div.comments
+  div.list_item
     background: #f7f7f7
+    box-shadow: none
 
 div.item_view
   div.list_item
@@ -233,6 +261,11 @@ a.tag
   a
     vertical-align: middle
 
+div.text p
+  font-family: Georgia, serif
+  font-size: 15px
+  line-height: 20px
+
 div.calendar
   background: #f7f7f7
   border-radius: 5px
@@ -250,7 +283,7 @@ div.calendar
       background: #ffffff
       border: 2px solid #f7f7f7
       display: block
-      min-width: 30px
+      min-width: 24px
       padding: 2px
       text-align: center
       &.on_day
@@ -280,8 +313,8 @@ abbr[title=required]
     filter: progid:DXImageTransform.Microsoft.Alpha(opacity=90)
     margin: 10px
     opacity: 0.9
-    width: 280px
-    height: 209px
+    width: 270px
+    height: 200px
     &:hover
       filter: progid:DXImageTransform.Microsoft.Alpha(opacity=100)
       opacity: 1
@@ -353,7 +386,8 @@ form
     padding: 0
 
 .breadcrumbs
-  margin: -5px 0 35px -20px
+  margin: -20px 0 20px -20px
+  position: relative
   a
     background: #a7a7af
     border: none
@@ -370,7 +404,38 @@ form
 
 .dropdown-toggle img
   vertical-align: top
-  margin-top: 2px
+  margin-top: 1px
 
-.pull-right.btn
-  margin-left: 5px
+.button-menu
+  float: right
+  .btn, .btn-group
+    display: block
+    float: right
+    margin-left: 5px
+
+ul.tiles
+  :margin 0 -5px 0 0
+  li
+    :display inline
+    :line-height 20px
+    :margin 0
+    a
+      :background #e7eff7
+      :border-radius 5px
+      :display inline-block
+      :margin 0 5px 5px 0
+      :overflow hidden
+      :padding 10px 0
+      :width 83px
+      :text-align center
+      &:hover
+        :background #4f5f6f
+        :color #ffffff
+        :text-decoration none
+      span
+        :color #7f9fbf
+        :font-size 20px
+        :display block
+
+.table
+  margin: 10px 0

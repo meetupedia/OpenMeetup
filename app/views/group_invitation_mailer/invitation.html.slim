@@ -1,0 +1,23 @@
+- current_user = @invited_user
+
+h2 Meghívó
+
+p
+  =' link_to @user.name, @user
+  ' meghívott a/az
+  =' link_to @group.name, @group
+  ' nevű csoportba.
+
+.list_view= render @group
+
+- unless @message.blank?
+  h3 Személyes üzenet
+  = simple_format @message
+
+p= link_to tr('Join'), set_group_memberships_path(@group), :class => 'btn btn-primary'
+
+p= link_to tr('Registration'), sign_up_path(:code => @code), :class => 'btn'
+
+hr
+
+= Settings.email_signature

@@ -1,49 +1,33 @@
 = render 'header'
 
 .row
-  .span7
-    div
-      strong
-        - if @event.place.present?
-          = @event.place
-          = dot
-        = link_to @event.gmaps4rails_address, map_event_path(@event)
-    div
-      strong
-        = l(@event.start_time)
-        = " → "
-        = l(@event.end_time)
+  .span4
+    .wrapper
+      ul.tiles
+        li= link_to "<span class='menu_count'>#{@event.participants.size}</span> #{tr('participants')}".html_safe, users_event_path(@event), :rel => 'modal'
+        li= link_to "<span class='menu_count'>#{@event.event_invitations.size}</span> #{tr('invited')}".html_safe, invited_event_path(@event), :rel => 'modal'
 
-    = simple_format(@event.description)
+      - if current_user
+        - if (users = @event.participants.where('users.id' => current_user.followed_users.map(&:id)).order('users.name ASC')).empty?
+          p.muted= tr('No friend in this event yet.')
+        - else
+          h3= tr('Friends')
+          p= render 'users/user_avatars', :users => users
+      h3= tr('All participants')
+      p= render 'users/user_avatars', :users => @event.participants.order('participations.created_at ASC')
 
-    = render 'comments/comments', :commentable => @event
+    .wrapper
+      .calendar= calendar(@event.start_time, @event.end_time)
 
-    hr
+    .wrapper
+      - if Settings.enable_share_buttons
+        | <div class="fb-like" data-href="#{event_url(@event)}" data-send="false" data-width="450" data-show-faces="false"></div>
 
-    - if Settings.enable_facebook_comments
-      h2= tr('Facebook comments')
-      | <div class="fb-comments" data-href="#{event_url(@event)}" data-num-posts="10"></div>
-      hr
+  .span8
+    - unless @event.description.blank?
+      .wrapper
+        = simple_format(@event.description)
 
-  .span4.offset1
-    .calendar= calendar(@event.start_time, @event.end_time)
-
-    hr
-
-    h2= tr('Participants')
-    p= render 'users/user_avatars', :users => @event.participants.order('participations.created_at ASC')
-    p= link_to tr('All Participants'), users_event_path(@event), :rel => 'modal'
-
-    - if can? :create, EventInvitation.new(:event => @event)
-      p
-        =' link_to tr('Send invitations'), new_event_event_invitation_path(@event), :class => 'btn', :rel => 'modal'
-        = link_to tr('Invite group members'), new_event_event_invitation_path(@event, :invite_members => true), :class => 'btn', :rel => 'modal'
-      p= link_to "→ #{t('event.already_invited')}", invited_event_path(@event), :rel => 'modal'
-
-    hr
-
-    h2= tr('Activity')
-    .list_view= render @event.activities.order('created_at DESC').limit(5).includes(:activable => :user)
-
-    - if Settings.enable_share_buttons
-      | <div class="fb-like" data-href="#{event_url(@event)}" data-send="false" data-width="450" data-show-faces="false"></div>
+    .wrapper
+      h2= tr('Activity')
+      .list_view= render @event.activities.order('created_at DESC').limit(5).includes(:activable => :user)
