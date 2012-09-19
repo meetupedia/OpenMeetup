@@ -1,0 +1,23 @@
+.row
+  .span4
+    .wrapper
+      h2 Groups
+      .list_view
+        .list_item
+          = link_to notifications_path, :class => 'pjax' do
+            = tr('All')
+            span.badge.badge-success.pull-right= current_user.notifications.size
+        - Group.joins(:notifications).where('notifications.user_id' => current_user.id).group('groups.id').count.each do |group_id, count|
+          - if group = Group.find_by_id(group_id)
+            .list_item
+              = link_to notifications_path(:group_id => group_id), :class => 'pjax' do
+                = group.name
+                span.badge.pull-right= count
+  .span8
+    .wrapper
+      h2
+        ' Notifications
+        - if @group
+          = dot
+          = link_to @group.name, @group
+      .list_view= render @notifications

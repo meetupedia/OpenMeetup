@@ -65,6 +65,8 @@ Openmeetup::Application.routes.draw do
     resources :interest_taggings, :shallow => true
   end
 
+  resources :notifications
+
   resources :passwords
 
   resources :posts do

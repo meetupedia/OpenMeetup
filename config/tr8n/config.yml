@@ -104,7 +104,7 @@ defaults:
   #
   #############################################################################
   caching:
-    enabled:                  false
+    enabled:                  true
     adapter:                  ActiveSupport::Cache
     store:                    'memory_store'
     version:                  1 # you can change the version to invalidate the cache
@@ -285,7 +285,7 @@ defaults:
 # You can overload any feature defined in the defaults for any environment
 #############################################################################
 development:
-  enable_tr8n: true
+  enable_tr8n: false
 
 test:
 

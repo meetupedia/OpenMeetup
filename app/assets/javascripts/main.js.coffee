@@ -4,7 +4,7 @@ $ ->
 
   initPage()
 
-  $('.nav-tabs a:not([rel="modal"], .pagination a)').pjax(container: '#pjax', timeout: false)
+  $('a.pjax').pjax(container: '#pjax', timeout: false)
 
   $('#pjax').live 'pjax:success', ->
     initPage()

@@ -20,6 +20,9 @@
             input type='text' class='search-query' placeholder=tr('Search') name='q'
         ul.nav.pull-right
           - unless current_user.restricted_access
+            li= link_to notifications_path do
+              =' tr('Notifications')
+              span.badge.badge-important= current_user.notifications.size
             li= link_to tr('My profile'), current_user
             li= link_to tr('My groups'), groups_user_path(current_user)
             li= link_to tr('My messages'), waves_user_path(current_user)

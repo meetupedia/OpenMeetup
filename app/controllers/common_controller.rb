@@ -47,7 +47,7 @@ class CommonController < ApplicationController
 
   def destroy_show(item, url = nil)
     if request.xhr?
-      render :text => "$('.#{item.class.name.underscore}_#{item.id}').fadeOut(500, function(){$('.#{item.class.name.underscore}_#{item.id}').remove()});"
+      render :text => "$('##{item.class.name.underscore}_#{item.id}').fadeOut(500, function(){$('##{item.class.name.underscore}_#{item.id}').remove()});"
     else
       redirect_to url || url_for(item.class.name.tableize.to_sym)
     end

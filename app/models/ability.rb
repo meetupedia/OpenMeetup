@@ -46,13 +46,15 @@ class Ability
         membership_request.user_id == current_user.id or membership_request.group.admins.include?(current_user)
       end
 
-     can [:create, :set], Membership
+      can [:create, :set], Membership
       can :destroy, Membership do |membership|
         membership.user_id == current_user.id or membership.group.admins.include?(current_user)
       end
       can [:set_admin, :unset_admin], Membership do |membership|
         (membership.group.admins.include?(current_user) and membership.group.admins.size > 1) or current_user.is_admin?
       end
+
+      can [:index, :destroy], Notification
 
       can [:create, :set], Participation
       can :destroy, Participation do |participation|

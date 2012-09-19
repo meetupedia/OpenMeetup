@@ -31,6 +31,7 @@ class Group < ActiveRecord::Base
   has_many :membership_requests, :dependent => :destroy
   has_many :memberships, :dependent => :destroy
   has_many :members, :through => :memberships, :source => :user
+  has_many :notifications, :dependent => :destroy
   has_many :posts, :as => :postable, :dependent => :destroy
   has_many :requested_members, :through => :membership_requests, :source => :user
   has_many :reviews, :dependent => :destroy
