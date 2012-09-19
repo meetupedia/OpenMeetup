@@ -3,6 +3,7 @@
 Openmeetup::Application.routes.draw do
   mount WillFilter::Engine => '/will_filter'
   mount Tr8n::Engine => '/tr8n'
+  mount EventMailer::Preview => '/event_mailer/mail_view'
   mount GroupInvitationMailer::Preview => '/group_invitation_mailer/mail_view'
   mount GroupMailer::Preview => '/group_mailer/mail_view'
   mount MembershipRequestMailer::Preview => '/membership_request_mailer/mail_view'

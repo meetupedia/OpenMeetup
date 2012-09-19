@@ -1,0 +1,21 @@
+p
+  =' link_to @user.name, @user
+  ' is not coming to
+  = link_to @event.name, @event
+  | .
+
+.list_view
+  = render @user
+
+  .icon-container
+    i.icon-minus-sign
+
+  = render @event
+
+p
+  =' link_to 'Send a message', '#', :class => 'btn btn-primary'
+  = link_to 'View user profile', @user, :class => 'btn'
+
+hr
+
+= Settings.email_signature
