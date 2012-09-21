@@ -1,0 +1,3 @@
+= div_for notification do 
+  .pull-right= link_to '×', notification_path(notification), :method => :delete, :remote => true, :class => 'close'
+  = render notification.activity

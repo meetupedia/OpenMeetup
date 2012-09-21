@@ -15,7 +15,7 @@ class UsersController < CommonController
   end
 
   def show
-    @activities = @user.activities.order('created_at DESC').paginate :page => params[:page]
+    @activities = @user.activities.order('created_at DESC').includes(:activable).paginate :page => params[:page]
   end
 
   def new

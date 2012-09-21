@@ -9,6 +9,11 @@ class ParticipationsController < CommonController
     unless @event.participation_for(current_user)
       @participation.save
       @participation.event.absence_for(current_user).andand.destroy
+      run_later do
+        @participation.event.group.admins.each do |user|
+          EventMailer.participation(current_user, user.email, @event).deliver
+        end
+      end
       create_activity @participation
     end
     redirect_to @event

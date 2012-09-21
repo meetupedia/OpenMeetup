@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   key :restricted_access, :as => :boolean, :default => false
   key :invitation_code
   key :karma, :as => :integer, :default => 0
+  key :notifications_count, :as => :integer, :default => 0
   timestamps
 
   belongs_to :city
@@ -26,12 +27,14 @@ class User < ActiveRecord::Base
   has_many :authentications, :dependent => :destroy
   has_many :event_invitations, :dependent => :nullify
   has_many :events, :dependent => :nullify
+  has_many :followers, :through => :user_follows, :source => :user
   has_many :group_invitations, :dependent => :nullify
   has_many :groups, :dependent => :nullify
   has_many :joined_events, :through => :participations, :source => :event
   has_many :joined_next_events, :through => :participations, :source => :event, :conditions => ['start_time > ?', Time.now], :order => 'start_time ASC'
   has_many :joined_groups, :through => :memberships, :source => :group
   has_many :memberships, :dependent => :destroy
+  has_many :notifications, :dependent => :destroy
   has_many :participations, :dependent => :destroy
   has_many :reviews, :dependent => :destroy
   has_many :taggings, :dependent => :destroy

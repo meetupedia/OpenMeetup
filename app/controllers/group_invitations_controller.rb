@@ -20,11 +20,13 @@ class GroupInvitationsController < CommonController
         if group_invitation.new_record?
           group_invitation.message = @group_invitation.message
           if group_invitation.save
-            GroupInvitationMailer.invitation(group_invitation).deliver
+            run_later { GroupInvitationMailer.invitation(group_invitation).deliver }
           end
         end
       end
       redirect_to invited_group_path(@group), :notice => 'Meghívó elküldve.'
+    else
+      redirect_to @group
     end
   end
 end

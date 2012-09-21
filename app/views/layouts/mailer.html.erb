@@ -7,13 +7,27 @@
     body {
       padding-top: 0;
     }
-    .wrapper {
+    .wrapper-container {
       margin: 20px auto;
       width: 600px;
     }
+    .wrapper {
+    }
     .breadcrumbs a {
+      border-radius: 5px 0 0 0;
       display: inline-block;
       float: none;
+    }
+    .email-footer {
+      font-size: .9em;
+      padding: 0 20px 20px 20px;
+    }
+    .wrapper .list_view {
+      border-radius: none;
+      margin-bottom: 20px;
+    }
+    .icon-container {
+      padding-left: 15px;
     }
   </style>
 </head>
@@ -24,6 +38,11 @@
         <a href="<%= Settings.host %>"><%= Settings.title %></a>
       </div>
       <%= yield %>
+    </div>
+    <div class="email-footer">
+      This message was sent to <%= @user.email %>. If you do not want to receive these emails from OpenMeetup in the future, you can change your <a href="<%= settings_user_path(@user) %>">email preferences</a>.<br />
+      If you have questions or require assistance, visit <a href="https://openmeetup.uservoice.com/">https://openmeetup.uservoice.com/</a><br />
+      OpenMeetup, Pipa utca 2/b, 1095 Budapest, Hungary
     </div>
   </div>
 </body>

@@ -6,6 +6,10 @@ class Activity < ActiveRecord::Base
   belongs_to :activable, :polymorphic => true
   belongs_to :group
   belongs_to :user
+
+  def self.per_page
+    20
+  end
 end
 
 Activity.auto_upgrade!

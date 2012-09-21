@@ -1,8 +1,10 @@
 = div_for event, :class => 'list_item' do
   h4= link_to event.title, event
   div
+    ' ▼
     = l(event.start_time)
-    = " → "
+    br
+    ' ▲
     = l(event.end_time)
   div
     = event.address
