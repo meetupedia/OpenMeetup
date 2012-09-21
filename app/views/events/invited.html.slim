@@ -1,20 +1,19 @@
 - unless modal_request?
-  h1.event= link_to @event.title, @event
+  = render 'events/header'
 
-  .pull-right= link_to tr('Send invitations'), new_event_event_invitation_path(@event), :class => 'btn', :rel => 'modal'
+.wrapper
+  h2= tr('Already invited')
 
-h2= tr('Already invited')
+  = will_paginate @event_invitations
 
-= will_paginate @event_invitations
+  table.table
+    - @event_invitations.each do |event_invitation|
+      tr
+        td
+          - if event_invitation.invited_user.present?
+            = user_link event_invitation.invited_user
+          - else
+            = event_invitation.email
+        td.right_aligned= l(event_invitation.created_at)
 
-table.table
-  - @event_invitations.each do |event_invitation|
-    tr
-      td
-        - if event_invitation.invited_user.present?
-          = user_link event_invitation.invited_user
-        - else
-          = event_invitation.email
-      td.right_aligned= l(event_invitation.created_at)
-
-= will_paginate @event_invitations
+  = will_paginate @event_invitations

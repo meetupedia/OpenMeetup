@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 
 class EventInvitationsController < CommonController
   load_resource :event
@@ -25,7 +25,7 @@ class EventInvitationsController < CommonController
         if event_invitation.new_record?
           event_invitation.message = @event_invitation.message
           if event_invitation.save
-            run_later { EventMailer.invitation(current_user, event_invitation).deliver }
+            EventMailer.invitation(current_user, event_invitation).deliver
           end
         end
       end

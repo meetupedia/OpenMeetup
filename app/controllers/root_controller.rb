@@ -7,6 +7,8 @@ class RootController < CommonController
     if current_user
       if current_user.restricted_access
         redirect_to restricted_access_url
+      else
+        redirect_to discovery_url
       end
     else
       template = 'custom/root.index.slim'
