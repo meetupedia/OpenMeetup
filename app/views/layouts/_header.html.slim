@@ -13,7 +13,9 @@
           - if  Settings.multilingual
             li
               .tr8n-language-selector.btn= tr8n_language_selector_tag
-          li= link_to tr('Sign in'), sign_in_path, 'data-disable-pjax' => true
+          li= link_to tr('Sign in'), sign_in_path
+          - unless Settings.enable_invite_process
+            li= link_to tr('Sign up'), sign_up_path
       - else
         .nav-collapse
           form.navbar-search.pull-left action='/search' method='get'
@@ -26,4 +28,4 @@
             li= link_to tr('My profile'), current_user
             li= link_to tr('My groups'), groups_user_path(current_user)
             li= link_to tr('My messages'), waves_user_path(current_user)
-          li= link_to tr('Sign out'), sign_out_path, 'data-disable-pjax' => true
+          li= link_to tr('Sign out'), sign_out_path

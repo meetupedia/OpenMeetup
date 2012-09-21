@@ -25,6 +25,8 @@ class GroupInvitationsController < CommonController
         end
       end
       redirect_to invited_group_path(@group), :notice => 'Meghívó elküldve.'
+    else
+      redirect_to @group
     end
   end
 end

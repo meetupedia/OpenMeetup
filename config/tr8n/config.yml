@@ -66,7 +66,7 @@ defaults:
   #  rake tr8n:featured_languages
   #
   #############################################################################
-  featured_languages:         ["en-US", "es", "pt", "fr", "de", "it", "ru", "et", "iw", "zh-TW"]
+  featured_languages:         ["en-US", 'hu', "es", "pt", "fr", "de", "it", "ru"]
 
   #############################################################################
   # Set the following flag to true if you would like to allow any registered
