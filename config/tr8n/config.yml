@@ -66,7 +66,7 @@ defaults:
   #  rake tr8n:featured_languages
   #
   #############################################################################
-  featured_languages:         ["en-US", "es", "pt", "fr", "de", "it", "ru", "et", "iw", "zh-TW"]
+  featured_languages:         ["en-US", 'hu', "es", "pt", "fr", "de", "it", "ru"]
 
   #############################################################################
   # Set the following flag to true if you would like to allow any registered
@@ -104,7 +104,7 @@ defaults:
   #
   #############################################################################
   caching:
-    enabled:                  false
+    enabled:                  true
     adapter:                  ActiveSupport::Cache
     store:                    'memory_store'
     version:                  1 # you can change the version to invalidate the cache
@@ -285,7 +285,7 @@ defaults:
 # You can overload any feature defined in the defaults for any environment
 #############################################################################
 development:
-  enable_tr8n: true
+  enable_tr8n: false
 
 test:
 

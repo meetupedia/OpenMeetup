@@ -7,7 +7,7 @@ class MembershipRequestsController < CommonController
   def create
     if not @group.membership_for(current_user) and not @group.membership_request_for(current_user)
       @membership_request.save
-      MembershipRequestMailer.created(@membership_request).deliver
+      run_later { MembershipRequestMailer.created(@membership_request).deliver }
     end
     redirect_to @group
   end
@@ -19,7 +19,7 @@ class MembershipRequestsController < CommonController
 
   def confirm
     @membership_request.group.memberships.create(:user_id => @membership_request.user_id)
-    MembershipRequestMailer.confirmed(@membership_request).deliver
+    run_later { MembershipRequestMailer.confirmed(@membership_request).deliver }
     @membership_request.destroy
     redirect_to requested_members_group_url(@membership_request.group)
   end

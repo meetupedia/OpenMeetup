@@ -9,7 +9,10 @@ class WaveItemsController < CommonController
   end
 
   def create
-    @wave_item.save
-    redirect_to @wave
+    if @wave_item.save
+      redirect_to @wave
+    else
+      render :new
+    end
   end
 end

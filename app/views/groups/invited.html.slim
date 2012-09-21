@@ -1,20 +1,21 @@
 - unless modal_request?
-  h1.group= link_to @group.name, @group
+  = render 'groups/header'
 
-.pull-right= link_to tr('Send invitations'), new_group_group_invitation_path(@group), :class => 'btn', :rel => 'modal'
+.wrapper
+  .pull-right= link_to tr('Send invitations'), new_group_group_invitation_path(@group), :class => 'btn', :rel => 'modal'
 
-h2= tr('Already invited')
+  h2= tr('Already invited')
 
-= will_paginate @group_invitations
+  = will_paginate @group_invitations
 
-table.table
-  - @group_invitations.each do |group_invitation|
-    tr
-      td
-        - if group_invitation.invited_user.present?
-          = user_link group_invitation.invited_user
-        - else
-          = group_invitation.email
-      td.right_aligned= l(group_invitation.created_at)
+  table.table
+    - @group_invitations.each do |group_invitation|
+      tr
+        td
+          - if group_invitation.invited_user.present?
+            = user_link group_invitation.invited_user
+          - else
+            = group_invitation.email
+        td.right_aligned= l(group_invitation.created_at)
 
-= will_paginate @group_invitations
+  = will_paginate @group_invitations

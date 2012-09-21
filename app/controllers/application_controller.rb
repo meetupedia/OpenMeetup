@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :set_locale, :set_domain, :copy_flash_to_cookie, :check_restricted_access
+  # before_filter :miniprofiler
+
   helper_method :current_city, :current_language, :current_user
   helper LaterDude::CalendarHelper
 
@@ -18,6 +20,17 @@ class ApplicationController < ActionController::Base
   end
 
 private
+
+  def run_later
+    Thread.new do
+      yield
+      ActiveRecord::Base.connection.close
+    end
+  end
+
+  # def miniprofiler
+  #   Rack::MiniProfiler.authorize_request if current_user.andand.is_admin?
+  # end
 
   def copy_flash_to_cookie
     # cookies[:flash_notice] = URI.escape(flash[:notice]).to_json if flash[:notice]
@@ -42,7 +55,12 @@ private
   helper_method :current_locale
 
   def create_activity(item)
-    Activity.create :activable_type => item.class.name, :activable_id => item.id, :group => @group
+    activity = Activity.create :activable_type => item.class.name, :activable_id => item.id, :group => @group
+    if @group
+      (@group.members + current_user.followers).uniq.each do |user|
+        Notification.create :activity => activity, :group => @group, :user => user
+      end
+    end
   end
 
   def current_language
@@ -104,6 +122,6 @@ private
 
   def set_locale
     I18n.locale = current_locale
-    current_user.update_attributes :locale => I18n.locale if current_user and not current_user.locale == I18n.locale
+    current_user.update_attribute :locale, I18n.locale if current_user and not current_user.locale == I18n.locale.to_s
   end
 end

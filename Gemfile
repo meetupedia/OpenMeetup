@@ -4,19 +4,7 @@ gem 'rails', '3.2.8'
 
 gem 'mysql2'
 gem 'json'
-
-group :assets do
-  gem 'sass-rails', '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'therubyracer'
-  gem 'uglifier', '>= 1.0.3'
-end
-
-group :production do
-  gem 'newrelic_rpm'
-end
-
-gem 'jquery-rails'
+gem 'jquery-rails', '2.1.1'
 gem 'rails-i18n'
 gem 'rails_config'
 gem 'andand'
@@ -38,12 +26,10 @@ gem 'railhead_autouser'
 gem 'railhead_permalink'
 gem 'paperclip', '~> 2.7'
 gem 'mime-types', :require => 'mime/types'
-gem 'oink'
 gem 'paper_trail'
 gem 'globalize3'
 gem 'later_dude'
 gem 'rails_autolink'
-gem 'exception_notification'
 gem 'authlogic'
 gem 'fancybox-rails'
 gem 'pjax_rails'
@@ -52,3 +38,19 @@ gem 'will_filter'
 gem 'tr8n', :git => 'git://github.com/berk/tr8n.git'
 gem 'roadie'
 gem 'mail_view'
+gem 'exception_notification'
+
+group :assets do
+  gem 'sass-rails', '~> 3.2.3'
+  gem 'coffee-rails', '~> 3.2.1'
+  gem 'therubyracer'
+  gem 'uglifier', '>= 1.0.3'
+end
+
+group :development do
+  gem 'rack-mini-profiler'
+end
+
+group :production do
+  gem 'newrelic_rpm'
+end

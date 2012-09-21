@@ -10,8 +10,10 @@ class MembershipsController < CommonController
     unless @group.membership_for(current_user)
       @membership.save
       create_activity @membership
-      @group.admins.each do |admin|
-        GroupMailer.join(current_user, admin.email, @group).deliver
+      run_later do
+        @group.admins.each do |admin|
+          GroupMailer.join(current_user, admin.email, @group).deliver
+        end
       end
     end
     redirect_to @group unless request.xhr?
