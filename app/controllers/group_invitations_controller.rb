@@ -20,7 +20,7 @@ class GroupInvitationsController < CommonController
         if group_invitation.new_record?
           group_invitation.message = @group_invitation.message
           if group_invitation.save
-            run_later { GroupInvitationMailer.invitation(group_invitation).deliver }
+            GroupInvitationMailer.invitation(group_invitation).deliver
           end
         end
       end
