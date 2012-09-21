@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 
 class AbsencesController < CommonController
   load_resource :event
@@ -9,6 +9,11 @@ class AbsencesController < CommonController
     unless @event.absence_for(current_user)
       @absence.save
       @absence.event.participation_for(current_user).andand.destroy
+      run_later do
+        @absence.event.group.admins.each do |user|
+          EventMailer.absence(current_user, user.email, @event).deliver
+        end
+      end
     end
     redirect_to @event
   end

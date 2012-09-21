@@ -21,6 +21,13 @@ class ApplicationController < ActionController::Base
 
 private
 
+  def run_later
+    Thread.new do
+      yield
+      ActiveRecord::Base.connection.close
+    end
+  end
+
   # def miniprofiler
   #   Rack::MiniProfiler.authorize_request if current_user.andand.is_admin?
   # end
