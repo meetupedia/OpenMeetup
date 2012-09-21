@@ -13,7 +13,7 @@
 javascript:
   $(function() {
     $('#user_city_id').tokenInput('/cities.json', {
-      allowInsert: true,
+      allowFreeTagging: true,
       crossDomain: false,
       preventDuplicates: true,
       prePopulate: #{[@city].compact.map { |city| {:id => city.id, :name => tr(city.display_name)} }.to_json.html_safe},

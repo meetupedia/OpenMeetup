@@ -4,7 +4,7 @@ gem 'rails', '3.2.8'
 
 gem 'mysql2'
 gem 'json'
-gem 'jquery-rails'
+gem 'jquery-rails', '2.1.1'
 gem 'rails-i18n'
 gem 'rails_config'
 gem 'andand'
@@ -35,9 +35,10 @@ gem 'fancybox-rails'
 gem 'pjax_rails'
 gem 'kaminari'
 gem 'will_filter'
-  gem 'tr8n', :git => 'git://github.com/berk/tr8n.git'
+gem 'tr8n', :git => 'git://github.com/berk/tr8n.git'
 gem 'roadie'
 gem 'mail_view'
+gem 'exception_notification'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
@@ -51,6 +52,5 @@ group :development do
 end
 
 group :production do
-  gem 'exception_notification'
   gem 'newrelic_rpm'
 end
