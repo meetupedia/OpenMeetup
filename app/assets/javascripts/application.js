@@ -3,5 +3,5 @@
 //= require jquery-ui
 //= require twitter/bootstrap
 //= require fancybox
-//= require jquery.pjax
+//= require turbolinks
 //= require_tree .

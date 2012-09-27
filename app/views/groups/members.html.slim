@@ -3,6 +3,6 @@
 
 .wrapper
   h2= tr('Members')
-  p= link_to "→ #{tr('Already invited')}".html_safe, invited_group_path(@group), :rel => 'modal'
+  p= link_to "→ #{tr('Already invited')}".html_safe, invited_group_path(@group), :rel => 'modal', 'data-no-turbolink' => true
   .list_view= render @memberships
   = will_paginate @memberships

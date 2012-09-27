@@ -8,11 +8,11 @@
             span.caret
           ul.dropdown-menu
             - if can? :create, Event.new(:group => @group)
-              li= link_to tr('New event'), new_group_event_path(@group), :rel => 'modal'
+              li= link_to tr('New event'), new_group_event_path(@group), :rel => 'modal', 'data-no-turbolink' => true
             - if current_user
-              li= link_to tr('Send invitations'), new_group_group_invitation_path(@group), :rel => 'modal'
+              li= link_to tr('Send invitations'), new_group_group_invitation_path(@group), :rel => 'modal', 'data-no-turbolink' => true
             - if can? :edit, @group
-              li= link_to tr('Edit group'), edit_group_path(@group), :rel => 'modal'
+              li= link_to tr('Edit group'), edit_group_path(@group), :rel => 'modal', 'data-no-turbolink' => true
         =' render 'memberships/button', :group => @group
     - else
       .button-menu=' link_to %{<i class="icon-plus-sign icon-white"></i> #{tr('Join')}}.html_safe, set_group_memberships_path(@group), :class => 'btn btn-primary'

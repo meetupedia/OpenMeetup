@@ -12,4 +12,4 @@
           = render 'memberships/button', :group => group
         - else
           h3= facebook_group.name
-          = link_to 'Létrehozás', new_group_path(:group => {:facebook_uid => facebook_group.identifier, :name => facebook_group.name, :description => facebook_group.description, :url => facebook_group.link}), :rel => 'modal'
+          = link_to 'Létrehozás', new_group_path(:group => {:facebook_uid => facebook_group.identifier, :name => facebook_group.name, :description => facebook_group.description, :url => facebook_group.link}), :rel => 'modal', 'data-no-turbolink' => true

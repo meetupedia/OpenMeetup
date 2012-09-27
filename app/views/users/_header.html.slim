@@ -10,9 +10,9 @@
             - if current_user
               li= link_to tr('Settings'), settings_user_path(@user)
             - if can? :create, Group
-              li= link_to tr('Create new group'), new_group_path, :rel => 'modal'
+              li= link_to tr('Create new group'), new_group_path, :rel => 'modal', 'data-no-turbolink' => true
             - if current_user and not @user == current_user
-              li= link_to tr('Send message'), new_wave_path(:recipient_id => @user.id), :rel => 'modal'
+              li= link_to tr('Send message'), new_wave_path(:recipient_id => @user.id), :rel => 'modal', 'data-no-turbolink' => true
             - if @user.is_admin?
               li= link_to tr('System settings'), system_path
         - if current_user and not @user == current_user

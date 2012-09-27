@@ -1,4 +1,4 @@
-p= link_to tr('New comment'), polymorphic_path([:new, commentable, :comment]), :rel => 'modal'
+p= link_to tr('New comment'), polymorphic_path([:new, commentable, :comment]), :rel => 'modal', 'data-no-turbolink' => true
 
 - unless (comments = commentable.comments.where(:reply_to_id => nil).order('created_at ASC')).blank?
   .comments= render comments
