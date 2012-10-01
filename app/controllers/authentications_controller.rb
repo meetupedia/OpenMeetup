@@ -33,7 +33,7 @@ class AuthenticationsController < CommonController
   def destroy
     @authentication = current_user.authentications.find(params[:id])
     @authentication.destroy
-    redirect_to dashboard_user_path(current_user)
+    redirect_to settings_user_path(current_user)
   end
 
   def sign_in_and_redirect(user)

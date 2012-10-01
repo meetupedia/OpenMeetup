@@ -21,7 +21,7 @@ module ApplicationHelper
   end
 
   def auth_path(provider)
-    provider = :developer if Rails.env.development?
+    # provider = :developer if Rails.env.development?
     case provider
       when :facebook then '/auth/facebook'
       when :twitter then '/auth/twitter'
