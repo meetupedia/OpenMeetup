@@ -1,7 +1,7 @@
 .row
   .span4
     .wrapper
-      h2 Groups
+      h2= tr('Groups')
       .list_view
         .list_item
           = link_to notifications_path, :class => 'pjax' do
@@ -16,7 +16,7 @@
   .span8
     .wrapper
       h2
-        ' Notifications
+        = tr('Notifications')
         - if @group
           = dot
           = link_to @group.name, @group
