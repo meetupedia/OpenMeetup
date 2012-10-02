@@ -3,7 +3,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :set_locale, :set_domain, :copy_flash_to_cookie, :check_restricted_access
+  before_filter :set_locale, :check_restricted_access
   # before_filter :miniprofiler
 
   helper_method :current_city, :current_language, :current_user
@@ -31,12 +31,6 @@ private
   # def miniprofiler
   #   Rack::MiniProfiler.authorize_request if current_user.andand.is_admin?
   # end
-
-  def copy_flash_to_cookie
-    # cookies[:flash_notice] = URI.escape(flash[:notice]).to_json if flash[:notice]
-    # cookies[:flash_alert] = URI.escape(flash[:alert]).to_json if flash[:alert]
-    # flash.clear
-  end
 
   def current_locale
     if params[:locale]
@@ -113,11 +107,6 @@ private
       store_location
       redirect_to edit_city_user_path(current_user)
     end
-  end
-
-  def set_domain
-#    host = request.env['HTTP_HOST'].split(':').first
-#    request.env['rack.session.options'][:domain] = ".#{host}"
   end
 
   def set_locale

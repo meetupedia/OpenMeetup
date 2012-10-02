@@ -127,6 +127,13 @@ class User < ActiveRecord::Base
       memberships(:is_admin => true) * 40
     update_column :karma, karma
   end
+
+  # /get2gather
+  key :read_manual, :as => :boolean
+  key :read_cobe, :as => :boolean
+
+  validates :read_manual, :read_cobe, :presence => true
+  # \get2gather
 end
 
 User.auto_upgrade!

@@ -11,6 +11,12 @@ module CommonCommentable
       def commenters
         @commenters ||= comments_count > 0 ? User.joins(:comments).where('comments.commentable_type' => self.class.name, 'comments.commentable_id' => self.id).group('users.id').all : []
       end
+
+      def comments_after(time = nil)
+        output = comments
+        output = output.where('created_at >= ?', time) if time
+        output.map(&:root_comment).uniq
+      end
     end
   end
 end
