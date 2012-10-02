@@ -4,8 +4,8 @@ class Membership < ActiveRecord::Base
   key :is_admin, :as => :boolean
   timestamps
 
-  belongs_to :user
-  belongs_to :group
+  belongs_to :user, :counter_cache => true
+  belongs_to :group, :counter_cache => true
 
   has_many :activities, :as => :activable, :dependent => :destroy
 

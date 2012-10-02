@@ -18,6 +18,7 @@ class Group < ActiveRecord::Base
   key :url
   key :facebook_url
   timestamps
+  key :memberships_count, :as => :integer, :default => 0
 
   belongs_to :city
   belongs_to :language
