@@ -9,9 +9,9 @@
           span.caret
         ul.dropdown-menu
           - if can? :edit, @event
-            li= link_to t('event.edit'), edit_event_path(@event), :rel => 'modal', 'data-no-turbolink' => true
-          li= link_to tr('Send invitations'), new_event_event_invitation_path(@event), :rel => 'modal', 'data-no-turbolink' => true
-          li= link_to tr('Invite group members'), new_event_event_invitation_path(@event, :invite_members => true), :rel => 'modal', 'data-no-turbolink' => true
+            li= link_to t('event.edit'), edit_event_path(@event), :rel => 'modal'
+          li= link_to tr('Send invitations'), new_event_event_invitation_path(@event), :rel => 'modal'
+          li= link_to tr('Invite group members'), new_event_event_invitation_path(@event, :invite_members => true), :rel => 'modal'
       - absence = @event.absence_for(current_user)
       - participation = @event.participation_for(current_user)
       - if absence
@@ -39,4 +39,4 @@
       = @event.place
       = dot
     - if @event.gmaps4rails_address.present?
-      = link_to @event.gmaps4rails_address, map_event_path(@event), :rel => 'modal', 'data-no-turbolink' => true
+      = link_to @event.gmaps4rails_address, map_event_path(@event), :rel => 'modal'

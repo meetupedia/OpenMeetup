@@ -13,5 +13,5 @@
       p= render 'users/user_avatars', :users => @wave.wave_members
   .span8
     .wrapper
-      p= link_to 'Új üzenet', new_wave_wave_item_path(@wave), :class => 'btn', :rel => 'modal', 'data-no-turbolink' => true
+      p= link_to 'Új üzenet', new_wave_wave_item_path(@wave), :class => 'btn', :rel => 'modal'
       .list_view= render @wave_items

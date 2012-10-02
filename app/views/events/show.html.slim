@@ -4,8 +4,8 @@
   .span4
     .wrapper
       ul.tiles
-        li= link_to "<span class='menu_count'>#{@event.participants.size}</span> #{tr('participants')}".html_safe, users_event_path(@event), :rel => 'modal', 'data-no-turbolink' => true
-        li= link_to "<span class='menu_count'>#{@event.event_invitations.size}</span> #{tr('invited')}".html_safe, invited_event_path(@event), :rel => 'modal', 'data-no-turbolink' => true
+        li= link_to "<span class='menu_count'>#{@event.participants.size}</span> #{tr('participants')}".html_safe, users_event_path(@event), :rel => 'modal'
+        li= link_to "<span class='menu_count'>#{@event.event_invitations.size}</span> #{tr('invited')}".html_safe, invited_event_path(@event), :rel => 'modal'
 
       - if current_user
         - if (users = @event.participants.where('users.id' => current_user.followed_users.map(&:id)).order('users.name ASC')).empty?

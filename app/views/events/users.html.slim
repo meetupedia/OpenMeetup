@@ -4,7 +4,7 @@
 .wrapper
   - if can? :create, EventInvitation.new(:event => @event)
     .button-menu
-      = link_to tr('Send invitations'), new_event_event_invitation_path(@event), :class => 'btn', :rel => 'modal', 'data-no-turbolink' => true
+      = link_to tr('Send invitations'), new_event_event_invitation_path(@event), :class => 'btn', :rel => 'modal'
 
   h2= tr('Participants')
 

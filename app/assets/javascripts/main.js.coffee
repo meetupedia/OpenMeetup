@@ -1,10 +1,14 @@
 $ ->
   initPage = ->
     $('a.fancybox').fancybox()
+    $('a[rel*=modal], a.fancybox').attr('data-no-turbolink', true)
 
   initPage()
 
   $(document).bind 'modalbox.loaded', ->
+    initPage()
+
+  $(document).bind 'page:change', ->
     initPage()
 
   $('a[rel*=modal], a.modal').live 'click', ->

@@ -18,7 +18,7 @@
     - if @group.images.size > 0
       .wrapper
         = link_to image_tag(@group.images.last.image.url(:normal)), @group.images.last.image.url(:normal), :class => 'fancybox'
-        p= link_to tr('All images'), images_group_path(@group), :rel => 'modal', 'data-no-turbolink' => true
+        p= link_to tr('All images'), images_group_path(@group), :rel => 'modal'
 
       /
         - unless (users = @group.members.order('users.name ASC')).empty?
@@ -47,7 +47,7 @@
         = render 'next_event', :event => event
 
     .wrapper
-      .button-menu= link_to tr('New post'), polymorphic_path([:new, @group, :post]), :class => 'btn', :rel => 'modal', 'data-no-turbolink' => true
+      .button-menu= link_to tr('New post'), polymorphic_path([:new, @group, :post]), :class => 'btn', :rel => 'modal'
       = render 'activities/activities', :activities => @activities
 
 - if Settings.enable_share_buttons

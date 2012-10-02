@@ -1,3 +1,6 @@
+- if comment.reply_to
+  = render 'comments/parent_comment', :comment => comment.reply_to, :commentable => commentable
+
 = div_for comment, :class => "list_item avatar_item indent#{comment.level}" do
   - if comment.level < 5
     .pull-right= link_to tr('Reply'), polymorphic_path([:new, commentable, :comment], :reply_to_id => comment.id), :rel => 'modal'
@@ -5,6 +8,3 @@
   =' user_link comment.user
   span.date= time_ago_in_words comment.created_at
   = simple_format comment.comment
-
-- comment.replies.each do |comment|
-  = render comment, :commentable => commentable

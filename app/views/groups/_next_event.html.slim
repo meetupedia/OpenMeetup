@@ -17,4 +17,4 @@
     - if event.place.present?
       = event.place
       = dot
-    = link_to event.gmaps4rails_address, map_event_path(event), :rel => 'modal', 'data-no-turbolink' => true
+    = link_to event.gmaps4rails_address, map_event_path(event), :rel => 'modal'
