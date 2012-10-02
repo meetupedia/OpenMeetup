@@ -86,7 +86,6 @@ Openmeetup::Application.routes.draw do
     end
     member do
       get :edit_city
-      get :activities
       get :facebook_groups
       get :groups
       get :settings
