@@ -8,7 +8,12 @@ class DiscoveryController < CommonController
     unless params[:q].blank?
       @groups = Group.joins(:tags).where('groups.name LIKE ? OR tags.name LIKE ?', "%#{params[:q]}%", "#{params[:q]}%").group('groups.id')
     else
-      @groups = Group.paginate :page => params[:page]
+      order = case params[:order]
+        when 'name' then 'name ASC'
+        when 'members' then 'memberships_count DESC'
+        else 'id ASC'
+      end
+      @groups = Group.order(order).paginate :page => params[:page]
     end
   end
 
