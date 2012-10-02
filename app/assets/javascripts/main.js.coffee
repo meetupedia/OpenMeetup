@@ -1,5 +1,6 @@
 $ ->
   initPage = ->
+    $('.dropdown-toggle').dropdown()
     $('a.fancybox').fancybox()
     $('a[rel*=modal], a.fancybox').attr('data-no-turbolink', true)
 
