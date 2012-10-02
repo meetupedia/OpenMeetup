@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   key :karma, :as => :integer, :default => 0
   key :notifications_count, :as => :integer, :default => 0
   timestamps
+  key :memberships_count, :as => :integer, :default => 0
 
   belongs_to :city
   has_many :absences, :dependent => :destroy
