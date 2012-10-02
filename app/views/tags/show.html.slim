@@ -1,5 +1,5 @@
 .row
-  .span8.offset2
+  .span12
     .wrapper
       .breadcrumbs.clearfix= link_to tr('All tags'), tags_path
 
@@ -10,6 +10,13 @@
         ' :
         = @tag.name
 
+.row
+  .span4
+    - unless (users = @tag.users).blank?
+      .wrapper
+        h2= tr('Users')
+        .list_view= render users
+  .span8
     - unless (groups = @tag.groups).blank?
       .wrapper
         h2= tr('Groups')
