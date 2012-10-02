@@ -3,4 +3,5 @@
 //= require jquery-ui
 //= require twitter/bootstrap
 //= require fancybox
+//= require turbolinks
 //= require_tree .
