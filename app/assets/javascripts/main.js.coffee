@@ -1,25 +1,14 @@
 $ ->
   initPage = ->
     $('a.fancybox').fancybox()
+    $('a[rel*=modal], a.fancybox').attr('data-no-turbolink', true)
 
   initPage()
 
-  $('a.pjax').pjax(container: '#pjax', timeout: false)
-
-  $('#pjax').live 'pjax:success', ->
+  $(document).bind 'modalbox.loaded', ->
     initPage()
 
-  # if $.cookie('flash_notice')
-  #   flash = $.parseJSON(decodeURIComponent($.cookie('flash_notice')))
-  #   $('#flash_notice').show().find('span').html(flash)
-  #   $.cookie('flash_notice', null, {path: '/'})
-
-  # if $.cookie('flash_alert')
-  #   flash = $.parseJSON(decodeURIComponent($.cookie('flash_alert')))
-  #   $('#flash_alert').show().find('span').html(flash)
-  #   $.cookie('flash_alert', null, {path: '/'})
-
-  $(document).bind 'modalbox.loaded', ->
+  $(document).bind 'page:change', ->
     initPage()
 
   $('a[rel*=modal], a.modal').live 'click', ->

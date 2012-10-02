@@ -2,7 +2,7 @@
 
 class UsersController < CommonController
   load_resource :except => [:create]
-  authorize_resource :except => [:index, :show, :activities, :groups, :request_invite, :validate_email]
+  authorize_resource :except => [:index, :show, :groups, :request_invite, :validate_email]
   before_filter :set_city, :except => [:edit, :update, :edit_city]
   before_filter :create_city, :only => [:new, :request_invite, :edit_city]
   skip_before_filter :check_restricted_access, :only => [:new, :create, :request_invite]
@@ -42,9 +42,6 @@ class UsersController < CommonController
   def update
     @user.update_attributes params[:user]
     redirect_back_or_default @user
-  end
-
-  def activities
   end
 
   def dashboard

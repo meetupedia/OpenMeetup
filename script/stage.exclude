@@ -7,6 +7,5 @@ config/database.yml
 db/sphinx
 log/*
 tmp
-Gemfile.lock
 public/system
 config/initializers/omniauth.rb
