@@ -8,7 +8,7 @@
             span.caret
           ul.dropdown-menu
             - if current_user
-              li= link_to tr('Settings'), settings_user_path(@user)
+              li= link_to tr('Edit user profile'), settings_user_path(@user)
             - if can? :create, Group
               li= link_to tr('Create new group'), new_group_path, :rel => 'modal'
             - if current_user and not @user == current_user
