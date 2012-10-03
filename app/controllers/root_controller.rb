@@ -10,9 +10,9 @@ class RootController < CommonController
       else
         redirect_to discovery_url
       end
-    else
-      template = 'custom/root.index.slim'
-      render template if File.file?(File.join(Rails.root, 'app/views', template))
+    elsif Settings.customization
+      template = "customizations/#{Settings.customization}"
+      render template if File.file?(File.join(Rails.root, 'app/views', template + '.html.slim'))
     end
   end
 
