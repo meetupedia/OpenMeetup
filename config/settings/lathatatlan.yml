@@ -1,0 +1,17 @@
+standalone: true
+customization: 'lathatatlan'
+title: 'Láthatatlan Egyetem'
+multilingual: false
+default_locale: 'hu'
+host: 'lathatatlan.openmeetup.net'
+default_email: 'noreply@openmeetup.net'
+email_signature: "Üdvözlettel,\naz OpenMeetup csapata"
+
+enable_facebook_login: true
+enable_twitter_login: true
+enable_share_buttons: true
+enable_facebook_comments: true
+
+enable_messages: true
+
+enable_invite_process: true
