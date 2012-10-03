@@ -19,13 +19,11 @@
   = f.actions
 
 javascript:
-  $(function() {
-    $('#group_tag_tokens').tokenInput('/tags.json', {
-      allowFreeTagging: true,
-      crossDomain: false,
-      tokenValue: 'name',
-      preventDuplicates: true,
-      prePopulate: $('#group_tag_tokens').data('pre'),
-      theme: 'facebook'
-    })
+  $('#group_tag_tokens').tokenInput('/tags.json', {
+    allowFreeTagging: true,
+    crossDomain: false,
+    tokenValue: 'name',
+    preventDuplicates: true,
+    prePopulate: $('#group_tag_tokens').data('pre'),
+    theme: 'facebook'
   })
