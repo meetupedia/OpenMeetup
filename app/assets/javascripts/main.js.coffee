@@ -12,6 +12,7 @@ $ ->
   $(document).bind 'page:change', ->
     initPage()
 
+
   $('a[rel*=modal], a.modal').live 'click', ->
     modalbox.create $(this).attr('href')
     return false
