@@ -2,22 +2,23 @@
 
 .row
   .span4
-    .wrapper
-      h2= tr('Connections')
-      - if authentication = current_user.authenticated_with(:facebook)
-        - if current_user.authentications.size > 1
-          p= link_to tr('Disconnect Facebook'), authentication, :method => :delete, :confirm => tr('Are you sure?')
+    - if Settings.enable_facebook_login or Settings.enable_twitter_login
+      .wrapper
+        h2= tr('Connections')
+        - if authentication = current_user.authenticated_with(:facebook)
+          - if current_user.authentications.size > 1
+            p= link_to tr('Disconnect Facebook'), authentication, :method => :delete, :confirm => tr('Are you sure?')
+          - else
+            p= tr('Connected with Facebook')
         - else
-          p= tr('Connected with Facebook')
-      - else
-        p.facebook_connect= link_to image_tag('facebook_connect.png', :alt => tr('Sign in with Facebook')), auth_path(:facebook)
-      - if authentication = current_user.authenticated_with(:twitter)
-        - if current_user.authentications.size > 1
-          p= link_to tr('Disconnect Twitter'), authentication, :method => :delete, :confirm => tr('Are you sure?')
+          p.facebook_connect= link_to image_tag('facebook_connect.png', :alt => tr('Sign in with Facebook')), auth_path(:facebook)
+        - if authentication = current_user.authenticated_with(:twitter)
+          - if current_user.authentications.size > 1
+            p= link_to tr('Disconnect Twitter'), authentication, :method => :delete, :confirm => tr('Are you sure?')
+          - else
+            p= tr('Connected with Twitter')
         - else
-          p= tr('Connected with Twitter')
-      - else
-        p.twitter_connect= link_to image_tag('twitter_connect.png', :alt => tr('Sign in with Twitter')), auth_path(:twitter)
+          p.twitter_connect= link_to image_tag('twitter_connect.png', :alt => tr('Sign in with Twitter')), auth_path(:twitter)
     - if Settings.multilingual
       .wrapper
         .tr8n-language-selector.btn= tr8n_language_selector_tag
@@ -37,13 +38,11 @@
         = f.actions
 
 javascript:
-  $(function() {
-    $('#user_city_id').tokenInput('/cities.json', {
-      allowFreeTagging: true,
-      crossDomain: false,
-      preventDuplicates: true,
-      prePopulate: $('#user_city_id').data('pre'),
-      tokenLimit: 1,
-      theme: 'facebook'
-    })
+  $('#user_city_id').tokenInput('/cities.json', {
+    allowFreeTagging: true,
+    crossDomain: false,
+    preventDuplicates: true,
+    prePopulate: $('#user_city_id').data('pre'),
+    tokenLimit: 1,
+    theme: 'facebook'
   })

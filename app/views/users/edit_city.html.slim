@@ -8,13 +8,11 @@
   			= f.actions
 
 javascript:
-  $(function() {
-    $('#user_city_id').tokenInput('/cities.json', {
-      allowFreeTagging: true,
-      crossDomain: false,
-      preventDuplicates: true,
-      prePopulate: #{[@user.city || @city].compact.map { |city| {:id => city.id, :name => tr(city.display_name)} }.to_json.html_safe},
-      tokenLimit: 1,
-      theme: 'facebook'
-    })
+  $('#user_city_id').tokenInput('/cities.json', {
+    allowFreeTagging: true,
+    crossDomain: false,
+    preventDuplicates: true,
+    prePopulate: #{[@user.city || @city].compact.map { |city| {:id => city.id, :name => tr(city.display_name)} }.to_json.html_safe},
+    tokenLimit: 1,
+    theme: 'facebook'
   })

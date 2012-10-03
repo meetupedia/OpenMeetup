@@ -129,12 +129,12 @@ class User < ActiveRecord::Base
     update_column :karma, karma
   end
 
-  # /get2gather
-  key :read_manual, :as => :boolean
-  key :read_cobe, :as => :boolean
+  if Settings.customization == 'get2gather'
+    key :read_manual, :as => :boolean
+    key :read_cobe, :as => :boolean
 
-  validates :read_manual, :read_cobe, :presence => true
-  # \get2gather
+    validates :read_manual, :read_cobe, :presence => true
+  end
 end
 
 User.auto_upgrade!

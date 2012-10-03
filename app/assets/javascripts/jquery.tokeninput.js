@@ -556,6 +556,7 @@ $.TokenList = function (input, url_or_data, settings) {
           }
           var object = {};
           object[$(input).data("settings").tokenValue] = object[$(input).data("settings").propertyToSearch] = token;
+          object['id'] = token; /* OpenMeetup fix */
           add_token(object);
         });
     }
