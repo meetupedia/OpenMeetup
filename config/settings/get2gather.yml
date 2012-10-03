@@ -13,3 +13,5 @@ enable_share_buttons: false
 enable_facebook_comments: false
 
 enable_messages: false
+
+enable_invite_process: true
