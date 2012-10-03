@@ -17,9 +17,8 @@
       .footer-left
         =' tr('Powered by')
         = link_to 'OpenMeetup', 'http://openmeetup.org/'
-      / /get2gather
-      .pull-right
-        = tr('Contact')
-        ' :
-        = link_to 'get2gather (ETH)', 'mailto:PDLGET2GAT@ex1.eemea.ericsson.se'
-      / \get2gather
+      - if Settings.customization == 'get2gather'
+        .pull-right
+          = tr('Contact')
+          ' :
+          = link_to 'get2gather (ETH)', 'mailto:PDLGET2GAT@ex1.eemea.ericsson.se'

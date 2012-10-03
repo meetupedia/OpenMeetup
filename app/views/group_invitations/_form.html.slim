@@ -7,12 +7,10 @@
   = f.actions
 
 javascript:
-  $(function() {
-    $('#group_invitation_ids').tokenInput('/users.json', {
-      allowFreeTagging: true,
-      crossDomain: false,
-      tokenValue: 'id',
-      preventDuplicates: true,
-      theme: 'facebook'
-    })
+  $('#group_invitation_ids').tokenInput('/users.json', {
+    allowFreeTagging: true,
+    crossDomain: false,
+    tokenValue: 'id',
+    preventDuplicates: true,
+    theme: 'facebook'
   })

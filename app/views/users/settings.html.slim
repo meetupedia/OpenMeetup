@@ -38,13 +38,11 @@
         = f.actions
 
 javascript:
-  $(function() {
-    $('#user_city_id').tokenInput('/cities.json', {
-      allowFreeTagging: true,
-      crossDomain: false,
-      preventDuplicates: true,
-      prePopulate: $('#user_city_id').data('pre'),
-      tokenLimit: 1,
-      theme: 'facebook'
-    })
+  $('#user_city_id').tokenInput('/cities.json', {
+    allowFreeTagging: true,
+    crossDomain: false,
+    preventDuplicates: true,
+    prePopulate: $('#user_city_id').data('pre'),
+    tokenLimit: 1,
+    theme: 'facebook'
   })
