@@ -11,10 +11,9 @@
           = f.input :email
           = f.input :password
           = f.input :password_confirmation
-          / / /get2gather
-          / = f.input :read_manual, :label => 'I have read the <a href="http://openmeetup.org/get2gather-user-manual" target="_blank">user manual</a>.'
-          / = f.input :read_cobe, :label => 'I accept the <a href="http://www.ericsson.com/res/thecompany/docs/corporate-responsibility/2012/cobe/EN_COBE.pdf" target="_blank">cobe of ethics</a>.'
-          / / \get2gather
+          - if Settings.customization == 'get2gather'
+            = f.input :read_manual, :label => 'I have read the <a href="http://openmeetup.org/get2gather-user-manual" target="_blank">user manual</a>.'
+            = f.input :read_cobe, :label => 'I accept the <a href="http://www.ericsson.com/res/thecompany/docs/corporate-responsibility/2012/cobe/EN_COBE.pdf" target="_blank">cobe of ethics</a>.'
         = f.actions
   - if Settings.enable_facebook_login or Settings.enable_twitter_login
     .span6
