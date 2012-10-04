@@ -51,7 +51,7 @@ private
   def create_activity(item)
     activity = Activity.create :activable_type => item.class.name, :activable_id => item.id, :group => @group
     if @group
-      (@group.members + current_user.followers).uniq.each do |user|
+      (@group.members + current_user.followers - [current_user]).uniq.each do |user|
         Notification.create :activity => activity, :group => @group, :user => user
         user.increment! :notifications_count
       end
