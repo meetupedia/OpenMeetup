@@ -10,6 +10,7 @@ class CommentsController < CommonController
 
   def create
     @comment.commentable = @post
+    @group = @post.postable if @post.postable.is_a?(Group)
     if @comment.save
       create_activity @comment
       respond_to do |format|

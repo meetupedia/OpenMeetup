@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   key :invitation_code
   key :karma, :as => :integer, :default => 0
   key :notifications_count, :as => :integer, :default => 0
+  key :last_notified, :as => :datetime
   timestamps
   key :memberships_count, :as => :integer, :default => 0
 

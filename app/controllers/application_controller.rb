@@ -53,6 +53,7 @@ private
     if @group
       (@group.members + current_user.followers).uniq.each do |user|
         Notification.create :activity => activity, :group => @group, :user => user
+        user.increment! :notifications_count
       end
     end
   end
