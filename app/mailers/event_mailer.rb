@@ -2,17 +2,16 @@
 
 class EventMailer < CommonMailer
 
-  def invitation(user, event_invitation)
-    @user = event_invitation.user
-    @event = event_invitation.event
-    @message = event_invitation.message
-    mail :to => event_invitation.email, :subject => "Meghívó: #{@event.title}"
-  end
-
   def absence(user, email, event)
     @user = user
     @event = event
     mail :to => email, :subject => "#{@user.name} is not coming to #{@event.name}"
+  end
+
+  def invitation(user, email, event)
+    @user = user
+    @event = event
+    mail :to => email, :subject => "Invitation to #{@event.title}"
   end
 
   def participation(user, email, event)
@@ -27,6 +26,12 @@ class EventMailer < CommonMailer
     def absence
       absence = Absence.last
       mail = EventMailer.absence(absence.user, absence.event.group.admins.first.email, absence.event)
+      mail
+    end
+
+    def invitation
+      event_invitation = EventInvitation.last
+      mail = EventMailer.invitation(event_invitation.user, event_invitation.email, event_invitation.event)
       mail
     end
 
