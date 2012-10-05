@@ -11,12 +11,15 @@ class ApplicationController < ActionController::Base
 
   auto_user
 
+
   rescue_from CanCan::AccessDenied do |exception|
-    url = @group
-    url ||= sign_in_url unless current_user
-    url ||= root_url
-    flash[:alert] = 'Nincsen megfelelő jogosultságod ehhez!'
-    redirect_to url
+    unless current_user
+      flash[:alert] = 'Be kell jelentkezned!'
+      authenticate
+    else
+      flash[:alert] = 'Nem hozzáférhető számodra a kért oldal!'
+      redirect_to root_url
+    end
   end
 
 private
