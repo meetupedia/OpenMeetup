@@ -9,8 +9,8 @@ email_signature: "Üdvözlettel,\naz OpenMeetup csapata"
 enable_facebook_login: true
 enable_twitter_login: true
 enable_share_buttons: true
-enable_facebook_comments: true
 
 enable_messages: true
 
 enable_invite_process: true
+skip_invite_process_code: 'geronimo'

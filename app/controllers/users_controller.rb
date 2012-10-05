@@ -19,16 +19,14 @@ class UsersController < CommonController
   end
 
   def new
-    if Settings.enable_invite_process and not (params[:invitation_code] and GroupInvitation.find_by_code(params[:invitation_code]))
-      render :request_invite
-    end
+    render :request_invite if use_invite_process?
   end
 
   def create
     city = City.find_or_create_with_country(params[:user].delete(:city_id))
     @user = User.new params[:user]
     @user.city = city
-    if Settings.enable_invite_process and not (params[:invitation_code] and GroupInvitation.find_by_code(params[:invitation_code]))
+    if use_invite_process?
       @user.invitation_code = SecureRandom.hex(16)
       @user.restricted_access = true
     end
@@ -77,6 +75,10 @@ class UsersController < CommonController
   end
 
 protected
+
+  def use_invite_process?
+    Settings.enable_invite_process and not (params[:invitation_code].present? and (GroupInvitation.find_by_code(params[:invitation_code]) or params[:invitation_code] == Settings.skip_invite_process_code))
+  end
 
   def create_city
     if request.location
