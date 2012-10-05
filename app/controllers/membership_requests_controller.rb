@@ -7,7 +7,11 @@ class MembershipRequestsController < CommonController
   def create
     if not @group.membership_for(current_user) and not @group.membership_request_for(current_user)
       @membership_request.save
-      run_later { MembershipRequestMailer.created(@membership_request).deliver }
+      run_later do
+        @group.admins.each do |user|
+          MembershipRequestMailer.created(@membership_request, user).deliver
+        end
+      end
     end
     redirect_to @group
   end
