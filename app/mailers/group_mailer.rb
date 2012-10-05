@@ -2,10 +2,12 @@
 
 class GroupMailer < CommonMailer
 
-  def join(user, email, group)
-    @user = user
-    @group = group
-    mail :to => email, :subject => "New member in #{@group.name}: #{@user.name}"
+  def join(membership, recipient)
+    @recipient = recipient
+    @email = @recipient.email
+    @user = membership.user
+    @group = membership.group
+    mail :to => @email, :subject => "New member in #{@group.name}: #{@user.name}"
   end
 
 
@@ -13,7 +15,7 @@ class GroupMailer < CommonMailer
 
     def join
       membership = Membership.last
-      mail = GroupMailer.join(membership.user, membership.group.admins.first.email, membership.group)
+      mail = GroupMailer.join(membership, User.first)
       mail
     end
   end

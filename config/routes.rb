@@ -7,7 +7,7 @@ Openmeetup::Application.routes.draw do
   mount GroupInvitationMailer::Preview => '/group_invitation_mailer/mail_view'
   mount GroupMailer::Preview => '/group_mailer/mail_view'
   mount MembershipRequestMailer::Preview => '/membership_request_mailer/mail_view'
-  mount UserMailer::Preview => '/user_mailer/mail_view'
+  mount WaveMailer::Preview => '/wave_mailer/mail_view'
 
   resources :groups do
     member do

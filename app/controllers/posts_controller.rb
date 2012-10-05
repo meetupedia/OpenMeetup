@@ -3,7 +3,10 @@
 class PostsController < CommonController
   load_resource :group
   load_resource :post, :through => :group, :shallow => true
-  authorize_resource
+  authorize_resource :except => [:show]
+
+  def show
+  end
 
   def new
   end

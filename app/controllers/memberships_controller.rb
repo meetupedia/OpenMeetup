@@ -11,8 +11,8 @@ class MembershipsController < CommonController
       @membership.save
       create_activity @membership
       run_later do
-        @group.admins.each do |admin|
-          GroupMailer.join(current_user, admin.email, @group).deliver
+        @group.admins.each do |user|
+          GroupMailer.join(@membership, user).deliver if user.email
         end
       end
     end

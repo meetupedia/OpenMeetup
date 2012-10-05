@@ -1,5 +1,5 @@
 .wrapper
-  = semantic_form_for @comment, :url => url_for([@comment.commentable, :comments]) do |f|
+  = semantic_form_for @comment, :url => polymorphic_path([@comment.commentable, :comments]) do |f|
     = f.hidden_field :reply_to_id, :value => params[:reply_to_id]
     = f.inputs :comment
     = f.actions

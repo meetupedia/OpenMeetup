@@ -4,14 +4,15 @@
       h2= tr('Groups')
       .list_view
         .list_item
-          = link_to notifications_path, :class => 'pjax' do
+          = link_to notifications_path(:time => @last_notified.to_i) do
             = tr('All')
-            span.badge.badge-success.pull-right= current_user.notifications.size
-        - Group.joins(:notifications).where('notifications.user_id' => current_user.id).group('groups.id').count.each do |group_id, count|
-          - if group = Group.find_by_id(group_id)
-            .list_item
-              = link_to notifications_path(:group_id => group_id), :class => 'pjax' do
-                = group.name
+            - unless @counts.empty?
+              span.badge.badge-success.pull-right= @notifications_count
+        - Group.joins(:notifications).where('notifications.user_id' => current_user.id).group('groups.id').each do |group|
+          .list_item
+            = link_to notifications_path(:group_id => group.id, :time => @last_notified.to_i) do
+              = group.name
+              - if count = @counts[group.id]
                 span.badge.pull-right= count
   .span8
     .wrapper
@@ -21,6 +22,9 @@
           = dot
           = link_to @group.name, @group
       - unless @notifications.blank?
-      .list_view= render @notifications
+        .list_view
+          = will_paginate @notifications
+          = render @notifications
+          = will_paginate @notifications
       - else
         p= tr('No notifications this time.')

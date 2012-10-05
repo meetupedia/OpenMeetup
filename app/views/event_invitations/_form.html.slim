@@ -7,13 +7,11 @@
   = f.actions
 
 javascript:
-  $(function() {
-    $('#event_invitation_ids').tokenInput('/users.json', {
-      allowFreeTagging: true,
-      crossDomain: false,
-      tokenValue: 'id',
-      preventDuplicates: true,
-      prePopulate: #{@users.map{ |user| {:id => user.id, :name => user.name} }.to_json.html_safe},
-      theme: 'facebook'
-    })
+  $('#event_invitation_ids').tokenInput('/users.json', {
+    allowFreeTagging: true,
+    crossDomain: false,
+    tokenValue: 'id',
+    preventDuplicates: true,
+    prePopulate: #{@users.map{ |user| {:id => user.id, :name => user.name} }.to_json.html_safe},
+    theme: 'facebook'
   })

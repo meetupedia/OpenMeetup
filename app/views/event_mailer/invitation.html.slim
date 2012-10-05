@@ -1,12 +1,9 @@
-h2 Request membership
-
 p
   =' link_to @user.name, @user
-  ' jelentkezett a/az
-  =' link_to @group.name, requested_members_group_path(@group)
-  ' nevű csoportba.
+  ' invited you!
 
-.list_view= render @user
+.list_view
+  = render @event
 
 p
   =' link_to 'Send a message', new_wave_path(:recipient_id => @user.id), :class => 'btn btn-primary'

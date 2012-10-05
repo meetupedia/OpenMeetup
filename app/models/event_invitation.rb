@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 
 class EventInvitation < ActiveRecord::Base
   key :message, :as => :text
