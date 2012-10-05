@@ -31,7 +31,7 @@ class EventMailer < CommonMailer
 
     def absence
       absence = Absence.last
-      mail = EventMailer.absence(absence, absence.event.group.admins.first)
+      mail = EventMailer.absence(absence, User.first)
       mail
     end
 
