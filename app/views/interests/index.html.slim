@@ -5,4 +5,4 @@
 
   #interest_taggings= render :partial => 'interest_taggings/button', :collection => Interest.order('name ASC'), :as => :interest
 
-  .pull-right= link_to tr('Next step'), discovery_path, :class => 'btn btn-primary'
+  p.pull-right= link_to tr('Next step'), discovery_path, :class => 'btn btn-primary'
