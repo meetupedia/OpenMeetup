@@ -1,0 +1,22 @@
+.wrapper
+  p.pull-right= link_to image_tag('cog.png'), edit_letter_path(@letter), :class => 'btn'
+
+  h1 Levél
+
+  table.table
+    tr
+      th Tárgy
+      td= @letter.subject
+    tr
+      th Tesztcímzett
+      td= user_link @user
+
+  p
+    =' link_to 'Teszt', mailtest_letter_path(@letter), :method => :post, :class => 'btn'
+    = link_to 'Levélnézet', '/letter_mailer/mail_view/letter', :class => 'external'
+
+  hr
+
+  - begin
+    = render :inline => @letter.template, :type => :slim
+  - rescue

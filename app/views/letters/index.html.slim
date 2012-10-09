@@ -1,0 +1,17 @@
+.wrapper
+  h1 Levelek
+
+  - if params[:page]
+    = will_paginate @letters
+
+  table
+    tr
+      th Tárgy
+      th Címzettek
+      td Elküldve
+    - @letters.each do |letter|
+      tr
+        td= link_to letter.subject, letter
+        td= letter.mailed_at
+
+  = will_paginate @letters

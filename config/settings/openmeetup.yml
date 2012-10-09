@@ -1,5 +1,5 @@
 standalone: false
-title: 'OpenMeetup'
+title: 'Meetupedia'
 multilingual: true
 default_language: 'hu'
 host: 'openmeetup.net'
