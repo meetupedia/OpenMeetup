@@ -2,7 +2,8 @@
   .pull-right= link_to tr('Next step'), discovery_path, :class => 'btn btn-primary'
 
   h1= tr('What are your interests?')
-
+  'hello
   #interest_taggings= render :partial => 'interest_taggings/button', :collection => Interest.order('name ASC'), :as => :interest
 
-  p.pull-right= link_to tr('Next step'), discovery_path, :class => 'btn btn-primary'
+  .pull-right= link_to tr('Next step'), discovery_path, :class => 'btn btn-primary'
+  br
