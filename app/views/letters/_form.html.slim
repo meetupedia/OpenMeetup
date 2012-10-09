@@ -1,0 +1,16 @@
+= semantic_form_for @letter do |f|
+  = f.inputs do
+    = f.input :testuser_id
+    = f.input :subject
+    = f.input :template
+  = f.actions
+
+javascript:
+  $('#letter_testuser_id').tokenInput('/users.json', {
+    allowFreeTagging: true,
+    crossDomain: false,
+    tokenValue: 'id',
+    preventDuplicates: true,
+    prePopulate: #{(@letter.testuser ? [{:id => @letter.testuser.id, :name => @letter.testuser.name}] : nil).to_json.html_safe}
+    theme: 'facebook'
+  })

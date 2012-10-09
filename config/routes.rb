@@ -6,6 +6,7 @@ Openmeetup::Application.routes.draw do
   mount EventMailer::Preview => '/event_mailer/mail_view'
   mount GroupInvitationMailer::Preview => '/group_invitation_mailer/mail_view'
   mount GroupMailer::Preview => '/group_mailer/mail_view'
+  mount LetterMailer::Preview => '/letter_mailer/mail_view'
   mount MembershipRequestMailer::Preview => '/membership_request_mailer/mail_view'
   mount WaveMailer::Preview => '/wave_mailer/mail_view'
 
@@ -64,6 +65,13 @@ Openmeetup::Application.routes.draw do
 
   resources :interests do
     resources :interest_taggings, :shallow => true
+  end
+
+  resources :letters do
+    member do
+      post :mail
+      post :mailtest
+    end
   end
 
   resources :notifications
