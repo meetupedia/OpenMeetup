@@ -9,8 +9,9 @@ html
     = javascript_include_tag 'application'
     - unless Rails.env == 'test'
       = tr8n_scripts_tag.html_safe
-    = render 'layouts/google_analytics'
-    = render 'layouts/kissmetrics'
+    - if Rails.env == 'production'
+      = render 'layouts/google_analytics'
+      = render 'layouts/kissmetrics'
     = csrf_meta_tags
   body
     = render 'layouts/header'

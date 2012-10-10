@@ -13,7 +13,7 @@ class LetterMailer < CommonMailer
 
     def letter
       letter = Letter.last
-      user = letter.testuser || current_user
+      user = letter.testuser || User.first
       mail = LetterMailer.letter(letter, user)
       mail
     end
