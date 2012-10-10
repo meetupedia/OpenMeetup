@@ -8,6 +8,7 @@ Openmeetup::Application.routes.draw do
   mount GroupMailer::Preview => '/group_mailer/mail_view'
   mount LetterMailer::Preview => '/letter_mailer/mail_view'
   mount MembershipRequestMailer::Preview => '/membership_request_mailer/mail_view'
+  mount PostMailer::Preview => '/post_mailer/mail_view'
   mount WaveMailer::Preview => '/wave_mailer/mail_view'
 
   resources :groups do

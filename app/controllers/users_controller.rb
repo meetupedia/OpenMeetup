@@ -31,6 +31,10 @@ class UsersController < CommonController
       @user.restricted_access = true
     end
     if @user.save
+      if cookies[:add_membership_for] and group = Group.find_by_id(session[:cookies_membership_for])
+        group.memberships.create :user => @user
+        cookies.delete :add_membership_for
+      end
       redirect_to interests_url
     else
       render :new
