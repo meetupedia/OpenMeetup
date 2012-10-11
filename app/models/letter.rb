@@ -3,7 +3,6 @@
 class Letter < ActiveRecord::Base
   key :subject
   key :template, :as => :text
-  key :recipient_type, :as => :integer
   key :is_mailed, :as => :boolean, :default => false
   key :mailed_at, :as => :datetime
   timestamps
