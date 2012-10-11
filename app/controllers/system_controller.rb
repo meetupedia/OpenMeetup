@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 
 class SystemController < CommonController
   before_filter :authenticate_as_admin

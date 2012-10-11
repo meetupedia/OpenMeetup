@@ -20,7 +20,7 @@ class LettersController < CommonController
     if @letter.save
       redirect_to @letter
     else
-      render_new
+      render :new
     end
   end
 
@@ -29,10 +29,15 @@ class LettersController < CommonController
 
   def update
     if @letter.update_attributes params[:letter]
-      update_page @letter
+      redirect_to @letter
     else
-      render_edit
+      render :edit
     end
+  end
+
+  def destroy
+    @letter.destroy
+    redirect_to letters_url
   end
 
   def mail

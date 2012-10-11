@@ -68,6 +68,12 @@ Openmeetup::Application.routes.draw do
     resources :interest_taggings, :shallow => true
   end
 
+  resources :letter_templates do
+    member do
+      post :create_letter
+    end
+  end
+
   resources :letters do
     member do
       post :mail
