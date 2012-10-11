@@ -1,0 +1,12 @@
+p
+  =' link_to @user.name, @user
+  ' invited you!
+
+.list_view
+  = render @event
+
+p= link_to tr('Join'), set_event_particiations_path(@event), :class => 'btn btn-primary'
+
+hr
+
+= Settings.email_signature

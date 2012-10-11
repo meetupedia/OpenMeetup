@@ -8,6 +8,7 @@ class UsersController < CommonController
   skip_before_filter :check_restricted_access, :only => [:new, :create, :request_invite]
 
   cache_sweeper :membership_sweeper, :only => [:create]
+  cache_sweeper :participation_sweeper, :only => [:create]
 
   def index
     @users = User.where('name LIKE ?', "%#{params[:q]}%")
@@ -36,6 +37,10 @@ class UsersController < CommonController
       if cookies[:add_membership_for] and group = Group.find_by_id(session[:cookies_membership_for])
         group.memberships.create :user => @user
         cookies.delete :add_membership_for
+      end
+      if cookies[:add_participation_for] and event = Event.find_by_id(cookies[:add_participation_for])
+        event.participations.create :user => @user
+        cookies.delete :add_participation_for
       end
       redirect_to interests_url
     else

@@ -25,6 +25,10 @@ class AuthenticationsController < CommonController
           group.memberships.create :user => user
           cookies.delete :add_membership_for
         end
+        if cookies[:add_participation_for] and event = Event.find_by_id(cookies[:add_participation_for])
+          event.participations.create :user => user
+          cookies.delete :add_participation_for
+        end
         sign_in_and_redirect(user)
       else
         session[:omniauth] = omniauth.except('extra')
