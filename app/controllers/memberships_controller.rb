@@ -7,6 +7,8 @@ class MembershipsController < CommonController
   before_filter :set_add_membership_for, :only => [:set]
   before_filter :authenticate, :only => [:set]
 
+  cache_sweeper :membership_sweeper, :only => [:create]
+
   def create
     unless @group.membership_for(current_user)
       @membership.save

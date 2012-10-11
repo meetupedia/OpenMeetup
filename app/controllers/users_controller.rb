@@ -7,6 +7,8 @@ class UsersController < CommonController
   before_filter :create_city, :only => [:new, :request_invite, :edit_city]
   skip_before_filter :check_restricted_access, :only => [:new, :create, :request_invite]
 
+  cache_sweeper :membership_sweeper, :only => [:create]
+
   def index
     @users = User.where('name LIKE ?', "%#{params[:q]}%")
     respond_to do |format|
