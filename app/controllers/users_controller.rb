@@ -70,7 +70,7 @@ class UsersController < CommonController
   end
 
   def request_invite
-    redirect_to sign_in_path unless Settings.invite_process
+    redirect_to sign_in_path unless Settings.enable_invite_process
   end
 
   def settings
