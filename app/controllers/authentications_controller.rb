@@ -1,4 +1,5 @@
 class AuthenticationsController < CommonController
+  cache_sweeper :membership_sweeper, :only => [:create]
 
   def create
     omniauth = request.env['omniauth.auth']
@@ -20,6 +21,14 @@ class AuthenticationsController < CommonController
       if user.save
         user.apply_omniauth(omniauth)
         session[:return_to] = interests_url
+        if cookies[:add_membership_for] and group = Group.find_by_id(cookies[:add_membership_for])
+          group.memberships.create :user => user
+          cookies.delete :add_membership_for
+        end
+        if cookies[:add_participation_for] and event = Event.find_by_id(cookies[:add_participation_for])
+          event.participations.create :user => user
+          cookies.delete :add_participation_for
+        end
         sign_in_and_redirect(user)
       else
         session[:omniauth] = omniauth.except('extra')

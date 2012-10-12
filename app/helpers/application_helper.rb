@@ -2,14 +2,6 @@
 
 module ApplicationHelper
 
-  def current_user
-    nil
-  end
-
-  def application_title
-    Settings.title
-  end
-
   def user_avatar(user)
     filename = 'default_avatar.png'
     filename = "https://graph.facebook.com/#{user.facebook_id}/picture" if user.facebook_id

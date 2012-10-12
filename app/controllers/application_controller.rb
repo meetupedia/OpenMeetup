@@ -52,13 +52,7 @@ private
   helper_method :current_locale
 
   def create_activity(item)
-    activity = Activity.create :activable_type => item.class.name, :activable_id => item.id, :group => @group
-    if @group
-      (@group.members + current_user.followers - [current_user]).uniq.each do |user|
-        Notification.create :activity => activity, :group => @group, :user => user
-        user.increment! :notifications_count
-      end
-    end
+    Activity.create_from(item, current_user, @group)
   end
 
   def current_language

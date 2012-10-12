@@ -2,8 +2,11 @@
   = render 'header'
 
 .wrapper
+
+  .button-menu
+    = link_to tr('Invite friends'), new_group_group_invitation_path(@group), :class => 'btn', :rel => 'modal'
+
   h2= tr('Members')
-  = link_to tr('Invite friends'), new_group_group_invitation_path(@group), :class => 'btn', :rel => 'modal'
 
   .list_view= render @memberships
   = will_paginate @memberships

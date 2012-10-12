@@ -4,7 +4,9 @@
       = f.label :ids, tr('Names or emails')
       = f.text_field :ids
     = f.input :message
-  = f.actions
+  = f.actions do
+    = f.action :submit, :label => tr('Send')
+    = f.action :cancel, :label => tr('Cancel')
 
 javascript:
   $('#group_invitation_ids').tokenInput('/users.json', {

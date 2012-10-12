@@ -15,6 +15,13 @@ class PostsController < CommonController
     @post.postable = @group if @group
     if @post.save
       create_activity @post
+      if @group
+        run_later do
+          @group.members.each do |user|
+            PostMailer.notification(@post, user).deliver if user.email
+          end
+        end
+      end
       respond_to do |format|
         format.html { redirect_to @post.postable }
         format.js

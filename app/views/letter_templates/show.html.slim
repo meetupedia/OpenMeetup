@@ -1,0 +1,15 @@
+.wrapper
+  p.pull-right= link_to image_tag('cog.png'), edit_letter_template_path(@letter_template), :class => 'btn'
+
+  h1 Levél
+
+  table.table
+    tr
+      th Név
+      td= @letter_template.name
+
+  p= link_to tr('Create letter from template'), create_letter_letter_template_path(@letter_template), :method => :post, :class => 'btn'
+
+  hr
+
+  pre= @letter_template.template

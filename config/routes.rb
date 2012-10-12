@@ -3,11 +3,13 @@
 Openmeetup::Application.routes.draw do
   mount WillFilter::Engine => '/will_filter'
   mount Tr8n::Engine => '/tr8n'
+  mount EventInvitationMailer::Preview => '/event_invitation_mailer/mail_view'
   mount EventMailer::Preview => '/event_mailer/mail_view'
   mount GroupInvitationMailer::Preview => '/group_invitation_mailer/mail_view'
   mount GroupMailer::Preview => '/group_mailer/mail_view'
   mount LetterMailer::Preview => '/letter_mailer/mail_view'
   mount MembershipRequestMailer::Preview => '/membership_request_mailer/mail_view'
+  mount PostMailer::Preview => '/post_mailer/mail_view'
   mount WaveMailer::Preview => '/wave_mailer/mail_view'
 
   resources :groups do
@@ -65,6 +67,12 @@ Openmeetup::Application.routes.draw do
 
   resources :interests do
     resources :interest_taggings, :shallow => true
+  end
+
+  resources :letter_templates do
+    member do
+      post :create_letter
+    end
   end
 
   resources :letters do
