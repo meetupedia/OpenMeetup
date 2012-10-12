@@ -11,7 +11,6 @@ class ApplicationController < ActionController::Base
 
   auto_user
 
-
   rescue_from CanCan::AccessDenied do |exception|
     unless current_user
       flash[:alert] = 'Be kell jelentkezned!'
