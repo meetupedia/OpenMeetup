@@ -8,7 +8,7 @@ class GroupInvitationMailer < CommonMailer
     @user = group_invitation.user
     @group = group_invitation.group
     @message = group_invitation.message
-    @code = group_invitation.code
+    @invitation_code = group_invitation.code
     set_locale @recipient.andand.locale || @user.locale
     mail :to => @email, :subject => "Invitation: #{@group.name}"
   end

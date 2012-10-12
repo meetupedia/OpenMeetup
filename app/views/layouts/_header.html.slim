@@ -14,8 +14,6 @@
             li
               .tr8n-language-selector.btn= tr8n_language_selector_tag
           li= link_to tr('Sign in'), sign_in_path
-          - unless Settings.enable_invite_process
-            li= link_to tr('Sign up'), sign_up_path
       - else
         .nav-collapse
           form.navbar-search.pull-left action='/search' method='get'

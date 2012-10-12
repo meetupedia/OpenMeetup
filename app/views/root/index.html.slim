@@ -9,7 +9,7 @@
         = link_to image_tag('carousel_02.jpg'), request_invite_users_path
       .hero-unit(style="background: #ffffff; margin: 60px 0 0 0; padding: 0; float: right; width: 290px; text-align: center;")
         - unless Settings.enable_invite_process
-          p= link_to tr('Sign in'), new_user_sessions_path, :class => 'btn btn-primary btn-large'
+          p= link_to tr('Sign in'), sign_in_path, :class => 'btn btn-primary btn-large'
         - else
           p= link_to tr('Request an invite'), request_invite_users_path, :class => 'btn btn-primary btn-large', :style => 'padding: 15px; font-size: 17px;'
         p= tr('It\'s free and always will be.')

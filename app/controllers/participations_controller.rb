@@ -11,6 +11,7 @@ class ParticipationsController < CommonController
 
   def create
     unless @event.participation_for(current_user)
+      @group = @event.group
       @participation.save
       cookies.delete :add_participation_for
     end

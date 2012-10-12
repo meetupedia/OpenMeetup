@@ -5,7 +5,7 @@ p
 .list_view
   = render @event
 
-p= link_to tr('Join'), set_event_particiations_path(@event), :class => 'btn btn-primary'
+p= link_to tr('Join'), set_event_participations_path(@event, :invitation_code => @invitation_code), :class => 'btn btn-primary'
 
 hr
 

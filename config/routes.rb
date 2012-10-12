@@ -127,8 +127,8 @@ Openmeetup::Application.routes.draw do
 
   resources :authentications
   match '/auth/:provider/callback' => 'authentications#create'
-  match '/sign_up' => 'users#new', :as => :sign_up
-  match '/sign_in' => 'user_sessions#new', :as => :sign_in
+  match '/sign_in' => 'root#sign_in', :as => :sign_in
+  match '/sign_in_with_email' => 'users#new', :as => :sign_in_with_email
   match '/sign_out' => 'user_sessions#destroy', :as => :sign_out
 
   root :to => 'root#index'

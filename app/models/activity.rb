@@ -4,11 +4,12 @@ class Activity < ActiveRecord::Base
   timestamps
 
   belongs_to :activable, :polymorphic => true
+  belongs_to :event
   belongs_to :group
   belongs_to :user
 
-  def self.create_from(item, current_user, group)
-    activity = Activity.create :activable_type => item.class.name, :activable_id => item.id, :group => group
+  def self.create_from(item, current_user, group, event)
+    activity = Activity.create :activable_type => item.class.name, :activable_id => item.id, :group => group, :event => event
     if group
       (group.members + current_user.followers - [current_user]).uniq.each do |user|
         Notification.create :activity => activity, :group => group, :user => user

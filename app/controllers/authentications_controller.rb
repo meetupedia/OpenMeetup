@@ -19,6 +19,7 @@ class AuthenticationsController < CommonController
       user = User.new :name => omniauth['info']['name'], :email => omniauth['info']['email']
       user.authentications.build :provider => omniauth['provider'], :uid => omniauth['uid']
       if user.save
+        cookies.delete :invitation_code
         user.apply_omniauth(omniauth)
         session[:return_to] = interests_url
         if cookies[:add_membership_for] and group = Group.find_by_id(cookies[:add_membership_for])

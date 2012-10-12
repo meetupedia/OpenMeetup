@@ -1,5 +1,13 @@
 .row
-  .span6
+  .span6.offset3
+    .wrapper
+      h2= tr('Sign in with email')
+      = semantic_form_for UserSession.new do |f|
+        = f.inputs do
+          = f.input :email
+          = f.input :password
+          = f.input :remember_me, :as => :boolean
+        = f.actions
     .wrapper
       h2= tr('Sign up with email')
       = semantic_form_for @user do |f|
@@ -15,12 +23,3 @@
             = f.input :read_manual, :label => 'I have read the <a href="http://openmeetup.org/get2gather-user-manual" target="_blank">user manual</a>.'
             = f.input :read_cobe, :label => 'I accept the <a href="http://www.ericsson.com/res/thecompany/docs/corporate-responsibility/2012/cobe/EN_COBE.pdf" target="_blank">code of ethics</a>.'
         = f.actions
-  - if Settings.enable_facebook_login or Settings.enable_twitter_login
-    .span6
-      .wrapper
-        - if Settings.enable_facebook_login
-          h2= tr('Sign up with Facebook')
-          p= link_to image_tag('facebook_connect.png', :alt => tr('Sign up with Facebook')), auth_path(:facebook), 'data-no-turbolink' => true
-        - if Settings.enable_twitter_login
-          h2= tr('Sign up with Twitter')
-          p= link_to image_tag('twitter_connect.png', :alt => tr('Sign up with Twitter')), auth_path(:twitter), 'data-no-turbolink' => true
