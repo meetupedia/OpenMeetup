@@ -24,7 +24,12 @@ class GroupInvitationsController < CommonController
           end
         end
       end
-      redirect_to invited_group_path(@group), :notice => 'Meghívó elküldve.'
+      flash[:notice] => 'Meghívó elküldve.'
+      if can? :invited, Group
+        redirect_to invited_group_path(@group)
+      else
+        redirect_to @group
+      end
     else
       redirect_to @group
     end
