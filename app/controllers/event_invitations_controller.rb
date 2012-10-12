@@ -29,7 +29,12 @@ class EventInvitationsController < CommonController
           end
         end
       end
-      redirect_to invited_event_path(@event), :notice => 'Meghívó elküldve.'
+      flash[:notice] => 'Meghívó elküldve.'
+      if can? :invited, Event
+        redirect_to invited_event_path(@event)
+      else
+        redirect_to @event
+      end
     end
   end
 end
