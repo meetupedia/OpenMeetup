@@ -9,7 +9,7 @@ class Activity < ActiveRecord::Base
   belongs_to :user
 
   def self.create_from(item, current_user, group, event = nil)
-    activity = Activity.create :activable_type => item.class.name, :activable_id => item.id, :group => group, :event => event
+    activity = Activity.create :activable_type => item.class.name, :activable_id => item.id, :user => current_user, :group => group, :event => event
     if group
       (group.members + current_user.followers - [current_user]).uniq.each do |user|
         Notification.create :activity => activity, :group => group, :user => user
