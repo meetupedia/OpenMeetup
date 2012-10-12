@@ -22,7 +22,6 @@ class UsersController < CommonController
   end
 
   def new
-    render :request_invite if use_invite_process?
   end
 
   def create
@@ -92,6 +91,7 @@ protected
   def use_invite_process?
     Settings.enable_invite_process and not (cookies[:invitation_code].present? and (EventInvitation.find_by_code(cookies[:invitation_code]) or GroupInvitation.find_by_code(cookies[:invitation_code]) or cookies[:invitation_code] == Settings.skip_invite_process_code))
   end
+  helper_method :use_invite_process?
 
   def create_city
     if request.location

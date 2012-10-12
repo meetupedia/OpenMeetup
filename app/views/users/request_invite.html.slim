@@ -1,21 +1,21 @@
 .row
-.span8.offset2
-  .wrapper
-    h1= tr('Request invitation')
+  .span6.offset3
+    .wrapper
+      h1= tr('Request invitation')
 
-    = semantic_form_for User.new do |f|
-      = f.inputs do
-        = f.input :email
-        = f.input :city_id, :as => :string, :hint => 'Example: London (United Kingdom)'
-      = f.actions do
-        = f.action :submit, :label => tr('Next step')
+      = semantic_form_for User.new do |f|
+        = f.inputs do
+          = f.input :email
+          = f.input :city_id, :as => :string, :hint => 'Example: London (United Kingdom)'
+        = f.actions do
+          = f.action :submit, :label => tr('Next step')
 
-javascript:
-  $('#user_city_id').tokenInput('/cities.json', {
-    allowFreeTagging: true,
-    crossDomain: false,
-    preventDuplicates: true,
-    prePopulate: #{[@city].compact.map { |city| {:id => city.id, :name => tr(city.display_name)} }.to_json.html_safe},
-    tokenLimit: 1,
-    theme: 'facebook'
-  })
+  javascript:
+    $('#user_city_id').tokenInput('/cities.json', {
+      allowFreeTagging: true,
+      crossDomain: false,
+      preventDuplicates: true,
+      prePopulate: #{[@city].compact.map { |city| {:id => city.id, :name => tr(city.display_name)} }.to_json.html_safe},
+      tokenLimit: 1,
+      theme: 'facebook'
+    })
