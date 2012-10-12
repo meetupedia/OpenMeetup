@@ -2,7 +2,7 @@ class ParticipationSweeper < ActionController::Caching::Sweeper
   observe Participation
 
   def after_create(participation)
-    create_activity participation
+    Activity.create_from participation, current_user, participation.event.group, participation.event
     participation.event.absence_for(current_user).andand.destroy
     membership = participation.event.group.memberships.create :user => current_user unless participation.event.group.membership_for(current_user)
     run_later do
