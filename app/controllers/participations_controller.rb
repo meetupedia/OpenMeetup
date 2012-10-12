@@ -3,7 +3,7 @@
 class ParticipationsController < CommonController
   load_resource :event
   load_resource :participation, :through => :event, :shallow => true
-  authorize_resource
+  authorize_resource :except => [:set]
   before_filter :set_add_participation_for, :only => [:set]
   before_filter :authenticate, :only => [:set]
 
