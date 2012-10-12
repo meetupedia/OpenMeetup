@@ -52,7 +52,7 @@ private
   helper_method :current_locale
 
   def create_activity(item)
-    Activity.create_from(item, current_user, @group)
+    Activity.create_from(item, current_user, @group, @event)
   end
 
   def current_language
