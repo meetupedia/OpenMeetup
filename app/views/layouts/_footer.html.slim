@@ -1,8 +1,12 @@
 #footer.clearfix
   .container
+    - if  Settings.multilingual
+      .tr8n-language-selector.btn= tr8n_language_selector_tag
+
     - unless Settings.standalone
       .footer-left
         =' link_to tr('About'), 'http://openmeetup.org/'
+
       - if current_user
         .footer-showlove
           .footer-facebook
