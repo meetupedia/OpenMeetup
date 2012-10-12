@@ -9,17 +9,21 @@
           = f.input :remember_me, :as => :boolean
         = f.actions
     .wrapper
-      h2= tr('Sign up with email')
-      = semantic_form_for @user do |f|
-        - if params[:invitation_code]
-          = hidden_field_tag :invitation_code, params[:invitation_code]
-        = f.inputs do
-          = f.input :name
-          = f.input :nickname
-          = f.input :email
-          = f.input :password
-          = f.input :password_confirmation
-          - if Settings.customization == 'get2gather'
-            = f.input :read_manual, :label => 'I have read the <a href="http://openmeetup.org/get2gather-user-manual" target="_blank">user manual</a>.'
-            = f.input :read_cobe, :label => 'I accept the <a href="http://www.ericsson.com/res/thecompany/docs/corporate-responsibility/2012/cobe/EN_COBE.pdf" target="_blank">code of ethics</a>.'
-        = f.actions
+      - if use_invite_process?
+        h2= tr('New here?')
+        p= link_to tr('Request an invite'), request_invite_users_path, :class => 'btn btn-primary'
+      - else
+        h2= tr('Sign up with email')
+        = semantic_form_for @user do |f|
+          - if params[:invitation_code]
+            = hidden_field_tag :invitation_code, params[:invitation_code]
+          = f.inputs do
+            = f.input :name
+            = f.input :nickname
+            = f.input :email
+            = f.input :password
+            = f.input :password_confirmation
+            - if Settings.customization == 'get2gather'
+              = f.input :read_manual, :label => 'I have read the <a href="http://openmeetup.org/get2gather-user-manual" target="_blank">user manual</a>.'
+              = f.input :read_cobe, :label => 'I accept the <a href="http://www.ericsson.com/res/thecompany/docs/corporate-responsibility/2012/cobe/EN_COBE.pdf" target="_blank">code of ethics</a>.'
+          = f.actions
