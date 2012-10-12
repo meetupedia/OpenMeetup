@@ -7,14 +7,9 @@
         li= link_to "<span class='menu_count'>#{@event.participants.size}</span> #{tr('participants')}".html_safe, users_event_path(@event), :rel => 'modal'
         li= link_to "<span class='menu_count'>#{@event.event_invitations.size}</span> #{tr('invited')}".html_safe, invited_event_path(@event), :rel => 'modal'
 
-      - if current_user
-        - if (users = @event.participants.where('users.id' => current_user.followed_users.map(&:id)).order('users.name ASC')).empty?
-          p.muted= tr('No friend in this event yet.')
-        - else
-          h3= tr('Friends')
-          p= render 'users/user_avatars', :users => users
-      h3= tr('All participants')
-      p= render 'users/user_avatars', :users => @event.participants.order('participations.created_at ASC')
+    .wrapper
+      h3= tr('Participants')
+      p= render ('users/user_names'), :users => @event.participants.order('participations.created_at ASC')
 
     .wrapper
       .calendar= calendar(@event.start_time, @event.end_time)

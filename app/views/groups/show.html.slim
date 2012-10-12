@@ -27,12 +27,10 @@
           p= render 'users/user_avatars', :users => users
 
     /
-      .wrapper
-        h2= tr('Activity')
-        - unless (activities = @group.activities.order('created_at DESC').limit(20)).blank?
-          .list_view= render activities
-        - else
-          p.muted= tr('No activity yet.')
+
+    .wrapper
+      h3= tr('Members')
+      p= render ('users/user_names'), :users => @group.members
 
     - if Settings.enable_share_buttons
       .wrapper
