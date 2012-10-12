@@ -34,6 +34,7 @@ class UsersController < CommonController
       @user.restricted_access = true
     end
     if @user.save
+      cookies.delete :invitation_code
       if cookies[:add_membership_for] and group = Group.find_by_id(session[:cookies_membership_for])
         group.memberships.create :user => @user
         cookies.delete :add_membership_for
@@ -69,6 +70,7 @@ class UsersController < CommonController
   end
 
   def request_invite
+    redirect_to sign_in_path unless Settings.invite_process
   end
 
   def settings
@@ -88,7 +90,7 @@ class UsersController < CommonController
 protected
 
   def use_invite_process?
-    Settings.enable_invite_process and not (params[:invitation_code].present? and (GroupInvitation.find_by_code(params[:invitation_code]) or params[:invitation_code] == Settings.skip_invite_process_code))
+    Settings.enable_invite_process and not (cookies[:invitation_code].present? and (GroupInvitation.find_by_code(cookies[:invitation_code]) or cookies[:invitation_code] == Settings.skip_invite_process_code))
   end
 
   def create_city

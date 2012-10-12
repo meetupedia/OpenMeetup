@@ -24,8 +24,8 @@
       - elsif not absence
         = link_to '<i class="icon-plus-sign icon-white"></i> Részt veszek'.html_safe, event_participations_path(@event), :method => :post, :class => 'btn btn-primary'
     - else
-      = link_to '<i class="icon-plus-sign icon-black"></i> Nem veszek részt'.html_safe, new_user_sessions_path(:return_to => set_event_absences_path(@event)), :class => 'btn'
-      = link_to '<i class="icon-plus-sign icon-black"></i> Részt veszek'.html_safe, new_user_sessions_path(:return_to => set_event_participations_path(@event)), :class => 'btn'
+      = link_to '<i class="icon-plus-sign icon-black"></i> Nem veszek részt'.html_safe, sign_in_path(:return_to => set_event_absences_path(@event)), :class => 'btn'
+      = link_to '<i class="icon-plus-sign icon-black"></i> Részt veszek'.html_safe, sign_in_path(:return_to => set_event_participations_path(@event)), :class => 'btn'
 
 
   h4= link_to @event.title, @event

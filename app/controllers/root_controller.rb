@@ -34,4 +34,8 @@ class RootController < CommonController
 
   def restricted_access
   end
+
+  def sign_in
+    redirect_to sign_in_with_email_path unless Settings.enable_facebook_login or Settings.enable_twitter_login
+  end
 end

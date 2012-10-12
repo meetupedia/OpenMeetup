@@ -7,6 +7,7 @@ class EventInvitationMailer < CommonMailer
     @email = event_invitation.email
     @user = event_invitation.user
     @event = event_invitation.event
+    @invitation_code = event_invitation.code
     mail :to => @email, :subject => "Invitation to #{@event.title}"
   end
 
@@ -15,7 +16,7 @@ class EventInvitationMailer < CommonMailer
 
     def invitation
       event_invitation = EventInvitation.last
-      mail = EventMailer.invitation(event_invitation)
+      mail = EventInvitationMailer.invitation(event_invitation)
       mail
     end
   end

@@ -3,7 +3,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :set_locale, :check_restricted_access
+  before_filter :set_locale, :check_restricted_access, :set_invitation_code
   # before_filter :miniprofiler
 
   helper_method :current_city, :current_language, :current_user
@@ -73,6 +73,12 @@ private
   def check_restricted_access
     if current_user.andand.restricted_access
       redirect_to root_url
+    end
+  end
+
+  def set_invitation_code
+    if params[:invitation_code]
+      cookies[:invitation_code] = params[:invitation_code]
     end
   end
 
