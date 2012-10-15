@@ -1,0 +1,16 @@
+.wrapper
+  p.pull-right= link_to tr('New template for letters'), new_letter_template_path, :class => 'btn', :rel => 'modal'
+
+  h1 Levélsablonok
+
+  - if params[:page]
+    = will_paginate @letter_templates
+
+  table
+    tr
+      th Név
+    - @letter_templates.each do |letter_template|
+      tr
+        td= link_to letter_template.name, letter_template
+
+  = will_paginate @letter_templates

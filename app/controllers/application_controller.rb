@@ -3,7 +3,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :set_locale, :check_restricted_access
+  before_filter :set_locale, :check_restricted_access, :set_invitation_code
   # before_filter :miniprofiler
 
   helper_method :current_city, :current_language, :current_user
@@ -12,11 +12,13 @@ class ApplicationController < ActionController::Base
   auto_user
 
   rescue_from CanCan::AccessDenied do |exception|
-    url = @group
-    url ||= sign_in_url unless current_user
-    url ||= root_url
-    flash[:alert] = 'Nincsen megfelelő jogosultságod ehhez!'
-    redirect_to url
+    unless current_user
+      flash[:alert] = 'Be kell jelentkezned!'
+      authenticate
+    else
+      flash[:alert] = 'Nem hozzáférhető számodra a kért oldal!'
+      redirect_to root_url
+    end
   end
 
 private
@@ -49,12 +51,7 @@ private
   helper_method :current_locale
 
   def create_activity(item)
-    activity = Activity.create :activable_type => item.class.name, :activable_id => item.id, :group => @group
-    if @group
-      (@group.members + current_user.followers).uniq.each do |user|
-        Notification.create :activity => activity, :group => @group, :user => user
-      end
-    end
+    Activity.create_from(item, current_user, @group, @event)
   end
 
   def current_language
@@ -75,6 +72,12 @@ private
   def check_restricted_access
     if current_user.andand.restricted_access
       redirect_to root_url
+    end
+  end
+
+  def set_invitation_code
+    if params[:invitation_code]
+      cookies[:invitation_code] = params[:invitation_code]
     end
   end
 

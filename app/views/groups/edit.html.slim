@@ -1,4 +1,5 @@
-.pull-right= link_to tr('Delete group'), @group, :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-danger'
+- if can? :destroy, @group
+  .pull-right= link_to tr('Delete group'), @group, :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-danger'
 
 h1= tr('Edit group')
 

@@ -20,7 +20,7 @@ class Event < ActiveRecord::Base
   belongs_to :group
   has_many :absences, :dependent => :destroy
   has_many :absents, :through => :absences, :source => :user
-  has_many :activities, :as => :activable, :dependent => :destroy
+  has_many :activities, :dependent => :destroy
   has_many :event_invitations, :dependent => :nullify
   has_many :images, :as => :imageable
   has_many :participations, :dependent => :destroy

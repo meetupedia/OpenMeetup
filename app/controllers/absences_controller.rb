@@ -11,7 +11,7 @@ class AbsencesController < CommonController
       @absence.event.participation_for(current_user).andand.destroy
       run_later do
         @absence.event.group.admins.each do |user|
-          EventMailer.absence(current_user, user.email, @event).deliver
+          EventMailer.absence(@absence, user).deliver
         end
       end
     end

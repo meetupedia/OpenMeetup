@@ -4,17 +4,15 @@ class MembershipsController < CommonController
   load_resource :group
   load_resource :membership, :through => :group, :shallow => true
   authorize_resource :except => [:set]
+  before_filter :set_add_membership_for, :only => [:set]
   before_filter :authenticate, :only => [:set]
+
+  cache_sweeper :membership_sweeper, :only => [:create]
 
   def create
     unless @group.membership_for(current_user)
       @membership.save
-      create_activity @membership
-      run_later do
-        @group.admins.each do |admin|
-          GroupMailer.join(current_user, admin.email, @group).deliver
-        end
-      end
+      cookies.delete :add_membership_for
     end
     redirect_to @group unless request.xhr?
   end
@@ -47,5 +45,11 @@ class MembershipsController < CommonController
     @membership.is_admin = false
     @membership.save
     redirect_to members_group_url(@membership.group)
+  end
+
+protected
+
+  def set_add_membership_for
+    cookies[:add_membership_for] = @group.id
   end
 end

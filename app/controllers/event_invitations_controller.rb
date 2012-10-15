@@ -25,11 +25,16 @@ class EventInvitationsController < CommonController
         if event_invitation.new_record?
           event_invitation.message = @event_invitation.message
           if event_invitation.save
-            EventMailer.invitation(current_user, event_invitation).deliver
+            EventInvitationMailer.invitation(event_invitation).deliver
           end
         end
       end
-      redirect_to invited_event_path(@event), :notice => 'Meghívó elküldve.'
+      flash[:notice] = 'Meghívó elküldve.'
+      if can? :invited, Event
+        redirect_to invited_event_path(@event)
+      else
+        redirect_to @event
+      end
     end
   end
 end

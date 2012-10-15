@@ -3,13 +3,14 @@
 class GroupInvitationMailer < CommonMailer
 
   def invitation(group_invitation)
-    @invited_user = group_invitation.invited_user
+    @recipient = group_invitation.invited_user
+    @email = group_invitation.email
+    @user = group_invitation.user
     @group = group_invitation.group
     @message = group_invitation.message
-    @user = group_invitation.user
-    @code = group_invitation.code
-    set_locale @user.locale
-    mail :to => group_invitation.email, :subject => "Meghívó: #{@group.name}"
+    @invitation_code = group_invitation.code
+    set_locale @recipient.andand.locale || @user.locale
+    mail :to => @email, :subject => "Invitation: #{@group.name}"
   end
 
 

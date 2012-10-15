@@ -8,6 +8,10 @@ p
 
 .list_view= render @user
 
+p
+  =' link_to 'Send a message', new_wave_path(:recipient_id => @user.id), :class => 'btn btn-primary'
+  = link_to 'View user profile', @user, :class => 'btn'
+
 hr
 
 = Settings.email_signature

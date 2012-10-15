@@ -7,21 +7,19 @@
         li= link_to "<span class='menu_count'>#{@event.participants.size}</span> #{tr('participants')}".html_safe, users_event_path(@event), :rel => 'modal'
         li= link_to "<span class='menu_count'>#{@event.event_invitations.size}</span> #{tr('invited')}".html_safe, invited_event_path(@event), :rel => 'modal'
 
-      - if current_user
-        - if (users = @event.participants.where('users.id' => current_user.followed_users.map(&:id)).order('users.name ASC')).empty?
-          p.muted= tr('No friend in this event yet.')
-        - else
-          h3= tr('Friends')
-          p= render 'users/user_avatars', :users => users
-      h3= tr('All participants')
-      p= render 'users/user_avatars', :users => @event.participants.order('participations.created_at ASC')
+    .wrapper
+      h3= tr('Participants')
+      p= render ('users/user_names'), :users => @event.participants.order('participations.created_at ASC')
 
     .wrapper
       .calendar= calendar(@event.start_time, @event.end_time)
 
-    .wrapper
-      - if Settings.enable_share_buttons
-        | <div class="fb-like" data-href="#{event_url(@event)}" data-send="false" data-width="450" data-show-faces="false"></div>
+    - if Settings.enable_share_buttons
+      .wrapper
+        h3= tr('Sharing is caring')
+        ' <div class="fb-like" data-href="#{event_url(@event)}" data-send="false" data-width="450" data-layout="button_count" data-show-faces="false"></div><br/>
+        ' <div class="g-plusone" data-size="medium"></div><br/>
+        ' <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
   .span8
     - unless @event.description.blank?

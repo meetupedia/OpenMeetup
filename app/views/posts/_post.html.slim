@@ -2,5 +2,6 @@
   .avatar= user_avatar post.user
   =' user_link post.user
   span.date= time_ago_in_words post.created_at
+  .pull-right= link_to tr('Reply'), polymorphic_path([:new, post, :comment]), :rel => 'modal'
   .text= simple_format post.post
   = render 'comments/comments', :commentable => post

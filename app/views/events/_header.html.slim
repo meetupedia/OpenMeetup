@@ -10,8 +10,9 @@
         ul.dropdown-menu
           - if can? :edit, @event
             li= link_to t('event.edit'), edit_event_path(@event), :rel => 'modal'
-          li= link_to tr('Send invitations'), new_event_event_invitation_path(@event), :rel => 'modal'
-          li= link_to tr('Invite group members'), new_event_event_invitation_path(@event, :invite_members => true), :rel => 'modal'
+            li= link_to tr('Delete event'), @event, :method => :delete
+          li= link_to tr('Invite friends'), new_event_event_invitation_path(@event), :rel => 'modal'
+          li= link_to tr('Invite all group members'), new_event_event_invitation_path(@event, :invite_members => true), :rel => 'modal'
       - absence = @event.absence_for(current_user)
       - participation = @event.participation_for(current_user)
       - if absence
@@ -23,8 +24,8 @@
       - elsif not absence
         = link_to '<i class="icon-plus-sign icon-white"></i> Részt veszek'.html_safe, event_participations_path(@event), :method => :post, :class => 'btn btn-primary'
     - else
-      = link_to '<i class="icon-plus-sign icon-black"></i> Nem veszek részt'.html_safe, new_user_sessions_path(:return_to => set_event_absences_path(@event)), :class => 'btn'
-      = link_to '<i class="icon-plus-sign icon-black"></i> Részt veszek'.html_safe, new_user_sessions_path(:return_to => set_event_participations_path(@event)), :class => 'btn'
+      = link_to '<i class="icon-plus-sign icon-black"></i> Nem veszek részt'.html_safe, sign_in_path(:return_to => set_event_absences_path(@event)), :class => 'btn'
+      = link_to '<i class="icon-plus-sign icon-black"></i> Részt veszek'.html_safe, sign_in_path(:return_to => set_event_participations_path(@event)), :class => 'btn'
 
 
   h4= link_to @event.title, @event
