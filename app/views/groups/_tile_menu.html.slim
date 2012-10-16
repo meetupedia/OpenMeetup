@@ -5,7 +5,7 @@ ul.tiles
 
 /
   - if current_user
-    - if (users = group.members.where('users.id' => current_user.followed_users.map(&:id)).order('users.name ASC')).empty?
+    - if (users = current_user.friends_in_group(group).order('users.name ASC')).empty?
       .muted= tr('No friends in this group yet.')
     - else
       h3= tr('Friends')

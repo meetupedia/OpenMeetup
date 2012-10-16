@@ -79,6 +79,9 @@ class Ability
       can [:update, :destroy, :settings, :facebook_groups, :waves], User do |user|
         user == current_user
       end
+      can :calendar, User do |user|
+        user == current_user or current_user.is_admin?
+      end
 
       can :create, UserFollow
       can :destroy, UserFollow do |user_follow|

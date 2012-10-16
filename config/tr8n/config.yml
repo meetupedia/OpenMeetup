@@ -288,6 +288,7 @@ development:
   enable_tr8n: false
 
 test:
+  enable_tr8n: false
 
 qa:
 

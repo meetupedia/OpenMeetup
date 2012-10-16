@@ -53,6 +53,9 @@ class UsersController < CommonController
     redirect_back_or_default @user
   end
 
+  def calendar
+  end
+
   def dashboard
   end
 

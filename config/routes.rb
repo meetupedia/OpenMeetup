@@ -101,6 +101,7 @@ Openmeetup::Application.routes.draw do
       get :validate_email
     end
     member do
+      get :calendar
       get :edit_city
       get :facebook_groups
       get :groups
