@@ -14,7 +14,7 @@
       - else
         .nav-collapse
           form.navbar-search.pull-left action='/search' method='get'
-            input type='text' class='search-query' placeholder=tr('Search') name='q'
+            input type='text' class='search-query' placeholder=trl('Search') name='q'
         ul.nav.pull-right
           - unless current_user.restricted_access
             li= link_to tr('My profile'), current_user

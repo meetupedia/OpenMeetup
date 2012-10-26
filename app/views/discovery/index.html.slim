@@ -5,7 +5,7 @@
         p.pull-right= link_to tr('Create new group'), new_group_path, :class => 'btn'
       h1= tr('Searching for groups')
       form action='#{discovery_path}' method='get' id='discovery'
-        input type='text' placeholder=tr('Search') name='q'
+        input type='text' placeholder=trl('Search') name='q'
       #results
         - if params[:q].blank?
           p
