@@ -94,6 +94,7 @@ GEM
     gmaps4rails (1.5.5)
     hashie (1.2.0)
     hike (1.2.1)
+    hirb (0.7.0)
     httpauth (0.2.0)
     httpclient (2.2.7)
     i18n (0.6.1)
@@ -256,6 +257,7 @@ DEPENDENCIES
   geocoder
   globalize3
   gmaps4rails
+  hirb
   jquery-rails (= 2.1.1)
   json
   kaminari
