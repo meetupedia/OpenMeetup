@@ -63,6 +63,10 @@ class Ability
 
       can :create, Post
 
+      can [:create, :destroy], Question do |question|
+        question.event.group.admins.include?(current_user) or current_user.is_admin?
+      end
+
       can :create, Review
       can [:update, :destroy], Review do |review|
         review.user == current_user
