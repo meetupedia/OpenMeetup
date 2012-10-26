@@ -3,3 +3,11 @@
 h1= tr('Edit event')
 
 = render 'form', :url => @event
+
+- @event.questions.each do |question|
+  =' question.name
+  = link_to tr('Delete question'), question, :method => :delete, :confirm => 'Biztosan törlöd?'
+
+= semantic_form_for Question.new, :url => event_questions_path(@event) do
+  = f.inputs
+  = f.actions

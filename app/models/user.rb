@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   key :notifications_count, :as => :integer, :default => 0
   key :last_notified, :as => :datetime
   timestamps
+  key :settings, :as => :binary
   key :memberships_count, :as => :integer, :default => 0
 
   belongs_to :city
@@ -46,6 +47,8 @@ class User < ActiveRecord::Base
   has_many :waves, :through => :wave_memberships
 
   serialize :facebook_friend_ids
+  store :settings, :accessors => [:facebook_friends]
+
   acts_as_authentic do |c|
     c.validate_email_field = false
     c.validate_password_field = false

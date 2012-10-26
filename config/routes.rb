@@ -3,6 +3,7 @@
 Openmeetup::Application.routes.draw do
   mount WillFilter::Engine => '/will_filter'
   mount Tr8n::Engine => '/tr8n'
+  mount CommentMailer::Preview => '/comment_mailer/mail_view'
   mount EventInvitationMailer::Preview => '/event_invitation_mailer/mail_view'
   mount EventMailer::Preview => '/event_mailer/mail_view'
   mount GroupInvitationMailer::Preview => '/group_invitation_mailer/mail_view'
@@ -42,6 +43,7 @@ Openmeetup::Application.routes.draw do
           get :set
         end
       end
+      resources :questions, :shallow => true
     end
     resources :group_invitations, :shallow => true
     resources :images, :shallow => true

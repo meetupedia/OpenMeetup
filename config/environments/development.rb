@@ -37,3 +37,7 @@ Openmeetup::Application.configure do
 
   config.assets.logger = false
 end
+
+if $0 == 'irb'
+  Hirb.enable
+end
