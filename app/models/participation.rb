@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 
 class Participation < ActiveRecord::Base
   timestamps
@@ -7,6 +7,7 @@ class Participation < ActiveRecord::Base
   belongs_to :event
 
   has_many :activities, :as => :activable, :dependent => :destroy
+  has_many :answers, :dependent => :destroy
 end
 
 Participation.auto_upgrade!

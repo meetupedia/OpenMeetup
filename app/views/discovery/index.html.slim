@@ -1,5 +1,5 @@
 .row
-  .span12
+  .span8
     .wrapper
       - if can? :create, Group
         p.pull-right= link_to tr('Create new group'), new_group_path, :class => 'btn'
@@ -21,3 +21,8 @@
           = render 'search'
           - if @groups.respond_to?(:total_pages)
             = will_paginate @groups
+
+  .span4
+    .wrapper
+      h1= tr('Interests')
+      = render current_user.tags.order('name ASC')

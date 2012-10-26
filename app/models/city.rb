@@ -1,8 +1,8 @@
 # encoding: UTF-8
 
 class City < ActiveRecord::Base
-  key :name
-  key :permalink
+  key :name, :index => true
+  key :permalink, :index => true
   key :state
   belongs_to :country
   has_many :users, :dependent => :nullify

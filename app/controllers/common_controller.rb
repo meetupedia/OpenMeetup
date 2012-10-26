@@ -13,6 +13,14 @@ class CommonController < ApplicationController
   end
   helper_method :modal_request?
 
+  def reload_to(url)
+    if request.xhr?
+      render :inline => 'modalbox.reload()'
+    else
+      redirect_to url
+    end
+  end
+
   def redirect_to(url, options = {})
     if ajax_request? or modal_request?
       render :text => "window.location = '#{url_for(url)}'"

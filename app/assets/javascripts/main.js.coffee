@@ -1,4 +1,7 @@
 $ ->
+  window.reloadPage = ->
+    Turbolinks.visit(window.location)
+
   initPage = ->
     $('.dropdown-toggle').dropdown()
     $('a.fancybox').fancybox()

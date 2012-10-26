@@ -1,5 +1,19 @@
-.pull-right= link_to tr('Delete event'), @event, :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-danger'
+.wrapper
+  .pull-right= link_to tr('Delete event'), @event, :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-danger'
 
-h1= tr('Edit event')
+  h1= tr('Edit event')
 
-= render 'form', :url => @event
+  = render 'form', :url => @event
+
+  hr
+
+  h3= tr('Questions')
+
+  - @event.questions.each do |question|
+    p
+      =' question.question
+      = link_to tr('Delete question'), question, :method => :delete, :remote => true, :confirm => 'Biztosan törlöd?'
+
+  = semantic_form_for Question.new, :url => event_questions_path(@event), :remote => true do |f|
+    = f.inputs :question, :label => trl('Add new question')
+    = f.actions

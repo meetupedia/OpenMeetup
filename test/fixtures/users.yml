@@ -1,3 +1,7 @@
 one:
-  name: 'Nagy Bence'
-  permalink: 'nagy-bence'
+  name: Nagy Bence
+  email: meetupedia@meetupedia.com
+  password_salt: <%= salt = Authlogic::Random.hex_token %>
+  crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt('secret' + salt) %>
+  persistence_token: <%= Authlogic::Random.hex_token %>
+  single_access_token: <%= Authlogic::Random.friendly_token %>

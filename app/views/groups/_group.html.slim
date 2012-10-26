@@ -11,4 +11,4 @@
     p= render group.tags.order('name ASC')
     = render 'groups/tile_menu', :group => group
     - if event = group.next_event
-      = render 'groups/next_event', :event => event
+      .next_event= render 'groups/next_event', :event => event

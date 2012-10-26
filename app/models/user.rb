@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   key :notifications_count, :as => :integer, :default => 0
   key :last_notified, :as => :datetime
   timestamps
+  key :settings, :as => :binary
   key :memberships_count, :as => :integer, :default => 0
 
   belongs_to :city
@@ -46,6 +47,8 @@ class User < ActiveRecord::Base
   has_many :waves, :through => :wave_memberships
 
   serialize :facebook_friend_ids
+  store :settings, :accessors => [:facebook_friends]
+
   acts_as_authentic do |c|
     c.validate_email_field = false
     c.validate_password_field = false
@@ -116,6 +119,10 @@ class User < ActiveRecord::Base
     User.joins('INNER JOIN user_follows ON user_follows.followed_user_id = users.id').where('user_follows.user_id' => 1)
   end
 
+  def followed_user_ids
+    followed_users.map(&:id)
+  end
+
   def connect_facebook_friends
     Authentication.where(:provider => 'facebook', :uid => facebook_friend_ids).includes(:user).map(&:user).each do |user|
       follow(user)
@@ -128,6 +135,22 @@ class User < ActiveRecord::Base
       memberships.count * 10 +
       memberships(:is_admin => true) * 40
     update_column :karma, karma
+  end
+
+  def get_joined_events_in_next_week(limit = 3)
+    Event.joins(:participations).where('participations.user_id' => self.id).where('events.start_time > ? AND events.end_time < ?', Time.now, 1.week.from_now).order('start_time ASC').group('events.id').limit(limit)
+  end
+
+  def get_events_with_friends_in_next_week(limit = 3)
+    Event.joins(:participations).where('participations.user_id' => followed_user_ids).where('events.start_time > ? AND events.end_time < ?', Time.now, 1.week.from_now).order('start_time ASC').group('events.id').limit(limit)
+  end
+
+  def friends_in_event(event)
+    event.participants.where('users.id' => followed_user_ids)
+  end
+
+  def friends_in_group(group)
+    group.members.where('users.id' => followed_user_ids)
   end
 
   if Settings.customization == 'get2gather'

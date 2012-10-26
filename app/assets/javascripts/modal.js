@@ -77,6 +77,17 @@ modalbox = {
     $('div.modal-window').last().attr('rel', href)
   },
 
+  reload: function(){
+    lastWindow = $('div.modal-window').last()
+    if (lastWindow.length){
+      $('#overlay').fadeIn(1000)
+      href = lastWindow.attr('rel')
+      modalbox.load(href, function(){ $('#overlay').hide() })
+    } else {
+      window.reloadPage()
+    }
+  },
+
   reloadParent: function(){
     parentWindow = $('div.modal-window').eq(-2)
     if (parentWindow.length){
