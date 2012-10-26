@@ -7,14 +7,14 @@
         h2= tr('Connections')
         - if authentication = current_user.authenticated_with(:facebook)
           - if current_user.authentications.size > 1
-            p= link_to tr('Disconnect Facebook'), authentication, :method => :delete, :confirm => tr('Are you sure?')
+            p= link_to tr('Disconnect Facebook'), authentication, :method => :delete, :confirm => trl('Are you sure?')
           - else
             p= tr('Connected with Facebook')
         - else
           p.facebook_connect= link_to image_tag('facebook_connect.png', :alt => tr('Sign in with Facebook')), auth_path(:facebook)
         - if authentication = current_user.authenticated_with(:twitter)
           - if current_user.authentications.size > 1
-            p= link_to tr('Disconnect Twitter'), authentication, :method => :delete, :confirm => tr('Are you sure?')
+            p= link_to tr('Disconnect Twitter'), authentication, :method => :delete, :confirm => trl('Are you sure?')
           - else
             p= tr('Connected with Twitter')
         - else
