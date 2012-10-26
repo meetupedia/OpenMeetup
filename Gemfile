@@ -39,6 +39,7 @@ gem 'tr8n', :git => 'git://github.com/berk/tr8n.git'
 gem 'roadie'
 gem 'mail_view'
 gem 'exception_notification'
+gem 'hirb'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
