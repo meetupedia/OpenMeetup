@@ -49,6 +49,10 @@ class EventsController < CommonController
   def map
   end
 
+  def participations
+    @participations = @event.participations.includes(:user, {:answers => :question})
+  end
+
   def users
     @participations = @event.participations.includes(:user).paginate :page => params[:page]
   end

@@ -8,6 +8,7 @@ class Participation < ActiveRecord::Base
 
   has_many :activities, :as => :activable, :dependent => :destroy
   has_many :answers, :dependent => :destroy
+  accepts_nested_attributes_for :answers
 end
 
 Participation.auto_upgrade!
