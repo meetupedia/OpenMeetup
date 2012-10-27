@@ -9,11 +9,12 @@
 
   h3= tr('Questions')
 
-  - @event.questions.each do |question|
+  - @event.questions.order('id ASC').each do |question|
     p
       =' question.question
       = link_to tr('Delete question'), question, :method => :delete, :remote => true, :confirm => 'Biztosan törlöd?'
 
   = semantic_form_for Question.new, :url => event_questions_path(@event), :remote => true do |f|
-    = f.inputs :question, :label => trl('Add new question')
+    = f.inputs do
+      = f.input :question, :label => trl('Add new question')
     = f.actions

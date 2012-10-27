@@ -12,7 +12,7 @@ class Ability
 
       can :create, Comment
 
-      can [:create, :update, :destroy], Event do |event|
+      can [:create, :update, :destroy, :participations], Event do |event|
         event.group.admins.include?(current_user) or current_user.is_admin?
       end
       can :invited, Event do |event|
@@ -57,7 +57,7 @@ class Ability
       can [:index, :destroy], Notification
 
       can [:create, :set], Participation
-      can :destroy, Participation do |participation|
+      can [:update, :destroy], Participation do |participation|
         participation.user_id == current_user.id or participation.event.group.admins.include?(current_user)
       end
 

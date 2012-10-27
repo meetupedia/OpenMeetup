@@ -28,6 +28,7 @@ Openmeetup::Application.routes.draw do
         get :images
         get :invited
         get :map
+        get :participations
         get :users
       end
       resources :absences, :shallow => true do
