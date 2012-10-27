@@ -2,6 +2,10 @@
 
 .row
   .span4
+    - if @user.facebook_id
+      .wrapper.center
+        = link_to(image_tag("https://graph.facebook.com/#{@user.facebook_id}/picture?type=large", :alt => @user.name, :title => @user.name, :class => 'avatar_image'), @user)
+
     .wrapper
       ul.tiles
         li= link_to "<span class='menu_count'>#{@user.memberships.size}</span> #{tr('groups')}".html_safe, groups_user_path(@user)
