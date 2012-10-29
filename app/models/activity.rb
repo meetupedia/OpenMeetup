@@ -7,6 +7,7 @@ class Activity < ActiveRecord::Base
   belongs_to :event
   belongs_to :group
   belongs_to :user
+  has_many :notification, :dependent => :destroy
 
   def self.create_from(item, current_user, group, event = nil)
     activity = Activity.create :activable_type => item.class.name, :activable_id => item.id, :user => current_user, :group => group, :event => event
