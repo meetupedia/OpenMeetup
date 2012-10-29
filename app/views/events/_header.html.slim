@@ -10,9 +10,10 @@
         ul.dropdown-menu
           - if can? :edit, @event
             li= link_to t('event.edit'), edit_event_path(@event), :rel => 'modal'
-            li= link_to tr('Delete event'), @event, :method => :delete
           li= link_to tr('Invite friends'), new_event_event_invitation_path(@event), :rel => 'modal'
           li= link_to tr('Invite all group members'), new_event_event_invitation_path(@event, :invite_members => true), :rel => 'modal'
+          - if can? :delete, @event
+            li= link_to tr('Delete event'), @event, :method => :delete, :confirm => trl('Are you sure?')
       - absence = @event.absence_for(current_user)
       - participation = @event.participation_for(current_user)
       - if absence
