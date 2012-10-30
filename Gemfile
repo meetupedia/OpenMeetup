@@ -35,7 +35,6 @@ gem 'fancybox-rails'
 gem 'turbolinks'
 gem 'kaminari'
 gem 'will_filter'
-gem 'tr8n', :git => 'git://github.com/berk/tr8n.git'
 gem 'roadie'
 gem 'mail_view'
 gem 'exception_notification'
@@ -56,10 +55,11 @@ end
 
 group :production do
   gem 'newrelic_rpm'
+  gem 'tr8n', :git => 'git://github.com/berk/tr8n.git'
 end
 
 group :test do
-  gem 'rspec-rails'
   # gem 'factory_girl'
-  gem 'watchr'
+  # gem 'rspec-rails'
+  # gem 'watchr'
 end
