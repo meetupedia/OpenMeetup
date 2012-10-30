@@ -11,7 +11,7 @@
               i.icon-chevron-down
             = render event
       - else
-        p.muted= 'No participations for the next week.'
+        p.muted= tr('No participations for the next week.')
     .wrapper
       h2= tr('Your friends will be at')
       - if (events = @user.get_events_with_friends_in_next_week.all).present?
@@ -22,4 +22,4 @@
               i.icon-chevron-down
             = render event
       - else
-        p.muted= 'No friends in events in the next week.'
+        p.muted= tr('No friends in events in the next week.')

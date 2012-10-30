@@ -1,3 +1,24 @@
+@media all and (min-width: 1025px)
+  .container
+    max-width: 940px
+    .row
+      .span4
+        margin-left: 30px
+        max-width: 310px
+      .span8
+        margin-left: 30px
+        max-width: 600px
+        .row
+          margin-left: -30px
+          .span4
+            margin-left: 30px
+            max-width: 310px
+      .span12
+        margin-left: 30px
+        max-width: 940px
+  #content
+    padding: 70px 0 20px 0
+
 body
   background: #d7dfe7
   font: normal 12px/18px Verdana, Arial, sans-serif
@@ -74,7 +95,6 @@ div.group.list_item
 
 #content
   background: #efeff7
-  padding: 70px 0 20px 0
 
 #footer
   border-top: 1px solid #efeff7
@@ -475,7 +495,7 @@ ul.tiles
 .icon-container
   padding-left: 15px
 
-#layout_users_calendar
+#layout_users_calendar, #layout_cities_show
   .next_event
     display: none
 

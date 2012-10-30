@@ -3,13 +3,25 @@
     = f.input :title
     = f.input :start_time
     = f.input :end_time
+    .control-group
+      = f.label :city_id, tr('City')
+      = f.text_field :city_id, 'data-pre' => [@event.city].compact.map { |city| {:id => city.id, :name => city.name} }.to_json
     = f.input :place
-    = f.input :city
     = f.input :street
   p= link_to_function tr('More options'), "$('#more-options').toggle()", :class => 'function'
   #more-options
     = f.inputs do
       = f.input :description
-  = f.actions
-    = f.action :submit, :label => tr('Save')
-    = f.action :cancel, :label => tr('Cancel')
+  = f.actions do
+    =' f.action :submit, :label => 'Save'
+    = f.action :cancel, :label => 'Cancel'
+
+javascript:
+  $('#event_city_id').tokenInput('/cities.json', {
+    allowFreeTagging: true,
+    crossDomain: false,
+    preventDuplicates: true,
+    prePopulate: $('#event_city_id').data('pre'),
+    tokenLimit: 1,
+    theme: 'facebook'
+  })

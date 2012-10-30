@@ -1,0 +1,13 @@
+.wrapper
+  h1
+    =' tr('Next events:')
+    = @city.name
+  - if (events = Event.joins(:group => :city).where('cities.id' => @city.id).where('start_time > ?', Time.zone.now).order('start_time ASC').all).present?
+    - events.each do |event|
+      .list_view
+        = render event.group
+        .icon-container
+          i.icon-chevron-down
+        = render event
+  - else
+    p.muted= 'No events.'
