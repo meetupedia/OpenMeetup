@@ -16,8 +16,9 @@ class Event < ActiveRecord::Base
   key :end_time, :as => :datetime
   timestamps
 
-  belongs_to :user
+  belongs_to :city
   belongs_to :group
+  belongs_to :user
   has_many :absences, :dependent => :destroy
   has_many :absents, :through => :absences, :source => :user
   has_many :activities, :dependent => :destroy
@@ -54,7 +55,7 @@ class Event < ActiveRecord::Base
   end
 
   def gmaps4rails_address
-    @gmaps4rails_address ||= [self.street, self.city].select(&:present?).join(', ')
+    @gmaps4rails_address ||= [self.street, self.city.andand.name].select(&:present?).join(', ')
   end
 
   def participation_for(user)

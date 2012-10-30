@@ -23,6 +23,12 @@ class ApplicationController < ActionController::Base
 
 private
 
+  if Rails.env == 'development'
+    def tr(text)
+      text
+    end
+  end
+
   def run_later
     Thread.new do
       yield
@@ -88,7 +94,7 @@ private
 
   def current_city
     return @current_city if defined?(@current_city)
-    @current_city = current_user.andand.city
+    @current_city = current_user.andand.city || City.first
   end
 
   def current_user_session

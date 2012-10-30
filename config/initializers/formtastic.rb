@@ -97,10 +97,12 @@ module FormtasticBootstrap
         end
       end
 
-      module Labelling
+      if Rails.env == 'production'
+        module Labelling
 
-        def localized_label
-          Tr8n::Config.current_language.tr(label_from_options || method.to_s.send(FormBuilder.label_str_method))
+          def localized_label
+            Tr8n::Config.current_language.tr(label_from_options || method.to_s.send(FormBuilder.label_str_method))
+          end
         end
       end
     end

@@ -16,7 +16,7 @@
 
   = semantic_form_for Question.new, :url => event_questions_path(@event), :remote => true do |f|
     = f.inputs do
-      = f.input :question, :label => trl('Add new question')
-    = f.actions
-      = f.action :submit, :label => tr('Save')
-      = f.action :cancel, :label => tr('Cancel')
+      = f.input :question, :label => 'Add new question'
+    = f.actions do
+      =' f.action :submit, :label => 'Save'
+      = f.action :cancel, :label => 'Cancel'
