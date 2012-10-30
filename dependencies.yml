@@ -1,0 +1,2719 @@
+---
+- name: rake
+  source: bundle
+  version: 0.9.2.2
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194@global/gems/rake-0.9.2.2/MIT-LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194@global/gems/rake-0.9.2.2/README.rdoc
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194@global/gems/rake-0.9.2.2/README.rdoc
+  bundler_groups: []
+  summary: Ruby based make-like utility.
+  description: Rake is a Make-like program implemented in Ruby. Tasks and dependencies
+    arespecified in standard Ruby syntax.
+  homepage: http://rake.rubyforge.org
+  children:
+  - minitest
+  parents:
+  - multi_json
+  - rack
+  - sprockets
+  - treetop
+  - addressable
+  - attr_required
+  - authlogic
+  - cocaine
+  - execjs
+  - thor
+  - railties
+  - commonjs
+  - css_parser
+  - faraday
+  - rack-oauth2
+  - fb_graph
+  - formtastic
+  - paper_trail
+  - hashie
+  - kaminari
+  - less
+  - libv8
+  - license_finder
+  - mysql2
+  - nokogiri
+  - oauth
+  - oauth2
+  - omniauth
+  - omniauth-facebook
+  - paperclip
+  - rails_config
+  - temple
+  - slim
+  - therubyracer
+- name: i18n
+  source: bundle
+  version: 0.6.1
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/i18n-0.6.1/MIT-LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/i18n-0.6.1/README.textile
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/i18n-0.6.1/README.textile
+  bundler_groups: []
+  summary: New wave Internationalization support for Ruby
+  description: New wave Internationalization support for Ruby.
+  homepage: http://github.com/svenfuchs/i18n
+  children:
+  - activesupport
+  - sqlite3
+  - mocha
+  - test_declarative
+  parents:
+  - activesupport
+  - treetop
+  - mail
+  - rack-oauth2
+  - rails-i18n
+- name: multi_json
+  source: bundle
+  version: 1.3.6
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/multi_json-1.3.6/LICENSE.md
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/multi_json-1.3.6/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/multi_json-1.3.6/README.md
+  bundler_groups: []
+  summary: A gem to provide swappable JSON backends.
+  description: A gem to provide easy switching between different JSON backends, including
+    Oj, Yajl, the JSON gem (with C-extensions), the pure-Ruby JSON gem, and OkJson.
+  homepage: http://github.com/intridea/multi_json
+  children:
+  - rake
+  - rdoc
+  - rspec
+  - simplecov
+  parents:
+  - activesupport
+  - execjs
+  - rack-oauth2
+  - jwt
+  - oauth2
+  - omniauth-twitter
+  - uglifier
+- name: activesupport
+  source: bundle
+  version: 3.2.8
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.8/MIT-LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.8/README.rdoc
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.8/README.rdoc
+  bundler_groups: []
+  summary: A toolkit of support libraries and Ruby core extensions extracted from
+    the Rails framework.
+  description: A toolkit of support libraries and Ruby core extensions extracted from
+    the Rails framework. Rich support for multibyte strings, internationalization,
+    time zones, and testing.
+  homepage: http://www.rubyonrails.org
+  children:
+  - i18n
+  - multi_json
+  parents:
+  - i18n
+  - activemodel
+  - actionpack
+  - treetop
+  - activerecord
+  - activeresource
+  - authlogic
+  - railties
+  - rack-oauth2
+  - rails
+  - kaminari
+  - paperclip
+  - rails_config
+- name: builder
+  source: bundle
+  version: 3.0.3
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/builder-3.0.3/MIT-LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/builder-3.0.3/README.rdoc
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/builder-3.0.3/README.rdoc
+  bundler_groups: []
+  summary: Builders for MarkUp.
+  description: ! 'Builder provides a number of builder objects that make creating
+    structured data
+
+    simple to do.  Currently the following builder objects are supported:
+
+
+    * XML Markup
+
+    * XML Events
+
+'
+  homepage: http://onestepback.org
+  children: []
+  parents:
+  - activemodel
+  - tilt
+  - actionpack
+  - slim
+- name: activemodel
+  source: bundle
+  version: 3.2.8
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/activemodel-3.2.8/MIT-LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/activemodel-3.2.8/README.rdoc
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/activemodel-3.2.8/README.rdoc
+  bundler_groups: []
+  summary: A toolkit for building modeling frameworks (part of Rails).
+  description: A toolkit for building modeling frameworks like Active Record and Active
+    Resource. Rich support for attributes, callbacks, validations, observers, serialization,
+    internationalization, and testing.
+  homepage: http://www.rubyonrails.org
+  children:
+  - activesupport
+  - builder
+  parents:
+  - actionpack
+  - activerecord
+  - activeresource
+  - globalize3
+- name: erubis
+  source: bundle
+  version: 2.7.0
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/erubis-2.7.0/MIT-LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/erubis-2.7.0/doc-api/files/README_txt.html
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/erubis-2.7.0/README.txt
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/erubis-2.7.0/doc-api/files/README_txt.html
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/erubis-2.7.0/README.txt
+  bundler_groups: []
+  summary: a fast and extensible eRuby implementation which supports multi-language
+  description: ! "  Erubis is an implementation of eRuby and has the following features:\n\n
+    \ * Very fast, almost three times faster than ERB and about 10% faster than eruby.\n
+    \ * Multi-language support (Ruby/PHP/C/Java/Scheme/Perl/Javascript)\n  * Auto
+    escaping support\n  * Auto trimming spaces around '<% %>'\n  * Embedded pattern
+    changeable (default '<% %>')\n  * Enable to handle Processing Instructions (PI)
+    as embedded pattern (ex. '<?rb ... ?>')\n  * Context object available and easy
+    to combine eRuby template with YAML datafile\n  * Print statement available\n
+    \ * Easy to extend and customize in subclass\n  * Ruby on Rails support\n"
+  homepage: http://www.kuwata-lab.com/erubis/
+  children: []
+  parents:
+  - tilt
+  - actionpack
+- name: journey
+  source: bundle
+  version: 1.0.4
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/journey-1.0.4/README.rdoc
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/journey-1.0.4/README.rdoc
+  bundler_groups: []
+  summary: Journey is a router
+  description: Journey is a router.  It routes requests.
+  homepage: http://github.com/rails/journey
+  children:
+  - minitest
+  - racc
+  - rdoc
+  - json
+  - rdoc
+  - hoe
+  parents:
+  - actionpack
+- name: rack
+  source: bundle
+  version: 1.4.1
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/rack-1.4.1/COPYING
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/rack-1.4.1/README.rdoc
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/rack-1.4.1/README.rdoc
+  bundler_groups: []
+  summary: a modular Ruby webserver interface
+  description: ! 'Rack provides a minimal, modular and adaptable interface for developing
+
+    web applications in Ruby.  By wrapping HTTP requests and responses in
+
+    the simplest way possible, it unifies and distills the API for web
+
+    servers, web frameworks, and software in between (the so-called
+
+    middleware) into a single method call.
+
+
+    Also see http://rack.rubyforge.org.
+
+'
+  homepage: http://rack.rubyforge.org
+  children:
+  - bacon
+  - rake
+  - ruby-fcgi
+  - memcache-client
+  - mongrel
+  - thin
+  parents:
+  - rack-cache
+  - rack-test
+  - sprockets
+  - actionpack
+  - rack-ssl
+  - rack-oauth2
+  - oauth
+  - oauth2
+  - omniauth
+- name: rack-cache
+  source: bundle
+  version: '1.2'
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/rack-cache-1.2/COPYING
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/rack-cache-1.2/README
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/rack-cache-1.2/README
+  bundler_groups: []
+  summary: HTTP Caching for Rack
+  description: Rack::Cache is suitable as a quick drop-in component to enable HTTP
+    caching for Rack-based applications that produce freshness (Expires, Cache-Control)
+    and/or validation (Last-Modified, ETag) information.
+  homepage: http://tomayko.com/src/rack-cache/
+  children:
+  - rack
+  - bacon
+  - memcached
+  - dalli
+  parents:
+  - actionpack
+- name: rack-test
+  source: bundle
+  version: 0.6.2
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/rack-test-0.6.2/MIT-LICENSE.txt
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/rack-test-0.6.2/README.rdoc
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/rack-test-0.6.2/README.rdoc
+  bundler_groups: []
+  summary: Simple testing API built on Rack
+  description: ! 'Rack::Test is a small, simple testing API for Rack apps. It can
+    be used on its
+
+    own or as a reusable starting point for Web frameworks and testing libraries
+
+    to build on. Most of its initial functionality is an extraction of Merb 1.0''s
+
+    request helpers feature.'
+  homepage: http://github.com/brynary/rack-test
+  children:
+  - rack
+  parents:
+  - sprockets
+  - actionpack
+  - omniauth
+  - omniauth-oauth2
+  - omniauth-oauth
+  - omniauth-twitter
+- name: hike
+  source: bundle
+  version: 1.2.1
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/hike-1.2.1/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/hike-1.2.1/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/hike-1.2.1/README.md
+  bundler_groups: []
+  summary: Find files in a set of paths
+  description: A Ruby library for finding files in a set of paths.
+  homepage: http://github.com/sstephenson/hike
+  children: []
+  parents:
+  - sprockets
+- name: tilt
+  source: bundle
+  version: 1.3.3
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/tilt-1.3.3/COPYING
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/tilt-1.3.3/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/tilt-1.3.3/README.md
+  bundler_groups: []
+  summary: Generic interface to multiple Ruby template engines
+  description: Generic interface to multiple Ruby template engines
+  homepage: http://github.com/rtomayko/tilt/
+  children:
+  - contest
+  - builder
+  - erubis
+  - haml
+  - sass
+  - rdiscount
+  - liquid
+  - less
+  - radius
+  - nokogiri
+  - markaby
+  - coffee-script
+  - bluecloth
+  - RedCloth
+  - maruku
+  - creole
+  - kramdown
+  - redcarpet
+  - creole
+  - yajl-ruby
+  - wikicloth
+  - redcarpet
+  - kramdown
+  parents:
+  - sprockets
+  - mail_view
+  - sass-rails
+  - temple
+  - slim
+- name: sprockets
+  source: bundle
+  version: 2.1.3
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/sprockets-2.1.3/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/sprockets-2.1.3/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/sprockets-2.1.3/README.md
+  bundler_groups: []
+  summary: Rack-based asset packaging system
+  description: Sprockets is a Rack-based asset packaging system that concatenates
+    and serves JavaScript, CoffeeScript, CSS, LESS, Sass, and SCSS.
+  homepage: http://getsprockets.org/
+  children:
+  - hike
+  - rack
+  - tilt
+  - coffee-script
+  - eco
+  - ejs
+  - execjs
+  - json
+  - rack-test
+  - rake
+  parents:
+  - actionpack
+  - roadie
+- name: actionpack
+  source: bundle
+  version: 3.2.8
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.8/MIT-LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.8/README.rdoc
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.8/README.rdoc
+  bundler_groups: []
+  summary: Web-flow and rendering framework putting the VC in MVC (part of Rails).
+  description: Web apps on Rails. Simple, battle-tested conventions for building and
+    testing MVC web applications. Works with any Rack-compatible server.
+  homepage: http://www.rubyonrails.org
+  children:
+  - activesupport
+  - activemodel
+  - rack-cache
+  - builder
+  - rack
+  - rack-test
+  - journey
+  - sprockets
+  - erubis
+  - tzinfo
+  parents:
+  - actionmailer
+  - railties
+  - fb_graph
+  - formtastic
+  - rails
+  - kaminari
+  - less-rails
+  - oauth
+- name: mime-types
+  source: bundle
+  version: '1.19'
+  license: ruby
+  license_url: http://www.ruby-lang.org/en/LICENSE.txt
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/mime-types-1.19/Licence.rdoc
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/mime-types-1.19/README.rdoc
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/mime-types-1.19/README.rdoc
+  bundler_groups:
+  - :default
+  summary: This library allows for the identification of a file's likely MIME content
+    type
+  description: ! 'This library allows for the identification of a file''s likely MIME
+    content
+
+    type. This is release 1.19 with new MIME types. The identification of MIME
+
+    content type is based on a file''s filename extensions.
+
+
+    MIME::Types for Ruby was originally based on and synchronized with MIME::Types
+
+    for Perl by Mark Overmeer, copyright 2001 - 2009. As of version 1.15, the data
+
+    format for the MIME::Type list has changed and the synchronization will no
+
+    longer happen.
+
+
+    :include: Licence.rdoc'
+  homepage: http://mime-types.rubyforge.org/
+  children:
+  - rubyforge
+  - minitest
+  - rdoc
+  - nokogiri
+  - hoe-doofus
+  - hoe-gemspec
+  - hoe-git
+  - hoe-seattlerb
+  - hoe
+  parents:
+  - mail
+  - paperclip
+- name: polyglot
+  source: bundle
+  version: 0.3.3
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/polyglot-0.3.3/License.txt
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/polyglot-0.3.3/README.txt
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/polyglot-0.3.3/README.txt
+  bundler_groups: []
+  summary: Augment 'require' to load non-Ruby file types
+  description: ! '
+
+    The Polyglot library allows a Ruby module to register a loader
+
+    for the file type associated with a filename extension, and it
+
+    augments ''require'' to find and load matching files.'
+  homepage: http://github.com/cjheath/polyglot
+  children: []
+  parents:
+  - treetop
+  - treetop
+- name: treetop
+  source: bundle
+  version: 1.4.10
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/treetop-1.4.10/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/treetop-1.4.10/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/treetop-1.4.10/README.md
+  bundler_groups: []
+  summary: A Ruby-based text parsing and interpretation DSL
+  description: 
+  homepage: http://functionalform.blogspot.com
+  children:
+  - polyglot
+  - jeweler
+  - activesupport
+  - i18n
+  - rr
+  - rspec
+  - rake
+  - polyglot
+  parents:
+  - mail
+- name: mail
+  source: bundle
+  version: 2.4.4
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/mail-2.4.4/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/mail-2.4.4/README.md
+  bundler_groups: []
+  summary: Mail provides a nice Ruby DSL for making, sending and reading emails.
+  description: A really Ruby Mail handler.
+  homepage: http://github.com/mikel/mail
+  children:
+  - mime-types
+  - treetop
+  - i18n
+  parents:
+  - actionmailer
+- name: actionmailer
+  source: bundle
+  version: 3.2.8
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/actionmailer-3.2.8/MIT-LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/actionmailer-3.2.8/README.rdoc
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/actionmailer-3.2.8/README.rdoc
+  bundler_groups: []
+  summary: Email composition, delivery, and receiving framework (part of Rails).
+  description: Email on Rails. Compose, deliver, receive, and test emails using the
+    familiar controller/view pattern. First-class support for multipart email and
+    attachments.
+  homepage: http://www.rubyonrails.org
+  children:
+  - actionpack
+  - mail
+  parents:
+  - exception_notification
+  - rails
+  - roadie
+- name: arel
+  source: bundle
+  version: 3.0.2
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/arel-3.0.2/MIT-LICENSE.txt
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/arel-3.0.2/README.markdown
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/arel-3.0.2/README.markdown
+  bundler_groups: []
+  summary: Arel is a SQL AST manager for Ruby
+  description: ! 'Arel is a SQL AST manager for Ruby. It
+
+
+    1. Simplifies the generation of complex SQL queries
+
+    2. Adapts to various RDBMS systems
+
+
+    It is intended to be a framework framework; that is, you can build your own ORM
+
+    with it, focusing on innovative object and collection modeling as opposed to
+
+    database compatibility and query generation.'
+  homepage: http://github.com/rails/arel
+  children:
+  - minitest
+  - rdoc
+  - hoe
+  parents:
+  - activerecord
+- name: tzinfo
+  source: bundle
+  version: 0.3.33
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/tzinfo-0.3.33/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/tzinfo-0.3.33/README
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/tzinfo-0.3.33/README
+  bundler_groups: []
+  summary: Daylight-savings aware timezone library
+  description: TZInfo is a Ruby library that uses the standard tz (Olson) database
+    to provide daylight savings aware transformations between times in different time
+    zones.
+  homepage: http://tzinfo.rubyforge.org/
+  children: []
+  parents:
+  - actionpack
+  - activerecord
+  - fb_graph
+  - formtastic
+  - kaminari
+- name: activerecord
+  source: bundle
+  version: 3.2.8
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/activerecord-3.2.8/MIT-LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/activerecord-3.2.8/README.rdoc
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/activerecord-3.2.8/README.rdoc
+  bundler_groups: []
+  summary: Object-relational mapper framework (part of Rails).
+  description: Databases on Rails. Build a persistent domain model by mapping database
+    tables to Ruby classes. Strong conventions for associations, validations, aggregations,
+    migrations, and testing come baked-in.
+  homepage: http://www.rubyonrails.org
+  children:
+  - activesupport
+  - activemodel
+  - arel
+  - tzinfo
+  parents:
+  - authlogic
+  - rails
+  - paper_trail
+  - globalize3
+  - mini_record
+  - mysql2
+  - paperclip
+- name: activeresource
+  source: bundle
+  version: 3.2.8
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/activeresource-3.2.8/MIT-LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/activeresource-3.2.8/README.rdoc
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/activeresource-3.2.8/README.rdoc
+  bundler_groups: []
+  summary: REST modeling framework (part of Rails).
+  description: REST on Rails. Wrap your RESTful web app with Ruby classes and work
+    with them like Active Record models.
+  homepage: http://www.rubyonrails.org
+  children:
+  - activesupport
+  - activemodel
+  parents:
+  - rails
+- name: addressable
+  source: bundle
+  version: 2.3.2
+  license: Apache 2.0
+  license_url: http://www.apache.org/licenses/LICENSE-2.0.txt
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/addressable-2.3.2/LICENSE.txt
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/addressable-2.3.2/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/addressable-2.3.2/README.md
+  bundler_groups: []
+  summary: URI Implementation
+  description: ! 'Addressable is a replacement for the URI implementation that is
+    part of
+
+    Ruby''s standard library. It more closely conforms to the relevant RFCs and
+
+    adds support for IRIs and URI templates.
+
+'
+  homepage: http://addressable.rubyforge.org/
+  children:
+  - rake
+  - rspec
+  - launchy
+  parents:
+  - css_parser
+  - oauth2
+- name: andand
+  source: bundle
+  version: 1.3.3
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/andand-1.3.3/License.txt
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/andand-1.3.3/README.textile
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/andand-1.3.3/README.textile
+  bundler_groups:
+  - :default
+  summary: The Maybe Monad in idiomatic Ruby
+  description: ! ' Maybe Monad in idiomatic Ruby.'
+  homepage: http://github.com/raganwald/andand/
+  children: []
+  parents: []
+- name: attr_required
+  source: bundle
+  version: 0.0.5
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/attr_required-0.0.5/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/attr_required-0.0.5/README.rdoc
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/attr_required-0.0.5/README.rdoc
+  bundler_groups: []
+  summary: attr_required and attr_optional
+  description: attr_required and attr_optional
+  homepage: http://github.com/nov/attr_required
+  children:
+  - rake
+  - rcov
+  - rspec
+  parents:
+  - rack-oauth2
+- name: authlogic
+  source: bundle
+  version: 3.1.3
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/authlogic-3.1.3/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/authlogic-3.1.3/README.rdoc
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/authlogic-3.1.3/README.rdoc
+  bundler_groups:
+  - :default
+  summary: A clean, simple, and unobtrusive ruby authentication solution.
+  description: A clean, simple, and unobtrusive ruby authentication solution.
+  homepage: http://github.com/binarylogic/authlogic
+  children:
+  - activerecord
+  - activesupport
+  - rake
+  - bcrypt-ruby
+  - sqlite3
+  parents: []
+- name: will_paginate
+  source: bundle
+  version: 3.0.3
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/will_paginate-3.0.3/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/will_paginate-3.0.3/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/will_paginate-3.0.3/README.md
+  bundler_groups:
+  - :default
+  summary: Pagination plugin for web frameworks and other apps
+  description: will_paginate provides a simple API for performing paginated queries
+    with Active Record, DataMapper and Sequel, and includes helpers for rendering
+    pagination links in Rails, Sinatra and Merb web apps.
+  homepage: https://github.com/mislav/will_paginate/wiki
+  children: []
+  parents:
+  - bootstrap-will_paginate
+- name: bootstrap-will_paginate
+  source: bundle
+  version: 0.0.9
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/bootstrap-will_paginate-0.0.9/MIT-LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/bootstrap-will_paginate-0.0.9/README.markdown
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/bootstrap-will_paginate-0.0.9/README.markdown
+  bundler_groups:
+  - :default
+  summary: Format will_paginate html to match Twitter Bootstrap styling.
+  description: Hooks into will_paginate to format the html to match Twitter Bootstrap
+    styling.  Extension code was originally written by Isaac Bowen (https://gist.github.com/1182136).
+  homepage: http://ndfine.com/2011/12/17/twitter-bootstrap-will-paginate.html
+  children:
+  - will_paginate
+  parents: []
+- name: bundler
+  source: bundle
+  version: 1.1.5
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.5/lib/bundler/templates/newgem/LICENSE.tt
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.5/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.5/lib/bundler/templates/newgem/README.md.tt
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.5/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.5/lib/bundler/templates/newgem/README.md.tt
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194@global/gems/bundler-1.1.5/README.md
+  bundler_groups: []
+  summary: The best way to manage your application's dependencies
+  description: Bundler manages an application's dependencies through its entire life,
+    across many machines, systematically and repeatably
+  homepage: http://gembundler.com
+  children:
+  - ronn
+  - rspec
+  parents:
+  - thor
+  - fancybox-rails
+  - rails
+  - formtastic-bootstrap
+  - kaminari
+  - libv8
+  - license_finder
+  - paperclip
+  - will_filter
+  - tr8n
+  - uglifier
+- name: cancan
+  source: bundle
+  version: 1.6.8
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/cancan-1.6.8/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/cancan-1.6.8/README.rdoc
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/cancan-1.6.8/spec/README.rdoc
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/cancan-1.6.8/README.rdoc
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/cancan-1.6.8/spec/README.rdoc
+  bundler_groups:
+  - :default
+  summary: Simple authorization solution for Rails.
+  description: Simple authorization solution for Rails which is decoupled from user
+    roles. All permissions are stored in a single location.
+  homepage: http://github.com/ryanb/cancan
+  children:
+  - rspec
+  - rails
+  - rr
+  - supermodel
+  parents: []
+- name: cocaine
+  source: bundle
+  version: 0.3.2
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/cocaine-0.3.2/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/cocaine-0.3.2/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/cocaine-0.3.2/README.md
+  bundler_groups: []
+  summary: A small library for doing (command) lines
+  description: A small library for doing (command) lines
+  homepage: http://github.com/thoughtbot/cocaine
+  children:
+  - rspec
+  - bourne
+  - mocha
+  - rake
+  - posix-spawn
+  parents:
+  - paperclip
+  - paperclip
+- name: execjs
+  source: bundle
+  version: 1.4.0
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/execjs-1.4.0/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/execjs-1.4.0/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/execjs-1.4.0/README.md
+  bundler_groups: []
+  summary: Run JavaScript code from Ruby
+  description: ExecJS lets you run JavaScript code from Ruby.
+  homepage: https://github.com/sstephenson/execjs
+  children:
+  - multi_json
+  - rake
+  parents:
+  - sprockets
+  - coffee-script
+  - uglifier
+- name: coffee-script
+  source: bundle
+  version: 2.2.0
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/coffee-script-2.2.0/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/coffee-script-2.2.0/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/coffee-script-2.2.0/README.md
+  bundler_groups: []
+  summary: Ruby CoffeeScript Compiler
+  description: ! '    Ruby CoffeeScript is a bridge to the JS CoffeeScript compiler.
+
+'
+  homepage: http://github.com/josh/ruby-coffee-script
+  children:
+  - coffee-script-source
+  - execjs
+  parents:
+  - tilt
+  - sprockets
+  - coffee-rails
+- name: rack-ssl
+  source: bundle
+  version: 1.3.2
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/rack-ssl-1.3.2/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/rack-ssl-1.3.2/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/rack-ssl-1.3.2/README.md
+  bundler_groups: []
+  summary: Force SSL/TLS in your app.
+  description: ! '    Rack middleware to force SSL/TLS.
+
+'
+  homepage: https://github.com/josh/rack-ssl
+  children:
+  - rack
+  parents:
+  - railties
+- name: json
+  source: bundle
+  version: 1.7.5
+  license: ruby
+  license_url: http://www.ruby-lang.org/en/LICENSE.txt
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/json-1.7.5/COPYING
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/json-1.7.5/COPYING-json-jruby
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/json-1.7.5/README-json-jruby.markdown
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/json-1.7.5/README.rdoc
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/json-1.7.5/README-json-jruby.markdown
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/json-1.7.5/README.rdoc
+  bundler_groups:
+  - :default
+  summary: JSON Implementation for Ruby
+  description: This is a JSON implementation as a Ruby extension in C.
+  homepage: http://flori.github.com/json
+  children:
+  - permutation
+  - sdoc
+  parents:
+  - journey
+  - sprockets
+  - rdoc
+  - fb_graph
+- name: thor
+  source: bundle
+  version: 0.16.0
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/thor-0.16.0/LICENSE.md
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/thor-0.16.0/README.md
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/thor-0.16.0/spec/fixtures/app{1}/README
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/thor-0.16.0/spec/fixtures/doc/README
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/thor-0.16.0/README.md
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/thor-0.16.0/spec/fixtures/app{1}/README
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/thor-0.16.0/spec/fixtures/doc/README
+  bundler_groups: []
+  summary: A scripting framework that replaces rake, sake and rubigen
+  description: A scripting framework that replaces rake, sake and rubigen
+  homepage: http://whatisthor.com/
+  children:
+  - bundler
+  - fakeweb
+  - rake
+  - rdoc
+  - rspec
+  - simplecov
+  - childlabor
+  parents:
+  - railties
+  - jquery-rails
+- name: railties
+  source: bundle
+  version: 3.2.8
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.8/lib/rails/generators/rails/plugin_new/templates/MIT-LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.8/guides/assets/images/icons/README
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.8/guides/code/getting_started/doc/README_FOR_APP
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.8/guides/code/getting_started/README.rdoc
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.8/lib/rails/generators/rails/app/templates/doc/README_FOR_APP
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.8/lib/rails/generators/rails/app/templates/README
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.8/lib/rails/generators/rails/plugin_new/templates/README.rdoc
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.8/README.rdoc
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.8/guides/assets/images/icons/README
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.8/guides/code/getting_started/doc/README_FOR_APP
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.8/guides/code/getting_started/README.rdoc
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.8/lib/rails/generators/rails/app/templates/doc/README_FOR_APP
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.8/lib/rails/generators/rails/app/templates/README
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.8/lib/rails/generators/rails/plugin_new/templates/README.rdoc
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.8/README.rdoc
+  bundler_groups: []
+  summary: Tools for creating, working with, and running Rails applications.
+  description: ! 'Rails internals: application bootup, plugins, generators, and rake
+    tasks.'
+  homepage: http://www.rubyonrails.org
+  children:
+  - rake
+  - rack-ssl
+  - thor
+  - rdoc
+  - activesupport
+  - actionpack
+  parents:
+  - coffee-rails
+  - fancybox-rails
+  - rails
+  - paper_trail
+  - jquery-rails
+  - sass-rails
+- name: coffee-rails
+  source: bundle
+  version: 3.2.2
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/coffee-rails-3.2.2/MIT-LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/coffee-rails-3.2.2/README.markdown
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/coffee-rails-3.2.2/README.markdown
+  bundler_groups:
+  - :assets
+  summary: Coffee Script adapter for the Rails asset pipeline.
+  description: Coffee Script adapter for the Rails asset pipeline.
+  homepage: ''
+  children:
+  - coffee-script
+  - railties
+  parents: []
+- name: fancybox-rails
+  source: bundle
+  version: 0.1.4
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/fancybox-rails-0.1.4/MIT-LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/fancybox-rails-0.1.4/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/fancybox-rails-0.1.4/README.md
+  bundler_groups:
+  - :default
+  summary: Use FancyBox with Rails 3.1
+  description: This gem provides jQuery FancyBox for your Rails 3.1 application.
+  homepage: https://github.com/hecticjeff/fancybox-rails
+  children:
+  - railties
+  - bundler
+  - rails
+  parents: []
+- name: multipart-post
+  source: bundle
+  version: 1.1.5
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/multipart-post-1.1.5/README.txt
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/multipart-post-1.1.5/README.txt
+  bundler_groups: []
+  summary: A multipart form post accessory for Net::HTTP.
+  description: ! 'Use with Net::HTTP to do multipart form posts.  IO values that have
+    #content_type, #original_filename, and #local_path will be posted as a binary
+    file.'
+  homepage: https://github.com/nicksieger/multipart-post
+  children: []
+  parents:
+  - faraday
+- name: faraday
+  source: bundle
+  version: 0.8.4
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/faraday-0.8.4/LICENSE.md
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/faraday-0.8.4/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/faraday-0.8.4/README.md
+  bundler_groups: []
+  summary: HTTP/REST API client library.
+  description: 
+  homepage: https://github.com/technoweenie/faraday
+  children:
+  - multipart-post
+  - rake
+  - simplecov
+  - test-unit
+  parents:
+  - oauth2
+- name: rack-oauth2
+  source: bundle
+  version: 0.14.9
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/rack-oauth2-0.14.9/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/rack-oauth2-0.14.9/README.rdoc
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/rack-oauth2-0.14.9/README.rdoc
+  bundler_groups: []
+  summary: OAuth 2.0 Server & Client Library - Both Bearer and MAC token type are
+    supported
+  description: OAuth 2.0 Server & Client Library. Both Bearer and MAC token type are
+    supported.
+  homepage: http://github.com/nov/rack-oauth2
+  children:
+  - rack
+  - multi_json
+  - httpclient
+  - activesupport
+  - i18n
+  - attr_required
+  - rake
+  - cover_me
+  - rspec
+  - webmock
+  parents:
+  - fb_graph
+- name: fb_graph
+  source: bundle
+  version: 2.5.1
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/fb_graph-2.5.1/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/fb_graph-2.5.1/README.rdoc
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/fb_graph-2.5.1/README.rdoc
+  bundler_groups:
+  - :default
+  summary: A full-stack Facebook Graph API wrapper in Ruby.
+  description: A full-stack Facebook Graph API wrapper in Ruby.
+  homepage: http://github.com/nov/fb_graph
+  children:
+  - httpclient
+  - rack-oauth2
+  - tzinfo
+  - json
+  - rake
+  - cover_me
+  - rspec
+  - webmock
+  - actionpack
+  parents: []
+- name: formtastic
+  source: bundle
+  version: 2.1.1
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/formtastic-2.1.1/MIT-LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/formtastic-2.1.1/README.textile
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/formtastic-2.1.1/README.textile
+  bundler_groups:
+  - :default
+  summary: A Rails form builder plugin/gem with semantically rich and accessible markup
+  description: A Rails form builder plugin/gem with semantically rich and accessible
+    markup
+  homepage: http://github.com/justinfrench/formtastic
+  children:
+  - actionpack
+  - rspec-rails
+  - rspec_tag_matchers
+  - hpricot
+  - BlueCloth
+  - yard
+  - rcov
+  - colored
+  - tzinfo
+  - ammeter
+  - appraisal
+  - rake
+  parents:
+  - formtastic-bootstrap
+- name: formtastic-bootstrap
+  source: bundle
+  version: 1.1.2
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/formtastic-bootstrap-4e6a7f50153a/LICENSE.txt
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/formtastic-bootstrap-4e6a7f50153a/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/formtastic-bootstrap-4e6a7f50153a/README.md
+  bundler_groups:
+  - :default
+  summary: Formtastic form builder to generate Twitter Bootstrap-friendly markup.
+  description: Formtastic form builder to generate Twitter Bootstrap-friendly markup.
+  homepage: http://github.com/mjbellantoni/formtastic-bootstrap
+  children:
+  - formtastic
+  - rails
+  - rspec
+  - bundler
+  - jeweler
+  - rcov
+  - rspec_tag_matchers
+  parents: []
+- name: geocoder
+  source: bundle
+  version: 1.1.3
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/geocoder-1.1.3/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/geocoder-1.1.3/README.rdoc
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/geocoder-1.1.3/README.rdoc
+  bundler_groups:
+  - :default
+  summary: Complete geocoding solution for Ruby.
+  description: Provides object geocoding (by street or IP address), reverse geocoding
+    (coordinates to street address), distance queries for ActiveRecord and Mongoid,
+    result caching, and more. Designed for Rails but works with Sinatra and other
+    Rack frameworks too.
+  homepage: http://www.rubygeocoder.com
+  children: []
+  parents: []
+- name: paper_trail
+  source: bundle
+  version: 2.6.3
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/paper_trail-2.6.3/MIT-LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/paper_trail-2.6.3/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/paper_trail-2.6.3/README.md
+  bundler_groups:
+  - :default
+  summary: Track changes to your models' data.  Good for auditing or versioning.
+  description: Track changes to your models' data.  Good for auditing or versioning.
+  homepage: http://github.com/airblade/paper_trail
+  children:
+  - railties
+  - activerecord
+  - rake
+  - shoulda
+  - sqlite3
+  - capybara
+  parents:
+  - globalize3
+- name: globalize3
+  source: bundle
+  version: 0.2.0
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/globalize3-0.2.0/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/globalize3-0.2.0/README.textile
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/globalize3-0.2.0/README.textile
+  bundler_groups:
+  - :default
+  summary: ! 'Rails I18n: de-facto standard library for ActiveRecord 3 model/data
+    translation'
+  description: ! 'Rails I18n: de-facto standard library for ActiveRecord 3 model/data
+    translation.'
+  homepage: http://github.com/svenfuchs/globalize3
+  children:
+  - activerecord
+  - activemodel
+  - paper_trail
+  - database_cleaner
+  - mocha
+  - pathname_local
+  - test_declarative
+  - sqlite3
+  parents: []
+- name: gmaps4rails
+  source: bundle
+  version: 1.5.5
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/gmaps4rails-1.5.5/MIT-LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/gmaps4rails-1.5.5/lib/generators/templates/README
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/gmaps4rails-1.5.5/README.rdoc
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/gmaps4rails-1.5.5/spec/dummy/README.rdoc
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/gmaps4rails-1.5.5/lib/generators/templates/README
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/gmaps4rails-1.5.5/README.rdoc
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/gmaps4rails-1.5.5/spec/dummy/README.rdoc
+  bundler_groups:
+  - :default
+  summary: Maps made easy for Rails 3
+  description: Enables easy display of items (taken from a Rails 3 model) on a Google
+    Maps (JS API V3), OpenLayers, Mapquest and Bing. Geocoding + Directions included.
+  homepage: http://github.com/apneadiving/Google-Maps-for-Rails
+  children:
+  - rails
+  - sqlite3
+  - jquery-rails
+  - rspec-rails
+  - database_cleaner
+  - jasmine
+  - guard
+  - guard-spork
+  - guard-coffeescript
+  - guard-jasmine
+  - guard-rspec
+  - factory_girl_rails
+  - webmock
+  - pry
+  parents: []
+- name: hashie
+  source: bundle
+  version: 1.2.0
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/hashie-1.2.0/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/hashie-1.2.0/README.rdoc
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/hashie-1.2.0/README.rdoc
+  bundler_groups: []
+  summary: Your friendly neighborhood hash toolkit.
+  description: Hashie is a small collection of tools that make hashes more powerful.
+    Currently includes Mash (Mocking Hash) and Dash (Discrete Hash).
+  homepage: https://github.com/intridea/hashie
+  children:
+  - rake
+  - rspec
+  - guard
+  - guard-rspec
+  parents:
+  - omniauth
+- name: httpauth
+  source: bundle
+  version: 0.2.0
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/httpauth-0.2.0/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/httpauth-0.2.0/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/httpauth-0.2.0/README.md
+  bundler_groups: []
+  summary: HTTPauth is a library supporting the full HTTP Authentication protocol
+    as specified in RFC 2617; both Digest Authentication and Basic Authentication.
+  description: Library for the HTTP Authentication protocol (RFC 2617)
+  homepage: https://github.com/Manfred/HTTPauth
+  children: []
+  parents:
+  - oauth2
+- name: jquery-rails
+  source: bundle
+  version: 2.1.1
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/jquery-rails-2.1.1/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/jquery-rails-2.1.1/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/jquery-rails-2.1.1/README.md
+  bundler_groups:
+  - :default
+  summary: Use jQuery with Rails 3
+  description: This gem provides jQuery and the jQuery-ujs driver for your Rails 3
+    application.
+  homepage: http://rubygems.org/gems/jquery-rails
+  children:
+  - railties
+  - thor
+  parents:
+  - gmaps4rails
+- name: kaminari
+  source: bundle
+  version: 0.14.1
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/kaminari-0.14.1/MIT-LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/kaminari-0.14.1/README.rdoc
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/kaminari-0.14.1/README.rdoc
+  bundler_groups:
+  - :default
+  summary: A pagination engine plugin for Rails 3 or other modern frameworks
+  description: Kaminari is a Scope & Engine based, clean, powerful, agnostic, customizable
+    and sophisticated paginator for Rails 3
+  homepage: https://github.com/amatsuda/kaminari
+  children:
+  - activesupport
+  - actionpack
+  - bundler
+  - rake
+  - sqlite3
+  - tzinfo
+  - rspec
+  - rr
+  - capybara
+  - database_cleaner
+  - rdoc
+  parents:
+  - will_filter
+  - tr8n
+- name: later_dude
+  source: bundle
+  version: 0.3.3
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/later_dude-0.3.3/MIT-LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/later_dude-0.3.3/README
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/later_dude-0.3.3/README
+  bundler_groups:
+  - :default
+  summary: Small calendar helper plugin for Rails with i18n support
+  description: LaterDude is a small calendar helper plugin for Rails with i18n support.
+  homepage: http://github.com/clemens/later_dude
+  children: []
+  parents: []
+- name: less
+  source: bundle
+  version: 2.2.2
+  license: Apache 2.0
+  license_url: http://www.apache.org/licenses/LICENSE-2.0.txt
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/less-2.2.2/lib/less/js/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/less-2.2.2/lib/less/js/README.md
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/less-2.2.2/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/less-2.2.2/lib/less/js/README.md
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/less-2.2.2/README.md
+  bundler_groups: []
+  summary: Leaner CSS, in your browser or Ruby (via less.js)
+  description: Invoke the Less CSS compiler from Ruby
+  homepage: http://lesscss.org
+  children:
+  - commonjs
+  - rake
+  - rspec
+  parents:
+  - tilt
+  - less-rails
+- name: less-rails
+  source: bundle
+  version: 2.2.3
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/less-rails-2.2.3/MIT-LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/less-rails-2.2.3/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/less-rails-2.2.3/README.md
+  bundler_groups: []
+  summary: The dynamic stylesheet language for the Rails asset pipeline.
+  description: The dynamic stylesheet language for the Rails asset pipeline. Allows
+    other gems to extend Less load path.
+  homepage: http://github.com/metaskills/less-rails
+  children:
+  - less
+  - actionpack
+  - minitest
+  - guard-minitest
+  - rails
+  parents:
+  - less-rails-bootstrap
+- name: license_finder
+  source: bundle
+  version: 0.7.0
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/LicenseFinder-95d8d89795d7/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/LicenseFinder-95d8d89795d7/spec/fixtures/APACHE-2-LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/LicenseFinder-95d8d89795d7/spec/fixtures/ISC-LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/LicenseFinder-95d8d89795d7/spec/fixtures/license_directory/LICENSE/BSD-2-Clause.txt
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/LicenseFinder-95d8d89795d7/spec/fixtures/license_directory/LICENSE/GPL-2.0.txt
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/LicenseFinder-95d8d89795d7/spec/fixtures/license_directory/LICENSE/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/LicenseFinder-95d8d89795d7/spec/fixtures/license_directory/LICENSE/MIT.txt
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/LicenseFinder-95d8d89795d7/spec/fixtures/license_directory/LICENSE/RUBY.txt
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/LicenseFinder-95d8d89795d7/spec/fixtures/license_names/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/LicenseFinder-95d8d89795d7/spec/fixtures/MIT-LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/LicenseFinder-95d8d89795d7/spec/fixtures/MIT-LICENSE-with-varied-disclaimer
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/LicenseFinder-95d8d89795d7/spec/fixtures/mit_licensed_gem/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/LicenseFinder-95d8d89795d7/spec/fixtures/nested_gem/vendor/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/LicenseFinder-95d8d89795d7/spec/fixtures/other_licensed_gem/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/LicenseFinder-95d8d89795d7/spec/fixtures/README-with-MIT-LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/LicenseFinder-95d8d89795d7/spec/fixtures/license_names/Mit-License
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/LicenseFinder-95d8d89795d7/spec/fixtures/license_names/Licence.rdoc
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/LicenseFinder-95d8d89795d7/spec/fixtures/license_directory/COPYING
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/LicenseFinder-95d8d89795d7/spec/fixtures/license_names/COPYING.txt
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/LicenseFinder-95d8d89795d7/spec/fixtures/license_names/README.rdoc
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/LicenseFinder-95d8d89795d7/spec/fixtures/nested_readme/vendor/README
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/LicenseFinder-95d8d89795d7/spec/fixtures/readme/README
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/LicenseFinder-95d8d89795d7/spec/fixtures/utf8_gem/README
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/LicenseFinder-95d8d89795d7/spec/fixtures/readme/Readme.markdown
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/LicenseFinder-95d8d89795d7/spec/fixtures/readme/Project
+    ReadMe
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/LicenseFinder-95d8d89795d7/spec/fixtures/license_names/README.rdoc
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/LicenseFinder-95d8d89795d7/spec/fixtures/nested_readme/vendor/README
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/LicenseFinder-95d8d89795d7/spec/fixtures/readme/README
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/LicenseFinder-95d8d89795d7/spec/fixtures/README-with-MIT-LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/LicenseFinder-95d8d89795d7/spec/fixtures/utf8_gem/README
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/LicenseFinder-95d8d89795d7/spec/fixtures/readme/Readme.markdown
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/LicenseFinder-95d8d89795d7/spec/fixtures/readme/Project
+    ReadMe
+  bundler_groups:
+  - :default
+  summary: Audit the OSS licenses of your application's dependencies.
+  description: ! "  Do you know the licenses of all your application's dependencies?
+    What open source software licenses will your business accept?\n\n  LicenseFinder
+    culls your Gemfile, detects the licenses of the gems in it, and gives you a report
+    that you can act on. If you already know \n  what licenses your business is comfortable
+    with, you can whitelist them, leaving you with an action report of only those
+    dependencies that have \n  licenses that fall outside of the whitelist.\n"
+  homepage: https://github.com/pivotal/LicenseFinder
+  children:
+  - bundler
+  - rails
+  - rspec
+  - rake
+  - cucumber
+  - rails
+  - pry
+  - capybara
+  parents: []
+- name: mail_view
+  source: bundle
+  version: 1.0.3
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/mail_view-1.0.3/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/mail_view-1.0.3/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/mail_view-1.0.3/README.md
+  bundler_groups:
+  - :default
+  summary: Visual email testing
+  description: 
+  homepage: https://github.com/37signals/mail_view
+  children:
+  - tilt
+  parents: []
+- name: memcache-client
+  source: bundle
+  version: 1.8.5
+  license: other
+  license_url: 
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/memcache-client-1.8.5/LICENSE.txt
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/memcache-client-1.8.5/README.rdoc
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/memcache-client-1.8.5/README.rdoc
+  bundler_groups:
+  - :default
+  summary: A Ruby library for accessing memcached.
+  description: A Ruby library for accessing memcached.
+  homepage: http://github.com/mperham/memcache-client
+  children: []
+  parents:
+  - rack
+- name: mini_record
+  source: bundle
+  version: 0.3.1
+  license: other
+  license_url: 
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/mini_record-0.3.1/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/mini_record-0.3.1/README.md
+  bundler_groups:
+  - :default
+  summary: MiniRecord is a micro gem that allow you to write schema inside your model
+    as you can do in DataMapper.
+  description: ! "\nWith it you can add the ability to create columns outside the
+    default schema, directly\nin your model in a similar way that you just know in
+    others projects\nlike  DataMapper or  MongoMapper.\n  "
+  homepage: https://github.com/DAddYE/mini_record
+  children:
+  - activerecord
+  parents: []
+- name: mysql2
+  source: bundle
+  version: 0.3.11
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/mysql2-0.3.11/MIT-LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/mysql2-0.3.11/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/mysql2-0.3.11/README.md
+  bundler_groups:
+  - :default
+  summary: A simple, fast Mysql library for Ruby, binding to libmysql
+  description: 
+  homepage: http://github.com/brianmario/mysql2
+  children:
+  - eventmachine
+  - rake-compiler
+  - rake
+  - rspec
+  - activerecord
+  - mysql
+  - do_mysql
+  - sequel
+  - faker
+  parents: []
+- name: newrelic_rpm
+  source: bundle
+  version: 3.4.2.1
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/newrelic_rpm-3.4.2.1/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/newrelic_rpm-3.4.2.1/vendor/gems/dependency_detection-0.0.1.build/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/newrelic_rpm-3.4.2.1/README.rdoc
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/newrelic_rpm-3.4.2.1/README.rdoc
+  bundler_groups:
+  - :production
+  summary: New Relic Ruby Agent
+  description: ! 'New Relic is a performance management system, developed by New Relic,
+
+    Inc (http://www.newrelic.com).  New Relic provides you with deep
+
+    information about the performance of your web application as it runs
+
+    in production. The New Relic Ruby Agent is dual-purposed as a either a
+
+    Gem or plugin, hosted on
+
+    http://github.com/newrelic/rpm/
+
+'
+  homepage: http://www.github.com/newrelic/rpm
+  children:
+  - jeweler
+  - mocha
+  - shoulda
+  parents: []
+- name: nokogiri
+  source: bundle
+  version: 1.5.5
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/nokogiri-1.5.5/README.ja.rdoc
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/nokogiri-1.5.5/README.rdoc
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/nokogiri-1.5.5/README.ja.rdoc
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/nokogiri-1.5.5/README.rdoc
+  bundler_groups: []
+  summary: ! "Nokogiri (é\x8B¸) is an HTML, XML, SAX, and Reader parser"
+  description: ! "Nokogiri (é\x8B¸) is an HTML, XML, SAX, and Reader parser.  Among
+    Nokogiri's\nmany features is the ability to search documents via XPath or CSS3
+    selectors.\n\nXML is like violence - if it doesnâ\x80\x99t solve your problems,
+    you are not using\nenough of it."
+  homepage: http://nokogiri.org
+  children:
+  - hoe-bundler
+  - hoe-debugging
+  - hoe-gemspec
+  - hoe-git
+  - mini_portile
+  - minitest
+  - rake
+  - rake-compiler
+  - racc
+  - rexical
+  - rdoc
+  - hoe
+  parents:
+  - tilt
+  - mime-types
+  - roadie
+- name: oauth
+  source: bundle
+  version: 0.4.7
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/oauth-0.4.7/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/oauth-0.4.7/README.rdoc
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/oauth-0.4.7/README.rdoc
+  bundler_groups: []
+  summary: OAuth Core Ruby implementation
+  description: OAuth Core Ruby implementation
+  homepage: 
+  children:
+  - rake
+  - jeweler
+  - actionpack
+  - rack
+  - mocha
+  - typhoeus
+  - em-http-request
+  - curb
+  parents:
+  - omniauth-oauth
+- name: oauth2
+  source: bundle
+  version: 0.8.0
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/oauth2-0.8.0/LICENSE.md
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/oauth2-0.8.0/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/oauth2-0.8.0/README.md
+  bundler_groups: []
+  summary: A Ruby wrapper for the OAuth 2.0 protocol.
+  description: A Ruby wrapper for the OAuth 2.0 protocol built with a similar style
+    to the original OAuth gem.
+  homepage: http://github.com/intridea/oauth2
+  children:
+  - faraday
+  - httpauth
+  - multi_json
+  - rack
+  - jwt
+  - addressable
+  - multi_xml
+  - rake
+  - rdoc
+  - rspec
+  - simplecov
+  parents:
+  - omniauth-oauth2
+- name: omniauth
+  source: bundle
+  version: 1.1.1
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/omniauth-1.1.1/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/omniauth-1.1.1/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/omniauth-1.1.1/README.md
+  bundler_groups: []
+  summary: A generalized Rack framework for multiple-provider authentication.
+  description: A generalized Rack framework for multiple-provider authentication.
+  homepage: http://github.com/intridea/omniauth
+  children:
+  - rack
+  - hashie
+  - maruku
+  - simplecov
+  - rack-test
+  - rake
+  - rspec
+  - yard
+  parents:
+  - omniauth-oauth2
+  - omniauth-oauth
+- name: omniauth-oauth2
+  source: bundle
+  version: 1.1.1
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/omniauth-oauth2-1.1.1/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/omniauth-oauth2-1.1.1/README.md
+  bundler_groups: []
+  summary: An abstract OAuth2 strategy for OmniAuth.
+  description: An abstract OAuth2 strategy for OmniAuth.
+  homepage: https://github.com/intridea/omniauth-oauth2
+  children:
+  - omniauth
+  - oauth2
+  - rspec
+  - rack-test
+  - webmock
+  - simplecov
+  parents:
+  - omniauth-facebook
+- name: omniauth-facebook
+  source: bundle
+  version: 1.4.1
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/omniauth-facebook-1.4.1/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/omniauth-facebook-1.4.1/README.md
+  bundler_groups:
+  - :default
+  summary: Facebook strategy for OmniAuth
+  description: 
+  homepage: https://github.com/mkdynamic/omniauth-facebook
+  children:
+  - omniauth-oauth2
+  - minitest
+  - mocha
+  - rake
+  parents: []
+- name: omniauth-oauth
+  source: bundle
+  version: 1.0.1
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/omniauth-oauth-1.0.1/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/omniauth-oauth-1.0.1/README.md
+  bundler_groups: []
+  summary: A generic OAuth (1.0/1.0a) strategy for OmniAuth.
+  description: A generic OAuth (1.0/1.0a) strategy for OmniAuth.
+  homepage: https://github.com/intridea/omniauth-oauth
+  children:
+  - omniauth
+  - oauth
+  - rspec
+  - webmock
+  - simplecov
+  - rack-test
+  parents:
+  - omniauth-twitter
+- name: omniauth-twitter
+  source: bundle
+  version: 0.0.13
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/omniauth-twitter-0.0.13/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/omniauth-twitter-0.0.13/README.md
+  bundler_groups:
+  - :default
+  summary: OmniAuth strategy for Twitter
+  description: OmniAuth strategy for Twitter
+  homepage: https://github.com/arunagw/omniauth-twitter
+  children:
+  - multi_json
+  - omniauth-oauth
+  - rspec
+  - rack-test
+  - simplecov
+  - webmock
+  parents: []
+- name: paperclip
+  source: bundle
+  version: 2.7.1
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/paperclip-2.7.1/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/paperclip-2.7.1/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/paperclip-2.7.1/README.md
+  bundler_groups:
+  - :default
+  summary: File attachments as attributes for ActiveRecord
+  description: Easy upload management for ActiveRecord
+  homepage: https://github.com/thoughtbot/paperclip
+  children:
+  - activerecord
+  - activesupport
+  - cocaine
+  - mime-types
+  - shoulda
+  - appraisal
+  - mocha
+  - aws-sdk
+  - sqlite3
+  - cucumber
+  - aruba
+  - capybara
+  - bundler
+  - cocaine
+  - fog
+  - rake
+  - fakeweb
+  parents: []
+- name: railhead_autouser
+  source: bundle
+  version: 0.1.4
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/railhead_autouser-0.1.4/MIT-LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/railhead_autouser-0.1.4/README.rdoc
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/railhead_autouser-0.1.4/README.rdoc
+  bundler_groups:
+  - :default
+  summary: RailheadAutoUser is a Ruby on Rails plugin that automatically adds current_user
+    to models.
+  description: RailheadAutoUser is a Ruby on Rails plugin that automatically adds
+    current_user to modelsk.
+  homepage: http://github.com/nagybence/railhead_autouser
+  children: []
+  parents: []
+- name: railhead_permalink
+  source: bundle
+  version: 0.1.19
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/railhead_permalink-0.1.19/MIT-LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/railhead_permalink-0.1.19/README.rdoc
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/railhead_permalink-0.1.19/README.rdoc
+  bundler_groups:
+  - :default
+  summary: RailheadPermalink is a Ruby on Rails plugin that automatically finds ActiveRecord
+    objects with permalink.
+  description: RailheadPermalink is a Ruby on Rails plugin that automatically finds
+    ActiveRecord objects with permalink.
+  homepage: http://github.com/nagybence/railhead_permalink
+  children: []
+  parents: []
+- name: rails-i18n
+  source: bundle
+  version: 0.6.6
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/rails-i18n-0.6.6/MIT-LICENSE.txt
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/rails-i18n-0.6.6/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/rails-i18n-0.6.6/README.md
+  bundler_groups:
+  - :default
+  summary: Common locale data and translations for Rails i18n.
+  description: A set of common locale data and translations to internationalize and/or
+    localize your Rails applications.
+  homepage: http://github.com/svenfuchs/rails-i18n
+  children:
+  - i18n
+  - rails
+  - rspec-rails
+  - i18n-spec
+  - spork
+  parents: []
+- name: rails_autolink
+  source: bundle
+  version: 1.0.9
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/rails_autolink-1.0.9/README.rdoc
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/rails_autolink-1.0.9/README.rdoc
+  bundler_groups:
+  - :default
+  summary: This is an extraction of the `auto_link` method from rails
+  description: ! 'This is an extraction of the `auto_link` method from rails.  The
+    `auto_link`
+
+    method was removed from Rails in version Rails 3.1.  This gem is meant to
+
+    bridge the gap for people migrating.'
+  homepage: http://github.com/tenderlove/rails_autolink
+  children:
+  - rails
+  - rdoc
+  - hoe
+  parents: []
+- name: rails_config
+  source: bundle
+  version: 0.3.1
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/rails_config-0.3.1/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/rails_config-0.3.1/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/rails_config-0.3.1/README.md
+  bundler_groups:
+  - :default
+  summary: Provides a Settings helper for rails3 that reads from config/settings.yml
+  description: Easy to use Settings helper that loads its data in from config/settings.yml.
+    Handles adding multiple sources, and easy reloading.
+  homepage: http://github.com/railsjedi/rails_config
+  children:
+  - activesupport
+  - rake
+  - rspec
+  - autotest
+  - growl-glue
+  parents: []
+- name: roadie
+  source: bundle
+  version: 2.3.2
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/roadie-2.3.2/MIT-LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/roadie-2.3.2/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/roadie-2.3.2/README.md
+  bundler_groups:
+  - :default
+  summary: Making HTML emails comfortable for the Rails rockstars
+  description: Roadie tries to make sending HTML emails a little less painful in Rails
+    3 by inlining stylesheets and rewrite relative URLs for you.
+  homepage: http://github.com/Mange/roadie
+  children:
+  - nokogiri
+  - css_parser
+  - actionmailer
+  - sprockets
+  - rails
+  - rspec-rails
+  - appraisal
+  parents: []
+- name: sass
+  source: bundle
+  version: 3.2.1
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/sass-3.2.1/MIT-LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/sass-3.2.1/vendor/listen/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/sass-3.2.1/README.md
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/sass-3.2.1/vendor/listen/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/sass-3.2.1/README.md
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/sass-3.2.1/vendor/listen/README.md
+  bundler_groups: []
+  summary: A powerful but elegant CSS compiler that makes CSS fun again.
+  description: ! "      Sass makes CSS fun again. Sass is an extension of CSS3, adding\n
+    \     nested rules, variables, mixins, selector inheritance, and more.\n      It's
+    translated to well-formatted, standard CSS using the\n      command line tool
+    or a web-framework plugin.\n"
+  homepage: http://sass-lang.com/
+  children:
+  - yard
+  - maruku
+  parents:
+  - tilt
+  - sass-rails
+  - slim
+  - will_filter
+  - tr8n
+- name: sass-rails
+  source: bundle
+  version: 3.2.5
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/sass-rails-3.2.5/MIT-LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/sass-rails-3.2.5/README.markdown
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/sass-rails-3.2.5/test/fixtures/engine_project/README.rdoc
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/sass-rails-3.2.5/test/fixtures/sass_project/doc/README_FOR_APP
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/sass-rails-3.2.5/test/fixtures/sass_project/README
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/sass-rails-3.2.5/test/fixtures/scss_project/doc/README_FOR_APP
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/sass-rails-3.2.5/test/fixtures/scss_project/README
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/sass-rails-3.2.5/README.markdown
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/sass-rails-3.2.5/test/fixtures/engine_project/README.rdoc
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/sass-rails-3.2.5/test/fixtures/sass_project/doc/README_FOR_APP
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/sass-rails-3.2.5/test/fixtures/sass_project/README
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/sass-rails-3.2.5/test/fixtures/scss_project/doc/README_FOR_APP
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/sass-rails-3.2.5/test/fixtures/scss_project/README
+  bundler_groups:
+  - :assets
+  summary: Sass adapter for the Rails asset pipeline.
+  description: Sass adapter for the Rails asset pipeline.
+  homepage: ''
+  children:
+  - sass
+  - railties
+  - tilt
+  parents: []
+- name: temple
+  source: bundle
+  version: 0.5.4
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/temple-0.5.4/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/temple-0.5.4/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/temple-0.5.4/README.md
+  bundler_groups: []
+  summary: Template compilation framework in Ruby
+  description: 
+  homepage: https://github.com/judofyr/temple
+  children:
+  - tilt
+  - bacon
+  - rake
+  parents:
+  - slim
+- name: slim
+  source: bundle
+  version: 1.3.2
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/slim-1.3.2/LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/slim-1.3.2/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/slim-1.3.2/README.md
+  bundler_groups:
+  - :default
+  summary: Slim is a template language.
+  description: Slim is a template language whose goal is reduce the syntax to the
+    essential parts without becoming cryptic.
+  homepage: http://slim-lang.com/
+  children:
+  - temple
+  - tilt
+  - rake
+  - sass
+  - minitest
+  - kramdown
+  - creole
+  - builder
+  parents: []
+- name: therubyracer
+  source: bundle
+  version: 0.10.2
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/therubyracer-0.10.2/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/therubyracer-0.10.2/README.md
+  bundler_groups:
+  - :assets
+  summary: Embed the V8 Javascript interpreter into Ruby
+  description: Call javascript code and manipulate javascript objects from ruby. Call
+    ruby code and manipulate ruby objects from javascript.
+  homepage: http://github.com/cowboyd/therubyracer
+  children:
+  - libv8
+  - rake
+  - rspec
+  - rake-compiler
+  parents: []
+- name: will_filter
+  source: bundle
+  version: 3.1.9
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/will_filter-3.1.9/MIT-LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/will_filter-3.1.9/README.rdoc
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/will_filter-3.1.9/README.rdoc
+  bundler_groups:
+  - :default
+  summary: A filtering engine plugin for Rails 3.1
+  description: will_filter is a powerful customizable framework for filtering active_record
+    models.
+  homepage: https://github.com/berk/will_filter
+  children:
+  - rails
+  - kaminari
+  - sass
+  - pry
+  - bundler
+  - sqlite3
+  - rspec
+  - rspec-rails
+  - spork
+  - watchr
+  - rr
+  parents:
+  - tr8n
+- name: tr8n
+  source: bundle
+  version: 3.2.3
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/tr8n-973fb5277bfe/MIT-LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/tr8n-973fb5277bfe/javascripts/compressors/google/COPYING
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/tr8n-973fb5277bfe/doc/README_FOR_APP
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/tr8n-973fb5277bfe/javascripts/compressors/google/README
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/tr8n-973fb5277bfe/README.rdoc
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/tr8n-973fb5277bfe/doc/README_FOR_APP
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/tr8n-973fb5277bfe/javascripts/compressors/google/README
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/bundler/gems/tr8n-973fb5277bfe/README.rdoc
+  bundler_groups:
+  - :production
+  summary: Crowd-sourced translation engine for Rails.
+  description: Crowd-sourced translation and localization engine for Rails.
+  homepage: https://github.com/berk/tr8n
+  children:
+  - rails
+  - will_filter
+  - kaminari
+  - sass
+  - fssm
+  - pry
+  - bundler
+  - sqlite3
+  - rspec
+  - rspec-rails
+  - spork
+  - watchr
+  - rr
+  - dalli
+  parents: []
+- name: turbolinks
+  source: bundle
+  version: 0.5.1
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/turbolinks-0.5.1/MIT-LICENSE
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/turbolinks-0.5.1/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/turbolinks-0.5.1/README.md
+  bundler_groups:
+  - :default
+  summary: Turbolinks makes following links in your web application faster (use with
+    Rails Asset Pipeline)
+  description: 
+  homepage: 
+  children: []
+  parents: []
+- name: uglifier
+  source: bundle
+  version: 1.3.0
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/uglifier-1.3.0/LICENSE.txt
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/uglifier-1.3.0/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/uglifier-1.3.0/README.md
+  bundler_groups:
+  - :assets
+  summary: Ruby wrapper for UglifyJS JavaScript compressor
+  description: 
+  homepage: http://github.com/lautis/uglifier
+  children:
+  - execjs
+  - multi_json
+  - rspec
+  - bundler
+  - jeweler
+  - rdoc
+  parents: []
+- name: coffee-script-source
+  source: bundle
+  version: 1.3.3
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files: []
+  readme_files: []
+  bundler_groups: []
+  summary: The CoffeeScript Compiler
+  description: ! "      CoffeeScript is a little language that compiles into JavaScript.\n
+    \     Underneath all of those embarrassing braces and semicolons,\n      JavaScript
+    has always had a gorgeous object model at its heart.\n      CoffeeScript is an
+    attempt to expose the good parts of JavaScript\n      in a simple way.\n"
+  homepage: http://jashkenas.github.com/coffee-script/
+  children: []
+  parents:
+  - coffee-script
+- name: commonjs
+  source: bundle
+  version: 0.2.6
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/commonjs-0.2.6/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/commonjs-0.2.6/README.md
+  bundler_groups: []
+  summary: Provide access to your Ruby and Operating System runtime via the commonjs
+    API
+  description: Host CommonJS JavaScript environments in Ruby
+  homepage: http://github.com/cowboyd/commonjs.rb
+  children:
+  - rake
+  - rspec
+  parents:
+  - less
+- name: css_parser
+  source: bundle
+  version: 1.2.6
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files: []
+  readme_files: []
+  bundler_groups: []
+  summary: Ruby CSS parser.
+  description: A set of classes for parsing CSS in Ruby.
+  homepage: https://github.com/alexdunae/css_parser
+  children:
+  - addressable
+  - rdoc
+  - rake
+  parents:
+  - roadie
+- name: exception_notification
+  source: bundle
+  version: 2.6.1
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/exception_notification-2.6.1/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/exception_notification-2.6.1/README.md
+  bundler_groups:
+  - :default
+  summary: Exception notification by email for Rails apps
+  description: 
+  homepage: http://smartinez87.github.com/exception_notification
+  children:
+  - actionmailer
+  - rails
+  - sqlite3
+  parents: []
+- name: jwt
+  source: bundle
+  version: 0.1.5
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files: []
+  readme_files: []
+  bundler_groups: []
+  summary: JSON Web Token implementation in Ruby
+  description: JSON Web Token implementation in Ruby
+  homepage: http://github.com/progrium/ruby-jwt
+  children:
+  - multi_json
+  - echoe
+  parents:
+  - oauth2
+- name: less-rails-bootstrap
+  source: bundle
+  version: 2.1.1
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/less-rails-bootstrap-2.1.1/README.md
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/less-rails-bootstrap-2.1.1/README.md
+  bundler_groups:
+  - :default
+  summary: CSS toolkit from Twitter For Rails 3.1 Asset Pipeline
+  description: CSS toolkit from Twitter For Rails 3.1 Asset Pipeline. Best one of
+    all!
+  homepage: http://github.com/metaskills/less-rails-bootstrap
+  children:
+  - less-rails
+  - minitest
+  - guard-minitest
+  - rails
+  parents: []
+- name: libv8
+  source: bundle
+  version: 3.3.10.4
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files: []
+  readme_files: []
+  bundler_groups: []
+  summary: Distribution of the V8 JavaScript engine
+  description: Distributes the V8 JavaScript engine in binary and source forms in
+    order to support fast builds of The Ruby Racer
+  homepage: http://github.com/fractaloop/libv8
+  children:
+  - rake
+  - bundler
+  parents:
+  - therubyracer
+- name: rails
+  source: bundle
+  version: 3.2.8
+  license: MIT
+  license_url: http://opensource.org/licenses/mit-license
+  approved: true
+  notes: 
+  license_files: []
+  readme_files: []
+  bundler_groups:
+  - :default
+  summary: Full-stack web application framework.
+  description: Ruby on Rails is a full-stack web framework optimized for programmer
+    happiness and sustainable productivity. It encourages beautiful code by favoring
+    convention over configuration.
+  homepage: http://www.rubyonrails.org
+  children:
+  - activesupport
+  - actionpack
+  - activerecord
+  - activeresource
+  - actionmailer
+  - railties
+  - bundler
+  parents:
+  - cancan
+  - exception_notification
+  - fancybox-rails
+  - formtastic-bootstrap
+  - gmaps4rails
+  - less-rails
+  - less-rails-bootstrap
+  - license_finder
+  - license_finder
+  - rails-i18n
+  - rails_autolink
+  - roadie
+  - will_filter
+  - tr8n
+- name: httpclient
+  source: bundle
+  version: 2.2.7
+  license: ruby
+  license_url: http://www.ruby-lang.org/en/LICENSE.txt
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/httpclient-2.2.7/README.txt
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/httpclient-2.2.7/README.txt
+  bundler_groups: []
+  summary: gives something like the functionality of libwww-perl (LWP) in Ruby
+  description: 
+  homepage: http://github.com/nahi/httpclient
+  children: []
+  parents:
+  - rack-oauth2
+  - fb_graph
+- name: rdoc
+  source: bundle
+  version: '3.12'
+  license: GPLv2
+  license_url: http://www.gnu.org/licenses/gpl-2.0.txt
+  approved: true
+  notes: 
+  license_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/rdoc-3.12/LICENSE.rdoc
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/rdoc-3.12/README.rdoc
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/rdoc-3.12/test/README
+  readme_files:
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/rdoc-3.12/README.rdoc
+  - /Users/bbt/.rvm/gems/ruby-1.9.3-p194/gems/rdoc-3.12/test/README
+  bundler_groups: []
+  summary: RDoc produces HTML and command-line documentation for Ruby projects
+  description: ! 'RDoc produces HTML and command-line documentation for Ruby projects.  RDoc
+
+    includes the +rdoc+ and +ri+ tools for generating and displaying online
+
+    documentation.
+
+
+    See RDoc for a description of RDoc''s markup and basic use.'
+  homepage: http://docs.seattlerb.org/rdoc
+  children:
+  - json
+  - minitest
+  - racc
+  - minitest
+  - ZenTest
+  - hoe
+  parents:
+  - multi_json
+  - journey
+  - journey
+  - mime-types
+  - arel
+  - thor
+  - railties
+  - css_parser
+  - kaminari
+  - nokogiri
+  - oauth2
+  - rails_autolink
+  - uglifier

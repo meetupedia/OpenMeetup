@@ -38,6 +38,7 @@ gem 'will_filter'
 gem 'roadie'
 gem 'mail_view'
 gem 'exception_notification'
+gem 'license_finder', :git => 'git://github.com/pivotal/LicenseFinder.git'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
