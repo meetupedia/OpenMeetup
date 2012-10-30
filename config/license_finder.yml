@@ -2,6 +2,9 @@
 whitelist:
 - MIT
 - Apache 2.0
+- ruby
+- GPLv2
+- other
 ignore_groups:
 - test
 - development
