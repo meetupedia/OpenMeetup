@@ -15,6 +15,8 @@ Openmeetup::Application.routes.draw do
   mount PostMailer::Preview => '/post_mailer/mail_view'
   mount WaveMailer::Preview => '/wave_mailer/mail_view'
 
+  resources :cities
+
   resources :groups do
     member do
       get :events

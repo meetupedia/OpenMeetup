@@ -28,7 +28,7 @@
       h2= tr('Edit user')
       = semantic_form_for @user do |f|
         = f.inputs do
-          = f.input :name
+          = f.input :name, :label => 'Name'
           = f.input :email
           .control-group
             = f.label :city_id, tr('City')
