@@ -4,13 +4,13 @@ h1
   = params[:q]
 
 .row
-  .span7
+  .span8
     - unless @groups.blank?
       h2= tr('Groups')
       .list_view= render @groups
     - else
       p= tr('Not found.')
-  .span4.offset1
+  .span4
     - unless @events.blank?
       h2= tr('Events')
       .list_view= render @events

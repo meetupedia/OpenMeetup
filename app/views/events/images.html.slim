@@ -1,11 +1,11 @@
 = render 'header'
 
 .row
-  .span7
+  .span8
     h2= tr('Images')
 
     #images= render @event.images.order('created_at ASC')
-  .span4.offset1
+  .span4
     - if can? :create, Image
       = semantic_form_for Image.new, :url => event_images_path(@event) do |f|
         = f.inputs do
