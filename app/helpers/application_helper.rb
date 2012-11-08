@@ -27,7 +27,7 @@ module ApplicationHelper
   end
 
   def user_link(user)
-    link_to user.name, user
+    link_to user.name.presence || trl("Citizen #{user.id}"), user
   end
 
   def auth_path(provider)

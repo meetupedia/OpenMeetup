@@ -5,7 +5,7 @@ class GroupsController < CommonController
   authorize_resource :except => [:index, :show, :events, :images, :members]
 
   def show
-    @activities = @group.activities.order('created_at DESC').paginate :page => params[:page]
+    @activities = @group.activities.where('activable_type NOT IN (?)', ['Comment']).order('created_at DESC').paginate :page => params[:page]
     @title = @group.name
     @static_follow = true
   end
