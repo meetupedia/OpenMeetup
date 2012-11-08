@@ -11,8 +11,8 @@
         p= link_to 'More information about participations', participations_event_path(@event), :rel => 'modal'
 
     .wrapper
-      h3= tr('Participants')
-      p= render ('users/user_names'), :users => @event.participants.order('participations.created_at ASC')
+      h2= tr('Participants')
+      .list_view= render ('users/user_names'), :users => @event.participants.order('participations.created_at ASC')
 
     .wrapper
       .calendar= calendar(@event.start_time, @event.end_time)
