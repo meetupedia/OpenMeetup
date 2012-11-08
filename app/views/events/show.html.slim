@@ -12,7 +12,7 @@
 
     .wrapper
       h2= tr('Participants')
-      .list_view= render ('users/user_names'), :users => @event.participants.order('participations.created_at ASC')
+      .list_view= render @event.participants.order('participations.created_at ASC')
 
     .wrapper
       .calendar= calendar(@event.start_time, @event.end_time)

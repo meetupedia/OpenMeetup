@@ -30,7 +30,7 @@
 
     .wrapper
       h2= tr('Members')
-      .list_view= render ('users/user_names'), :users => @group.members
+      .list_view= render @group.members.order('memberships.created_at ASC')
 
     - if Settings.enable_share_buttons
       .wrapper
