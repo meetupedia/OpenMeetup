@@ -20,9 +20,7 @@ class InterestTaggingsController < CommonController
 
   def destroy
     @interest_tagging.destroy
-    if tag = Tag.find_by_name_and_language_id(@interest_tagging.interest.name.trl, Language.find_by_code(I18n.locale))
-      tag.tagging_for(current_user).andand.destroy
-    end
+    Tag.where(:name => @interest_tagging.interest.name.trl).first.andand.tagging_for(current_user).andand.destroy
     if request.xhr?
       render :create
     else
