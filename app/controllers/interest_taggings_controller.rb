@@ -9,7 +9,7 @@ class InterestTaggingsController < CommonController
   def create
     unless @interest.interest_tagging_for(current_user)
       @interest_tagging.save
-      tag = Tag.find_or_create_by_name_and_language_id(@interest.name.trl, Language.find_by_code(I18n.locale))
+      tag = Tag.find_or_create_by_name(@interest.name.trl)
       unless tag.tagging_for(current_user)
         tagging = Tagging.create :tag => tag
         create_activity tagging unless current_user.restricted_access?

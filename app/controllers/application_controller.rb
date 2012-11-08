@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :set_locale, :check_restricted_access, :set_invitation_code
-  # before_filter :miniprofiler
 
   helper_method :current_city, :current_language, :current_user
   helper LaterDude::CalendarHelper
@@ -27,6 +26,10 @@ private
     def tr(text)
       text
     end
+
+    def trl(text)
+      text
+    end
   end
 
   def run_later
@@ -36,9 +39,13 @@ private
     end
   end
 
+
+  # before_filter :miniprofiler
+
   # def miniprofiler
   #   Rack::MiniProfiler.authorize_request if current_user.andand.is_admin?
   # end
+
 
   def current_locale
     if params[:locale]

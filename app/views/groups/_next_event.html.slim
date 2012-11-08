@@ -3,10 +3,7 @@
     .pull-right
       span.label.label-success=' tr('I am going')
 
-  h4
-    = tr('Next event')
-    ' :
-    = link_to event.title, event
+  h4= link_to event.title, event
   div
     ' ▼
     = l(event.start_time)
