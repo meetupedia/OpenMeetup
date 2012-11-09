@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :set_locale, :check_restricted_access, :set_invitation_code
-  # before_filter :miniprofiler
 
   helper_method :current_city, :current_language, :current_user
   helper LaterDude::CalendarHelper
@@ -21,10 +20,27 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  unless Rails.application.config.consider_all_requests_local
+    rescue_from Exception, with: lambda { |exception| render_error 500, exception }
+    rescue_from ActionController::RoutingError, ActionController::UnknownController, ::AbstractController::ActionNotFound, ActiveRecord::RecordNotFound, with: lambda { |exception| render_error 404, exception }
+  end
+
+  private
+  def render_error(status, exception)
+    respond_to do |format|
+      format.html { render template: "errors/error_#{status}", layout: 'layouts/application', status: status }
+      format.all { render nothing: true, status: status }
+    end
+  end
+
 private
 
   if Rails.env == 'development'
     def tr(text)
+      text
+    end
+
+    def trl(text)
       text
     end
   end
@@ -36,9 +52,13 @@ private
     end
   end
 
+
+  # before_filter :miniprofiler
+
   # def miniprofiler
   #   Rack::MiniProfiler.authorize_request if current_user.andand.is_admin?
   # end
+
 
   def current_locale
     if params[:locale]
@@ -122,4 +142,9 @@ private
     I18n.locale = current_locale
     current_user.update_attribute :locale, I18n.locale if current_user and not current_user.locale == I18n.locale.to_s
   end
+
+  def notify(exception)
+    ExceptionNotifier::Notifier.exception_notification(request.env, exception, data: {message: 'an error happened'}).deliver
+  end
+
 end

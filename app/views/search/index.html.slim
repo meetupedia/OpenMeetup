@@ -1,18 +1,23 @@
-h1
-  = tr('Results')
-  ' :
-  = params[:q]
+.wrapper
+  h1
+    = tr('Results')
+    ' :
+    = params[:q]
 
-.row
-  .span8
-    - unless @groups.blank?
-      h2= tr('Groups')
-      .list_view= render @groups
-    - else
-      p= tr('Not found.')
-  .span4
-    - unless @events.blank?
-      h2= tr('Events')
-      .list_view= render @events
-    - else
-      p= tr('Not found.')
+  h2= tr('Cities')
+  - unless @cities.blank?
+    .list_view= render @cities
+  - else
+    p= tr('City not found.')
+
+  h2= tr('Groups')
+  - unless @groups.blank?
+    .list_view= render @groups
+  - else
+    p= tr('Group not found.')
+
+  h2= tr('Events')
+  - unless @events.blank?
+    .list_view= render @events
+  - else
+    p= tr('Event not found.')

@@ -1,5 +1,5 @@
 .row
-  .span8
+  .span6
     .wrapper
       h2= tr('Existing users')
       = semantic_form_for UserSession.new do |f|
@@ -8,7 +8,7 @@
           = f.input :password, :label => tr('Password')
           = f.input :remember_me, :as => :boolean, :label => tr('Remember me')
         = f.actions
-  .span4
+  .span6
     .wrapper
       - if use_invite_process?
         h2= tr('New here?')

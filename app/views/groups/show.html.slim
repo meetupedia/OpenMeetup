@@ -29,12 +29,12 @@
     /
 
     .wrapper
-      h3= tr('Members')
-      p= render ('users/user_names'), :users => @group.members
+      h2= tr('Members')
+      .list_view= render @group.members.order('memberships.created_at ASC')
 
     - if Settings.enable_share_buttons
       .wrapper
-        h3= tr('Sharing is caring')
+        h2= tr('Sharing is caring')
         ' <div class="fb-like" data-href="#{group_url(@group)}" data-send="false" data-width="450" data-layout="button_count" data-show-faces="false"></div><br/>
         ' <div class="g-plusone" data-size="medium"></div><br/>
         ' <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>

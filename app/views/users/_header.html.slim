@@ -18,4 +18,4 @@
         - if current_user and not @user == current_user
           = render 'user_follows/button', :user => @user
 
-      h1.user= link_to @user.name, @user
+      h1.user= user_link @user

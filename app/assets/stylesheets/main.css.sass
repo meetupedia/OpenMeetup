@@ -1,24 +1,3 @@
-@media all and (min-width: 1025px)
-  .container
-    max-width: 940px
-    .row
-      .span4
-        margin-left: 30px
-        max-width: 310px
-      .span8
-        margin-left: 30px
-        max-width: 600px
-        .row
-          margin-left: -30px
-          .span4
-            margin-left: 30px
-            max-width: 310px
-      .span12
-        margin-left: 30px
-        max-width: 940px
-  #content
-    padding: 70px 0 20px 0
-
 body
   background: #d7dfe7
   font: normal 12px/18px Verdana, Arial, sans-serif
@@ -29,7 +8,7 @@ td.right_aligned
 .center
   text-align: center
 
-h1, h2, h3
+h1, h2, h3, h4
   font-family: "Trebuchet MS", Arial, sans-serif
   font-weight: normal
 
@@ -38,6 +17,9 @@ h1:nth-of-type(1), h3:nth-of-type(1)
 
 h2:nth-of-type(1)
   margin-top: 0
+
+h4
+  margin: 0
 
 a
   color: #005f8f
@@ -93,14 +75,9 @@ div.group.list_item
     margin: 10px 0
     padding: 5px 10px
 
-#content
-  background: #efeff7
-
 #footer
-  border-top: 1px solid #efeff7
   color: #9f9f9f
   font-size: 11px
-  margin-top: 1px
   padding: 10px 0px 20px 0px
   .footer-left
     float: left
@@ -503,3 +480,39 @@ ul.tiles
   font-size: 16px
   line-height: 24px
 
+
+@media all and (min-width: 1025px)
+  .container
+    max-width: 940px
+    .row
+      .span4
+        margin-left: 30px
+        max-width: 310px
+      .span6
+        margin-left: 30px
+        max-width: 455px
+      .span8
+        margin-left: 30px
+        max-width: 600px
+        .row
+          margin-left: -30px
+          .span4
+            margin-left: 30px
+            max-width: 310px
+      .span12
+        margin-left: 30px
+        max-width: 940px
+  #content
+    background: #efeff7
+    padding: 70px 0 20px 0
+  #footer
+    border-top: 1px solid #efeff7
+    margin-top: 1px
+
+@media all and (max-width: 1025px)
+  body
+    background: #efeff7
+  #footer
+    background: #d7dfe7
+    margin: 1px -20px -20px -20px
+    padding: 10px 20px 20px 20px
