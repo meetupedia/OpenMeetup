@@ -101,7 +101,7 @@ private
 
   def current_city
     return @current_city if defined?(@current_city)
-    @current_city = current_user.andand.city || City.first
+    @current_city = session[:city] || current_user.andand.city || City.first
   end
 
   def current_user_session
