@@ -135,7 +135,7 @@ Openmeetup::Application.routes.draw do
   match '/download_database' => 'system#download_database', :as => :download_database
 
   unless Rails.application.config.consider_all_requests_local
-    match '*not_found', to: 'errors#error_404'
+    match '*not_found', :to => 'errors#error_404'
   end
 
   resources :authentications
