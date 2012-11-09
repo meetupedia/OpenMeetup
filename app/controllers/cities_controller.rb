@@ -1,6 +1,6 @@
 class CitiesController < CommonController
   load_resource
-  authorize_resource :except => [:index, :show]
+  authorize_resource :except => [:index, :show, :search]
 
   def index
     @cities = City.where('name LIKE ?', "%#{params[:q]}%").includes(:country)
@@ -10,5 +10,10 @@ class CitiesController < CommonController
   end
 
   def show
+  end
+
+  def search
+    @city = City.find_by_id(params[:city][:id])
+    redirect_to @city
   end
 end

@@ -10,30 +10,35 @@ class ApplicationController < ActionController::Base
 
   auto_user
 
-  rescue_from CanCan::AccessDenied do |exception|
-    unless current_user
-      flash[:alert] = 'Be kell jelentkezned!'
-      authenticate
-    else
-      flash[:alert] = 'Nem hozzáférhető számodra a kért oldal!'
-      redirect_to root_url
-    end
-  end
-
   unless Rails.application.config.consider_all_requests_local
-    rescue_from Exception, :with => lambda { |exception| render_error 500, exception }
-    rescue_from ActionController::RoutingError, ActionController::UnknownController, AbstractController::ActionNotFound, ActiveRecord::RecordNotFound, :with => lambda { |exception| render_error 404, exception }
-  end
+    rescue_from Exception do |exception|
+      handling_error 500, exception
+    end
 
-  private
-  def render_error(status, exception)
-    respond_to do |format|
-      format.html { render :template => "errors/error_#{status}", :layout => 'layouts/application', :status => status }
-      format.all { render :nothing => true, :status => status }
+    rescue_from ActionController::RoutingError, ActionController::UnknownController, AbstractController::ActionNotFound, ActiveRecord::RecordNotFound do |exception|
+      handling_error 404, exception
+    end
+
+    rescue_from CanCan::AccessDenied do |exception|
+      unless current_user
+        flash[:alert] = 'Be kell jelentkezned!'
+        authenticate
+      else
+        flash[:alert] = 'Nem hozzáférhető számodra a kért oldal!'
+        redirect_to root_url
+      end
     end
   end
 
 private
+
+  def handling_error(status, exception)
+    ExceptionNotifier::Notifier.exception_notification(request.env, exception, :data => {:message => 'an error happened'}).deliver
+    respond_to do |format|
+      format.html { render "errors/error_#{status}", :status => status }
+      format.any { render :nothing => true, :status => status }
+    end
+  end
 
   if Rails.env == 'development'
     def tr(text)
@@ -142,9 +147,4 @@ private
     I18n.locale = current_locale
     current_user.update_attribute :locale, I18n.locale if current_user and not current_user.locale == I18n.locale.to_s
   end
-
-  def notify(exception)
-    ExceptionNotifier::Notifier.exception_notification(request.env, exception, :data => {:message => 'an error happened'}).deliver
-  end
-
 end
