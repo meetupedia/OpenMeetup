@@ -1,6 +1,7 @@
 # encoding: UTF-8
 
 Openmeetup::Application.routes.draw do
+
   mount WillFilter::Engine => '/will_filter'
   if Rails.env == 'production'
     mount Tr8n::Engine => '/tr8n'
@@ -132,6 +133,10 @@ Openmeetup::Application.routes.draw do
   match '/system' => 'system#index', :as => :system
   match '/reload' => 'system#reload', :as => :reload
   match '/download_database' => 'system#download_database', :as => :download_database
+
+  unless Rails.application.config.consider_all_requests_local
+    match '*not_found', to: 'errors#error_404'
+  end
 
   resources :authentications
   match '/auth/:provider/callback' => 'authentications#create'
