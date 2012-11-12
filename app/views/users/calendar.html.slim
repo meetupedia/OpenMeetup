@@ -1,6 +1,7 @@
+h1= tr('The next 7 days')
+
 .row
   .span8
-    h1= tr('The next 7 days')
     .wrapper
       h2= tr('Your meetup groups')
       - if (events = @user.get_joined_events_in_next_week.all).present?
@@ -23,3 +24,8 @@
             = render event
       - else
         p.muted= tr('No friends in events in the next week.')
+  .span4
+    .wrapper
+      h2= link_to current_city.name, current_city
+      - if (events = current_city.events.where('start_time > ?', Time.zone.now).order('start_time ASC').limit(10).all).present?
+        .list_view= render events

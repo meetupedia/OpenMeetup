@@ -18,6 +18,7 @@ Openmeetup::Application.routes.draw do
 
   resources :cities do
     collection do
+      get :city_names
       post :search
     end
   end
@@ -148,6 +149,6 @@ Openmeetup::Application.routes.draw do
   match ':controller(/:action(/:id))(.:format)'
 
   unless Rails.application.config.consider_all_requests_local
-    match '*not_found', to: 'errors#error_404'
+    match '*not_found', :to => 'errors#error_404'
   end
 end
