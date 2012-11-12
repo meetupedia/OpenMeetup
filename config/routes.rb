@@ -16,7 +16,12 @@ Openmeetup::Application.routes.draw do
   mount PostMailer::Preview => '/post_mailer/mail_view'
   mount WaveMailer::Preview => '/wave_mailer/mail_view'
 
-  resources :cities
+  resources :cities do
+    collection do
+      get :city_names
+      post :search
+    end
+  end
 
   resources :groups do
     member do
@@ -134,10 +139,6 @@ Openmeetup::Application.routes.draw do
   match '/reload' => 'system#reload', :as => :reload
   match '/download_database' => 'system#download_database', :as => :download_database
 
-  unless Rails.application.config.consider_all_requests_local
-    match '*not_found', to: 'errors#error_404'
-  end
-
   resources :authentications
   match '/auth/:provider/callback' => 'authentications#create'
   match '/sign_in' => 'root#sign_in', :as => :sign_in
@@ -146,4 +147,8 @@ Openmeetup::Application.routes.draw do
 
   root :to => 'root#index'
   match ':controller(/:action(/:id))(.:format)'
+
+  unless Rails.application.config.consider_all_requests_local
+    match '*not_found', :to => 'errors#error_404'
+  end
 end

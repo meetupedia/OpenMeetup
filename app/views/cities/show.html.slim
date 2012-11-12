@@ -1,19 +1,25 @@
-/ .navbar
-/   .navbar-inner
-/     .container
-/       a.brand Budapest
-/       ul.nav
-/         li= link_to 'Teszt', '#'
-
 .wrapper
+  .pull-right
+    = semantic_form_for City.new, :url => search_cities_path do |f|
+      .pull-right= f.text_field :name
+      .pull-right= f.label :name, tr('Change city'), :class => 'change_field'
+
   h1
-    / =' tr('Next events:')
     = @city.name
 
-  ul.nav.nav-tabs
-    li= link_to 'Groups', '#'
-    li.active= link_to 'Events', '#'
-    li= link_to 'Interests', '#'
+  javascript:
+    $('#city_name').typeahead({
+      source: function(query, process){
+        $.get('/cities/city_names', {q: query, limit: 20}, function(data){
+          process(data)
+        })
+      }
+    })
+
+  / ul.nav.nav-tabs
+  /   li= link_to 'Groups', '#'
+  /   li.active= link_to 'Events', '#'
+  /   li= link_to 'Interests', '#'
 
   - if (events = Event.joins(:group => :city).where('cities.id' => @city.id).where('start_time > ?', Time.zone.now).order('start_time ASC').all).present?
     - events.each do |event|

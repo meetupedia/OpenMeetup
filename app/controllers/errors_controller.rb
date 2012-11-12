@@ -1,10 +1,7 @@
-class ErrorsController < ApplicationController
-  def error_404
-    notify exception
-    @not_found_path = params[:not_found]
-  end
+# encoding: UTF-8
 
-  def error_500
-    notify exception
+class ErrorsController < ApplicationController
+
+  def error_404
   end
 end

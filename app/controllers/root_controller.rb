@@ -8,7 +8,8 @@ class RootController < CommonController
       if current_user.restricted_access
         redirect_to restricted_access_url
       else
-        redirect_to discovery_url
+        @user = current_user
+        render 'users/calendar'
       end
     elsif Settings.customization
       template = "customizations/#{Settings.customization}"

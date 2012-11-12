@@ -5,6 +5,7 @@ class City < ActiveRecord::Base
   key :permalink, :index => true
   key :state
   belongs_to :country
+  has_many :events, :dependent => :nullify
   has_many :groups, :dependent => :nullify
   has_many :users, :dependent => :nullify
 
