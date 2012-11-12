@@ -11,6 +11,10 @@ module ApplicationHelper
       text
     end
 
+    def tr8n_language_strip_tag
+      ''
+    end
+
     def tr8n_scripts_tag
       ''
     end
