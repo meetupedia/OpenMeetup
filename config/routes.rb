@@ -17,9 +17,11 @@ Openmeetup::Application.routes.draw do
   mount WaveMailer::Preview => '/wave_mailer/mail_view'
 
   resources :cities do
+    member do
+      get :search
+    end
     collection do
-      get :city_names
-      post :search
+      post :jump
     end
   end
 
@@ -132,8 +134,6 @@ Openmeetup::Application.routes.draw do
   match '/search' => 'search#index', :as => :search
   match '/dashboard' => 'root#dashboard', :as => :dashboard
   match '/restricted_access' => 'root#restricted_access', :as => :restricted_access
-
-  match '/discovery' => 'discovery#index', :as => :discovery
 
   match '/system' => 'system#index', :as => :system
   match '/reload' => 'system#reload', :as => :reload

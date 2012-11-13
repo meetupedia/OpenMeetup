@@ -6,7 +6,7 @@ class InterestsController < CommonController
   skip_before_filter :check_restricted_access
 
   def index
-    redirect_to discovery_url if Interest.count == 0
+    redirect_to root_url if Interest.count == 0
   end
 
   def create
