@@ -11,7 +11,7 @@ class AuthenticationsController < CommonController
       unless current_user.restricted_access
         current_user.authentications.create! :provider => omniauth['provider'], :uid => omniauth['uid']
         current_user.apply_omniauth(omniauth)
-        redirect_to discovery_url
+        redirect_to root_url
       else
         redirect_to request_invite_users_path
       end
@@ -51,6 +51,6 @@ class AuthenticationsController < CommonController
       user_session = UserSession.new(User.find_by_single_access_token(user.single_access_token))
       user_session.save
     end
-    redirect_back_or_default discovery_url
+    redirect_back_or_default root_url
   end
 end

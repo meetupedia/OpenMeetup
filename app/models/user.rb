@@ -145,6 +145,14 @@ class User < ActiveRecord::Base
     Event.joins(:participations).where('participations.user_id' => followed_user_ids).where('events.start_time > ? AND events.end_time < ?', Time.now, 1.week.from_now).order('start_time ASC').group('events.id').limit(limit)
   end
 
+  def get_joined_events_in_next_month(limit = 3)
+    Event.joins(:participations).where('participations.user_id' => self.id).where('events.start_time > ? AND events.end_time < ?', Time.now, 1.month.from_now).order('start_time ASC').group('events.id').limit(limit)
+  end
+
+  def get_events_with_friends_in_next_month(limit = 3)
+    Event.joins(:participations).where('participations.user_id' => followed_user_ids).where('events.start_time > ? AND events.end_time < ?', Time.now, 1.month.from_now).order('start_time ASC').group('events.id').limit(limit)
+  end
+
   def friends_in_event(event)
     event.participants.where('users.id' => followed_user_ids)
   end

@@ -155,7 +155,7 @@ ul.nav-tabs
 
 h1
   color: #000000
-  margin: 25px 0
+  margin: 25px 0 15px 0
   &.event
     background: url(calendar_alt_stroke_32x32.png) no-repeat 0 4px
     padding-left: 48px
@@ -391,11 +391,13 @@ a.function
   img
     margin-top: 3px
 
-ul.token-input-list-facebook
-  width: 99%
-
 .modal-content h1
   margin-top: 5px
+
+.change_city
+  margin-top: 10px
+  ul.token-input-list-facebook
+    width: 250px
 
 form
   margin-bottom: 0px
@@ -408,6 +410,7 @@ form
 .breadcrumbs
   margin: -20px 0 20px -20px
   position: relative
+  z-index: 10
   a
     background: #a7a7af
     border: none
@@ -421,6 +424,24 @@ form
       text-decoration: none
     &:first-child
       border-radius: 5px 0 0 0
+
+.notification
+  .breadcrumbs
+    float: right
+    margin: 0 5px 0 10px
+    a:first-child
+      border-radius: 0 0 5px 5px
+  a.close
+    margin: 2px 4px 0 0
+    position: relative
+    z-index: 10
+  .label
+    margin: 5px 10px 0 0
+    position: relative
+    z-index: 10
+  .comments
+    display: none
+
 
 .dropdown-toggle img
   vertical-align: top
@@ -459,18 +480,6 @@ ul.tiles
 
 .table
   margin: 10px 0
-
-.notification
-  a.close
-    margin: 2px 4px 0 0
-    position: relative
-    z-index: 10
-  .label
-    margin: 5px 10px 0 0
-    position: relative
-    z-index: 10
-  .comments
-    display: none
 
 .icon-container
   padding-left: 15px

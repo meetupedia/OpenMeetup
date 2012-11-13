@@ -1,32 +1,62 @@
 .wrapper
-  .pull-right
-    = semantic_form_for City.new, :url => search_cities_path do |f|
-      .pull-right= f.text_field :name
-      .pull-right= f.label :name, tr('Change city'), :class => 'change_field'
+  .change_city
+    = semantic_form_for City.new, :url => jump_cities_path do |f|
+      .pull-right= f.text_field :id
+      .pull-right= f.label :id, tr('Change city'), :class => 'change_field'
 
   h1
     = @city.name
 
   javascript:
-    $('#city_name').typeahead({
-      source: function(query, process){
-        $.get('/cities/city_names', {q: query, limit: 20}, function(data){
-          process(data)
-        })
-      }
+    $('#city_id').tokenInput('/cities.json', {
+      allowFreeTagging: true,
+      crossDomain: false,
+      preventDuplicates: true,
+      tokenLimit: 1,
+      theme: 'facebook',
+      onAdd: function(){
+        $('#city_id').closest('form').submit()
+      },
     })
 
-  / ul.nav.nav-tabs
-  /   li= link_to 'Groups', '#'
-  /   li.active= link_to 'Events', '#'
-  /   li= link_to 'Interests', '#'
+.row
+  .span8
+    .wrapper
+      - if can? :create, Group
+        p.pull-right= link_to tr('Create new group'), new_group_path, :class => 'btn'
 
-  - if (events = Event.joins(:group => :city).where('cities.id' => @city.id).where('start_time > ?', Time.zone.now).order('start_time ASC').all).present?
-    - events.each do |event|
-      .list_view
-        = render event.group
-        .icon-container
-          i.icon-chevron-down
-        = render event
-  - else
-    p.muted= 'No events.'
+      h2= tr('Searching for groups')
+
+      form action='#{discovery_path}' method='get' id='discovery'
+        input type='text' placeholder=trl('Search') name='q'
+      #results
+        - if params[:q].blank?
+          p
+            - unless params[:order] == 'name'
+              =' link_to tr('Order by name'), '?order=name', :class => 'btn btn-mini'
+            - else
+              span.btn.btn-mini.btn-success.disabled=' tr('Order by name')
+            - unless params[:order] == 'members'
+              =' link_to tr('Order by members'), '?order=members', :class => 'btn btn-mini'
+            - else
+              span.btn.btn-mini.btn-success.disabled=' tr('Order by members')
+        - if @groups
+          = render 'search'
+          - if @groups.respond_to?(:total_pages)
+            = will_paginate @groups
+
+javascript:
+  $(function(){
+    $('form#discovery input').bind('input', $.debounce(250, function(event){
+      var item = $(this)
+      item.addClass('loading')
+      $.ajax({
+        url: '#{search_city_path(@city)}',
+        data: {'q': item.val()},
+        success: function(data){
+          item.removeClass('loading')
+          $('#results').html(data)
+        }
+      })
+    }))
+  })

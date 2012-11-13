@@ -3,7 +3,7 @@
 module ApplicationHelper
 
   if Rails.env == 'development'
-    def tr(text)
+    def tr(text, options = {})
       text
     end
 
