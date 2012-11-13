@@ -1,15 +1,13 @@
-.row
-  .span8
-    .wrapper
-      .button-menu
-        .btn-group.pull-right
-          a.btn.dropdown-toggle(data-toggle="dropdown" href="#")
-            =' image_tag 'cog.png'
-            span.caret
-          ul.dropdown-menu
-            - if can? :create, Tag
-              .li= link_to tr('Add new tag'), new_tag_path
+.wrapper
+  .button-menu
+    .btn-group.pull-right
+      a.btn.dropdown-toggle(data-toggle="dropdown" href="#")
+        =' image_tag 'cog.png'
+        span.caret
+      ul.dropdown-menu
+        - if can? :create, Tag
+          .li= link_to tr('Add new tag'), new_tag_path
 
-      h1= tr('Tags')
+  h1= tr('Tags')
 
-      p= render @tags
+  p= render @tags
