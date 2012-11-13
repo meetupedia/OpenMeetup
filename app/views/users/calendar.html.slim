@@ -1,5 +1,5 @@
 .change_city
-  h2.pull-right= link_to tr('Explore {city}', {:city => current_city.name}), current_city
+  h2.pull-right= link_to tr('Explore {city}', {:tokens => {:city => current_city.name}}), current_city
 
 h1= tr('The next 31 days')
 
