@@ -27,8 +27,8 @@
 
       h2= tr('Searching for groups')
 
-      form action='#{discovery_path}' method='get' id='discovery'
-        input type='text' placeholder=trl('Search') name='q'
+      form action='#{city_path(@city)}' method='get' id='discovery'
+        input type='text' placeholder=trl('Search') name='q' value="#{params[:q]}"
       #results
         - if params[:q].blank?
           p
@@ -44,6 +44,11 @@
           = render 'search'
           - if @groups.respond_to?(:total_pages)
             = will_paginate @groups
+  .span4
+    .wrapper
+      h2= tr('Tags')
+      - unless (tags = Tag.joins(:groups => :city).where('cities.id' => @city.id).order('tags.name ASC').all).blank?
+        = render tags
 
 javascript:
   $(function(){
