@@ -67,6 +67,6 @@ Openmeetup::Application.configure do
 
   Openmeetup::Application.config.middleware.use ExceptionNotifier,
     :email_prefix => "[OpenMeetup] ",
-    :sender_address => %{"noreply@openmeetup.net" <noreply@openmeetup.net>},
+    :sender_address => %{"exceptions@openmeetup.net" <exceptions@openmeetup.net>},
     :exception_recipients => %w{bence.nagy@gmail.com p.toth.andras@gmail.com}
 end
