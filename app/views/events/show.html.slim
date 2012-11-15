@@ -8,7 +8,7 @@
         li= link_to "<span class='menu_count'>#{@event.event_invitations.size}</span> #{tr('invited')}".html_safe, invited_event_path(@event), :rel => 'modal'
 
       - if can? :participations, @event and @event.questions.present?
-        p= link_to 'More information about participations', participations_event_path(@event), :rel => 'modal'
+        p= link_to tr("View participants' answers"), participations_event_path(@event), :rel => 'modal'
 
     .wrapper
       h2= tr('Participants')
