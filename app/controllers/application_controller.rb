@@ -147,4 +147,9 @@ private
     I18n.locale = current_locale
     current_user.update_attribute :locale, I18n.locale if current_user and not current_user.locale == I18n.locale.to_s
   end
+
+  def use_invite_process?
+    Settings.enable_invite_process and not (cookies[:invitation_code].present? and (EventInvitation.find_by_code(cookies[:invitation_code]) or GroupInvitation.find_by_code(cookies[:invitation_code]) or cookies[:invitation_code] == Settings.skip_invite_process_code))
+  end
+  helper_method :use_invite_process?
 end
