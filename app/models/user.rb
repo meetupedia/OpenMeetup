@@ -59,7 +59,7 @@ class User < ActiveRecord::Base
   attr_protected :is_admin
 
   after_create do |user|
-    user.update_attributes :last_notified_at => user.created_at
+    user.update_attributes :last_notified => user.created_at
     true
   end
 
