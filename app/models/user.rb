@@ -58,6 +58,11 @@ class User < ActiveRecord::Base
   validates :password, :presence => {:if => :password_required?}, :confirmation => true
   attr_protected :is_admin
 
+  after_create do |user|
+    user.update_attributes :last_notified_at => user.created_at
+    true
+  end
+
   def password_required?
     authentications.blank? and crypted_password.blank? and not restricted_access
   end
