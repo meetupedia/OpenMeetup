@@ -91,11 +91,6 @@ class UsersController < CommonController
 
 protected
 
-  def use_invite_process?
-    Settings.enable_invite_process and not (cookies[:invitation_code].present? and (EventInvitation.find_by_code(cookies[:invitation_code]) or GroupInvitation.find_by_code(cookies[:invitation_code]) or cookies[:invitation_code] == Settings.skip_invite_process_code))
-  end
-  helper_method :use_invite_process?
-
   def create_city
     if request.location
       country = Country.find_or_create_by_name_and_code(request.location.country, request.location.country_code)

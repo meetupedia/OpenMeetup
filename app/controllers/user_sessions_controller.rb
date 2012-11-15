@@ -11,7 +11,7 @@ class UserSessionsController < CommonController
     if @user_session.save
       redirect_back_or_default root_url
     else
-      render :new
+      render 'users/new'
     end
   end
 

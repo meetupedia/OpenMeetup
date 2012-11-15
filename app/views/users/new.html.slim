@@ -2,7 +2,7 @@
   .span6
     .wrapper
       h2= tr('Existing users')
-      = semantic_form_for UserSession.new do |f|
+      = semantic_form_for @user_session || UserSession.new do |f|
         = f.inputs do
           = f.input :email, :label => tr('Email')
           = f.input :password, :label => tr('Password')
@@ -15,7 +15,7 @@
         p= link_to tr('Request an invite'), request_invite_users_path, :class => 'btn btn-primary'
       - else
         h2= tr('New here?')
-        = semantic_form_for @user do |f|
+        = semantic_form_for @user || User.new do |f|
           - if params[:invitation_code]
             = hidden_field_tag :invitation_code, params[:invitation_code]
           = f.inputs do
