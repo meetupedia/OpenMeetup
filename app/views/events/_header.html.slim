@@ -3,6 +3,8 @@
 
   .button-menu
     - if current_user
+      - absence = @event.absence_for(current_user)
+      - participation = @event.participation_for(current_user)
       .btn-group.pull-right
         a.btn.dropdown-toggle(data-toggle="dropdown" href="#")
           =' image_tag 'cog.png'
@@ -14,14 +16,9 @@
           li= link_to tr('Invite all group members'), new_event_event_invitation_path(@event, :invite_members => true), :rel => 'modal'
           - if can? :delete, @event
             li= link_to tr('Delete event'), @event, :method => :delete, :confirm => trl('Are you sure?')
-          - if participation
-            - unless @event.questions.blank?
-              li= link_to tr('Edit answers'), edit_participation_path(participation), :rel => 'modal'
-        - elsif not absence
-          = link_to "<i class='icon-ok-sign icon-white'></i> #{tr('Join')}".html_safe, event_participations_path(@event), :method => :post, :class => 'btn btn-primary'
+          - if participation and @event.questions.present? and @event.start_time > Time.zone.now
+            li= link_to tr('Edit answers'), edit_participation_path(participation), :rel => 'modal'
       - if @event.start_time > Time.zone.now
-        - absence = @event.absence_for(current_user)
-        - participation = @event.participation_for(current_user)
         - if absence
           =' link_to "<i class='icon-minus-sign icon-white'></i> #{tr('Not going')}".html_safe, absence_path(absence), :method => :delete, :class => 'btn btn-warning'
         - elsif not participation
