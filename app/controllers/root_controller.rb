@@ -31,8 +31,7 @@ class RootController < CommonController
     unless current_user.andand.is_admin?
       redirect_to root_url
     end
-    @notifications = Notification.order('created_at DESC')
-    @notifications = @notifications.paginate :page => params[:page]
+    @activities = Activity.order('created_at DESC').paginate :page => params[:page]
   end
 
   def restricted_access

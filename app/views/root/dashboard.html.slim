@@ -2,9 +2,9 @@ h1= tr('Dashboard')
 
 h2= tr('Notifications')
 .list_view
-  = will_paginate @notifications
-  = render @notifications
-  = will_paginate @notifications
+  = will_paginate @activities
+  = render @activities
+  = will_paginate @activities
 
 h2= tr('Members')
 table.table= render :partial => 'dashboard/user', :collection => User.all, :as => :user
