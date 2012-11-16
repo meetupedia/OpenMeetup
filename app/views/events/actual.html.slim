@@ -1,0 +1,19 @@
+= render 'events/header'
+
+.wrapper
+  - if participation = @event.participation_for(current_user)
+    - unless participation.is_checkined?
+      = link_to tr('Check-in for event'), checkin_participation_path(participation), :method => :post, :confirm => trl('Are you sure?'), :class => 'btn btn-primary'
+    - else
+      p
+        span.label.label-success= tr('Already check-ined.')
+
+  = semantic_form_for Post.new, :url => url_for([@event.group, :posts]) do |f|
+    = f.hidden_field :is_live, :value => true
+    = f.inputs do
+      = f.input :post, :label => false
+    = f.actions
+
+.wrapper
+  h2= tr('Participants')
+  .list_view= render @event.participations.order('participations.created_at ASC')

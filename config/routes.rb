@@ -37,6 +37,7 @@ Openmeetup::Application.routes.draw do
     resources :posts, :shallow => true
     resources :events, :shallow => true do
       member do
+        get :actual
         get :images
         get :invited
         get :map
@@ -52,6 +53,9 @@ Openmeetup::Application.routes.draw do
       resources :event_invitations, :shallow => true
       resources :images, :shallow => true
       resources :participations, :shallow => true do
+        member do
+          post :checkin
+        end
         collection do
           get :set
         end

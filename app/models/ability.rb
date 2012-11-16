@@ -57,7 +57,7 @@ class Ability
       can [:index, :destroy], Notification
 
       can [:create, :set], Participation
-      can [:update, :destroy], Participation do |participation|
+      can [:update, :destroy, :checkin], Participation do |participation|
         participation.user_id == current_user.id or participation.event.group.admins.include?(current_user)
       end
 

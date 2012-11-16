@@ -1,6 +1,7 @@
 # encoding: UTF-8
 
 class Participation < ActiveRecord::Base
+  key :is_checkined, :as => :boolean, :default => false
   timestamps
 
   belongs_to :user

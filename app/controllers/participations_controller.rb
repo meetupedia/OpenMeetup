@@ -38,6 +38,11 @@ class ParticipationsController < CommonController
     redirect_to @participation.event
   end
 
+  def checkin
+    @participation.update_attributes :is_checkined => true
+    redirect_to actual_event_path(@participation.event)
+  end
+
   def set
     @participation = @event.participations.build
     create

@@ -2,4 +2,6 @@
   - if can? :destroy, participation
     .pull-right= link_to 'Törlés', participation, :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-danger btn-mini'
   .avatar= user_avatar participation.user
-  = link_to participation.user.name, participation.user
+  =' link_to participation.user.name, participation.user
+  - if participation.is_checkined?
+    span.label.label-success= tr('check-ined')

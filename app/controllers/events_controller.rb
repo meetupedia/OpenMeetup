@@ -3,7 +3,7 @@
 class EventsController < CommonController
   load_resource :group
   load_resource :event, :through => :group, :shallow => true
-  authorize_resource :except => [:index, :show, :images, :map, :users]
+  authorize_resource :except => [:index, :show, :actual, :images, :map, :users]
 
   def show
     events_show
@@ -37,6 +37,9 @@ class EventsController < CommonController
   def destroy
     @event.destroy
     redirect_to @event.group, :notice => 'Esemény törölve.'
+  end
+
+  def actual
   end
 
   def images

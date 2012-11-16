@@ -5,6 +5,7 @@ class Post < ActiveRecord::Base
   key :post, :as => :text
   key :is_highlighted, :as => :boolean, :default => false
   key :is_broadcasted, :as => :boolean, :default => false
+  key :is_live, :as => :boolean, :default => false
   timestamps
 
   belongs_to :user
