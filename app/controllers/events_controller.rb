@@ -6,7 +6,7 @@ class EventsController < CommonController
   authorize_resource :except => [:index, :show, :images, :map, :users]
 
   def show
-    @title = @event.title
+    events_show
   end
 
   def new

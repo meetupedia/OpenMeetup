@@ -1,5 +1,5 @@
 - unless modal_request?
-  = render 'header'
+  = render 'events/header'
 
 .wrapper
   - if can? :create, EventInvitation.new(:event => @event)

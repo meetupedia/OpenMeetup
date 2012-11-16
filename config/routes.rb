@@ -147,8 +147,5 @@ Openmeetup::Application.routes.draw do
 
   root :to => 'root#index'
   match ':controller(/:action(/:id))(.:format)'
-
-  unless Rails.application.config.consider_all_requests_local
-    match '*not_found', :to => 'errors#error_404'
-  end
+  match '/:id' => 'root#undefined', :as => :undefined
 end
