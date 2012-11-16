@@ -64,7 +64,7 @@ class Group < ActiveRecord::Base
   auto_permalink :permaname
 
   before_validation do |group|
-    group.permaname = group.name if group.permaname.blank?
+    group.permaname = group.name.parameterize if group.permaname.blank?
     true
   end
 

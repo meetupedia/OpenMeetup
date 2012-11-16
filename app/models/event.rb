@@ -34,7 +34,7 @@ class Event < ActiveRecord::Base
   auto_permalink :permaname
 
   before_validation do |event|
-    event.permaname = event.title if event.permaname.blank?
+    event.permaname = event.title.parameterize if event.permaname.blank?
     true
   end
 
