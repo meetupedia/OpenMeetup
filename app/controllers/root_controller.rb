@@ -39,4 +39,14 @@ class RootController < CommonController
   def sign_in
     redirect_to sign_in_with_email_path unless Settings.enable_facebook_login or Settings.enable_twitter_login
   end
+
+  def undefined
+    if @group = Group.find_by_permalink(params[:id])
+      groups_show
+    elsif @event = Event.find_by_permalink(params[:id])
+      events_show
+    else
+      render 'errors/error_404', :status => 404
+    end
+  end
 end

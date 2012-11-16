@@ -1,7 +1,6 @@
-= render 'header'
+= render 'groups/header'
 
-.row
-  .span7
-    h2= tr('Requests')
-    .list_view= render @membership_requests
-    = will_paginate @membership_requests
+.wrapper
+  h2= tr('Requests')
+  .list_view= render @membership_requests
+  = will_paginate @membership_requests

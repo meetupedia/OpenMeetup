@@ -3,6 +3,7 @@
 class Event < ActiveRecord::Base
   include CommonCommentable
   key :title
+  key :permaname
   key :permalink, :index => true
   key :description, :as => :text
   key :latitude, :as => :float
@@ -30,7 +31,12 @@ class Event < ActiveRecord::Base
   has_many :waves, :dependent => :nullify
 
   acts_as_gmappable :validation => false
-  auto_permalink :title
+  auto_permalink :permaname
+
+  before_validation do |event|
+    event.permaname = event.title if event.permaname.blank?
+    true
+  end
 
   after_create :create_admin_participation
 

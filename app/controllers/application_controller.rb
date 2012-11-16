@@ -152,4 +152,16 @@ private
     Settings.enable_invite_process and not (cookies[:invitation_code].present? and (EventInvitation.find_by_code(cookies[:invitation_code]) or GroupInvitation.find_by_code(cookies[:invitation_code]) or cookies[:invitation_code] == Settings.skip_invite_process_code))
   end
   helper_method :use_invite_process?
+
+  def groups_show
+    @activities = @group.activities.where('activable_type NOT IN (?)', ['Comment']).order('created_at DESC').paginate :page => params[:page]
+    @title = @group.name
+    @static_follow = true
+    render 'groups/show'
+  end
+
+  def events_show
+    @title = @event.title
+    render 'events/show'
+  end
 end

@@ -1,6 +1,9 @@
 = semantic_form_for @event, :url => url do |f|
   = f.inputs do
     = f.input :title
+    .control-group
+      | http://meetupedia.com/
+      = f.text_field :permaname
     = f.input :start_time
     = f.input :end_time
     .control-group

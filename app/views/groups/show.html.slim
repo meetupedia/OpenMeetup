@@ -1,4 +1,4 @@
-= render 'header'
+= render 'groups/header'
 
 .row
   .span4
@@ -42,7 +42,7 @@
   .span8
     - if event = @group.next_event
       .wrapper
-        = render 'next_event', :event => event
+        = render 'groups/next_event', :event => event
 
     .wrapper
       .button-menu= link_to tr('New post'), polymorphic_path([:new, @group, :post]), :class => 'btn', :rel => 'modal'

@@ -2,9 +2,10 @@
 
 class Group < ActiveRecord::Base
   key :name
-  key :facebook_uid
+  key :permaname
   key :permalink, :index => true
   key :description, :as => :text
+  key :facebook_uid
   key :location, :index => true
   key :image_file_name
   key :image_content_type
@@ -60,7 +61,7 @@ class Group < ActiveRecord::Base
     },
     :convert_options => {:all => '-quality 95 -strip'}
 
-  auto_permalink :name
+  auto_permalink :permaname
 
   after_create :create_admin_membership, :write_language
   after_validation :set_city
