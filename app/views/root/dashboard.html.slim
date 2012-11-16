@@ -1,15 +1,16 @@
 h1= tr('Dashboard')
 
-h2= tr('Notifications')
-.list_view
-  = will_paginate @activities
-  = render @activities
-  = will_paginate @activities
+.wrapper
+  h2= tr('Notifications')
+  .list_view
+    = will_paginate @activities
+    = render @activities
+    = will_paginate @activities
 
-h2= tr('Members')
-table.table= render :partial => 'dashboard/user', :collection => User.all, :as => :user
+.wrapper
+  h2= tr('Members')
+  table.table= render :partial => 'dashboard/user', :collection => User.all, :as => :user
 
-hr
-
-h2= tr('Interests')
-p= render Tag.all
+.wrapper
+  h2= tr('Interests')
+  p= render Tag.all
