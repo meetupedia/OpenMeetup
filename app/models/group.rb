@@ -63,6 +63,11 @@ class Group < ActiveRecord::Base
 
   auto_permalink :permaname
 
+  before_validation do |group|
+    group.permaname = group.name if group.permaname.blank?
+    true
+  end
+
   after_create :create_admin_membership, :write_language
   after_validation :set_city
 
