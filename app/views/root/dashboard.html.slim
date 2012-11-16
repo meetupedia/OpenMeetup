@@ -1,9 +1,15 @@
-h1 Vezérlőpult
+h1= tr('Dashboard')
+
+h2= tr('Notifications')
+.list_view
+  = will_paginate @notifications
+  = render @notifications
+  = will_paginate @notifications
 
 h2= tr('Members')
 table.table= render :partial => 'dashboard/user', :collection => User.all, :as => :user
 
 hr
 
-h2 Érdeklődési körök
+h2= tr('Interests')
 p= render Tag.all

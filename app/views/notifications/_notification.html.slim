@@ -1,6 +1,7 @@
 = div_for notification do
   .pull-right= link_to '×', notification_path(notification), :method => :delete, :remote => true, :class => 'close'
   .breadcrumbs= link_to notification.group.name, notification.group
-  - if @last_notified < notification.created_at
-    span.label.label-success.pull-right= tr('new')
+  - unless @last_notified.blank?
+    - if @last_notified < notification.created_at
+      span.label.label-success.pull-right= tr('new')
   = render notification.activity
