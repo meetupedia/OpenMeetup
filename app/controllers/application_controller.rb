@@ -163,9 +163,9 @@ private
   def events_show
     @title = @event.title
     if Time.zone.now.between?(@event.start_time, @event.end_time)
-      render 'events/show'
-    else
       render 'events/actual'
+    else
+      render 'events/show'
     end
   end
 end
