@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 
 class ImagesController < CommonController
   load_resource :event
@@ -8,12 +8,17 @@ class ImagesController < CommonController
 
   def create
     @image = Image.new(coerce(params)[:image])
-    @image.imageable = @event if @event
-    @image.imageable = @group if @group
+    @image.imageable = @event || @group
     if @image.save
       create_activity @image
       respond_to do |format|
-        format.html { redirect_to @image.imageable }
+        format.html do
+          if @image.is_live?
+            redirect_to actual_event_path(@image.imageable)
+          else
+            redirect_to @image.imageable
+          end
+        end
         format.js
       end
     end

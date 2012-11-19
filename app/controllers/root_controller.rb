@@ -47,7 +47,7 @@ class RootController < CommonController
     elsif @event = Event.find_by_permalink(params[:id])
       events_show
     else
-      render 'errors/error_404', :status => 404
+      render 'errors/error_404.html', :status => 404
     end
   end
 end
