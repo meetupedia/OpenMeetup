@@ -36,4 +36,4 @@
 
 .wrapper
   h2= tr('Participants')
-  .list_view= render @event.participations.order('participations.created_at ASC')
+  .list_view= render @event.participations.order('participations.is_checkined DESC, participations.created_at ASC')
