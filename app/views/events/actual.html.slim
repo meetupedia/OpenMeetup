@@ -1,6 +1,14 @@
 = render 'events/header'
 
 .wrapper
+  - if participation = @event.participation_for(current_user)
+    p
+      - unless participation.is_checkined?
+        = link_to tr('Check-in for event'), checkin_participation_path(participation), :method => :post, :confirm => trl('Are you sure?'), :class => 'btn btn-primary'
+      - else
+        span.label.label-success= tr('Already check-ined.')
+    hr
+
   = semantic_form_for Post.new, :url => url_for([@event.group, :posts]) do |f|
     = f.hidden_field :is_live, :value => true
     = f.hidden_field :event_id, :value => @event.id
@@ -15,14 +23,6 @@
     = f.inputs do
       = f.input :image, :label => trl('Upload an image')
     = f.actions
-
-  - if participation = @event.participation_for(current_user)
-    hr
-    p
-      - unless participation.is_checkined?
-        = link_to tr('Check-in for event'), checkin_participation_path(participation), :method => :post, :confirm => trl('Are you sure?'), :class => 'btn btn-primary'
-      - else
-        span.label.label-success= tr('Already check-ined.')
 
 - unless (images = @event.images.order('created_at ASC').all).empty?
   .wrapper
