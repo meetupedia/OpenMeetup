@@ -42,6 +42,7 @@ Openmeetup::Application.routes.draw do
         get :invited
         get :map
         get :participations
+        get :reviews
         get :users
       end
       resources :absences, :shallow => true do
@@ -61,6 +62,7 @@ Openmeetup::Application.routes.draw do
         end
       end
       resources :questions, :shallow => true
+      resources :reviews, :shallow => true
     end
     resources :group_invitations, :shallow => true
     resources :images, :shallow => true
@@ -78,7 +80,6 @@ Openmeetup::Application.routes.draw do
         put :unset_admin
       end
     end
-    resources :reviews, :shallow => true
     resources :tags, :shallow => true do
       resources :taggings, :shallow => true
     end

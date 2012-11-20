@@ -42,9 +42,9 @@ class RootController < CommonController
   end
 
   def undefined
-    if @group = Group.find_by_permalink(params[:id])
+    if @group = Group.find_by_permaname(params[:id])
       groups_show
-    elsif @event = Event.find_by_permalink(params[:id])
+    elsif @event = Event.find_by_permaname(params[:id])
       events_show
     else
       render 'errors/error_404.html', :status => 404

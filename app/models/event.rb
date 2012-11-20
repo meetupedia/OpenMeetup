@@ -3,7 +3,7 @@
 class Event < ActiveRecord::Base
   include CommonCommentable
   key :title
-  key :permaname
+  key :permaname, :index => true
   key :permalink, :index => true
   key :description, :as => :text
   key :latitude, :as => :float
@@ -29,17 +29,26 @@ class Event < ActiveRecord::Base
   has_many :participants, :through => :participations, :source => :user
   has_many :posts, :dependent => :nullify
   has_many :questions, :dependent => :destroy
+  has_many :reviews, :dependent => :destroy
   has_many :waves, :dependent => :nullify
 
   acts_as_gmappable :validation => false
-  auto_permalink :permaname
+  auto_permalink :title
 
   before_validation do |event|
-    event.permaname = event.title.parameterize if event.permaname.blank?
+    event.permaname = event.permaname.parameterize
     true
   end
 
+  validate :check_permaname
+
   after_create :create_admin_participation
+
+  def check_permaname
+    if permaname.present? and permaname_changed? and (Group.find_by_permaname(permaname) or Event.find_by_permaname(permaname))
+      errors.add(:permaname, I18n.t('errors.messages.taken'))
+    end
+  end
 
   def absence_for(user)
     Absence.find_by_event_id_and_user_id(self.id, user.id)

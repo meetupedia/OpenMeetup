@@ -56,6 +56,10 @@ class EventsController < CommonController
     @participations = @event.participations.includes(:user, {:answers => :question})
   end
 
+  def reviews
+    @reviews = @event.reviews.order('created_at DESC')
+  end
+
   def users
     @participations = @event.participations.includes(:user).paginate :page => params[:page]
   end

@@ -6,6 +6,7 @@
       ul.tiles
         li= link_to "<span class='menu_count'>#{@event.participants.size}</span> #{tr('participants')}".html_safe, users_event_path(@event), :rel => 'modal'
         li= link_to "<span class='menu_count'>#{@event.event_invitations.size}</span> #{tr('invited')}".html_safe, invited_event_path(@event), :rel => 'modal'
+        li= link_to "<span class='menu_count'>#{@event.images.size}</span> #{tr('images')}".html_safe, images_event_path(@event), :rel => 'modal'
 
       - if can? :participations, @event and @event.questions.present?
         p= link_to tr("View participants' answers"), participations_event_path(@event), :rel => 'modal'
