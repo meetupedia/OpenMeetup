@@ -49,7 +49,6 @@ end
 
 group :development do
   gem 'hirb'
-  gem 'rack-mini-profiler'
   gem 'rspec-rails'
 end
 

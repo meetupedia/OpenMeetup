@@ -57,14 +57,6 @@ private
     end
   end
 
-
-  # before_filter :miniprofiler
-
-  # def miniprofiler
-  #   Rack::MiniProfiler.authorize_request if current_user.andand.is_admin?
-  # end
-
-
   def current_locale
     if params[:locale]
       session[:locale] = params[:locale]
