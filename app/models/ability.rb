@@ -12,7 +12,7 @@ class Ability
 
       can :create, Comment
 
-      can [:create, :update, :destroy, :participations, :users_and_emails], Event do |event|
+      can [:create, :update, :destroy, :participations, :users_with_emails], Event do |event|
         event.group.admins.include?(current_user) or current_user.is_admin?
       end
       can :invited, Event do |event|

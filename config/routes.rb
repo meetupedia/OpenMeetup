@@ -44,7 +44,7 @@ Openmeetup::Application.routes.draw do
         get :participations
         get :reviews
         get :users
-        get :users_and_emails
+        get :users_with_emails
       end
       resources :absences, :shallow => true do
         collection do
