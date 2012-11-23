@@ -4,7 +4,10 @@ $ ->
 
   initPage = ->
     $('.dropdown-toggle').dropdown()
-    $('a.fancybox').fancybox()
+    $('a.fancybox').fancybox
+      titlePosition: 'inside'
+      onComplete: ->
+        $('#fancybox-title-inside').append '<br /><iframe src="//www.facebook.com/plugins/like.php?href=' + this.href + '&amp;layout=button_count&amp;show_faces=true&amp;width=500&amp;action=like&amp;font&amp;colorscheme=light&amp;height=23" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:110px; height:23px;" allowTransparency="true"></iframe>'
     $('a[rel*=modal], a.fancybox').attr('data-no-turbolink', true)
 
   initPage()
