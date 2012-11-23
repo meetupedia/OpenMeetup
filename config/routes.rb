@@ -65,7 +65,11 @@ Openmeetup::Application.routes.draw do
       resources :reviews, :shallow => true
     end
     resources :group_invitations, :shallow => true
-    resources :images, :shallow => true
+    resources :images, :shallow => true do
+      collection do
+        post :upload
+      end
+    end
     resources :membership_requests, :shallow => true do
       member do
         put :confirm

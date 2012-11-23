@@ -1,4 +1,5 @@
-= render 'groups/header'
+- unless modal_request?
+  = render 'groups/header'
 
 .wrapper
   h2= tr('Requests')

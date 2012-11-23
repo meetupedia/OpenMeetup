@@ -4,10 +4,9 @@ class ImagesController < CommonController
   load_resource :event
   load_resource :group
   load_resource :image, :through => [:event, :group], :shallow => true
-  authorize_resource
+  authorize_resource :except => [:upload]
 
   def create
-    @image = Image.new(coerce(params)[:image])
     @image.imageable = @event || @group
     if @image.save
       create_activity @image
@@ -24,17 +23,14 @@ class ImagesController < CommonController
     end
   end
 
-protected
-
-  def coerce(params)
-    if params[:image].nil?
-      hash = {}
-      hash[:image] = {}
-      hash[:image][:image] = params[:Filedata]
-      hash[:image][:image].content_type = MIME::Types.type_for(hash[:image][:image].original_filename).to_s
-      hash
+  def upload
+    @image = Image.new
+    @image.imageable = @event || @group
+    @image.image = request.body
+    if @image.save
+      create_activity @image
     else
-      params
+      render :json => {'fail' => true}
     end
   end
 end

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.9'
 
 gem 'mysql2'
 gem 'json'
@@ -39,6 +39,7 @@ gem 'roadie'
 gem 'mail_view'
 gem 'exception_notification'
 gem 'license_finder', :git => 'git://github.com/pivotal/LicenseFinder.git'
+gem 'fileuploader-rails'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
