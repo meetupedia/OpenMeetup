@@ -13,6 +13,8 @@
 
     .wrapper
       h2= tr('Participants')
+      - if can? :users_and_emails, @event
+        = link_to tr('Users with emails'), users_and_emails_event_path(@event), :rel => 'modal'
       .list_view= render @event.participants.order('participations.created_at ASC')
 
     .wrapper

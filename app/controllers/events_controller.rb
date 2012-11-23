@@ -63,4 +63,8 @@ class EventsController < CommonController
   def users
     @participations = @event.participations.includes(:user).paginate :page => params[:page]
   end
+
+  def users_and_emails
+    @users = @event.participants.order('name ASC')
+  end
 end
