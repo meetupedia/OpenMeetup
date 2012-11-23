@@ -5,9 +5,9 @@
   h2= tr('Images')
 
   - if can? :create, Image
-    = semantic_form_for Image.new, :url => event_images_path(@event) do |f|
-      = f.inputs do
-        = f.file_field :image
-    = render 'images/upload', :item => @event
+    #images_upload
 
   #images= render @event.images.order('created_at ASC')
+
+- if can? :create, Image
+  = render 'images/upload', :url => upload_event_images_path(@event)

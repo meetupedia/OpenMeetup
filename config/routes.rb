@@ -52,7 +52,11 @@ Openmeetup::Application.routes.draw do
       end
       resources :comments, :shallow => true
       resources :event_invitations, :shallow => true
-      resources :images, :shallow => true
+      resources :images, :shallow => true do
+        collection do
+          post :upload
+        end
+      end
       resources :participations, :shallow => true do
         member do
           post :checkin
