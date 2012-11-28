@@ -4,11 +4,12 @@
     ' :
     = params[:q]
 
-  h2= tr('Cities')
-  - unless @cities.blank?
-    .list_view= render @cities
-  - else
-    p= tr('City not found.')
+  - unless Settings.standalone
+    h2= tr('Cities')
+    - unless @cities.blank?
+      .list_view= render @cities
+    - else
+      p= tr('City not found.')
 
   h2= tr('Groups')
   - unless @groups.blank?
