@@ -1,0 +1,28 @@
+.row
+  .span8
+    .wrapper
+      - if can? :create, Group
+        p.pull-right= link_to tr('Create new group'), new_group_path, :class => 'btn'
+
+      h2= tr('Searching for groups')
+
+      #results
+        - if params[:q].blank?
+          p
+            - unless params[:order] == 'name'
+              =' link_to tr('Order by name'), '?order=name', :class => 'btn btn-mini'
+            - else
+              span.btn.btn-mini.btn-success.disabled=' tr('Order by name')
+            - unless params[:order] == 'members'
+              =' link_to tr('Order by members'), '?order=members', :class => 'btn btn-mini'
+            - else
+              span.btn.btn-mini.btn-success.disabled=' tr('Order by members')
+        - if @groups
+          = render 'cities/search'
+          - if @groups.respond_to?(:total_pages)
+            = will_paginate @groups
+  .span4
+    .wrapper
+      h2= tr('Tags')
+      - unless (tags = Tag.joins(:groups).order('tags.name ASC').all).blank?
+        = render tags

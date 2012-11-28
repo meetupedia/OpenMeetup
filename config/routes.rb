@@ -146,6 +146,7 @@ Openmeetup::Application.routes.draw do
 
   match '/about' => 'root#about', :as => :about
   match '/developer_dashboard' => 'root#developer_dashboard', :as => :developer_dashboard
+  match '/discovery' => 'root#discovery', :as => :discovery
   match '/search' => 'search#index', :as => :search
   match '/dashboard' => 'root#dashboard', :as => :dashboard
   match '/restricted_access' => 'root#restricted_access', :as => :restricted_access
