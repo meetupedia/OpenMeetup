@@ -34,6 +34,19 @@ class RootController < CommonController
     @activities = Activity.order('created_at DESC').paginate :page => params[:page]
   end
 
+  def discovery
+    unless params[:q].blank?
+      @groups = Group.joins(:tags).where('groups.name LIKE ? OR tags.name LIKE ?', "%#{params[:q]}%", "#{params[:q]}%").group('groups.id')
+    else
+      order = case params[:order]
+        when 'name' then 'name ASC'
+        when 'members' then 'memberships_count DESC'
+        else 'id ASC'
+      end
+      @groups = Group.order(order).paginate :page => params[:page]
+    end
+  end
+
   def restricted_access
   end
 
