@@ -2,6 +2,14 @@
 
 class GroupMailer < CommonMailer
 
+  def creation(group, recipient)
+    @recipient = recipient
+    @email = @recipient.email
+    @group = group
+    @user = @group.user
+    mail :to => @email, :subject => "New group: #{@group.name}"
+  end
+
   def join(membership, recipient)
     @recipient = recipient
     @email = @recipient.email
@@ -12,6 +20,12 @@ class GroupMailer < CommonMailer
 
 
   class Preview < MailView
+
+    def creation
+      group = Group.last
+      mail = GroupMailer.creation(group, User.first)
+      mail
+    end
 
     def join
       membership = Membership.last

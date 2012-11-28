@@ -134,6 +134,7 @@ Openmeetup::Application.routes.draw do
       get :edit_city
       get :facebook_groups
       get :groups
+      post :set_admin
       get :settings
       get :waves
     end

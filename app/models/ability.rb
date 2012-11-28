@@ -48,7 +48,7 @@ class Ability
 
       can [:create, :set], Membership
       can :destroy, Membership do |membership|
-        membership.user_id == current_user.id or membership.group.admins.include?(current_user)
+        membership.user_id == current_user.id or membership.group.admins.include?(current_user) or current_user.is_admin?
       end
       can [:set_admin, :unset_admin], Membership do |membership|
         (membership.group.admins.include?(current_user) and membership.group.admins.size > 1) or current_user.is_admin?
@@ -58,7 +58,7 @@ class Ability
 
       can [:create, :set], Participation
       can [:update, :destroy, :checkin], Participation do |participation|
-        participation.user_id == current_user.id or participation.event.group.admins.include?(current_user)
+        participation.user_id == current_user.id or participation.event.group.admins.include?(current_user) or current_user.is_admin?
       end
 
       can :create, Post
@@ -86,6 +86,7 @@ class Ability
       can :calendar, User do |user|
         user == current_user or current_user.is_admin?
       end
+      can :set_admin, User if current_user.is_admin?
 
       can :create, UserFollow
       can :destroy, UserFollow do |user_follow|

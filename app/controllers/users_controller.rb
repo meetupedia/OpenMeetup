@@ -75,6 +75,12 @@ class UsersController < CommonController
     redirect_to sign_in_path unless Settings.enable_invite_process
   end
 
+  def set_admin
+    @user.is_admin = true
+    @user.save
+    redirect_to @user
+  end
+
   def settings
   end
 
