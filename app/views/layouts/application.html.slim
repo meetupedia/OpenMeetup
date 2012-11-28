@@ -16,7 +16,7 @@ html
   body
     = render 'layouts/header'
     #content
-      .container
+      .container(class="layout_#{controller.controller_name}" id="layout_#{controller.controller_name}_#{controller.action_name}")
         = yield :header
         - if flash[:notice]
           .alert.alert-success

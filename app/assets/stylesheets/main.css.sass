@@ -8,7 +8,7 @@ td.right_aligned
 .center
   text-align: center
 
-h1, h2, h3
+h1, h2, h3, h4
   font-family: "Trebuchet MS", Arial, sans-serif
   font-weight: normal
 
@@ -17,6 +17,9 @@ h1:nth-of-type(1), h3:nth-of-type(1)
 
 h2:nth-of-type(1)
   margin-top: 0
+
+h4
+  margin: 0
 
 a
   color: #005f8f
@@ -35,6 +38,9 @@ span a.btn
 
 input[type=text], textarea
   width: 98%
+
+input#group_permaname, input#event_permaname
+  max-width: 200px
 
 .wrapper
   background: #ffffff
@@ -72,15 +78,9 @@ div.group.list_item
     margin: 10px 0
     padding: 5px 10px
 
-#content
-  background: #efeff7
-  padding: 70px 0 20px 0
-
 #footer
-  border-top: 1px solid #efeff7
   color: #9f9f9f
-  font-size: 11px
-  margin-top: 1px
+  font-size: 12px
   padding: 10px 0px 20px 0px
   .footer-left
     float: left
@@ -95,6 +95,9 @@ div.group.list_item
       float: left
       margin-right: 10px
       width: 100px
+  .footer-languages
+    padding-top: 40px
+    text-align: center
 
 .navbar
   border-bottom: 1px solid #ffffff
@@ -107,7 +110,7 @@ div.group.list_item
       padding: 10px
       text-shadow: none
       &:hover
-        background: #003f6f
+        background: #005f8f
         color: #ffffff
     &.dropdown ul li a
       color: #005f8f
@@ -122,6 +125,8 @@ div.group.list_item
       color: #000000
       font-family: "Trebuchet MS", Arial, sans-serif
       font-size: 20px
+      padding-bottom: 12px
+      text-shadow: none
       &:hover
         background: #005f8f
         color: #ffffff
@@ -155,7 +160,7 @@ ul.nav-tabs
 
 h1
   color: #000000
-  margin: 25px 0
+  margin: 25px 0 15px 0
   &.event
     background: url(calendar_alt_stroke_32x32.png) no-repeat 0 4px
     padding-left: 48px
@@ -189,6 +194,10 @@ div.list_item
   margin: 10px 0
   min-height: 20px
   padding: 5px 10px
+  div.list_item
+    margin: 5px 0 10px 0
+    padding: 0
+
 
 div.avatar_item
   min-height: 32px
@@ -200,14 +209,16 @@ div.avatar_item
     top: 5px
 
 div.list_view
-  border-radius: 0 0 5px 5px
-  margin: 20px -20px -20px -20px
+  margin: 20px -20px
   padding: 5px 20px 10px 20px
   background: #f7f7f7
-  div.list_item
+  > div.list_item, > div.notification > div.list_item
     background: #ffffff
     border-radius: 0 5px 5px 5px
     box-shadow: 0 1px 2px #cfcfcf
+  &:last-child
+    border-radius: 0 0 5px 5px
+    margin-bottom: -20px
 
 div.list_item.indent0
   margin-left: 0
@@ -320,6 +331,8 @@ abbr[title=required]
 
 #images
   margin: 20px 0
+  img
+    margin-bottom: 4px
 
 .opening-images
   img
@@ -385,11 +398,16 @@ a.function
   img
     margin-top: 3px
 
-ul.token-input-list-facebook
-  width: 99%
-
 .modal-content h1
   margin-top: 5px
+
+ul.token-input-list-facebook
+  width: 100%
+
+.change_city
+  margin-top: 10px
+  ul.token-input-list-facebook
+    width: 250px
 
 form
   margin-bottom: 0px
@@ -402,6 +420,7 @@ form
 .breadcrumbs
   margin: -20px 0 20px -20px
   position: relative
+  z-index: 10
   a
     background: #a7a7af
     border: none
@@ -415,6 +434,25 @@ form
       text-decoration: none
     &:first-child
       border-radius: 5px 0 0 0
+
+.notification
+  .breadcrumbs
+    float: right
+    font-size: 11px
+    margin: 0 5px 0 10px
+    a:first-child
+      border-radius: 0 0 5px 5px
+  a.close
+    margin: 2px 4px 0 0
+    position: relative
+    z-index: 10
+  .label
+    margin: 5px 10px 0 0
+    position: relative
+    z-index: 10
+  .comments
+    display: none
+
 
 .dropdown-toggle img
   vertical-align: top
@@ -454,15 +492,57 @@ ul.tiles
 .table
   margin: 10px 0
 
-.notification
-  a.close
-    margin: 2px 4px 0 0
-    position: relative
-    z-index: 10
-  .label
-    margin: 5px 10px 0 0
-    position: relative
-    z-index: 10
-  .comments
+.icon-container
+  padding-left: 15px
+
+#layout_users_calendar, #layout_root_index, #layout_cities_show
+  .next_event
     display: none
 
+.hero-unit p
+  font-size: 16px
+  line-height: 24px
+
+.change_field
+  margin: 4px 10px 0 0
+
+#fancybox-title-inside
+  text-align: left
+
+
+
+@media all and (min-width: 1025px)
+  .container
+    max-width: 940px
+    .row
+      .span4
+        margin-left: 30px
+        max-width: 310px
+      .span6
+        margin-left: 30px
+        max-width: 455px
+      .span8
+        margin-left: 30px
+        max-width: 600px
+        .row
+          margin-left: -30px
+          .span4
+            margin-left: 30px
+            max-width: 310px
+      .span12
+        margin-left: 30px
+        max-width: 940px
+  #content
+    background: #efeff7
+    padding: 70px 0 20px 0
+  #footer
+    border-top: 1px solid #efeff7
+    margin-top: 1px
+
+@media all and (max-width: 1025px)
+  body
+    background: #efeff7
+  #footer
+    background: #d7dfe7
+    margin: 1px -20px -20px -20px
+    padding: 10px 20px 20px 20px

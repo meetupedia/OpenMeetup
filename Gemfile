@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.9'
 
 gem 'mysql2'
 gem 'json'
@@ -35,10 +35,11 @@ gem 'fancybox-rails'
 gem 'turbolinks'
 gem 'kaminari'
 gem 'will_filter'
-gem 'tr8n', :git => 'git://github.com/berk/tr8n.git'
 gem 'roadie'
 gem 'mail_view'
 gem 'exception_notification'
+gem 'license_finder', :git => 'git://github.com/pivotal/LicenseFinder.git'
+gem 'fileuploader-rails'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
@@ -48,9 +49,17 @@ group :assets do
 end
 
 group :development do
-  gem 'rack-mini-profiler'
+  gem 'hirb'
+  gem 'rspec-rails'
 end
 
 group :production do
   gem 'newrelic_rpm'
+  gem 'tr8n', :git => 'git://github.com/berk/tr8n.git'
+end
+
+group :test do
+  # gem 'factory_girl'
+  # gem 'rspec-rails'
+  # gem 'watchr'
 end

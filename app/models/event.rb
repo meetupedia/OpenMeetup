@@ -3,6 +3,7 @@
 class Event < ActiveRecord::Base
   include CommonCommentable
   key :title
+  key :permaname, :index => true
   key :permalink, :index => true
   key :description, :as => :text
   key :latitude, :as => :float
@@ -16,8 +17,9 @@ class Event < ActiveRecord::Base
   key :end_time, :as => :datetime
   timestamps
 
-  belongs_to :user
+  belongs_to :city
   belongs_to :group
+  belongs_to :user
   has_many :absences, :dependent => :destroy
   has_many :absents, :through => :absences, :source => :user
   has_many :activities, :dependent => :destroy
@@ -25,12 +27,28 @@ class Event < ActiveRecord::Base
   has_many :images, :as => :imageable
   has_many :participations, :dependent => :destroy
   has_many :participants, :through => :participations, :source => :user
+  has_many :posts, :dependent => :nullify
+  has_many :questions, :dependent => :destroy
+  has_many :reviews, :dependent => :destroy
   has_many :waves, :dependent => :nullify
 
   acts_as_gmappable :validation => false
   auto_permalink :title
 
+  before_validation do |event|
+    event.permaname = event.permaname.parameterize
+    true
+  end
+
+  validate :check_permaname
+
   after_create :create_admin_participation
+
+  def check_permaname
+    if permaname.present? and permaname_changed? and (Group.find_by_permaname(permaname) or Event.find_by_permaname(permaname))
+      errors.add(:permaname, I18n.t('errors.messages.taken'))
+    end
+  end
 
   def absence_for(user)
     Absence.find_by_event_id_and_user_id(self.id, user.id)
@@ -53,7 +71,7 @@ class Event < ActiveRecord::Base
   end
 
   def gmaps4rails_address
-    @gmaps4rails_address ||= [self.street, self.city].select(&:present?).join(', ')
+    @gmaps4rails_address ||= [self.street, self.city.andand.name].select(&:present?).join(', ')
   end
 
   def participation_for(user)

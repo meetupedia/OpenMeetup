@@ -5,7 +5,7 @@ Openmeetup::Application.configure do
   config.cache_classes = true
 
   # Full error reports are disabled and caching is turned on
-  config.consider_all_requests_local       = false
+  config.consider_all_requests_local = false
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
@@ -67,6 +67,6 @@ Openmeetup::Application.configure do
 
   Openmeetup::Application.config.middleware.use ExceptionNotifier,
     :email_prefix => "[OpenMeetup] ",
-    :sender_address => %{"noreply@openmeetup.net" <noreply@openmeetup.net>},
+    :sender_address => %{"exceptions@openmeetup.net" <exceptions@openmeetup.net>},
     :exception_recipients => %w{bence.nagy@gmail.com p.toth.andras@gmail.com}
 end

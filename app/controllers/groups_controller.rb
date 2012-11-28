@@ -5,9 +5,7 @@ class GroupsController < CommonController
   authorize_resource :except => [:index, :show, :events, :images, :members]
 
   def show
-    @activities = @group.activities.order('created_at DESC').paginate :page => params[:page]
-    @title = @group.name
-    @static_follow = true
+    groups_show
   end
 
   def new
@@ -16,6 +14,9 @@ class GroupsController < CommonController
   def create
     if @group.save
       create_activity @group
+      User.where(:is_admin => true).each do |user|
+        GroupMailer.creation(@group, user).deliver if user.email
+      end
       redirect_to @group
     else
       render :new

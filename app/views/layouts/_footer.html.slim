@@ -1,7 +1,5 @@
 #footer.clearfix
   .container
-    - if  Settings.multilingual
-      .tr8n-language-selector.btn= tr8n_language_selector_tag
 
     - unless Settings.standalone
       .footer-left
@@ -26,3 +24,7 @@
           = tr('Contact')
           ' :
           = link_to 'get2gather (ETH)', 'mailto:PDLGET2GAT@ex1.eemea.ericsson.se'
+
+    - if Settings.multilingual
+      .footer-languages
+        = tr8n_language_strip_tag

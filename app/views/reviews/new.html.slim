@@ -1,3 +1,9 @@
-h1 Hogyan értékeled a csoportot?
+.wrapper
+  h1= tr('Write a review')
 
-= render 'form', :url => group_reviews_path(@group)
+  = render 'form', :url => event_reviews_path(@event)
+
+  .list_view
+    .icon-container
+      i.icon-chevron-up
+    = render @event

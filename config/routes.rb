@@ -1,8 +1,12 @@
 # encoding: UTF-8
 
 Openmeetup::Application.routes.draw do
+
   mount WillFilter::Engine => '/will_filter'
-  mount Tr8n::Engine => '/tr8n'
+  if Rails.env == 'production'
+    mount Tr8n::Engine => '/tr8n'
+  end
+  mount CommentMailer::Preview => '/comment_mailer/mail_view'
   mount EventInvitationMailer::Preview => '/event_invitation_mailer/mail_view'
   mount EventMailer::Preview => '/event_mailer/mail_view'
   mount GroupInvitationMailer::Preview => '/group_invitation_mailer/mail_view'
@@ -11,6 +15,15 @@ Openmeetup::Application.routes.draw do
   mount MembershipRequestMailer::Preview => '/membership_request_mailer/mail_view'
   mount PostMailer::Preview => '/post_mailer/mail_view'
   mount WaveMailer::Preview => '/wave_mailer/mail_view'
+
+  resources :cities do
+    member do
+      get :search
+    end
+    collection do
+      post :jump
+    end
+  end
 
   resources :groups do
     member do
@@ -24,10 +37,14 @@ Openmeetup::Application.routes.draw do
     resources :posts, :shallow => true
     resources :events, :shallow => true do
       member do
+        get :actual
         get :images
         get :invited
         get :map
+        get :participations
+        get :reviews
         get :users
+        get :users_with_emails
       end
       resources :absences, :shallow => true do
         collection do
@@ -36,15 +53,28 @@ Openmeetup::Application.routes.draw do
       end
       resources :comments, :shallow => true
       resources :event_invitations, :shallow => true
-      resources :images, :shallow => true
+      resources :images, :shallow => true do
+        collection do
+          post :upload
+        end
+      end
       resources :participations, :shallow => true do
+        member do
+          post :checkin
+        end
         collection do
           get :set
         end
       end
+      resources :questions, :shallow => true
+      resources :reviews, :shallow => true
     end
     resources :group_invitations, :shallow => true
-    resources :images, :shallow => true
+    resources :images, :shallow => true do
+      collection do
+        post :upload
+      end
+    end
     resources :membership_requests, :shallow => true do
       member do
         put :confirm
@@ -59,7 +89,6 @@ Openmeetup::Application.routes.draw do
         put :unset_admin
       end
     end
-    resources :reviews, :shallow => true
     resources :tags, :shallow => true do
       resources :taggings, :shallow => true
     end
@@ -101,9 +130,11 @@ Openmeetup::Application.routes.draw do
       get :validate_email
     end
     member do
+      get :calendar
       get :edit_city
       get :facebook_groups
       get :groups
+      post :set_admin
       get :settings
       get :waves
     end
@@ -119,8 +150,6 @@ Openmeetup::Application.routes.draw do
   match '/dashboard' => 'root#dashboard', :as => :dashboard
   match '/restricted_access' => 'root#restricted_access', :as => :restricted_access
 
-  match '/discovery' => 'discovery#index', :as => :discovery
-
   match '/system' => 'system#index', :as => :system
   match '/reload' => 'system#reload', :as => :reload
   match '/download_database' => 'system#download_database', :as => :download_database
@@ -133,4 +162,5 @@ Openmeetup::Application.routes.draw do
 
   root :to => 'root#index'
   match ':controller(/:action(/:id))(.:format)'
+  match '/:id' => 'root#undefined', :as => :undefined
 end

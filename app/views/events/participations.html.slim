@@ -1,0 +1,20 @@
+- unless modal_request?
+  = render 'events/header'
+
+.wrapper
+  h2= tr('Participations')
+
+  table.table
+    tr
+      th= tr('User')
+      - @event.questions.order('id ASC').each do |question|
+        th= question.question
+    - @participations.each do |participation|
+      tr
+        td= user_link(participation.user)
+        - @event.questions.order('id ASC').each do |question|
+          td
+            - if answer = participation.answers.where(:question_id => question.id).first
+              = answer.answer
+            - else
+              span.muted n. a.

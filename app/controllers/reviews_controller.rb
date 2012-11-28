@@ -1,16 +1,23 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 
 class ReviewsController < CommonController
-  load_resource :group
-  load_resource :review, :through => :group, :shallow => true
+  load_resource :event
+  load_resource :review, :through => :event, :shallow => true
   authorize_resource :except => [:index, :show]
 
   def new
   end
 
   def create
-    @review.save
-    redirect_to @review.group
+    @review.event = @event
+    @group = @event.group
+    @review.group = @group
+    if @review.save
+      create_activity @review
+      redirect_to @review.event
+    else
+      render :new
+    end
   end
 
   def edit

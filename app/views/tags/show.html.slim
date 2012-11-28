@@ -12,10 +12,12 @@
 
 .row
   .span4
-    - unless (users = @tag.users).blank?
-      .wrapper
-        h2= tr('Users')
+    .wrapper
+      h2= tr('Users')
+      - unless (users = @tag.users).blank?
         .list_view= render users
+      - else
+        p.muted= tr('No users tagged.')
   .span8
     - unless (groups = @tag.groups).blank?
       .wrapper

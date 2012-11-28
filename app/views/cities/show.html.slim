@@ -1,0 +1,67 @@
+.wrapper
+  .change_city
+    = semantic_form_for City.new, :url => jump_cities_path do |f|
+      .pull-right= f.text_field :id
+      .pull-right= f.label :id, tr('Change city'), :class => 'change_field'
+
+  h1
+    = @city.name
+
+  javascript:
+    $('#city_id').tokenInput('/cities.json', {
+      allowFreeTagging: true,
+      crossDomain: false,
+      preventDuplicates: true,
+      tokenLimit: 1,
+      theme: 'facebook',
+      onAdd: function(){
+        $('#city_id').closest('form').submit()
+      },
+    })
+
+.row
+  .span8
+    .wrapper
+      - if can? :create, Group
+        p.pull-right= link_to tr('Create new group'), new_group_path, :class => 'btn'
+
+      h2= tr('Searching for groups')
+
+      form action='#{city_path(@city)}' method='get' id='discovery'
+        input type='text' placeholder=trl('Search') name='q' value="#{params[:q]}"
+      #results
+        - if params[:q].blank?
+          p
+            - unless params[:order] == 'name'
+              =' link_to tr('Order by name'), '?order=name', :class => 'btn btn-mini'
+            - else
+              span.btn.btn-mini.btn-success.disabled=' tr('Order by name')
+            - unless params[:order] == 'members'
+              =' link_to tr('Order by members'), '?order=members', :class => 'btn btn-mini'
+            - else
+              span.btn.btn-mini.btn-success.disabled=' tr('Order by members')
+        - if @groups
+          = render 'search'
+          - if @groups.respond_to?(:total_pages)
+            = will_paginate @groups
+  .span4
+    .wrapper
+      h2= tr('Tags')
+      - unless (tags = Tag.joins(:groups => :city).where('cities.id' => @city.id).order('tags.name ASC').all).blank?
+        = render tags
+
+javascript:
+  $(function(){
+    $('form#discovery input').bind('input', $.debounce(250, function(event){
+      var item = $(this)
+      item.addClass('loading')
+      $.ajax({
+        url: '#{search_city_path(@city)}',
+        data: {'q': item.val()},
+        success: function(data){
+          item.removeClass('loading')
+          $('#results').html(data)
+        }
+      })
+    }))
+  })

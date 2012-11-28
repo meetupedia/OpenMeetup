@@ -3,6 +3,8 @@
 
   .button-menu
     - if current_user
+      - absence = @event.absence_for(current_user)
+      - participation = @event.participation_for(current_user)
       .btn-group.pull-right
         a.btn.dropdown-toggle(data-toggle="dropdown" href="#")
           =' image_tag 'cog.png'
@@ -10,23 +12,28 @@
         ul.dropdown-menu
           - if can? :edit, @event
             li= link_to t('event.edit'), edit_event_path(@event), :rel => 'modal'
-            li= link_to tr('Delete event'), @event, :method => :delete
           li= link_to tr('Invite friends'), new_event_event_invitation_path(@event), :rel => 'modal'
           li= link_to tr('Invite all group members'), new_event_event_invitation_path(@event, :invite_members => true), :rel => 'modal'
-      - absence = @event.absence_for(current_user)
-      - participation = @event.participation_for(current_user)
-      - if absence
-        =' link_to '<i class="icon-minus-sign icon-white"></i> Nem veszek részt'.html_safe, absence_path(absence), :method => :delete, :class => 'btn btn-warning'
-      - elsif not participation
-        =' link_to '<i class="icon-plus-sign icon-black"></i> Nem veszek részt'.html_safe, event_absences_path(@event), :method => :post, :class => 'btn'
-      - if participation
-        = link_to '<i class="icon-ok-sign icon-white"></i> Részt veszek'.html_safe, participation_path(participation), :method => :delete, :class => 'btn btn-success'
-      - elsif not absence
-        = link_to '<i class="icon-plus-sign icon-white"></i> Részt veszek'.html_safe, event_participations_path(@event), :method => :post, :class => 'btn btn-primary'
+          - if can? :delete, @event
+            li= link_to tr('Delete event'), @event, :method => :delete, :confirm => trl('Are you sure?')
+          - if participation and @event.questions.present? and @event.start_time > Time.zone.now
+            li= link_to tr('Edit answers'), edit_participation_path(participation), :rel => 'modal'
+      - if @event.start_time > Time.zone.now
+        - if absence
+          =' link_to "<i class='icon-minus-sign icon-white'></i> #{tr('Not going')}".html_safe, absence_path(absence), :method => :delete, :class => 'btn btn-warning'
+        - elsif not participation
+          =' link_to "<i class='icon-plus-sign icon-black'></i> #{tr('Not going')}".html_safe, event_absences_path(@event), :method => :post, :class => 'btn'
+        - if participation
+          = link_to "<i class='icon-ok-sign icon-white'></i> #{tr('Join')}".html_safe, participation_path(participation), :method => :delete, :class => 'btn btn-success'
+        - elsif not absence
+          = link_to "<i class='icon-ok-sign icon-white'></i> #{tr('Join')}".html_safe, event_participations_path(@event), :method => :post, :class => 'btn btn-primary'
+      - else
+        - if participation
+          = link_to tr('Write a review'), new_event_review_path(@event), :class => 'btn btn-primary', :rel => 'modal'
     - else
-      = link_to '<i class="icon-plus-sign icon-black"></i> Nem veszek részt'.html_safe, sign_in_path(:return_to => set_event_absences_path(@event)), :class => 'btn'
-      = link_to '<i class="icon-plus-sign icon-black"></i> Részt veszek'.html_safe, sign_in_path(:return_to => set_event_participations_path(@event)), :class => 'btn'
-
+      - if @event.start_time > Time.zone.now
+        = link_to "<i class='icon-plus-sign icon-black'></i> #{tr('Not going')}".html_safe, sign_in_path(:return_to => set_event_absences_path(@event)), :class => 'btn'
+        = link_to "<i class='icon-plus-sign icon-black'></i> #{tr('Join')}".html_safe, sign_in_path(:return_to => set_event_participations_path(@event)), :class => 'btn'
 
   h4= link_to @event.title, @event
   div

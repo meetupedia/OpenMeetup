@@ -12,6 +12,7 @@ class PostsController < CommonController
   end
 
   def create
+    @post.event = Event.find_by_id(params[:post][:event_id])
     @post.postable = @group if @group
     if @post.save
       create_activity @post
@@ -23,7 +24,13 @@ class PostsController < CommonController
         end
       end
       respond_to do |format|
-        format.html { redirect_to @post.postable }
+        format.html do
+          if @post.event
+            redirect_to actual_event_path(@post.event)
+          else
+            redirect_to @post.postable
+          end
+        end
         format.js
       end
     end

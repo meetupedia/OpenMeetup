@@ -1,0 +1,30 @@
+.change_city
+  h2.pull-right= link_to tr('Explore {city}', {:tokens => {:city => current_city.name}}), current_city
+
+h1= tr('The next 31 days')
+
+
+.row
+  .span8
+    .wrapper
+      h2= tr('Your meetup groups')
+      - if (events = @user.get_joined_events_in_next_month.all).present?
+        - events.each do |event|
+          .list_view
+            = render event.group
+            .icon-container
+              i.icon-chevron-down
+            = render event
+      - else
+        p.muted= tr('No participations for the next month.')
+    .wrapper
+      h2= tr('Your friends will be at')
+      - if (events = @user.get_events_with_friends_in_next_month.all).present?
+        - events.each do |event|
+          .list_view
+            = render current_user.friends_in_event(event)
+            .icon-container
+              i.icon-chevron-down
+            = render event
+      - else
+        p.muted= tr('No friends in events in the next month.')

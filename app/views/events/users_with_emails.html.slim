@@ -1,0 +1,14 @@
+- unless modal_request?
+  = render 'events/header'
+
+.wrapper
+  h2= tr('Users')
+
+  table.table
+    tr
+      th= tr('User')
+      th= tr('Email')
+    - @users.each do |user|
+      tr
+        td= user_link(user)
+        td= user.email

@@ -1,11 +1,9 @@
-.row
-  .span8.offset2
-    .wrapper
-  		h2 Válassz települést!
-  		= semantic_form_for @user do |f|
-  			= f.inputs do
-  			  = f.text_field :city_id
-  			= f.actions
+.wrapper
+	h2 Válassz települést!
+	= semantic_form_for @user do |f|
+		= f.inputs do
+		  = f.text_field :city_id
+		= f.actions
 
 javascript:
   $('#user_city_id').tokenInput('/cities.json', {

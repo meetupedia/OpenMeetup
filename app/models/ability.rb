@@ -12,7 +12,7 @@ class Ability
 
       can :create, Comment
 
-      can [:create, :update, :destroy], Event do |event|
+      can [:create, :update, :destroy, :participations, :users_with_emails], Event do |event|
         event.group.admins.include?(current_user) or current_user.is_admin?
       end
       can :invited, Event do |event|
@@ -48,7 +48,7 @@ class Ability
 
       can [:create, :set], Membership
       can :destroy, Membership do |membership|
-        membership.user_id == current_user.id or membership.group.admins.include?(current_user)
+        membership.user_id == current_user.id or membership.group.admins.include?(current_user) or current_user.is_admin?
       end
       can [:set_admin, :unset_admin], Membership do |membership|
         (membership.group.admins.include?(current_user) and membership.group.admins.size > 1) or current_user.is_admin?
@@ -57,11 +57,15 @@ class Ability
       can [:index, :destroy], Notification
 
       can [:create, :set], Participation
-      can :destroy, Participation do |participation|
-        participation.user_id == current_user.id or participation.event.group.admins.include?(current_user)
+      can [:update, :destroy, :checkin], Participation do |participation|
+        participation.user_id == current_user.id or participation.event.group.admins.include?(current_user) or current_user.is_admin?
       end
 
       can :create, Post
+
+      can [:create, :destroy], Question do |question|
+        question.event.group.admins.include?(current_user) or current_user.is_admin?
+      end
 
       can :create, Review
       can [:update, :destroy], Review do |review|
@@ -79,6 +83,10 @@ class Ability
       can [:update, :destroy, :settings, :facebook_groups, :waves], User do |user|
         user == current_user
       end
+      can :calendar, User do |user|
+        user == current_user or current_user.is_admin?
+      end
+      can :set_admin, User if current_user.is_admin?
 
       can :create, UserFollow
       can :destroy, UserFollow do |user_follow|

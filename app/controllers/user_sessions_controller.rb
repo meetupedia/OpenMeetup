@@ -9,9 +9,9 @@ class UserSessionsController < CommonController
   def create
     @user_session = UserSession.new params[:user_session]
     if @user_session.save
-      redirect_back_or_default discovery_url
+      redirect_back_or_default root_url
     else
-      render :new
+      render 'users/new'
     end
   end
 

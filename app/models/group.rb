@@ -2,9 +2,10 @@
 
 class Group < ActiveRecord::Base
   key :name
-  key :facebook_uid
+  key :permaname, :index => true
   key :permalink, :index => true
   key :description, :as => :text
+  key :facebook_uid
   key :location, :index => true
   key :image_file_name
   key :image_content_type
@@ -62,8 +63,21 @@ class Group < ActiveRecord::Base
 
   auto_permalink :name
 
+  before_validation do |group|
+    group.permaname = group.permaname.parameterize
+    true
+  end
+
+  validate :check_permaname
+
   after_create :create_admin_membership, :write_language
   after_validation :set_city
+
+  def check_permaname
+    if permaname.present? and permaname_changed? and (Group.find_by_permaname(permaname) or Event.find_by_permaname(permaname))
+      errors.add(:permaname, I18n.t('errors.messages.taken'))
+    end
+  end
 
   def add_tag_by_name(name)
     if tag = Tag.find_by_name(name)

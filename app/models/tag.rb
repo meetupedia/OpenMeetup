@@ -5,7 +5,6 @@ class Tag < ActiveRecord::Base
   key :permalink
   timestamps
 
-  belongs_to :language
   belongs_to :user
   has_many :group_taggings
   has_many :taggings
@@ -14,16 +13,13 @@ class Tag < ActiveRecord::Base
 
   auto_permalink :name
 
-  after_create :write_language
+  before_validation do |tag|
+    tag.name = tag.name.mb_chars.downcase
+    true
+  end
 
   def group_tagging_for(group)
     GroupTagging.find_by_tag_id_and_group_id(self.id, group.id)
-  end
-
-  def write_language(code = nil)
-    code ||= I18n.locale
-    self.language = Language.find_or_create_by_code(code)
-    save
   end
 
   def tagging_for(user)

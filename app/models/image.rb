@@ -4,6 +4,7 @@ class Image < ActiveRecord::Base
   key :image_file_size, :as => :integer
   key :image_updated_at, :as => :datetime
   key :caption
+  key :is_live, :as => :boolean, :default => false
   timestamps
 
   belongs_to :imageable, :polymorphic => true

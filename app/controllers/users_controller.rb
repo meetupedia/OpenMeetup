@@ -53,6 +53,9 @@ class UsersController < CommonController
     redirect_back_or_default @user
   end
 
+  def calendar
+  end
+
   def dashboard
   end
 
@@ -72,6 +75,12 @@ class UsersController < CommonController
     redirect_to sign_in_path unless Settings.enable_invite_process
   end
 
+  def set_admin
+    @user.is_admin = true
+    @user.save
+    redirect_to @user
+  end
+
   def settings
   end
 
@@ -87,11 +96,6 @@ class UsersController < CommonController
   end
 
 protected
-
-  def use_invite_process?
-    Settings.enable_invite_process and not (cookies[:invitation_code].present? and (EventInvitation.find_by_code(cookies[:invitation_code]) or GroupInvitation.find_by_code(cookies[:invitation_code]) or cookies[:invitation_code] == Settings.skip_invite_process_code))
-  end
-  helper_method :use_invite_process?
 
   def create_city
     if request.location

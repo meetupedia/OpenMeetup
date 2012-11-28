@@ -1,12 +1,12 @@
-= render 'header'
+= render 'groups/header'
 
 .row
-  .span7
+  .span8
     h2= tr('Messages')
     = will_paginate @waves
     .list_view= render @waves
     = will_paginate @waves
-  .span4.offset1
+  .span4
     - if can? :edit, @group
       .pull-right= link_to tr('New message'), new_wave_path(:group_id => @group.id), :class => 'btn', :rel => 'modal'
 

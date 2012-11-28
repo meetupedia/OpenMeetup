@@ -38,4 +38,9 @@
       = link_to 'bejegyzéshez', activity.activable.commentable, :rel => 'modal'
       | .
       p= activity.activable.comment
+    - elsif activity.activable.class.name == 'Review'
+      =' user_link activity.activable.user
+      ' új véleményt írt egy eseményhez:
+      = link_to activity.activable.event.title, activity.activable.event
+      p= activity.activable.review
     .date= time_ago_in_words activity.created_at

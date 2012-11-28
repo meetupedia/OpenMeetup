@@ -1,12 +1,12 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 
 class EventsController < CommonController
   load_resource :group
   load_resource :event, :through => :group, :shallow => true
-  authorize_resource :except => [:index, :show, :images, :map, :users]
+  authorize_resource :except => [:index, :show, :actual, :images, :map, :users]
 
   def show
-    @title = @event.title
+    events_show
   end
 
   def new
@@ -39,6 +39,9 @@ class EventsController < CommonController
     redirect_to @event.group, :notice => 'Esemény törölve.'
   end
 
+  def actual
+  end
+
   def images
   end
 
@@ -49,7 +52,19 @@ class EventsController < CommonController
   def map
   end
 
+  def participations
+    @participations = @event.participations.includes(:user, {:answers => :question})
+  end
+
+  def reviews
+    @reviews = @event.reviews.order('created_at DESC')
+  end
+
   def users
     @participations = @event.participations.includes(:user).paginate :page => params[:page]
+  end
+
+  def users_with_emails
+    @users = @event.participants.order('name ASC')
   end
 end

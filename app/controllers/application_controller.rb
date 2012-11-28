@@ -4,24 +4,51 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :set_locale, :check_restricted_access, :set_invitation_code
-  # before_filter :miniprofiler
 
   helper_method :current_city, :current_language, :current_user
   helper LaterDude::CalendarHelper
 
   auto_user
 
-  rescue_from CanCan::AccessDenied do |exception|
-    unless current_user
-      flash[:alert] = 'Be kell jelentkezned!'
-      authenticate
-    else
-      flash[:alert] = 'Nem hozzáférhető számodra a kért oldal!'
-      redirect_to root_url
+  unless Rails.application.config.consider_all_requests_local
+    rescue_from Exception do |exception|
+      handling_error 500, exception
+    end
+
+    rescue_from ActionController::RoutingError, ActionController::UnknownController, AbstractController::ActionNotFound, ActiveRecord::RecordNotFound do |exception|
+      handling_error 404, exception
+    end
+
+    rescue_from CanCan::AccessDenied do |exception|
+      unless current_user
+        flash[:alert] = 'Be kell jelentkezned!'
+        authenticate
+      else
+        flash[:alert] = 'Nem hozzáférhető számodra a kért oldal!'
+        redirect_to root_url
+      end
     end
   end
 
 private
+
+  def handling_error(status, exception)
+    ExceptionNotifier::Notifier.exception_notification(request.env, exception, :data => {:message => 'an error happened'}).deliver
+    respond_to do |format|
+      format.html { render "errors/error_#{status}", :status => status }
+      format.any { render :nothing => true, :status => status }
+    end
+  end
+
+  if Rails.env == 'development'
+    def tr(text)
+      text
+    end
+
+    def trl(text)
+      text
+    end
+  end
 
   def run_later
     Thread.new do
@@ -29,10 +56,6 @@ private
       ActiveRecord::Base.connection.close
     end
   end
-
-  # def miniprofiler
-  #   Rack::MiniProfiler.authorize_request if current_user.andand.is_admin?
-  # end
 
   def current_locale
     if params[:locale]
@@ -88,7 +111,7 @@ private
 
   def current_city
     return @current_city if defined?(@current_city)
-    @current_city = current_user.andand.city
+    @current_city = session[:city] || current_user.andand.city || City.first
   end
 
   def current_user_session
@@ -115,5 +138,26 @@ private
   def set_locale
     I18n.locale = current_locale
     current_user.update_attribute :locale, I18n.locale if current_user and not current_user.locale == I18n.locale.to_s
+  end
+
+  def use_invite_process?
+    Settings.enable_invite_process and not (cookies[:invitation_code].present? and (EventInvitation.find_by_code(cookies[:invitation_code]) or GroupInvitation.find_by_code(cookies[:invitation_code]) or cookies[:invitation_code] == Settings.skip_invite_process_code))
+  end
+  helper_method :use_invite_process?
+
+  def groups_show
+    @activities = @group.activities.where('activable_type NOT IN (?)', ['Comment']).order('created_at DESC').paginate :page => params[:page]
+    @title = @group.name
+    @static_follow = true
+    render 'groups/show'
+  end
+
+  def events_show
+    @title = @event.title
+    if Time.zone.now.between?(@event.start_time, @event.end_time)
+      render 'events/actual'
+    else
+      render 'events/show'
+    end
   end
 end

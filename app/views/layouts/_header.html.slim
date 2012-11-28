@@ -8,20 +8,22 @@
       | </a>
 
       = link_to application_title, root_path, :class => 'brand'
-      - unless current_user
-        ul.nav.pull-right
-          li= link_to tr('Sign in'), sign_in_path
-      - else
-        .nav-collapse
-          form.navbar-search.pull-left action='/search' method='get'
-            input type='text' class='search-query' placeholder=tr('Search') name='q'
-        ul.nav.pull-right
-          - unless current_user.restricted_access
-            li= link_to tr('My profile'), current_user
-            li= link_to tr('My groups'), groups_user_path(current_user)
-            /! li= link_to tr('My messages'), waves_user_path(current_user)
-            li= link_to notifications_path do
-              =' tr('My notifications')
-              - if current_user.notifications.size != 0
-                span.badge.badge-important= current_user.notifications.size
-          li= link_to tr('Sign out'), sign_out_path
+      /! ul.nav
+      /!   li= link_to current_city.name, current_city
+      .nav-collapse
+        form.navbar-search action='/search' method='get'
+          input type='text' class='search-query' placeholder=trl('Search') name='q'
+        - unless current_user
+          ul.nav.pull-right
+            li= link_to tr('Sign in'), sign_in_path
+        - else
+          ul.nav.pull-right
+            - unless current_user.restricted_access
+              li= link_to tr('My profile'), current_user
+              li= link_to tr('My groups'), groups_user_path(current_user)
+              /! li= link_to tr('My messages'), waves_user_path(current_user)
+              li= link_to notifications_path do
+                =' tr('My notifications')
+                - if current_user.notifications.size != 0
+                  span.badge.badge-important= current_user.notifications.size
+            li= link_to tr('Sign out'), sign_out_path

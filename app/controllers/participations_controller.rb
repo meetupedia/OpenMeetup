@@ -15,12 +15,32 @@ class ParticipationsController < CommonController
       @participation.save
       cookies.delete :add_participation_for
     end
-    redirect_to @event
+    if @event.questions.size > 0
+      redirect_to edit_participation_path(@participation)
+    else
+      redirect_to @event
+    end
+  end
+
+  def edit
+    @participation.event.questions.each do |question|
+      @participation.answers.build :question => question unless @participation.answers.where(:question_id => question.id).first
+    end
+  end
+
+  def update
+    @participation.update_attributes params[:participation]
+    redirect_to @participation.event
   end
 
   def destroy
     @participation.destroy
     redirect_to @participation.event
+  end
+
+  def checkin
+    @participation.update_attributes :is_checkined => true
+    redirect_to actual_event_path(@participation.event)
   end
 
   def set
