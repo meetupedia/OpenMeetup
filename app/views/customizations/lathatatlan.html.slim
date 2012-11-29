@@ -1,21 +1,12 @@
-.row
-  .span4
-    .hero-unit(style="background: #ffffff; padding: 30px 0;")
-      h1= tr('Knowledge Community Fun :)')
-  .span4(style="padding: 30px 0;")
-    .opening-images
-      = link_to image_tag('lathatatlan/lathatatlan_2.jpg'), request_invite_users_path
-  .span4(style="padding: 30px 0;")
-    .opening-images
-      = link_to image_tag('lathatatlan/lathatatlan_6.jpg'), request_invite_users_path
-.row
-  .span4
-    .opening-images
-      = link_to image_tag('lathatatlan/lathatatlan_4.jpg'), request_invite_users_path
-  .span4
-    .opening-images
-      = link_to image_tag('lathatatlan/lathatatlan_3.jpg'), request_invite_users_path
-  .span4
+.wrapper
+  .opening-images
+    /! .hero-unit(style="background: #ffffff; padding: 30px 0;")
+    /!  h1= tr('Knowledge Community Fun :)')
+    = link_to image_tag('lathatatlan/lathatatlan_2.jpg'), sign_in_path
+    = link_to image_tag('lathatatlan/lathatatlan_6.jpg'), sign_in_path
+    = link_to image_tag('lathatatlan/lathatatlan_4.jpg'), sigh_in_path
+  .opening-images
+    = link_to image_tag('lathatatlan/lathatatlan_3.jpg'), sign_in_path
     .hero-unit(style="background: #ffffff; padding: 50px 15px;")
       p= tr('Soft skill trainings in higher education, worldwide.')
       - unless Settings.enable_invite_process
