@@ -11,6 +11,16 @@
       /! ul.nav
       /!   li= link_to current_city.name, current_city
       .nav-collapse
+        ul.nav
+
+          li= link_to waves_user_path(current_user), :alt => trl('My messages'), :title => trl('My messages') do
+            b.icon-envelope
+
+          li= link_to notifications_path, :alt => trl('My notifications'), :title => trl('My notifications') do
+            b.icon-info-sign            
+            - if current_user.notifications.size != 0
+              span.badge.badge-important= current_user.notifications.size
+
         form.navbar-search action='/search' method='get'
           input type='text' class='search-query' placeholder=trl('Search') name='q'
         - unless current_user
@@ -19,26 +29,15 @@
         - else
           ul.nav.pull-right
             - unless current_user.restricted_access
-              li= link_to tr('My profile'), current_user
-              li= link_to tr('My groups'), groups_user_path(current_user)
-              /! li= link_to tr('My messages'), waves_user_path(current_user)
-              li= link_to notifications_path do
-                =' tr('My notifications')
-                - if current_user.notifications.size != 0
-                  span.badge.badge-important= current_user.notifications.size
-            li= link_to tr('Sign out'), sign_out_path
-  - if current_user
-    .navbar-inner
-      .container
-        | <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        |   <span class="icon-bar"></span>
-        |   <span class="icon-bar"></span>
-        |   <span class="icon-bar"></span>
-        | </a>
-        .nav-collapse
-          ul.nav.pull-right
-            li= link_to tr('Home'), notifications_path
-            li= link_to tr('Groups'), discovery_path
-            li= link_to tr('Interests'), tags_path
-            li= link_to tr('Events'), root_path
-            li= link_to tr('Friends'), root_path
+              li= link_to tr('Home'), notifications_path
+              li= link_to tr('Groups'), discovery_path
+
+              li.dropdown
+                a.dropdown-toggle(data-toggle="dropdown")
+                  = current_user.name
+                  b.caret
+                ul.dropdown-menu
+                  li= link_to tr('Profile'), current_user
+                  li= link_to tr('Groups'), groups_user_path(current_user)
+                  li= link_to tr('Friends'), root_path
+                  li= link_to tr('Sign out'), sign_out_path
