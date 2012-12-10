@@ -27,6 +27,6 @@
             = f.input :password, :label => tr('Password')
             = f.input :password_confirmation, :label => tr('Password again')
             - if Settings.customization == 'get2gather'
-              = f.input :read_manual, :label => 'I have read the <a href="http://openmeetup.org/get2gather-user-manual" target="_blank">user manual</a>.'
-              = f.input :read_cobe, :label => 'I accept the <a href="http://www.ericsson.com/res/thecompany/docs/corporate-responsibility/2012/cobe/EN_COBE.pdf" target="_blank">code of ethics</a>.'
+              = f.input :read_manual, :label => 'I have read the <a href="http://openmeetup.org/get2gather-user-manual" target="_blank">user manual</a>.'.html_safe
+              = f.input :read_cobe, :label => 'I accept the <a href="http://www.ericsson.com/res/thecompany/docs/corporate-responsibility/2012/cobe/EN_COBE.pdf" target="_blank">code of ethics</a>.'.html_safe
           = f.actions
