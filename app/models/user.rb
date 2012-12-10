@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   key :crypted_password
   key :password_salt
   key :persistence_token
+  key :perishable_token
   key :single_access_token
   key :token
   key :location
@@ -52,6 +53,8 @@ class User < ActiveRecord::Base
   acts_as_authentic do |c|
     c.validate_email_field = false
     c.validate_password_field = false
+    c.perishable_token_valid_for = 1.day
+    c.disable_perishable_token_maintenance = true
   end
 
   validates :email, :presence => {:if => :password_required?}
@@ -81,6 +84,11 @@ class User < ActiveRecord::Base
 
   def link
     false
+  end
+
+  def deliver_password_reset
+    reset_perishable_token!
+    UserMailer.password_reset(self).deliver
   end
 
   def apply_omniauth(omniauth)

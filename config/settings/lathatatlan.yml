@@ -15,3 +15,5 @@ enable_facebook_comments: true
 enable_messages: true
 
 enable_invite_process: false
+
+enable_feedback_box: true

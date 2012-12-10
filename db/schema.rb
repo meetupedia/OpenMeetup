@@ -29,10 +29,27 @@ ActiveRecord::Schema.define(:version => 20120618082322) do
     t.string   "activable_type"
     t.integer  "activable_id"
     t.integer  "user_id"
+    t.integer  "group_id"
+    t.integer  "event_id"
   end
 
   add_index "activities", ["activable_id", "activable_type"], :name => "index_activities_on_activable_id_and_activable_type"
+  add_index "activities", ["event_id"], :name => "index_activities_on_event_id"
+  add_index "activities", ["group_id"], :name => "index_activities_on_group_id"
   add_index "activities", ["user_id"], :name => "index_activities_on_user_id"
+
+  create_table "answers", :force => true do |t|
+    t.string   "answer"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "question_id"
+    t.integer  "user_id"
+    t.integer  "participation_id"
+  end
+
+  add_index "answers", ["participation_id"], :name => "index_answers_on_participation_id"
+  add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
+  add_index "answers", ["user_id"], :name => "index_answers_on_user_id"
 
   create_table "authentications", :force => true do |t|
     t.string  "uid"
@@ -43,9 +60,41 @@ ActiveRecord::Schema.define(:version => 20120618082322) do
   add_index "authentications", ["user_id"], :name => "index_authentications_on_user_id"
 
   create_table "cities", :force => true do |t|
+    t.string  "name"
+    t.string  "permalink"
+    t.integer "country_id"
+    t.string  "state"
+  end
+
+  add_index "cities", ["country_id"], :name => "index_cities_on_country_id"
+  add_index "cities", ["name"], :name => "index_cities_on_name"
+  add_index "cities", ["permalink"], :name => "index_cities_on_permalink"
+
+  create_table "comments", :force => true do |t|
+    t.text     "comment"
+    t.boolean  "is_highlighted",   :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "reply_to_id"
+    t.string   "commentable_type"
+    t.integer  "commentable_id"
+    t.integer  "user_id"
+    t.integer  "level",            :default => 0
+  end
+
+  add_index "comments", ["commentable_id", "commentable_type"], :name => "index_comments_on_commentable_id_and_commentable_type"
+  add_index "comments", ["reply_to_id"], :name => "index_comments_on_reply_to_id"
+  add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
+
+  create_table "countries", :force => true do |t|
     t.string "name"
     t.string "permalink"
+    t.string "code"
   end
+
+  add_index "countries", ["code"], :name => "index_countries_on_code"
+  add_index "countries", ["name"], :name => "index_countries_on_name"
+  add_index "countries", ["permalink"], :name => "index_countries_on_permalink"
 
   create_table "event_invitation_targets", :force => true do |t|
     t.string   "email"
@@ -67,9 +116,14 @@ ActiveRecord::Schema.define(:version => 20120618082322) do
     t.integer  "event_id"
     t.integer  "user_id"
     t.text     "message"
+    t.integer  "invited_user_id"
+    t.boolean  "is_accepted"
+    t.string   "email"
+    t.string   "code"
   end
 
   add_index "event_invitations", ["event_id"], :name => "index_event_invitations_on_event_id"
+  add_index "event_invitations", ["invited_user_id"], :name => "index_event_invitations_on_invited_user_id"
   add_index "event_invitations", ["user_id"], :name => "index_event_invitations_on_user_id"
 
   create_table "events", :force => true do |t|
@@ -89,11 +143,16 @@ ActiveRecord::Schema.define(:version => 20120618082322) do
     t.boolean  "gmaps"
     t.string   "permalink"
     t.string   "place"
+    t.integer  "comments_count"
+    t.integer  "city_id"
+    t.string   "permaname"
   end
 
   add_index "events", ["city"], :name => "index_events_on_city"
+  add_index "events", ["city_id"], :name => "index_events_on_city_id"
   add_index "events", ["group_id"], :name => "index_events_on_group_id"
   add_index "events", ["permalink"], :name => "index_events_on_permalink"
+  add_index "events", ["permaname"], :name => "index_events_on_permaname"
   add_index "events", ["user_id"], :name => "index_events_on_user_id"
 
   create_table "follows", :force => true do |t|
@@ -113,10 +172,12 @@ ActiveRecord::Schema.define(:version => 20120618082322) do
     t.datetime "updated_at"
     t.integer  "group_invitation_id"
     t.integer  "group_id"
+    t.integer  "invited_user_id"
   end
 
   add_index "group_invitation_targets", ["group_id"], :name => "index_group_invitation_targets_on_group_id"
   add_index "group_invitation_targets", ["group_invitation_id"], :name => "index_group_invitation_targets_on_group_invitation_id"
+  add_index "group_invitation_targets", ["invited_user_id"], :name => "index_group_invitation_targets_on_invited_user_id"
 
   create_table "group_invitations", :force => true do |t|
     t.datetime "created_at"
@@ -124,9 +185,14 @@ ActiveRecord::Schema.define(:version => 20120618082322) do
     t.integer  "group_id"
     t.integer  "user_id"
     t.text     "message"
+    t.integer  "invited_user_id"
+    t.boolean  "is_accepted"
+    t.string   "email"
+    t.string   "code"
   end
 
   add_index "group_invitations", ["group_id"], :name => "index_group_invitations_on_group_id"
+  add_index "group_invitations", ["invited_user_id"], :name => "index_group_invitations_on_invited_user_id"
   add_index "group_invitations", ["user_id"], :name => "index_group_invitations_on_user_id"
 
   create_table "group_taggings", :force => true do |t|
@@ -152,19 +218,26 @@ ActiveRecord::Schema.define(:version => 20120618082322) do
     t.string   "image_file_name"
     t.integer  "image_file_size"
     t.string   "image_content_type"
-    t.boolean  "is_closed",          :default => false
+    t.boolean  "is_closed",           :default => false
     t.datetime "image_updated_at"
     t.string   "facebook_url"
     t.string   "url"
     t.string   "facebook_uid"
     t.integer  "language_id"
     t.integer  "city_id"
+    t.datetime "header_updated_at"
+    t.integer  "header_file_size"
+    t.string   "header_content_type"
+    t.string   "header_file_name"
+    t.integer  "memberships_count",   :default => 0
+    t.string   "permaname"
   end
 
   add_index "groups", ["city_id"], :name => "index_groups_on_city_id"
   add_index "groups", ["language_id"], :name => "index_groups_on_language_id"
   add_index "groups", ["location"], :name => "index_groups_on_location"
   add_index "groups", ["permalink"], :name => "index_groups_on_permalink"
+  add_index "groups", ["permaname"], :name => "index_groups_on_permaname"
   add_index "groups", ["user_id"], :name => "index_groups_on_user_id"
 
   create_table "images", :force => true do |t|
@@ -175,18 +248,98 @@ ActiveRecord::Schema.define(:version => 20120618082322) do
     t.string   "caption"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "imageable_id"
-    t.string   "imageable_type"
     t.integer  "user_id"
+    t.string   "imageable_type"
+    t.integer  "imageable_id"
+    t.boolean  "is_live",            :default => false
   end
 
   add_index "images", ["imageable_id", "imageable_type"], :name => "index_images_on_imageable_id_and_imageable_type"
   add_index "images", ["user_id"], :name => "index_images_on_user_id"
 
+  create_table "interest_taggings", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "interest_id"
+    t.integer  "user_id"
+  end
+
+  add_index "interest_taggings", ["interest_id"], :name => "index_interest_taggings_on_interest_id"
+  add_index "interest_taggings", ["user_id"], :name => "index_interest_taggings_on_user_id"
+
+  create_table "interests", :force => true do |t|
+    t.string   "name"
+    t.string   "permalink"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "invited_interest_taggings", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "invited_user_id"
+    t.integer  "interest_id"
+  end
+
+  add_index "invited_interest_taggings", ["interest_id"], :name => "index_invited_interest_taggings_on_interest_id"
+  add_index "invited_interest_taggings", ["invited_user_id"], :name => "index_invited_interest_taggings_on_invited_user_id"
+
+  create_table "invited_users", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "code"
+    t.string   "permalink"
+    t.string   "locale"
+    t.string   "location"
+    t.boolean  "i_am_an_organizer"
+    t.boolean  "i_am_a_participant"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "languages", :force => true do |t|
     t.string "code"
     t.string "name"
   end
+
+  create_table "letter_templates", :force => true do |t|
+    t.string   "name"
+    t.string   "subject"
+    t.text     "template"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  add_index "letter_templates", ["user_id"], :name => "index_letter_templates_on_user_id"
+
+  create_table "letters", :force => true do |t|
+    t.string   "subject"
+    t.text     "template"
+    t.boolean  "is_mailed",   :default => false
+    t.datetime "mailed_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "testuser_id"
+  end
+
+  add_index "letters", ["testuser_id"], :name => "index_letters_on_testuser_id"
+  add_index "letters", ["user_id"], :name => "index_letters_on_user_id"
+
+  create_table "membership_requests", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "group_id"
+    t.integer  "user_id"
+  end
+
+  add_index "membership_requests", ["group_id"], :name => "index_membership_requests_on_group_id"
+  add_index "membership_requests", ["user_id"], :name => "index_membership_requests_on_user_id"
 
   create_table "memberships", :force => true do |t|
     t.boolean  "is_admin"
@@ -199,15 +352,65 @@ ActiveRecord::Schema.define(:version => 20120618082322) do
   add_index "memberships", ["group_id"], :name => "index_memberships_on_group_id"
   add_index "memberships", ["user_id"], :name => "index_memberships_on_user_id"
 
+  create_table "notifications", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "activity_id"
+    t.integer  "group_id"
+    t.integer  "user_id"
+  end
+
+  add_index "notifications", ["activity_id"], :name => "index_notifications_on_activity_id"
+  add_index "notifications", ["group_id"], :name => "index_notifications_on_group_id"
+  add_index "notifications", ["user_id"], :name => "index_notifications_on_user_id"
+
+  create_table "organizations", :force => true do |t|
+    t.string "name"
+    t.string "permalink"
+    t.string "layout_name"
+    t.text   "layout"
+    t.text   "stylesheets"
+  end
+
   create_table "participations", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "event_id"
+    t.integer  "user_id"
+    t.boolean  "is_checkined", :default => false
+  end
+
+  add_index "participations", ["event_id"], :name => "index_participations_on_event_id"
+  add_index "participations", ["user_id"], :name => "index_participations_on_user_id"
+
+  create_table "posts", :force => true do |t|
+    t.integer  "comments_count"
+    t.text     "post"
+    t.boolean  "is_highlighted", :default => false
+    t.boolean  "is_broadcasted", :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "postable_type"
+    t.integer  "postable_id"
+    t.integer  "user_id"
+    t.boolean  "is_live",        :default => false
+    t.integer  "event_id"
+  end
+
+  add_index "posts", ["event_id"], :name => "index_posts_on_event_id"
+  add_index "posts", ["postable_id", "postable_type"], :name => "index_posts_on_postable_id_and_postable_type"
+  add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
+
+  create_table "questions", :force => true do |t|
+    t.string   "question"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "event_id"
     t.integer  "user_id"
   end
 
-  add_index "participations", ["event_id"], :name => "index_participations_on_event_id"
-  add_index "participations", ["user_id"], :name => "index_participations_on_user_id"
+  add_index "questions", ["event_id"], :name => "index_questions_on_event_id"
+  add_index "questions", ["user_id"], :name => "index_questions_on_user_id"
 
   create_table "reviews", :force => true do |t|
     t.datetime "created_at"
@@ -215,9 +418,10 @@ ActiveRecord::Schema.define(:version => 20120618082322) do
     t.integer  "user_id"
     t.text     "review"
     t.integer  "group_id"
-    t.boolean  "recommendation"
+    t.integer  "event_id"
   end
 
+  add_index "reviews", ["event_id"], :name => "index_reviews_on_event_id"
   add_index "reviews", ["group_id"], :name => "index_reviews_on_group_id"
   add_index "reviews", ["user_id"], :name => "index_reviews_on_user_id"
 
@@ -237,10 +441,8 @@ ActiveRecord::Schema.define(:version => 20120618082322) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.integer  "language_id"
   end
 
-  add_index "tags", ["language_id"], :name => "index_tags_on_language_id"
   add_index "tags", ["user_id"], :name => "index_tags_on_user_id"
 
   create_table "tr8n_glossary", :force => true do |t|
@@ -621,15 +823,11 @@ ActiveRecord::Schema.define(:version => 20120618082322) do
   add_index "user_follows", ["user_id"], :name => "index_user_follows_on_user_id"
 
   create_table "users", :force => true do |t|
-    t.string   "provider"
-    t.string   "uid"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "permalink"
     t.string   "token"
-    t.string   "location"
-    t.boolean  "is_admin"
+    t.boolean  "is_admin",            :default => false
     t.text     "facebook_friend_ids"
     t.string   "email"
     t.integer  "city_id"
@@ -637,6 +835,17 @@ ActiveRecord::Schema.define(:version => 20120618082322) do
     t.string   "crypted_password"
     t.string   "password_salt"
     t.string   "email_confirmed"
+    t.string   "locale"
+    t.string   "single_access_token"
+    t.string   "nickname"
+    t.string   "invitation_code"
+    t.boolean  "restricted_access",   :default => false
+    t.string   "location"
+    t.integer  "karma",               :default => 0
+    t.integer  "notifications_count", :default => 0
+    t.integer  "memberships_count",   :default => 0
+    t.datetime "last_notified"
+    t.binary   "settings"
   end
 
   add_index "users", ["city_id"], :name => "index_users_on_city_id"
