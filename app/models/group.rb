@@ -5,6 +5,7 @@ class Group < ActiveRecord::Base
   key :permaname, :index => true
   key :permalink, :index => true
   key :description, :as => :text
+  key :creation_letter_text, :as => :text
   key :facebook_uid
   key :location, :index => true
   key :image_file_name

@@ -6,7 +6,7 @@ class WaveMailer < CommonMailer
     @recipient = recipient
     @email = @recipient.email
     @wave_item = wave_item
-    mail :to => @email, :subject => 'New message'
+    mail :to => @email, :subject => trl('New message')
   end
 
   class Preview < MailView
