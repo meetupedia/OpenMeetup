@@ -20,14 +20,6 @@
         = link_to image_tag(@group.images.last.image.url(:normal)), @group.images.last.image.url(:normal), :class => 'fancybox'
         p= link_to tr('All images'), images_group_path(@group), :rel => 'modal'
 
-      /
-        - unless (users = @group.members.order('users.name ASC')).empty?
-          hr
-          h2= tr('Who we are')
-          p= render 'users/user_avatars', :users => users
-
-    /
-
     .wrapper
       h2= tr('Members')
       - if @group.is_closed?

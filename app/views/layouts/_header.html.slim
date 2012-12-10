@@ -11,15 +11,14 @@
       /! ul.nav
       /!   li= link_to current_city.name, current_city
       .nav-collapse
-        ul.nav
-
-          li= link_to waves_user_path(current_user), :alt => trl('My messages'), :title => trl('My messages') do
-            b.icon-envelope
-
-          li= link_to notifications_path, :alt => trl('My notifications'), :title => trl('My notifications') do
-            b.icon-info-sign            
-            - if current_user.notifications.size != 0
-              span.badge.badge-important= current_user.notifications.size
+        - if current_user
+          ul.nav
+            li= link_to waves_user_path(current_user), :alt => trl('My messages'), :title => trl('My messages') do
+              b.icon-envelope
+            li= link_to notifications_path, :alt => trl('My notifications'), :title => trl('My notifications') do
+              b.icon-info-sign
+              - if current_user.notifications.size != 0
+                span.badge.badge-important= current_user.notifications.size
 
         form.navbar-search action='/search' method='get'
           input type='text' class='search-query' placeholder=trl('Search') name='q'
