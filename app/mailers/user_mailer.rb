@@ -2,9 +2,16 @@
 
 class UserMailer < CommonMailer
 
-  def set_admin(recipient)
-    @recipient = recipient
-    @email = @recipient.email
+  def password_reset(user)
+    @user = user
+    @email = @user.email
+    @url = edit_password_url(@user.perishable_token)
+    mail :to => @email, :subject => 'Request new password'
+  end
+
+  def set_admin(user)
+    @user = user
+    @email = @user.email
     mail :to => @email, :subject => 'Your are admin now'
   end
 

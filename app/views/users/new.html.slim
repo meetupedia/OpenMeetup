@@ -8,6 +8,8 @@
           = f.input :password, :label => tr('Password')
           = f.input :remember_me, :as => :boolean, :label => tr('Remember me')
         = f.actions
+      hr
+      p= link_to tr('Forgot password?'), new_password_path
   .span6
     .wrapper
       - if use_invite_process?
