@@ -1,0 +1,11 @@
+.wrapper
+  h1= tr('Change password')
+
+  = semantic_form_for :user, :url => password_path, :html => {:method => :put} do |f|
+    = f.inputs do
+      = f.input :password
+      = f.input :password_confirmation
+    = f.actions do
+      = f.action :submit, :label => tr('Save password')
+
+= debug @user.errors

@@ -78,6 +78,7 @@ class UsersController < CommonController
   def set_admin
     @user.is_admin = true
     @user.save
+    UserMailer.set_admin(@user).deliver
     redirect_to @user
   end
 

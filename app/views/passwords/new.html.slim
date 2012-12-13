@@ -1,0 +1,7 @@
+.wrapper
+  h1= tr('Forgot password?')
+
+  = semantic_form_for :user, :url => passwords_path do |f|
+    = f.inputs :email
+    = f.actions do
+      = f.action :submit, :label => tr('Request new password')
