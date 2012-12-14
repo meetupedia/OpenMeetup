@@ -8,17 +8,17 @@
       - if current_user
         .footer-showlove
           .footer-facebook
-            | <div class="fb-like" data-href="http://openmeetup.net" data-send="false" data-layout="button_count" data-show-faces="false"></div>
+            | <div class="fb-like" data-href="http://meetupedia.com" data-send="false" data-layout="button_count" data-show-faces="false"></div>
           .footer-google
             | <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
-            | <g:plusone href="http://openmeetup.net" size="medium"></g:plusone>
+            | <g:plusone href="http://meetupedia.com" size="medium"></g:plusone>
           .footer-twitter
-            | <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://openmeetup.net" data-text="Free meetup alternative -->">Tweet</a>
+            | <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://meetupedia.com" data-text="Wow, a free meetup.com alternative -->">Tweet</a>
             | <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
     - else
       .footer-left
         =' tr('Powered by')
-        = link_to 'OpenMeetup', 'http://openmeetup.org/'
+        = link_to 'Meetupedia', 'http://meetupedia.com/'
       - if Settings.customization == 'get2gather'
         .pull-right
           = tr('Contact')
