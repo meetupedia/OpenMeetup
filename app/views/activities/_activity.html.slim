@@ -4,43 +4,41 @@
   = div_for activity, :class => 'list_item avatar_item' do
     .avatar= user_avatar activity.user
     - if activity.activable.class.name == 'Event'
-      = t('activity.event_created', :user => user_link(activity.activable.user), :event => link_to(activity.activable.title, activity.activable)).html_safe
+      =' user_link activity.activable.user
+      = tr('created the meetup ')
+      =' link_to activity.activable.title, activity.activable
     - elsif activity.activable.class.name == 'Group'
       =' user_link activity.activable.user
-      ' létrehozta a
+      = tr('created the meetup group ')
       =' link_to activity.activable.name, activity.activable
-      ' csoportot.
     - elsif activity.activable.class.name == 'Membership'
       =' user_link activity.activable.user
-      ' követi a
+      = tr('has joined the group ')
       =' link_to activity.activable.group.name, activity.activable.group
-      ' csoportot.
     - elsif activity.activable.class.name == 'Participation'
       =' user_link activity.activable.user
-      ' jelentkezett a
+      = tr('will participate at ')
       =' link_to activity.activable.event.title, activity.activable.event
-      ' eseményre.
     - elsif activity.activable.class.name == 'Tagging'
       =' user_link activity.activable.user
-      ' követi a
+      = tr('follows ')
       =' link_to activity.activable.tag.name, activity.activable.tag
-      ' témakört.
     - elsif activity.activable.class.name == 'UserFollow'
       =' user_link activity.activable.user
-      ' követni kezdett egy felhasználót.
+      = tr('follows ')
     - elsif activity.activable.class.name == 'Image'
       =' user_link activity.activable.user
-      ' feltöltött egy képet.
+      = tr('uploaded a picture ')
       p= link_to image_tag(activity.activable.image.url(:small), :alt => '', :height => 80, :width => 80), activity.activable.image.url(:normal), :class => 'fancybox'
     - elsif activity.activable.class.name == 'Comment'
       =' user_link activity.activable.user
-      ' új kommentet írt egy
-      = link_to 'bejegyzéshez', activity.activable.commentable, :rel => 'modal'
+      = tr('made ')
+      = link_to tr('a new comment'), activity.activable.commentable, :rel => 'modal'
       | .
       p= activity.activable.comment
     - elsif activity.activable.class.name == 'Review'
       =' user_link activity.activable.user
-      ' új véleményt írt egy eseményhez:
+      = tr('wrote a review for the event ')
       = link_to activity.activable.event.title, activity.activable.event
       p= activity.activable.review
     .date= time_ago_in_words activity.created_at
