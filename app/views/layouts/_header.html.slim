@@ -39,4 +39,6 @@
                   li= link_to tr('Profile'), current_user
                   li= link_to tr('Groups'), groups_user_path(current_user)
                   li= link_to tr('Friends'), root_path
+                  - if @user.is_admin?
+                    li= link_to tr('System settings'), system_path
                   li= link_to tr('Sign out'), sign_out_path
