@@ -1,24 +1,35 @@
 .wrapper
   h1
-    = tr('Results')
-    ' :
+    = tr('Results for ')
     = params[:q]
+
+  h2= tr('Users')
+  - unless @users.blank?
+    .list_view= render @users
+  - else
+    p= tr('No matching users found.')
+
+  h2= tr('Groups')
+  - unless @groups.blank?
+    .list_view= render @groups
+  - else
+    p= tr('No matching group found.')
+
+  h2= tr('Events')
+  - unless @events.blank?
+    .list_view= render @events
+  - else
+    p= tr('No matching event found.')
+
+  h2= tr('Interests')
+  - unless @interests.blank?
+    .list_view= render @interests
+  - else
+    p= tr('No matching interests found.')
 
   - unless Settings.standalone
     h2= tr('Cities')
     - unless @cities.blank?
       .list_view= render @cities
     - else
-      p= tr('City not found.')
-
-  h2= tr('Groups')
-  - unless @groups.blank?
-    .list_view= render @groups
-  - else
-    p= tr('Group not found.')
-
-  h2= tr('Events')
-  - unless @events.blank?
-    .list_view= render @events
-  - else
-    p= tr('Event not found.')
+      p= tr('No matching city found.')
