@@ -12,8 +12,7 @@
 
       - if @group.facebook_url.present?
         div
-          ' Facebook-oldal:
-          = auto_link @group.facebook_url
+          = link_to tr('Facebook'), @group.facebook_url
 
     - if @group.images.size > 0
       .wrapper
