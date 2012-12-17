@@ -30,7 +30,7 @@
             - unless current_user.restricted_access
               li= link_to tr('Home'), notifications_path
               li= link_to tr('Find a meetup group'), discovery_path
-              li= link_to tr('Start a meetup group'), '/groups/new'
+              li= link_to tr('Start a meetup group'), new_group_path
 
               li.dropdown
                 a.dropdown-toggle(data-toggle="dropdown")

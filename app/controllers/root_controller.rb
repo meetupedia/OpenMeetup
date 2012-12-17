@@ -8,7 +8,7 @@ class RootController < CommonController
       if current_user.restricted_access
         redirect_to restricted_access_url
       else
-        @user = current_user
+        # @user = current_user
         # render 'users/calendar'
         redirect_to discovery_url
       end
