@@ -3,7 +3,7 @@
   = f.hidden_field :facebook_uid
   = f.inputs do
     = f.input :name
-    = f.input :permaname, :label => false, :prepend => 'http://meetupedia.com/'
+    = f.input :permaname, :label => false, :prepend => 'http://'+Settings.host+'/'
     = f.input :description
     = f.input :creation_letter_text
     = f.input :image
