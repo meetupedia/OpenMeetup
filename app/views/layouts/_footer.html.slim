@@ -1,24 +1,46 @@
 #footer.clearfix
   .container
 
+    // footer for the global version
+
     - unless Settings.standalone
-      .footer-left
-        =' link_to tr('About'), 'http://openmeetup.org/'
+      .span2
+        h3= tr('About')
+        ul
+          li= link_to tr('About'), 'http://openmeetup.org/?about'
+          li= link_to tr('Team'), 'http://openmeetup.org/?team'
+          li= link_to tr('Blog'), 'http://openmeetup.org/?blog'
+          li= link_to tr('Press'), 'http://openmeetup.org/?press'
+          li= link_to tr('Contact'), 'http://openmeetup.org/?contact'
+      .span2
+        h3= tr('Get involved')
+        ul
+          li= link_to tr('Coding'), 'http://openmeetup.org/?coding'
+          li= link_to tr('Documentation'), 'http://openmeetup.org/?documentation'
+          li= link_to tr('Education'), 'http://openmeetup.org/?education'
+          li= link_to tr('Helping Users'), 'http://openmeetup.org/?helpingusers'
+          li= link_to tr('Localization'), 'http://openmeetup.org/?localization'
+          li= link_to tr('Quality Assurance'), 'http://openmeetup.org/?qualityassurance'
 
       - if current_user
-        .footer-showlove
-          .footer-facebook
-            | <div class="fb-like" data-href="http://openmeetup.net" data-send="false" data-layout="button_count" data-show-faces="false"></div>
-          .footer-google
-            | <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
-            | <g:plusone href="http://openmeetup.net" size="medium"></g:plusone>
-          .footer-twitter
-            | <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://openmeetup.net" data-text="Free meetup alternative -->">Tweet</a>
-            | <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        .span4
+          .footer-showlove
+            h3= tr('Spread the word')
+            .footer-facebook
+              | <div class="fb-like" data-href="http://meetupedia.com" data-send="false" data-layout="button_count" data-show-faces="false"></div>
+            .footer-google
+              | <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+              | <g:plusone href="http://meetupedia.com" size="medium"></g:plusone>
+            .footer-twitter
+              | <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://meetupedia.com" data-text="Wow, a free meetup.com alternative -->">Tweet</a>
+              | <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+    // footer for the standalone versions
+    
     - else
       .footer-left
         =' tr('Powered by')
-        = link_to 'OpenMeetup', 'http://openmeetup.org/'
+        = link_to 'Meetupedia', 'http://meetupedia.com/'
       - if Settings.customization == 'get2gather'
         .pull-right
           = tr('Contact')

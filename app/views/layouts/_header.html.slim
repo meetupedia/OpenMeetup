@@ -13,10 +13,8 @@
       .nav-collapse
         - if current_user
           ul.nav
-
             li= link_to waves_user_path(current_user), :alt => trl('My messages'), :title => trl('My messages') do
               b.icon-envelope
-
             li= link_to notifications_path, :alt => trl('My notifications'), :title => trl('My notifications') do
               b.icon-info-sign
               - if current_user.notifications.size != 0
@@ -31,7 +29,8 @@
           ul.nav.pull-right
             - unless current_user.restricted_access
               li= link_to tr('Home'), notifications_path
-              li= link_to tr('Groups'), discovery_path
+              li= link_to tr('Find a meetup group'), discovery_path
+              li= link_to tr('Start a meetup group'), 'groups/new'
 
               li.dropdown
                 a.dropdown-toggle(data-toggle="dropdown")
@@ -40,5 +39,6 @@
                 ul.dropdown-menu
                   li= link_to tr('Profile'), current_user
                   li= link_to tr('Groups'), groups_user_path(current_user)
-                  li= link_to tr('Friends'), root_path
+                  - if current_user.is_admin?
+                    li= link_to tr('System settings'), system_path
                   li= link_to tr('Sign out'), sign_out_path

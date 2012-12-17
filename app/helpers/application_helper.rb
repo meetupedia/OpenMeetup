@@ -7,6 +7,10 @@ module ApplicationHelper
       text
     end
 
+    def tr(text, identifiers = {}, options = {})
+      text
+    end
+
     def trl(text)
       text
     end

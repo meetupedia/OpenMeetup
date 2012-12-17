@@ -1,33 +1,38 @@
 .wrapper
   .group_header
-    - if current_user
-      .button-menu
-        .btn-group.pull-right
-          a.btn.dropdown-toggle(data-toggle="dropdown" href="#")
-            =' image_tag 'cog.png'
-            span.caret
-          ul.dropdown-menu
-            - if can? :create, Event.new(:group => @group)
-              li= link_to tr('New event'), new_group_event_path(@group), :rel => 'modal'
-            - if current_user
-              li= link_to tr('Invite friends'), new_group_group_invitation_path(@group), :rel => 'modal'
-            - if can? :edit, @group
-              li= link_to tr('Edit group'), edit_group_path(@group), :rel => 'modal'
-        =' render 'memberships/button', :group => @group
-    - else
-      .button-menu=' link_to %{<i class="icon-plus-sign icon-white"></i> #{tr('Join')}}.html_safe, set_group_memberships_path(@group), :class => 'btn btn-primary'
+    .container
+      .span1
+        - if @group.image.file?
+          .avatar= link_to(image_tag(@group.image.url(:small), :alt => @group.name, :height => 96, :width => 96, :title => @group.name), @group)
+      .span5
+        h1.group= link_to @group.name, @group
+        - unless (tags = @group.tags).blank?
+          p= render @group.tags
+        - else
+          p.muted= tr('No tags yet.')
+      .span3
+        - if current_user
+          .button-menu
+            .btn-group.pull-right
+              a.btn.dropdown-toggle(data-toggle="dropdown" href="#")
+                =' image_tag 'cog.png'
+                span.caret
+              ul.dropdown-menu
+                - if can? :create, Event.new(:group => @group)
+                  li= link_to tr('New event'), new_group_event_path(@group), :rel => 'modal'
+                - if current_user
+                  li= link_to tr('Invite friends'), new_group_group_invitation_path(@group), :rel => 'modal'
+                - if can? :edit, @group
+                  li= link_to tr('Edit group'), edit_group_path(@group), :rel => 'modal'
+            =' render 'memberships/button', :group => @group
+        - else
+          .button-menu=' link_to %{<i class="icon-plus-sign icon-white"></i> #{tr('Join')}}.html_safe, set_group_memberships_path(@group), :class => 'btn btn-primary'
 
-    - if @group.image.file?
-      .avatar= link_to(image_tag(@group.image.url(:small), :alt => @group.name, :height => 96, :width => 96, :title => @group.name), @group)
-
-    h1.group= link_to @group.name, @group
-
-    - unless @group.description.blank?
-      p= truncate(@group.description, :length => 120)
-    - else
-      p.muted= tr('No description yet.')
-
-    - unless (tags = @group.tags).blank?
-      p= render @group.tags
-    - else
-      p.muted= tr('No tags yet.')
+.wrapper
+  .container
+    .span8
+      - unless @group.description.blank?
+        // p= truncate(@group.description, :length => 120)
+        p= @group.description
+      - else
+        p.muted= tr('No description yet.')
