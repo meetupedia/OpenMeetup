@@ -3,9 +3,9 @@ customization: 'get2gather'
 title: 'Get2Gather'
 multilingual: true
 default_language: 'en'
-host: 'get2gather.hu'
-default_email: 'noreply@get2gather.hu'
-email_signature: "Üdvözlettel,\na Get2Gather csapata"
+host: 'get2gather.meetupedia.com'
+default_email: 'noreply@get2gather.meetupedia.com'
+email_signature: ""
 
 enable_facebook_login: false
 enable_twitter_login: false

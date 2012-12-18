@@ -3,22 +3,27 @@
   = f.hidden_field :facebook_uid
   = f.inputs do
     = f.input :name
-    = f.input :permaname, :label => false, :prepend => 'http://meetupedia.com/'
     = f.input :description
-    = f.input :creation_letter_text
-    = f.input :image
+    - unless Settings.standalone
+      = f.input :location, :label => tr('City')
     .control-group
       = f.label :tag_tokens, tr('Tags')
       = f.text_field :tag_tokens, 'data-pre' => @group.tags.map { |tag| {:id => tag.id, :name => tag.name} }.to_json
+    = f.input :image, :label => tr("Header image (we will resize it to 72x72)")
   p= link_to_function tr('More options'), "$('#more-options').toggle()", :class => 'function'
   #more-options
     = f.inputs do
-      = f.input :header
-      = f.input :url
-      = f.input :facebook_url
-      = f.input :location
-      = f.input :is_closed
-  = f.actions
+      - if Settings.standalone
+        = f.input :location, :label => tr('City')
+      = f.input :header, :label => tr('Background image (any size)')
+      = f.input :permaname, :label => tr('Short URL'), :prepend => 'http://'+Settings.host+'/'
+      = f.input :url, :label => tr('Website URL'), :prepend => 'http://'
+      = f.input :facebook_url, :label => tr('Facebook URL'), :prepend => 'http://'
+      = f.input :is_closed, :label => tr('Closed group (admins have to approve membership requests)')
+      = f.input :creation_letter_text, :label => tr('Welcome email message to new members')
+  = f.actions do
+    = f.action :submit, :label => tr('Create')
+    = f.action :cancel, :label => tr('Cancel')
 
 javascript:
   $('#group_tag_tokens').tokenInput('/tags.json', {

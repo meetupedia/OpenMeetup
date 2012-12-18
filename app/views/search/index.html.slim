@@ -1,13 +1,13 @@
 .wrapper
   h1
-    = tr('Results for ')
+    =' tr('Results for')
     = params[:q]
 
   h2= tr('Users')
   - unless @users.blank?
     .list_view= render @users
   - else
-    p= tr('No matching users found.')
+    p= tr('No matching user found.')
 
   h2= tr('Groups')
   - unless @groups.blank?
@@ -25,7 +25,7 @@
   - unless @interests.blank?
     .list_view= render @interests
   - else
-    p= tr('No matching interests found.')
+    p= tr('No matching interest found.')
 
   - unless Settings.standalone
     h2= tr('Cities')

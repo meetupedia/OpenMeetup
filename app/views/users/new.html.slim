@@ -7,7 +7,8 @@
           = f.input :email, :label => tr('Email')
           = f.input :password, :label => tr('Password')
           = f.input :remember_me, :as => :boolean, :label => tr('Remember me')
-        = f.actions
+        = f.actions do
+          = f.action :submit, :label => "Sign in"
       hr
       p= link_to tr('Forgot password?'), new_password_path
   .span6
@@ -22,11 +23,11 @@
             = hidden_field_tag :invitation_code, params[:invitation_code]
           = f.inputs do
             = f.input :name, :label => tr('Name')
-            = f.input :nickname, :label => tr('Nickname')
             = f.input :email, :label => tr('Email')
             = f.input :password, :label => tr('Password')
             = f.input :password_confirmation, :label => tr('Password again')
             - if Settings.customization == 'get2gather'
               = f.input :read_manual, :label => 'I have read the <a href="http://openmeetup.org/get2gather-user-manual" target="_blank">user manual</a>.'.html_safe
               = f.input :read_cobe, :label => 'I accept the <a href="http://www.ericsson.com/res/thecompany/docs/corporate-responsibility/2012/cobe/EN_COBE.pdf" target="_blank">code of ethics</a>.'.html_safe
-          = f.actions
+          = f.actions do
+            = f.action :submit, :label => "Sign up"
