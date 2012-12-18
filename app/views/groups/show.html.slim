@@ -18,10 +18,10 @@
         = link_to image_tag(@group.images.last.image.url(:normal)), @group.images.last.image.url(:normal), :class => 'fancybox'
         p= link_to tr('All images'), images_group_path(@group), :rel => 'modal'
 
-    - if can? :create, membership 
+    - if @group.admins.include?(current_user)
       - unless @membership_requests.blank?
         .wrapper
-          h2= tr('Requests')
+          h2= tr('Membership requests')
           .list_view= render @membership_requests
           = will_paginate @membership_requests
 
