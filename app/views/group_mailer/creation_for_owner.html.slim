@@ -1,0 +1,14 @@
+p
+  ' You have created
+  = link_to @group.name, @group
+  | .
+
+.list_view
+  = render @group
+
+- if text = Setting[:welcome_letter].presence
+  p= text
+
+hr
+
+= Settings.email_signature

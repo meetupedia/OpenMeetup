@@ -18,13 +18,13 @@ class MembershipRequestsController < CommonController
 
   def destroy
     @membership_request.destroy
-    redirect_to requested_members_group_url(@membership_request.group)
+    redirect_to @membership_request.group
   end
 
   def confirm
     @membership_request.group.memberships.create(:user_id => @membership_request.user_id)
     run_later { MembershipRequestMailer.confirmed(@membership_request).deliver }
     @membership_request.destroy
-    redirect_to requested_members_group_url(@membership_request.group)
+    redirect_to @membership_request.group
   end
 end

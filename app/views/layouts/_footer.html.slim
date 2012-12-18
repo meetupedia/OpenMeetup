@@ -36,7 +36,7 @@
               | <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
     // footer for the standalone versions
-    
+
     - else
       .footer-left
         =' tr('Powered by')
@@ -48,5 +48,5 @@
           = link_to 'get2gather (ETH)', 'mailto:PDLGET2GAT@ex1.eemea.ericsson.se'
 
     - if Settings.multilingual
-      .footer-languages
+      .footer-languages.data-no-turbolink
         = tr8n_language_strip_tag

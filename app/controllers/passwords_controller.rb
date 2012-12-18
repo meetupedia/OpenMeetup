@@ -10,14 +10,14 @@ class PasswordsController < CommonController
     unless params[:user][:email].blank?
       if @user = User.find_by_email(params[:user][:email])
         @user.deliver_password_reset
-        flash[:notice] = 'E-mailben elküldtük a szükséges tennivalókat.'
+        flash[:notice] = tr('An email has been sent to you, check your Inbox for further instructions.')
         redirect_to root_url
       else
-        flash[:alert] = 'Nincsen felhasználó ezzel az e-mail címmel!'
+        flash[:alert] = tr('No user found with this email, please try another email address.')
         render :new
       end
     else
-      flash[:alert] = 'Kötelező e-mail címet megadnod!'
+      flash[:alert] = tr('Please enter an email address.')
       render :new
     end
   end
@@ -29,7 +29,7 @@ class PasswordsController < CommonController
     @user.password = params[:user][:password]
     @user.password_confirmation = params[:user][:password_confirmation]
     if @user.save
-      flash[:notice] = 'Sikeres jelszóváltoztatás.'
+      flash[:notice] = tr('Password changed successfully, congratulations.')
       redirect_to root_url
     else
       render :edit
@@ -41,7 +41,7 @@ protected
   def load_user_using_perishable_token
     @user = User.find_using_perishable_token(params[:id])
     unless @user
-      flash[:alert] = 'Nem sikerült azonosítani téged, próbáld meg még egyszer!'
+      flash[:alert] = tr('Something went wrong, please try again.')
       redirect_to root_url
     end
   end

@@ -50,7 +50,10 @@ class Ability
       can :destroy, Membership do |membership|
         membership.user_id == current_user.id or membership.group.admins.include?(current_user) or current_user.is_admin?
       end
-      can [:set_admin, :unset_admin], Membership do |membership|
+      can :set_admin, Membership do |membership|
+        membership.group.admins.include?(current_user) or current_user.is_admin?
+      end
+      can :unset_admin, Membership do |membership|
         (membership.group.admins.include?(current_user) and membership.group.admins.size > 1) or current_user.is_admin?
       end
 
@@ -71,6 +74,8 @@ class Ability
       can [:update, :destroy], Review do |review|
         review.user == current_user
       end
+
+      can [:index, :show, :create, :update, :destroy], Setting if current_user.is_admin?
 
       can :create, Tagging
       can :destroy, Tagging do |tagging|

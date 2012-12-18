@@ -10,6 +10,13 @@ class GroupMailer < CommonMailer
     mail :to => @email, :subject => "New group: #{@group.name}"
   end
 
+  def creation_for_owner(group)
+    @group = group
+    @user = @group.user
+    @email = @user.email
+    mail :to => @email, :subject => "Your group has been created: #{@group.name}"
+  end
+
   def join(membership, recipient)
     @recipient = recipient
     @email = @recipient.email
@@ -24,6 +31,12 @@ class GroupMailer < CommonMailer
     def creation
       group = Group.last
       mail = GroupMailer.creation(group, User.first)
+      mail
+    end
+
+    def creation_for_owner
+      group = Group.last
+      mail = GroupMailer.creation_for_owner(group)
       mail
     end
 
