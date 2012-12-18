@@ -15,6 +15,7 @@ class GroupsController < CommonController
   def create
     if @group.save
       create_activity @group
+      GroupMailer.creation_for_owner(@group).deliver
       User.where(:is_admin => true).each do |user|
         GroupMailer.creation(@group, user).deliver if user.email
       end

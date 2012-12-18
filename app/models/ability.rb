@@ -75,6 +75,8 @@ class Ability
         review.user == current_user
       end
 
+      can [:index, :show, :create, :update, :destroy], Setting if current_user.is_admin?
+
       can :create, Tagging
       can :destroy, Tagging do |tagging|
         tagging.user == current_user

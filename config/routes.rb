@@ -120,6 +120,8 @@ Openmeetup::Application.routes.draw do
     resources :comments, :shallow => true
   end
 
+  resources :settings
+
   resources :tags
 
   resource :user_sessions
