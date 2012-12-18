@@ -5,6 +5,7 @@ class GroupsController < CommonController
   authorize_resource :except => [:index, :show, :events, :images, :members]
 
   def show
+    @membership_requests = @group.membership_requests.order('created_at ASC').includes(:user).paginate :page => params[:page]
     groups_show
   end
 

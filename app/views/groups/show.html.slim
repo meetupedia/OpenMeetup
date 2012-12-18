@@ -7,8 +7,7 @@
 
       - if @group.url.present?
         div
-          ' Honlap:
-          = auto_link @group.url
+          = link_to tr('Homepage'), @group.url
 
       - if @group.facebook_url.present?
         div
@@ -19,10 +18,14 @@
         = link_to image_tag(@group.images.last.image.url(:normal)), @group.images.last.image.url(:normal), :class => 'fancybox'
         p= link_to tr('All images'), images_group_path(@group), :rel => 'modal'
 
+    - unless @membership_requests.blank?
+      .wrapper
+        h2= tr('Requests')
+        .list_view= render @membership_requests
+        = will_paginate @membership_requests
+
     .wrapper
       h2= tr('Members')
-      - if @group.is_closed?
-        p= link_to tr('Requested memberships'), requested_members_group_path(@group), :rel => 'modal'
       .list_view= render @group.members.order('memberships.created_at ASC')
 
     - if Settings.enable_share_buttons
