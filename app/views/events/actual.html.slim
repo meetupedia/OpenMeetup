@@ -21,7 +21,7 @@
   = semantic_form_for Image.new, :url => url_for([@event, :images]) do |f|
     = f.hidden_field :is_live, :value => true
     = f.inputs do
-      = f.input :image, :label => trl('Upload an image')
+      = f.input :image, :label => trl('Upload image')
     = f.actions
 
 - unless (images = @event.images.order('created_at ASC').all).empty?
