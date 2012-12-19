@@ -26,6 +26,4 @@
 
 - unless @group.description.blank?
   .wrapper
-    .container
-      .span8
-        p= @group.description
+    = textilize(@group.description).html_safe
