@@ -40,6 +40,7 @@ gem 'mail_view'
 gem 'exception_notification'
 gem 'license_finder', :git => 'git://github.com/pivotal/LicenseFinder.git'
 gem 'fileuploader-rails'
+gem 'RedCloth'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3'

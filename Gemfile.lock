@@ -27,6 +27,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    RedCloth (4.2.9)
     actionmailer (3.2.9)
       actionpack (= 3.2.9)
       mail (~> 2.4.4)
@@ -268,6 +269,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  RedCloth
   andand
   authlogic
   bootstrap-will_paginate
