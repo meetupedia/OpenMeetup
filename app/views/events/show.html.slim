@@ -30,7 +30,7 @@
   .span8
     - unless @event.description.blank?
       .wrapper
-        = simple_format(@event.description)
+        = textilize(@event.description).html_safe
 
     .wrapper
       h2= tr('Activity')
