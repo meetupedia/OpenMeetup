@@ -6,8 +6,10 @@
   .opening-images
     = link_to image_tag('carousel_04.jpg'), sign_in_path
     = link_to image_tag('get2gather/get2gather3.jpg'), sign_in_path
-    .hero-unit(style="background: #ffffff; padding: 75px 0px 0px 15px; display: inline-block;")
-      - unless Settings.enable_invite_process
-        = link_to tr('Sign in'), sign_in_path, :class => 'btn btn-primary btn-large', :style => 'margin-left: 50px; padding: 15px; font-size: 17px;'
-      - else
-        = link_to tr('Request an invite'), request_invite_users_path, :class => 'btn btn-primary btn-large', :style => 'margin-left: 35px; padding: 15px; font-size: 17px;'
+    .opening-container
+      .opening-container-table
+        .opening-container-tablecell
+          - unless Settings.enable_invite_process
+            = link_to tr('Sign in'), sign_in_path, :class => 'btn btn-primary btn-large opening-button'
+          - else
+            = link_to tr('Request an invite'), request_invite_users_path, :class => 'btn btn-primary btn-large opening-button'
