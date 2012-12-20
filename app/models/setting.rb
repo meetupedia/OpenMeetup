@@ -3,8 +3,8 @@
 class Setting < ActiveRecord::Base
   key :key, :index => true
   key :permalink, :index => true
-  key :description
-  key :value, :as => :text, :index => true
+  key :description, :as => :text
+  key :value, :as => :text
 
   auto_permalink :key
 
