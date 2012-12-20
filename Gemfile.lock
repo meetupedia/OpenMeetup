@@ -1,15 +1,17 @@
 GIT
-  remote: git://github.com/berk/tr8n.git
-  revision: 973fb5277bfe25270687fba9e519b7ff1e41fd5d
+  remote: https://github.com/berk/tr8n.git
+  revision: e28ba5771e489e3f1c450e91de8c40a608709e81
   specs:
-    tr8n (3.2.3)
+    tr8n (3.2.4)
+      faraday
       kaminari
       rails (~> 3.2.3)
       sass
+      thor
       will_filter (~> 3.1.9)
 
 GIT
-  remote: git://github.com/cgunther/formtastic-bootstrap.git
+  remote: https://github.com/cgunther/formtastic-bootstrap.git
   revision: 4e6a7f50153af805470d43a2bd2c9885a902e4a6
   branch: bootstrap2-rails3-2-formtastic-2-1
   specs:
@@ -18,8 +20,8 @@ GIT
       rails (>= 3.1.0)
 
 GIT
-  remote: git://github.com/pivotal/LicenseFinder.git
-  revision: 95d8d89795d7d8313808ae4e9e9afde5901f2e5b
+  remote: https://github.com/pivotal/LicenseFinder.git
+  revision: b402944390c84b4d6bb83fc773b975a505b1f08f
   specs:
     license_finder (0.7.0)
       bundler

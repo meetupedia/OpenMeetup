@@ -14,7 +14,7 @@ gem 'slim'
 gem 'cancan'
 gem 'less-rails-bootstrap'
 gem 'formtastic', '< 2.2'
-gem 'formtastic-bootstrap', :git => 'git://github.com/cgunther/formtastic-bootstrap.git', :branch => 'bootstrap2-rails3-2-formtastic-2-1'
+gem 'formtastic-bootstrap', :git => 'https://github.com/cgunther/formtastic-bootstrap.git', :branch => 'bootstrap2-rails3-2-formtastic-2-1'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'omniauth-facebook'
@@ -38,7 +38,7 @@ gem 'will_filter'
 gem 'roadie'
 gem 'mail_view'
 gem 'exception_notification'
-gem 'license_finder', :git => 'git://github.com/pivotal/LicenseFinder.git'
+gem 'license_finder', :git => 'https://github.com/pivotal/LicenseFinder.git'
 gem 'fileuploader-rails'
 gem 'RedCloth'
 
@@ -56,7 +56,7 @@ end
 
 group :production do
   gem 'newrelic_rpm'
-  gem 'tr8n', :git => 'git://github.com/berk/tr8n.git'
+  gem 'tr8n', :git => 'https://github.com/berk/tr8n.git'
 end
 
 group :test do
