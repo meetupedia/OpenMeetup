@@ -4,7 +4,7 @@ class Setting < ActiveRecord::Base
   key :key, :index => true
   key :permalink, :index => true
   key :description
-  key :value, :index => true
+  key :value, :as => :text, :index => true
 
   auto_permalink :key
 

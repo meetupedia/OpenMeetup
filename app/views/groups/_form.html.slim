@@ -22,8 +22,8 @@
       = f.input :is_closed, :label => tr('Closed group (admins have to approve membership requests)')
       = f.input :creation_letter_text, :label => tr('Welcome email message to new members')
   = f.actions do
-    = f.action :submit, :label => tr('Create')
-    = f.action :cancel, :label => tr('Cancel')
+    = f.action :submit, :label => trl('Create')
+    = f.action :cancel, :label => trl('Cancel')
 
 javascript:
   $('#group_tag_tokens').tokenInput('/tags.json', {
