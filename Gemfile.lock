@@ -1,5 +1,5 @@
 GIT
-  remote: https://github.com/berk/tr8n.git
+  remote: git://github.com/berk/tr8n.git
   revision: e28ba5771e489e3f1c450e91de8c40a608709e81
   specs:
     tr8n (3.2.4)
@@ -11,7 +11,7 @@ GIT
       will_filter (~> 3.1.9)
 
 GIT
-  remote: https://github.com/cgunther/formtastic-bootstrap.git
+  remote: git://github.com/cgunther/formtastic-bootstrap.git
   revision: 4e6a7f50153af805470d43a2bd2c9885a902e4a6
   branch: bootstrap2-rails3-2-formtastic-2-1
   specs:
@@ -20,7 +20,7 @@ GIT
       rails (>= 3.1.0)
 
 GIT
-  remote: https://github.com/pivotal/LicenseFinder.git
+  remote: git://github.com/pivotal/LicenseFinder.git
   revision: b402944390c84b4d6bb83fc773b975a505b1f08f
   specs:
     license_finder (0.7.0)
