@@ -69,4 +69,14 @@ Openmeetup::Application.configure do
     :email_prefix => "[OpenMeetup] ",
     :sender_address => %{"exceptions@openmeetup.net" <exceptions@openmeetup.net>},
     :exception_recipients => %w{bence.nagy@gmail.com andris@openmeetup.org}
+
+  config.action_mailer.smtp_settings = {
+    :address => 'localhost',
+    :port => 25,
+    :domain => 'meetupedia.com',
+    :user_name => nil,
+    :password => nil,
+    :authentication => nil,
+    :enable_starttls_auto => false
+  }
 end
