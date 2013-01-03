@@ -5,13 +5,15 @@
 
   table.table
     tr
-      th= tr('Name')
-      th= tr('Email')
+      th= link_to tr('ID'), url_for(:order => 'id')
+      th= link_to tr('Name'), url_for(:order => 'name')
+      th= link_to tr('Email'), url_for(:order => 'email')
       th= tr('Facebook')
       th= tr('Twitter')
       th= tr('Destroy?')
     - @users.each do |user|
       tr
+        td= user.id
         td= link_to user.name, user
         td= user.email
         td

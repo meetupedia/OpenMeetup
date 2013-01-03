@@ -1,6 +1,10 @@
 .wrapper
   h1= tr('System')
 
+  p= link_to tr('User management'), admin_users_path
+
+  hr
+
   p= link_to tr('System options'), settings_path
 
   p= link_to tr('Letter templates'), letter_templates_path
