@@ -53,6 +53,12 @@ class UsersController < CommonController
     redirect_back_or_default @user
   end
 
+  def destroy
+    current_user_session.andand.destroy if @user == current_user
+    @user.destroy
+    redirect_to root_url
+  end
+
   def calendar
   end
 

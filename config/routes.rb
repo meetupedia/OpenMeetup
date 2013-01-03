@@ -17,6 +17,10 @@ Openmeetup::Application.routes.draw do
   mount UserMailer::Preview => '/user_mailer/mail_view'
   mount WaveMailer::Preview => '/wave_mailer/mail_view'
 
+  namespace :admin do
+    resources :users
+  end
+
   resources :cities do
     member do
       get :search

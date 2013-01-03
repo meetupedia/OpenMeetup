@@ -1,0 +1,26 @@
+.wrapper
+  h1= tr('Users')
+
+  = will_paginate @users
+
+  table.table
+    tr
+      th= tr('Name')
+      th= tr('Email')
+      th= tr('Facebook')
+      th= tr('Twitter')
+      th= tr('Destroy?')
+    - @users.each do |user|
+      tr
+        td= link_to user.name, user
+        td= user.email
+        td
+          - if user.facebook_id.present?
+            i.icon-ok
+        td
+          - if user.twitter_id.present?
+            i.icon-ok
+        td
+          = link_to tr('Destroy'), admin_user_path(user), :method => :delete, :confirm => tr('Are you sure?'), :class => 'btn btn-mini btn-danger'
+
+  = will_paginate @users

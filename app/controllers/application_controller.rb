@@ -32,6 +32,10 @@ class ApplicationController < ActionController::Base
 
 private
 
+  def can_admin?
+    raise CanCan::AccessDenied unless current_user.andand.is_admin?
+  end
+
   def handling_error(status, exception)
     ExceptionNotifier::Notifier.exception_notification(request.env, exception, :data => {:message => 'an error happened'}).deliver
     respond_to do |format|

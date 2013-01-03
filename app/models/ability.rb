@@ -85,10 +85,10 @@ class Ability
       can :create, Tag
 
       can :edit_city, User
-      can [:update, :destroy, :settings, :facebook_groups, :waves], User do |user|
+      can [:facebook_groups, :waves], User do |user|
         user == current_user
       end
-      can :calendar, User do |user|
+      can [:update, :destroy, :calendar, :settings], User do |user|
         user == current_user or current_user.is_admin?
       end
       can :set_admin, User if current_user.is_admin?
