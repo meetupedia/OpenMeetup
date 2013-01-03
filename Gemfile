@@ -56,7 +56,7 @@ end
 
 group :production do
   gem 'newrelic_rpm'
-  gem 'tr8n', :git => 'git://github.com/berk/tr8n.git'
+  gem 'tr8n', :git => 'git://github.com/berk/tr8n.git', :ref => '973fb5277bfe25270687fba9e519b7ff1e41fd5d'
 end
 
 group :test do

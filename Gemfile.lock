@@ -1,13 +1,12 @@
 GIT
   remote: git://github.com/berk/tr8n.git
-  revision: e28ba5771e489e3f1c450e91de8c40a608709e81
+  revision: 973fb5277bfe25270687fba9e519b7ff1e41fd5d
+  ref: 973fb5277bfe25270687fba9e519b7ff1e41fd5d
   specs:
-    tr8n (3.2.4)
-      faraday
+    tr8n (3.2.3)
       kaminari
       rails (~> 3.2.3)
       sass
-      thor
       will_filter (~> 3.1.9)
 
 GIT
