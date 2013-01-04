@@ -2,7 +2,7 @@
   = f.inputs do
     = f.input :title
     = f.input :permaname, :label => false, :prepend => 'http://'+Settings.host+'/'
-    = f.input :start_time
+    = f.input :start_time, :input_html => { :onblur => 'alert(1);' }
     = f.input :end_time
     .control-group
       = f.label :city_id, tr('City')
