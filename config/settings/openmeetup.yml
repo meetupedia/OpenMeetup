@@ -7,7 +7,7 @@ default_email: 'noreply@meetupedia.com'
 email_signature: "Meetupedia Team"
 
 enable_facebook_login: true
-enable_twitter_login: true
+enable_twitter_login: false
 enable_share_buttons: true
 
 enable_messages: true

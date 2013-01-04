@@ -143,6 +143,7 @@ Openmeetup::Application.routes.draw do
       get :facebook_groups
       get :groups
       post :set_admin
+      post :unset_admin
       get :settings
       get :waves
     end

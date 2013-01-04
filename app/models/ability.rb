@@ -91,7 +91,7 @@ class Ability
       can [:update, :destroy, :calendar, :settings], User do |user|
         user == current_user or current_user.is_admin?
       end
-      can :set_admin, User if current_user.is_admin?
+      can [:set_admin, :unset_admin], User if current_user.is_admin?
 
       can :create, UserFollow
       can :destroy, UserFollow do |user_follow|
