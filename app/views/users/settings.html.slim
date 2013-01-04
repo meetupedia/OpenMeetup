@@ -5,22 +5,25 @@
     - if Settings.enable_facebook_login or Settings.enable_twitter_login
       .wrapper
         h2= tr('Connections')
-        - if authentication = current_user.authenticated_with(:facebook)
-          - if current_user.authentications.size > 1
-            p= link_to tr('Disconnect Facebook'), authentication, :method => :delete, :confirm => trl('Are you sure?')
+        - if Settings.enable_facebook_login
+          - if authentication = current_user.authenticated_with(:facebook)
+            - if current_user.authentications.size > 1
+              p= link_to tr('Disconnect Facebook'), authentication, :method => :delete, :confirm => trl('Are you sure?')
+            - else
+              p= tr('Connected with Facebook')
           - else
-            p= tr('Connected with Facebook')
-        - else
-          p.facebook_connect= link_to image_tag('facebook_connect.png', :alt => tr('Sign in with Facebook')), auth_path(:facebook)
-        - if authentication = current_user.authenticated_with(:twitter)
-          - if current_user.authentications.size > 1
-            p= link_to tr('Disconnect Twitter'), authentication, :method => :delete, :confirm => trl('Are you sure?')
+            p.facebook_connect= link_to image_tag('facebook_connect.png', :alt => tr('Sign in with Facebook')), auth_path(:facebook)
+        - if Settings.enable_twitter_login
+          - if authentication = current_user.authenticated_with(:twitter)
+            - if current_user.authentications.size > 1
+              p= link_to tr('Disconnect Twitter'), authentication, :method => :delete, :confirm => trl('Are you sure?')
+            - else
+              p= tr('Connected with Twitter')
           - else
-            p= tr('Connected with Twitter')
-        - else
-          p.twitter_connect= link_to image_tag('twitter_connect.png', :alt => tr('Sign in with Twitter')), auth_path(:twitter)
+            p.twitter_connect= link_to image_tag('twitter_connect.png', :alt => tr('Sign in with Twitter')), auth_path(:twitter)
     - if Settings.multilingual
       .wrapper
+        h2= tr('Language')
         .tr8n-language-selector.btn= tr8n_language_selector_tag
 
     .wrapper
@@ -33,9 +36,10 @@
         = f.inputs do
           = f.input :name, :label => 'Name'
           = f.input :email
-          .control-group
-            = f.label :city_id, tr('City')
-            = f.text_field :city_id, 'data-pre' => [@user.city].compact.map { |city| {:id => city.id, :name => city.name} }.to_json
+          - unless Settings.standalone
+            .control-group
+              = f.label :city_id, tr('City')
+              = f.text_field :city_id, 'data-pre' => [@user.city].compact.map { |city| {:id => city.id, :name => city.name} }.to_json
           = f.input :password
           = f.input :password_confirmation
         = f.actions
