@@ -2,26 +2,27 @@
   .span12
     .wrapper
       .button-menu
-        - if current_user.is_admin?
-          .btn-group.pull-right
-            a.btn.dropdown-toggle(data-toggle="dropdown" href="#")
-              =' image_tag 'cog.png'
-              span.caret
-            ul.dropdown-menu
-              - if current_user
-                li= link_to tr('Edit profile'), settings_user_path(@user)
-              - if can? :set_admin, @user and not @user.is_admin?
-                li= link_to tr('Set admin role'), set_admin_user_path(@user), :method => :post, :confirm => trl('Are you sure?')
-              - if can? :set_admin, @user and @user.is_admin?
-                li= link_to tr('Unset admin role'), unset_admin_user_path(@user), :method => :post, :confirm => trl('Are you sure?')
-        - if current_user and not @user == current_user
-          = link_to new_wave_path(:recipient_id => @user.id), :rel => 'modal', :class => 'btn' do
-            b.icon-envelope
-            ' 
-            = tr('Send message')
-        - if current_user and not @user == current_user
-          = render 'user_follows/button', :user => @user
-        - if current_user and @user == current_user
-          = link_to tr('Edit profile'), settings_user_path(@user), :class => 'btn'
+        - if current_user
+          - if current_user.is_admin?
+            .btn-group.pull-right
+              a.btn.dropdown-toggle(data-toggle="dropdown" href="#")
+                =' image_tag 'cog.png'
+                span.caret
+              ul.dropdown-menu
+                - if can? :update, @user
+                  li= link_to tr('Edit profile'), settings_user_path(@user)
+                - if can? :set_admin, @user and not @user.is_admin?
+                  li= link_to tr('Set admin role'), set_admin_user_path(@user), :method => :post, :confirm => trl('Are you sure?')
+                - if can? :unset_admin, @user and @user.is_admin?
+                  li= link_to tr('Unset admin role'), unset_admin_user_path(@user), :method => :post, :confirm => trl('Are you sure?')
+          - if @user == current_user
+            = link_to tr('Edit profile'), settings_user_path(@user), :class => 'btn'
+          - else
+            = link_to new_wave_path(:recipient_id => @user.id), :rel => 'modal', :class => 'btn' do
+              b.icon-envelope
+              ' 
+              = tr('Send message')
+            = render 'user_follows/button', :user => @user
+
 
       h1.user= user_link @user
