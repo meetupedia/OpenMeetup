@@ -33,7 +33,7 @@
 
               - if current_user.is_admin?
                 li.dropdown
-                  a.dropdown-toggle(data-toggle="dropdown")
+                  a.dropdown-toggle(data-toggle="dropdown" href="#") 
                     = tr('Admin')
                     b.caret
                   ul.dropdown-menu
@@ -41,7 +41,7 @@
                     li= link_to tr('Reload site'), reload_path, :confirm => trl('Reload site?')
 
               li.dropdown
-                a.dropdown-toggle(data-toggle="dropdown")
+                a.dropdown-toggle(data-toggle="dropdown" href="#")
                   = current_user.name
                   b.caret
                 ul.dropdown-menu
