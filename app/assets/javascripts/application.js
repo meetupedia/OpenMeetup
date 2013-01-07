@@ -2,7 +2,6 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require fancybox
-//= require turbolinks
 //= require fineuploader
 //= require fineuploader.jquery
 //= require_tree .
