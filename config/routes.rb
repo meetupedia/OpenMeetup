@@ -3,9 +3,9 @@
 Openmeetup::Application.routes.draw do
 
   mount WillFilter::Engine => '/will_filter'
-  if Rails.env == 'production'
-    mount Tr8n::Engine => '/tr8n'
-  end
+  mount Tr8n::Engine => '/tr8n'
+  # if Rails.env == 'production'
+  # end
 
   mount CommentMailer::Preview => '/comment_mailer/mail_view'
   mount EventInvitationMailer::Preview => '/event_invitation_mailer/mail_view'

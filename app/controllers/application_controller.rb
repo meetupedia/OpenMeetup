@@ -44,15 +44,15 @@ private
     end
   end
 
-  if Rails.env == 'development'
-    def tr(text)
-      text
-    end
+#  if Rails.env == 'development'
+#    def tr(text)
+#      text
+#    end
 
-    def trl(text)
-      text
-    end
-  end
+#    def trl(text)
+#      text
+#    end
+#  end
 
   def run_later
     Thread.new do

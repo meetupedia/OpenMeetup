@@ -137,7 +137,6 @@ GEM
       treetop (~> 1.4.8)
     mail_view (1.0.3)
       tilt
-    memcache-client (1.8.5)
     mime-types (1.19)
     mini_record (0.3.1)
       activerecord (>= 3.2.0)
@@ -297,7 +296,6 @@ DEPENDENCIES
   less-rails-bootstrap
   license_finder!
   mail_view
-  memcache-client
   mime-types
   mini_record
   mysql2
