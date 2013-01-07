@@ -8,21 +8,39 @@
       th= link_to tr('ID'), url_for(:order => 'id')
       th= link_to tr('Name'), url_for(:order => 'name')
       th= link_to tr('Email'), url_for(:order => 'email')
-      th= tr('Facebook')
-      th= tr('Twitter')
-      th= tr('Destroy?')
+      - if Settings.enable_facebook_login
+        th= tr('Facebook')
+      - if Settings.enable_twitter_login
+        th= tr('Twitter')
+      th= tr('Admin')
+      th= tr('Action')
     - @users.each do |user|
       tr
         td= user.id
         td= link_to user.name, user
         td= user.email
+        - if Settings.enable_facebook_login
+          td
+            - if user.facebook_id.present?
+              i.icon-ok
+        - if Settings.enable_twitter_login
+          td
+            - if user.twitter_id.present?
+              i.icon-ok
         td
-          - if user.facebook_id.present?
+          - if user.is_admin?
             i.icon-ok
         td
-          - if user.twitter_id.present?
-            i.icon-ok
-        td
-          = link_to tr('Destroy'), admin_user_path(user), :method => :delete, :confirm => tr('Are you sure?'), :class => 'btn btn-mini btn-danger'
+          .btn-group
+            a.btn.dropdown-toggle(data-toggle="dropdown" href="#")
+              =' image_tag 'cog.png'
+              span.caret
+            ul.dropdown-menu
+              li= link_to tr('Edit'), settings_user_path(user)
+              - if can? :set_admin, user and not user.is_admin?
+                li= link_to tr('Set admin role'), set_admin_user_path(user), :method => :post, :confirm => trl('Are you sure?')
+              - if can? :set_admin, user and user.is_admin?
+                li= link_to tr('Unset admin role'), unset_admin_user_path(user), :method => :post, :confirm => trl('Are you sure?')
+              li= link_to tr('Delete'), admin_user_path(user), :method => :delete, :confirm => trl('Are you sure?')
 
   = will_paginate @users

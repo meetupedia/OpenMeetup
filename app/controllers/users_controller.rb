@@ -88,6 +88,12 @@ class UsersController < CommonController
     redirect_to @user
   end
 
+  def unset_admin
+    @user.is_admin = false
+    @user.save
+    redirect_to @user
+  end
+
   def settings
   end
 
