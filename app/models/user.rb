@@ -5,7 +5,8 @@ class User < ActiveRecord::Base
   key :nickname
   key :locale
   key :email, :index => true
-  key :email_confirmed
+  key :email_confirmed, :as => :boolean, :default => false
+  key :email_bounced, :as => :boolean, :default => false
   key :crypted_password
   key :password_salt
   key :persistence_token
