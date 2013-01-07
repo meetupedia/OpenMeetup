@@ -7,7 +7,7 @@ p
   = render @group
 
 - if text = Setting[:welcome_letter].presence
-  p= text
+  = simple_format(auto_link(text))
 
 hr
 
