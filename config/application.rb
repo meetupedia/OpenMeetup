@@ -59,5 +59,9 @@ module Openmeetup
 
     # Handling error messages dynamically
     config.exceptions_app = self.routes
+
+    log_file = File.open("#{Rails.root}/log/#{Rails.env}-#{Process.pid}.log", 'a')
+    Rails.logger = ActiveSupport::BufferedLogger.new(log_file)
+    Openmeetup::Application.middleware.use Oink::Middleware
   end
 end
