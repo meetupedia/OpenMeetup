@@ -44,8 +44,8 @@ private
     ExceptionNotifier::Notifier.exception_notification(request.env, exception, :data => {:message => 'an error happened'}).deliver
     respond_to do |format|
       format.html do
-        if exception.class == ActiveRecord::RecordNotFound and controller_name == 'groups'
-          render "errors/missing_group"
+        if exception.class == ActiveRecord::RecordNotFound and controller_name == /events|groups/
+          render "errors/no_#{controller_name}"
         else
           render "errors/error_#{status}", :status => status
         end
