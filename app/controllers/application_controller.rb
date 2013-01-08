@@ -24,8 +24,12 @@ class ApplicationController < ActionController::Base
         flash[:alert] = 'Be kell jelentkezned!'
         authenticate
       else
-        flash[:alert] = 'Nem hozzáférhető számodra a kért oldal!'
-        redirect_to root_url
+        if modal_request?
+          render :text => 'Nem hozzáférhető számodra a kért oldal!'
+        else
+          flash[:alert] = 'Nem hozzáférhető számodra a kért oldal!'
+          redirect_to root_url
+        end
       end
     end
   end

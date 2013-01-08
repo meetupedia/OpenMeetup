@@ -16,7 +16,7 @@ class Ability
         event.group.admins.include?(current_user) or current_user.is_admin?
       end
       can :invited, Event do |event|
-        event.participants.include?(current_user) or current_user.is_admin?
+        event.participants.include?(current_user)
       end
 
       can :create, EventInvitation
