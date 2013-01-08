@@ -12,10 +12,8 @@ class User < ActiveRecord::Base
   key :persistence_token
   key :perishable_token
   key :single_access_token
-  key :token
   key :location
   key :is_admin, :as => :boolean, :default => false
-  key :facebook_friend_ids, :as => :text
   key :restricted_access, :as => :boolean, :default => false
   key :invitation_code
   key :karma, :as => :integer, :default => 0
@@ -46,8 +44,6 @@ class User < ActiveRecord::Base
   has_many :user_follows, :dependent => :destroy
   has_many :wave_memberships, :dependent => :destroy
   has_many :waves, :through => :wave_memberships
-
-  serialize :facebook_friend_ids
 
   acts_as_authentic do |c|
     c.validate_email_field = false
@@ -126,13 +122,13 @@ class User < ActiveRecord::Base
     followed_users.map(&:id)
   end
 
-  # def facebook_friend_ids
-  #   if authentication = authentication_with(:facebook)
-  #     authentication.facebook_friend_ids
-  #   else
-  #     []
-  #   end
-  # end
+  def facebook_friend_ids
+    if authentication = authentication_with(:facebook)
+      authentication.facebook_friend_ids
+    else
+      []
+    end
+  end
 
   def connect_facebook_friends
     Authentication.where(:provider => 'facebook', :uid => facebook_friend_ids).includes(:user).map(&:user).each do |user|
