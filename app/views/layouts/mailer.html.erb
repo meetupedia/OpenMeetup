@@ -37,9 +37,9 @@
       <%= yield %>
     </div>
     <div class="email-footer">
-      This message was sent to <%= @email %>.<% if @recipient %> If you do not want to receive these emails from OpenMeetup in the future, you can change your <a href="<%= settings_user_path(@recipient) %>">email preferences</a>.<% end %><br />
-      If you have questions or require assistance, visit the <a href="https://openmeetup.uservoice.com/">discussion forums</a>.<br />
-      OpenMeetup, Pipa utca 2/b, 1095 Budapest, Hungary
+      This message was sent to <%= @email %>.<br />
+      <% if @recipient %>Don't want activity notifications? <a href="<%= settings_user_path(@recipient) %>">Change your email preferences</a>.<br /><% end %>
+      <%= Settings.email_footer_whois %>
     </div>
   </div>
 </body>
