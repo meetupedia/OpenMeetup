@@ -43,20 +43,16 @@ private
   def handling_error(status, exception)
     ExceptionNotifier::Notifier.exception_notification(request.env, exception, :data => {:message => 'an error happened'}).deliver
     respond_to do |format|
-      format.html { render "errors/error_#{status}", :status => status }
+      format.html do
+        if exception.class == ActiveRecord::RecordNotFound and controller_name == 'groups'
+          render "errors/missing_group"
+        else
+          render "errors/error_#{status}", :status => status
+        end
+      end
       format.any { render :nothing => true, :status => status }
     end
   end
-
-#  if Rails.env == 'development'
-#    def tr(text)
-#      text
-#    end
-
-#    def trl(text)
-#      text
-#    end
-#  end
 
   def run_later
     Thread.new do
