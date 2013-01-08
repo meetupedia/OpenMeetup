@@ -8,7 +8,6 @@ gem 'jquery-rails', '2.1.1'
 gem 'rails-i18n'
 gem 'rails_config'
 gem 'andand'
-gem 'memcache-client'
 gem 'mini_record'
 gem 'slim'
 gem 'cancan'
@@ -38,10 +37,10 @@ gem 'will_filter'
 gem 'roadie'
 gem 'mail_view'
 gem 'exception_notification'
-gem 'license_finder', :git => 'git://github.com/pivotal/LicenseFinder.git'
 gem 'fileuploader-rails'
 gem 'RedCloth'
 gem 'oink'
+gem 'tr8n', :git => 'git://github.com/berk/tr8n.git', :ref => '973fb5277bfe25270687fba9e519b7ff1e41fd5d'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
@@ -53,11 +52,12 @@ end
 group :development do
   gem 'hirb'
   gem 'rspec-rails'
+  gem 'license_finder', :git => 'git://github.com/pivotal/LicenseFinder.git'
 end
 
 group :production do
+  gem 'memcache-client'
   gem 'newrelic_rpm'
-  gem 'tr8n', :git => 'git://github.com/berk/tr8n.git', :ref => '973fb5277bfe25270687fba9e519b7ff1e41fd5d'
 end
 
 group :test do
