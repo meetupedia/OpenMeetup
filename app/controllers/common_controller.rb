@@ -22,7 +22,9 @@ class CommonController < ApplicationController
   end
 
   def redirect_to(url, options = {})
-    if ajax_request? or modal_request?
+    if ajax_request?
+      render :text => "window.location = '#{url_for(url)}'"
+    elsif modal_request?
       render :text => "window.location = '#{url_for(url)}'"
     else
       super url, options

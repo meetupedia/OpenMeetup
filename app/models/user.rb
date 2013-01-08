@@ -91,15 +91,15 @@ class User < ActiveRecord::Base
   end
 
   def facebook
-    @facebook ||= FbGraph::User.new(facebook_id, :access_token => self.token).fetch
+    @facebook ||= FbGraph::User.new(facebook_id, :access_token => authentication_with(:facebook).andand.facebook_access_token).fetch
   end
 
   def facebook_id
-    @facebook_id ||= authentications.where(:provider => 'facebook').first.andand.uid
+    @facebook_id ||= authentication_with(:facebook).andand.uid
   end
 
   def twitter_id
-    @twitter_id ||= authentications.where(:provider => 'twitter').first.andand.uid
+    @twitter_id ||= authentication_with(:twitter).andand.uid
   end
 
   def user_follow_for(user)
