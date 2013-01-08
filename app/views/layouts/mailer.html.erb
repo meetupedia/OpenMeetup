@@ -37,8 +37,10 @@
       <%= yield %>
     </div>
     <div class="email-footer">
-      This message was sent to <%= @email %>.<br />
-      <% if @recipient %>Don't want activity notifications? <a href="<%= settings_user_path(@recipient) %>">Change your email preferences</a>.<br /><% end %>
+      <%= tr("This message was sent to {email}.", "email footer email recipient", :email => @email) %><br />
+      <% if @recipient %>
+        <%= tr("Don't want activity notifications?") %> <a href="<%= settings_user_path(@recipient) %>"><%= tr('Change your email preferences') %></a>.<br />
+      <% end %>
       <%= Settings.email_footer_whois %>
     </div>
   </div>

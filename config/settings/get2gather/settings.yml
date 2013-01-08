@@ -5,7 +5,7 @@
 title: 'Get2Gather'
 host: 'get2gather.meetupedia.com'
 default_email: 'noreply@get2gather.meetupedia.com'
-email_footer_whois: "Get2Gather staff"
+email_footer_whois: ""
 
 # custom frontpage at app/views/customizations/[customization].html.slim
 
