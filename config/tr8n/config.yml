@@ -106,7 +106,7 @@ defaults:
   caching:
     enabled:                  true
     adapter:                  ActiveSupport::Cache
-    store:                    'memory_store'
+    store:                    'dalli_store'
     version:                  1 # you can change the version to invalidate the cache
 
   #############################################################################

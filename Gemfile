@@ -41,6 +41,7 @@ gem 'fileuploader-rails'
 gem 'RedCloth'
 gem 'oink'
 gem 'tr8n', :git => 'git://github.com/berk/tr8n.git', :ref => '973fb5277bfe25270687fba9e519b7ff1e41fd5d'
+gem 'dalli'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
@@ -56,7 +57,6 @@ group :development do
 end
 
 group :production do
-  gem 'memcache-client'
   gem 'newrelic_rpm'
 end
 
