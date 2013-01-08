@@ -5,12 +5,12 @@ class AuthenticationsController < CommonController
     omniauth = request.env['omniauth.auth']
     authentication = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
     if authentication
-      fresh_settings(authentication)
+      fresh_settings(authentication, omniauth)
       sign_in_and_redirect(authentication.user)
     elsif current_user
       unless current_user.restricted_access
         authentication = current_user.authentications.create! :provider => omniauth['provider'], :uid => omniauth['uid']
-        fresh_settings(authentication)
+        fresh_settings(authentication, omniauth)
         redirect_to root_url
       else
         redirect_to request_invite_users_path
@@ -21,7 +21,7 @@ class AuthenticationsController < CommonController
       authentication = user.authentications.build :provider => omniauth['provider'], :uid => omniauth['uid']
       if user.save
         cookies.delete :invitation_code
-        fresh_settings(authentication)
+        fresh_settings(authentication, omniauth)
         session[:return_to] = interests_url
         if cookies[:add_membership_for] and group = Group.find_by_id(cookies[:add_membership_for])
           group.memberships.create :user => user
@@ -57,7 +57,7 @@ class AuthenticationsController < CommonController
 
 protected
 
-  def fresh_settings(authentication)
+  def fresh_settings(authentication, omniauth)
     if authentication.provider == 'facebook'
       authentication.facebook_access_token = omniauth['credentials']['token']
       authentication.facebook_friend_ids = facebook.friends.map(&:identifier)
