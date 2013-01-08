@@ -20,7 +20,6 @@ class User < ActiveRecord::Base
   key :invitation_code
   key :karma, :as => :integer, :default => 0
   key :last_notified, :as => :datetime
-  key :settings, :as => :binary
   timestamps
   key :memberships_count, :as => :integer, :default => 0
   key :notifications_count, :as => :integer, :default => 0
@@ -49,7 +48,6 @@ class User < ActiveRecord::Base
   has_many :waves, :through => :wave_memberships
 
   serialize :facebook_friend_ids
-  store :settings, :accessors => [:facebook_friends]
 
   acts_as_authentic do |c|
     c.validate_email_field = false
@@ -92,16 +90,7 @@ class User < ActiveRecord::Base
     UserMailer.password_reset(self).deliver
   end
 
-  def apply_omniauth(omniauth)
-    case omniauth['provider']
-      when 'facebook'
-        self.token = omniauth['credentials']['token']
-        self.facebook_friend_ids = facebook.friends.map(&:identifier)
-    end
-    save
-  end
-
-  def authenticated_with(provider)
+  def authentication_with(provider)
     authentications.where(:provider => provider).first
   end
 
@@ -136,6 +125,14 @@ class User < ActiveRecord::Base
   def followed_user_ids
     followed_users.map(&:id)
   end
+
+  # def facebook_friend_ids
+  #   if authentication = authentication_with(:facebook)
+  #     authentication.facebook_friend_ids
+  #   else
+  #     []
+  #   end
+  # end
 
   def connect_facebook_friends
     Authentication.where(:provider => 'facebook', :uid => facebook_friend_ids).includes(:user).map(&:user).each do |user|
