@@ -1,19 +1,39 @@
-standalone: true
-customization: 'get2gather'
+# site config
+
+# basic info
+
 title: 'Get2Gather'
-multilingual: true
-default_language: 'en'
 host: 'get2gather.meetupedia.com'
 default_email: 'noreply@get2gather.meetupedia.com'
-email_signature: ""
+email_footer_whois: ""
+
+# custom frontpage at app/views/customizations/[customization].html.slim
+
+customization: 'get2gather'
+
+# single location -> standalone: false
+# multiple location, eg. cities -> standalone: true
+
+standalone: true
+
+# language settings
+
+multilingual: true
+default_language: 'en'
+
+# login options
 
 enable_facebook_login: false
 enable_twitter_login: false
+
+# facebook, twitter, g+ share buttons on the group pages
+
 enable_share_buttons: false
-enable_facebook_comments: false
 
-enable_messages: false
-
-enable_invite_process: false
+# feedback box at the bottom
 
 enable_feedback_box: false
+
+# invite module
+
+enable_invite_process: false
