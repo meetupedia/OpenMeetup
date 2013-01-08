@@ -36,4 +36,6 @@ Openmeetup::Application.configure do
   config.assets.debug = false
 
   config.assets.logger = false
+
+  config.cache_store = :dalli_store
 end

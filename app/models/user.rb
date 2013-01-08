@@ -19,11 +19,11 @@ class User < ActiveRecord::Base
   key :restricted_access, :as => :boolean, :default => false
   key :invitation_code
   key :karma, :as => :integer, :default => 0
-  key :notifications_count, :as => :integer, :default => 0
   key :last_notified, :as => :datetime
-  timestamps
   key :settings, :as => :binary
+  timestamps
   key :memberships_count, :as => :integer, :default => 0
+  key :notifications_count, :as => :integer, :default => 0
 
   belongs_to :city
   has_many :absences, :dependent => :destroy

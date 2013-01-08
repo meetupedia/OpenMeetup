@@ -2,32 +2,6 @@
 
 module ApplicationHelper
 
-#  if Rails.env == 'development'
-#    def tr(text, options = {})
-#      text
-#    end
-
-#    def tr(text, identifiers = {}, options = {})
-#      text
-#    end
-
-#    def trl(text)
-#      text
-#    end
-
-#    def tr8n_language_strip_tag
-#      ''
-#    end
-
-#    def tr8n_scripts_tag
-#      ''
-#    end
-
-#    def tr8n_language_selector_tag
-#      ''
-#    end
-#  end
-
   def user_avatar(user)
     filename = 'default_avatar.png'
     filename = "https://graph.facebook.com/#{user.facebook_id}/picture" if user.facebook_id

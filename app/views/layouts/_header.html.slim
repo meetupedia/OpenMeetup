@@ -17,7 +17,7 @@
               b.icon-envelope
             li= link_to notifications_path, :alt => trl('My notifications'), :title => trl('My notifications') do
               b.icon-info-sign
-              - if current_user.notifications.size != 0
+              - if current_user.notifications.size > 0
                 span.badge.badge-important= current_user.notifications.size
 
         form.navbar-search action='/search' method='get'
@@ -33,7 +33,7 @@
 
               - if current_user.is_admin?
                 li.dropdown
-                  a.dropdown-toggle(data-toggle="dropdown" href="#") 
+                  a.dropdown-toggle(data-toggle="dropdown" href="#")
                     = tr('Admin')
                     b.caret
                   ul.dropdown-menu
