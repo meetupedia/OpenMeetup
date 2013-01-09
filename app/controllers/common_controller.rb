@@ -2,6 +2,7 @@
 
 class CommonController < ApplicationController
   layout Proc.new { |p| p.request.xhr? ? false : 'application' }
+  before_filter :check_for_mobile
 
   def ajax_request?
     request.xhr? and not request.headers['X-PJAX'] and not request.headers['X-MODAL']
