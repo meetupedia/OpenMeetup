@@ -43,9 +43,9 @@
         = link_to 'Meetupedia', 'http://meetupedia.com/'
       - if Settings.customization == 'get2gather'
         .pull-right
-          = tr('Contact')
-          ' :
-          = link_to 'get2gather (ETH)', 'mailto:PDLGET2GAT@ex1.eemea.ericsson.se'
+          = link_to tr('FAQ'), 'http://meetupedia.org/wiki/faq_user'
+          '  - 
+          = link_to tr('Contact (get2gather ETH)'), 'mailto:PDLGET2GAT@ex1.eemea.ericsson.se'
 
     - if Settings.multilingual
       .footer-languages(data-no-turbolink='')
