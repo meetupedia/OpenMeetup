@@ -2,22 +2,23 @@ javascript:
   $(function(){
     $('#images_upload').fineUploader({
       request: {
-        endpoint: '#{url}'
+        endpoint: '#{url}',
+        params: {authenticity_token: $('meta[name=csrf-token]').attr('content')}
       },
       text: {
         uploadButton: '<i class="icon-upload icon-white"></i> #{tr("Upload")}'
       },
       template: '<div class="qq-uploader"><pre class="qq-upload-drop-area"><span>{dragZoneText}</span></pre><div class="qq-upload-button btn btn-primary">{uploadButtonText}</div><ul class="qq-upload-list"></ul></div>',
       fileTemplate: '<li class="alert">' +
-          '<div class="qq-progress-bar"></div>' +
-          '<span class="qq-upload-spinner"></span>' +
-          '<span class="qq-upload-finished"></span>' +
-          '<span class="qq-upload-file"></span>' +
-          '<span class="qq-upload-size"></span>' +
-          '<a class="qq-upload-cancel" href="#">{cancelButtonText}</a>' +
-          '<a class="qq-upload-retry" href="#">{retryButtonText}</a>' +
-          '<span class="qq-upload-status-text">{statusText}</span>' +
-          '</li>',
+        '<div class="qq-progress-bar"></div>' +
+        '<span class="qq-upload-spinner"></span>' +
+        '<span class="qq-upload-finished"></span>' +
+        '<span class="qq-upload-file"></span>' +
+        '<span class="qq-upload-size"></span>' +
+        '<a class="qq-upload-cancel" href="#">{cancelButtonText}</a>' +
+        '<a class="qq-upload-retry" href="#">{retryButtonText}</a>' +
+        '<span class="qq-upload-status-text">{statusText}</span>' +
+        '</li>',
       classes: {
         success: 'alert-success',
         fail: 'alert-error'
