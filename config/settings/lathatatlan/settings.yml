@@ -11,10 +11,10 @@ email_footer_whois: ""
 
 customization: 'lathatatlan'
 
-# single location -> standalone: false
-# multiple location, eg. cities -> standalone: true
+# single location -> standalone: true
+# multiple location, eg. cities -> standalone: false
 
-standalone: false
+standalone: true
 
 # language settings
 
