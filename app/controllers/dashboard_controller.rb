@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-class SystemController < CommonController
+class DashboardController < CommonController
   before_filter :authenticate_as_admin
 
   def index

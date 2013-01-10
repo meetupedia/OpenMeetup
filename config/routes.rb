@@ -160,9 +160,9 @@ Openmeetup::Application.routes.draw do
   match '/dashboard' => 'root#dashboard', :as => :dashboard
   match '/restricted_access' => 'root#restricted_access', :as => :restricted_access
 
-  match '/settings' => 'system#index', :as => :system
-  match '/reload' => 'system#reload', :as => :reload
-  match '/download_database' => 'system#download_database', :as => :download_database
+  match '/system-settings' => 'dashboard#index', :as => :system
+  match '/reload' => 'dashboard#reload', :as => :reload
+  match '/download_database' => 'dashboard#download_database', :as => :download_database
 
   resources :authentications
   match '/auth/:provider/callback' => 'authentications#create'
