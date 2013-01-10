@@ -59,9 +59,8 @@ protected
 
   def fresh_settings(authentication, omniauth)
     if authentication.provider == 'facebook'
-      authentication.facebook_access_token = omniauth['credentials']['token']
-      authentication.facebook_friend_ids = authentication.user.facebook.friends.map(&:identifier)
-      authentication.save
+      authentication.update_attributes :facebook_access_token => omniauth['credentials']['token']
+      authentication.update_attributes :facebook_friend_ids => authentication.user.facebook.friends.map(&:identifier)
     end
   end
 end
