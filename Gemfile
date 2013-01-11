@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.10'
+gem 'rails', '3.2.11'
 
 gem 'mysql2'
 gem 'json'
@@ -56,6 +56,8 @@ group :development do
   gem 'hirb'
   gem 'rspec-rails'
   gem 'license_finder', :git => 'git://github.com/pivotal/LicenseFinder.git'
+  gem 'bullet'
+  gem 'meta_request'
 end
 
 group :production do
