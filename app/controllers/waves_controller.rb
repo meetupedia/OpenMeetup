@@ -6,7 +6,6 @@ class WavesController < CommonController
 
   def index
     @waves = Wave.order('last_changed_at DESC').paginate :joins => :wave_memberships, :conditions => {'wave_memberships.user_id' => current_user.id, 'wave_memberships.is_archived' => false, 'wave_memberships.is_deleted' => false}, :include => [:users, :wave_notes], :page => params[:page]
-    @title = 'Bejövő üzenetek'
   end
 
   def show
@@ -18,7 +17,6 @@ class WavesController < CommonController
         current_user.reload
       end
       @wave_items = @wave.wave_items.order('created_at DESC').includes(:user).paginate :page => params[:page]
-      @title = 'Üzenet: ' + @wave.subject
     else
       flash[:alert] = 'Nem tekintheted meg ezt a folyamot!'
       redirect_to waves_url
@@ -44,7 +42,6 @@ class WavesController < CommonController
 
   def all
     @waves = Wave.order('last_changed_at DESC').paginate :joins => :wave_memberships, :conditions => {'wave_memberships.user_id' => current_user.id, 'wave_memberships.is_deleted' => false}, :include => [:users, :wave_notes], :page => params[:page]
-    @title = 'Összes üzenet'
     render :index
   end
 end
