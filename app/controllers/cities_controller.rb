@@ -20,6 +20,7 @@ class CitiesController < CommonController
       end
       @groups = @city.groups.order(order).paginate :page => params[:page]
     end
+    @title = tr('Meetup {cityname}', "City html header", :cityname => @city.name)
   end
 
   def jump
