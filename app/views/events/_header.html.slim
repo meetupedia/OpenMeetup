@@ -11,7 +11,7 @@
           span.caret
         ul.dropdown-menu
           - if can? :edit, @event
-            li= link_to tr('Edit'), edit_event_path(@event), :rel => 'modal'
+            li= link_to tr('Edit event'), edit_event_path(@event), :rel => 'modal'
           li= link_to tr('Invite friends'), new_event_event_invitation_path(@event), :rel => 'modal'
           li= link_to tr('Invite all group members'), new_event_event_invitation_path(@event, :invite_members => true), :rel => 'modal'
           - if can? :delete, @event
@@ -47,8 +47,8 @@
           = link_to tr('Write a review'), new_event_review_path(@event), :class => 'btn btn-primary', :rel => 'modal'
     - else
       - if @event.start_time > Time.zone.now
-        = link_to "<i class='icon-plus-sign icon-black'></i> #{tr('Not going')}".html_safe, sign_in_path(:return_to => set_event_absences_path(@event)), :class => 'btn'
-        = link_to "<i class='icon-plus-sign icon-black'></i> #{tr('Join')}".html_safe, sign_in_path(:return_to => set_event_participations_path(@event)), :class => 'btn'
+        = link_to "<i class='icon-minus-sign icon-black'></i> #{tr('Decline')}".html_safe, sign_in_path(:return_to => set_event_absences_path(@event)), :class => 'btn'
+        = link_to "<i class='icon-plus-sign icon-white'></i> #{tr('Join')}".html_safe, sign_in_path(:return_to => set_event_participations_path(@event)), :class => 'btn btn-primary'
 
   h4= link_to @event.title, @event
   div
