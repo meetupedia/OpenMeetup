@@ -163,6 +163,7 @@ Openmeetup::Application.routes.draw do
   match '/system-settings' => 'dashboard#index', :as => :system
   match '/reload' => 'dashboard#reload', :as => :reload
   match '/download_database' => 'dashboard#download_database', :as => :download_database
+  match '/download_translations' => 'dashboard#download_translations', :as => :download_translations
 
   resources :authentications
   match '/auth/:provider/callback' => 'authentications#create'

@@ -2,6 +2,6 @@
 
 cd `dirname $_`/..
 ./../openmeetup/script/backup
-mysql -uroot -pwrstcvgo openmeetup-dev < ../openmeetup/db/openmeetup.sql
+mysql -u$USER -p$PASSWORD openmeetup-dev < ../openmeetup/db/openmeetup.sql
 rm public/system -rf
 cp ../openmeetup/public/system public -r
