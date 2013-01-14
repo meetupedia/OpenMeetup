@@ -24,7 +24,7 @@
           input type='text' class='search-query' placeholder=trl('Search') name='q'
         - unless current_user
           ul.nav.pull-right
-            li= link_to tr('Sign in'), sign_in_path
+            li= link_to tr('Sign in'), sign_in_path(:return_to => request.path)
         - else
           ul.nav.pull-right
             - unless current_user.restricted_access
