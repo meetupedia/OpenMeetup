@@ -1,0 +1,15 @@
+p
+  = tr('Hi {user},', "Greetings user", :user => @user.name)
+
+p
+  = tr('Here are the latest insights about your {sitename} pages.', "Here are the insights", :sitename => Settings.title)
+
+  - @admined_groups.each do |group|
+    =' link_to group.name, group
+
+/ group image
+/ group name
+/ group new people this week
+/ number of visitors
+/ number of appearences at meetupedia browser / search
+

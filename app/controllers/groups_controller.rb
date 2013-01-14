@@ -63,4 +63,5 @@ class GroupsController < CommonController
   def waves
     @waves = @group.waves.order('last_changed_at DESC').paginate :page => params[:page]
   end
+
 end

@@ -109,6 +109,10 @@ class UsersController < CommonController
     @waves = current_user.waves.order('last_changed_at DESC').paginate :page => params[:page]
   end
 
+  def newsletter_insights_for_group_admin
+    UserMailer.newsletter_insights_for_group_admin(@user).deliver
+  end
+
 protected
 
   def create_city
