@@ -16,6 +16,11 @@ class DashboardController < CommonController
     send_file 'db/openmeetup.sql'
   end
 
+  def download_translations
+    system "script/backup_translations"
+    send_file 'db/translations.sql'
+  end
+
 protected
 
   def authenticate_as_admin
