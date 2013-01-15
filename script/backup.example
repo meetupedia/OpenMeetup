@@ -1,0 +1,3 @@
+#!/bin/bash
+
+mysqldump -u$USER -p$PASSWORD $DATABASE > tmp/openmeetup.sql

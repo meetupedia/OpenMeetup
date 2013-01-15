@@ -64,7 +64,13 @@ class Ability
         participation.user_id == current_user.id or participation.event.group.admins.include?(current_user) or current_user.is_admin?
       end
 
-      can :create, Post
+      can :create, Post do |post|
+        if post.postable.is_a?(Group)
+          post.postable.members.include?(current_user)
+        else
+          true
+        end
+      end
 
       can [:create, :destroy], Question do |question|
         question.event.group.admins.include?(current_user) or current_user.is_admin?

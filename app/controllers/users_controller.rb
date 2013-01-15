@@ -19,6 +19,7 @@ class UsersController < CommonController
 
   def show
     @activities = @user.activities.order('created_at DESC').includes(:activable).paginate :page => params[:page]
+    @title = @user.name
   end
 
   def new
@@ -106,6 +107,10 @@ class UsersController < CommonController
 
   def waves
     @waves = current_user.waves.order('last_changed_at DESC').paginate :page => params[:page]
+  end
+
+  def newsletter_insights_for_group_admin
+    UserMailer.newsletter_insights_for_group_admin(@user).deliver
   end
 
 protected

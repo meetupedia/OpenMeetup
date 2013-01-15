@@ -1,0 +1,3 @@
+#!/bin/bash
+
+mysql -u$USER -p$PASSWORD -e 'show tables like "tr8n%"' $DATABASE | grep -v Tables_in | xargs mysqldump -u$USER -p$PASSWORD $DATABASE > tmp/translations.sql

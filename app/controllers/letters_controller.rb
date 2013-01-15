@@ -6,7 +6,6 @@ class LettersController < CommonController
 
   def index
     @letters = Letter.order('-mailed_at ASC').paginate :page => params[:page]
-    @title = 'Levelek'
   end
 
   def show

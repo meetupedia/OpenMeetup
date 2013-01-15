@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.10'
+gem 'rails', '3.2.11'
 
 gem 'mysql2'
 gem 'json'
@@ -43,6 +43,7 @@ gem 'oink'
 gem 'tr8n', :git => 'git://github.com/berk/tr8n.git', :ref => '973fb5277bfe25270687fba9e519b7ff1e41fd5d'
 gem 'dalli'
 gem 'sitemap_generator'
+gem 'whenever', :require => false
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
@@ -55,6 +56,8 @@ group :development do
   gem 'hirb'
   gem 'rspec-rails'
   gem 'license_finder', :git => 'git://github.com/pivotal/LicenseFinder.git'
+  gem 'bullet'
+  gem 'meta_request'
 end
 
 group :production do

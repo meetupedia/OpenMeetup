@@ -52,6 +52,7 @@ class RootController < CommonController
   end
 
   def sign_in
+    session[:return_to] = params[:return_to] if params[:return_to]
     redirect_to sign_in_with_email_path unless Settings.enable_facebook_login or Settings.enable_twitter_login
   end
 

@@ -47,8 +47,8 @@
           = link_to tr('Write a review'), new_event_review_path(@event), :class => 'btn btn-primary', :rel => 'modal'
     - else
       - if @event.start_time > Time.zone.now
-        = link_to "<i class='icon-minus-sign icon-black'></i> #{tr('Decline')}".html_safe, sign_in_path(:return_to => set_event_absences_path(@event)), :class => 'btn'
-        = link_to "<i class='icon-plus-sign icon-white'></i> #{tr('Join')}".html_safe, sign_in_path(:return_to => set_event_participations_path(@event)), :class => 'btn btn-primary'
+        = link_to "<i class='icon-minus-sign icon-black'></i> #{tr('Decline')}".html_safe, set_event_absences_path(@event), :class => 'btn'
+        = link_to "<i class='icon-plus-sign icon-white'></i> #{tr('Join')}".html_safe, set_event_participations_path(@event), :class => 'btn btn-primary'
 
   h4= link_to @event.title, @event
   div

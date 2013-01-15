@@ -1,3 +1,0 @@
-#!/bin/bash
-
-mysqldump -uroot -pwrstcvgo openmeetup > db/openmeetup.sql

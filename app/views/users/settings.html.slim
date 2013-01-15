@@ -40,6 +40,14 @@
             .control-group
               = f.label :city_id, tr('City')
               = f.text_field :city_id, 'data-pre' => [@user.city].compact.map { |city| {:id => city.id, :name => city.name} }.to_json
+        = f.actions do
+          =' f.action :submit, :label => 'Save'
+          = f.action :cancel, :label => 'Cancel'
+
+    .wrapper
+      h2= tr('Edit password')
+      = semantic_form_for @user do |f|
+        = f.inputs do
           = f.input :password
           = f.input :password_confirmation
         = f.actions do

@@ -13,7 +13,12 @@ class DashboardController < CommonController
 
   def download_database
     system "script/backup"
-    send_file 'db/openmeetup.sql'
+    send_file 'tmp/openmeetup.sql'
+  end
+
+  def download_translations
+    system "script/backup_translations"
+    send_file 'tmp/translations.sql'
   end
 
 protected

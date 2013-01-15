@@ -6,7 +6,6 @@ class LetterTemplatesController < CommonController
 
   def index
     @letter_templates = LetterTemplate.order('name ASC').paginate :page => params[:page]
-    @title = 'Levélsablonok'
   end
 
   def show

@@ -26,4 +26,4 @@
 
 - unless @group.description.blank?
   .wrapper
-    = simple_format(auto_link(@group.description))
+    = textilize(auto_link(@group.description))
