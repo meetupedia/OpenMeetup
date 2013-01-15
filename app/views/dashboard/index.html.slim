@@ -1,27 +1,18 @@
 .wrapper
-  h1= tr('System settings')
+  h1= tr('Site admin menu')
 
-  p= link_to tr('User management'), admin_users_path
+  p= link_to tr('User management'), admin_users_path, :class => 'btn'
 
-  hr
+  p= link_to tr('System options'), settings_path, :class => 'btn'
 
-  p= link_to tr('System options'), settings_path
+  p= link_to tr('Letter template manager'), letter_templates_path, :class => 'btn'
 
-  p= link_to tr('Letter templates'), letter_templates_path
+  p= link_to tr('Letter manager'), letters_path, :class => 'btn'
 
-  p= link_to tr('Letters'), letters_path
+  p= link_to tr('Download database'), download_database_path, :class => 'btn', :confirm => trl('Download database?')
 
-  hr
+  p= link_to tr('Download translations'), download_translations_path, :class => 'btn', :confirm => trl('Download translations?')
 
-  h2= tr('Restart')
-  p= link_to tr('Restart'), reload_path, :class => 'btn btn-danger', :confirm => trl('Restart system?')
+  p= link_to tr('Reload site'), reload_path, :class => 'btn', :confirm => trl('Reload site?')
 
-  hr
-
-  h2= tr('Download database')
-  p= link_to tr('Download'), download_database_path, :class => 'btn btn-danger', :confirm => trl('Download database?')
-
-  hr
-
-  h2= tr('Download translations')
-  p= link_to tr('Download'), download_translations_path, :class => 'btn btn-danger', :confirm => trl('Download translations?')
+  p= tr('Software version : {version}', "software version", :version => $revision)
