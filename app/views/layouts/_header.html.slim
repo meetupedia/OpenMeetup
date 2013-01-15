@@ -37,6 +37,7 @@
                     = tr('Admin')
                     b.caret
                   ul.dropdown-menu
+                    li= link_to tr('Site admin menu'), system_path
                     li= link_to tr('Manage users'), admin_users_path
                     li= link_to tr('Reload site'), reload_path, :confirm => trl('Reload site?')
 

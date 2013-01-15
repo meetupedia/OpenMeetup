@@ -31,4 +31,5 @@ module ApplicationHelper
   def dot
     ' · '
   end
+
 end
