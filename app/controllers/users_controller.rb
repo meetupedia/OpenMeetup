@@ -19,6 +19,7 @@ class UsersController < CommonController
 
   def show
     @activities = @user.activities.order('created_at DESC').includes(:activable).paginate :page => params[:page]
+    @title = @user.name
   end
 
   def new
@@ -53,6 +54,12 @@ class UsersController < CommonController
     redirect_back_or_default @user
   end
 
+  def destroy
+    current_user_session.andand.destroy if @user == current_user
+    @user.destroy
+    redirect_to root_url
+  end
+
   def calendar
   end
 
@@ -82,6 +89,12 @@ class UsersController < CommonController
     redirect_to @user
   end
 
+  def unset_admin
+    @user.is_admin = false
+    @user.save
+    redirect_to @user
+  end
+
   def settings
   end
 
@@ -94,6 +107,10 @@ class UsersController < CommonController
 
   def waves
     @waves = current_user.waves.order('last_changed_at DESC').paginate :page => params[:page]
+  end
+
+  def newsletter_insights_for_group_admin
+    UserMailer.newsletter_insights_for_group_admin(@user).deliver
   end
 
 protected

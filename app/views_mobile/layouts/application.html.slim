@@ -1,0 +1,38 @@
+doctype html
+html
+  head
+    title= [@title, Settings.title].compact.join(' - ')
+    meta http-equiv="content-type" content="text/html; charset=utf-8"
+    meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    meta name="apple-mobile-web-app-capable" content="yes"
+    meta name="apple-mobile-web-app-status-bar-style" content="black"
+    = stylesheet_link_tag 'application', :media => 'all'
+    | <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    = javascript_include_tag 'application'
+    - unless Rails.env == 'test'
+      = tr8n_scripts_tag.html_safe
+    - if Rails.env == 'production'
+      = render 'layouts/google_analytics'
+      = render 'layouts/kissmetrics'
+    = csrf_meta_tags
+  body
+    = render 'layouts/header'
+    #content
+      .container(class="layout_#{controller.controller_name}" id="layout_#{controller.controller_name}_#{controller.action_name}")
+        = yield :header
+        - if flash[:notice]
+          .alert.alert-success
+            a.close(data-dismiss="alert")×
+            = flash[:notice]
+        - if flash[:alert]
+          .alert.alert-error
+            a.close(data-dismiss="alert")×
+            = flash[:alert]
+        = yield
+    = render 'layouts/footer'
+    = yield :scripts
+    - if Settings.enable_feedback_box
+      = render 'layouts/uservoice'
+    = render 'layouts/facebook_connect'
+    javascript:
+      window.addEventListener('load', setTimeout(function(){ window.scrollTo(0, 1) }, 0))

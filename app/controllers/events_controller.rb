@@ -7,6 +7,7 @@ class EventsController < CommonController
 
   def show
     events_show
+    @title = @event.name
   end
 
   def new

@@ -36,4 +36,12 @@ Openmeetup::Application.configure do
   config.assets.debug = false
 
   config.assets.logger = false
+
+  config.cache_store = :dalli_store
+
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.bullet_logger = true
+    Bullet.rails_logger = true
+  end
 end

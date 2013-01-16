@@ -3,9 +3,10 @@
 Openmeetup::Application.routes.draw do
 
   mount WillFilter::Engine => '/will_filter'
-  if Rails.env == 'production'
-    mount Tr8n::Engine => '/tr8n'
-  end
+  mount Tr8n::Engine => '/tr8n'
+  # if Rails.env == 'production'
+  # end
+
   mount CommentMailer::Preview => '/comment_mailer/mail_view'
   mount EventInvitationMailer::Preview => '/event_invitation_mailer/mail_view'
   mount EventMailer::Preview => '/event_mailer/mail_view'
@@ -16,6 +17,10 @@ Openmeetup::Application.routes.draw do
   mount PostMailer::Preview => '/post_mailer/mail_view'
   mount UserMailer::Preview => '/user_mailer/mail_view'
   mount WaveMailer::Preview => '/wave_mailer/mail_view'
+
+  namespace :admin do
+    resources :users
+  end
 
   resources :cities do
     member do
@@ -138,6 +143,7 @@ Openmeetup::Application.routes.draw do
       get :facebook_groups
       get :groups
       post :set_admin
+      post :unset_admin
       get :settings
       get :waves
     end
@@ -154,9 +160,10 @@ Openmeetup::Application.routes.draw do
   match '/dashboard' => 'root#dashboard', :as => :dashboard
   match '/restricted_access' => 'root#restricted_access', :as => :restricted_access
 
-  match '/system' => 'system#index', :as => :system
-  match '/reload' => 'system#reload', :as => :reload
-  match '/download_database' => 'system#download_database', :as => :download_database
+  match '/system-settings' => 'dashboard#index', :as => :system
+  match '/reload' => 'dashboard#reload', :as => :reload
+  match '/download_database' => 'dashboard#download_database', :as => :download_database
+  match '/download_translations' => 'dashboard#download_translations', :as => :download_translations
 
   resources :authentications
   match '/auth/:provider/callback' => 'authentications#create'

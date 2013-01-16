@@ -1,0 +1,18 @@
+.wrapper
+  h1= tr('Site admin menu')
+
+  p= link_to tr('User management'), admin_users_path, :class => 'btn'
+
+  p= link_to tr('System options'), settings_path, :class => 'btn'
+
+  p= link_to tr('Letter template manager'), letter_templates_path, :class => 'btn'
+
+  p= link_to tr('Letter manager'), letters_path, :class => 'btn'
+
+  p= link_to tr('Download database'), download_database_path, :class => 'btn', :confirm => trl('Download database?')
+
+  p= link_to tr('Download translations'), download_translations_path, :class => 'btn', :confirm => trl('Download translations?')
+
+  p= link_to tr('Reload site'), reload_path, :class => 'btn', :confirm => trl('Reload site?')
+
+  p= tr('Software version : {version}', "software version", :version => $revision)

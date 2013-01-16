@@ -1,0 +1,41 @@
+# site config
+
+# basic info
+
+title: 'Meetupedia'
+host: 'meetupedia.com'
+default_email: 'noreply@meetupedia.com'
+email_footer_whois: "Meetupedia Inc., Pipa utca 2/b, 1095 Budapest, Hungary"
+
+# custom frontpage at app/views/customizations/[customization].html.slim
+
+customization: ''
+
+# single location -> standalone: true
+# multiple location, eg. cities -> standalone: false
+
+standalone: false
+
+# language settings
+
+multilingual: true
+default_language: 'en'
+
+# login options
+
+enable_facebook_login: true
+enable_twitter_login: true
+
+# facebook, twitter, g+ share buttons on the group pages
+
+enable_share_buttons: true
+
+# feedback box at the bottom
+
+enable_feedback_box: true
+
+# invite module
+
+enable_invite_process: false
+# skip_invite_process_code: 'geronimo'
+

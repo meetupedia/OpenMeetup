@@ -41,8 +41,15 @@ class Event < ActiveRecord::Base
   end
 
   validate :check_permaname
+  validate :valid_dates
 
   after_create :create_admin_participation
+
+  def valid_dates
+    if start_time >= end_time
+      errors.add(:end_time, I18n.t('errors.messages.endtimebeforestarttime'))
+    end
+  end
 
   def check_permaname
     if permaname.present? and permaname_changed? and (Group.find_by_permaname(permaname) or Event.find_by_permaname(permaname))

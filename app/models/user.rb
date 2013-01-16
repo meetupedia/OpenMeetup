@@ -5,24 +5,22 @@ class User < ActiveRecord::Base
   key :nickname
   key :locale
   key :email, :index => true
-  key :email_confirmed
+  key :email_confirmed, :as => :boolean, :default => false
+  key :email_bounced, :as => :boolean, :default => false
   key :crypted_password
   key :password_salt
   key :persistence_token
   key :perishable_token
   key :single_access_token
-  key :token
   key :location
   key :is_admin, :as => :boolean, :default => false
-  key :facebook_friend_ids, :as => :text
   key :restricted_access, :as => :boolean, :default => false
   key :invitation_code
   key :karma, :as => :integer, :default => 0
-  key :notifications_count, :as => :integer, :default => 0
   key :last_notified, :as => :datetime
   timestamps
-  key :settings, :as => :binary
   key :memberships_count, :as => :integer, :default => 0
+  key :notifications_count, :as => :integer, :default => 0
 
   belongs_to :city
   has_many :absences, :dependent => :destroy
@@ -46,9 +44,6 @@ class User < ActiveRecord::Base
   has_many :user_follows, :dependent => :destroy
   has_many :wave_memberships, :dependent => :destroy
   has_many :waves, :through => :wave_memberships
-
-  serialize :facebook_friend_ids
-  store :settings, :accessors => [:facebook_friends]
 
   acts_as_authentic do |c|
     c.validate_email_field = false
@@ -91,29 +86,20 @@ class User < ActiveRecord::Base
     UserMailer.password_reset(self).deliver
   end
 
-  def apply_omniauth(omniauth)
-    case omniauth['provider']
-      when 'facebook'
-        self.token = omniauth['credentials']['token']
-        self.facebook_friend_ids = facebook.friends.map(&:identifier)
-    end
-    save
-  end
-
-  def authenticated_with(provider)
+  def authentication_with(provider)
     authentications.where(:provider => provider).first
   end
 
   def facebook
-    @facebook ||= FbGraph::User.new(facebook_id, :access_token => self.token).fetch
+    @facebook ||= FbGraph::User.new(facebook_id, :access_token => authentication_with(:facebook).andand.facebook_access_token).fetch
   end
 
   def facebook_id
-    @facebook_id ||= authentications.where(:provider => 'facebook').first.andand.uid
+    @facebook_id ||= authentication_with(:facebook).andand.uid
   end
 
   def twitter_id
-    @twitter_id ||= authentications.where(:provider => 'twitter').first.andand.uid
+    @twitter_id ||= authentication_with(:twitter).andand.uid
   end
 
   def user_follow_for(user)
@@ -134,6 +120,14 @@ class User < ActiveRecord::Base
 
   def followed_user_ids
     followed_users.map(&:id)
+  end
+
+  def facebook_friend_ids
+    if authentication = authentication_with(:facebook)
+      authentication.facebook_friend_ids
+    else
+      []
+    end
   end
 
   def connect_facebook_friends

@@ -12,7 +12,7 @@
                 li= link_to tr('New event'), new_group_event_path(@group), :rel => 'modal'
               - if current_user
                 li= link_to tr('Invite friends'), new_group_group_invitation_path(@group), :rel => 'modal'
-              - if can? :edit, @group
+              - if can? :update, @group
                 li= link_to tr('Edit group'), edit_group_path(@group), :rel => 'modal'
           =' render 'memberships/button', :group => @group
       - else
@@ -26,4 +26,4 @@
 
 - unless @group.description.blank?
   .wrapper
-    = textilize(@group.description).html_safe
+    = textilize(auto_link(@group.description))

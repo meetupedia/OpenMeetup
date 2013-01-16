@@ -1,14 +1,11 @@
 p
-  ' You have created
-  = link_to @group.name, @group
-  | .
+  - if text = Setting[:email_group_created_for_owner].presence
+    = simple_format(auto_link(text))
+  - else
+    ' You have created
+    = link_to @group.name, @group
+    | .
 
 .list_view
   = render @group
 
-- if text = Setting[:welcome_letter].presence
-  p= text
-
-hr
-
-= Settings.email_signature

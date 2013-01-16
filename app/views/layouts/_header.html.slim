@@ -17,28 +17,37 @@
               b.icon-envelope
             li= link_to notifications_path, :alt => trl('My notifications'), :title => trl('My notifications') do
               b.icon-info-sign
-              - if current_user.notifications.size != 0
+              - if current_user.notifications.size > 0
                 span.badge.badge-important= current_user.notifications.size
 
         form.navbar-search action='/search' method='get'
           input type='text' class='search-query' placeholder=trl('Search') name='q'
         - unless current_user
           ul.nav.pull-right
-            li= link_to tr('Sign in'), sign_in_path
+            li= link_to tr('Sign in'), sign_in_path(:return_to => request.path)
         - else
           ul.nav.pull-right
             - unless current_user.restricted_access
-              li= link_to tr('Home'), notifications_path
               li= link_to tr('Find a meetup group'), discovery_path
               li= link_to tr('Start a meetup group'), new_group_path
 
+              - if current_user.is_admin?
+                li.dropdown
+                  a.dropdown-toggle(data-toggle="dropdown" href="#")
+                    = tr('Admin')
+                    b.caret
+                  ul.dropdown-menu
+                    li= link_to tr('Site admin menu'), system_path
+                    li= link_to tr('Manage users'), admin_users_path
+                    li= link_to tr('Reload site'), reload_path, :confirm => trl('Reload site?')
+
               li.dropdown
-                a.dropdown-toggle(data-toggle="dropdown")
+                a.dropdown-toggle(data-toggle="dropdown" href="#")
                   = current_user.name
                   b.caret
                 ul.dropdown-menu
                   li= link_to tr('Profile'), current_user
                   li= link_to tr('Groups'), groups_user_path(current_user)
-                  - if current_user.is_admin?
-                    li= link_to tr('System settings'), system_path
+                  li.divider
                   li= link_to tr('Sign out'), sign_out_path
+

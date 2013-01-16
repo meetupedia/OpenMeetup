@@ -16,7 +16,7 @@ class Ability
         event.group.admins.include?(current_user) or current_user.is_admin?
       end
       can :invited, Event do |event|
-        event.participants.include?(current_user)
+        event.participants.include?(current_user) or current_user.is_admin?
       end
 
       can :create, EventInvitation
@@ -64,7 +64,13 @@ class Ability
         participation.user_id == current_user.id or participation.event.group.admins.include?(current_user) or current_user.is_admin?
       end
 
-      can :create, Post
+      can :create, Post do |post|
+        if post.postable.is_a?(Group)
+          post.postable.members.include?(current_user)
+        else
+          true
+        end
+      end
 
       can [:create, :destroy], Question do |question|
         question.event.group.admins.include?(current_user) or current_user.is_admin?
@@ -85,13 +91,13 @@ class Ability
       can :create, Tag
 
       can :edit_city, User
-      can [:update, :destroy, :settings, :facebook_groups, :waves], User do |user|
+      can [:facebook_groups, :waves], User do |user|
         user == current_user
       end
-      can :calendar, User do |user|
+      can [:update, :destroy, :calendar, :settings], User do |user|
         user == current_user or current_user.is_admin?
       end
-      can :set_admin, User if current_user.is_admin?
+      can [:set_admin, :unset_admin], User if current_user.is_admin?
 
       can :create, UserFollow
       can :destroy, UserFollow do |user_follow|

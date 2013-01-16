@@ -1,1 +1,1 @@
-= {'success' => true, 'code' => "$('#images').append('#{escape_javascript(render 'images/image.html', :image => @image)}')"}.to_json.html_safe
+= {'success' => true, 'code' => "$('#images').append('#{escape_javascript(render :partial => 'images/image', :locals => {:image => @image}, :formats => [:html])}')"}.to_json.html_safe

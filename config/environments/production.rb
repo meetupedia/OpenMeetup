@@ -34,13 +34,13 @@ Openmeetup::Application.configure do
   # config.log_level = :debug
 
   # Prepend all log lines with the following tags
-  # config.log_tags = [ :subdomain, :uuid ]
+  config.log_tags = [:uuid]
 
   # Use a different logger for distributed setups
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
 
   # Use a different cache store in production
-  config.cache_store = :mem_cache_store
+  config.cache_store = :dalli_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
@@ -68,5 +68,15 @@ Openmeetup::Application.configure do
   Openmeetup::Application.config.middleware.use ExceptionNotifier,
     :email_prefix => "[OpenMeetup] ",
     :sender_address => %{"exceptions@openmeetup.net" <exceptions@openmeetup.net>},
-    :exception_recipients => %w{bence.nagy@gmail.com p.toth.andras@gmail.com}
+    :exception_recipients => %w{bence.nagy@gmail.com andris@openmeetup.org}
+
+  config.action_mailer.smtp_settings = {
+    :address => 'localhost',
+    :port => 25,
+    :domain => 'meetupedia.com',
+    :user_name => nil,
+    :password => nil,
+    :authentication => nil,
+    :enable_starttls_auto => false
+  }
 end

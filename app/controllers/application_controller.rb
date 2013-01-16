@@ -24,29 +24,36 @@ class ApplicationController < ActionController::Base
         flash[:alert] = 'Be kell jelentkezned!'
         authenticate
       else
-        flash[:alert] = 'Nem hozzáférhető számodra a kért oldal!'
-        redirect_to root_url
+        if modal_request?
+          render :text => 'Nem hozzáférhető számodra a kért oldal!'
+        else
+          flash[:alert] = 'Nem hozzáférhető számodra a kért oldal!'
+          redirect_to root_url
+        end
       end
     end
   end
 
 private
 
-  def handling_error(status, exception)
-    ExceptionNotifier::Notifier.exception_notification(request.env, exception, :data => {:message => 'an error happened'}).deliver
-    respond_to do |format|
-      format.html { render "errors/error_#{status}", :status => status }
-      format.any { render :nothing => true, :status => status }
-    end
+  def can_admin?
+    raise CanCan::AccessDenied unless current_user.andand.is_admin?
   end
 
-  if Rails.env == 'development'
-    def tr(text)
-      text
-    end
-
-    def trl(text)
-      text
+  def handling_error(status, exception)
+    respond_to do |format|
+      format.html do
+        if exception.class == ActiveRecord::RecordNotFound and controller_name =~ /events|groups/
+          render "errors/no_#{controller_name}"
+        else
+          ExceptionNotifier::Notifier.exception_notification(request.env, exception, :data => {:message => 'an error happened'}).deliver
+          render "errors/error_#{status}", :status => status
+        end
+      end
+      format.any do
+        ExceptionNotifier::Notifier.exception_notification(request.env, exception, :data => {:message => 'an error happened'}).deliver
+        render :nothing => true, :status => status
+      end
     end
   end
 
@@ -56,6 +63,24 @@ private
       ActiveRecord::Base.connection.close
     end
   end
+
+  def check_for_mobile
+    session[:mobile_override] = params[:mobile] if params[:mobile]
+    prepare_for_mobile if mobile_device?
+  end
+
+  def prepare_for_mobile
+    prepend_view_path Rails.root + 'app' + 'views_mobile'
+  end
+
+  def mobile_device?
+    if session[:mobile_override]
+      session[:mobile_override] == '1'
+    else
+      request.user_agent =~ /iPhone|iPod|Android|webOS|Mobile/ and request.user_agent !~ /iPad/
+    end
+  end
+  helper_method :mobile_device?
 
   def current_locale
     if params[:locale]

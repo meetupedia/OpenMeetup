@@ -106,7 +106,7 @@ defaults:
   caching:
     enabled:                  true
     adapter:                  ActiveSupport::Cache
-    store:                    'memory_store'
+    store:                    'dalli_store'
     version:                  1 # you can change the version to invalidate the cache
 
   #############################################################################
@@ -285,10 +285,10 @@ defaults:
 # You can overload any feature defined in the defaults for any environment
 #############################################################################
 development:
-  enable_tr8n: false
+  enable_tr8n: true
 
 test:
-  enable_tr8n: false
+  enable_tr8n: true
 
 qa:
 

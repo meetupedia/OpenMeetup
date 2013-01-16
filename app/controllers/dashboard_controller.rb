@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-class SystemController < CommonController
+class DashboardController < CommonController
   before_filter :authenticate_as_admin
 
   def index
@@ -13,7 +13,12 @@ class SystemController < CommonController
 
   def download_database
     system "script/backup"
-    send_file 'db/openmeetup.sql'
+    send_file 'tmp/openmeetup.sql'
+  end
+
+  def download_translations
+    system "script/backup_translations"
+    send_file 'tmp/translations.sql'
   end
 
 protected

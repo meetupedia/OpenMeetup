@@ -5,22 +5,23 @@ class AuthenticationsController < CommonController
     omniauth = request.env['omniauth.auth']
     authentication = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
     if authentication
-      authentication.user.apply_omniauth(omniauth)
+      fresh_settings(authentication, omniauth)
       sign_in_and_redirect(authentication.user)
     elsif current_user
       unless current_user.restricted_access
-        current_user.authentications.create! :provider => omniauth['provider'], :uid => omniauth['uid']
-        current_user.apply_omniauth(omniauth)
+        authentication = current_user.authentications.create! :provider => omniauth['provider'], :uid => omniauth['uid']
+        fresh_settings(authentication, omniauth)
         redirect_to root_url
       else
         redirect_to request_invite_users_path
       end
     elsif not Settings.enable_invite_process
-      user = User.new :name => omniauth['info']['name'], :email => omniauth['info']['email']
-      user.authentications.build :provider => omniauth['provider'], :uid => omniauth['uid']
+      user = User.where(:email => omniauth['info']['email']).first if omniauth['info']['email'].present?
+      user ||= User.new :name => omniauth['info']['name'], :email => omniauth['info']['email']
+      authentication = user.authentications.build :provider => omniauth['provider'], :uid => omniauth['uid']
       if user.save
         cookies.delete :invitation_code
-        user.apply_omniauth(omniauth)
+        fresh_settings(authentication, omniauth)
         session[:return_to] = interests_url
         if cookies[:add_membership_for] and group = Group.find_by_id(cookies[:add_membership_for])
           group.memberships.create :user => user
@@ -52,5 +53,14 @@ class AuthenticationsController < CommonController
       user_session.save
     end
     redirect_back_or_default root_url
+  end
+
+protected
+
+  def fresh_settings(authentication, omniauth)
+    if authentication.provider == 'facebook'
+      authentication.update_attributes :facebook_access_token => omniauth['credentials']['token']
+      authentication.update_attributes :facebook_friend_ids => authentication.user.facebook.friends.map(&:identifier)
+    end
   end
 end
