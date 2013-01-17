@@ -2,7 +2,6 @@
 .sass-cache
 /log/*.log
 /tmp
-/public/assets
 /public/system
 config/settings.yml
 config/database.yml
