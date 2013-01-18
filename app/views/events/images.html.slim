@@ -4,10 +4,6 @@
 .wrapper
   h2= tr('Images')
 
-  - if can? :create, Image
-    #images_upload
+  = render 'images/new', :url => event_images_path(@event)
 
   #images= render @event.images.order('created_at ASC')
-
-- if can? :create, Image
-  = render 'images/upload', :url => upload_event_images_path(@event)
