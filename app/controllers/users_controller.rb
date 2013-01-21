@@ -113,6 +113,13 @@ class UsersController < CommonController
     UserMailer.newsletter_insights_for_group_admin(@user).deliver
   end
 
+  def recommendations
+    user_ids = current_user.recommended_users_hash.to_a.map(&:first)
+    @users = User.find(user_ids)
+    group_ids = current_user.recommended_groups_hash.to_a.map(&:first)
+    @groups = Group.find(group_ids)
+  end
+
 protected
 
   def create_city

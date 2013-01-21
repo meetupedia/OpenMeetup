@@ -1,0 +1,22 @@
+h1= tr('Recommandations')
+
+.row
+  .span6
+    .wrapper
+      h2= tr('Recommended groups')
+      - @groups.each do |group|
+        .list_view
+          = render group
+          .icon-container
+            i.icon-chevron-up
+          = render current_user.friends_in_group(group)
+
+  .span6
+    .wrapper
+      h2= tr('People to follow')
+      - @users.each do |user|
+        .list_view
+          = render user
+          .icon-container
+            i.icon-chevron-up
+          = render user.followed_users & current_user.followed_users
