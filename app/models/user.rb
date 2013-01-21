@@ -168,6 +168,14 @@ class User < ActiveRecord::Base
     group.members.where('users.id' => followed_user_ids)
   end
 
+  def recommended_users_hash(limit = 5)
+    User.joins(:user_follows).where('user_follows.followed_user_id IN (?) AND users.id NOT IN (?)', self.followed_user_ids, self.followed_user_ids + [self.id]).order('count_all DESC').group('users.id').count
+  end
+
+  def recommended_groups_hash(limit = 5)
+    Group.joins(:memberships).where('memberships.user_id IN (?) AND groups.id NOT IN (?)', self.followed_user_ids, self.joined_group_ids).order('count_all DESC').group('groups.id').count
+  end
+
   if Settings.customization == 'get2gather'
     key :read_manual, :as => :boolean
     key :read_cobe, :as => :boolean
