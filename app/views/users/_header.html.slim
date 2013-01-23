@@ -1,6 +1,8 @@
 .row
   .span12
     .wrapper
+      - if @user.header.file?
+        .header_image= image_tag @user.header.url(:normal)
       .button-menu
         - if current_user
           - if current_user.is_admin?
@@ -20,7 +22,7 @@
           - else
             = link_to new_wave_path(:recipient_id => @user.id), :rel => 'modal', :class => 'btn' do
               b.icon-envelope
-              ' 
+              '
               = tr('Send message')
             = render 'user_follows/button', :user => @user
 
