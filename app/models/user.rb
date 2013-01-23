@@ -18,6 +18,14 @@ class User < ActiveRecord::Base
   key :invitation_code
   key :karma, :as => :integer, :default => 0
   key :last_notified, :as => :datetime
+  key :avatar_file_name
+  key :avatar_content_type
+  key :avatar_file_size, :as => :integer
+  key :avatar_updated_at, :as => :datetime
+  key :header_file_name
+  key :header_content_type
+  key :header_file_size, :as => :integer
+  key :header_updated_at, :as => :datetime
   timestamps
   key :memberships_count, :as => :integer, :default => 0
   key :notifications_count, :as => :integer, :default => 0
@@ -44,6 +52,25 @@ class User < ActiveRecord::Base
   has_many :user_follows, :dependent => :destroy
   has_many :wave_memberships, :dependent => :destroy
   has_many :waves, :through => :wave_memberships
+
+  has_attached_file :avatar,
+    :path => ':rails_root/public/system/:class/:attachment/:style/:class_:id.:extension',
+    :url => '/system/:class/:attachment/:style/:class_:id.:extension',
+    :default_url => '/system/:class/missing_:style.png',
+    :styles => {
+      :normal => ['270x270#', :jpg],
+      :small => ['32x32#', :jpg]
+    },
+    :convert_options => {:all => '-quality 95 -strip'}
+
+  has_attached_file :header,
+    :path => ':rails_root/public/system/:class/:attachment/:style/:class_:id.:extension',
+    :url => '/system/:class/:attachment/:style/:class_:id.:extension',
+    :default_url => '/system/:class/missing_:style.png',
+    :styles => {
+      :normal => ['940x200#', :jpg]
+    },
+    :convert_options => {:all => '-quality 95 -strip'}
 
   acts_as_authentic do |c|
     c.validate_email_field = false
