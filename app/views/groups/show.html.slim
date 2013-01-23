@@ -42,8 +42,12 @@
         = render 'groups/next_event', :event => event
 
     .wrapper
-      - if can? :create, @group.posts.build
-        .button-menu= link_to tr('New post'), polymorphic_path([:new, @group, :post]), :class => 'btn', :rel => 'modal'
+      h2= tr('Activity')
+      - if can? :create, post = @group.posts.build
+        = semantic_form_for post, :url => url_for([@group, :posts]) do |f|
+          = f.inputs do
+            = f.input :post, :label => false
+          = f.actions
       = render 'activities/activities', :activities => @activities
 
 - if Settings.enable_share_buttons
