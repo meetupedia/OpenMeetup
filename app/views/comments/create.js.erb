@@ -1,0 +1,8 @@
+<% if @comment.reply_to -%>
+  $('#add-comment-comment-<%= @comment.reply_to.id %>').hide().find('textarea').val('')
+  $('#comment_<%= @comment.reply_to.id %>').after('<%= j render @comment %>')
+<% else -%>
+  $('#add-post-comment-<%= @comment.commentable.id %>').hide().find('textarea').val('')
+  $('#post_<%= @comment.commentable.id %> .comments').append('<%= j render @comment %>')
+<% end -%>
+$('#comment_<%= @comment.id %>').hide().fadeIn()

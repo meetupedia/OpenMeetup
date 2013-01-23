@@ -1,2 +1,3 @@
-- unless (comments = commentable.comments.where(:reply_to_id => nil).order('created_at ASC')).blank?
-  .comments= render comments, :commentable => commentable
+.comments
+  - unless (comments = commentable.comments.where(:reply_to_id => nil).order('created_at ASC')).blank?
+    = render comments, :commentable => commentable

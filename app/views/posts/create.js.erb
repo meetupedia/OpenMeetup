@@ -1,0 +1,4 @@
+$('#activities').prepend('<%= j render @post %>')
+$('#activities').find('.muted').remove()
+$('#post_<%= @post.id %>').hide().fadeIn()
+$('form#new_post').find('textarea').val('')

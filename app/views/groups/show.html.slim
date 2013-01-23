@@ -44,10 +44,9 @@
     .wrapper
       h2= tr('Activity')
       - if can? :create, post = @group.posts.build
-        = semantic_form_for post, :url => url_for([@group, :posts]) do |f|
-          = f.inputs do
-            = f.input :post, :label => false
-          = f.actions
+        = form_for post, :url => url_for([@group, :posts]), :remote => true do |f|
+          = f.text_area :post
+          = f.submit trl('Add post'), :class => 'btn btn-primary'
       = render 'activities/activities', :activities => @activities
 
 - if Settings.enable_share_buttons
