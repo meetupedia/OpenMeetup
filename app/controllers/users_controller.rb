@@ -110,6 +110,7 @@ class UsersController < CommonController
   end
 
   def newsletter_insights_for_group_admin
+    @admined_groups = @user.admined_groups
     UserMailer.newsletter_insights_for_group_admin(@user).deliver
   end
 
