@@ -1,10 +1,11 @@
 .wrapper
   .clearfix
     .pull-left
-      p= link_to tr('Previous'), previous_image_path(@image)
+      p= link_to tr('Previous'), previous_image_path(@image), :class => 'btn btn-mini'
     .pull-right
-      p= link_to tr('Next'), next_image_path(@image)
-    h3.center= link_to @image.imageable.name, url_for([@image.imageable, :images])
+      p= link_to tr('Next'), next_image_path(@image), :class => 'btn btn-mini'
+    .center
+      h3= link_to @image.imageable.name, url_for([@image.imageable, :images])
   p = image_tag @image.image.url(:normal)
 
   - if @image.caption.present?
@@ -22,7 +23,8 @@
       = f.text_area :comment
       = f.submit trl('Add comment'), :class => 'btn btn-primary'
 
-.wrapper
+  hr
+
   p= link_to tr('Set as personal avatar'), set_avatar_user_path(current_user, :image_id => @image.id), :method => :post, :confirm => tr('Are you sure you want to change your avatar?')
   p= link_to tr('Set as personal header'), set_header_user_path(current_user, :image_id => @image.id), :method => :post, :confirm => tr('Are you sure you want to change your header?')
   - if @image.imageable.is_a?(Group) and can? :set_image, @image.imageable
