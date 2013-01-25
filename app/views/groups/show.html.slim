@@ -15,7 +15,7 @@
 
     - if @group.images.size > 0
       .wrapper
-        = link_to image_tag(@group.images.last.image.url(:normal)), @group.images.last.image.url(:normal), :class => 'fancybox'
+        = link_to image_tag(@group.images.last.image.url(:normal)), @group.images.last
         p= link_to tr('All images'), images_group_path(@group), :rel => 'modal'
 
     - if @group.admins.include?(current_user)

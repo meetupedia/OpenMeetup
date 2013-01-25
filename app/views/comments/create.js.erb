@@ -3,6 +3,6 @@
   $('#comment_<%= @comment.reply_to.id %>').after('<%= j render @comment %>')
 <% else -%>
   $('#add-post-comment-<%= @comment.commentable.id %>').hide().find('textarea').val('')
-  $('#post_<%= @comment.commentable.id %> .comments').append('<%= j render @comment %>')
+  $('#add-post-comment-<%= @comment.commentable.id %>').parent().find('.comments').append('<%= j render @comment %>')
 <% end -%>
 $('#comment_<%= @comment.id %>').hide().fadeIn()

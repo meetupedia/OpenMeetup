@@ -4,7 +4,7 @@ class ImagesController < CommonController
   load_resource :event
   load_resource :group
   load_resource :image, :through => [:event, :group], :shallow => true
-  authorize_resource :except => [:upload]
+  authorize_resource :except => [:show, :next, :previous, :upload]
 
   def create
     @image.imageable = @event || @group
@@ -21,6 +21,18 @@ class ImagesController < CommonController
         format.js
       end
     end
+  end
+
+  def next
+    image = @image.imageable.images.where('id > ?', @image.id).order('id ASC').first
+    image ||= @image.imageable.images.order('id ASC').first
+    redirect_to image
+  end
+
+  def previous
+    image = @image.imageable.images.where('id < ?', @image.id).order('id ASC').last
+    image ||= @image.imageable.images.order('id ASC').last
+    redirect_to image
   end
 
   def upload
