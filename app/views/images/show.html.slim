@@ -1,11 +1,14 @@
 .wrapper
   .clearfix
     .pull-left
-      p= link_to tr('Previous image'), previous_image_path(@image)
+      p= link_to tr('Previous'), previous_image_path(@image)
     .pull-right
-      p= link_to tr('Next image'), next_image_path(@image)
-    h3.center= @image.caption.presence or @image.imageable.name
+      p= link_to tr('Next'), next_image_path(@image)
+    h3.center= link_to @image.imageable.name, url_for([@image.imageable, :images])
   p = image_tag @image.image.url(:normal)
+
+  - if @image.caption.present?
+    = textilize(@image.caption).html_safe
 
   | <iframe src="//www.facebook.com/plugins/like.php?href=' + this.href + '&amp;layout=button_count&amp;show_faces=true&amp;width=500&amp;action=like&amp;font&amp;colorscheme=light&amp;height=23" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:110px; height:23px;" allowTransparency="true"></iframe>
 
