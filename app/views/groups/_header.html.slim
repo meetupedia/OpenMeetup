@@ -1,4 +1,6 @@
 .wrapper
+  - if @group.header.file?
+    .header_image= image_tag @group.header.url(:normal)
   .group_header
     .right
       - if current_user

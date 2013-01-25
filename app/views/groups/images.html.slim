@@ -7,3 +7,5 @@
   = render 'images/new', :url => group_images_path(@group)
 
   #images= render @group.images.order('created_at ASC')
+
+  = link_to tr('All images'), group_images_path(@group)

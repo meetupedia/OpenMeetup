@@ -22,7 +22,7 @@ class Ability
       can :create, EventInvitation
 
       can :create, Group
-      can [:update, :destroy, :requested_members], Group do |group|
+      can [:update, :destroy, :requested_members, :set_image, :set_header], Group do |group|
         group.admins.include?(current_user) or current_user.is_admin?
       end
       can [:invited, :waves], Group do |group|
@@ -91,7 +91,7 @@ class Ability
       can :create, Tag
 
       can [:edit_city, :recommendations], User
-      can [:facebook_groups, :waves], User do |user|
+      can [:facebook_groups, :waves, :set_avatar, :set_header], User do |user|
         user == current_user
       end
       can [:update, :destroy, :calendar, :settings], User do |user|

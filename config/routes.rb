@@ -4,8 +4,6 @@ Openmeetup::Application.routes.draw do
 
   mount WillFilter::Engine => '/will_filter'
   mount Tr8n::Engine => '/tr8n'
-  # if Rails.env == 'production'
-  # end
 
   mount CommentMailer::Preview => '/comment_mailer/mail_view'
   mount EventInvitationMailer::Preview => '/event_invitation_mailer/mail_view'
@@ -38,6 +36,8 @@ Openmeetup::Application.routes.draw do
       get :invited
       get :members
       get :requested_members
+      post :set_image
+      post :set_header
       get :waves
     end
     resources :posts, :shallow => true
@@ -100,6 +100,13 @@ Openmeetup::Application.routes.draw do
     end
   end
 
+  resources :images do
+    member do
+      get :next
+      get :previous
+    end
+  end
+
   resources :interests do
     resources :interest_taggings, :shallow => true
   end
@@ -145,6 +152,8 @@ Openmeetup::Application.routes.draw do
       get :groups
       post :set_admin
       post :unset_admin
+      post :set_avatar
+      post :set_header
       get :settings
       get :waves
     end
