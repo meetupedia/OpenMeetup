@@ -29,7 +29,7 @@
     - elsif activity.activable.class.name == 'Image'
       =' user_link activity.activable.user
       = tr('uploaded a picture ')
-      p= link_to image_tag(activity.activable.image.url(:small), :alt => '', :height => 80, :width => 80), activity.activable.image.url(:normal), :class => 'fancybox'
+      p= link_to image_tag(activity.activable.image.url(:small), :alt => '', :height => 80, :width => 80), activity.activable
     - elsif activity.activable.class.name == 'Comment'
       =' user_link activity.activable.user
       = tr('made ')

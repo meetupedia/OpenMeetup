@@ -105,6 +105,7 @@ Openmeetup::Application.routes.draw do
       get :next
       get :previous
     end
+    resources :comments, :shallow => true
   end
 
   resources :interests do
