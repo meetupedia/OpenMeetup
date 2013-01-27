@@ -25,8 +25,9 @@
 
   hr
 
-  p= link_to tr('Set as personal avatar'), set_avatar_user_path(current_user, :image_id => @image.id), :method => :post, :confirm => tr('Are you sure you want to change your avatar?')
-  p= link_to tr('Set as personal header'), set_header_user_path(current_user, :image_id => @image.id), :method => :post, :confirm => tr('Are you sure you want to change your header?')
+  - if current_user
+    p= link_to tr('Set as personal avatar'), set_avatar_user_path(current_user, :image_id => @image.id), :method => :post, :confirm => tr('Are you sure you want to change your avatar?')
+    p= link_to tr('Set as personal header'), set_header_user_path(current_user, :image_id => @image.id), :method => :post, :confirm => tr('Are you sure you want to change your header?')
   - if @image.imageable.is_a?(Group) and can? :set_image, @image.imageable
     p= link_to tr('Set as group image'), set_image_group_path(@image.imageable, :image_id => @image.id), :method => :post, :confirm => tr('Are you sure you want to change the groups image?')
   - if @image.imageable.is_a?(Group) and can? :set_header, @image.imageable
