@@ -5,6 +5,5 @@
  *= require gmaps4rails
  *= require fancybox
  *= require token-input-facebook
- *= require jquery.fileupload-ui
  *= require_tree .
 */
