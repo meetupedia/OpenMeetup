@@ -4,10 +4,6 @@
 .wrapper
   h2= tr('Images')
 
-  - if can? :create, Image
-    #images_upload
+  = render 'images/new', :url => group_images_path(@group)
 
   #images= render @group.images.order('created_at ASC')
-
-- if can? :create, Image
-  = render 'images/upload', :url => upload_group_images_path(@group)

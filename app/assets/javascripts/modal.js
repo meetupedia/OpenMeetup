@@ -1,8 +1,7 @@
 modalbox = {
   settings: {
     top: 65,
-    speed: 250,
-    distance: 20
+    speed: 250
   },
 
   build: function(){
@@ -12,7 +11,7 @@ modalbox = {
     lastWindow.css({
       top: $(window).scrollTop() + modalbox.settings.top,
       left: $(window).width() / 2 - lastWindow.outerWidth() / 2
-    }).show().draggable({distance: modalbox.settings.distance})
+    }).show()
     $(document).bind('keydown.modalbox', function(event) {
       if (event.keyCode == 27){
         modalbox.close()

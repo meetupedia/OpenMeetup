@@ -1,0 +1,20 @@
+- if can? :create, Image
+  = semantic_form_for Image.new, :url => url do |f|
+    = f.inputs do
+      = f.input :image, :multiple => true, :name => 'image[image]', :label => false
+
+#progress.progress.progress-striped.active(style="display: none;")
+  .bar(style="width: 0%;")
+
+coffee:
+  $('#new_image').fileupload
+    dataType: 'script'
+    add: (e, data) ->
+      $('#progress').show()
+      data.submit()
+    progressall: (e, data) ->
+      progress = parseInt(data.loaded / data.total * 100, 10)
+      $('#progress .bar').css('width', progress + '%')
+    done: ->
+      $('#progress .bar').css('width', '0%')
+      $('#progress').hide()

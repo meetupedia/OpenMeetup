@@ -1,8 +1,6 @@
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui
 //= require fancybox
-//= require fineuploader
-//= require fineuploader.jquery
+//= require jquery-fileupload/basic
 //= require_tree .
 //= require twitter/bootstrap

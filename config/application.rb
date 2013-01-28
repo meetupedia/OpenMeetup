@@ -60,6 +60,6 @@ module Openmeetup
     # Handling error messages dynamically
     config.exceptions_app = self.routes
 
-    Openmeetup::Application.middleware.use Oink::Middleware
+    # Openmeetup::Application.middleware.use Oink::Middleware
   end
 end

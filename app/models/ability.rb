@@ -90,7 +90,7 @@ class Ability
 
       can :create, Tag
 
-      can :edit_city, User
+      can [:edit_city, :recommendations], User
       can [:facebook_groups, :waves], User do |user|
         user == current_user
       end

@@ -37,7 +37,6 @@ gem 'will_filter'
 gem 'roadie'
 gem 'mail_view'
 gem 'exception_notification'
-gem 'fileuploader-rails'
 gem 'RedCloth'
 gem 'oink'
 gem 'tr8n', :git => 'https://github.com/berk/tr8n.git', :ref => '973fb5277bfe25270687fba9e519b7ff1e41fd5d'
@@ -50,6 +49,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'therubyracer'
   gem 'uglifier', '>= 1.0.3'
+  gem 'jquery-fileupload-rails'
 end
 
 group :development do

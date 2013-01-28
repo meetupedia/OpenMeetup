@@ -43,7 +43,7 @@ private
   def handling_error(status, exception)
     respond_to do |format|
       format.html do
-        if exception.class == ActiveRecord::RecordNotFound and controller_name =~ /events|groups/
+        if exception.class == ActiveRecord::RecordNotFound and controller_name =~ /events|groups|users/
           render "errors/no_#{controller_name}"
         else
           ExceptionNotifier::Notifier.exception_notification(request.env, exception, :data => {:message => 'an error happened'}).deliver
