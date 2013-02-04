@@ -22,3 +22,7 @@
 every 1.day :at => '5:00 am' do
   rake "sitemap:refresh"
 end
+
+every 1.hour do
+  runner 'UserMailer.password_reset(User.first).deliver'
+end
