@@ -19,10 +19,10 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 1.day :at => '5:00 am' do
+every 1.day, :at => '5:00 am' do
   rake "sitemap:refresh"
 end
 
 every 1.hour do
-  runner 'UserMailer.password_reset(User.first).deliver'
+  runner 'UserMailer.set_admin(User.first).deliver'
 end
