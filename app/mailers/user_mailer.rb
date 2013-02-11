@@ -5,7 +5,6 @@ class UserMailer < CommonMailer
   def password_reset(user)
     @user = user
     @email = @user.email
-    @url = edit_password_url(@user.perishable_token)
     mail :to => @email, :subject => 'Request new password'
   end
 
