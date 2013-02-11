@@ -48,7 +48,7 @@ class Group < ActiveRecord::Base
     :url => '/system/:class/:attachment/:style/:class_:id.:extension',
     :default_url => '/assets/:class_missing_:style.png',
     :styles => {
-      :normal => ['960>', :jpg]
+      :normal => ['940x200#', :jpg]
     },
     :convert_options => {:all => '-quality 95 -strip'}
 
@@ -58,7 +58,7 @@ class Group < ActiveRecord::Base
     :default_url => '/assets/:class_missing_:style.png',
     :styles => {
       :normal => ['500x500>', :jpg],
-      :small => ['72x72#', :jpg]
+      :small => ['96x96#', :jpg]
     },
     :convert_options => {:all => '-quality 95 -strip'}
 

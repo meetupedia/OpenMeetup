@@ -1,4 +1,6 @@
 .wrapper
+  - if @group.header.file?
+    .header_image= image_tag @group.header.url(:normal)
   .group_header
     .right
       - if current_user
@@ -24,6 +26,5 @@
     - unless (tags = @group.tags).blank?
       p= render @group.tags
 
-- unless @group.description.blank?
-  .wrapper
-    = textilize(auto_link(@group.description)).html_safe
+    - unless @group.description.blank?
+      = textilize(auto_link(@group.description)).html_safe

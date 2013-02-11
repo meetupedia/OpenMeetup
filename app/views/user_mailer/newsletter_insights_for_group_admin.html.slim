@@ -5,7 +5,14 @@ p
   = tr('Here are the latest insights about your {sitename} pages.', "Here are the insights", :sitename => Settings.title)
 
   - @admined_groups.each do |group|
-    =' link_to group.name, group
+    - if group.image.file?
+      .avatar= link_to(image_tag(group.image.url(:small), :alt => group.name, :height => 96, :width => 96, :title => group.name), group)
+    h4 =' link_to group.name, group
+	ul.tiles
+	  li= link_to "<span class='menu_count'>#{group.members.size}</span> #{tr('members')}".html_safe, members_group_path(group), :rel => 'modal'
+	  li= link_to "<span class='menu_count'>#{group.events.size}</span> #{tr('events')}".html_safe, events_group_path(group), :rel => 'modal'
+	  li= link_to "<span class='menu_count'>#{group.images.size}</span> #{tr('images')}".html_safe, images_group_path(group)
+	br
 
 / group image
 / group name

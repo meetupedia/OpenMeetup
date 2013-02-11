@@ -60,6 +60,22 @@ class GroupsController < CommonController
     @membership_requests = @group.membership_requests.order('created_at ASC').includes(:user).paginate :page => params[:page]
   end
 
+  def set_image
+    if image = Image.find_by_id(params[:image_id])
+      @group.image = File.open(image.image.path)
+      @group.save
+    end
+    redirect_to @group
+  end
+
+  def set_header
+    if image = Image.find_by_id(params[:image_id])
+      @group.header = File.open(image.image.path)
+      @group.save
+    end
+    redirect_to @group
+  end
+
   def waves
     @waves = @group.waves.order('last_changed_at DESC').paginate :page => params[:page]
   end

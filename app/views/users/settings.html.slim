@@ -36,6 +36,8 @@
         = f.inputs do
           = f.input :name, :label => 'Name'
           = f.input :email
+          = f.input :avatar
+          = f.input :header
           - unless Settings.standalone
             .control-group
               = f.label :city_id, tr('City')

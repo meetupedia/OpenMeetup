@@ -110,6 +110,7 @@ class UsersController < CommonController
   end
 
   def newsletter_insights_for_group_admin
+    @admined_groups = @user.admined_groups
     UserMailer.newsletter_insights_for_group_admin(@user).deliver
   end
 
@@ -118,6 +119,22 @@ class UsersController < CommonController
     @users = User.find(user_ids)
     group_ids = current_user.recommended_groups_hash.to_a.map(&:first)
     @groups = Group.find(group_ids)
+  end
+
+  def set_avatar
+    if image = Image.find_by_id(params[:image_id])
+      @user.avatar = File.open(image.image.path)
+      @user.save
+    end
+    redirect_to @user
+  end
+
+  def set_header
+    if image = Image.find_by_id(params[:image_id])
+      @user.header = File.open(image.image.path)
+      @user.save
+    end
+    redirect_to @user
   end
 
 protected

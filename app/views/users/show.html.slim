@@ -2,9 +2,9 @@
 
 .row
   .span4
-    - if @user.facebook_id
+    - if @user.avatar.file?
       .wrapper.center
-        = link_to(image_tag("https://graph.facebook.com/#{@user.facebook_id}/picture?type=large", :alt => @user.name, :title => @user.name, :class => 'avatar_image'), @user)
+        = link_to image_tag(@user.avatar.url(:normal), :alt => @user.name, :title => @user.name), @user
 
     .wrapper
       ul.tiles
@@ -23,4 +23,5 @@
 
   .span8
     .wrapper
+      h2= tr('Activity')
       = render 'activities/activities', :activities => @activities
