@@ -1,5 +1,5 @@
 span.interest_tagging(id="interest_tagging_button_for_interest_#{interest.id}")
-  - if interest_tagging = interest.interest_tagging_for(current_user)
+  - if current_user and interest_tagging = interest.interest_tagging_for(current_user)
     =' link_to interest_tagging, :method => :delete, :class => 'btn btn-mini btn-success ', :remote => true do
       = tr(interest.name)
       br
