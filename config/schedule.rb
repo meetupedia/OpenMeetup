@@ -34,5 +34,5 @@ every 15.minutes do
 end
 
 every 15.minutes do
-  command 'git pull https://github.com/meetupedia/openmeetup.git'
+  command 'git pull https://github.com/meetupedia/OpenMeetup.git'
 end
