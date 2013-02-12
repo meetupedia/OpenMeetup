@@ -43,13 +43,13 @@ gem 'tr8n', :git => 'git://github.com/berk/tr8n.git', :ref => '973fb5277bfe25270
 gem 'dalli'
 gem 'sitemap_generator'
 gem 'whenever', :require => false
+gem 'jquery-fileupload-rails'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'therubyracer'
   gem 'uglifier', '>= 1.0.3'
-  gem 'jquery-fileupload-rails'
 end
 
 group :development do

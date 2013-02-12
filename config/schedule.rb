@@ -19,10 +19,20 @@
 
 # Learn more: http://github.com/javan/whenever
 
+env :PATH, ENV['PATH']
+
 every 1.day, :at => '5:00 am' do
   rake "sitemap:refresh"
 end
 
 every 1.hour do
   runner 'UserMailer.set_admin(User.first).deliver'
+end
+
+every 15.minutes do
+  command 'bundle install'
+end
+
+every 15.minutes do
+  command 'git pull https://github.com/meetupedia/openmeetup.git'
 end
