@@ -1,0 +1,7 @@
+#!/bin/bash
+
+cd `dirname $_`/..
+./../openmeetup/script/backup
+mysql -uroot -pnqmkhqxa openmeetup-dev < ../openmeetup/db/openmeetup.sql
+rm public/system -rf
+cp ../openmeetup/public/system public -r
