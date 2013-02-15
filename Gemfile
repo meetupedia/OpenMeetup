@@ -13,7 +13,7 @@ gem 'slim'
 gem 'cancan'
 gem 'less-rails-bootstrap'
 gem 'formtastic', '< 2.2'
-gem 'formtastic-bootstrap', :git => 'git://github.com/cgunther/formtastic-bootstrap.git', :branch => 'bootstrap2-rails3-2-formtastic-2-1'
+gem 'formtastic-bootstrap', :git => 'https://github.com/cgunther/formtastic-bootstrap.git', :branch => 'bootstrap2-rails3-2-formtastic-2-1'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'omniauth-facebook'
@@ -39,23 +39,23 @@ gem 'mail_view'
 gem 'exception_notification'
 gem 'RedCloth'
 # gem 'oink'
-gem 'tr8n', :git => 'git://github.com/berk/tr8n.git', :ref => '973fb5277bfe25270687fba9e519b7ff1e41fd5d'
+gem 'tr8n', :git => 'https://github.com/berk/tr8n.git', :ref => '973fb5277bfe25270687fba9e519b7ff1e41fd5d'
 gem 'dalli'
 gem 'sitemap_generator'
 gem 'whenever', :require => false
+gem 'jquery-fileupload-rails'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'therubyracer'
   gem 'uglifier', '>= 1.0.3'
-  gem 'jquery-fileupload-rails'
 end
 
 group :development do
   gem 'hirb'
   gem 'rspec-rails'
-  gem 'license_finder', :git => 'git://github.com/pivotal/LicenseFinder.git'
+  gem 'license_finder', :git => 'https://github.com/pivotal/LicenseFinder.git'
   gem 'bullet'
   gem 'meta_request'
 end
