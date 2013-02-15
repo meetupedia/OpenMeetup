@@ -32,6 +32,7 @@ class PasswordsController < CommonController
       flash[:notice] = tr('Password changed successfully, congratulations.')
       redirect_to root_url
     else
+      flash[:alert] = tr('The two passwords does not match, please reenter.')
       render :edit
     end
   end
