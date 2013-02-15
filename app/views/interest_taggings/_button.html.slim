@@ -1,9 +1,10 @@
 span.interest_tagging(id="interest_tagging_button_for_interest_#{interest.id}")
-  - if current_user and interest_tagging = interest.interest_tagging_for(current_user)
-    =' link_to interest_tagging, :method => :delete, :class => 'btn btn-mini btn-success ', :remote => true do
-      = tr(interest.name)
-      br
-      = image_tag interest.image.url(:normal)
+  - if current_user 
+    - if interest_tagging = interest.interest_tagging_for(current_user)
+      =' link_to interest_tagging, :method => :delete, :class => 'btn btn-mini btn-success ', :remote => true do
+        = tr(interest.name)
+        br
+        = image_tag interest.image.url(:normal)
   - else
     =' link_to interest_interest_taggings_path(interest), :method => :post, :class => 'btn btn-mini', :remote => true do
       = tr(interest.name)
