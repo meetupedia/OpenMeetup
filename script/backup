@@ -1,0 +1,3 @@
+#!/bin/bash
+
+mysqldump -uroot -pnqmkhqxa openmeetup > tmp/openmeetup.sql

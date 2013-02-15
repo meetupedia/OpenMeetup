@@ -1,0 +1,3 @@
+#!/bin/bash
+
+mysql -uroot -pnqmkhqxa -e 'show tables like "tr8n%"' openmeetup | grep -v Tables_in | xargs mysqldump -uroot -pnqmkhqxa openmeetup > tmp/translations.sql
