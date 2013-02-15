@@ -1,7 +1,8 @@
 .next-event
-  - if current_user and participation = event.participation_for(current_user)
-    .pull-right
-      span.label.label-success=' tr('I am going')
+  - if current_user
+    - if participation = event.participation_for(current_user)
+      .pull-right
+        span.label.label-success=' tr('I am going')
 
   h4= link_to event.title, event
   div
