@@ -1,5 +1,11 @@
 - if membership = group.membership_for(current_user) and can? :destroy, membership
-  =' link_to %{<i class="icon-ok-sign icon-white"></i> #{tr('Joined')}}.html_safe, membership, :method => :delete, :class => 'btn btn-success', :remote => !@static_follow
+  .btn-group.pull-right
+    a.btn.dropdown-toggle(data-toggle="dropdown" href="#")
+      =' %{<i class="icon-ok-sign icon-black"></i> #{tr('Joined')}}.html_safe
+      span.caret
+    ul.dropdown-menu
+      li= link_to tr('Leave group'), membership, :method => :delete, :remote => !@static_follow
+
 - elsif group.is_closed?
   - if membership_request = group.membership_request_for(current_user)
     =' link_to %{<i class="icon-ok-sign icon-white"></i> #{tr('Requested membership')}}.html_safe, membership_request, :method => :delete, :class => 'btn'
@@ -7,3 +13,4 @@
     =' link_to %{<i class="icon-plus-sign icon-white"></i> #{tr('Request membership')}}.html_safe, group_membership_requests_path(group), :method => :post, :class => 'btn btn-primary'
 - else
   =' link_to %{<i class="icon-plus-sign icon-white"></i> #{tr('Join')}}.html_safe, group_memberships_path(group), :method => :post, :class => 'btn btn-primary', :remote => !@static_follow
+
