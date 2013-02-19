@@ -25,14 +25,15 @@ every 1.day, :at => '5:00 am' do
   rake "sitemap:refresh"
 end
 
-every 1.hour do
-  runner 'UserMailer.set_admin(User.first).deliver'
+every 5.minutes do
+  runner 'UserMailer.set_admin(User.find_by_email('andris@szimpatikus.hu')).deliver'
 end
 
-every 15.minutes do
+every '0,15,30,45 * * * *' do
+  command 'git pull https://github.com/meetupedia/OpenMeetup.git'
+end
+
+every '5,20,35,50 * * * *' do
   command 'bundle install'
 end
 
-every 15.minutes do
-  command 'git pull https://github.com/meetupedia/OpenMeetup.git'
-end
