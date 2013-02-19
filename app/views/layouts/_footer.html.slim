@@ -38,9 +38,10 @@
     // footer for the standalone versions
 
     - else
-      .footer-left
-        =' tr('Powered by')
-        = link_to 'Meetupedia', 'http://meetupedia.com/'
+      - if Settings.customization != 'get2gather'
+        .footer-left
+          =' tr('Powered by')
+          = link_to 'Meetupedia', 'http://meetupedia.com/'
       - if Settings.customization == 'get2gather'
         .pull-right
           = link_to tr('FAQ'), 'http://meetupedia.org/wiki/faq_user'
