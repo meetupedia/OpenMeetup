@@ -5,7 +5,8 @@
     .pull-right
       p= link_to tr('Next'), next_image_path(@image), :class => 'btn btn-mini'
     .center
-      h3= link_to @image.imageable.name, url_for([@image.imageable, :images])
+      - if @image.imageable
+        h3= link_to @image.imageable.name, url_for([@image.imageable, :images])
   p = image_tag @image.image.url(:normal)
 
   - if @image.caption.present?
