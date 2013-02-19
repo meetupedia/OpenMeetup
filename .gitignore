@@ -8,4 +8,4 @@ config/database.yml
 public/sitemap1.xml.gz
 public/sitemap_index.xml.gz
 public/assets
-
+db/openmeetup.sql
