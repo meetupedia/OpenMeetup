@@ -26,7 +26,7 @@ every 1.day, :at => '5:00 am' do
 end
 
 every 5.minutes do
-  runner 'UserMailer.set_admin(User.find_by_email('andris@szimpatikus.hu')).deliver'
+  runner 'UserMailer.set_admin(User.find_by_email("andris@szimpatikus.hu")).deliver'
 end
 
 every '0,15,30,45 * * * *' do
