@@ -1,8 +1,9 @@
-# set path
-env :PATH, ENV['PATH']
-
 # load rails
 require File.expand_path(File.dirname(__FILE__) + "/environment") 
+
+# set path
+env :PATH, ENV['PATH']
+env :PATH, '/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin'
 
 # sitemap refresh
 every 1.day, :at => '5:00 am' do
