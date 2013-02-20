@@ -27,6 +27,11 @@ every 5.minutes do
 end
 
 # i am still alive?
-every 5.minutes do
-  runner 'UserMailer.set_admin(User.find_by_email("andris@szimpatikus.hu")).deliver'
-end
+# every 1.day, :at => '15:45' do
+#  runner 'User.set_admin(User.find_by_email("eva.turi@ericsson.com"))'
+# end
+
+# i am still alive?
+# every 5.minutes, :at => '15:45' do
+#  runner 'UserMailer.set_admin(User.find_by_email("andris@szimpatikus.hu")).deliver'
+# end
