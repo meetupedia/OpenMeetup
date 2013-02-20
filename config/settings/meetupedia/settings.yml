@@ -6,6 +6,7 @@ title: 'Meetupedia'
 host: 'meetupedia.com'
 default_email: 'noreply@meetupedia.com'
 email_footer_whois: "Meetupedia Inc., Pipa utca 2/b, 1095 Budapest, Hungary"
+server_path: "/var/www/openmeetup"
 
 # custom frontpage at app/views/customizations/[customization].html.slim
 
