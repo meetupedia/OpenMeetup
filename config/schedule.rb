@@ -9,7 +9,7 @@ end
 # git pull
 # every '0,15,30,45 * * * *' do  
 every 5.minutes do
-  command "cd #{path} && git pull https://github.com/meetupedia/OpenMeetup.git"
+  command "cd #{path} && git pull https://github.com/meetupedia/OpenMeetup.git master"
 end
 
 # bundle install
