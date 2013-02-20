@@ -6,7 +6,6 @@ title: 'Láthatatlan Egyetem'
 host: 'lathatatlan.meetupedia.com'
 default_email: 'noreply@lathatatlan.meetupedia.com'
 email_footer_whois: ""
-server_path: "/var/www/lathatatlankollegium"
 
 # custom frontpage at app/views/customizations/[customization].html.slim
 

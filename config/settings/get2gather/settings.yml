@@ -6,7 +6,6 @@ title: 'Get2Gather'
 host: 'get2gather.eth.ericsson.se'
 default_email: 'noreply@get2gather.eth.ericsson.se'
 email_footer_whois: ""
-server_path: "/var/www/get2gather"
 
 # custom frontpage at app/views/customizations/[customization].html.slim
 
