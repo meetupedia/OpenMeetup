@@ -1,3 +1,6 @@
+env :PATH, ENV['PATH']
+RAILS_ENV=production; source /usr/local/rvm/scripts/rvm;
+
 # load rails
 require File.expand_path(File.dirname(__FILE__) + "/environment") 
 
