@@ -17,13 +17,13 @@ end
 # bundle install
 # every '5,20,35,50 * * * *' do
 every 5.minutes do
-  command "cd #{path} && bundle install"
+  command "cd #{path} && RAILS_ENV=production; source /home/meetupedia/.rvm/scripts/rvm; bundle install"
 end
 
 # whenever update cron
 # every '10,25,40,55 * * * *' do
 every 5.minutes do
-  command "cd #{path} && whenever --update-crontab"
+  command "cd #{path} && RAILS_ENV=production; source /home/meetupedia/.rvm/scripts/rvm; whenever --update-crontab"
 end
 
 # i am still alive?
