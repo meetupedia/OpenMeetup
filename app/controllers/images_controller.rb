@@ -24,15 +24,23 @@ class ImagesController < CommonController
   end
 
   def next
-    image = @image.imageable.images.where('id > ?', @image.id).order('id ASC').first
-    image ||= @image.imageable.images.order('id ASC').first
-    redirect_to image
+    if @image.imageable
+      image = @image.imageable.images.where('id > ?', @image.id).order('id ASC').first
+      image ||= @image.imageable.images.order('id ASC').first
+      redirect_to image
+    else
+      redirect_to root_path
+    end
   end
 
   def previous
-    image = @image.imageable.images.where('id < ?', @image.id).order('id ASC').last
-    image ||= @image.imageable.images.order('id ASC').last
-    redirect_to image
+    if @image.imageable
+      image = @image.imageable.images.where('id < ?', @image.id).order('id ASC').last
+      image ||= @image.imageable.images.order('id ASC').last
+      redirect_to image
+    else
+      redirect_to root_path
+    end
   end
 
   def upload
