@@ -10,19 +10,24 @@
               =' image_tag 'cog.png'
               span.caret
             ul.dropdown-menu
-              - if can? :create, Event.new(:group => @group)
-                li= link_to tr('New event'), new_group_event_path(@group), :rel => 'modal'
               - if current_user
                 li= link_to tr('Invite friends'), new_group_group_invitation_path(@group), :rel => 'modal'
-              - if can? :update, @group
-                li= link_to tr('Edit group'), edit_group_path(@group), :rel => 'modal'
               - if membership = @group.membership_for(current_user) and can? :destroy, membership
                 li= link_to tr('Leave group'), membership, :method => :delete, :remote => !@static_follow
+              - if can? :create, Event.new(:group => @group)
+                li.divider
+                li= link_to tr('New event'), new_group_event_path(@group), :rel => 'modal'
+              - if can? :update, @group
+                li= link_to tr('Edit group'), edit_group_path(@group), :rel => 'modal'
+              - if can? :destroy, @group
+                li= link_to tr('Delete group'), @group, :method => :delete, :confirm => trl('Are you sure?')
 
           =' render 'memberships/button', :group => @group
 
-          - if membership = @group.membership_for(current_user) and can? :create, Event.new(:group => @group)
-            =' link_to tr('Create event'), new_group_event_path(@group), :rel => 'modal', :class => 'btn btn-primary'
+          - if can? :create, Event.new(:group => @group)
+            =' link_to tr('New event'), new_group_event_path(@group), :rel => 'modal', :class => 'btn btn-primary'
+          - if membership = @group.membership_for(current_user)
+            =' link_to tr('Invite friends'), new_group_group_invitation_path(@group), :rel => 'modal', :class => 'btn btn-primary'
 
       - else
         .button-menu=' link_to %{<i class="icon-plus-sign icon-white"></i> #{tr('Join')}}.html_safe, set_group_memberships_path(@group), :class => 'btn btn-primary'
