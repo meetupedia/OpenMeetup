@@ -7,7 +7,7 @@ class GroupMailer < CommonMailer
     @email = @recipient.email
     @group = group
     @user = @group.user
-    mail :to => @email, :subject => "New group: #{@group.name}"
+    mail :to => @email, :subject => "[site admin notice] New group: #{@group.name}"
   end
 
   def creation_for_owner(group)
