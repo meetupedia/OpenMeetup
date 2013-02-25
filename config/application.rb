@@ -60,11 +60,6 @@ module Openmeetup
     # Handling error messages dynamically
     config.exceptions_app = self.routes
 
-    config.action_mailer.smtp_settings = {
-      :address => '159.107.194.52',
-      :port =>25
-    }
-
     # Openmeetup::Application.middleware.use Oink::Middleware
   end
 end
