@@ -44,7 +44,7 @@ gem 'dalli'
 gem 'sitemap_generator'
 gem 'whenever', :require => false
 gem 'jquery-fileupload-rails'
-gem 'cache_digests'
+# gem 'cache_digests'
 gem 'rails-timeago'
 
 group :assets do
