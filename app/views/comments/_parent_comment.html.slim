@@ -6,5 +6,5 @@
     .pull-right= link_to tr('Reply'), polymorphic_path([:new, commentable, :comment], :reply_to_id => comment.id), :rel => 'modal'
   .avatar= user_avatar comment.user
   =' user_link comment.user
-  span.date= time_ago_in_words comment.created_at
+  span.date= timeago_tag comment.created_at
   = simple_format comment.comment

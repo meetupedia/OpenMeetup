@@ -7,7 +7,7 @@ class Comment < ActiveRecord::Base
   timestamps
 
   belongs_to :user
-  belongs_to :commentable, :polymorphic => true, :counter_cache => true
+  belongs_to :commentable, :polymorphic => true, :counter_cache => true, :touch => true
   belongs_to :reply_to, :class_name => 'Comment'
   has_many :replies, :class_name => 'Comment', :foreign_key => 'reply_to_id'
 

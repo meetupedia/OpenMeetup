@@ -5,7 +5,7 @@
   h3= link_to wave.subject, wave
   =' wave.wave_items.size
   =' tr('messages')
-  span.date=' time_ago_in_words wave.last_changed_at
+  span.date=' timeago_tag wave.last_changed_at
   - if wave.group
     ' →
     = link_to wave.group.name, wave.group

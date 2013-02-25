@@ -10,7 +10,7 @@ class Post < ActiveRecord::Base
 
   belongs_to :event
   belongs_to :user
-  belongs_to :postable, :polymorphic => true
+  belongs_to :postable, :polymorphic => true, :touch => true
 
   validates_presence_of :post
 end

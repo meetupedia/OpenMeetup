@@ -8,5 +8,5 @@
       =' image_tag 'cross.png'
   .avatar= user_avatar review.user
   =' link_to review.user.name, review.user
-  =' time_ago_in_words review.created_at
+  =' timeago_tag review.created_at
   = simple_format review.review

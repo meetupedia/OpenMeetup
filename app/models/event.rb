@@ -18,7 +18,7 @@ class Event < ActiveRecord::Base
   timestamps
 
   belongs_to :city
-  belongs_to :group
+  belongs_to :group, :touch => true
   belongs_to :user
   has_many :absences, :dependent => :destroy
   has_many :absents, :through => :absences, :source => :user

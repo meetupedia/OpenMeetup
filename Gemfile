@@ -45,6 +45,7 @@ gem 'sitemap_generator'
 gem 'whenever', :require => false
 gem 'jquery-fileupload-rails'
 gem 'cache_digests'
+gem 'rails-timeago'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
@@ -59,6 +60,9 @@ group :development do
   gem 'license_finder', :git => 'https://github.com/pivotal/LicenseFinder.git'
   gem 'bullet'
   gem 'meta_request'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'quiet_assets'
 end
 
 group :production do

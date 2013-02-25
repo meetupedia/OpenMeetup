@@ -1,44 +1,45 @@
-- if activity.activable.class.name == 'Post'
-  = render activity.activable
-- else
-  = div_for activity, :class => 'list_item avatar_item' do
-    .avatar= user_avatar activity.user
-    - if activity.activable.class.name == 'Event'
-      =' user_link activity.activable.user
-      = tr('created the meetup ')
-      =' link_to activity.activable.title, activity.activable
-    - elsif activity.activable.class.name == 'Group'
-      =' user_link activity.activable.user
-      = tr('created the meetup group ')
-      =' link_to activity.activable.name, activity.activable
-    - elsif activity.activable.class.name == 'Membership'
-      =' user_link activity.activable.user
-      = tr('has joined the group ')
-      =' link_to activity.activable.group.name, activity.activable.group
-    - elsif activity.activable.class.name == 'Participation'
-      =' user_link activity.activable.user
-      = tr('will participate at ')
-      =' link_to activity.activable.event.title, activity.activable.event
-    - elsif activity.activable.class.name == 'Tagging'
-      =' user_link activity.activable.user
-      = tr('follows ')
-      =' link_to activity.activable.tag.name, activity.activable.tag
-    - elsif activity.activable.class.name == 'UserFollow'
-      =' user_link activity.activable.user
-      = tr('follows ')
-    - elsif activity.activable.class.name == 'Image'
-      =' user_link activity.activable.user
-      = tr('uploaded a picture ')
-      p= link_to image_tag(activity.activable.image.url(:small), :alt => '', :height => 80, :width => 80), activity.activable
-    - elsif activity.activable.class.name == 'Comment'
-      =' user_link activity.activable.user
-      = tr('made ')
-      = link_to tr('a new comment'), activity.activable.commentable, :rel => 'modal'
-      | .
-      p= activity.activable.comment
-    - elsif activity.activable.class.name == 'Review'
-      =' user_link activity.activable.user
-      = tr('wrote a review for the event ')
-      = link_to activity.activable.event.title, activity.activable.event
-      p= activity.activable.review
-    .date= time_ago_in_words activity.created_at
+- cache [activity, I18n.locale] do
+  - if activity.activable.class.name == 'Post'
+    = render activity.activable
+  - else
+    = div_for activity, :class => 'list_item avatar_item' do
+      .avatar= user_avatar activity.user
+      - if activity.activable.class.name == 'Event'
+        =' user_link activity.activable.user
+        = tr('created the meetup ')
+        =' link_to activity.activable.title, activity.activable
+      - elsif activity.activable.class.name == 'Group'
+        =' user_link activity.activable.user
+        = tr('created the meetup group ')
+        =' link_to activity.activable.name, activity.activable
+      - elsif activity.activable.class.name == 'Membership'
+        =' user_link activity.activable.user
+        = tr('has joined the group ')
+        =' link_to activity.activable.group.name, activity.activable.group
+      - elsif activity.activable.class.name == 'Participation'
+        =' user_link activity.activable.user
+        = tr('will participate at ')
+        =' link_to activity.activable.event.title, activity.activable.event
+      - elsif activity.activable.class.name == 'Tagging'
+        =' user_link activity.activable.user
+        = tr('follows ')
+        =' link_to activity.activable.tag.name, activity.activable.tag
+      - elsif activity.activable.class.name == 'UserFollow'
+        =' user_link activity.activable.user
+        = tr('follows ')
+      - elsif activity.activable.class.name == 'Image'
+        =' user_link activity.activable.user
+        = tr('uploaded a picture ')
+        p= link_to image_tag(activity.activable.image.url(:small), :alt => '', :height => 80, :width => 80), activity.activable
+      - elsif activity.activable.class.name == 'Comment'
+        =' user_link activity.activable.user
+        = tr('made ')
+        = link_to tr('a new comment'), activity.activable.commentable, :rel => 'modal'
+        | .
+        p= activity.activable.comment
+      - elsif activity.activable.class.name == 'Review'
+        =' user_link activity.activable.user
+        = tr('wrote a review for the event ')
+        = link_to activity.activable.event.title, activity.activable.event
+        p= activity.activable.review
+      .date= timeago_tag activity.created_at

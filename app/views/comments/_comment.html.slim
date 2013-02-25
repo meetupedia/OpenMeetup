@@ -1,16 +1,17 @@
-= div_for comment, :class => "list_item avatar_item indent#{comment.level}" do
-  - if comment.level < 5
-    .pull-right= link_to_function tr('Reply'), "$('#add-comment-comment-#{comment.id}').toggle().find('textarea').focus()", :class => 'btn btn-mini'
-  .avatar= user_avatar comment.user
-  =' user_link comment.user
-  span.date= time_ago_in_words comment.created_at
-  = simple_format comment.comment
-  - if comment.level < 5
-    div(id="add-comment-comment-#{comment.id}" style="display: none;")
-      = form_for Comment.new, :url => polymorphic_path([comment.commentable, :comments]), :remote => true do |f|
-        = f.hidden_field :reply_to_id, :value => comment.id
-        = f.text_area :comment
-        = f.submit trl('Add comment'), :class => 'btn btn-primary'
+- cache [comment, I18n.locale] do
+  = div_for comment, :class => "list_item avatar_item indent#{comment.level}" do
+    - if comment.level < 5
+      .pull-right= link_to_function tr('Reply'), "$('#add-comment-comment-#{comment.id}').toggle().find('textarea').focus()", :class => 'btn btn-mini'
+    .avatar= user_avatar comment.user
+    =' user_link comment.user
+    span.date= timeago_tag comment.created_at
+    = simple_format comment.comment
+    - if comment.level < 5
+      div(id="add-comment-comment-#{comment.id}" style="display: none;")
+        = form_for Comment.new, :url => polymorphic_path([comment.commentable, :comments]), :remote => true do |f|
+          = f.hidden_field :reply_to_id, :value => comment.id
+          = f.text_area :comment
+          = f.submit trl('Add comment'), :class => 'btn btn-primary'
 
 - comment.replies.each do |comment|
   = render comment, :commentable => commentable
