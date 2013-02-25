@@ -72,8 +72,6 @@ GEM
     builder (3.0.4)
     bullet (4.3.0)
       uniform_notifier
-    cache_digests (0.2.0)
-      actionpack (>= 3.2)
     cancan (1.6.8)
     chronic (0.9.0)
     climate_control (0.0.3)
@@ -323,7 +321,6 @@ DEPENDENCIES
   binding_of_caller
   bootstrap-will_paginate
   bullet
-  cache_digests
   cancan
   coffee-rails (~> 3.2.1)
   dalli
