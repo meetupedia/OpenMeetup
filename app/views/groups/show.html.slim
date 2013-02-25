@@ -27,7 +27,8 @@
 
     .wrapper
       h2= tr('Members')
-      .list_view= render @group.members.order('memberships.created_at ASC')
+      // .list_view= render @group.members.order('memberships.created_at ASC'), partial
+      .list_view= render :partial => 'groups/user_member', :collection => @group.members.order('memberships.created_at ASC'), :as => :user
 
     - if Settings.enable_share_buttons
       .wrapper

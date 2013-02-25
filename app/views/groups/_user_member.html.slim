@@ -1,0 +1,4 @@
+- cache [user, I18n.locale] do
+  = div_for user, :class => 'list_item avatar_item' do
+    .avatar= user_avatar user
+    = user_link user
