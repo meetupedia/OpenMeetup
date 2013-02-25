@@ -27,8 +27,14 @@
 
     .wrapper
       h2= tr('Members')
-      // .list_view= render @group.members.order('memberships.created_at ASC'), partial
-      .list_view= render :partial => 'groups/user_member', :collection => @group.members.order('memberships.created_at ASC'), :as => :user
+      - @group.members.order('memberships.created_at ASC').each do |user|
+        = div_for user, :class => 'list_item avatar_item' do
+          .avatar= user_avatar user
+          = user_link user
+          - if @group.admins.include?(user)
+            '
+            span.label.label-important=' tr('group admin')
+
 
     - if Settings.enable_share_buttons
       .wrapper
