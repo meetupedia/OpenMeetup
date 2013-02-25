@@ -146,7 +146,7 @@ class User < ActiveRecord::Base
   end
 
   def followed_user_ids
-    followed_users.map(&:id)
+    followed_users.pluck(:id)
   end
 
   def facebook_friend_ids
