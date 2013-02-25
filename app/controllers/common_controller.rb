@@ -23,7 +23,7 @@ class CommonController < ApplicationController
   end
 
   def redirect_to(url, options = {})
-    if ajax_request? or modal_request?
+    if request.xhr?
       render :text => "window.location = '#{url_for(url)}'"
     else
       super url, options
@@ -31,8 +31,8 @@ class CommonController < ApplicationController
   end
 
   def update_page(url)
-    if ajax_request? or modal_request?
-      render :text => 'modalbox.close(); modalbox.reloadParent()'
+    if request.xhr?
+      render :text => 'modalbox.reloadParent()'
     else
       redirect_to url
     end
