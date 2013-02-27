@@ -315,6 +315,8 @@ PLATFORMS
 
 DEPENDENCIES
   RedCloth
+  activerecord-jdbc-adapter
+  activerecord-jdbcmysql-adapter
   andand
   authlogic
   better_errors
@@ -333,6 +335,7 @@ DEPENDENCIES
   globalize3
   gmaps4rails
   hirb
+  jdbc-mysql
   jquery-fileupload-rails
   jquery-rails (= 2.1.1)
   json
@@ -364,6 +367,7 @@ DEPENDENCIES
   sitemap_generator
   slim
   therubyracer
+  therubyrhino
   tr8n!
   uglifier (>= 1.0.3)
   whenever

@@ -2,7 +2,16 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.11'
 
-gem 'mysql2'
+platform :ruby do
+  gem 'mysql2'
+end
+
+platform :jruby do
+  gem 'activerecord-jdbc-adapter'
+  gem 'jdbc-mysql', :require => false
+  gem 'activerecord-jdbcmysql-adapter'
+end
+
 gem 'json'
 gem 'jquery-rails', '2.1.1'
 gem 'rails-i18n'
@@ -47,10 +56,12 @@ gem 'jquery-fileupload-rails'
 # gem 'cache_digests'
 gem 'rails-timeago'
 
+gem 'sass-rails', '~> 3.2.3'
+gem 'coffee-rails', '~> 3.2.1'
+
 group :assets do
-  gem 'sass-rails', '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'therubyracer'
+  gem 'therubyrhino', :platform => :jruby
+  gem 'therubyracer', :platform => :ruby
   gem 'uglifier', '>= 1.0.3'
 end
 
@@ -60,9 +71,11 @@ group :development do
   gem 'license_finder', :git => 'https://github.com/pivotal/LicenseFinder.git'
   gem 'bullet'
   gem 'meta_request'
-  gem 'better_errors'
-  gem 'binding_of_caller'
   gem 'quiet_assets'
+  platform :ruby do
+    gem 'better_errors'
+    gem 'binding_of_caller'
+  end
 end
 
 group :production do
