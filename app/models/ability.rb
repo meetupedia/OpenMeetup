@@ -46,7 +46,7 @@ class Ability
         membership_request.user_id == current_user.id or membership_request.group.admins.include?(current_user)
       end
 
-      can [:create, :set], Membership
+      can [:create, :set, :index], Membership
       can :destroy, Membership do |membership|
         membership.user_id == current_user.id or membership.group.admins.include?(current_user) or current_user.is_admin?
       end

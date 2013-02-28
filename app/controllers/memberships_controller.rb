@@ -9,6 +9,10 @@ class MembershipsController < CommonController
 
   cache_sweeper :membership_sweeper, :only => [:create]
 
+  def index
+    redirect_to @group
+  end
+
   def create
     unless @group.membership_for(current_user)
       @membership.save
