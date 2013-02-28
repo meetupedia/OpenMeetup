@@ -13,6 +13,11 @@ class MembershipsController < CommonController
     redirect_to @group
   end
 
+  def show
+    redirect_to @group
+  end
+
+
   def create
     unless @group.membership_for(current_user)
       @membership.save
