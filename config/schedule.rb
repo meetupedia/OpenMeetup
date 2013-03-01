@@ -3,6 +3,9 @@ env :PATH, ENV['PATH']
 # load rails
 require File.expand_path(File.dirname(__FILE__) + "/environment") 
 
+# set output
+set :output, {:error => 'log/error.log', :standard => 'log/cron.log'}
+
 # sitemap refresh
 every 1.day, :at => '5:00 am' do
   rake "sitemap:refresh"
