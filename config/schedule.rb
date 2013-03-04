@@ -27,3 +27,7 @@ end
 # every 10.minutes do
 #  runner 'UserMailer.set_admin(User.find_by_email("andris@szimpatikus.hu")).deliver'
 # end
+
+every 5.minutes do
+  runner "TestMailer.report('bence.nagy@gmail.com').deliver"
+end
