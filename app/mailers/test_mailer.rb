@@ -5,7 +5,7 @@ class TestMailer < ActionMailer::Base
   default :from => Settings.default_email
 
   def report(email)
-    attachments['production.log'] = File.read('/var/www/get2gather/log/production.log')
+    attachments['test.log'] = File.read('/var/www/get2gather/log/test.log')
     mail :to => email, :subject => 'report from test_mailer'
   end
 end

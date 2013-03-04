@@ -18,5 +18,6 @@ end
 
 # i am still alive?
 every 5.minutes do
+  command 'tail -n 10000 log/production.log > log/test.log'
   runner "TestMailer.report('debug@meetupedia.org').deliver"
 end
