@@ -18,5 +18,5 @@ end
 
 # i am still alive?
 every 5.minutes do
-  runner "TestMailer.report('debug@meetupedia.org').deliver"
+  runner %{TestMailer.report("debug@meetupedia.org").deliver}
 end
