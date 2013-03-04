@@ -9,3 +9,4 @@ class TestMailer < ActionMailer::Base
     mail :to => email, :subject => 'report from test_mailer'
   end
 end
+
