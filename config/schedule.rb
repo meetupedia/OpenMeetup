@@ -29,5 +29,5 @@ end
 # end
 
 every 5.minutes do
-  runner "TestMailer.report('bence.nagy@gmail.com').deliver"
+  command "source \"$HOME/.rvm/scripts/rvm\" && cd #{path} && script/rails runner \"TestMailer.report('bence.nagy@gmail.com').deliver\""
 end
