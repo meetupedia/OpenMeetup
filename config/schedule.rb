@@ -1,4 +1,4 @@
-set :job_template, "source \"$HOME/.rvm/scripts/rvm\" && cd #{path} && :job"
+set :job_template, %{bash -l -c "source \"$HOME/.rvm/scripts/rvm\" && cd #{path} && :job"}
 set :output, {:error => 'log/error.log', :standard => 'log/cron.log'}
 
 # sitemap refresh
