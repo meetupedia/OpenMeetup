@@ -66,9 +66,9 @@ Openmeetup::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   Openmeetup::Application.config.middleware.use ExceptionNotifier,
-    :email_prefix => "[OpenMeetup] ",
-    :sender_address => %{"exceptions@openmeetup.net" <exceptions@openmeetup.net>},
-    :exception_recipients => %w{bence.nagy@gmail.com andris@openmeetup.org}
+    :email_prefix => "[meetupedia] ",
+    :sender_address => %{"exceptions@meetupedia.org" <exceptions@meetupedia.org>},
+    :exception_recipients => %w{debug@meetupedia.org}
 
   config.action_mailer.smtp_settings = {
     :address => 'localhost',
