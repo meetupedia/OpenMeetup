@@ -21,3 +21,8 @@ every 5.minutes do
   command 'tail -n 1000 log/production.log > log/test.log'
   runner "TestMailer.report('debug@meetupedia.org').deliver"
 end
+
+# creating crash
+every 5.minutes do
+  command 'wget http://get2gather.eth.ericsson.se/crash'
+end
