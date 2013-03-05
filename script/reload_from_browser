@@ -1,4 +1,5 @@
 #!/bin/bash
 
-git pull
+git pull https://github.com/nagybence/OpenMeetup.git master
+bundle
 touch tmp/restart.txt
