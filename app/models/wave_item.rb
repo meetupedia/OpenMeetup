@@ -22,7 +22,7 @@ class WaveItem < ActiveRecord::Base
 
   def send_letters
     (wave.wave_members - [user]).each do |user|
-      WaveMailer.new_message(self, user).deliver if user.mailer
+      WaveMailer.new_message(self, user).deliver
     end
   end
 
