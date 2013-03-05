@@ -1,5 +1,5 @@
 #!/bin/bash
 
-git pull https://github.com/nagybence/OpenMeetup.git master
+git pull https://github.com/meetupedia/OpenMeetup.git master
 bundle
 touch tmp/restart.txt
