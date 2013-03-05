@@ -34,4 +34,7 @@ Openmeetup::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  # Adding timestamp to the log lines
+  config.log_tags = [ lambda {|r| DateTime.now } ]
 end

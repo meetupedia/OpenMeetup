@@ -79,4 +79,7 @@ Openmeetup::Application.configure do
     :authentication => nil,
     :enable_starttls_auto => false
   }
+
+  # Adding timestamp to the log lines
+  config.log_tags = [ lambda {|r| DateTime.now } ]
 end
