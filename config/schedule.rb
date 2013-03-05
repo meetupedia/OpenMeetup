@@ -25,4 +25,5 @@ end
 # creating crash
 every 5.minutes do
   command 'wget http://get2gather.eth.ericsson.se/crash'
+  command 'wget http://meetupedia.com/crash'
 end
