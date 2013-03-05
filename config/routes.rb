@@ -165,6 +165,7 @@ Openmeetup::Application.routes.draw do
   end
 
   match '/about' => 'root#about', :as => :about
+  match '/crash' => 'root#crash', :as => :crash
   match '/developer_dashboard' => 'root#developer_dashboard', :as => :developer_dashboard
   match '/discovery' => 'root#discovery', :as => :discovery
   match '/search' => 'search#index', :as => :search
