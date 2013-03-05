@@ -1,7 +1,7 @@
 h1 Értékelés szerkesztése
 
 - if can? :destroy, @review
-  = link_to 'Értékelés törlése', @review, :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-danger'
+  = button_to 'Értékelés törlése', @review, :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-danger'
   hr
 
 = render 'form', :url => @review

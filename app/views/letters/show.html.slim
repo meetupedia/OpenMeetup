@@ -12,7 +12,7 @@
       td= user_link @user
 
   p
-    =' link_to 'Teszt', mailtest_letter_path(@letter), :method => :post, :class => 'btn'
+    =' button_to 'Teszt', mailtest_letter_path(@letter), :method => :post, :class => 'btn'
     = link_to 'Levélnézet', '/letter_mailer/mail_view/letter', :class => 'external'
 
   hr

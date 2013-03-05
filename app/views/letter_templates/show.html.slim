@@ -8,7 +8,7 @@
       th Név
       td= @letter_template.name
 
-  p= link_to tr('Create letter from template'), create_letter_letter_template_path(@letter_template), :method => :post, :class => 'btn'
+  p= button_to tr('Create letter from template'), create_letter_letter_template_path(@letter_template), :method => :post, :class => 'btn'
 
   hr
 

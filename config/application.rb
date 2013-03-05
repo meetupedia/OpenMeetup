@@ -61,5 +61,7 @@ module Openmeetup
     config.exceptions_app = self.routes
 
     # Openmeetup::Application.middleware.use Oink::Middleware
+
+    GC::Profiler.enable
   end
 end
