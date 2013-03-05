@@ -8,7 +8,7 @@ end
 
 # git pull and bundle install
 every 5.minutes do
-  command 'git pull https://github.com/meetupedia/OpenMeetup.git master && bundle install'
+  command 'git pull https://github.com/meetupedia/OpenMeetup.git master && bundle install --without test'
 end
 
 # whenever update cron
