@@ -1,6 +1,6 @@
 span(id="tagging_button_for_tag_#{tag.id}")
   - if current_user
     - if tagging = tag.tagging_for(current_user)
-      =' link_to %{<i class="icon-ok-sign icon-white"></i> #{tr('Following')}}.html_safe, tagging, :method => :delete, :class => 'btn btn-success', :remote => true
+      =' button_to %{<i class="icon-ok-sign icon-white"></i> #{tr('Following')}}.html_safe, tagging, :method => :delete, :class => 'btn btn-success', :remote => true
   - else
-	=' link_to %{<i class="icon-plus-sign icon-black"></i> #{tr('Follow')}}.html_safe, tag_taggings_path(tag), :method => :post, :class => 'btn', :remote => true
+	=' button_to %{<i class="icon-plus-sign icon-black"></i> #{tr('Follow')}}.html_safe, tag_taggings_path(tag), :method => :post, :class => 'btn', :remote => true

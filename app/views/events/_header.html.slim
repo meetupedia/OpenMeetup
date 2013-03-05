@@ -39,8 +39,8 @@
           = link_to "<i class='icon-envelope icon-black'></i> #{tr('Invite friends')}".html_safe, new_event_event_invitation_path(@event), :rel => 'modal', :class => 'btn'
 
       - else
-        = link_to "<i class='icon-minus-sign icon-black'></i> #{tr('Decline')}".html_safe, event_absences_path(@event), :method => :post, :class => 'btn'
-        = link_to "<i class='icon-plus-sign icon-white'></i> #{tr('Join')}".html_safe, event_participations_path(@event), :method => :post, :class => 'btn btn-primary'
+        =' button_to "<i class='icon-minus-sign icon-black'></i> #{tr('Decline')}".html_safe, event_absences_path(@event), :method => :post, :class => 'btn'
+        = button_to "<i class='icon-plus-sign icon-white'></i> #{tr('Join')}".html_safe, event_participations_path(@event), :method => :post, :class => 'btn btn-primary'
 
       - if @event.start_time < Time.zone.now
         - if participation

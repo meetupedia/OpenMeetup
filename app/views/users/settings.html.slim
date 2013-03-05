@@ -27,7 +27,7 @@
         .tr8n-language-selector.btn= tr8n_language_selector_tag
 
     .wrapper
-      = link_to tr('Delete profile'), @user, :method => :delete, :confirm => tr('Are you sure?'), :class => 'btn btn-danger'
+      = button_to tr('Delete profile'), @user, :method => :delete, :confirm => tr('Are you sure?'), :class => 'btn btn-danger'
 
   .span8
     .wrapper

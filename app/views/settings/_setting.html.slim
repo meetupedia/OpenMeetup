@@ -6,4 +6,4 @@ tr
   td
     .pull-right
       =' link_to tr('Edit'), edit_setting_path(setting), :rel => 'modal', :class => 'btn btn-mini'
-      = link_to tr('Delete'), setting_path(setting), :method => :delete, :confirm => tr('Are you sure?'), :class => 'btn btn-danger btn-mini'
+      = button_to tr('Delete'), setting_path(setting), :method => :delete, :confirm => tr('Are you sure?'), :class => 'btn btn-danger btn-mini'

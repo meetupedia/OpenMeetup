@@ -5,7 +5,7 @@
     - if participation = @event.participation_for(current_user)
       p
         - unless participation.is_checkined?
-          = link_to tr('Check-in for event'), checkin_participation_path(participation), :method => :post, :confirm => trl('Are you sure?'), :class => 'btn btn-primary'
+          = button_to tr('Check-in for event'), checkin_participation_path(participation), :method => :post, :confirm => trl('Are you sure?'), :class => 'btn btn-primary'
         - else
           span.label.label-success= tr('Already check-ined.')
       hr
