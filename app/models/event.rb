@@ -74,7 +74,7 @@ class Event < ActiveRecord::Base
   end
 
   def geocode?
-    city.present? and street.present?
+    !Settings.disable_gmaps and city.present? and street.present?
   end
 
   def gmaps4rails_address

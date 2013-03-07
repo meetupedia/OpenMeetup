@@ -37,3 +37,5 @@ enable_feedback_box: false
 # invite module
 
 enable_invite_process: false
+
+disable_gmaps: true
