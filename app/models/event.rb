@@ -32,7 +32,9 @@ class Event < ActiveRecord::Base
   has_many :reviews, :dependent => :destroy
   has_many :waves, :dependent => :nullify
 
-  acts_as_gmappable :validation => false
+  unless Settings.disable_gmaps
+    acts_as_gmappable :validation => false
+  end
   auto_permalink :title
 
   before_validation do |event|
@@ -74,9 +76,7 @@ class Event < ActiveRecord::Base
   end
 
   def geocode?
-    if !Settings.disable_gmaps 
-      city.present? and street.present?
-    end
+    city.present? and street.present?
   end
 
   def gmaps4rails_address
