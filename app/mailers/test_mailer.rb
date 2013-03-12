@@ -5,7 +5,8 @@ class TestMailer < ActionMailer::Base
   default :from => Settings.default_email
 
   def report(email)
-    attachments['test.log'] = File.read(File.join(Rails.root, 'log/test.log'))
+    attachments['production_small.log'] = File.read(File.join(Rails.root, 'log/production_small.log'))
+    attachments['whenever_small.log'] = File.read(File.join(Rails.root, 'log/whenever_small.log'))
     mail :to => email, :subject => 'report from test_mailer'
   end
 end
