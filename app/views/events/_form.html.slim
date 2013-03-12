@@ -3,13 +3,19 @@
     = f.input :title
     = f.input :start_time
     = f.input :end_time
-    .control-group
-      = f.label :city_id, tr('City')
-      = f.text_field :city_id, 'data-pre' => [@event.city].compact.map { |city| {:id => city.id, :name => city.name} }.to_json
     = f.input :place
-    = f.input :street
+    - unless Settings.standalone
+      .control-group
+        = f.label :city_id, tr('City')
+        = f.text_field :city_id, 'data-pre' => [@event.city].compact.map { |city| {:id => city.id, :name => city.name} }.to_json
+      = f.input :street
   p= link_to_function tr('More options'), "$('#more-options').toggle()", :class => 'function'
   #more-options
+    - if Settings.standalone
+      .control-group
+        = f.label :city_id, tr('City')
+        = f.text_field :city_id, 'data-pre' => [@event.city].compact.map { |city| {:id => city.id, :name => city.name} }.to_json
+      = f.input :street
     = f.inputs do
       = f.input :description
       = f.input :permaname, :label => false, :prepend => 'http://'+Settings.host+'/'
