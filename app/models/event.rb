@@ -67,21 +67,21 @@ class Event < ActiveRecord::Base
     title
   end
 
-  def address
-    gmaps4rails_address
-  end
+#  def address
+#    gmaps4rails_address
+#  end
 
   def create_admin_participation
     Participation.create :event => self
   end
 
-  def geocode?
-    city.present? and street.present?
-  end
+#  def geocode?
+#    city.present? and street.present?
+#  end
 
-  def gmaps4rails_address
-    @gmaps4rails_address ||= [self.street, self.city.andand.name].select(&:present?).join(', ')
-  end
+#  def gmaps4rails_address
+#    @gmaps4rails_address ||= [self.street, self.city.andand.name].select(&:present?).join(', ')
+#  end
 
   def participation_for(user)
     Participation.find_by_event_id_and_user_id(self.id, user.id)

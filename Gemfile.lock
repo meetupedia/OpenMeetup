@@ -116,7 +116,6 @@ GEM
       activemodel (>= 3.0.0)
       activerecord (>= 3.0.0)
       paper_trail (~> 2)
-    gmaps4rails (1.5.6)
     hashie (1.2.0)
     hike (1.2.1)
     hirb (0.7.0)
@@ -321,7 +320,6 @@ DEPENDENCIES
   formtastic-bootstrap!
   geocoder
   globalize3
-  gmaps4rails
   hirb
   jdbc-mysql
   jquery-fileupload-rails

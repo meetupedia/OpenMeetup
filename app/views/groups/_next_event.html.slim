@@ -13,6 +13,7 @@
     = l(event.end_time)
   div
     - if event.place.present?
-      = event.place
-      = dot
-    = link_to event.gmaps4rails_address, map_event_path(event), :rel => 'modal'
+      =' event.place + ','
+      =' event.city.name + ','
+      =' event.street
+/    = link_to event.gmaps4rails_address, map_event_path(event), :rel => 'modal'
