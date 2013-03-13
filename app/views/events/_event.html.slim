@@ -8,6 +8,7 @@
       ' ▲
       = l(event.end_time)
     div
-      = event.address
+      - if event.address.present?
+        = event.address
     div
       = link_to "#{event.participations.size} #{tr('participants')}".html_safe, users_event_path(event)

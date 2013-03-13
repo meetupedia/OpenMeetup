@@ -82,9 +82,9 @@ group :production do
   gem 'newrelic_rpm'
 end
 
-# gem "rspec-rails", :group => [:test, :development]
-# group :test do
-#  gem "factory_girl_rails"
-#  gem "capybara"
-#  gem "guard-rspec"
-#end
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
+  gem 'launchy'
+  gem 'database_cleaner'
+end
