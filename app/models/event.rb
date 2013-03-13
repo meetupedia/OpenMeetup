@@ -32,9 +32,9 @@ class Event < ActiveRecord::Base
   has_many :reviews, :dependent => :destroy
   has_many :waves, :dependent => :nullify
 
-  unless Settings.disable_gmaps
-    acts_as_gmappable :validation => false
-  end
+#  unless Settings.disable_gmaps
+#    acts_as_gmappable :validation => false
+#  end
   auto_permalink :title
 
   before_validation do |event|
