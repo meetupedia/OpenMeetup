@@ -3,7 +3,9 @@
     .control-group
       = f.label :ids, tr('Names or emails')
       = f.text_field :ids
-    = f.input :message
+  p= link_to_function tr('More options'), "$('#more-options').toggle()", :class => 'function'
+  #more-options
+    = f.input :message, :label => tr('Personal message')
   = f.actions do
     =' f.action :submit, :label => trl('Send')
     = f.action :cancel, :label => trl('Cancel')

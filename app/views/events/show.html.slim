@@ -13,8 +13,6 @@
       .list_view= render @event.participants.order('participations.created_at ASC')
       - if can? :participations, @event and @event.questions.present?
         p= link_to tr("View participants' answers"), participations_event_path(@event), :rel => 'modal'
-      - if can? :users_with_emails, @event
-        = link_to tr('Users with emails'), users_with_emails_event_path(@event), :rel => 'modal'
 
     .wrapper
       .calendar= calendar(@event.start_time, @event.end_time)

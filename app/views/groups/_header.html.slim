@@ -14,7 +14,7 @@
                 li= link_to tr('Invite friends'), new_group_group_invitation_path(@group), :rel => 'modal'
               - if membership = @group.membership_for(current_user) and can? :destroy, membership
                 li= link_to tr('Leave group'), membership, :method => :delete, :remote => !@static_follow
-              - if can? :create, Event.new(:group => @group)
+              - if membership = @group.membership_for(current_user) and can? :create, Event.new(:group => @group)
                 li.divider
                 li= link_to tr('New event'), new_group_event_path(@group), :rel => 'modal'
               - if can? :update, @group
@@ -24,7 +24,7 @@
 
           =' render 'memberships/button', :group => @group
 
-          - if can? :create, Event.new(:group => @group)
+          - if membership = @group.membership_for(current_user) and can? :create, Event.new(:group => @group)
             =' link_to tr('New event'), new_group_event_path(@group), :rel => 'modal', :class => 'btn btn-primary'
           - if membership = @group.membership_for(current_user)
             =' link_to tr('Invite friends'), new_group_group_invitation_path(@group), :rel => 'modal', :class => 'btn btn-primary'
