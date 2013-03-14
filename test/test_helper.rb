@@ -1,5 +1,20 @@
-require 'rubygems'
+ENV['RAILS_ENV'] = 'test'
+require File.expand_path('../../config/environment', __FILE__)
+require 'rails/test_help'
+require 'authlogic/test_case'
+
+class ActiveSupport::TestCase
+  setup :activate_authlogic
+  fixtures :all
+end
+
+
 require 'spork'
+
+def current_user
+  UserSession.find.record
+end
+
 #uncomment the following line to use spork with the debugger
 #require 'spork/ext/ruby-debug'
 
@@ -43,16 +58,3 @@ end
 #
 # These instructions should self-destruct in 10 seconds.  If they don't, feel
 # free to delete them.
-
-
-
-
-ENV['RAILS_ENV'] = 'test'
-require File.expand_path('../../config/environment', __FILE__)
-require 'rails/test_help'
-require 'authlogic/test_case'
-
-class ActiveSupport::TestCase
-  setup :activate_authlogic
-  fixtures :all
-end
