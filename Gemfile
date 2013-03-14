@@ -55,7 +55,6 @@ gem 'whenever', :require => false
 gem 'jquery-fileupload-rails'
 # gem 'cache_digests'
 gem 'rails-timeago'
-# gem 'spork-rails'
 
 gem 'sass-rails', '~> 3.2.3'
 gem 'coffee-rails', '~> 3.2.1'
