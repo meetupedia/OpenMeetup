@@ -55,6 +55,8 @@ gem 'whenever', :require => false
 gem 'jquery-fileupload-rails'
 # gem 'cache_digests'
 gem 'rails-timeago'
+gem 'spork-rails'
+gem 'spork-testunit'
 
 gem 'sass-rails', '~> 3.2.3'
 gem 'coffee-rails', '~> 3.2.1'
@@ -79,9 +81,4 @@ end
 
 group :production do
   gem 'newrelic_rpm'
-end
-
-group :test do
-  # gem 'spork-rails'
-  # gem 'spork-testunit'
 end
