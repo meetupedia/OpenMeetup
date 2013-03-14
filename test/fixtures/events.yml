@@ -1,0 +1,8 @@
+event_one:
+  group: group_one
+  user: user_one
+  title: 'Testevent 1'
+  permaname: 'testevent-1'
+  permalink: 'testevent-1'
+  start_time: '<%= Time.now %>'
+  end_time: '<%= Time.now + 1.hour %>'

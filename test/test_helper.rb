@@ -12,7 +12,7 @@ end
 require 'spork'
 
 def current_user
-  UserSession.find.record
+  UserSession.find.andand.record
 end
 
 #uncomment the following line to use spork with the debugger

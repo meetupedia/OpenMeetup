@@ -2,7 +2,7 @@ require 'test_helper'
 
 class GroupsControllerTest < ActionController::TestCase
   setup do
-    @group = groups(:one)
+    @group = groups(:group_one)
   end
 
   test 'show' do
@@ -17,7 +17,7 @@ class GroupsControllerTest < ActionController::TestCase
   end
 
   test 'new with sign in' do
-    UserSession.create(users(:one))
+    UserSession.create(users(:user_one))
     get :new
     assert_response :success
   end
@@ -29,7 +29,7 @@ class GroupsControllerTest < ActionController::TestCase
   end
 
   test 'create with sign in' do
-    UserSession.create(users(:one))
+    UserSession.create(users(:user_one))
     assert_difference('Group.count') do
       post :create, :group => {:name => 'Testgroup 4', :permaname => 'testgroup-4'}
     end
@@ -43,23 +43,23 @@ class GroupsControllerTest < ActionController::TestCase
   end
 
   test 'edit with sign in and without membership'  do
-    UserSession.create(users(:one))
+    UserSession.create(users(:user_one))
     assert_raise CanCan::AccessDenied do
       get :edit, :id => @group.id
     end
   end
 
   test 'edit with sign in and plain membership' do
-    UserSession.create(users(:one))
-    membership = Membership.create :group => @group, :user => users(:one)
+    UserSession.create(users(:user_one))
+    membership = Membership.create :group => @group, :user => users(:user_one)
     assert_raise CanCan::AccessDenied do
       get :edit, :id => @group.id
     end
   end
 
   test 'edit with sign in and admin membership' do
-    UserSession.create(users(:two))
-    membership = Membership.create :group => @group, :user => users(:two)
+    UserSession.create(users(:user_two))
+    membership = Membership.create :group => @group, :user => users(:user_two)
     membership.is_admin = true
     membership.save
     get :edit, :id => @group.id

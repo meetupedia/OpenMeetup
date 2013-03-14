@@ -1,9 +1,11 @@
-one:
+group_one:
+  user: user_one
   name: 'Testgroup 1'
   permaname: 'testgroup-1'
   permalink: 'testgroup-1'
 
-two:
+group_two:
+  user: user_two
   name: 'Testgroup 2'
   permaname: 'testgroup-2'
   permalink: 'testgroup-2'
