@@ -18,7 +18,7 @@ class EventsController < CommonController
   def create
     if @event.save
       create_activity @event
-      redirect_to @event
+      redirect_to @event, :notice => trfn('Event created.')
     else
       render :new
     end
@@ -29,7 +29,7 @@ class EventsController < CommonController
 
   def update
     if @event.update_attributes params[:event]
-      redirect_to @event
+      redirect_to @event, :notice => trfn('Event updated.')
     else
       render :edit
     end
@@ -37,7 +37,7 @@ class EventsController < CommonController
 
   def destroy
     @event.destroy
-    redirect_to @event.group, :notice => 'Esemény törölve.'
+    redirect_to @event.group, :notice => trfn('Event deleted.')
   end
 
   def actual
