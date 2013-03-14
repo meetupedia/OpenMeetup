@@ -11,8 +11,9 @@ class GroupsControllerTest < ActionController::TestCase
   end
 
   test 'new without sign in' do
-    get :new
-    assert_response 302
+    assert_raise CanCan::AccessDenied do
+      get :new
+    end
   end
 
   test 'new with sign in' do
@@ -22,39 +23,43 @@ class GroupsControllerTest < ActionController::TestCase
   end
 
   test 'create without sign in' do
-    post :create, :group => {:name => 'one'}
-    assert_response 302
+    assert_raise CanCan::AccessDenied do
+      post :create, :group => {:name => 'Testgroup 3', :permaname => 'testgroup-3'}
+    end
   end
 
   test 'create with sign in' do
     UserSession.create(users(:one))
     assert_difference('Group.count') do
-      post :create, :group => {:name => 'one'}
+      post :create, :group => {:name => 'Testgroup 4', :permaname => 'testgroup-4'}
     end
     assert_redirected_to group_path(assigns(:group))
   end
 
   test 'edit without sign in' do
-    get :edit, :id => @group.id
-    assert_response 302
+    assert_raise CanCan::AccessDenied do
+      get :edit, :id => @group.id
+    end
   end
 
   test 'edit with sign in and without membership'  do
     UserSession.create(users(:one))
-    get :edit, :id => @group.id
-    assert_response 302
+    assert_raise CanCan::AccessDenied do
+      get :edit, :id => @group.id
+    end
   end
 
   test 'edit with sign in and plain membership' do
     UserSession.create(users(:one))
     membership = Membership.create :group => @group, :user => users(:one)
-    get :edit, :id => @group.id
-    assert_response 302
+    assert_raise CanCan::AccessDenied do
+      get :edit, :id => @group.id
+    end
   end
 
   test 'edit with sign in and admin membership' do
-    UserSession.create(users(:one))
-    membership = Membership.create :group => @group, :user => users(:one)
+    UserSession.create(users(:two))
+    membership = Membership.create :group => @group, :user => users(:two)
     membership.is_admin = true
     membership.save
     get :edit, :id => @group.id

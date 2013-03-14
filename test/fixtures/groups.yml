@@ -1,7 +1,9 @@
 one:
   name: 'Testgroup 1'
+  permaname: 'testgroup-1'
   permalink: 'testgroup-1'
 
 two:
   name: 'Testgroup 2'
+  permaname: 'testgroup-2'
   permalink: 'testgroup-2'
