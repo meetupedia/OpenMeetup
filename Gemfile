@@ -66,6 +66,8 @@ group :assets do
 end
 
 group :development do
+  # gem 'spork-rails'
+  # gem 'spork-testunit'
   gem 'hirb'
   gem 'license_finder', :git => 'https://github.com/pivotal/LicenseFinder.git'
   gem 'bullet'
