@@ -29,8 +29,7 @@ class EventInvitationsController < CommonController
           end
         end
       end
-      flash[:notice] = 'Meghívó elküldve.'
-      redirect_to @event
+      redirect_to @event, :notice => trfn('Invitation sent.')
     end
   end
 end

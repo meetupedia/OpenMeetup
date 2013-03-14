@@ -57,7 +57,7 @@ class UsersController < CommonController
   def destroy
     current_user_session.andand.destroy if @user == current_user
     @user.destroy
-    redirect_to root_url
+    redirect_to root_url, :notice => trfn('User deleted.')
   end
 
   def calendar
@@ -86,13 +86,13 @@ class UsersController < CommonController
     @user.is_admin = true
     @user.save
     UserMailer.set_admin(@user).deliver
-    redirect_to @user
+    redirect_to @user, :notice => trfn('User is now admin.')
   end
 
   def unset_admin
     @user.is_admin = false
     @user.save
-    redirect_to @user
+    redirect_to @user, :notice => trfn('User is not an admin anymore.')
   end
 
   def settings
@@ -126,7 +126,7 @@ class UsersController < CommonController
       @user.avatar = File.open(image.image.path)
       @user.save
     end
-    redirect_to @user
+    redirect_to @user, :notice => trfn('User profile image updated.')
   end
 
   def set_header
@@ -134,7 +134,7 @@ class UsersController < CommonController
       @user.header = File.open(image.image.path)
       @user.save
     end
-    redirect_to @user
+    redirect_to @user, :notice => trfn('User header image updated.')
   end
 
 protected

@@ -24,8 +24,7 @@ class GroupInvitationsController < CommonController
           end
         end
       end
-      flash[:notice] = 'Meghívó elküldve.'
-      redirect_to @group
+      redirect_to @group, :notice => trfn('Invitation sent.')
     else
       redirect_to @group
     end

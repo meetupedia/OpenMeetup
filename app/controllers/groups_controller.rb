@@ -19,7 +19,7 @@ class GroupsController < CommonController
       User.where(:is_admin => true).each do |user|
         GroupMailer.creation(@group, user).deliver if user.email
       end
-      redirect_to @group
+      redirect_to @group, :notice => trfn('Group created.')
     else
       render :new
     end
@@ -30,7 +30,7 @@ class GroupsController < CommonController
 
   def update
     if @group.update_attributes params[:group]
-      redirect_to @group
+      redirect_to @group, :notice => trfn('Group updated.')
     else
       render :edit
     end
@@ -38,7 +38,7 @@ class GroupsController < CommonController
 
   def destroy
     @group.destroy
-    redirect_to groups_user_path(current_user)
+    redirect_to discovery_path, :notice => trfn('Group deleted.')
   end
 
   def events
@@ -65,7 +65,7 @@ class GroupsController < CommonController
       @group.image = File.open(image.image.path)
       @group.save
     end
-    redirect_to @group
+    redirect_to @group, :notice => trfn('Group profile image changed.')
   end
 
   def set_header
@@ -73,7 +73,7 @@ class GroupsController < CommonController
       @group.header = File.open(image.image.path)
       @group.save
     end
-    redirect_to @group
+    redirect_to @group, :notice => trfn('Group header image changed.')
   end
 
   def waves
