@@ -1,5 +1,5 @@
 .wrapper
-  .pull-right= button_to tr('Delete event'), @event, :method => :delete, :confirm => 'Biztosan törlöd?', :class => 'btn btn-danger'
+  .pull-right= button_to tr('Delete event'), @event, :method => :delete, :confirm => trl('Are you sure?'), :class => 'btn btn-danger'
 
   h1= tr('Edit event')
 
@@ -12,11 +12,11 @@
   - @event.questions.order('id ASC').each do |question|
     p
       =' question.question
-      = button_to tr('Delete question'), question, :method => :delete, :remote => true, :confirm => 'Biztosan törlöd?'
+      = button_to tr('Delete question'), question, :method => :delete, :remote => true, :confirm => trl('Are you sure?')
 
   = semantic_form_for Question.new, :url => event_questions_path(@event), :remote => true do |f|
     = f.inputs do
-      = f.input :question, :label => 'Add new question'
+      = f.input :question, :label => tr('Add new question')
     = f.actions do
-      =' f.action :submit, :label => 'Save'
-      = f.action :cancel, :label => 'Cancel'
+      =' f.action :submit, :label => tr('Save')
+      = f.action :cancel, :label => tr('Cancel')

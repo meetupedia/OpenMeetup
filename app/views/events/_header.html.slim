@@ -10,16 +10,18 @@
           =' image_tag 'cog.png'
           span.caret
         ul.dropdown-menu
-          - if can? :edit, @event
-            li= link_to tr('Edit event'), edit_event_path(@event), :rel => 'modal'
           li= link_to tr('Invite friends'), new_event_event_invitation_path(@event), :rel => 'modal'
           li= link_to tr('Invite all group members'), new_event_event_invitation_path(@event, :invite_members => true), :rel => 'modal'
-          - if can? :delete, @event
-            li= link_to tr('Delete event'), @event, :method => :delete, :confirm => trl('Are you sure?')
-          - if participation and @event.questions.present? and @event.start_time > Time.zone.now
-            li= link_to tr('Edit answers'), edit_participation_path(participation), :rel => 'modal'
-          - if can? :users_with_emails, @event
-            li= link_to tr('Export list of participants'), users_with_emails_event_path(@event), :rel => 'modal'
+          - if can? :edit, @event
+            li.divider
+            - if can? :users_with_emails, @event
+              li= link_to tr('Export list of participants'), users_with_emails_event_path(@event), :rel => 'modal'
+            - if participation and @event.questions.present? and @event.start_time > Time.zone.now
+              li= link_to tr('Edit answers'), edit_participation_path(participation), :rel => 'modal'
+            - if can? :edit, @event
+              li= link_to tr('Edit event'), edit_event_path(@event), :rel => 'modal'
+            - if can? :destroy, @event
+              li= link_to tr('Delete event'), @event, :method => :delete, :confirm => trl('Are you sure?')
 
       - if absence or participation
         - if absence
