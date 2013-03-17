@@ -11,9 +11,16 @@ class UsersController < CommonController
   cache_sweeper :participation_sweeper, :only => [:create]
 
   def index
-    @users = User.where('name LIKE ?', "%#{params[:q]}%")
-    respond_to do |format|
-      format.json { render :json => @users.map { |user| {:id => user.id, :name => user.name} } }
+    if Settings.standalone
+      @users = User.where('name LIKE ? OR email LIKE ?', "%#{params[:q]}%", "%#{params[:q]}%")
+      respond_to do |format|
+        format.json { render :json => @users.map { |user| {:id => user.id, :name => "#{user.name} <#{user.email}>" } } }
+      end
+    else
+      @users = User.where('name LIKE ?', "%#{params[:q]}%")
+      respond_to do |format|
+        format.json { render :json => @users.map { |user| {:id => user.id, :name => user.name } } }
+      end
     end
   end
 
