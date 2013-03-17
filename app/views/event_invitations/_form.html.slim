@@ -16,6 +16,5 @@ javascript:
     crossDomain: false,
     tokenValue: 'id',
     preventDuplicates: true,
-    prePopulate: #{@users.map{ |user| {:id => user.id, :name => user.name} }.to_json.html_safe},
     theme: 'facebook'
   })
