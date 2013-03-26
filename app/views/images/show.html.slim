@@ -4,17 +4,18 @@
       p= link_to tr('Previous'), previous_image_path(@image), :class => 'btn'
     .pull-right
       = link_to tr('Next'), next_image_path(@image), :class => 'btn'
-      .btn-group
-        a.btn.dropdown-toggle(data-toggle="dropdown" href="#")
-          =' image_tag 'cog.png'
-          span.caret
-        ul.dropdown-menu
-          li= link_to tr('Set as personal avatar'), set_avatar_user_path(current_user, :image_id => @image.id), :method => :post, :confirm => trl('Are you sure you want to change your avatar?')
-          li= link_to tr('Set as personal header'), set_header_user_path(current_user, :image_id => @image.id), :method => :post, :confirm => trl('Are you sure you want to change your header?')
-          - if @image.imageable.is_a?(Group) and can? :set_image, @image.imageable
-            li= link_to tr('Set as group image'), set_image_group_path(@image.imageable, :image_id => @image.id), :method => :post, :confirm => trl('Are you sure you want to change the groups image?')
-          - if @image.imageable.is_a?(Group) and can? :set_header, @image.imageable
-            li= link_to tr('Set as group header'), set_header_group_path(@image.imageable, :image_id => @image.id), :method => :post, :confirm => trl('Are you sure you want to change the groups header?')
+      - if current_user
+        .btn-group
+          a.btn.dropdown-toggle(data-toggle="dropdown" href="#")
+            =' image_tag 'cog.png'
+            span.caret
+          ul.dropdown-menu
+            li= link_to tr('Set as personal avatar'), set_avatar_user_path(current_user, :image_id => @image.id), :method => :post, :confirm => trl('Are you sure you want to change your avatar?')
+            li= link_to tr('Set as personal header'), set_header_user_path(current_user, :image_id => @image.id), :method => :post, :confirm => trl('Are you sure you want to change your header?')
+            - if @image.imageable.is_a?(Group) and can? :set_image, @image.imageable
+              li= link_to tr('Set as group image'), set_image_group_path(@image.imageable, :image_id => @image.id), :method => :post, :confirm => trl('Are you sure you want to change the groups image?')
+            - if @image.imageable.is_a?(Group) and can? :set_header, @image.imageable
+              li= link_to tr('Set as group header'), set_header_group_path(@image.imageable, :image_id => @image.id), :method => :post, :confirm => trl('Are you sure you want to change the groups header?')
     .center
       - if @image.imageable
         h3= link_to @image.imageable.name, url_for([@image.imageable, :images])
@@ -28,9 +29,9 @@
 
   = render 'comments/comments', :commentable => @image
 
-  p= link_to_function tr('Add comment'), "$('#add-post-comment-#{@image.id}').toggle().find('textarea').focus()", :class => 'btn btn-mini'
-
-  div(id="add-post-comment-#{@image.id}" style="display: none;")
-    = form_for Comment.new, :url => polymorphic_path([@image, :comments]), :remote => true do |f|
-      = f.text_area :comment
-      = f.submit trl('Add comment'), :class => 'btn btn-primary'
+  - if current_user
+    p= link_to_function tr('Add comment'), "$('#add-post-comment-#{@image.id}').toggle().find('textarea').focus()", :class => 'btn btn-mini'
+    div(id="add-post-comment-#{@image.id}" style="display: none;")
+      = form_for Comment.new, :url => polymorphic_path([@image, :comments]), :remote => true do |f|
+        = f.text_area :comment
+        = f.submit trl('Add comment'), :class => 'btn btn-primary'
