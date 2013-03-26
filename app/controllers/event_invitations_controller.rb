@@ -31,5 +31,6 @@ class EventInvitationsController < CommonController
       end
       redirect_to @event, :notice => trfn('Invitation sent.')
     end
+    redirect_to @event, :notice => trfn('No invitation sent.')
   end
 end
