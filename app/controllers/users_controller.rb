@@ -58,7 +58,7 @@ class UsersController < CommonController
 
   def update
     @user.update_attributes params[:user]
-    redirect_back_or_default @user
+    redirect_to @user
   end
 
   def destroy
