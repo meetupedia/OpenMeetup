@@ -1,0 +1,16 @@
+= render 'groups/header'
+
+.wrapper
+  table.table
+    - @results.each do |group_invitation|
+      tr
+        td
+          - if group_invitation.invited_user
+            = user_link group_invitation.invited_user
+          - elsif group_invitation.email
+            = group_invitation.email
+        td
+          - if group_invitation.error
+            = tr(group_invitation.error)
+          - else
+            = tr('invitation sent')

@@ -10,21 +10,30 @@ class GroupInvitationsController < CommonController
 
   def create
     unless @group_invitation.ids.blank?
+      @results = []
       @group_invitation.ids.split(',').each do |id|
-        if user = User.find_by_id(id)
-          group_invitation = GroupInvitation.find_or_initialize_by_group_id_and_invited_user_id(@group.id, user.id)
-          group_invitation.email ||= user.email
-        else
+        if user = User.find_by_id(id) || User.find_by_email(id)
+          unless @group.members.include?(user)
+            group_invitation = GroupInvitation.find_or_initialize_by_group_id_and_invited_user_id(@group.id, user.id)
+            group_invitation.email ||= user.email
+          else
+            group_invitation = GroupInvitation.new :invited_user => user, :error => 'already member'
+          end
+        elsif id =~ /.+@.+\..+/
           group_invitation = GroupInvitation.find_or_initialize_by_group_id_and_email(@group.id, id)
+        else
+          group_invitation = GroupInvitation.new :email => id, :error => 'not recognized as valid email'
         end
-        if group_invitation.new_record?
+        group_invitation.error = 'already invited' unless group_invitation.new_record? and group_invitation.error.blank?
+        unless group_invitation.error
           group_invitation.message = @group_invitation.message
           if group_invitation.save
             GroupInvitationMailer.invitation(group_invitation).deliver
           end
         end
+        puts group_invitation.inspect
+        @results << group_invitation
       end
-      redirect_to @group, :notice => trfn('Invitation sent.')
     else
       redirect_to @group
     end

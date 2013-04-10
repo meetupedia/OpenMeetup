@@ -11,9 +11,9 @@ class GroupInvitation < ActiveRecord::Base
   belongs_to :group
   belongs_to :invited_user, :class_name => 'User'
 
-  attr_accessor :ids
+  attr_accessor :ids, :error
 
-  before_validation :on => :create do |group_invitation|
+  before_create do |group_invitation|
     group_invitation.code = SecureRandom.hex(16)
     true
   end
