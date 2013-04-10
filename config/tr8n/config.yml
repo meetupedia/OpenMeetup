@@ -285,7 +285,7 @@ defaults:
 # You can overload any feature defined in the defaults for any environment
 #############################################################################
 development:
-  enable_tr8n: true
+  enable_tr8n: false
 
 test:
   enable_tr8n: true
