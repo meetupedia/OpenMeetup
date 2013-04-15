@@ -1,13 +1,13 @@
-- cache [post, I18n.locale] do
-  = div_for post, :class => 'list_item avatar_item' do
-    .avatar= user_avatar post.user
-    =' user_link post.user
-    // span.date= timeago_tag post.created_at
+= div_for post, :class => 'list_item avatar_item' do
+  .avatar= user_avatar post.user
+  =' user_link post.user
+  // span.date= timeago_tag post.created_at
 
-    .text= simple_format post.post
+  .text= simple_format post.post
 
-    = render 'comments/comments', :commentable => post
+  = render 'comments/comments', :commentable => post
 
+  - if current_user
     p= link_to_function tr('Add comment'), "$('#add-post-comment-#{post.id}').toggle().find('textarea').focus()", :class => 'btn btn-mini'
 
     div(id="add-post-comment-#{post.id}" style="display: none;")
