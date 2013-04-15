@@ -6,7 +6,11 @@ class InterestsController < CommonController
   skip_before_filter :check_restricted_access
 
   def index
-    redirect_to root_url if Interest.count == 0
+    if Interest.count == 0
+      redirect_to root_url
+    else
+      @interests = Interest.order('name ASC')
+    end
   end
 
   def create
