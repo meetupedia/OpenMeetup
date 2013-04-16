@@ -6,4 +6,5 @@
     = f.inputs do
       = f.input :subject
       = f.input :body, :as => :text
-    = f.actions
+    = f.actions do
+      = f.action :submit, :label => trl('Send')

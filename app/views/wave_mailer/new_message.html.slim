@@ -1,6 +1,6 @@
-p You've got a new message!
+h1 You've got a new message!
 
 .list_view
   = render @wave_item
 
-p= link_to 'Reply', @wave_item.wave, :class => 'btn btn-primary'
+p= link_to 'Write reply', @wave_item.wave
