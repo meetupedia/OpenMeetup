@@ -1,4 +1,6 @@
 .wrapper
+  .pull-right= link_to tr('New message'), new_wave_path, :class => 'btn', :rel => 'modal'
+
   h2= tr('Messages')
 
   - if params[:page]

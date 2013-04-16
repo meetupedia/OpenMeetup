@@ -1,10 +1,22 @@
 .wrapper
   = semantic_form_for @wave do |f|
-    = hidden_field_tag 'wave[recipient_id]', params[:recipient_id]
     = hidden_field_tag 'wave[group_id]', params[:group_id]
     = hidden_field_tag 'wave[event_id]', params[:event_id]
     = f.inputs do
+      = f.input :recipient_id, :label => trl('To')
       = f.input :subject
       = f.input :body, :as => :text
     = f.actions do
       = f.action :submit, :label => trl('Send')
+
+javascript:
+  $('#wave_recipient_id').tokenInput('/users.json', {
+    allowFreeTagging: true,
+    allowTabOut: true,
+    crossDomain: false,
+    tokenValue: 'id',
+    preventDuplicates: true,
+    prePopulate: #{(@recipient ? [{:id => @recipient.id, :name => @recipient.name}] : nil).to_json.html_safe},
+    tokenLimit: 1,
+    theme: 'facebook'
+  })

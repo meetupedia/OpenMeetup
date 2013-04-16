@@ -24,7 +24,7 @@ class WavesController < CommonController
   end
 
   def new
-    @recipient_id = params[:recipient_id]
+    @recipient = User.find_by_id(params[:recipient_id]) if params[:recipient_id].present?
   end
 
   def create
