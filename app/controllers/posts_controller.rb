@@ -17,12 +17,10 @@ class PostsController < CommonController
     if @post.save
       create_activity @post
       if @group
-        run_later do
-          @group.members.each do |user|
-            begin
-              PostMailer.notification(@post, user).deliver
-            rescue
-            end
+        @group.members.each do |user|
+          begin
+            PostMailer.notification(@post, user).deliver
+          rescue
           end
         end
       end
