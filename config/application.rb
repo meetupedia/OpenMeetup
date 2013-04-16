@@ -57,9 +57,6 @@ module Openmeetup
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    # Handling error messages dynamically
-    config.exceptions_app = self.routes
-
     # Openmeetup::Application.middleware.use Oink::Middleware
 
     GC::Profiler.enable
