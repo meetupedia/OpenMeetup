@@ -13,5 +13,9 @@
       p= render 'users/user_avatars', :users => @wave.wave_members
   .span8
     .wrapper
-      p= link_to 'Új üzenet', new_wave_wave_item_path(@wave), :class => 'btn', :rel => 'modal'
+      = semantic_form_for @wave.wave_items.build, :url => wave_wave_items_path(@wave) do |f|
+        = f.inputs do
+          = f.input :body, :label => false
+        = f.actions do
+          = f.action :submit, :label => trl('Reply')
       .list_view= render @wave_items
