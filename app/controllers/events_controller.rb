@@ -19,7 +19,7 @@ class EventsController < CommonController
     if @event.save
       create_activity @event
       if @event.invite_all_group_member
-        @event.group.members.each do |user|
+        [@event.group.members - @event.participants].each do |user|
           event_invitation = EventInvitation.find_or_create_by_event_id_and_invited_user_id(@event.id, user.id)
           begin
             EventInvitationMailer.invitation(event_invitation).deliver
