@@ -19,7 +19,10 @@ class PostsController < CommonController
       if @group
         run_later do
           @group.members.each do |user|
-            PostMailer.notification(@post, user).deliver if user.email
+            begin
+              PostMailer.notification(@post, user).deliver
+            rescue
+            end
           end
         end
       end

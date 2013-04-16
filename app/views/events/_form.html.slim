@@ -9,6 +9,8 @@
         = f.label :city_id, tr('City')
         = f.text_field :city_id, 'data-pre' => [@event.city].compact.map { |city| {:id => city.id, :name => city.name} }.to_json
       = f.input :street
+    - if @event.new_record?
+      = f.input :invite_all_group_member, :label => false, :as => :boolean, :input_html => {:checked => 'checked'}
   p= link_to_function tr('More options'), "$('#more-options').toggle()", :class => 'function'
   #more-options
     - if Settings.standalone

@@ -25,7 +25,10 @@ class EventInvitationsController < CommonController
         if event_invitation.new_record?
           event_invitation.message = @event_invitation.message
           if event_invitation.save
-            EventInvitationMailer.invitation(event_invitation).deliver
+            begin
+              EventInvitationMailer.invitation(event_invitation).deliver
+            rescue
+            end
           end
         end
       end

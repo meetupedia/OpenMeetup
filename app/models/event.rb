@@ -37,6 +37,8 @@ class Event < ActiveRecord::Base
 #  end
   auto_permalink :title
 
+  attr_accessor :invite_all_group_member
+
   before_validation do |event|
     event.permaname = event.permaname.parameterize
     true
