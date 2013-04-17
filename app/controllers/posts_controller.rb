@@ -1,8 +1,9 @@
 # encoding: UTF-8
 
 class PostsController < CommonController
+  load_resource :event
   load_resource :group
-  load_resource :post, :through => :group, :shallow => true
+  load_resource :post, :through => [:event, :group], :shallow => true
   authorize_resource :except => [:show]
 
   def show
@@ -12,12 +13,18 @@ class PostsController < CommonController
   end
 
   def create
-    @post.event = Event.find_by_id(params[:post][:event_id])
-    @post.postable = @group if @group
+    @post.postable = @event || @group
     if @post.save
       create_activity @post
-      if @group
-        @group.members.each do |user|
+      if @event
+        (@event.participants - [@post.user]).each do |user|
+          begin
+            PostMailer.notification(@post, user).deliver
+          rescue
+          end
+        end
+      elsif @group
+        (@group.members - [@post.user]).each do |user|
           begin
             PostMailer.notification(@post, user).deliver
           rescue

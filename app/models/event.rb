@@ -27,7 +27,7 @@ class Event < ActiveRecord::Base
   has_many :images, :as => :imageable
   has_many :participations, :dependent => :destroy
   has_many :participants, :through => :participations, :source => :user
-  has_many :posts, :dependent => :nullify
+  has_many :posts, :as => :postable, :dependent => :destroy
   has_many :questions, :dependent => :destroy
   has_many :reviews, :dependent => :destroy
   has_many :waves, :dependent => :nullify

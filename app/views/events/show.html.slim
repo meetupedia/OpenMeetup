@@ -31,4 +31,8 @@
 
     .wrapper
       h2= tr('Activity')
-      .list_view= render @event.activities.order('created_at DESC').limit(5).includes(:activable => :user)
+      - if can? :create, post = @event.posts.build
+        = form_for post, :url => url_for([@event, :posts]), :remote => true do |f|
+          = f.text_area :post
+          = f.submit trl('Add post'), :class => 'btn btn-primary', :disable_with => trl('Sending...')
+      = render 'activities/activities', :activities => @activities

@@ -178,6 +178,7 @@ private
   end
 
   def events_show
+    @activities = @event.activities.where('activable_type NOT IN (?)', ['Comment']).order('created_at DESC').paginate :page => params[:page]
     @title = @event.title
     if Time.zone.now.between?(@event.start_time, @event.end_time)
       render 'events/actual'

@@ -65,7 +65,9 @@ class Ability
       end
 
       can :create, Post do |post|
-        if post.postable.is_a?(Group)
+        if post.postable.is_a?(Event)
+          post.postable.group.members.include?(current_user)
+        elsif post.postable.is_a?(Group)
           post.postable.members.include?(current_user)
         else
           true

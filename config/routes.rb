@@ -72,6 +72,7 @@ Openmeetup::Application.routes.draw do
           get :set
         end
       end
+      resources :posts, :shallow => true
       resources :questions, :shallow => true
       resources :reviews, :shallow => true
     end

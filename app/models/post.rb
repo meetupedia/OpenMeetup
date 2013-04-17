@@ -8,7 +8,6 @@ class Post < ActiveRecord::Base
   key :is_live, :as => :boolean, :default => false
   timestamps
 
-  belongs_to :event
   belongs_to :user
   belongs_to :postable, :polymorphic => true, :touch => true
 
