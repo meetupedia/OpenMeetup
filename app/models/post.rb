@@ -12,6 +12,10 @@ class Post < ActiveRecord::Base
   belongs_to :postable, :polymorphic => true, :touch => true
 
   validates_presence_of :post
+
+  def commenters
+    comments.map(&:user).uniq
+  end
 end
 
 Post.auto_upgrade!

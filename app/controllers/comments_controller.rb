@@ -11,14 +11,11 @@ class CommentsController < CommonController
 
   def create
     @comment.commentable = @image || @post
-    @group = @post.postable if @psot and @post.postable.is_a?(Group)
     if @comment.save
       create_activity @comment
-      if @group
-        run_later do
-          @group.members.each do |user|
-            CommentMailer.notification(@comment, user).deliver if user.email
-          end
+      if @post
+        (@post.commenters + [@post.user] - [@comment.user]).uniq.each do |user|
+          CommentMailer.notification(@comment, user).deliver if user.email
         end
       end
       respond_to do |format|
