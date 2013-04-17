@@ -27,4 +27,12 @@ class CommentsController < CommonController
       end
     end
   end
+
+  def destroy
+    @comment.destroy
+    respond_to do |format|
+      format.html { redirect_to @comment.commentable }
+      format.js
+    end
+  end
 end

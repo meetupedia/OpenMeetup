@@ -11,6 +11,9 @@ class Ability
       end
 
       can :create, Comment
+      can :destroy, Comment do |comment|
+        comment.user == current_user or comment.commentable.user == current_user or current_user.is_admin?
+      end
 
       can [:create, :update, :destroy, :participations, :users_with_emails], Event do |event|
         event.group.admins.include?(current_user) or current_user.is_admin?
