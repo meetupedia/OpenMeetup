@@ -43,4 +43,14 @@ class PostsController < CommonController
       end
     end
   end
+
+  def destroy
+    @post.destroy
+    respond_to do |format|
+      format.html do
+        redirect_to @post.postable
+      end
+      format.js
+    end
+  end
 end

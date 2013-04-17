@@ -10,7 +10,7 @@
       = form_for Comment.new, :url => polymorphic_path([comment.commentable, :comments]), :remote => true do |f|
         = f.hidden_field :reply_to_id, :value => comment.id
         = f.text_area :comment
-        = f.submit trl('Add comment'), :class => 'btn btn-primary'
+        = f.submit trl('Add comment'), :class => 'btn btn-primary', :disable_with => trl('Sending...')
 
 - comment.replies.each do |comment|
   = render comment, :commentable => commentable

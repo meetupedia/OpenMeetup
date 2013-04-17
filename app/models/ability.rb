@@ -73,7 +73,15 @@ class Ability
           true
         end
       end
-
+      can :destroy, Post do |post|
+        if post.postable.is_a?(Event)
+          post.postable.group.admins.include?(current_user) or post.user == current_user or current_user.is_admin?
+        elsif post.postable.is_a?(Group)
+          post.postable.admins.include?(current_user) or post.user == current_user or current_user.is_admin?
+        else
+          post.user == current_user or current_user.is_admin?
+        end
+      end
       can [:create, :destroy], Question do |question|
         question.event.group.admins.include?(current_user) or current_user.is_admin?
       end
