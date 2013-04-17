@@ -1,6 +1,7 @@
 # encoding: UTF-8
 
 class Activity < ActiveRecord::Base
+  include CommonCommentable
   timestamps
 
   belongs_to :activable, :polymorphic => true

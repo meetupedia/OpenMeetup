@@ -42,3 +42,13 @@
       = link_to activity.activable.event.title, activity.activable.event
       p= activity.activable.review
     // .date= timeago_tag activity.created_at
+    - if activity.activable.class.name =~ /Membership|Participation|UserFollow/
+      = render 'comments/comments', :commentable => activity
+
+      - if current_user
+        p= link_to_function tr('Add comment'), "$('#add-activity-comment-#{activity.id}').toggle().find('textarea').focus()", :class => 'btn btn-mini'
+
+        div(id="add-activity-comment-#{activity.id}" style="display: none;")
+          = form_for Comment.new, :url => polymorphic_path([activity, :comments]), :remote => true do |f|
+            = f.text_area :comment
+            = f.submit trl('Add comment'), :class => 'btn btn-primary', :disable_with => trl('Sending...')

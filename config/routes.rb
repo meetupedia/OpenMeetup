@@ -20,6 +20,10 @@ Openmeetup::Application.routes.draw do
     resources :users
   end
 
+  resources :activities do
+    resources :comments, :shallow => true
+  end
+
   resources :cities do
     member do
       get :search

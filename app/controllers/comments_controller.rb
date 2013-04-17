@@ -1,19 +1,24 @@
 # encoding: UTF-8
 
 class CommentsController < CommonController
+  load_resource :activity
   load_resource :image
   load_resource :post
-  load_resource :comment, :through => [:image, :post], :shallow => true
+  load_resource :comment, :through => [:activity, :image, :post], :shallow => true
   authorize_resource
 
   def new
   end
 
   def create
-    @comment.commentable = @image || @post
+    @comment.commentable = @activity || @image || @post
     if @comment.save
       create_activity @comment
-      if @post
+      if @activity
+        ([@activity.user] - [@comment.user]).uniq.each do |user|
+          CommentMailer.notification(@comment, user).deliver if user.email
+        end
+      elsif @post
         (@post.commenters + [@post.user] - [@comment.user]).uniq.each do |user|
           CommentMailer.notification(@comment, user).deliver if user.email
         end

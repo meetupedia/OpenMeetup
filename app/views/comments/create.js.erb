@@ -2,7 +2,7 @@
   $('#add-comment-comment-<%= @comment.reply_to.id %>').hide().find('textarea').val('')
   $('#comment_<%= @comment.reply_to.id %>').after('<%= j render @comment %>')
 <% else -%>
-  $('#add-post-comment-<%= @comment.commentable.id %>').hide().find('textarea').val('')
-  $('#add-post-comment-<%= @comment.commentable.id %>').parent().find('.comments').append('<%= j render @comment %>')
+  $('#add-<%= @comment.commentable.class.name.underscore %>-comment-<%= @comment.commentable.id %>').hide().find('textarea').val('')
+  $('#add-<%= @comment.commentable.class.name.underscore %>-comment-<%= @comment.commentable.id %>').parent().find('.comments').append('<%= j render @comment %>')
 <% end -%>
 $('#comment_<%= @comment.id %>').hide().fadeIn()
