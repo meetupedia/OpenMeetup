@@ -5,7 +5,7 @@
   =' user_link post.user
   // span.date= timeago_tag post.created_at
 
-  .text= simple_format post.post
+  .text= textilize(auto_link(post.post)).html_safe
 
   = render 'comments/comments', :commentable => post
 

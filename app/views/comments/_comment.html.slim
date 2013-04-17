@@ -6,7 +6,7 @@
   .avatar= user_avatar comment.user
   =' user_link comment.user
   span.date= timeago_tag comment.created_at
-  = simple_format comment.comment
+  = textilize(auto_link(comment.comment)).html_safe
   - if current_user and comment.level < 5
     div(id="add-comment-comment-#{comment.id}" style="display: none;")
       = form_for Comment.new, :url => polymorphic_path([comment.commentable, :comments]), :remote => true do |f|
