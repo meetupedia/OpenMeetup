@@ -17,14 +17,14 @@ every 5.minutes do
 end
 
 # i am still alive?
-every 5.minutes do
-  command 'tail -n 2000 log/production.log > log/production_small.log'
-  command 'tail -n 2000 log/whenever-error.log > log/whenever-error_small.log'
-  runner "TestMailer.report('debug@meetupedia.org').deliver"
-end
+# every 5.minutes do
+#   command 'tail -n 2000 log/production.log > log/production_small.log'
+#   command 'tail -n 2000 log/whenever-error.log > log/whenever-error_small.log'
+#   runner "TestMailer.report('debug@meetupedia.org').deliver"
+# end
 
 # creating crash
-every 5.minutes do
-  command 'wget http://172.31.28.243/crash'
+# every 5.minutes do
+#   command 'wget http://172.31.28.243/crash'
 #   command 'wget http://meetupedia.com/crash'
-end
+# end
