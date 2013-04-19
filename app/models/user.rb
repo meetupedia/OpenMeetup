@@ -35,6 +35,7 @@ class User < ActiveRecord::Base
   has_many :activities, :dependent => :destroy
   has_many :admined_groups, :through => :memberships, :source => :group, :conditions => {'memberships.is_admin' => true}
   has_many :authentications, :dependent => :destroy
+  has_many :comments, :dependent => :nullify
   has_many :event_invitations, :dependent => :nullify
   has_many :events, :dependent => :nullify
   has_many :followers, :through => :user_follows, :source => :user
