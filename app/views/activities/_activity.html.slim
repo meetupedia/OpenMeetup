@@ -42,7 +42,7 @@
       = link_to activity.activable.event.title, activity.activable.event
       p= activity.activable.review
     // .date= timeago_tag activity.created_at
-    - if activity.activable.class.name =~ /Membership|Participation|UserFollow/
+    - if activity.activable.class.name =~ /Event|Group|Membership|Participation|UserFollow/
       = render 'comments/comments', :commentable => activity
 
       - if current_user
