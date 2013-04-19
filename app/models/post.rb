@@ -10,7 +10,7 @@ class Post < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :postable, :polymorphic => true, :touch => true
-  # has_many :activities, :as => :activable, :dependent => :destroy
+  has_many :activities, :as => :activable, :dependent => :destroy
 
   validates_presence_of :post
 end
