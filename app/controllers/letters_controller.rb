@@ -45,7 +45,10 @@ class LettersController < CommonController
   end
 
   def mailtest
-    LetterMailer.letter(@letter, @letter.user).deliver
+    begin
+      LetterMailer.letter(@letter, @letter.user).deliver
+    rescue
+    end
     flash[:notice] = "Tesztlevél elküldve #{@letter.user.email.az} címre."
     redirect_to @letter
   end

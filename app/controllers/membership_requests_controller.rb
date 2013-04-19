@@ -9,7 +9,10 @@ class MembershipRequestsController < CommonController
       @membership_request.save
       run_later do
         @group.admins.each do |user|
-          MembershipRequestMailer.created(@membership_request, user).deliver if user.email
+          begin
+            MembershipRequestMailer.created(@membership_request, user).deliver if user.email
+          rescue
+          end
         end
       end
     end

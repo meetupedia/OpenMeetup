@@ -15,9 +15,15 @@ class GroupsController < CommonController
   def create
     if @group.save
       create_activity @group
-      GroupMailer.creation_for_owner(@group).deliver
+      begin
+        GroupMailer.creation_for_owner(@group).deliver
+      rescue
+      end
       User.where(:is_admin => true).each do |user|
-        GroupMailer.creation(@group, user).deliver if user.email
+        begin
+          GroupMailer.creation(@group, user).deliver if user.email
+        rescue
+        end
       end
       redirect_to @group, :notice => trfn('Group created.')
     else
