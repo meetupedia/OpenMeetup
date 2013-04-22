@@ -3,8 +3,9 @@
 class AdminMailer < CommonMailer
 
   def weekly_report(user_id)
-    if @user = User.find_by_id(user_id)
-      mail :to => @user.email, :subject => 'Weekly report'
+    if @recipient = User.find_by_id(user_id)
+      @email = @recipient.email
+      mail :to => @email, :subject => 'Weekly report'
     end
   end
 
