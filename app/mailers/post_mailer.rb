@@ -2,13 +2,13 @@
 
 class PostMailer < CommonMailer
 
-  def notification(post, user)
-    @recipient = user
-    @email = @recipient.email
-    @post = post
-    @postable = @post.postable
-    set_locale @recipient.andand.locale
-    mail :to => @email, :subject => "Notification about a new post: #{@postable.name}"
+  def notification(post_id, user_id)
+    if @post = Post.find_by_id(post_id) and user = User.find_by_id(user_id)
+      @recipient = user
+      @email = user.email
+      @postable = @post.postable
+      set_locale @recipient.andand.locale
+      mail :to => @email, :subject => "Notification about a new post: #{@postable.name}"
   end
 
 
@@ -17,7 +17,7 @@ class PostMailer < CommonMailer
     def notification
       post = Post.last
       user = User.first
-      mail = PostMailer.notification(post, user)
+      mail = PostMailer.notification(post.id, user.id)
       mail
     end
   end

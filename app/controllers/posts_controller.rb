@@ -19,14 +19,14 @@ class PostsController < CommonController
       if @event
         (@event.participants - [@post.user]).each do |user|
           begin
-            PostMailer.notification(@post, user).deliver
+            PostMailer.notification(@post.id, user.id).deliver
           rescue
           end
         end
       elsif @group
         (@group.members - [@post.user]).each do |user|
           begin
-            PostMailer.notification(@post, user).deliver
+            PostMailer.notification(@post.id, user.id).deliver
           rescue
           end
         end
