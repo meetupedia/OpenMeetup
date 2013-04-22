@@ -17,14 +17,14 @@ class CommentsController < CommonController
       if @activity
         ([@activity.user] - [@comment.user]).uniq.each do |user|
           begin
-            CommentMailer.notification(@comment, user).deliver if user.email
+            CommentMailer.notification(@comment.id, user.id).deliver if user.email
           rescue
           end
         end
       elsif @post
         (@post.commenters + [@post.user] - [@comment.user]).uniq.each do |user|
           begin
-            CommentMailer.notification(@comment, user).deliver if user.email
+            CommentMailer.notification(@comment.id, user.id).deliver if user.email
           rescue
           end
         end
