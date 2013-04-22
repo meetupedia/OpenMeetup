@@ -38,9 +38,9 @@
             ul.dropdown-menu
               li= link_to tr('Edit'), settings_user_path(user)
               - if can? :set_admin, user and not user.is_admin?
-                li= link_to tr('Set admin role'), set_admin_user_path(user), :method => :post, :confirm => trl('Are you sure?')
+                li= link_to tr('Set admin role'), set_admin_user_path(user), :method => :put, :confirm => trl('Are you sure?')
               - if can? :set_admin, user and user.is_admin?
-                li= link_to tr('Unset admin role'), unset_admin_user_path(user), :method => :post, :confirm => trl('Are you sure?')
+                li= link_to tr('Unset admin role'), unset_admin_user_path(user), :method => :put, :confirm => trl('Are you sure?')
               li= link_to tr('Delete'), admin_user_path(user), :method => :delete, :confirm => trl('Are you sure?')
 
   = will_paginate @users

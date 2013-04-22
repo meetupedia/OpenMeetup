@@ -156,8 +156,10 @@ Openmeetup::Application.routes.draw do
       get :edit_city
       get :facebook_groups
       get :groups
-      post :set_admin
-      post :unset_admin
+      get :set_admin
+      put :set_admin
+      get :unset_admin
+      put :unset_admin
       post :set_avatar
       post :set_header
       get :settings
