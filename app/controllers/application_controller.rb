@@ -46,12 +46,18 @@ private
         if exception.class == ActiveRecord::RecordNotFound and controller_name =~ /events|groups|users/
           render "errors/no_#{controller_name}"
         else
-          ExceptionNotifier::Notifier.exception_notification(request.env, exception, :data => {:message => 'an error happened'}).deliver
+          begin
+            ExceptionNotifier::Notifier.exception_notification(request.env, exception, :data => {:message => 'an error happened'}).deliver
+          rescue
+          end
           render "errors/error_#{status}", :status => status
         end
       end
       format.any do
-        ExceptionNotifier::Notifier.exception_notification(request.env, exception, :data => {:message => 'an error happened'}).deliver
+        begin
+          ExceptionNotifier::Notifier.exception_notification(request.env, exception, :data => {:message => 'an error happened'}).deliver
+        rescue
+        end
         render :nothing => true, :status => status
       end
     end

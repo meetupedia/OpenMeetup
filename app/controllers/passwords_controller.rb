@@ -9,7 +9,10 @@ class PasswordsController < CommonController
   def create
     unless params[:user][:email].blank?
       if @user = User.find_by_email(params[:user][:email])
-        @user.deliver_password_reset
+        begin
+          @user.deliver_password_reset
+        rescue
+        end
         flash[:notice] = tr('An email has been sent to you, check your Inbox for further instructions.')
         redirect_to root_url
       else

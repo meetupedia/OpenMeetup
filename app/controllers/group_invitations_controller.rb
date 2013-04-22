@@ -28,7 +28,10 @@ class GroupInvitationsController < CommonController
         unless group_invitation.error
           group_invitation.message = @group_invitation.message
           if group_invitation.save
-            GroupInvitationMailer.invitation(group_invitation).deliver
+            begin
+              GroupInvitationMailer.invitation(group_invitation).deliver
+            rescue
+            end
           end
         end
         puts group_invitation.inspect
