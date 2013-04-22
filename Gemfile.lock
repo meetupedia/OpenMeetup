@@ -105,6 +105,7 @@ GEM
       actionpack (>= 3.0)
     formtastic-bootstrap (2.1.1)
       formtastic (~> 2.2)
+    gabba (1.0.1)
     geocoder (1.1.7)
     globalize3 (0.3.0)
       activemodel (>= 3.0.0)
@@ -298,6 +299,7 @@ DEPENDENCIES
   fb_graph
   formtastic
   formtastic-bootstrap
+  gabba
   geocoder
   globalize3
   hirb
