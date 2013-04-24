@@ -12,6 +12,7 @@ platform :jruby do
   gem 'activerecord-jdbcmysql-adapter'
 end
 
+gem 'thin'
 gem 'json'
 gem 'jquery-rails', '2.1.1'
 gem 'rails-i18n'
