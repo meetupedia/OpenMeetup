@@ -92,7 +92,7 @@ class UsersController < CommonController
   def set_admin
     # unless request.method == 'GET'
       @user.is_admin = true
-      @user.save
+      @user.save :validate => false
       begin
         UserMailer.set_admin(@user).deliver
       rescue
@@ -106,7 +106,7 @@ class UsersController < CommonController
   def unset_admin
     # unless request.method == 'GET'
       @user.is_admin = false
-      @user.save
+      @user.save :validate => false
       redirect_to @user, :notice => trfn('User is not an admin anymore.')
     # else
     #   redirect_to @user, :alert => trfe('Wrong query!')
