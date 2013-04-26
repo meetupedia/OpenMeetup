@@ -9,7 +9,7 @@ module CommonCommentable
       has_many :comments, :as => :commentable, :dependent => :destroy
 
       def commenters
-        @commenters ||= comments_count > 0 ? User.joins(:comments).where('comments.commentable_type' => self.class.name, 'comments.commentable_id' => self.id).group('users.id').all : []
+        @commenters ||= comments.size > 0 ? User.joins(:comments).where('comments.commentable_type' => self.class.name, 'comments.commentable_id' => self.id).group('users.id').all : []
       end
 
       def comments_after(time = nil)
