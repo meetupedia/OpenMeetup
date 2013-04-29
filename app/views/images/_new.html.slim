@@ -1,7 +1,7 @@
 - if can? :create, Image
   = semantic_form_for Image.new, :url => url do |f|
     = f.inputs do
-      = f.input :image, :multiple => true, :name => 'image[image]', :label => false
+      = f.input :image, :multiple => true, :name => 'image[image]', :label => false, :onclick => "_gaq.push(['_trackEvent', 'Image', 'Upload']);"
 
 #progress.progress.progress-striped.active(style="display: none;")
   .bar(style="width: 0%;")
