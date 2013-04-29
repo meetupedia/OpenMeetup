@@ -58,7 +58,6 @@ gem 'jquery-fileupload-rails'
 gem 'rails-timeago'
 gem 'spork-rails'
 gem 'spork-testunit'
-gem 'gabba'
 
 gem 'sass-rails', '~> 3.2.3'
 gem 'coffee-rails', '~> 3.2.1'

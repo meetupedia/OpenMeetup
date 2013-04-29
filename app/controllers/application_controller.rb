@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :set_locale, :check_restricted_access, :set_invitation_code
-  after_filter :do_analytics
 
   helper_method :current_city, :current_language, :current_user
   helper LaterDude::CalendarHelper
@@ -176,14 +175,6 @@ private
     Settings.enable_invite_process and not (cookies[:invitation_code].present? and (EventInvitation.find_by_code(cookies[:invitation_code]) or GroupInvitation.find_by_code(cookies[:invitation_code]) or cookies[:invitation_code] == Settings.skip_invite_process_code))
   end
   helper_method :use_invite_process?
-
-  def do_analytics
-    if Rails.env.production? and Settings.analytics_code
-      @gabba ||= Gabba::Gabba.new(Settings.analytics_code, Settings.host)
-      @gabba.identify_user(cookies[:__utma], cookies[:__utmz])
-      @gabba.event(controller_name, action_name, 'id', params[:id])
-    end
-  end
 
   def groups_show
     @activities = @group.activities.where('activable_type NOT IN (?)', ['Comment']).order('created_at DESC').paginate :page => params[:page]
