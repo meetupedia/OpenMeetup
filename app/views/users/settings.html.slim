@@ -34,7 +34,8 @@
       h2= tr('Edit profile')
       = semantic_form_for @user do |f|
         = f.inputs do
-          = f.input :name, :label => 'Name'
+          = f.input :first_name
+          = f.input :last_name
           = f.input :email
           = f.input :avatar
           = f.input :header

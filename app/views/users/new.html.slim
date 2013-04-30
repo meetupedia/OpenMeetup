@@ -22,7 +22,8 @@
           - if params[:invitation_code]
             = hidden_field_tag :invitation_code, params[:invitation_code]
           = f.inputs do
-            = f.input :name, :label => tr('Name')
+            = f.input :first_name, :label => tr('First name')
+            = f.input :last_name, :label => tr('Last name')
             = f.input :email, :label => tr('Email')
             = f.input :password, :label => tr('Password')
             = f.input :password_confirmation, :label => tr('Password again')

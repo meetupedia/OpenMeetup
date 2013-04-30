@@ -2,6 +2,8 @@
 
 class User < ActiveRecord::Base
   key :name
+  key :first_name
+  key :last_name
   key :nickname
   key :locale
   key :email, :index => true
@@ -87,6 +89,18 @@ class User < ActiveRecord::Base
   after_create do |user|
     user.update_attributes :last_notified => user.created_at
     true
+  end
+
+  def name
+    if first_name.present? and last_name.present?
+      if locale == 'hu'
+        "#{last_name} #{first_name}"
+      else
+        "#{first_name} #{last_name}"
+      end
+    else
+      self.name
+    end
   end
 
   def password_required?
