@@ -1,0 +1,6 @@
+.wrapper
+  h1= tr('Feedbacks')
+
+  .list_view= render @feedbacks
+
+  = will_paginate @feedbacks

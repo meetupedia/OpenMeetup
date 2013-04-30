@@ -1,0 +1,5 @@
+= div_for feedback, :class => 'list_item' do
+  - if feedback.user
+    =' user_link feedback.user
+    span.date= timeago_tag feedback.created_at
+  p= simple_format feedback.body

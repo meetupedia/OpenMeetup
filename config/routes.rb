@@ -34,6 +34,8 @@ Openmeetup::Application.routes.draw do
     end
   end
 
+  resources :feedbacks
+
   resources :groups do
     member do
       get :events

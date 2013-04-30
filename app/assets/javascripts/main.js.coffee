@@ -25,3 +25,8 @@ $ ->
   $('a.function').live 'click', ->
     $(this).toggleClass('expanded')
     false
+
+  $('#new_feedback textarea').on 'focus', ->
+    $(this).css(
+      height: '120px'
+    ).parent().find('input').show()

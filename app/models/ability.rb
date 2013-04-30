@@ -24,6 +24,8 @@ class Ability
 
       can :create, EventInvitation
 
+      can :index, Feedback if current_user.is_admin?
+
       can :create, Group
       can [:update, :destroy, :requested_members, :set_image, :set_header], Group do |group|
         group.admins.include?(current_user) or current_user.is_admin?

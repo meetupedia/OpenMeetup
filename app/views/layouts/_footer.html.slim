@@ -22,18 +22,23 @@
           li= link_to tr('Localization'), 'http://openmeetup.org/?localization'
           li= link_to tr('Quality Assurance'), 'http://openmeetup.org/?qualityassurance'
 
-      - if current_user
-        .span4
-          .footer-showlove
-            h3= tr('Spread the word')
-            .footer-facebook
-              | <div class="fb-like" data-href="http://meetupedia.com" data-send="false" data-layout="button_count" data-show-faces="false"></div>
-            .footer-google
-              | <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
-              | <g:plusone href="http://meetupedia.com" size="medium"></g:plusone>
-            .footer-twitter
-              | <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://meetupedia.com" data-text="Wow, a free meetup.com alternative -->">Tweet</a>
-              | <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+      .span4
+        .footer-showlove
+          h3= tr('Spread the word')
+          .footer-facebook
+            | <div class="fb-like" data-href="http://meetupedia.com" data-send="false" data-layout="button_count" data-show-faces="false"></div>
+          .footer-google
+            | <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+            | <g:plusone href="http://meetupedia.com" size="medium"></g:plusone>
+          .footer-twitter
+            | <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://meetupedia.com" data-text="Wow, a free meetup.com alternative -->">Tweet</a>
+            | <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+      .span8
+        h3= tr('How can we make this page better for you?')
+        = form_for Feedback.new, :remote => true do |f|
+          = f.text_area :body
+          = f.submit tr('Send feedback')
 
     // footer for the standalone versions
 
@@ -45,7 +50,7 @@
       - if Settings.customization == 'get2gather'
         .pull-right
           = link_to tr('FAQ'), about_path
-          '  - 
+          '  -
           = link_to tr('Contact (get2gather ETH)'), 'mailto:PDLGET2GAT@ex1.eemea.ericsson.se'
 
     - if Settings.multilingual
