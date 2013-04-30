@@ -18,7 +18,7 @@ class EventsController < CommonController
   def create
     if @event.save
       create_activity @event
-      if @event.invite_all_group_members
+      if @event.invite_all_group_members == '1'
         (@event.group.members - @event.participants).each do |user|
           event_invitation = EventInvitation.find_or_create_by_event_id_and_invited_user_id(@event.id, user.id)
           begin
