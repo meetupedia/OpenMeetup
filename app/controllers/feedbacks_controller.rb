@@ -10,5 +10,8 @@ class FeedbacksController < CommonController
 
   def create
     @feedback.save
+    User.where(:is_admin => true).each do |user|
+      AdminMailer.feedback(@feedback, user).deliver
+    end
   end
 end
