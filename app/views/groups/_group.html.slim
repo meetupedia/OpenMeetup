@@ -6,7 +6,7 @@
         - if membership.is_admin?
           span.label.label-important= tr('admin')
         - else
-          span.label.label-success=' tr('member')
+          span.label.label-success= tr('member')
     h3= link_to group.name, group
     p= render group.tags.order('name ASC')
     = render 'groups/tile_menu', :group => group
