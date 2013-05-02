@@ -99,7 +99,7 @@ class User < ActiveRecord::Base
         "#{first_name} #{last_name}"
       end
     else
-      self.name
+      attributes['name']
     end
   end
 
