@@ -2,6 +2,7 @@
 
 class Post < ActiveRecord::Base
   include CommonCommentable
+  include CommonVoteable
   key :post, :as => :text
   key :is_highlighted, :as => :boolean, :default => false
   key :is_broadcasted, :as => :boolean, :default => false

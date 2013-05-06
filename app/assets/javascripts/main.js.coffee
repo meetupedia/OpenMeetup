@@ -18,13 +18,20 @@ $ ->
 #    initPage()
 
 
-  $('a[rel*=modal], a.modal').live 'click', ->
+  $(document).on 'click', 'a[rel*=modal], a.modal', ->
     modalbox.create $(this).attr('href')
     return false
 
-  $('a.function').live 'click', ->
+  $(document).on 'click', 'a.function', ->
     $(this).toggleClass('expanded')
     false
+
+  $(document).on 'click', 'a.set_vote', ->
+    $(this).parent().find('a').addClass('disabled')
+    false
+
+  $(document).on 'ajax:success', 'a.set_vote', (event, data, status, xhr) ->
+    $(this).parent().replaceWith(data)
 
   $('#new_feedback textarea').on 'focus', ->
     $(this).css(

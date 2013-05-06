@@ -119,6 +119,8 @@ class Ability
         user_follow.user == current_user
       end
 
+      can :set, Vote
+
       can [:index, :show, :create, :edit, :all, :own, :starred, :with_user], Wave
 
       can :create, WaveItem

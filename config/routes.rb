@@ -170,6 +170,13 @@ Openmeetup::Application.routes.draw do
     end
   end
 
+  resources :votes, :only => [:index] do
+    collection do
+      get :set
+      post :set
+    end
+  end
+
   resources :waves do
     resources :wave_items
   end

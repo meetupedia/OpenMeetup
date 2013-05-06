@@ -1,0 +1,5 @@
+.wrapper
+  - unless @voteable.voters.empty?
+    .avatars
+      - @voteable.voters.each do |user|
+        =' user_avatar user
