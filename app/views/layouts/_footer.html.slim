@@ -4,6 +4,12 @@
     // footer for the global version
 
     - unless Settings.standalone
+      .span8
+        h4= tr('How can we make this page better for you?')
+        = form_for Feedback.new, :remote => true do |f|
+          = f.text_area :body
+          = f.submit trl('Send feedback'), :class => 'btn btn-primary', :disable_with => trl('Sending...')
+
       .span2
         h3= tr('About')
         ul
@@ -33,12 +39,6 @@
           .footer-twitter
             | <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://meetupedia.com" data-text="Wow, a free meetup.com alternative -->">Tweet</a>
             | <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
-      .span8
-        h4= tr('How can we make this page better for you?')
-        = form_for Feedback.new, :remote => true do |f|
-          = f.text_area :body
-          = f.submit tr('Send feedback'), :class => 'btn btn-primary', :disable_with => trl('Sending...')
 
     // footer for the standalone versions
 
