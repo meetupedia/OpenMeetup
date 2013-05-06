@@ -4,8 +4,9 @@ class AdminMailer < CommonMailer
 
   def feedback(feedback_id, user_id)
     if @feedback = Feedback.find_by_id(feedback_id) and @recipient = User.find_by_id(user_id)
-      @email = @recipient.email
-      mail :to => @email, :subject => 'New feedback'
+      if @email = @recipient.email
+        mail :to => @email, :subject => 'New feedback'
+      end
     end
   end
 
