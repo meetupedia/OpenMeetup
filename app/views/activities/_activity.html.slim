@@ -46,7 +46,7 @@
       = render 'comments/comments', :commentable => activity
 
       - if current_user
-        p= link_to_function tr('Add comment'), "$('#add-activity-comment-#{activity.id}').toggle().find('textarea').focus()", :class => 'btn btn-mini'
+        p= link_to_function tr('Comment'), "$('#add-activity-comment-#{activity.id}').toggle().find('textarea').focus()"
 
         div(id="add-activity-comment-#{activity.id}" style="display: none;")
           = form_for Comment.new, :url => polymorphic_path([activity, :comments]), :remote => true do |f|

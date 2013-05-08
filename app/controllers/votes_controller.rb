@@ -6,7 +6,7 @@ class VotesController < CommonController
 
   def index
     @voteable = Vote.find_by_voteable_type_and_voteable_id(params[:voteable_type], params[:voteable_id]).andand.voteable
-    redirect_to root_url unless request.xhr?
+    redirect_to root_url unless @voteable and request.xhr?
   end
 
   def set

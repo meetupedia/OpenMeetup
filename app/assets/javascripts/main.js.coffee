@@ -32,6 +32,4 @@ $ ->
       $(this).parent().replaceWith(data)
 
     .on 'focus', '#new_feedback textarea', ->
-      $(this).css(
-        height: '120px'
-      ).parent().find('input').show()
+      $(this).css(height: '120px').parent().find('input').show()
