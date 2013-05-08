@@ -15,6 +15,7 @@ Openmeetup::Application.routes.draw do
   mount MembershipRequestMailer::Preview => '/membership_request_mailer/mail_view'
   mount PostMailer::Preview => '/post_mailer/mail_view'
   mount UserMailer::Preview => '/user_mailer/mail_view'
+  mount VoteMailer::Preview => '/vote_mailer/mail_view'
   mount WaveMailer::Preview => '/wave_mailer/mail_view'
 
   namespace :admin do
