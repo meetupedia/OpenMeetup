@@ -15,6 +15,7 @@ class VotesController < CommonController
       if @vote.new_record?
         @vote.save
         create_activity @vote
+        VoteMailer.new_vote(@vote.id).perform
       else
         @vote.destroy
       end
