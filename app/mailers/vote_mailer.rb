@@ -4,9 +4,11 @@ class VoteMailer < CommonMailer
 
   def new_vote(vote_id)
     if @vote = Vote.find_by_id(vote_id)
-      @recipient = recipient
-      @email = @recipient.email
-      mail :to => @email, :subject => 'Your '
+      @recipient = @vote.user
+      @email = @recipient.andand.email
+      if @email
+        mail :to => @email, :subject => 'New starred item'
+      end
     end
   end
 
