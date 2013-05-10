@@ -7,7 +7,7 @@ class VoteMailer < CommonMailer
       @recipient = @vote.voteable.user
       @email = @recipient.andand.email
       if @email
-        mail :to => @email, :subject => "#{@vote.user.name} likes your content!'
+        mail :to => @email, :subject => "#{@vote.user.name} likes your content!"
       end
     end
   end
