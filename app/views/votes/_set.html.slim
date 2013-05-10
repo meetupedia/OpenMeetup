@@ -1,10 +1,24 @@
 .btn-group.pull-right
-  - if Vote.find_by_voteable_type_and_voteable_id_and_user_id(item.class.name, item.id, current_user.id)
-    - if item.votes_count > 0
-      = link_to item.votes_count, votes_path(:voteable_type => item.class.name, :voteable_id => item.id), :class => 'btn btn-mini btn-success', :rel => 'modal'
-    = link_to '<i class="icon-star icon-white"></i>'.html_safe, set_votes_path(:voteable_type => item.class.name, :voteable_id => item.id), :remote => true, :class => 'set_vote btn btn-mini btn-success'
-  - else
-    - if item.votes_count > 0
-      = link_to item.votes_count, votes_path(:voteable_type => item.class.name, :voteable_id => item.id), :class => 'btn btn-mini', :rel => 'modal'
-    - if current_user
-      = link_to '<i class="icon-star"></i>'.html_safe, set_votes_path(:voteable_type => item.class.name, :voteable_id => item.id), :remote => true, :class => 'set_vote btn btn-mini'
+
+  - if current_user
+
+	  // if the user has voted for this item already
+	  - if Vote.find_by_voteable_type_and_voteable_id_and_user_id(item.class.name, item.id, current_user.id)
+
+	    // if there has been votes --> display vote count
+	    - if item.votes_count > 0
+	      = link_to item.votes_count, votes_path(:voteable_type => item.class.name, :voteable_id => item.id), :class => 'btn btn-mini btn-success', :rel => 'modal'
+
+	    // lets display the green star
+	    = link_to '<i class="icon-star icon-white"></i>'.html_safe, set_votes_path(:voteable_type => item.class.name, :voteable_id => item.id), :remote => true, :class => 'set_vote btn btn-mini btn-success'
+
+	  // if the user has NOT voted for this item
+	  - else
+
+	    // if there has been votes --> display vote count
+	    - if item.votes_count > 0
+	      = link_to item.votes_count, votes_path(:voteable_type => item.class.name, :voteable_id => item.id), :class => 'btn btn-mini', :rel => 'modal'
+
+	    // lets display the gray star
+	    - if current_user
+	      = link_to '<i class="icon-star"></i>'.html_safe, set_votes_path(:voteable_type => item.class.name, :voteable_id => item.id), :remote => true, :class => 'set_vote btn btn-mini'
