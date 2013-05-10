@@ -5,5 +5,5 @@
  *= require gmaps4rails
  *= require fancybox
  *= require token-input-facebook
- *= require_tree .
+ *= require_tree ./all
 */

@@ -4,10 +4,10 @@ class VoteMailer < CommonMailer
 
   def new_vote(vote_id)
     if @vote = Vote.find_by_id(vote_id)
-      @recipient = @vote.user
+      @recipient = @vote.voteable.user
       @email = @recipient.andand.email
       if @email
-        mail :to => @email, :subject => 'New starred item'
+        mail :to => @email, :subject => "#{@vote.user.name} likes your content!'
       end
     end
   end
@@ -16,7 +16,7 @@ class VoteMailer < CommonMailer
 
     def new_vote
       vote = Vote.last
-      mail = WaveMailer.new_vote(vote.id)
+      mail = VoteMailer.new_vote(vote.id)
       mail
     end
   end
