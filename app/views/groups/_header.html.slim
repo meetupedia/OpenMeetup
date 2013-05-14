@@ -30,7 +30,7 @@
             =' link_to tr('Invite friends'), new_group_group_invitation_path(@group), :rel => 'modal', :class => 'btn btn-primary'
 
       - else
-        .button-menu=' link_to %{<i class="icon-plus-sign icon-white"></i> #{tr('Join')}}.html_safe, set_group_memberships_path(@group), :class => 'btn btn-primary', :onclick => "_gaq.push(['_trackEvent', 'Group', 'Join']);"
+        .button-menu=' link_to %{<i class="icon-plus-sign icon-white"></i> #{tr('Join')}}.html_safe, set_group_memberships_path(@group), :class => 'btn btn-primary', :onclick => "_gaq.push(['_trackEvent', 'Join group', 'Group']);"
 
     - if @group.image.file?
       .avatar= link_to(image_tag(@group.image.url(:small), :alt => @group.name, :height => 96, :width => 96, :title => @group.name), @group)

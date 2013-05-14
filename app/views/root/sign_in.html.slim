@@ -4,7 +4,7 @@
       h2= tr('Sign in')
       p
         - if Settings.enable_facebook_login
-          =' link_to image_tag('facebook_connect.png', :alt => tr('Sign up with Facebook')), auth_path(:facebook), 'data-no-turbolink' => true, :onclick => "_gaq.push(['_trackEvent', 'User', 'SignIn']);"
+          =' link_to image_tag('facebook_connect.png', :alt => tr('Sign up with Facebook')), auth_path(:facebook), 'data-no-turbolink' => true, :onclick => "_gaq.push(['_trackEvent', 'Sign in', 'User']);"
         - if Settings.enable_twitter_login
-          = link_to image_tag('twitter_connect.png', :alt => tr('Sign up with Twitter')), auth_path(:twitter), 'data-no-turbolink' => true, :onclick => "_gaq.push(['_trackEvent', 'User', 'SignIn']);"
+          = link_to image_tag('twitter_connect.png', :alt => tr('Sign up with Twitter')), auth_path(:twitter), 'data-no-turbolink' => true, :onclick => "_gaq.push(['_trackEvent', 'Sign in', 'User']);"
       p.right= link_to tr("I don't have a Facebook or Twitter account."), sign_in_with_email_path

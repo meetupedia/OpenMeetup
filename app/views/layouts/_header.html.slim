@@ -20,7 +20,7 @@
               - if current_user.notifications.size > 0
                 span.badge.badge-important= current_user.notifications.size
 
-        form.navbar-search action='/search' method='get' onsubmit="_gaq.push(['_trackEvent', 'Search', 'Run']);"
+        form.navbar-search action='/search' method='get' onsubmit="_gaq.push(['_trackEvent', 'Search', 'Search']);"
           input type='text' class='search-query' placeholder=trl('Search') name='q'
         - unless current_user
           ul.nav.pull-right

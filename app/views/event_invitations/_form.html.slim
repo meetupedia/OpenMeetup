@@ -7,7 +7,7 @@
   #more-options
     = f.input :message, :label => tr('Personal message')
   = f.actions do
-    =' f.action :submit, :label => trl('Send'), :onclick => "_gaq.push(['_trackEvent', 'Event', 'Invitation']);"
+    =' f.action :submit, :label => trl('Send'), :onclick => "_gaq.push(['_trackEvent', 'Send event invitation', 'Event invitation']);"
     = f.action :cancel, :label => trl('Cancel')
 
 javascript:
