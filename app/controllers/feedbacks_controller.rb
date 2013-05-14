@@ -13,5 +13,11 @@ class FeedbacksController < CommonController
     User.where(:is_admin => true).each do |user|
       AdminMailer.feedback(@feedback, user).deliver
     end
+    respond_to do |format|
+      format.js
+      format.html do
+        redirect_to root_url, :notice => 'Thank you, we appreciate your feedback!'
+      end
+    end
   end
 end
