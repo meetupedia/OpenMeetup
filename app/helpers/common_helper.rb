@@ -6,6 +6,11 @@ module CommonHelper
     nil
   end
 
+ 
+  def can?(*args)
+    false
+  end
+
   def application_title
     Settings.title
   end
