@@ -35,10 +35,6 @@ class CommonMailer < ActionMailer::Base
     false
   end
 
-  def can?(*args)
-    false
-  end
-
   def set_locale(locale)
     I18n.locale = locale
     Thread.current[:tr8n_current_language] = Tr8n::Language.for(I18n.locale)
