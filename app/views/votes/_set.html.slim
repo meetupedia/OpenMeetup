@@ -18,4 +18,4 @@
 
     // lets display the gray star
     - if current_user
-      = link_to '<i class="icon-star"></i>'.html_safe, set_votes_path(:voteable_type => item.class.name, :voteable_id => item.id), :remote => true, :class => 'set_vote btn btn-mini'
+      = link_to '<i class="icon-star"></i>'.html_safe, set_votes_path(:voteable_type => item.class.name, :voteable_id => item.id), :remote => true, :class => 'set_vote btn btn-mini', :onclick => "_gaq.push(['_trackEvent', 'Like', 'Like']);"
