@@ -1,11 +1,11 @@
 span.interest_tagging(id="interest_tagging_button_for_interest_#{interest.id}")
   - if interest_tagging = interest.interest_tagging_for(current_user)
-    =' link_to interest_tagging, :method => :delete, :class => 'btn btn-mini btn-success ', :remote => true, :onclick => "_gaq.push(['_trackEvent', 'Interest', 'Unset']);" do
+    =' link_to interest_tagging, :method => :delete, :class => 'btn btn-mini btn-success ', :remote => true, :onclick => "_gaq.push(['_trackEvent', 'Unset interest', 'Interest']);" do
       = tr(interest.name)
       br
       = image_tag interest.image.url(:normal)
   - else
-    =' link_to interest_interest_taggings_path(interest), :method => :post, :class => 'btn btn-mini', :remote => true, :onclick => "_gaq.push(['_trackEvent', 'Interest', 'Set']);" do
+    =' link_to interest_interest_taggings_path(interest), :method => :post, :class => 'btn btn-mini', :remote => true, :onclick => "_gaq.push(['_trackEvent', 'Set interest', 'Interest']);" do
       = tr(interest.name)
       br
       = image_tag interest.image.url(:normal)

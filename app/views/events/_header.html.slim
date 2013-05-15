@@ -30,22 +30,22 @@
               =' tr('Not going')
               span.caret
             ul.dropdown-menu
-              li= link_to tr('Going'), event_participations_path(@event), :method => :post, :onclick => "_gaq.push(['_trackEvent', 'Event', 'Going']);"
-              li= link_to "#{tr('Not going')} <i class='icon-ok'></i>".html_safe, event_absences_path(@event), :method => :post, :onclick => "_gaq.push(['_trackEvent', 'Event', 'Not going']);"
+              li= link_to tr('Going'), event_participations_path(@event), :method => :post, :onclick => "_gaq.push(['_trackEvent', 'Event RSVP - going', 'Event RSVP']);"
+              li= link_to "#{tr('Not going')} <i class='icon-ok'></i>".html_safe, event_absences_path(@event), :method => :post, :onclick => "_gaq.push(['_trackEvent', 'Event RSVP - not going', 'Event RSVP']);"
         - if participation
           .btn-group.pull-right
             a.btn.dropdown-toggle(data-toggle="dropdown" href="#")
               =' tr('Going')
               span.caret
             ul.dropdown-menu
-              li= link_to "#{tr('Going')} <i class='icon-ok'></i>".html_safe, event_participations_path(@event), :method => :post, :onclick => "_gaq.push(['_trackEvent', 'Event', 'Going']);"
-              li= link_to tr('Not going'), event_absences_path(@event), :method => :post, :onclick => "_gaq.push(['_trackEvent', 'Event', 'Not going']);"
+              li= link_to "#{tr('Going')} <i class='icon-ok'></i>".html_safe, event_participations_path(@event), :method => :post, :onclick => "_gaq.push(['_trackEvent', 'Event RSVP - going', 'Event RSVP']);"
+              li= link_to tr('Not going'), event_absences_path(@event), :method => :post, :onclick => "_gaq.push(['_trackEvent', 'Event RSVP - not going', 'Event RSVP']);"
         - if @event.start_time > Time.now
           = link_to tr('Invite friends'), new_event_event_invitation_path(@event), :rel => 'modal', :class => 'btn btn-primary'
 
       - else
-        =' button_to "<i class='icon-minus-sign icon-black'></i> #{tr('Decline')}".html_safe, event_absences_path(@event), :method => :post, :class => 'btn', :onclick => "_gaq.push(['_trackEvent', 'Event', 'Not going']);"
-        = button_to "<i class='icon-plus-sign icon-white'></i> #{tr('Join')}".html_safe, event_participations_path(@event), :method => :post, :class => 'btn btn-primary', :onclick => "_gaq.push(['_trackEvent', 'Event', 'Going']);"
+        =' button_to "<i class='icon-minus-sign icon-black'></i> #{tr('Decline')}".html_safe, event_absences_path(@event), :method => :post, :class => 'btn', :onclick => "_gaq.push(['_trackEvent', 'Event RSVP - not going', 'Event RSVP']);"
+        = button_to "<i class='icon-plus-sign icon-white'></i> #{tr('Join')}".html_safe, event_participations_path(@event), :method => :post, :class => 'btn btn-primary', :onclick => "_gaq.push(['_trackEvent', 'Event RSVP - going', 'Event RSVP']);"
 
       - if @event.start_time < Time.now
         - if participation
