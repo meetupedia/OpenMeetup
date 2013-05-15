@@ -22,11 +22,6 @@ modalbox = {
         modalbox.close()
       }
     })
-    $('div.modal-close a').live('click', function(){
-      $(this).remove()
-      modalbox.close()
-      return false
-    })
   },
 
   create: function(href){
@@ -63,6 +58,11 @@ modalbox = {
   content: function(html){
     $('#pjax').attr('id', null)
     $('div.modal-content').last().html('<div class="modal-close"><a href="#"><img src="/modal/closelabel.png" alt=""/></a></div><div class="pjax" id="pjax">' + html + '</div>')
+    $(document).on('click', 'div.modal-close a', function(){
+      $(this).remove()
+      modalbox.close()
+      return false
+    })
   },
 
   load: function(href, callback){
