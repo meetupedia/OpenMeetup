@@ -109,7 +109,7 @@ class Group < ActiveRecord::Base
   end
 
   def next_event
-    @next_event ||= events.where('start_time > ?', Time.zone.now).order('start_time ASC').first
+    @next_event ||= events.where('start_time > ?', Time.now).order('start_time ASC').first
   end
 
   def review_for(user)

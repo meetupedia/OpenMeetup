@@ -16,7 +16,7 @@
             li.divider
             - if can? :users_with_emails, @event
               li= link_to tr('Export list of participants'), users_with_emails_event_path(@event), :rel => 'modal'
-            - if participation and @event.questions.present? and @event.start_time > Time.zone.now
+            - if participation and @event.questions.present? and @event.start_time > Time.now
               li= link_to tr('Edit answers'), edit_participation_path(participation), :rel => 'modal'
             - if can? :edit, @event
               li= link_to tr('Edit event'), edit_event_path(@event), :rel => 'modal'
@@ -40,18 +40,18 @@
             ul.dropdown-menu
               li= link_to "#{tr('Going')} <i class='icon-ok'></i>".html_safe, event_participations_path(@event), :method => :post, :onclick => "_gaq.push(['_trackEvent', 'Event', 'Going']);"
               li= link_to tr('Not going'), event_absences_path(@event), :method => :post, :onclick => "_gaq.push(['_trackEvent', 'Event', 'Not going']);"
-        - if @event.start_time > Time.zone.now
+        - if @event.start_time > Time.now
           = link_to tr('Invite friends'), new_event_event_invitation_path(@event), :rel => 'modal', :class => 'btn btn-primary'
 
       - else
         =' button_to "<i class='icon-minus-sign icon-black'></i> #{tr('Decline')}".html_safe, event_absences_path(@event), :method => :post, :class => 'btn', :onclick => "_gaq.push(['_trackEvent', 'Event', 'Not going']);"
         = button_to "<i class='icon-plus-sign icon-white'></i> #{tr('Join')}".html_safe, event_participations_path(@event), :method => :post, :class => 'btn btn-primary', :onclick => "_gaq.push(['_trackEvent', 'Event', 'Going']);"
 
-      - if @event.start_time < Time.zone.now
+      - if @event.start_time < Time.now
         - if participation
           = link_to tr('Write a review'), new_event_review_path(@event), :class => 'btn btn-primary', :rel => 'modal'
     - else
-      - if @event.start_time > Time.zone.now
+      - if @event.start_time > Time.now
         = link_to "<i class='icon-minus-sign icon-black'></i> #{tr('Decline')}".html_safe, set_event_absences_path(@event), :class => 'btn'
         = link_to "<i class='icon-plus-sign icon-white'></i> #{tr('Join')}".html_safe, set_event_participations_path(@event), :class => 'btn btn-primary'
 

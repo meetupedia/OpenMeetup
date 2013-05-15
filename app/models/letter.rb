@@ -13,7 +13,7 @@ class Letter < ActiveRecord::Base
   validates_presence_of :template
 
   def mail!
-    update_attributes :is_mailed => true, :mailed_at => Time.zone.now
+    update_attributes :is_mailed => true, :mailed_at => Time.now
     recipients.find_each do |user|
       LetterMailer.letter(self, user).deliver
     end

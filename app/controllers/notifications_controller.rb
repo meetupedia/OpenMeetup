@@ -13,7 +13,7 @@ class NotificationsController < CommonController
     @last_notified ||= current_user.last_notified
     @notifications_count = current_user.notifications.where('created_at > ?', @last_notified).count
     @counts = Group.joins(:notifications).where('notifications.user_id' => current_user.id).where('notifications.created_at > ?', @last_notified).group('groups.id').count
-    current_user.update_attributes :notifications_count => 0, :last_notified => Time.zone.now
+    current_user.update_attributes :notifications_count => 0, :last_notified => Time.now
   end
 
   def destroy

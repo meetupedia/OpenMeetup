@@ -29,7 +29,7 @@ class Wave < ActiveRecord::Base
   end
 
   def change!
-    update_attribute :last_changed_at, Time.zone.now
+    update_attribute :last_changed_at, Time.now
   end
 
   def create_initial_membership
