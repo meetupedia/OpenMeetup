@@ -49,6 +49,7 @@ class User < ActiveRecord::Base
   has_many :memberships, :dependent => :destroy
   has_many :notifications, :dependent => :destroy
   has_many :participations, :dependent => :destroy
+  has_many :posts, :dependent => :destroy
   has_many :reviews, :dependent => :destroy
   has_many :taggings, :dependent => :destroy
   has_many :tags, :through => :taggings
