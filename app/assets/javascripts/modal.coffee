@@ -73,3 +73,6 @@ modalbox =
   reloadParent: ->
     modalbox.close ->
       modalbox.reload()
+
+
+window.modalbox = modalbox
