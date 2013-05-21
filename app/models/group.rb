@@ -65,7 +65,7 @@ class Group < ActiveRecord::Base
   auto_permalink :name
 
   before_validation do |group|
-    group.permaname = group.permaname.parameterize
+    group.permaname = group.permaname.andand.parameterize
     true
   end
 
