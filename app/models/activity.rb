@@ -2,6 +2,7 @@
 
 class Activity < ActiveRecord::Base
   include CommonCommentable
+  include CommonVoteable
   timestamps
 
   belongs_to :activable, :polymorphic => true

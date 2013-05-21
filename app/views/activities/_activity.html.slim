@@ -2,6 +2,7 @@
   = render activity.activable
 - else
   = div_for activity, :class => 'list_item avatar_item' do
+    = render 'votes/set', :item => activity
     .avatar= user_avatar activity.user
     - if activity.activable.class.name == 'Event'
       =' user_link activity.activable.user
