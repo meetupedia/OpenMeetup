@@ -14,6 +14,14 @@ class ParticipationsController < CommonController
       @group = @event.group
       @participation.save
       cookies.delete :add_participation_for
+      run_later do
+        @participation.event.group.admins.each do |user|
+          begin
+            EventMailer.participation(@participation, user).deliver
+          rescue
+          end
+        end
+      end
     end
     if @event.questions.size > 0
       redirect_to edit_participation_path(@participation)
