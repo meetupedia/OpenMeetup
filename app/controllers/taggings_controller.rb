@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 
 class TaggingsController < CommonController
   load_resource :tag

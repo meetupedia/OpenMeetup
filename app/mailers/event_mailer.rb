@@ -2,6 +2,14 @@
 
 class EventMailer < CommonMailer
 
+  def new_event(event, recipient)
+    @recipient = recipient
+    @email = @recipient.email
+    @event = event
+    @user = @event.user
+    mail :to => @email, :subject => "#{@user.name} has created a new event: #{@event.name}"
+  end
+
   def absence(absence, recipient)
     @recipient = recipient
     @email = @recipient.email
@@ -20,6 +28,12 @@ class EventMailer < CommonMailer
 
 
   class Preview < MailView
+
+    def event
+      event = Event.last
+      mail = EventMailer.event(event, User.first)
+      mail
+    end
 
     def absence
       absence = Absence.last
