@@ -1,6 +1,11 @@
 #footer.clearfix
   .container
 
+    // google analytics custom segment for logged in users
+
+    - if current_user
+      | <script>_gaq.push(['_setCustomVar', 1, 'Member?', 'Yes', 1]);</script>
+
     // footer for the global version
 
     - unless Settings.standalone
@@ -11,23 +16,23 @@
             = f.text_area :body
             = f.submit trl('Send feedback'), :class => 'btn btn-primary', :disable_with => trl('Sending...')
 
-      .span2
-        h3= tr('About')
-        ul
-          li= link_to tr('About'), 'http://openmeetup.org/?about'
-          li= link_to tr('Team'), 'http://openmeetup.org/?team'
-          li= link_to tr('Blog'), 'http://openmeetup.org/?blog'
-          li= link_to tr('Press'), 'http://openmeetup.org/?press'
-          li= link_to tr('Contact'), 'http://openmeetup.org/?contact'
-      .span2
-        h3= tr('Get involved')
-        ul
-          li= link_to tr('Coding'), 'http://openmeetup.org/?coding'
-          li= link_to tr('Documentation'), 'http://openmeetup.org/?documentation'
-          li= link_to tr('Education'), 'http://openmeetup.org/?education'
-          li= link_to tr('Helping Users'), 'http://openmeetup.org/?helpingusers'
-          li= link_to tr('Localization'), 'http://openmeetup.org/?localization'
-          li= link_to tr('Quality Assurance'), 'http://openmeetup.org/?qualityassurance'
+      / .span2
+      /   h3= tr('About')
+      /   ul
+      /     li= link_to tr('About'), 'http://openmeetup.org/?about'
+      /     li= link_to tr('Team'), 'http://openmeetup.org/?team'
+      /     li= link_to tr('Blog'), 'http://openmeetup.org/?blog'
+      /     li= link_to tr('Press'), 'http://openmeetup.org/?press'
+      /     li= link_to tr('Contact'), 'http://openmeetup.org/?contact'
+      / .span2
+      /   h3= tr('Get involved')
+      /   ul
+      /     li= link_to tr('Coding'), 'http://openmeetup.org/?coding'
+      /     li= link_to tr('Documentation'), 'http://openmeetup.org/?documentation'
+      /     li= link_to tr('Education'), 'http://openmeetup.org/?education'
+      /     li= link_to tr('Helping Users'), 'http://openmeetup.org/?helpingusers'
+      /     li= link_to tr('Localization'), 'http://openmeetup.org/?localization'
+      /     li= link_to tr('Quality Assurance'), 'http://openmeetup.org/?qualityassurance'
 
       .span4
         .footer-showlove
