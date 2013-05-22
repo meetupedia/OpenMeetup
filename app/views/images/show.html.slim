@@ -1,9 +1,9 @@
 .wrapper
   .clearfix
     .pull-left
-      p= link_to tr('Previous'), previous_image_path(@image), :class => 'btn'
+      = link_to tr('Previous'), previous_image_path(@image), :class => 'btn'
     .pull-right
-      = link_to tr('Next'), next_image_path(@image), :class => 'btn'
+      =' link_to tr('Next'), next_image_path(@image), :class => 'btn'
       - if current_user
         .btn-group
           a.btn.dropdown-toggle(data-toggle="dropdown" href="#")
@@ -20,6 +20,8 @@
       - if @image.imageable
         h3= link_to @image.imageable.name, url_for([@image.imageable, :images])
   p = image_tag @image.image.url(:normal)
+
+  .pull-right= render 'votes/set', :item => @image
 
   - if @image.caption.present?
     = textilize(@image.caption).html_safe

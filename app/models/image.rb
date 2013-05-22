@@ -1,5 +1,6 @@
 class Image < ActiveRecord::Base
   include CommonCommentable
+  include CommonVoteable
   key :image_file_name
   key :image_content_type
   key :image_file_size, :as => :integer

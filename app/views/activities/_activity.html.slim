@@ -1,5 +1,11 @@
 - if activity.activable.class.name == 'Post'
   = render activity.activable
+- elsif activity.activable.class.name == 'Image'
+  = div_for activity, :class => 'list_item avatar_item' do
+    = render 'votes/set', :item => activity.activable
+    =' user_link activity.activable.user
+    = tr('uploaded a picture ')
+    p= link_to image_tag(activity.activable.image.url(:small), :alt => '', :height => 80, :width => 80), activity.activable
 - else
   = div_for activity, :class => 'list_item avatar_item' do
     = render 'votes/set', :item => activity
@@ -28,10 +34,6 @@
       =' user_link activity.activable.user
       = tr('follows ')
       // FIXME
-    - elsif activity.activable.class.name == 'Image'
-      =' user_link activity.activable.user
-      = tr('uploaded a picture ')
-      p= link_to image_tag(activity.activable.image.url(:small), :alt => '', :height => 80, :width => 80), activity.activable
     - elsif activity.activable.class.name == 'Comment'
       =' user_link activity.activable.user
       = tr('made ')
