@@ -1,4 +1,0 @@
-#!/bin/bash
-
-rsync -rptzL --stats --progress --exclude-from=`dirname $_`/stage.exclude -e 'ssh -p 30000' . nagybence@tipogral.hu:/var/www/openmeetup-dev
-ssh -p 30000 nagybence@tipogral.hu /var/www/openmeetup-dev/script/restart
