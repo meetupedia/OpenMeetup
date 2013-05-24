@@ -49,8 +49,6 @@
       =' user_link activity.activable.user
       = tr('liked:')
       = render activity.activable.voteable
-      | .
-      p= render 'posts/post', :post => activity.activable.voteable
 
     // FIXME
     // .date= timeago_tag activity.created_at
