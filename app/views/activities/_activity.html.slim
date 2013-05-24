@@ -47,10 +47,8 @@
       p= activity.activable.review
     - elsif activity.activable.class.name == 'Vote'
       =' user_link activity.activable.user
-      = tr('liked ')
-      = link_to tr('a post'), activity.activable.voteable
-      = tr(' by ')
-      = link_to activity.activable.voteable.user.name, activity.activable.voteable.user
+      = tr('liked:')
+      = render activity.activable.voteable
       | .
       p= render 'posts/post', :post => activity.activable.voteable
 
