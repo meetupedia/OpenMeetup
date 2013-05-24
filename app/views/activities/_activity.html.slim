@@ -66,4 +66,4 @@
         div(id="add-activity-comment-#{activity.id}" style="display: none;")
           = form_for Comment.new, :url => polymorphic_path([activity, :comments]), :remote => true do |f|
             = f.text_area :comment
-            = f.submit trl('Add comment'), :class => 'btn btn-primary', :disable_with => trl('Sending...')
+            = f.submit trl('Add comment'), :button_html => {:class => 'btn btn-primary', :disable_with => trl('Sending...')}

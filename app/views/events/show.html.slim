@@ -34,5 +34,5 @@
       - if can? :create, post = @event.posts.build
         = form_for post, :url => url_for([@event, :posts]), :remote => true do |f|
           = f.text_area :post
-          = f.submit trl('Send'), :class => 'btn btn-primary', :disable_with => trl('Sending...')
+          = f.submit trl('Send'), :button_html => {:class => 'btn btn-primary', :disable_with => trl('Sending...')}
       = render 'activities/activities', :activities => @activities

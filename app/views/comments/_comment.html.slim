@@ -12,7 +12,7 @@
       = form_for Comment.new, :url => polymorphic_path([comment.commentable, :comments]), :remote => true do |f|
         = f.hidden_field :reply_to_id, :value => comment.id
         = f.text_area :comment
-        = f.submit trl('Add comment'), :class => 'btn btn-primary', :disable_with => trl('Sending...'), :onclick => "_gaq.push(['_trackEvent', 'Add Comment', 'Comment']);"
+        = f.submit trl('Add comment'), :button_html => {:class => 'btn btn-primary', :disable_with => trl('Sending...'), :onclick => "_gaq.push(['_trackEvent', 'Add Comment', 'Comment']);"}
 
 - comment.replies.each do |comment|
   = render comment, :commentable => commentable
