@@ -29,9 +29,9 @@ class EventMailer < CommonMailer
 
   class Preview < MailView
 
-    def event
+    def new_event
       event = Event.last
-      mail = EventMailer.event(event, User.first)
+      mail = EventMailer.new_event(event, User.first)
       mail
     end
 
