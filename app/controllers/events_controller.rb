@@ -18,17 +18,16 @@ class EventsController < CommonController
   def create
     if @event.save
       create_activity @event
-      (@event.group.admins - [@event.user]).each do |user|
-        EventMailer.new_event(@event, user).deliver
+      recipients = @event.group.admins - [@event.user]
+      recipients += @event.group.members - @event.participants if @event.invite_all_group_members == '1'
+      recipients.each do |user|
+        event_invitation = EventInvitation.find_or_create_by_event_id_and_invited_user_id(@event.id, user.id)
+        begin
+          EventInvitationMailer.invitation(event_invitation).deliver
+        rescue
+        end
       end
       if @event.invite_all_group_members == '1'
-        (@event.group.members - @event.participants).each do |user|
-          event_invitation = EventInvitation.find_or_create_by_event_id_and_invited_user_id(@event.id, user.id)
-          begin
-            EventInvitationMailer.invitation(event_invitation).deliver
-          rescue
-          end
-        end
         redirect_to @event, :notice => trfn('Event created and invitations sent.')
       else
         redirect_to @event, :notice => trfn('Event created.')
