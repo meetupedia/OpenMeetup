@@ -22,8 +22,9 @@ class EventsController < CommonController
       recipients = @event.group.admins
       recipients += @event.group.members if @event.invite_all_group_members == '1'
       recipients -= [@event.user]
-      recipients.each do |user|
+      recipients.uniq.each do |user|
         event_invitation = EventInvitation.find_or_create_by_event_id_and_invited_user_id(@event.id, user.id)
+        event_invitation.email ||= user.email
         begin
           EventInvitationMailer.invitation(event_invitation).deliver
           counter += 1
