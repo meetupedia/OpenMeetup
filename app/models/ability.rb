@@ -30,8 +30,13 @@ class Ability
       can [:update, :destroy, :requested_members, :set_image, :set_header], Group do |group|
         group.admins.include?(current_user) or current_user.is_admin?
       end
-      can [:invited, :waves], Group do |group|
+      can :invited, Group do |group|
         group.members.include?(current_user)
+      end
+      if Settings.enable_messages
+        can :waves, Group do |group|
+          group.members.include?(current_user)
+        end
       end
 
       can :create, GroupInvitation
@@ -106,8 +111,13 @@ class Ability
       can :create, Tag
 
       can [:edit_city, :recommendations], User
-      can [:facebook_groups, :waves, :set_avatar, :set_header], User do |user|
+      can [:facebook_groups, :set_avatar, :set_header], User do |user|
         user == current_user
+      end
+      if Settings.enable_messages
+        can :waves, User do |user|
+          user == current_user
+        end
       end
       can [:update, :destroy, :calendar, :settings], User do |user|
         user == current_user or current_user.is_admin?
@@ -121,16 +131,18 @@ class Ability
 
       can :set, Vote
 
-      can [:index, :show, :create, :edit, :all, :own, :starred, :with_user], Wave
+      if Settings.enable_messages
+        can [:index, :show, :create, :edit, :all, :own, :starred, :with_user], Wave
 
-      can :create, WaveItem
+        can :create, WaveItem
 
-      can :create, WaveMembership
-      can [:update, :destroy, :set_archive, :set_delete, :set_star], WaveMembership do |wave_membership|
-        wave_membership.user == current_user
+        can :create, WaveMembership
+        can [:update, :destroy, :set_archive, :set_delete, :set_star], WaveMembership do |wave_membership|
+          wave_membership.user == current_user
+        end
+
+        can :index, WaveNote
       end
-
-      can :index, WaveNote
     else
       can :create, User
     end

@@ -19,7 +19,7 @@
                   li= link_to tr('Unset admin role'), unset_admin_user_path(@user), :method => :post, :confirm => trl('Are you sure?')
           - if @user == current_user
             = link_to tr('Edit profile'), settings_user_path(@user), :class => 'btn'
-          - else
+          - elsif Settings.enable_messages
             = link_to new_wave_path(:recipient_id => @user.id), :rel => 'modal', :class => 'btn' do
               b.icon-envelope
               '
