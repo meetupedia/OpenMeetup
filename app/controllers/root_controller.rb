@@ -44,7 +44,7 @@ class RootController < CommonController
         when 'members' then 'memberships_count DESC'
         else 'id ASC'
       end
-      @groups = Group.where('memberships_count > ?', 3).order(order).paginate :page => params[:page]
+      @groups = Group.where('memberships_count > ?', 3).where('image_updated_at IS NOT ?', nil).order(order).paginate :page => params[:page]
     end
   end
 
