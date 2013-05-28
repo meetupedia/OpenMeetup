@@ -11,16 +11,21 @@
       = f.input :street
     - if @event.new_record?
       = f.input :invite_all_group_members, :label => false, :as => :boolean, :input_html => {:checked => 'checked'}
-  p= link_to_function tr('More options'), "$('#more-options').toggle()", :class => 'function'
-  #more-options
-    - if Settings.standalone
-      .control-group
-        = f.label :city_id, tr('City')
-        = f.text_field :city_id, 'data-pre' => [@event.city].compact.map { |city| {:id => city.id, :name => city.name} }.to_json
-      = f.input :street
-    = f.inputs do
-      = f.input :description
-      = f.input :permaname, :label => false, :prepend => 'http://'+Settings.host+'/'
+  #accordion.accordion
+    .accordion-group
+      .accordion-heading
+        a class='accordion-toggle' data-toggle='collapse' data-parent='#accordion' href='#collapse'
+          = tr('More options')
+      #collapse.accordion-body.collapse
+        .accordion-inner
+          - if Settings.standalone
+            .control-group
+              = f.label :city_id, tr('City')
+              = f.text_field :city_id, 'data-pre' => [@event.city].compact.map { |city| {:id => city.id, :name => city.name} }.to_json
+            = f.input :street
+          = f.inputs do
+            = f.input :description
+            = f.input :permaname, :label => false, :prepend => 'http://'+Settings.host+'/'
   = f.actions do
     - if @event.new_record?
       =' f.action :submit, :label => tr('Create'), :onclick => "_gaq.push(['_trackEvent', 'Create event', 'Event']);", :button_html => {:class => 'btn btn-primary', :disable_with => trl('Creating...')}
