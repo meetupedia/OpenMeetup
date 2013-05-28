@@ -45,13 +45,15 @@
       = tr('wrote a review for the event ')
       = link_to activity.activable.event.title, activity.activable.event
       p= activity.activable.review
+    - elsif activity.activable.class.name == 'User'
+      =' user_link activity.activable
+      = tr('joined.')
     - elsif activity.activable.class.name == 'Vote'
       =' user_link activity.activable.user
       = tr('liked')
       .activity_item= render activity.activable.voteable
 
-    // FIXME
-    // .date= timeago_tag activity.created_at
+    .date= timeago_tag activity.created_at
 
     - if activity.activable.class.name =~ /Event|Group|Membership|Participation|Review|UserFollow/
       = render 'comments/comments', :commentable => activity

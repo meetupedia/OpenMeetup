@@ -20,18 +20,23 @@ class EventsController < CommonController
       create_activity @event
       recipients = @event.group.admins - [@event.user]
       recipients += @event.group.members - @event.participants if @event.invite_all_group_members == '1'
+      counter = 0
       recipients.each do |user|
         event_invitation = EventInvitation.find_or_create_by_event_id_and_invited_user_id(@event.id, user.id)
         begin
           EventInvitationMailer.invitation(event_invitation).deliver
+          counter += 1
         rescue
         end
       end
-      if @event.invite_all_group_members == '1'
-        redirect_to @event, :notice => trfn('Event created and invitations sent.')
+      notice = if counter == 0
+        trfn('Event created.')
+      elsif 1
+        trfn('Event created and') + ' 1 ' + trfn('invitation sent.')
       else
-        redirect_to @event, :notice => trfn('Event created.')
+        trfn('Event created and') + " #{counter} " + trfn('invitations sent.')
       end
+      redirect_to @event, :notice => notice
     else
       render :new
     end

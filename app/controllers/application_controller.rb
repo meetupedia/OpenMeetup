@@ -104,8 +104,8 @@ private
   end
   helper_method :current_locale
 
-  def create_activity(item)
-    Activity.create_from(item, current_user, @group, @event)
+  def create_activity(item, user = current_user)
+    Activity.create_from(item, user, @group, @event)
   end
 
   def current_language

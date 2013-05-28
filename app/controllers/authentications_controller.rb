@@ -20,6 +20,7 @@ class AuthenticationsController < CommonController
       user ||= User.new :name => omniauth['info']['name'], :email => omniauth['info']['email']
       authentication = user.authentications.build :provider => omniauth['provider'], :uid => omniauth['uid']
       if user.save
+        create_activity user, user
         cookies.delete :invitation_code
         fresh_settings(authentication, omniauth)
         session[:return_to] = interests_url

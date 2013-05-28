@@ -15,6 +15,7 @@ class EventInvitationsController < CommonController
 
   def create
     unless @event_invitation.ids.blank?
+      counter = 0
       @event_invitation.ids.split(',').each do |id|
         if user = User.find_by_id(id)
           event_invitation = EventInvitation.find_or_initialize_by_event_id_and_invited_user_id(@event.id, user.id)
@@ -27,14 +28,20 @@ class EventInvitationsController < CommonController
           if event_invitation.save
             begin
               EventInvitationMailer.invitation(event_invitation).deliver
+              counter += 1
             rescue
             end
           end
         end
       end
-      redirect_to @event, :notice => trfn('Invitation sent.')
-    else
-      redirect_to @event, :notice => trfn('No invitation sent.')
     end
+    notice = if counter == 0
+      trfn('No invitation sent.')
+    elsif 1
+      '1 ' + trfn('invitation sent.')
+    else
+      "#{counter} " + trfn('invitations sent.')
+    end
+    redirect_to @event, :notice => notice
   end
 end
