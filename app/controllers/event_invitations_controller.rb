@@ -37,11 +37,11 @@ class EventInvitationsController < CommonController
     end
     notice = if counter == 0
       trfn('No invitation sent.')
-    elsif 1
+    elsif counter == 1
       '1 ' + trfn('invitation sent.')
     else
       "#{counter} " + trfn('invitations sent.')
     end
-    redirect_to @event, :notice => notice
+    redirect_to @event, :notice => notice.html_safe
   end
 end

@@ -28,7 +28,7 @@
             = f.input :permaname, :label => false, :prepend => 'http://'+Settings.host+'/'
   = f.actions do
     - if @event.new_record?
-      =' f.action :submit, :label => tr('Create'), :onclick => "_gaq.push(['_trackEvent', 'Create event', 'Event']);", :button_html => {:class => 'btn btn-primary', :disable_with => trl('Creating...')}
+      =' f.action :submit, :label => trl('Create'), :onclick => "_gaq.push(['_trackEvent', 'Create event', 'Event']);", :button_html => {:class => 'btn btn-primary', :disable_with => trl('Creating...')}
     - else
       =' f.action :submit, :label => trl('Save'), :button_html => {:class => 'btn btn-primary', :disable_with => trl('Saving...')}
     = f.action :cancel, :label => trl('Cancel')

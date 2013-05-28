@@ -18,9 +18,10 @@ class EventsController < CommonController
   def create
     if @event.save
       create_activity @event
-      recipients = @event.group.admins - [@event.user]
-      recipients += @event.group.members - @event.participants if @event.invite_all_group_members == '1'
       counter = 0
+      recipients = @event.group.admins
+      recipients += @event.group.members if @event.invite_all_group_members == '1'
+      recipients -= [@event.user]
       recipients.each do |user|
         event_invitation = EventInvitation.find_or_create_by_event_id_and_invited_user_id(@event.id, user.id)
         begin
@@ -31,12 +32,12 @@ class EventsController < CommonController
       end
       notice = if counter == 0
         trfn('Event created.')
-      elsif 1
+      elsif counter == 1
         trfn('Event created and') + ' 1 ' + trfn('invitation sent.')
       else
         trfn('Event created and') + " #{counter} " + trfn('invitations sent.')
       end
-      redirect_to @event, :notice => notice
+      redirect_to @event, :notice => notice.html_safe
     else
       render :new
     end
