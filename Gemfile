@@ -69,7 +69,7 @@ end
 
 group :development do
   gem 'hirb'
-  gem 'license_finder', :git => 'https://github.com/pivotal/LicenseFinder.git'
+  gem 'license_finder', :require => false, :git => 'https://github.com/pivotal/LicenseFinder.git'
   gem 'bullet'
   gem 'meta_request'
   gem 'quiet_assets'

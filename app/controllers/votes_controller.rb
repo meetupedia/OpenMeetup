@@ -14,7 +14,9 @@ class VotesController < CommonController
     if @vote.voteable
       if @vote.new_record?
         @vote.save
-        create_activity @vote
+        activity = create_activity @vote
+        Notification.create :activity => activity, :user => @vote.voteable.user
+        @vote.voteable.increment! :notifications_count
         VoteMailer.new_vote(@vote.id).deliver
       else
         @vote.destroy
