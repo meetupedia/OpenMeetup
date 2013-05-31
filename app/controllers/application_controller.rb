@@ -179,7 +179,6 @@ private
   def groups_show
     @activities = @group.activities.where('activable_type NOT IN (?)', ['Comment']).order('created_at DESC').paginate :page => params[:page]
     @title = @group.name
-    @static_follow = true
     render 'groups/show'
   end
 
