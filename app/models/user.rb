@@ -16,8 +16,6 @@ class User < ActiveRecord::Base
   key :single_access_token
   key :location
   key :is_admin, :as => :boolean, :default => false
-  key :restricted_access, :as => :boolean, :default => false
-  key :invitation_code
   key :karma, :as => :integer, :default => 0
   key :last_notified, :as => :datetime
   key :avatar_file_name

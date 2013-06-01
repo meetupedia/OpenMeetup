@@ -1,17 +1,10 @@
 # encoding: UTF-8
 
 class RootController < CommonController
-  skip_before_filter :check_restricted_access, :only => [:index, :restricted_access]
 
   def index
     if current_user
-      if current_user.restricted_access
-        redirect_to restricted_access_url
-      else
-        # @user = current_user
-        # render 'users/calendar'
-        redirect_to discovery_url
-      end
+      redirect_to discovery_url
     elsif Settings.customization
       template = "customizations/#{Settings.customization}"
       render template if File.file?(File.join(Rails.root, 'app/views', template + '.html.slim'))
@@ -46,9 +39,6 @@ class RootController < CommonController
       end
       @groups = Group.where('memberships_count > ?', 3).where('image_updated_at IS NOT ?', nil).order(order).paginate :page => params[:page]
     end
-  end
-
-  def restricted_access
   end
 
   def sign_in

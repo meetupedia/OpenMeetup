@@ -33,9 +33,3 @@ enable_share_buttons: true
 # feedback box at the bottom
 
 enable_feedback_box: true
-
-# invite module
-
-enable_invite_process: false
-# skip_invite_process_code: 'geronimo'
-

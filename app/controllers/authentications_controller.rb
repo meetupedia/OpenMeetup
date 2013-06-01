@@ -8,14 +8,10 @@ class AuthenticationsController < CommonController
       fresh_settings(authentication, omniauth)
       sign_in_and_redirect(authentication.user)
     elsif current_user
-      unless current_user.restricted_access
-        authentication = current_user.authentications.create! :provider => omniauth['provider'], :uid => omniauth['uid']
-        fresh_settings(authentication, omniauth)
-        redirect_to root_url
-      else
-        redirect_to request_invite_users_path
-      end
-    elsif not Settings.enable_invite_process
+      authentication = current_user.authentications.create! :provider => omniauth['provider'], :uid => omniauth['uid']
+      fresh_settings(authentication, omniauth)
+      redirect_to root_url
+    else
       user = User.where(:email => omniauth['info']['email']).first if omniauth['info']['email'].present?
       user ||= User.new :name => omniauth['info']['name'], :email => omniauth['info']['email']
       authentication = user.authentications.build :provider => omniauth['provider'], :uid => omniauth['uid']
@@ -37,8 +33,6 @@ class AuthenticationsController < CommonController
         session[:omniauth] = omniauth.except('extra')
         redirect_to sign_in_path
       end
-    else
-      redirect_to root_url
     end
   end
 

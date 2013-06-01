@@ -33,7 +33,3 @@ enable_share_buttons: false
 # feedback box at the bottom
 
 enable_feedback_box: false
-
-# invite module
-
-enable_invite_process: false

@@ -3,7 +3,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :set_locale, :check_restricted_access, :set_invitation_code
+  before_filter :set_locale
 
   helper_method :current_city, :current_language, :current_user
   helper LaterDude::CalendarHelper
@@ -123,18 +123,6 @@ private
     end
   end
 
-  def check_restricted_access
-    if current_user.andand.restricted_access
-      redirect_to root_url
-    end
-  end
-
-  def set_invitation_code
-    if params[:invitation_code]
-      cookies[:invitation_code] = params[:invitation_code]
-    end
-  end
-
   def redirect_back_or_default(default)
     redirect_to session[:return_to] || default
     session[:return_to] = nil
@@ -170,11 +158,6 @@ private
     I18n.locale = current_locale
     current_user.update_attribute :locale, I18n.locale if current_user and not current_user.locale == I18n.locale.to_s
   end
-
-  def use_invite_process?
-    Settings.enable_invite_process and not (cookies[:invitation_code].present? and (EventInvitation.find_by_code(cookies[:invitation_code]) or GroupInvitation.find_by_code(cookies[:invitation_code]) or cookies[:invitation_code] == Settings.skip_invite_process_code))
-  end
-  helper_method :use_invite_process?
 
   def groups_show
     @activities = @group.activities.where('activable_type NOT IN (?)', ['Comment']).order('created_at DESC').paginate :page => params[:page]
