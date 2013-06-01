@@ -1,7 +1,6 @@
 # encoding: UTF-8
 
 class UserSessionsController < CommonController
-  skip_before_filter :check_restricted_access
 
   def new
   end
