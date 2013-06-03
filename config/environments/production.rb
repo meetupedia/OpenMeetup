@@ -65,10 +65,12 @@ Openmeetup::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  Openmeetup::Application.config.middleware.use ExceptionNotifier,
-    :email_prefix => "[meetupedia] ",
-    :sender_address => %{"exceptions@meetupedia.org" <exceptions@meetupedia.org>},
-    :exception_recipients => %w{debug@meetupedia.org}
+  Airbrake.configure do |config|
+    config.api_key = '3f4da7790f333d6e4297d085c622ff84'
+    config.host = 'errbit.meetupedia.com'
+    config.port = 80
+    config.secure = config.port == 443
+  end
 
   config.action_mailer.smtp_settings = {
     :address => 'localhost',
