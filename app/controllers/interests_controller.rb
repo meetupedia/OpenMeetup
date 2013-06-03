@@ -3,6 +3,7 @@
 class InterestsController < CommonController
   load_resource
   authorize_resource
+  skip_before_filter :check_restricted_access
 
   def index
     if Interest.count == 0

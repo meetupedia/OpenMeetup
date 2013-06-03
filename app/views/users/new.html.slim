@@ -13,16 +13,22 @@
       p= link_to tr('Forgot password?'), new_password_path
   .span6
     .wrapper
-      h2= tr('New here?')
-      = semantic_form_for @user || User.new do |f|
-        = f.inputs do
-          = f.input :first_name, :label => tr('First name')
-          = f.input :last_name, :label => tr('Last name')
-          = f.input :email, :label => tr('Email')
-          = f.input :password, :label => tr('Password')
-          = f.input :password_confirmation, :label => tr('Password again')
-          - if Settings.customization == 'get2gather'
-            = f.input :read_manual, :label => 'I have read the <a href="http://get2gather.eth.ericsson.se/about" target="_blank">user manual</a>.'.html_safe
-            = f.input :read_cobe, :label => 'I accept the <a href="http://www.ericsson.com/res/thecompany/docs/corporate-responsibility/2012/cobe/EN_COBE.pdf" target="_blank">code of ethics</a>.'.html_safe
-        = f.actions do
-          = f.action :submit, :label => trl('Sign up'), :onclick => "_gaq.push(['_trackEvent', 'Register user', 'User']);", :button_html => {:class => 'btn btn-primary', :disable_with => trl('Signing up...')}
+      - if use_invite_process?
+        h2= tr('New here?')
+        p= link_to tr('Request an invite'), request_invite_users_path, :class => 'btn btn-primary'
+      - else
+        h2= tr('New here?')
+        = semantic_form_for @user || User.new do |f|
+          - if params[:invitation_code]
+            = hidden_field_tag :invitation_code, params[:invitation_code]
+          = f.inputs do
+            = f.input :first_name, :label => tr('First name')
+            = f.input :last_name, :label => tr('Last name')
+            = f.input :email, :label => tr('Email')
+            = f.input :password, :label => tr('Password')
+            = f.input :password_confirmation, :label => tr('Password again')
+            - if Settings.customization == 'get2gather'
+              = f.input :read_manual, :label => 'I have read the <a href="http://get2gather.eth.ericsson.se/about" target="_blank">user manual</a>.'.html_safe
+              = f.input :read_cobe, :label => 'I accept the <a href="http://www.ericsson.com/res/thecompany/docs/corporate-responsibility/2012/cobe/EN_COBE.pdf" target="_blank">code of ethics</a>.'.html_safe
+          = f.actions do
+            = f.action :submit, :label => trl('Sign up'), :onclick => "_gaq.push(['_trackEvent', 'Register user', 'User']);", :button_html => {:class => 'btn btn-primary', :disable_with => trl('Signing up...')}

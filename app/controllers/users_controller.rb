@@ -2,9 +2,10 @@
 
 class UsersController < CommonController
   load_resource :except => [:create]
-  authorize_resource :except => [:index, :show, :groups, :validate_email]
+  authorize_resource :except => [:index, :show, :groups, :request_invite, :validate_email]
   before_filter :set_city, :except => [:edit, :update, :edit_city]
-  before_filter :create_city, :only => [:new, :edit_city]
+  before_filter :create_city, :only => [:new, :request_invite, :edit_city]
+  skip_before_filter :check_restricted_access, :only => [:new, :create, :request_invite]
 
   cache_sweeper :membership_sweeper, :only => [:create]
   cache_sweeper :participation_sweeper, :only => [:create]
@@ -35,6 +36,10 @@ class UsersController < CommonController
     city = City.find_or_create_with_country(params[:user].delete(:city_id))
     @user = User.new params[:user]
     @user.city = city
+    if use_invite_process?
+      @user.invitation_code = SecureRandom.hex(16)
+      @user.restricted_access = true
+    end
     if @user.save
       create_activity @user, @user
       cookies.delete :invitation_code
@@ -79,6 +84,10 @@ class UsersController < CommonController
 
   def facebook_groups
     @facebook_groups = @user.facebook.groups
+  end
+
+  def request_invite
+    redirect_to sign_in_path unless Settings.enable_invite_process
   end
 
   def set_admin
