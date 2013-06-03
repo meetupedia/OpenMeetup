@@ -1,21 +1,16 @@
 $ ->
   window.reloadPage = ->
-    # Turbolinks.visit(window.location)
     window.location.reload()
 
   initPage = ->
     $('.dropdown-toggle').dropdown()
     $('a.fancybox').fancybox
       titlePosition: 'inside'
-#    $('a[rel*=modal], a.fancybox').attr('data-no-turbolink', true)
 
   initPage()
 
   $(document).bind 'modalbox.loaded', ->
     initPage()
-
-#  $(document).bind 'page:change', ->
-#    initPage()
 
   $(document)
     .on 'click', 'a[rel*=modal], a.modal', ->
