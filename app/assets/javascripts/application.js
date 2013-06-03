@@ -4,6 +4,4 @@
 //= require fancybox
 //= require jquery-fileupload/basic
 //= require rails-timeago-all
-//= require turbolinks
-//= require jquery.turbolinks
 //= require_tree .

@@ -60,9 +60,6 @@ gem 'airbrake'
 gem 'fast_xs'
 gem 'fast_blank'
 
-gem 'turbolinks'
-gem 'jquery-turbolinks'
-
 gem 'sass-rails'
 gem 'coffee-rails'
 
