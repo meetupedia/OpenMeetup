@@ -6,7 +6,7 @@ class Question < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :event
-  has_many :answers, :dependent => :destroy
+  has_many :answers, dependent: :destroy
 end
 
 Question.auto_upgrade!

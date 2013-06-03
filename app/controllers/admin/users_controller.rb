@@ -3,7 +3,7 @@ class Admin::UsersController < ApplicationController
   load_resource
 
   def index
-    @users = User.paginate :page => params[:page]
+    @users = User.paginate page: params[:page]
     order = case params[:order]
       when 'id' then 'id ASC'
       when 'name' then 'name ASC'

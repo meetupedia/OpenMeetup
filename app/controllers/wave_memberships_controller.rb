@@ -2,7 +2,7 @@
 
 class WaveMembershipsController < CommonController
   load_resource :wave
-  load_resource :wave_membership, :through => :wave, :shallow => true
+  load_resource :wave_membership, through: :wave, shallow: true
   authorize_resource
 
   def show
@@ -15,7 +15,7 @@ class WaveMembershipsController < CommonController
     end
     if request.xhr?
       @wave.reload
-      render :partial => 'users'
+      render partial: 'users'
     else
       redirect_to @wave
     end
@@ -33,16 +33,16 @@ class WaveMembershipsController < CommonController
 
   def set_archive
     @wave_membership.update_attribute :is_archived, !@wave_membership.is_archived?
-    render :partial => 'set_archive', :locals => {:wave => @wave_membership.wave}
+    render partial: 'set_archive', locals: {wave: @wave_membership.wave}
   end
 
   def set_delete
     @wave_membership.update_attribute :is_deleted, !@wave_membership.is_deleted?
-    render :nothing => true
+    render nothing: true
   end
 
   def set_star
     @wave_membership.update_attribute :is_starred, !@wave_membership.is_starred?
-    render :partial => 'set_star', :locals => {:wave => @wave_membership.wave}
+    render partial: 'set_star', locals: {wave: @wave_membership.wave}
   end
 end

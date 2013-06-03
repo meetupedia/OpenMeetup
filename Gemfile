@@ -8,7 +8,7 @@ end
 
 platform :jruby do
   gem 'activerecord-jdbc-adapter'
-  gem 'jdbc-mysql', :require => false
+  gem 'jdbc-mysql', require: false
   gem 'activerecord-jdbcmysql-adapter'
 end
 
@@ -35,7 +35,7 @@ gem 'geocoder'
 gem 'railhead_autouser'
 gem 'railhead_permalink'
 gem 'paperclip'
-gem 'mime-types', :require => 'mime/types'
+gem 'mime-types', require: 'mime/types'
 gem 'paper_trail'
 gem 'globalize3'
 gem 'later_dude'
@@ -48,10 +48,10 @@ gem 'will_filter'
 gem 'roadie'
 gem 'mail_view'
 gem 'RedCloth'
-gem 'tr8n', :git => 'https://github.com/berk/tr8n.git', :ref => '973fb5277bfe25270687fba9e519b7ff1e41fd5d'
+gem 'tr8n', git: 'https://github.com/berk/tr8n.git', ref: '973fb5277bfe25270687fba9e519b7ff1e41fd5d'
 gem 'dalli'
 gem 'sitemap_generator'
-gem 'whenever', :require => false
+gem 'whenever', require: false
 gem 'jquery-fileupload-rails'
 gem 'rails-timeago'
 gem 'spork-rails'
@@ -62,14 +62,14 @@ gem 'sass-rails', '~> 3.2.3'
 gem 'coffee-rails', '~> 3.2.1'
 
 group :assets do
-  gem 'therubyrhino', :platform => :jruby
-  gem 'therubyracer', :platform => :ruby
+  gem 'therubyrhino', platform: :jruby
+  gem 'therubyracer', platform: :ruby
   gem 'uglifier', '>= 1.0.3'
 end
 
 group :development do
   gem 'hirb'
-  gem 'license_finder', :require => false, :git => 'https://github.com/pivotal/LicenseFinder.git'
+  gem 'license_finder', require: false, git: 'https://github.com/pivotal/LicenseFinder.git'
   gem 'bullet'
   gem 'meta_request'
   gem 'quiet_assets'

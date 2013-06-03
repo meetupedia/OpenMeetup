@@ -2,12 +2,12 @@
 
 class ParticipationsController < CommonController
   load_resource :event
-  load_resource :participation, :through => :event, :shallow => true
-  authorize_resource :except => [:set]
-  before_filter :set_add_participation_for, :only => [:set]
-  before_filter :authenticate, :only => [:set]
+  load_resource :participation, through: :event, shallow: true
+  authorize_resource except: [:set]
+  before_filter :set_add_participation_for, only: [:set]
+  before_filter :authenticate, only: [:set]
 
-  cache_sweeper :participation_sweeper, :only => [:create]
+  cache_sweeper :participation_sweeper, only: [:create]
 
   def create
     unless @event.participation_for(current_user)
@@ -32,7 +32,7 @@ class ParticipationsController < CommonController
 
   def edit
     @participation.event.questions.each do |question|
-      @participation.answers.build :question => question unless @participation.answers.where(:question_id => question.id).first
+      @participation.answers.build question: question unless @participation.answers.where(question_id: question.id).first
     end
   end
 
@@ -47,7 +47,7 @@ class ParticipationsController < CommonController
   end
 
   def checkin
-    @participation.update_attributes :is_checkined => true
+    @participation.update_attributes is_checkined: true
     redirect_to actual_event_path(@participation.event)
   end
 

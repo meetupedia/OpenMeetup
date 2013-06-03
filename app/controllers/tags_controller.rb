@@ -2,8 +2,8 @@
 
 class TagsController < CommonController
   load_resource :group
-  load_resource :tag, :through => :group, :shallow => true, :except => [:create]
-  authorize_resource :except => [:index, :show]
+  load_resource :tag, through: :group, shallow: true, except: [:create]
+  authorize_resource except: [:index, :show]
 
   def index
     respond_to do |format|
@@ -12,7 +12,7 @@ class TagsController < CommonController
       end
       format.json do
         @tags = Tag.where('name LIKE ?', "%#{params[:q]}%")
-        render :json => @tags.map { |tag| {:id => tag.id, :name => tag.name} }
+        render json: @tags.map { |tag| {id: tag.id, name: tag.name} }
       end
     end
   end

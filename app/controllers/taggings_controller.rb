@@ -2,7 +2,7 @@
 
 class TaggingsController < CommonController
   load_resource :tag
-  load_resource :tagging, :through => :tag, :shallow => true
+  load_resource :tagging, through: :tag, shallow: true
   authorize_resource
 
   def create

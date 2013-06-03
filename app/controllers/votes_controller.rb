@@ -2,7 +2,7 @@
 
 class VotesController < CommonController
   load_resource
-  authorize_resource :except => [:index]
+  authorize_resource except: [:index]
 
   def index
     @voteable = Vote.find_by_voteable_type_and_voteable_id(params[:voteable_type], params[:voteable_id]).andand.voteable
@@ -15,19 +15,19 @@ class VotesController < CommonController
       if @vote.new_record?
         @vote.save
         activity = create_activity @vote
-        Notification.create :activity => activity, :user => @vote.voteable.user
+        Notification.create activity: activity, user: @vote.voteable.user
         @vote.voteable.increment! :notifications_count
         VoteMailer.new_vote(@vote.id).deliver
       else
         @vote.destroy
       end
       if request.xhr?
-        render :partial => 'votes/set', :locals => {:item => @vote.voteable.reload}
+        render partial: 'votes/set', locals: {item: @vote.voteable.reload}
       else
         redirect_to @vote.voteable
       end
     else
-      render :nothing => true
+      render nothing: true
     end
   end
 end

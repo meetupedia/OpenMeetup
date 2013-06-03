@@ -65,7 +65,7 @@ end
 
 # Specifies if labels/hints for input fields automatically be looked up using I18n.
 # Default value: true. Overridden for specific fields by setting value to true,
-# i.e. :label => true, or :hint => true (or opposite depending on initialized value)
+# i.e. label: true, or hint: true (or opposite depending on initialized value)
 # Formtastic::FormBuilder.i18n_lookups_by_default = false
 
 # You can add custom inputs or override parts of Formtastic by subclassing Formtastic::FormBuilder and
@@ -90,8 +90,8 @@ module FormtasticBootstrap
       module Timeish
 
         def fragment_input_html(fragment)
-          opts = input_options.merge(:prefix => fragment_prefix, :field_name => fragment_name(fragment), :default => value, :include_blank => include_blank?)
-          template.send(:"select_#{fragment}", value, opts, input_html_options.merge(:id => fragment_id(fragment)))
+          opts = input_options.merge(prefix: fragment_prefix, field_name: fragment_name(fragment), default: value, include_blank: include_blank?)
+          template.send(:"select_#{fragment}", value, opts, input_html_options.merge(id: fragment_id(fragment)))
         end
       end
 

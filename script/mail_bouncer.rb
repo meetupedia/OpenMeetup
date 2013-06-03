@@ -10,7 +10,7 @@ IO.foreach('mail.log') do |line|
     unless emails.include?(email)
       puts email
       if user = User.find_by_email(email)
-        user.update_attributes :email_bounced => true
+        user.update_attributes email_bounced: true
         puts '  OK'
       end
       emails << email

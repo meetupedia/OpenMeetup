@@ -3,7 +3,7 @@
     .wrapper
       .breadcrumbs.clearfix= link_to tr('All tags'), tags_path
 
-      .pull-right= render 'taggings/button', :tag => @tag
+      .pull-right= render 'taggings/button', tag: @tag
 
       h1
         = tr('Tag')

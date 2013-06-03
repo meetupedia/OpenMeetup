@@ -1,6 +1,6 @@
 ul.tiles
-  li= link_to "<span class='menu_count'>#{group.members.size}</span> #{tr('members')}".html_safe, members_group_path(group), :rel => 'modal'
-  li= link_to "<span class='menu_count'>#{group.events.size}</span> #{tr('events')}".html_safe, events_group_path(group), :rel => 'modal'
+  li= link_to "<span class='menu_count'>#{group.members.size}</span> #{tr('members')}".html_safe, members_group_path(group), rel: 'modal'
+  li= link_to "<span class='menu_count'>#{group.events.size}</span> #{tr('events')}".html_safe, events_group_path(group), rel: 'modal'
   li= link_to "<span class='menu_count'>#{group.images.size}</span> #{tr('images')}".html_safe, images_group_path(group)
 
 /
@@ -9,4 +9,4 @@ ul.tiles
       .muted= tr('No friends in this group yet.')
     - else
       h3= tr('Friends')
-      p= render 'users/user_avatars', :users => users
+      p= render 'users/user_avatars', users: users

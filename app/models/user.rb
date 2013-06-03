@@ -6,76 +6,76 @@ class User < ActiveRecord::Base
   key :last_name
   key :nickname
   key :locale
-  key :email, :index => true
-  key :email_confirmed, :as => :boolean, :default => false
-  key :email_bounced, :as => :boolean, :default => false
+  key :email, index: true
+  key :email_confirmed, as: :boolean, default: false
+  key :email_bounced, as: :boolean, default: false
   key :crypted_password
   key :password_salt
   key :persistence_token
   key :perishable_token
   key :single_access_token
   key :location
-  key :is_admin, :as => :boolean, :default => false
-  key :restricted_access, :as => :boolean, :default => false
+  key :is_admin, as: :boolean, default: false
+  key :restricted_access, as: :boolean, default: false
   key :invitation_code
-  key :karma, :as => :integer, :default => 0
-  key :last_notified, :as => :datetime
+  key :karma, as: :integer, default: 0
+  key :last_notified, as: :datetime
   key :avatar_file_name
   key :avatar_content_type
-  key :avatar_file_size, :as => :integer
-  key :avatar_updated_at, :as => :datetime
+  key :avatar_file_size, as: :integer
+  key :avatar_updated_at, as: :datetime
   key :header_file_name
   key :header_content_type
-  key :header_file_size, :as => :integer
-  key :header_updated_at, :as => :datetime
+  key :header_file_size, as: :integer
+  key :header_updated_at, as: :datetime
   timestamps
-  key :memberships_count, :as => :integer, :default => 0
-  key :notifications_count, :as => :integer, :default => 0
+  key :memberships_count, as: :integer, default: 0
+  key :notifications_count, as: :integer, default: 0
 
   belongs_to :city
-  has_many :absences, :dependent => :destroy
-  has_many :activities, :dependent => :destroy
-  has_many :admined_groups, :through => :memberships, :source => :group, :conditions => {'memberships.is_admin' => true}
-  has_many :authentications, :dependent => :destroy
-  has_many :comments, :dependent => :nullify
-  has_many :event_invitations, :dependent => :nullify
-  has_many :events, :dependent => :nullify
-  has_many :followers, :through => :user_follows, :source => :user
-  has_many :group_invitations, :dependent => :nullify
-  has_many :groups, :dependent => :nullify
-  has_many :joined_events, :through => :participations, :source => :event
-  has_many :joined_next_events, :through => :participations, :source => :event, :conditions => ['start_time > ?', Time.now], :order => 'start_time ASC'
-  has_many :joined_groups, :through => :memberships, :source => :group
-  has_many :memberships, :dependent => :destroy
-  has_many :notifications, :dependent => :destroy
-  has_many :participations, :dependent => :destroy
-  has_many :posts, :dependent => :destroy
-  has_many :reviews, :dependent => :destroy
-  has_many :taggings, :dependent => :destroy
-  has_many :tags, :through => :taggings
-  has_many :user_follows, :dependent => :destroy
-  has_many :votes, :dependent => :destroy
-  has_many :wave_memberships, :dependent => :destroy
-  has_many :waves, :through => :wave_memberships
+  has_many :absences, dependent: :destroy
+  has_many :activities, dependent: :destroy
+  has_many :admined_groups, through: :memberships, source: :group, conditions: {'memberships.is_admin' => true}
+  has_many :authentications, dependent: :destroy
+  has_many :comments, dependent: :nullify
+  has_many :event_invitations, dependent: :nullify
+  has_many :events, dependent: :nullify
+  has_many :followers, through: :user_follows, source: :user
+  has_many :group_invitations, dependent: :nullify
+  has_many :groups, dependent: :nullify
+  has_many :joined_events, through: :participations, source: :event
+  has_many :joined_next_events, through: :participations, source: :event, conditions: ['start_time > ?', Time.now], order: 'start_time ASC'
+  has_many :joined_groups, through: :memberships, source: :group
+  has_many :memberships, dependent: :destroy
+  has_many :notifications, dependent: :destroy
+  has_many :participations, dependent: :destroy
+  has_many :posts, dependent: :destroy
+  has_many :reviews, dependent: :destroy
+  has_many :taggings, dependent: :destroy
+  has_many :tags, through: :taggings
+  has_many :user_follows, dependent: :destroy
+  has_many :votes, dependent: :destroy
+  has_many :wave_memberships, dependent: :destroy
+  has_many :waves, through: :wave_memberships
 
   has_attached_file :avatar,
-    :path => ':rails_root/public/system/:class/:attachment/:style/:class_:id.:extension',
-    :url => '/system/:class/:attachment/:style/:class_:id.:extension',
-    :default_url => '/system/:class/missing_:style.png',
-    :styles => {
-      :normal => ['270x270#', :jpg],
-      :small => ['32x32#', :jpg]
+    path: ':rails_root/public/system/:class/:attachment/:style/:class_:id.:extension',
+    url: '/system/:class/:attachment/:style/:class_:id.:extension',
+    default_url: '/system/:class/missing_:style.png',
+    styles: {
+      normal: ['270x270#', :jpg],
+      small: ['32x32#', :jpg]
     },
-    :convert_options => {:all => '-quality 95 -strip'}
+    convert_options: {all: '-quality 95 -strip'}
 
   has_attached_file :header,
-    :path => ':rails_root/public/system/:class/:attachment/:style/:class_:id.:extension',
-    :url => '/system/:class/:attachment/:style/:class_:id.:extension',
-    :default_url => '/system/:class/missing_:style.png',
-    :styles => {
-      :normal => ['940x200#', :jpg]
+    path: ':rails_root/public/system/:class/:attachment/:style/:class_:id.:extension',
+    url: '/system/:class/:attachment/:style/:class_:id.:extension',
+    default_url: '/system/:class/missing_:style.png',
+    styles: {
+      normal: ['940x200#', :jpg]
     },
-    :convert_options => {:all => '-quality 95 -strip'}
+    convert_options: {all: '-quality 95 -strip'}
 
   acts_as_authentic do |c|
     c.validate_email_field = false
@@ -84,12 +84,12 @@ class User < ActiveRecord::Base
     c.disable_perishable_token_maintenance = true
   end
 
-  validates :email, :presence => {:if => :password_required?}, :uniqueness => true
-  validates :password, :presence => {:if => :password_required?}, :confirmation => true
+  validates :email, presence: {if: :password_required?}, uniqueness: true
+  validates :password, presence: {if: :password_required?}, confirmation: true
   attr_protected :is_admin
 
   after_create do |user|
-    user.update_attributes :last_notified => user.created_at
+    user.update_attributes last_notified: user.created_at
     true
   end
 
@@ -131,11 +131,11 @@ class User < ActiveRecord::Base
   end
 
   def authentication_with(provider)
-    authentications.where(:provider => provider).first
+    authentications.where(provider: provider).first
   end
 
   def facebook
-    @facebook ||= FbGraph::User.new(facebook_id, :access_token => authentication_with(:facebook).andand.facebook_access_token).fetch
+    @facebook ||= FbGraph::User.new(facebook_id, access_token: authentication_with(:facebook).andand.facebook_access_token).fetch
   end
 
   def facebook_id
@@ -151,7 +151,7 @@ class User < ActiveRecord::Base
   end
 
   def follow(user)
-    UserFollow.create :followed_user_id => self.id, :user_id => user.id unless user_follow_for(user)
+    UserFollow.create followed_user_id: self.id, user_id: user.id unless user_follow_for(user)
   end
 
   def unfollow(user)
@@ -175,7 +175,7 @@ class User < ActiveRecord::Base
   end
 
   def connect_facebook_friends
-    Authentication.where(:provider => 'facebook', :uid => facebook_friend_ids).includes(:user).map(&:user).each do |user|
+    Authentication.where(provider: 'facebook', uid: facebook_friend_ids).includes(:user).map(&:user).each do |user|
       follow(user)
       user.follow(self)
     end
@@ -184,7 +184,7 @@ class User < ActiveRecord::Base
   def set_karma
     karma = user_follows.count * 5 +
       memberships.count * 10 +
-      memberships(:is_admin => true) * 40
+      memberships(is_admin: true) * 40
     update_column :karma, karma
   end
 
@@ -221,10 +221,10 @@ class User < ActiveRecord::Base
   end
 
   if Settings.customization == 'get2gather'
-    key :read_manual, :as => :boolean
-    key :read_cobe, :as => :boolean
+    key :read_manual, as: :boolean
+    key :read_cobe, as: :boolean
 
-    validates :read_manual, :read_cobe, :presence => true
+    validates :read_manual, :read_cobe, presence: true
   end
 end
 

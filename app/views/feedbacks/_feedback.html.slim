@@ -1,4 +1,4 @@
-= div_for feedback, :class => 'list_item' do
+= div_for feedback, class: 'list_item' do
   - if feedback.user
     =' user_link feedback.user
     span.date= timeago_tag feedback.created_at

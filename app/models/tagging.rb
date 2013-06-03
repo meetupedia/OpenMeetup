@@ -5,7 +5,7 @@ class Tagging < ActiveRecord::Base
 
   belongs_to :tag
   belongs_to :user
-  has_many :activities, :as => :activable, :dependent => :destroy
+  has_many :activities, as: :activable, dependent: :destroy
 end
 
 Tagging.auto_upgrade!

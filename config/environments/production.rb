@@ -73,13 +73,13 @@ Openmeetup::Application.configure do
   end
 
   config.action_mailer.smtp_settings = {
-    :address => 'localhost',
-    :port => 25,
-    :domain => 'meetupedia.com',
-    :user_name => nil,
-    :password => nil,
-    :authentication => nil,
-    :enable_starttls_auto => false
+    address: 'localhost',
+    port: 25,
+    domain: 'meetupedia.com',
+    user_name: nil,
+    password: nil,
+    authentication: nil,
+    enable_starttls_auto: false
   }
 
   # Adding timestamp to the log lines

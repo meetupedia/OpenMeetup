@@ -1,9 +1,9 @@
 - if comment.reply_to
-  = render 'comments/parent_comment', :comment => comment.reply_to, :commentable => commentable
+  = render 'comments/parent_comment', comment: comment.reply_to, commentable: commentable
 
-= div_for comment, :class => "list_item avatar_item indent#{comment.level}" do
+= div_for comment, class: "list_item avatar_item indent#{comment.level}" do
   - if comment.level < 5
-    .pull-right= link_to tr('Reply'), polymorphic_path([:new, commentable, :comment], :reply_to_id => comment.id), :rel => 'modal'
+    .pull-right= link_to tr('Reply'), polymorphic_path([:new, commentable, :comment], reply_to_id: comment.id), rel: 'modal'
   .avatar= user_avatar comment.user
   =' user_link comment.user
   span.date= timeago_tag comment.created_at

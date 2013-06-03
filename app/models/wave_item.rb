@@ -1,12 +1,12 @@
 # encoding: UTF-8
 
 class WaveItem < ActiveRecord::Base
-  key :body, :as => :text
+  key :body, as: :text
   timestamps
   belongs_to :user
   belongs_to :wave
 
-  validates :body, :presence => true
+  validates :body, presence: true
 
   after_create :update_wave, :create_wave_notes, :send_letters
 
@@ -16,7 +16,7 @@ class WaveItem < ActiveRecord::Base
 
   def create_wave_notes
     (wave.wave_members - [user]).each do |user|
-      WaveNote.create :user_id => user.id, :wave_id => wave.id, :created_at => created_at
+      WaveNote.create user_id: user.id, wave_id: wave.id, created_at: created_at
     end
   end
 

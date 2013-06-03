@@ -6,4 +6,4 @@ h1
   = render @vote.voteable
 
 - if @vote.voteable.is_a?(Post)
-  p= link_to tr('View post'), @vote.voteable, :class => 'btn'
+  p= link_to tr('View post'), @vote.voteable, class: 'btn'

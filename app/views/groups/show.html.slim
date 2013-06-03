@@ -3,7 +3,7 @@
 .row
   .span4
     .wrapper
-      = render 'groups/tile_menu', :group => @group
+      = render 'groups/tile_menu', group: @group
 
       - if @group.url.present?
         div
@@ -16,7 +16,7 @@
     - if @group.images.size > 0
       .wrapper
         = link_to image_tag(@group.images.last.image.url(:normal)), @group.images.last
-        p= link_to tr('All images'), images_group_path(@group), :rel => 'modal'
+        p= link_to tr('All images'), images_group_path(@group), rel: 'modal'
 
     - if @group.admins.include?(current_user)
       - unless @membership_requests.blank?
@@ -28,7 +28,7 @@
     .wrapper
       h2= tr('Members')
       - @group.members.order('memberships.created_at ASC').each do |user|
-        = div_for user, :class => 'list_item avatar_item' do
+        = div_for user, class: 'list_item avatar_item' do
           .avatar= user_avatar user
           = user_link user
           - if @group.admins.include?(user)
@@ -46,15 +46,15 @@
   .span8
     - if event = @group.next_event
       .wrapper
-        = render 'groups/next_event', :event => event
+        = render 'groups/next_event', event: event
 
     .wrapper
       h2= tr('Activity')
       - if can? :create, post = @group.posts.build
-        = form_for post, :url => url_for([@group, :posts]), :remote => true do |f|
+        = form_for post, url: url_for([@group, :posts]), remote: true do |f|
           = f.text_area :post
-          = f.submit trl('Send'), :button_html => {:class => 'btn btn-primary', :disable_with => trl('Sending...')}
-      = render 'activities/activities', :activities => @activities
+          = f.submit trl('Send'), button_html: {class: 'btn btn-primary', disable_with: trl('Sending...')}
+      = render 'activities/activities', activities: @activities
 
 - if Settings.enable_share_buttons
   javascript:

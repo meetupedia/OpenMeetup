@@ -2,7 +2,7 @@
 
 class AbsencesController < CommonController
   load_resource :event
-  load_resource :absence, :through => :event, :shallow => true
+  load_resource :absence, through: :event, shallow: true
   authorize_resource
 
   def create

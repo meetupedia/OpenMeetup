@@ -16,7 +16,7 @@ class CommonController < ApplicationController
 
   def reload_to(url)
     if request.xhr?
-      render :inline => 'modalbox.reload()'
+      render inline: 'modalbox.reload()'
     else
       redirect_to url
     end
@@ -24,7 +24,7 @@ class CommonController < ApplicationController
 
   def redirect_to(url, options = {})
     if request.xhr?
-      render :text => "window.location = '#{url_for(url)}'"
+      render text: "window.location = '#{url_for(url)}'"
     else
       super url, options
     end
@@ -32,7 +32,7 @@ class CommonController < ApplicationController
 
   def update_page(url)
     if request.xhr?
-      render :text => 'modalbox.reloadParent()'
+      render text: 'modalbox.reloadParent()'
     else
       redirect_to url
     end
@@ -40,7 +40,7 @@ class CommonController < ApplicationController
 
   def update_atom(item, options = {})
     if request.xhr?
-      render 'common/update_atom', :locals => {:item => item, :options => options}
+      render 'common/update_atom', locals: {item: item, options: options}
     else
       redirect_to item
     end
@@ -48,7 +48,7 @@ class CommonController < ApplicationController
 
   def update_show(item, options = {})
     if request.xhr?
-      render 'common/update_show', :locals => {:item => item, :options => options}
+      render 'common/update_show', locals: {item: item, options: options}
     else
       redirect_to item
     end
@@ -56,7 +56,7 @@ class CommonController < ApplicationController
 
   def destroy_show(item, url = nil)
     if request.xhr?
-      render :text => "$('##{item.class.name.underscore}_#{item.id}').fadeOut(500, function(){$('##{item.class.name.underscore}_#{item.id}').remove()});"
+      render text: "$('##{item.class.name.underscore}_#{item.id}').fadeOut(500, function(){$('##{item.class.name.underscore}_#{item.id}').remove()});"
     else
       redirect_to url || url_for(item.class.name.tableize.to_sym)
     end

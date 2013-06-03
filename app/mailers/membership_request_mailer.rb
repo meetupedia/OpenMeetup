@@ -8,7 +8,7 @@ class MembershipRequestMailer < CommonMailer
     @user = membership_request.user
     @group = membership_request.group
     # set_locale @user.locale
-    mail :to => @email, :subject => "Join request: #{@group.name}"
+    mail to: @email, subject: "Join request: #{@group.name}"
   end
 
   def confirmed(membership_request)
@@ -16,7 +16,7 @@ class MembershipRequestMailer < CommonMailer
     @email = @recipient.email
     @user = membership_request.user
     @group = membership_request.group
-    mail :to => @email, :subject => "Join confirmed: #{@group.name}"
+    mail to: @email, subject: "Join confirmed: #{@group.name}"
   end
 
 

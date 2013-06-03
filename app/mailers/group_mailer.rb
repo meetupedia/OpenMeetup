@@ -7,14 +7,14 @@ class GroupMailer < CommonMailer
     @email = @recipient.email
     @group = group
     @user = @group.user
-    mail :to => @email, :subject => "[site admin notice] New group: #{@group.name}"
+    mail to: @email, subject: "[site admin notice] New group: #{@group.name}"
   end
 
   def creation_for_owner(group)
     @group = group
     @user = @group.user
     @email = @user.email
-    mail :to => @email, :subject => "Your group has been created: #{@group.name}"
+    mail to: @email, subject: "Your group has been created: #{@group.name}"
   end
 
   def join(membership, recipient)
@@ -22,7 +22,7 @@ class GroupMailer < CommonMailer
     @email = @recipient.email
     @user = membership.user
     @group = membership.group
-    mail :to => @email, :subject => "New member in #{@group.name}: #{@user.name}"
+    mail to: @email, subject: "New member in #{@group.name}: #{@user.name}"
   end
 
 

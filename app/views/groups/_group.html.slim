@@ -1,5 +1,5 @@
-= div_for group, :class => 'list_item' do
-  .avatar= link_to(image_tag(group.image.url(:small), :alt => group.name, :height => 72, :width => 72, :title => group.name), group)
+= div_for group, class: 'list_item' do
+  .avatar= link_to(image_tag(group.image.url(:small), alt: group.name, height: 72, width: 72, title: group.name), group)
   .item_content
     - if current_user and membership = group.membership_for(current_user)
       .pull-right
@@ -9,6 +9,6 @@
           span.label.label-success= tr('member')
     h3= link_to group.name, group
     p= render group.tags.order('name ASC')
-    = render 'groups/tile_menu', :group => group
+    = render 'groups/tile_menu', group: group
     - if event = group.next_event
-      .next_event= render 'groups/next_event', :event => event
+      .next_event= render 'groups/next_event', event: event

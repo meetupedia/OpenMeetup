@@ -2,19 +2,19 @@
 
 class Wave < ActiveRecord::Base
   key :subject
-  key :last_changed_at, :as => :datetime
+  key :last_changed_at, as: :datetime
   timestamps
 
   belongs_to :group
   belongs_to :event
   belongs_to :user
-  has_many :wave_items, :dependent => :destroy
-  has_many :wave_memberships, :dependent => :destroy
-  has_many :wave_members, :through => :wave_memberships, :source => :user
-  has_many :wave_notes, :dependent => :destroy
+  has_many :wave_items, dependent: :destroy
+  has_many :wave_memberships, dependent: :destroy
+  has_many :wave_members, through: :wave_memberships, source: :user
+  has_many :wave_notes, dependent: :destroy
 
   attr_accessor :body, :recipient_id
-  validates :subject, :body, :presence => true
+  validates :subject, :body, presence: true
 
   after_create :change!, :create_initial_membership, :add_recipients
 
@@ -33,7 +33,7 @@ class Wave < ActiveRecord::Base
   end
 
   def create_initial_membership
-    WaveMembership.create :wave_id => self.id, :user_id => self.user.id
+    WaveMembership.create wave_id: self.id, user_id: self.user.id
   end
 
   def wave_membership_for(user)

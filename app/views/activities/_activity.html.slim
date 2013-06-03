@@ -1,14 +1,14 @@
 - if activity.activable.class.name == 'Post'
   = render activity.activable
 - elsif activity.activable.class.name == 'Image'
-  = div_for activity, :class => 'list_item avatar_item' do
-    = render 'votes/set', :item => activity.activable
+  = div_for activity, class: 'list_item avatar_item' do
+    = render 'votes/set', item: activity.activable
     =' user_link activity.activable.user
     = tr('uploaded a picture ')
-    p= link_to image_tag(activity.activable.image.url(:small), :alt => '', :height => 80, :width => 80), activity.activable
+    p= link_to image_tag(activity.activable.image.url(:small), alt: '', height: 80, width: 80), activity.activable
 - else
-  = div_for activity, :class => 'list_item avatar_item' do
-    = render 'votes/set', :item => activity
+  = div_for activity, class: 'list_item avatar_item' do
+    = render 'votes/set', item: activity
     .avatar= user_avatar activity.user
     - if activity.activable.class.name == 'Event'
       =' user_link activity.activable.user
@@ -37,7 +37,7 @@
     - elsif activity.activable.class.name == 'Comment'
       =' user_link activity.activable.user
       = tr('made ')
-      = link_to tr('a new comment'), activity.activable.commentable, :rel => 'modal'
+      = link_to tr('a new comment'), activity.activable.commentable, rel: 'modal'
       | .
       p= activity.activable.comment
     - elsif activity.activable.class.name == 'Review'
@@ -56,12 +56,12 @@
     .date= timeago_tag activity.created_at
 
     - if activity.activable.class.name =~ /Event|Group|Membership|Participation|Review|UserFollow/
-      = render 'comments/comments', :commentable => activity
+      = render 'comments/comments', commentable: activity
 
       - if current_user
         p= link_to_function tr('Comment'), "$('#add-activity-comment-#{activity.id}').toggle().find('textarea').focus()"
 
         div(id="add-activity-comment-#{activity.id}" style="display: none;")
-          = form_for Comment.new, :url => polymorphic_path([activity, :comments]), :remote => true do |f|
+          = form_for Comment.new, url: polymorphic_path([activity, :comments]), remote: true do |f|
             = f.text_area :comment
-            = f.submit trl('Add comment'), :button_html => {:class => 'btn btn-primary', :disable_with => trl('Sending...')}
+            = f.submit trl('Add comment'), button_html: {class: 'btn btn-primary', disable_with: trl('Sending...')}

@@ -1,7 +1,7 @@
 # encoding: UTF-8
 
 class RootController < CommonController
-  skip_before_filter :check_restricted_access, :only => [:index, :restricted_access]
+  skip_before_filter :check_restricted_access, only: [:index, :restricted_access]
 
   def index
     if current_user
@@ -32,7 +32,7 @@ class RootController < CommonController
     unless current_user.andand.is_admin?
       redirect_to root_url
     end
-    @activities = Activity.order('created_at DESC').paginate :page => params[:page]
+    @activities = Activity.order('created_at DESC').paginate page: params[:page]
   end
 
   def discovery
@@ -44,7 +44,7 @@ class RootController < CommonController
         when 'members' then 'memberships_count DESC'
         else 'id ASC'
       end
-      @groups = Group.where('memberships_count > ?', 3).where('image_updated_at IS NOT ?', nil).order(order).paginate :page => params[:page]
+      @groups = Group.where('memberships_count > ?', 3).where('image_updated_at IS NOT ?', nil).order(order).paginate page: params[:page]
     end
   end
 
@@ -66,7 +66,7 @@ class RootController < CommonController
     elsif @event = Event.find_by_permaname(params[:id])
       events_show
     else
-      render 'errors/error_404.html', :status => 404
+      render 'errors/error_404.html', status: 404
     end
   end
 end

@@ -2,9 +2,9 @@
   = render 'events/header'
 
 .wrapper
-  - if can? :create, EventInvitation.new(:event => @event)
+  - if can? :create, EventInvitation.new(event: @event)
     .button-menu
-      = link_to tr('Invite friends'), new_event_event_invitation_path(@event), :class => 'btn', :rel => 'modal'
+      = link_to tr('Invite friends'), new_event_event_invitation_path(@event), class: 'btn', rel: 'modal'
 
   h2= tr('Participants')
 

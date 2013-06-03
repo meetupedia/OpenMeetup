@@ -7,7 +7,7 @@ class EventsControllerTest < ActionController::TestCase
   end
 
   test 'show' do
-    get :show, :id => @event.id
+    get :show, id: @event.id
     assert_response :success
   end
 end

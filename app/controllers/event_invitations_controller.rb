@@ -2,8 +2,8 @@
 
 class EventInvitationsController < CommonController
   load_resource :event
-  load_resource :event_invitation, :through => :event, :shallow => true
-  authorize_resource :except => [:index, :show, :users]
+  load_resource :event_invitation, through: :event, shallow: true
+  authorize_resource except: [:index, :show, :users]
 
   def new
     @users = if params[:invite_members]
@@ -42,6 +42,6 @@ class EventInvitationsController < CommonController
     else
       "#{counter} " + trfn('invitations sent.')
     end
-    redirect_to @event, :notice => notice.html_safe
+    redirect_to @event, notice: notice.html_safe
   end
 end

@@ -1,5 +1,5 @@
 = div_for notification do
-  .pull-right= link_to '×', notification, :method => :delete, :remote => true, :class => 'close'
+  .pull-right= link_to '×', notification, method: :delete, remote: true, class: 'close'
   - if notification.group
     .breadcrumbs= link_to notification.group.name, notification.group
   - unless @last_notified.blank?

@@ -1,18 +1,18 @@
-= div_for comment, :class => "list_item avatar_item indent#{comment.level}" do
+= div_for comment, class: "list_item avatar_item indent#{comment.level}" do
   - if current_user and can? :destroy, comment
-    .pull-right= link_to '×', comment, :method => :delete, :remote => true, :class => 'close', :confirm => trl('Delete comment?')
+    .pull-right= link_to '×', comment, method: :delete, remote: true, class: 'close', confirm: trl('Delete comment?')
   - if current_user and comment.level < 5
-    .pull-right= link_to_function tr('Reply'), "$('#add-comment-comment-#{comment.id}').toggle().find('textarea').focus()", :class => 'btn btn-mini'
+    .pull-right= link_to_function tr('Reply'), "$('#add-comment-comment-#{comment.id}').toggle().find('textarea').focus()", class: 'btn btn-mini'
   .avatar= user_avatar comment.user
   =' user_link comment.user
   span.date= timeago_tag comment.created_at
   = textilize(auto_link(comment.comment)).html_safe
   - if current_user and comment.level < 5
     div(id="add-comment-comment-#{comment.id}" style="display: none;")
-      = form_for Comment.new, :url => polymorphic_path([comment.commentable, :comments]), :remote => true do |f|
-        = f.hidden_field :reply_to_id, :value => comment.id
+      = form_for Comment.new, url: polymorphic_path([comment.commentable, :comments]), remote: true do |f|
+        = f.hidden_field :reply_to_id, value: comment.id
         = f.text_area :comment
-        = f.submit trl('Add comment'), :button_html => {:class => 'btn btn-primary', :disable_with => trl('Sending...'), :onclick => "_gaq.push(['_trackEvent', 'Add Comment', 'Comment']);"}
+        = f.submit trl('Add comment'), button_html: {class: 'btn btn-primary', disable_with: trl('Sending...'), onclick: "_gaq.push(['_trackEvent', 'Add Comment', 'Comment']);"}
 
 - comment.replies.each do |comment|
-  = render comment, :commentable => commentable
+  = render comment, commentable: commentable

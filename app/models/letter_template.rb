@@ -3,7 +3,7 @@
 class LetterTemplate < ActiveRecord::Base
   key :name
   key :subject
-  key :template, :as => :text
+  key :template, as: :text
   timestamps
   belongs_to :user
 

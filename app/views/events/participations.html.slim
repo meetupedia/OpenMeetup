@@ -14,7 +14,7 @@
         td= user_link(participation.user)
         - @event.questions.order('id ASC').each do |question|
           td
-            - if answer = participation.answers.where(:question_id => question.id).first
+            - if answer = participation.answers.where(question_id: question.id).first
               = answer.answer
             - else
               span.muted n. a.

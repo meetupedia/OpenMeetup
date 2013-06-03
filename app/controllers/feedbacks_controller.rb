@@ -2,21 +2,21 @@
 
 class FeedbacksController < CommonController
   load_resource
-  authorize_resource :except => [:create]
+  authorize_resource except: [:create]
 
   def index
-    @feedbacks = Feedback.order('created_at DESC').paginate :page => params[:page]
+    @feedbacks = Feedback.order('created_at DESC').paginate page: params[:page]
   end
 
   def create
     @feedback.save
-    User.where(:is_admin => true).each do |user|
+    User.where(is_admin: true).each do |user|
       AdminMailer.feedback(@feedback, user).deliver
     end
     respond_to do |format|
       format.js
       format.html do
-        redirect_to root_url, :notice => 'Thank you, we appreciate your feedback!'
+        redirect_to root_url, notice: 'Thank you, we appreciate your feedback!'
       end
     end
   end

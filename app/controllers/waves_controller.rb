@@ -5,7 +5,7 @@ class WavesController < CommonController
   authorize_resource
 
   def index
-    @waves = Wave.order('last_changed_at DESC').paginate :joins => :wave_memberships, :conditions => {'wave_memberships.user_id' => current_user.id, 'wave_memberships.is_archived' => false, 'wave_memberships.is_deleted' => false}, :include => [:users, :wave_notes], :page => params[:page]
+    @waves = Wave.order('last_changed_at DESC').paginate joins: :wave_memberships, conditions: {'wave_memberships.user_id' => current_user.id, 'wave_memberships.is_archived' => false, 'wave_memberships.is_deleted' => false}, include: [:users, :wave_notes], page: params[:page]
   end
 
   def show
@@ -16,7 +16,7 @@ class WavesController < CommonController
         wave_note.destroy
         current_user.reload
       end
-      @wave_items = @wave.wave_items.order('created_at DESC').includes(:user).paginate :page => params[:page]
+      @wave_items = @wave.wave_items.order('created_at DESC').includes(:user).paginate page: params[:page]
     else
       flash[:alert] = 'Nem tekintheted meg ezt a folyamot!'
       redirect_to waves_url
@@ -33,7 +33,7 @@ class WavesController < CommonController
       if @wave.recipient_id.present? and user = User.find_by_id(@wave.recipient_id)
         @wave.add_wave_member(user)
       end
-      wave_item = WaveItem.create(:wave_id => @wave.id, :body => @wave.body)
+      wave_item = WaveItem.create(wave_id: @wave.id, body: @wave.body)
       redirect_to @wave
     else
       render :new
@@ -41,7 +41,7 @@ class WavesController < CommonController
   end
 
   def all
-    @waves = Wave.order('last_changed_at DESC').paginate :joins => :wave_memberships, :conditions => {'wave_memberships.user_id' => current_user.id, 'wave_memberships.is_deleted' => false}, :include => [:users, :wave_notes], :page => params[:page]
+    @waves = Wave.order('last_changed_at DESC').paginate joins: :wave_memberships, conditions: {'wave_memberships.user_id' => current_user.id, 'wave_memberships.is_deleted' => false}, include: [:users, :wave_notes], page: params[:page]
     render :index
   end
 end

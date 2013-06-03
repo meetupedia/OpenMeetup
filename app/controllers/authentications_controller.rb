@@ -1,5 +1,5 @@
 class AuthenticationsController < CommonController
-  cache_sweeper :membership_sweeper, :only => [:create]
+  cache_sweeper :membership_sweeper, only: [:create]
 
   def create
     omniauth = request.env['omniauth.auth']
@@ -9,27 +9,27 @@ class AuthenticationsController < CommonController
       sign_in_and_redirect(authentication.user)
     elsif current_user
       unless current_user.restricted_access
-        authentication = current_user.authentications.create! :provider => omniauth['provider'], :uid => omniauth['uid']
+        authentication = current_user.authentications.create! provider: omniauth['provider'], uid: omniauth['uid']
         fresh_settings(authentication, omniauth)
         redirect_to root_url
       else
         redirect_to request_invite_users_path
       end
     elsif not Settings.enable_invite_process
-      user = User.where(:email => omniauth['info']['email']).first if omniauth['info']['email'].present?
-      user ||= User.new :name => omniauth['info']['name'], :email => omniauth['info']['email']
-      authentication = user.authentications.build :provider => omniauth['provider'], :uid => omniauth['uid']
+      user = User.where(email: omniauth['info']['email']).first if omniauth['info']['email'].present?
+      user ||= User.new name: omniauth['info']['name'], email: omniauth['info']['email']
+      authentication = user.authentications.build provider: omniauth['provider'], uid: omniauth['uid']
       if user.save
         create_activity user, user
         cookies.delete :invitation_code
         fresh_settings(authentication, omniauth)
         session[:return_to] = interests_url
         if cookies[:add_membership_for] and group = Group.find_by_id(cookies[:add_membership_for])
-          group.memberships.create :user => user
+          group.memberships.create user: user
           cookies.delete :add_membership_for
         end
         if cookies[:add_participation_for] and event = Event.find_by_id(cookies[:add_participation_for])
-          event.participations.create :user => user
+          event.participations.create user: user
           cookies.delete :add_participation_for
         end
         sign_in_and_redirect(user)
@@ -60,8 +60,8 @@ protected
 
   def fresh_settings(authentication, omniauth)
     if authentication.provider == 'facebook'
-      authentication.update_attributes :facebook_access_token => omniauth['credentials']['token']
-      authentication.update_attributes :facebook_friend_ids => authentication.user.facebook.friends.map(&:identifier)
+      authentication.update_attributes facebook_access_token: omniauth['credentials']['token']
+      authentication.update_attributes facebook_friend_ids: authentication.user.facebook.friends.map(&:identifier)
     end
   end
 end

@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
         authenticate
       else
         if modal_request?
-          render :text => 'Nem hozzáférhető számodra a kért oldal!'
+          render text: 'Nem hozzáférhető számodra a kért oldal!'
         else
           flash[:alert] = 'Nem hozzáférhető számodra a kért oldal!'
           redirect_to root_url
@@ -47,18 +47,18 @@ private
           render "errors/no_#{controller_name}"
         else
           begin
-            ExceptionNotifier::Notifier.exception_notification(request.env, exception, :data => {:message => 'an error happened'}).deliver
+            ExceptionNotifier::Notifier.exception_notification(request.env, exception, data: {message: 'an error happened'}).deliver
           rescue
           end
-          render "errors/error_#{status}", :status => status
+          render "errors/error_#{status}", status: status
         end
       end
       format.any do
         begin
-          ExceptionNotifier::Notifier.exception_notification(request.env, exception, :data => {:message => 'an error happened'}).deliver
+          ExceptionNotifier::Notifier.exception_notification(request.env, exception, data: {message: 'an error happened'}).deliver
         rescue
         end
-        render :nothing => true, :status => status
+        render nothing: true, status: status
       end
     end
   end
@@ -177,13 +177,13 @@ private
   helper_method :use_invite_process?
 
   def groups_show
-    @activities = @group.activities.where('activable_type NOT IN (?)', ['Comment']).order('created_at DESC').paginate :page => params[:page]
+    @activities = @group.activities.where('activable_type NOT IN (?)', ['Comment']).order('created_at DESC').paginate page: params[:page]
     @title = @group.name
     render 'groups/show'
   end
 
   def events_show
-    @activities = @event.activities.where('activable_type NOT IN (?)', ['Comment']).order('created_at DESC').paginate :page => params[:page]
+    @activities = @event.activities.where('activable_type NOT IN (?)', ['Comment']).order('created_at DESC').paginate page: params[:page]
     @title = @event.title
     if Time.now.between?(@event.start_time, @event.end_time)
       render 'events/actual'

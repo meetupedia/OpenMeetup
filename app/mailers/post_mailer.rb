@@ -7,7 +7,7 @@ class PostMailer < CommonMailer
       @email = @recipient.email
       @postable = @post.postable
       set_locale @recipient.andand.locale
-      mail :to => @email, :subject => "Notification about a new post: #{@postable.name}"
+      mail to: @email, subject: "Notification about a new post: #{@postable.name}"
     end
   end
 

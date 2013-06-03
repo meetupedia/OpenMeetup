@@ -1,31 +1,31 @@
 # encoding: UTF-8
 
 class UsersController < CommonController
-  load_resource :except => [:create]
-  authorize_resource :except => [:index, :show, :groups, :request_invite, :validate_email]
-  before_filter :set_city, :except => [:edit, :update, :edit_city]
-  before_filter :create_city, :only => [:new, :request_invite, :edit_city]
-  skip_before_filter :check_restricted_access, :only => [:new, :create, :request_invite]
+  load_resource except: [:create]
+  authorize_resource except: [:index, :show, :groups, :request_invite, :validate_email]
+  before_filter :set_city, except: [:edit, :update, :edit_city]
+  before_filter :create_city, only: [:new, :request_invite, :edit_city]
+  skip_before_filter :check_restricted_access, only: [:new, :create, :request_invite]
 
-  cache_sweeper :membership_sweeper, :only => [:create]
-  cache_sweeper :participation_sweeper, :only => [:create]
+  cache_sweeper :membership_sweeper, only: [:create]
+  cache_sweeper :participation_sweeper, only: [:create]
 
   def index
     if Settings.standalone
       @users = User.where('name LIKE ? OR email LIKE ?', "%#{params[:q]}%", "%#{params[:q]}%")
       respond_to do |format|
-        format.json { render :json => @users.map { |user| {:id => user.id, :name => "#{user.name} <#{user.email}>" } } }
+        format.json { render json: @users.map { |user| {id: user.id, name: "#{user.name} <#{user.email}>" } } }
       end
     else
       @users = User.where('name LIKE ?', "%#{params[:q]}%")
       respond_to do |format|
-        format.json { render :json => @users.map { |user| {:id => user.id, :name => user.name } } }
+        format.json { render json: @users.map { |user| {id: user.id, name: user.name } } }
       end
     end
   end
 
   def show
-    @activities = @user.activities.order('created_at DESC').includes(:activable).paginate :page => params[:page]
+    @activities = @user.activities.order('created_at DESC').includes(:activable).paginate page: params[:page]
     @title = @user.name
   end
 
@@ -44,11 +44,11 @@ class UsersController < CommonController
       create_activity @user, @user
       cookies.delete :invitation_code
       if cookies[:add_membership_for] and group = Group.find_by_id(session[:cookies_membership_for])
-        group.memberships.create :user => @user
+        group.memberships.create user: @user
         cookies.delete :add_membership_for
       end
       if cookies[:add_participation_for] and event = Event.find_by_id(cookies[:add_participation_for])
-        event.participations.create :user => @user
+        event.participations.create user: @user
         cookies.delete :add_participation_for
       end
       redirect_to interests_url
@@ -65,7 +65,7 @@ class UsersController < CommonController
   def destroy
     current_user_session.andand.destroy if @user == current_user
     @user.destroy
-    redirect_to root_url, :notice => trfn('User deleted.')
+    redirect_to root_url, notice: trfn('User deleted.')
   end
 
   def calendar
@@ -78,7 +78,7 @@ class UsersController < CommonController
   end
 
   def groups
-    @groups = @user.joined_groups.paginate :page => params[:page]
+    @groups = @user.joined_groups.paginate page: params[:page]
     @admined_groups = @user.admined_groups
   end
 
@@ -93,24 +93,24 @@ class UsersController < CommonController
   def set_admin
     # unless request.method == 'GET'
       @user.is_admin = true
-      @user.save :validate => false
+      @user.save validate: false
       begin
         UserMailer.set_admin(@user).deliver
       rescue
       end
-      redirect_to @user, :notice => trfn('User is now admin.')
+      redirect_to @user, notice: trfn('User is now admin.')
     # else
-    #   redirect_to @user, :alert => trfe('Wrong query!')
+    #   redirect_to @user, alert: trfe('Wrong query!')
     # end
   end
 
   def unset_admin
     # unless request.method == 'GET'
       @user.is_admin = false
-      @user.save :validate => false
-      redirect_to @user, :notice => trfn('User is not an admin anymore.')
+      @user.save validate: false
+      redirect_to @user, notice: trfn('User is not an admin anymore.')
     # else
-    #   redirect_to @user, :alert => trfe('Wrong query!')
+    #   redirect_to @user, alert: trfe('Wrong query!')
     # end
   end
 
@@ -121,11 +121,11 @@ class UsersController < CommonController
   end
 
   def validate_email
-    render :json => !User.find_by_email(params[:user][:email])
+    render json: !User.find_by_email(params[:user][:email])
   end
 
   def waves
-    @waves = current_user.waves.order('last_changed_at DESC').paginate :page => params[:page]
+    @waves = current_user.waves.order('last_changed_at DESC').paginate page: params[:page]
   end
 
   def newsletter_insights_for_group_admin
@@ -148,7 +148,7 @@ class UsersController < CommonController
       @user.avatar = File.open(image.image.path)
       @user.save
     end
-    redirect_to @user, :notice => trfn('User profile image updated.')
+    redirect_to @user, notice: trfn('User profile image updated.')
   end
 
   def set_header
@@ -156,7 +156,7 @@ class UsersController < CommonController
       @user.header = File.open(image.image.path)
       @user.save
     end
-    redirect_to @user, :notice => trfn('User header image updated.')
+    redirect_to @user, notice: trfn('User header image updated.')
   end
 
 protected

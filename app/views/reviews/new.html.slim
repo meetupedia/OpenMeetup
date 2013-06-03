@@ -1,7 +1,7 @@
 .wrapper
   h1= tr('Write a review')
 
-  = render 'form', :url => event_reviews_path(@event)
+  = render 'form', url: event_reviews_path(@event)
 
   .list_view
     .icon-container

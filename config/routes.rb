@@ -23,7 +23,7 @@ Openmeetup::Application.routes.draw do
   end
 
   resources :activities do
-    resources :comments, :shallow => true
+    resources :comments, shallow: true
   end
 
   resources :cities do
@@ -48,8 +48,8 @@ Openmeetup::Application.routes.draw do
       post :set_header
       get :waves
     end
-    resources :posts, :shallow => true
-    resources :events, :shallow => true do
+    resources :posts, shallow: true
+    resources :events, shallow: true do
       member do
         get :actual
         get :images
@@ -60,19 +60,19 @@ Openmeetup::Application.routes.draw do
         get :users
         get :users_with_emails
       end
-      resources :absences, :shallow => true do
+      resources :absences, shallow: true do
         collection do
           get :set
         end
       end
-      resources :comments, :shallow => true
-      resources :event_invitations, :shallow => true
-      resources :images, :shallow => true do
+      resources :comments, shallow: true
+      resources :event_invitations, shallow: true
+      resources :images, shallow: true do
         collection do
           post :upload
         end
       end
-      resources :participations, :shallow => true do
+      resources :participations, shallow: true do
         member do
           post :checkin
         end
@@ -80,22 +80,22 @@ Openmeetup::Application.routes.draw do
           get :set
         end
       end
-      resources :posts, :shallow => true
-      resources :questions, :shallow => true
-      resources :reviews, :shallow => true
+      resources :posts, shallow: true
+      resources :questions, shallow: true
+      resources :reviews, shallow: true
     end
-    resources :group_invitations, :shallow => true
-    resources :images, :shallow => true do
+    resources :group_invitations, shallow: true
+    resources :images, shallow: true do
       collection do
         post :upload
       end
     end
-    resources :membership_requests, :shallow => true do
+    resources :membership_requests, shallow: true do
       member do
         put :confirm
       end
     end
-    resources :memberships, :shallow => true do
+    resources :memberships, shallow: true do
       collection do
         get :set
       end
@@ -104,8 +104,8 @@ Openmeetup::Application.routes.draw do
         put :unset_admin
       end
     end
-    resources :tags, :shallow => true do
-      resources :taggings, :shallow => true
+    resources :tags, shallow: true do
+      resources :taggings, shallow: true
     end
   end
 
@@ -114,11 +114,11 @@ Openmeetup::Application.routes.draw do
       get :next
       get :previous
     end
-    resources :comments, :shallow => true
+    resources :comments, shallow: true
   end
 
   resources :interests do
-    resources :interest_taggings, :shallow => true
+    resources :interest_taggings, shallow: true
   end
 
   resources :letter_templates do
@@ -139,7 +139,7 @@ Openmeetup::Application.routes.draw do
   resources :passwords
 
   resources :posts do
-    resources :comments, :shallow => true
+    resources :comments, shallow: true
   end
 
   resources :settings
@@ -149,7 +149,7 @@ Openmeetup::Application.routes.draw do
   resource :user_sessions
 
   resources :users do
-    resources :user_follows, :shallow => true
+    resources :user_follows, shallow: true
     collection do
       get :request_invite
       get :recommendations
@@ -171,7 +171,7 @@ Openmeetup::Application.routes.draw do
     end
   end
 
-  resources :votes, :only => [:index] do
+  resources :votes, only: [:index] do
     collection do
       get :set
       post :set
@@ -182,26 +182,26 @@ Openmeetup::Application.routes.draw do
     resources :wave_items
   end
 
-  match '/about' => 'root#about', :as => :about
-  match '/crash' => 'root#crash', :as => :crash
-  match '/developer_dashboard' => 'root#developer_dashboard', :as => :developer_dashboard
-  match '/discovery' => 'root#discovery', :as => :discovery
-  match '/search' => 'search#index', :as => :search
-  match '/dashboard' => 'root#dashboard', :as => :dashboard
-  match '/restricted_access' => 'root#restricted_access', :as => :restricted_access
+  match '/about' => 'root#about', as: :about
+  match '/crash' => 'root#crash', as: :crash
+  match '/developer_dashboard' => 'root#developer_dashboard', as: :developer_dashboard
+  match '/discovery' => 'root#discovery', as: :discovery
+  match '/search' => 'search#index', as: :search
+  match '/dashboard' => 'root#dashboard', as: :dashboard
+  match '/restricted_access' => 'root#restricted_access', as: :restricted_access
 
-  match '/system-settings' => 'dashboard#index', :as => :system
-  match '/reload' => 'dashboard#reload', :as => :reload
-  match '/download_database' => 'dashboard#download_database', :as => :download_database
-  match '/download_translations' => 'dashboard#download_translations', :as => :download_translations
+  match '/system-settings' => 'dashboard#index', as: :system
+  match '/reload' => 'dashboard#reload', as: :reload
+  match '/download_database' => 'dashboard#download_database', as: :download_database
+  match '/download_translations' => 'dashboard#download_translations', as: :download_translations
 
   resources :authentications
   match '/auth/:provider/callback' => 'authentications#create'
-  match '/sign_in' => 'root#sign_in', :as => :sign_in
-  match '/sign_in_with_email' => 'users#new', :as => :sign_in_with_email
-  match '/sign_out' => 'user_sessions#destroy', :as => :sign_out
+  match '/sign_in' => 'root#sign_in', as: :sign_in
+  match '/sign_in_with_email' => 'users#new', as: :sign_in_with_email
+  match '/sign_out' => 'user_sessions#destroy', as: :sign_out
 
-  root :to => 'root#index'
+  root to: 'root#index'
   match ':controller(/:action(/:id))(.:format)'
-  match '/:id' => 'root#undefined', :as => :undefined
+  match '/:id' => 'root#undefined', as: :undefined
 end

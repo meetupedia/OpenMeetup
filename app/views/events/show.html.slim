@@ -4,15 +4,15 @@
   .span4
     .wrapper
       ul.tiles
-        li= link_to "<span class='menu_count'>#{@event.participants.size}</span> #{tr('participants')}".html_safe, users_event_path(@event), :rel => 'modal'
-        li= link_to "<span class='menu_count'>#{@event.event_invitations.size}</span> #{tr('invited')}".html_safe, invited_event_path(@event), :rel => 'modal'
-        li= link_to "<span class='menu_count'>#{@event.images.size}</span> #{tr('images')}".html_safe, images_event_path(@event), :rel => 'modal'
+        li= link_to "<span class='menu_count'>#{@event.participants.size}</span> #{tr('participants')}".html_safe, users_event_path(@event), rel: 'modal'
+        li= link_to "<span class='menu_count'>#{@event.event_invitations.size}</span> #{tr('invited')}".html_safe, invited_event_path(@event), rel: 'modal'
+        li= link_to "<span class='menu_count'>#{@event.images.size}</span> #{tr('images')}".html_safe, images_event_path(@event), rel: 'modal'
 
     .wrapper
       h2= tr('Participants')
       .list_view= render @event.participants.order('participations.created_at ASC')
       - if can? :participations, @event and @event.questions.present?
-        p= link_to tr("View participants' answers"), participations_event_path(@event), :rel => 'modal'
+        p= link_to tr("View participants' answers"), participations_event_path(@event), rel: 'modal'
 
     .wrapper
       .calendar= calendar(@event.start_time, @event.end_time)
@@ -32,7 +32,7 @@
     .wrapper
       h2= tr('Activity')
       - if can? :create, post = @event.posts.build
-        = form_for post, :url => url_for([@event, :posts]), :remote => true do |f|
+        = form_for post, url: url_for([@event, :posts]), remote: true do |f|
           = f.text_area :post
-          = f.submit trl('Send'), :button_html => {:class => 'btn btn-primary', :disable_with => trl('Sending...')}
-      = render 'activities/activities', :activities => @activities
+          = f.submit trl('Send'), button_html: {class: 'btn btn-primary', disable_with: trl('Sending...')}
+      = render 'activities/activities', activities: @activities

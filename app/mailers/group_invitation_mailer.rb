@@ -10,7 +10,7 @@ class GroupInvitationMailer < CommonMailer
     @message = group_invitation.message
     @invitation_code = group_invitation.code
     set_locale @recipient.andand.locale || @user.locale
-    mail :to => @email, :subject => "Invitation: #{@group.name}"
+    mail to: @email, subject: "Invitation: #{@group.name}"
   end
 
 

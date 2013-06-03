@@ -1,7 +1,7 @@
 .wrapper.clearfix
-  .pull-right= link_to tr('Next step'), root_path, :class => 'btn btn-primary'
+  .pull-right= link_to tr('Next step'), root_path, class: 'btn btn-primary'
 
   h1= tr('What are your interests?')
-  interest_taggings= render :partial => 'interest_taggings/button', :collection => @interests.all, :as => :interest
+  interest_taggings= render partial: 'interest_taggings/button', collection: @interests.all, as: :interest
 
-  .pull-right= link_to tr('Next step'), root_path, :class => 'btn btn-primary'
+  .pull-right= link_to tr('Next step'), root_path, class: 'btn btn-primary'

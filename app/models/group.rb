@@ -2,65 +2,65 @@
 
 class Group < ActiveRecord::Base
   key :name
-  key :permaname, :index => true
-  key :permalink, :index => true
-  key :description, :as => :text
-  key :creation_letter_text, :as => :text
+  key :permaname, index: true
+  key :permalink, index: true
+  key :description, as: :text
+  key :creation_letter_text, as: :text
   key :facebook_uid
-  key :location, :index => true
+  key :location, index: true
   key :image_file_name
   key :image_content_type
-  key :image_file_size, :as => :integer
-  key :image_updated_at, :as => :datetime
+  key :image_file_size, as: :integer
+  key :image_updated_at, as: :datetime
   key :header_file_name
   key :header_content_type
-  key :header_file_size, :as => :integer
-  key :header_updated_at, :as => :datetime
-  key :is_closed, :as => :boolean, :default => false
+  key :header_file_size, as: :integer
+  key :header_updated_at, as: :datetime
+  key :is_closed, as: :boolean, default: false
   key :url
   key :facebook_url
   timestamps
-  key :memberships_count, :as => :integer, :default => 0
+  key :memberships_count, as: :integer, default: 0
 
   belongs_to :city
   belongs_to :language
   belongs_to :user
-  has_many :activities, :dependent => :destroy
-  has_many :admins, :through => :memberships, :source => :user, :conditions => {'memberships.is_admin' => true}
-  has_many :events, :dependent => :destroy
-  has_many :group_invitations, :dependent => :nullify
-  has_many :group_taggings, :dependent => :destroy
-  has_many :images, :as => :imageable
-  has_many :membership_requests, :dependent => :destroy
-  has_many :memberships, :dependent => :destroy
-  has_many :members, :through => :memberships, :source => :user
-  has_many :notifications, :dependent => :destroy
-  has_many :posts, :as => :postable, :dependent => :destroy
-  has_many :requested_members, :through => :membership_requests, :source => :user
-  has_many :reviews, :dependent => :destroy
-  has_many :tags, :through => :group_taggings
-  has_many :waves, :dependent => :nullify
+  has_many :activities, dependent: :destroy
+  has_many :admins, through: :memberships, source: :user, conditions: {'memberships.is_admin' => true}
+  has_many :events, dependent: :destroy
+  has_many :group_invitations, dependent: :nullify
+  has_many :group_taggings, dependent: :destroy
+  has_many :images, as: :imageable
+  has_many :membership_requests, dependent: :destroy
+  has_many :memberships, dependent: :destroy
+  has_many :members, through: :memberships, source: :user
+  has_many :notifications, dependent: :destroy
+  has_many :posts, as: :postable, dependent: :destroy
+  has_many :requested_members, through: :membership_requests, source: :user
+  has_many :reviews, dependent: :destroy
+  has_many :tags, through: :group_taggings
+  has_many :waves, dependent: :nullify
 
   attr_reader :tag_tokens
 
   has_attached_file :header,
-    :path => ':rails_root/public/system/:class/:attachment/:style/:class_:id.:extension',
-    :url => '/system/:class/:attachment/:style/:class_:id.:extension',
-    :default_url => '/assets/:class_missing_:style.png',
-    :styles => {
-      :normal => ['940x200#', :jpg]
+    path: ':rails_root/public/system/:class/:attachment/:style/:class_:id.:extension',
+    url: '/system/:class/:attachment/:style/:class_:id.:extension',
+    default_url: '/assets/:class_missing_:style.png',
+    styles: {
+      normal: ['940x200#', :jpg]
     },
-    :convert_options => {:all => '-quality 95 -strip'}
+    convert_options: {all: '-quality 95 -strip'}
 
   has_attached_file :image,
-    :path => ':rails_root/public/system/:class/:style/:class_:id.:extension',
-    :url => '/system/:class/:style/:class_:id.:extension',
-    :default_url => '/assets/:class_missing_:style.png',
-    :styles => {
-      :normal => ['500x500>', :jpg],
-      :small => ['96x96#', :jpg]
+    path: ':rails_root/public/system/:class/:style/:class_:id.:extension',
+    url: '/system/:class/:style/:class_:id.:extension',
+    default_url: '/assets/:class_missing_:style.png',
+    styles: {
+      normal: ['500x500>', :jpg],
+      small: ['96x96#', :jpg]
     },
-    :convert_options => {:all => '-quality 95 -strip'}
+    convert_options: {all: '-quality 95 -strip'}
 
   auto_permalink :name
 
@@ -87,7 +87,7 @@ class Group < ActiveRecord::Base
   end
 
   def create_admin_membership
-    membership = Membership.create :group => self
+    membership = Membership.create group: self
     membership.is_admin = true
     membership.save
   end
@@ -144,7 +144,7 @@ class Group < ActiveRecord::Base
 
   def self.recommended_groups_for(user, limit = 10)
     tagged_groups = self.tagged_groups_for(user).limit(limit)
-    new_groups = self.joins(:language, :city).where('cities.id' => user.city_id, 'languages.code' => I18n.locale, :is_closed => false).order('created_at DESC').limit(limit)
+    new_groups = self.joins(:language, :city).where('cities.id' => user.city_id, 'languages.code' => I18n.locale, is_closed: false).order('created_at DESC').limit(limit)
     (tagged_groups + (new_groups - tagged_groups))[0...limit]
   end
 end

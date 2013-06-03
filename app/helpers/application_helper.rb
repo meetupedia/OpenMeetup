@@ -6,7 +6,7 @@ module ApplicationHelper
     filename = 'default_avatar.png'
     filename = "https://graph.facebook.com/#{user.facebook_id}/picture" if user.facebook_id
     filename = user.avatar(:small) if user.avatar.file?
-    link_to(image_tag(filename, :alt => user.name, :height => 32, :width => 32, :title => user.name, :class => 'avatar_image'), user)
+    link_to(image_tag(filename, alt: user.name, height: 32, width: 32, title: user.name, class: 'avatar_image'), user)
   end
 
   def user_link(user)
@@ -23,9 +23,9 @@ module ApplicationHelper
   end
 
   def calendar(start_time, end_time)
-    calendar_for(start_time.year, start_time.month, :current_month => '%Y. %B') do |date|
+    calendar_for(start_time.year, start_time.month, current_month: '%Y. %B') do |date|
       style = (start_time.beginning_of_day <= date and end_time.end_of_day >= date) ? 'on_day' : ''
-      content_tag :span, date.day, :class => style
+      content_tag :span, date.day, class: style
     end
   end
 
@@ -40,7 +40,7 @@ module ApplicationHelper
 
     method_tag = ''
     if (method = html_options.delete('method')) && %w{put delete}.include?(method.to_s)
-      method_tag = tag('input', :type => 'hidden', :name => '_method', :value => method.to_s)
+      method_tag = tag('input', type: 'hidden', name: '_method', value: method.to_s)
     end
 
     form_method = method.to_s == 'get' ? 'get' : 'post'
@@ -51,7 +51,7 @@ module ApplicationHelper
 
     request_token_tag = ''
     if form_method == 'post' && protect_against_forgery?
-      request_token_tag = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token)
+      request_token_tag = tag(:input, type: "hidden", name: request_forgery_protection_token.to_s, value: form_authenticity_token)
     end
 
     url = options.is_a?(String) ? options : self.url_for(options)
@@ -61,7 +61,7 @@ module ApplicationHelper
 
     html_options.merge!("type" => "submit")
 
-    form_options.merge!(:method => form_method, :action => url)
+    form_options.merge!(method: form_method, action: url)
     form_options.merge!("data-remote" => "true") if remote
 
     "#{tag(:form, form_options, true)}<div>#{method_tag}#{content_tag("button", name, html_options)}#{request_token_tag}</div></form>".html_safe

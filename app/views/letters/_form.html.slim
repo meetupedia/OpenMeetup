@@ -12,7 +12,7 @@ javascript:
     crossDomain: false,
     tokenValue: 'id',
     preventDuplicates: true,
-    prePopulate: #{(@letter.testuser ? [{:id => @letter.testuser.id, :name => @letter.testuser.name}] : nil).to_json.html_safe},
+    prePopulate: #{(@letter.testuser ? [{id: @letter.testuser.id, name: @letter.testuser.name}] : nil).to_json.html_safe},
     tokenLimit: 1,
     theme: 'facebook'
   })

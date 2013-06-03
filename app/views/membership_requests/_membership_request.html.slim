@@ -1,8 +1,8 @@
-= div_for membership_request.user, :class => 'list_item avatar_item clearfix' do
+= div_for membership_request.user, class: 'list_item avatar_item clearfix' do
   .pull-right
     - if can? :confirm, membership_request
-      =' button_to %{<span class="icon-ok"></span>}.html_safe, confirm_membership_request_path(membership_request), :method => :put, :class => 'btn btn-mini'
+      =' button_to %{<span class="icon-ok"></span>}.html_safe, confirm_membership_request_path(membership_request), method: :put, class: 'btn btn-mini'
     - if can? :destroy, membership_request
-      =' button_to %{<span class="icon-remove"></span>}.html_safe, membership_request, :method => :delete, :confirm => trl('Are you sure?'), :class => 'btn btn-mini'
+      =' button_to %{<span class="icon-remove"></span>}.html_safe, membership_request, method: :delete, confirm: trl('Are you sure?'), class: 'btn btn-mini'
   .avatar= user_avatar membership_request.user
   = link_to membership_request.user.name, membership_request.user

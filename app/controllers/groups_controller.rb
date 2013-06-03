@@ -2,10 +2,10 @@
 
 class GroupsController < CommonController
   load_resource
-  authorize_resource :except => [:index, :show, :events, :images, :members]
+  authorize_resource except: [:index, :show, :events, :images, :members]
 
   def show
-    @membership_requests = @group.membership_requests.order('created_at ASC').includes(:user).paginate :page => params[:page]
+    @membership_requests = @group.membership_requests.order('created_at ASC').includes(:user).paginate page: params[:page]
     groups_show
   end
 
@@ -19,13 +19,13 @@ class GroupsController < CommonController
         GroupMailer.creation_for_owner(@group).deliver
       rescue
       end
-      User.where(:is_admin => true).each do |user|
+      User.where(is_admin: true).each do |user|
         begin
           GroupMailer.creation(@group, user).deliver if user.email
         rescue
         end
       end
-      redirect_to @group, :notice => trfn('Group created.')
+      redirect_to @group, notice: trfn('Group created.')
     else
       render :new
     end
@@ -36,7 +36,7 @@ class GroupsController < CommonController
 
   def update
     if @group.update_attributes params[:group]
-      redirect_to @group, :notice => trfn('Group updated.')
+      redirect_to @group, notice: trfn('Group updated.')
     else
       render :edit
     end
@@ -44,11 +44,11 @@ class GroupsController < CommonController
 
   def destroy
     @group.destroy
-    redirect_to discovery_path, :notice => trfn('Group deleted.')
+    redirect_to discovery_path, notice: trfn('Group deleted.')
   end
 
   def events
-    @events = @group.events.order('start_time DESC').paginate :page => params[:page]
+    @events = @group.events.order('start_time DESC').paginate page: params[:page]
   end
 
   def images
@@ -59,11 +59,11 @@ class GroupsController < CommonController
   end
 
   def members
-    @memberships = @group.memberships.order('is_admin DESC, created_at ASC').includes(:user).paginate :page => params[:page]
+    @memberships = @group.memberships.order('is_admin DESC, created_at ASC').includes(:user).paginate page: params[:page]
   end
 
   def requested_members
-    @membership_requests = @group.membership_requests.order('created_at ASC').includes(:user).paginate :page => params[:page]
+    @membership_requests = @group.membership_requests.order('created_at ASC').includes(:user).paginate page: params[:page]
   end
 
   def set_image
@@ -71,7 +71,7 @@ class GroupsController < CommonController
       @group.image = File.open(image.image.path)
       @group.save
     end
-    redirect_to @group, :notice => trfn('Group profile image changed.')
+    redirect_to @group, notice: trfn('Group profile image changed.')
   end
 
   def set_header
@@ -79,11 +79,11 @@ class GroupsController < CommonController
       @group.header = File.open(image.image.path)
       @group.save
     end
-    redirect_to @group, :notice => trfn('Group header image changed.')
+    redirect_to @group, notice: trfn('Group header image changed.')
   end
 
   def waves
-    @waves = @group.waves.order('last_changed_at DESC').paginate :page => params[:page]
+    @waves = @group.waves.order('last_changed_at DESC').paginate page: params[:page]
   end
 
 end

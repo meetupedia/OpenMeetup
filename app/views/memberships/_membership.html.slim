@@ -1,11 +1,11 @@
-= div_for membership.user, :class => 'list_item avatar_item clearfix' do
+= div_for membership.user, class: 'list_item avatar_item clearfix' do
   .button-menu
     - if can? :destroy, membership
-      = button_to tr('Remove'), membership, :method => :delete, :confirm => trl('Are you sure?'), :class => 'btn btn-danger btn-mini'
+      = button_to tr('Remove'), membership, method: :delete, confirm: trl('Are you sure?'), class: 'btn btn-danger btn-mini'
     - if can? :set_admin, membership and not membership.group.admins.include?(membership.user)
-      = button_to tr('Set admin'), set_admin_membership_path(membership), :method => :put, :confirm => trl('Are you sure?'), :class => 'btn btn-mini'
+      = button_to tr('Set admin'), set_admin_membership_path(membership), method: :put, confirm: trl('Are you sure?'), class: 'btn btn-mini'
     - if can? :unset_admin, membership and membership.group.admins.include?(membership.user)
-      = button_to tr('Remove admin'), unset_admin_membership_path(membership), :method => :put, :confirm => trl('Are you sure?'), :class => 'btn btn-danger btn-mini'
+      = button_to tr('Remove admin'), unset_admin_membership_path(membership), method: :put, confirm: trl('Are you sure?'), class: 'btn btn-danger btn-mini'
   .avatar= user_avatar membership.user
   =' link_to membership.user.name, membership.user
   - if membership.is_admin?

@@ -1,2 +1,2 @@
-$('#tagging_button_for_tag_<%= @tagging.tag.id %>').replaceWith('<%= escape_javascript(render('taggings/button', :tag => @tagging.tag)) %>')
+$('#tagging_button_for_tag_<%= @tagging.tag.id %>').replaceWith('<%= escape_javascript(render('taggings/button', tag: @tagging.tag)) %>')
 $('#groups').html('<%= escape_javascript(render('groups/recommended_groups')) %>')

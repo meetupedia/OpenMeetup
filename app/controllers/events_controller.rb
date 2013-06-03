@@ -2,8 +2,8 @@
 
 class EventsController < CommonController
   load_resource :group
-  load_resource :event, :through => :group, :shallow => true
-  authorize_resource :except => [:index, :show, :actual, :images, :map, :users]
+  load_resource :event, through: :group, shallow: true
+  authorize_resource except: [:index, :show, :actual, :images, :map, :users]
 
   def show
     events_show
@@ -38,7 +38,7 @@ class EventsController < CommonController
       else
         trfn('Event created and') + " #{counter} " + trfn('invitations sent.')
       end
-      redirect_to @event, :notice => notice.html_safe
+      redirect_to @event, notice: notice.html_safe
     else
       render :new
     end
@@ -49,7 +49,7 @@ class EventsController < CommonController
 
   def update
     if @event.update_attributes params[:event]
-      redirect_to @event, :notice => trfn('Event updated.')
+      redirect_to @event, notice: trfn('Event updated.')
     else
       render :edit
     end
@@ -57,7 +57,7 @@ class EventsController < CommonController
 
   def destroy
     @event.destroy
-    redirect_to @event.group, :notice => trfn('Event deleted.')
+    redirect_to @event.group, notice: trfn('Event deleted.')
   end
 
   def actual
@@ -74,7 +74,7 @@ class EventsController < CommonController
   end
 
   def participations
-    @participations = @event.participations.includes(:user, {:answers => :question})
+    @participations = @event.participations.includes(:user, {answers: :question})
   end
 
   def reviews
@@ -82,7 +82,7 @@ class EventsController < CommonController
   end
 
   def users
-    @participations = @event.participations.includes(:user).paginate :page => params[:page]
+    @participations = @event.participations.includes(:user).paginate page: params[:page]
   end
 
   def users_with_emails

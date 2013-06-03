@@ -3,8 +3,8 @@
 class ImagesController < CommonController
   load_resource :event
   load_resource :group
-  load_resource :image, :through => [:event, :group], :shallow => true
-  authorize_resource :except => [:show, :next, :previous, :upload]
+  load_resource :image, through: [:event, :group], shallow: true
+  authorize_resource except: [:show, :next, :previous, :upload]
 
   def create
     @image.imageable = @event || @group
@@ -50,7 +50,7 @@ class ImagesController < CommonController
     if @image.save
       create_activity @image
     else
-      render :json => {'fail' => true}
+      render json: {'fail' => true}
     end
   end
 end

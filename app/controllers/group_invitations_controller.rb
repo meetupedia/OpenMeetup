@@ -2,8 +2,8 @@
 
 class GroupInvitationsController < CommonController
   load_resource :group
-  load_resource :group_invitation, :through => :group, :shallow => true
-  authorize_resource :except => [:index, :show, :users]
+  load_resource :group_invitation, through: :group, shallow: true
+  authorize_resource except: [:index, :show, :users]
 
   def new
   end
@@ -17,12 +17,12 @@ class GroupInvitationsController < CommonController
             group_invitation = GroupInvitation.find_or_initialize_by_group_id_and_invited_user_id(@group.id, user.id)
             group_invitation.email ||= user.email
           else
-            group_invitation = GroupInvitation.new :invited_user => user, :error => 'already member'
+            group_invitation = GroupInvitation.new invited_user: user, error: 'already member'
           end
         elsif id =~ /.+@.+\..+/
           group_invitation = GroupInvitation.find_or_initialize_by_group_id_and_email(@group.id, id)
         else
-          group_invitation = GroupInvitation.new :email => id, :error => 'not recognized as valid email'
+          group_invitation = GroupInvitation.new email: id, error: 'not recognized as valid email'
         end
         group_invitation.error = 'already invited' unless group_invitation.new_record? and group_invitation.error.blank?
         unless group_invitation.error

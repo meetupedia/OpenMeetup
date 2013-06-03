@@ -5,7 +5,7 @@ class LetterMailer < CommonMailer
   def letter(letter, user)
     @letter = letter
     @user = user
-    mail :to => user.email, :subject => @letter.subject
+    mail to: user.email, subject: @letter.subject
   end
 
 

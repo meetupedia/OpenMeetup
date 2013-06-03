@@ -3,8 +3,8 @@
 class PostsController < CommonController
   load_resource :event
   load_resource :group
-  load_resource :post, :through => [:event, :group], :shallow => true
-  authorize_resource :except => [:show]
+  load_resource :post, through: [:event, :group], shallow: true
+  authorize_resource except: [:show]
 
   def show
   end

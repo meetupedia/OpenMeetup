@@ -6,7 +6,7 @@ class CommentMailer < CommonMailer
     if @comment = Comment.find_by_id(comment_id) and @recipient = User.find_by_id(user_id)
       @email = @recipient.email
       set_locale @recipient.andand.locale
-      mail :to => @email, :subject => "Notification about a new comment."
+      mail to: @email, subject: "Notification about a new comment."
     end
   end
 

@@ -10,18 +10,18 @@
           =' image_tag 'cog.png'
           span.caret
         ul.dropdown-menu
-          li= link_to tr('Invite friends'), new_event_event_invitation_path(@event), :rel => 'modal'
-          li= link_to tr('Invite all group members'), new_event_event_invitation_path(@event, :invite_members => true), :rel => 'modal'
+          li= link_to tr('Invite friends'), new_event_event_invitation_path(@event), rel: 'modal'
+          li= link_to tr('Invite all group members'), new_event_event_invitation_path(@event, invite_members: true), rel: 'modal'
           - if can? :edit, @event
             li.divider
             - if can? :users_with_emails, @event
-              li= link_to tr('Export list of participants'), users_with_emails_event_path(@event), :rel => 'modal'
+              li= link_to tr('Export list of participants'), users_with_emails_event_path(@event), rel: 'modal'
             - if participation and @event.questions.present? and @event.start_time > Time.now
-              li= link_to tr('Edit answers'), edit_participation_path(participation), :rel => 'modal'
+              li= link_to tr('Edit answers'), edit_participation_path(participation), rel: 'modal'
             - if can? :edit, @event
-              li= link_to tr('Edit event'), edit_event_path(@event), :rel => 'modal'
+              li= link_to tr('Edit event'), edit_event_path(@event), rel: 'modal'
             - if can? :destroy, @event
-              li= link_to tr('Delete event'), @event, :method => :delete, :confirm => trl('Are you sure?')
+              li= link_to tr('Delete event'), @event, method: :delete, confirm: trl('Are you sure?')
 
       - if absence or participation
         - if absence
@@ -30,30 +30,30 @@
               =' tr('Not going')
               span.caret
             ul.dropdown-menu
-              li= link_to tr('Going'), event_participations_path(@event), :method => :post, :onclick => "_gaq.push(['_trackEvent', 'Event RSVP - going', 'Event RSVP']);"
-              li= link_to "#{tr('Not going')} <i class='icon-ok'></i>".html_safe, event_absences_path(@event), :method => :post, :onclick => "_gaq.push(['_trackEvent', 'Event RSVP - not going', 'Event RSVP']);"
+              li= link_to tr('Going'), event_participations_path(@event), method: :post, onclick: "_gaq.push(['_trackEvent', 'Event RSVP - going', 'Event RSVP']);"
+              li= link_to "#{tr('Not going')} <i class='icon-ok'></i>".html_safe, event_absences_path(@event), method: :post, onclick: "_gaq.push(['_trackEvent', 'Event RSVP - not going', 'Event RSVP']);"
         - if participation
           .btn-group.pull-right
             a.btn.dropdown-toggle(data-toggle="dropdown" href="#")
               =' tr('Going')
               span.caret
             ul.dropdown-menu
-              li= link_to "#{tr('Going')} <i class='icon-ok'></i>".html_safe, event_participations_path(@event), :method => :post, :onclick => "_gaq.push(['_trackEvent', 'Event RSVP - going', 'Event RSVP']);"
-              li= link_to tr('Not going'), event_absences_path(@event), :method => :post, :onclick => "_gaq.push(['_trackEvent', 'Event RSVP - not going', 'Event RSVP']);"
+              li= link_to "#{tr('Going')} <i class='icon-ok'></i>".html_safe, event_participations_path(@event), method: :post, onclick: "_gaq.push(['_trackEvent', 'Event RSVP - going', 'Event RSVP']);"
+              li= link_to tr('Not going'), event_absences_path(@event), method: :post, onclick: "_gaq.push(['_trackEvent', 'Event RSVP - not going', 'Event RSVP']);"
         - if @event.start_time > Time.now
-          = link_to tr('Invite friends'), new_event_event_invitation_path(@event), :rel => 'modal', :class => 'btn btn-primary'
+          = link_to tr('Invite friends'), new_event_event_invitation_path(@event), rel: 'modal', class: 'btn btn-primary'
 
       - else
-        =' button_to "<i class='icon-minus-sign icon-black'></i> #{tr('Decline')}".html_safe, event_absences_path(@event), :method => :post, :class => 'btn', :onclick => "_gaq.push(['_trackEvent', 'Event RSVP - not going', 'Event RSVP']);"
-        = button_to "<i class='icon-plus-sign icon-white'></i> #{tr('Join')}".html_safe, event_participations_path(@event), :method => :post, :class => 'btn btn-primary', :onclick => "_gaq.push(['_trackEvent', 'Event RSVP - going', 'Event RSVP']);"
+        =' button_to "<i class='icon-minus-sign icon-black'></i> #{tr('Decline')}".html_safe, event_absences_path(@event), method: :post, class: 'btn', onclick: "_gaq.push(['_trackEvent', 'Event RSVP - not going', 'Event RSVP']);"
+        = button_to "<i class='icon-plus-sign icon-white'></i> #{tr('Join')}".html_safe, event_participations_path(@event), method: :post, class: 'btn btn-primary', onclick: "_gaq.push(['_trackEvent', 'Event RSVP - going', 'Event RSVP']);"
 
       - if @event.start_time < Time.now
         - if participation
-          = link_to tr('Write a review'), new_event_review_path(@event), :class => 'btn btn-primary', :rel => 'modal'
+          = link_to tr('Write a review'), new_event_review_path(@event), class: 'btn btn-primary', rel: 'modal'
     - else
       - if @event.start_time > Time.now
-        = link_to "<i class='icon-minus-sign icon-black'></i> #{tr('Decline')}".html_safe, set_event_absences_path(@event), :class => 'btn'
-        = link_to "<i class='icon-plus-sign icon-white'></i> #{tr('Join')}".html_safe, set_event_participations_path(@event), :class => 'btn btn-primary'
+        = link_to "<i class='icon-minus-sign icon-black'></i> #{tr('Decline')}".html_safe, set_event_absences_path(@event), class: 'btn'
+        = link_to "<i class='icon-plus-sign icon-white'></i> #{tr('Join')}".html_safe, set_event_participations_path(@event), class: 'btn btn-primary'
 
   h4= link_to @event.title, @event
   div
@@ -70,4 +70,4 @@
     - if @event.street.present?
       =' @event.street
 /    - if @event.gmaps4rails_address.present?
-/      = link_to @event.gmaps4rails_address, map_event_path(@event), :rel => 'modal'
+/      = link_to @event.gmaps4rails_address, map_event_path(@event), rel: 'modal'

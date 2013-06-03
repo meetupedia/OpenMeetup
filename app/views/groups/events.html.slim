@@ -2,8 +2,8 @@
   = render 'groups/header'
 
 .wrapper
-  - if can? :create, Event.new(:group => @group)
-    .pull-right= link_to tr('New event'), new_group_event_path(@group), :class => 'btn', :rel => 'modal'
+  - if can? :create, Event.new(group: @group)
+    .pull-right= link_to tr('New event'), new_group_event_path(@group), class: 'btn', rel: 'modal'
 
   h2= tr('Events')
 

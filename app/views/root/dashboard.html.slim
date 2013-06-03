@@ -9,7 +9,7 @@ h1= tr('Dashboard')
 
 .wrapper
   h2= tr('Members')
-  table.table= render :partial => 'dashboard/user', :collection => User.all, :as => :user
+  table.table= render partial: 'dashboard/user', collection: User.all, as: :user
 
 .wrapper
   h2= tr('Interests')

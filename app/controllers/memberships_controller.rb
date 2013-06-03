@@ -2,12 +2,12 @@
 
 class MembershipsController < CommonController
   load_resource :group
-  load_resource :membership, :through => :group, :shallow => true
-  authorize_resource :except => [:set]
-  before_filter :set_add_membership_for, :only => [:set]
-  before_filter :authenticate, :only => [:set]
+  load_resource :membership, through: :group, shallow: true
+  authorize_resource except: [:set]
+  before_filter :set_add_membership_for, only: [:set]
+  before_filter :authenticate, only: [:set]
 
-  cache_sweeper :membership_sweeper, :only => [:create]
+  cache_sweeper :membership_sweeper, only: [:create]
 
   def index
     redirect_to @group
@@ -35,7 +35,7 @@ class MembershipsController < CommonController
         redirect_to @membership.group
       end
     else
-      redirect_to @membership.group, :alert => 'Nem törölheted magad, ha nincsen legalább két admin!'
+      redirect_to @membership.group, alert: 'Nem törölheted magad, ha nincsen legalább két admin!'
     end
   end
 

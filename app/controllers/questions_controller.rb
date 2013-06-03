@@ -2,7 +2,7 @@
 
 class QuestionsController < CommonController
   load_resource :event
-  load_resource :question, :through => :event, :shallow => true
+  load_resource :question, through: :event, shallow: true
   authorize_resource
 
   def create

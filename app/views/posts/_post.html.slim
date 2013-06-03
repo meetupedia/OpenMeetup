@@ -1,19 +1,19 @@
-= div_for post, :class => 'list_item avatar_item' do
+= div_for post, class: 'list_item avatar_item' do
   - if current_user and can? :destroy, post
-    .pull-right= link_to '×', post, :method => :delete, :remote => true, :class => 'close', :confirm => trl('Delete post?')
-  = render 'votes/set', :item => post
+    .pull-right= link_to '×', post, method: :delete, remote: true, class: 'close', confirm: trl('Delete post?')
+  = render 'votes/set', item: post
   .avatar= user_avatar post.user
   =' user_link post.user
   // span.date= timeago_tag post.created_at
 
   .text= textilize(auto_link(post.post)).html_safe
 
-  = render 'comments/comments', :commentable => post
+  = render 'comments/comments', commentable: post
 
   - if current_user
     p= link_to_function tr('Comment'), "$('#add-post-comment-#{post.id}').toggle().find('textarea').focus()"
 
     div(id="add-post-comment-#{post.id}" style="display: none;")
-      = form_for Comment.new, :url => polymorphic_path([post, :comments]), :remote => true do |f|
+      = form_for Comment.new, url: polymorphic_path([post, :comments]), remote: true do |f|
         = f.text_area :comment
-        = f.submit trl('Send'), :button_html => {:class => 'btn btn-primary', :disable_with => trl('Sending...')}
+        = f.submit trl('Send'), button_html: {class: 'btn btn-primary', disable_with: trl('Sending...')}

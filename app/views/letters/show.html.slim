@@ -1,5 +1,5 @@
 .wrapper
-  p.pull-right= link_to image_tag('cog.png'), edit_letter_path(@letter), :class => 'btn'
+  p.pull-right= link_to image_tag('cog.png'), edit_letter_path(@letter), class: 'btn'
 
   h1 Levél
 
@@ -12,11 +12,11 @@
       td= user_link @user
 
   p
-    =' button_to 'Teszt', mailtest_letter_path(@letter), :method => :post, :class => 'btn'
-    = link_to 'Levélnézet', '/letter_mailer/mail_view/letter', :class => 'external'
+    =' button_to 'Teszt', mailtest_letter_path(@letter), method: :post, class: 'btn'
+    = link_to 'Levélnézet', '/letter_mailer/mail_view/letter', class: 'external'
 
   hr
 
   - begin
-    = render :inline => @letter.template, :type => :slim
+    = render inline: @letter.template, type: :slim
   - rescue

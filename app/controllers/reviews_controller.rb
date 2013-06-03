@@ -2,8 +2,8 @@
 
 class ReviewsController < CommonController
   load_resource :event
-  load_resource :review, :through => :event, :shallow => true
-  authorize_resource :except => [:index, :show]
+  load_resource :review, through: :event, shallow: true
+  authorize_resource except: [:index, :show]
 
   def new
   end
@@ -25,11 +25,11 @@ class ReviewsController < CommonController
 
   def update
     @review.update_attributes params[:review]
-    redirect_to @review.group, :notice => 'Értékelés módosítva.'
+    redirect_to @review.group, notice: 'Értékelés módosítva.'
   end
 
   def destroy
     @review.destroy
-    redirect_to @review.group, :notice => 'Értékelés törölve.'
+    redirect_to @review.group, notice: 'Értékelés törölve.'
   end
 end

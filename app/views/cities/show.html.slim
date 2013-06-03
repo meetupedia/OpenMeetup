@@ -1,8 +1,8 @@
 .wrapper
   .change_city
-    = semantic_form_for City.new, :url => jump_cities_path do |f|
+    = semantic_form_for City.new, url: jump_cities_path do |f|
       .pull-right= f.text_field :id
-      .pull-right= f.label :id, tr('Change city'), :class => 'change_field'
+      .pull-right= f.label :id, tr('Change city'), class: 'change_field'
 
   h1
     = @city.name
@@ -23,7 +23,7 @@
   .span8
     .wrapper
       - if can? :create, Group
-        p.pull-right= link_to tr('Create new group'), new_group_path, :class => 'btn'
+        p.pull-right= link_to tr('Create new group'), new_group_path, class: 'btn'
 
       h2= tr('Searching for groups')
 
@@ -33,11 +33,11 @@
         - if params[:q].blank?
           p
             - unless params[:order] == 'name'
-              =' link_to tr('Order by name'), '?order=name', :class => 'btn btn-mini'
+              =' link_to tr('Order by name'), '?order=name', class: 'btn btn-mini'
             - else
               span.btn.btn-mini.btn-success.disabled=' tr('Order by name')
             - unless params[:order] == 'members'
-              =' link_to tr('Order by members'), '?order=members', :class => 'btn btn-mini'
+              =' link_to tr('Order by members'), '?order=members', class: 'btn btn-mini'
             - else
               span.btn.btn-mini.btn-success.disabled=' tr('Order by members')
         - if @groups
@@ -47,7 +47,7 @@
   .span4
     .wrapper
       h2= tr('Tags')
-      - unless (tags = Tag.joins(:groups => :city).where('cities.id' => @city.id).order('tags.name ASC').all).blank?
+      - unless (tags = Tag.joins(groups: :city).where('cities.id' => @city.id).order('tags.name ASC').all).blank?
         = render tags
 
 javascript:

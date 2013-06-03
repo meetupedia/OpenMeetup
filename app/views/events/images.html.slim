@@ -4,6 +4,6 @@
 .wrapper
   h2= tr('Images')
 
-  = render 'images/new', :url => event_images_path(@event)
+  = render 'images/new', url: event_images_path(@event)
 
   #images= render @event.images.order('created_at ASC')

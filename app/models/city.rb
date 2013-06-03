@@ -1,13 +1,13 @@
 # encoding: UTF-8
 
 class City < ActiveRecord::Base
-  key :name, :index => true
-  key :permalink, :index => true
+  key :name, index: true
+  key :permalink, index: true
   key :state
   belongs_to :country
-  has_many :events, :dependent => :nullify
-  has_many :groups, :dependent => :nullify
-  has_many :users, :dependent => :nullify
+  has_many :events, dependent: :nullify
+  has_many :groups, dependent: :nullify
+  has_many :users, dependent: :nullify
 
   auto_permalink :name
 
@@ -37,9 +37,9 @@ class City < ActiveRecord::Base
     unless city
       unless country_name.blank?
         country = Country.find_by_name(country_name)
-        country ||= Country.create :name => country_name
+        country ||= Country.create name: country_name
       end
-      city = City.create :name => city_name
+      city = City.create name: city_name
       if country
         city.country = country
         city.save

@@ -1,4 +1,4 @@
-= semantic_form_for @event, :url => url do |f|
+= semantic_form_for @event, url: url do |f|
   = f.inputs do
     = f.input :title
     = f.input :start_time
@@ -7,10 +7,10 @@
     - unless Settings.standalone
       .control-group
         = f.label :city_id, tr('City')
-        = f.text_field :city_id, 'data-pre' => [@event.city].compact.map { |city| {:id => city.id, :name => city.name} }.to_json
+        = f.text_field :city_id, 'data-pre' => [@event.city].compact.map { |city| {id: city.id, name: city.name} }.to_json
       = f.input :street
     - if @event.new_record?
-      = f.input :invite_all_group_members, :label => false, :as => :boolean, :input_html => {:checked => 'checked'}
+      = f.input :invite_all_group_members, label: false, as: :boolean, input_html: {checked: 'checked'}
   #accordion.accordion
     .accordion-group
       .accordion-heading
@@ -21,17 +21,17 @@
           - if Settings.standalone
             .control-group
               = f.label :city_id, tr('City')
-              = f.text_field :city_id, 'data-pre' => [@event.city].compact.map { |city| {:id => city.id, :name => city.name} }.to_json
+              = f.text_field :city_id, 'data-pre' => [@event.city].compact.map { |city| {id: city.id, name: city.name} }.to_json
             = f.input :street
           = f.inputs do
             = f.input :description
-            = f.input :permaname, :label => false, :prepend => 'http://'+Settings.host+'/'
+            = f.input :permaname, label: false, prepend: 'http://'+Settings.host+'/'
   = f.actions do
     - if @event.new_record?
-      =' f.action :submit, :label => trl('Create'), :onclick => "_gaq.push(['_trackEvent', 'Create event', 'Event']);", :button_html => {:class => 'btn btn-primary', :disable_with => trl('Creating...')}
+      =' f.action :submit, label: trl('Create'), onclick: "_gaq.push(['_trackEvent', 'Create event', 'Event']);", button_html: {class: 'btn btn-primary', disable_with: trl('Creating...')}
     - else
-      =' f.action :submit, :label => trl('Save'), :button_html => {:class => 'btn btn-primary', :disable_with => trl('Saving...')}
-    = f.action :cancel, :label => trl('Cancel')
+      =' f.action :submit, label: trl('Save'), button_html: {class: 'btn btn-primary', disable_with: trl('Saving...')}
+    = f.action :cancel, label: trl('Cancel')
 
 javascript:
   $('#event_city_id').tokenInput('/cities.json', {

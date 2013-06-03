@@ -1,8 +1,8 @@
 set :job_template, %{bash -l -c "source \\"$HOME/.rvm/scripts/rvm\\" && cd #{path} && :job"}
-set :output, {:error => 'log/whenever-error.log'}
+set :output, {error: 'log/whenever-error.log'}
 
 # sitemap refresh
-every 1.day, :at => '5:00 am' do
+every 1.day, at: '5:00 am' do
   rake 'sitemap:refresh'
 end
 

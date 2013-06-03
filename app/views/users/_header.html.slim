@@ -14,17 +14,17 @@
                 - if can? :update, @user
                   li= link_to tr('Edit profile'), settings_user_path(@user)
                 - if can? :set_admin, @user and not @user.is_admin?
-                  li= link_to tr('Set admin role'), set_admin_user_path(@user), :method => :post, :confirm => trl('Are you sure?')
+                  li= link_to tr('Set admin role'), set_admin_user_path(@user), method: :post, confirm: trl('Are you sure?')
                 - if can? :unset_admin, @user and @user.is_admin?
-                  li= link_to tr('Unset admin role'), unset_admin_user_path(@user), :method => :post, :confirm => trl('Are you sure?')
+                  li= link_to tr('Unset admin role'), unset_admin_user_path(@user), method: :post, confirm: trl('Are you sure?')
           - if @user == current_user
-            = link_to tr('Edit profile'), settings_user_path(@user), :class => 'btn'
+            = link_to tr('Edit profile'), settings_user_path(@user), class: 'btn'
           - elsif Settings.enable_messages
-            = link_to new_wave_path(:recipient_id => @user.id), :rel => 'modal', :class => 'btn' do
+            = link_to new_wave_path(recipient_id: @user.id), rel: 'modal', class: 'btn' do
               b.icon-envelope
               '
               = tr('Send message')
-            = render 'user_follows/button', :user => @user
+            = render 'user_follows/button', user: @user
 
 
       h1.user= user_link @user

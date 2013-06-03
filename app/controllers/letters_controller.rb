@@ -5,7 +5,7 @@ class LettersController < CommonController
   # authorize_resource
 
   def index
-    @letters = Letter.order('-mailed_at ASC').paginate :page => params[:page]
+    @letters = Letter.order('-mailed_at ASC').paginate page: params[:page]
   end
 
   def show

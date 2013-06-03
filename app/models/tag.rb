@@ -8,8 +8,8 @@ class Tag < ActiveRecord::Base
   belongs_to :user
   has_many :group_taggings
   has_many :taggings
-  has_many :groups, :through => :group_taggings
-  has_many :users, :through => :taggings
+  has_many :groups, through: :group_taggings
+  has_many :users, through: :taggings
 
   auto_permalink :name
 

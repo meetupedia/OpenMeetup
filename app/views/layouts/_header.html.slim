@@ -7,15 +7,15 @@
       |   <span class="icon-bar"></span>
       | </a>
 
-      = link_to application_title, root_path, :class => 'brand'
+      = link_to application_title, root_path, class: 'brand'
       /! ul.nav
       /!   li= link_to current_city.name, current_city
       .nav-collapse
         - if current_user
           ul.nav
-            li= link_to waves_user_path(current_user), :alt => trl('My messages'), :title => trl('My messages') do
+            li= link_to waves_user_path(current_user), alt: trl('My messages'), title: trl('My messages') do
               b.icon-envelope
-            li= link_to notifications_path, :alt => trl('My notifications'), :title => trl('My notifications') do
+            li= link_to notifications_path, alt: trl('My notifications'), title: trl('My notifications') do
               b.icon-info-sign
               - if current_user.notifications.size > 0
                 span.badge.badge-important= current_user.notifications.size
@@ -24,7 +24,7 @@
           input type='text' class='search-query' placeholder=trl('Search') name='q'
         - unless current_user
           ul.nav.pull-right
-            li= link_to tr('Sign in'), sign_in_path(:return_to => request.path)
+            li= link_to tr('Sign in'), sign_in_path(return_to: request.path)
         - else
           ul.nav.pull-right
             - unless current_user.restricted_access
@@ -42,6 +42,6 @@
                   - if current_user.is_admin?
                     li= link_to tr('Site admin menu'), system_path
                     li= link_to tr('Manage users'), admin_users_path
-                    li= link_to tr('Reload site'), reload_path, :confirm => trl('Reload site?')
+                    li= link_to tr('Reload site'), reload_path, confirm: trl('Reload site?')
                     li.divider
                   li= link_to tr('Sign out'), sign_out_path

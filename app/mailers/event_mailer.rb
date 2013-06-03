@@ -7,7 +7,7 @@ class EventMailer < CommonMailer
     @email = @recipient.email
     @user = absence.user
     @event = absence.event
-    mail :to => @email, :subject => "#{@user.name} is not coming to #{@event.name}"
+    mail to: @email, subject: "#{@user.name} is not coming to #{@event.name}"
   end
 
   def participation(participation, recipient)
@@ -15,7 +15,7 @@ class EventMailer < CommonMailer
     @email = @recipient.email
     @user = participation.user
     @event = participation.event
-    mail :to => @email, :subject => "#{@user.name} is coming to #{@event.name}"
+    mail to: @email, subject: "#{@user.name} is coming to #{@event.name}"
   end
 
 

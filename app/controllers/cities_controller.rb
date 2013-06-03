@@ -2,12 +2,12 @@
 
 class CitiesController < CommonController
   load_resource
-  authorize_resource :except => [:index, :show, :jump, :search]
+  authorize_resource except: [:index, :show, :jump, :search]
 
   def index
     @cities = City.where('name LIKE ?', "%#{params[:q]}%").includes(:country)
     respond_to do |format|
-      format.json { render :json => @cities.map { |city| {:id => city.id, :name => tr(city.display_name)} } }
+      format.json { render json: @cities.map { |city| {id: city.id, name: tr(city.display_name)} } }
     end
   end
 
@@ -20,9 +20,9 @@ class CitiesController < CommonController
         when 'members' then 'memberships_count DESC'
         else 'id ASC'
       end
-      @groups = @city.groups.order(order).paginate :page => params[:page]
+      @groups = @city.groups.order(order).paginate page: params[:page]
     end
-    @title = tr('Meetup {cityname}', "City html header", :cityname => @city.name)
+    @title = tr('Meetup {cityname}', "City html header", cityname: @city.name)
   end
 
   def jump

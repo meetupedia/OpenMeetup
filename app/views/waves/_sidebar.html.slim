@@ -1,11 +1,11 @@
 ul.sidemenu
-  = menu_item 'Friss üzenetek', wave_notes_path, :controller => 'wave_notes', :action => 'index'
-  = menu_item 'Bejövő üzenetek', waves_path, :controller => 'waves', :action => 'index'
-  = menu_item 'Csillagozott üzenetek', starred_waves_path, :controller => 'waves', :action => 'starred'
-  = menu_item 'Saját üzenetek', own_waves_path, :controller => 'waves', :action => 'own'
-  = menu_item 'Összes üzenet', all_waves_path, :controller => 'waves', :action => 'all'
+  = menu_item 'Friss üzenetek', wave_notes_path, controller: 'wave_notes', action: 'index'
+  = menu_item 'Bejövő üzenetek', waves_path, controller: 'waves', action: 'index'
+  = menu_item 'Csillagozott üzenetek', starred_waves_path, controller: 'waves', action: 'starred'
+  = menu_item 'Saját üzenetek', own_waves_path, controller: 'waves', action: 'own'
+  = menu_item 'Összes üzenet', all_waves_path, controller: 'waves', action: 'all'
 - if can? :create, Wave
   .sidelinks
-    = link_to 'Új üzenet', new_wave_path, :class => 'action'
+    = link_to 'Új üzenet', new_wave_path, class: 'action'
 
 #online

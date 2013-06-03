@@ -1,6 +1,6 @@
 .change_city
   - unless Settings.standalone
-    h2.pull-right= link_to tr('Explore {city}', {:tokens => {:city => current_city.name}}), current_city
+    h2.pull-right= link_to tr('Explore {city}', {tokens: {city: current_city.name}}), current_city
   - else
     h2.pull-right= link_to tr('Explore'), discovery_path
 

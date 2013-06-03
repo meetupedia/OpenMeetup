@@ -4,7 +4,7 @@
   .span4
     - if @user.avatar.file?
       .wrapper.center
-        = link_to image_tag(@user.avatar.url(:normal), :alt => @user.name, :title => @user.name), @user
+        = link_to image_tag(@user.avatar.url(:normal), alt: @user.name, title: @user.name), @user
 
     .wrapper
       ul.tiles
@@ -13,9 +13,9 @@
     - if @user.facebook_id or @user.twitter_id
       .wrapper
         - if @user.facebook_id
-          p= link_to tr("{username} at Facebook", "Username at facebook", :username => @user.name), "http://www.facebook.com/profile.php?id=#{@user.facebook_id}"
+          p= link_to tr("{username} at Facebook", "Username at facebook", username: @user.name), "http://www.facebook.com/profile.php?id=#{@user.facebook_id}"
         - if @user.twitter_id
-          p= link_to tr("{username} at Twitter", "Username at twitter", :username => @user.name), "http://twitter.com/account/redirect_by_id?id=#{@user.twitter_id}"
+          p= link_to tr("{username} at Twitter", "Username at twitter", username: @user.name), "http://twitter.com/account/redirect_by_id?id=#{@user.twitter_id}"
 
     - unless @user.tags.empty?
       .wrapper
@@ -24,4 +24,4 @@
   .span8
     .wrapper
       h2= tr('Activity')
-      = render 'activities/activities', :activities => @activities
+      = render 'activities/activities', activities: @activities

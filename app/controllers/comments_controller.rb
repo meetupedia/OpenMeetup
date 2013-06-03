@@ -4,7 +4,7 @@ class CommentsController < CommonController
   load_resource :activity
   load_resource :image
   load_resource :post
-  load_resource :comment, :through => [:activity, :image, :post], :shallow => true
+  load_resource :comment, through: [:activity, :image, :post], shallow: true
   authorize_resource
 
   def new

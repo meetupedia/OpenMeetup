@@ -10,6 +10,6 @@
       .opening-container-table
         .opening-container-tablecell
           - unless Settings.enable_invite_process
-            = link_to tr('Sign in'), sign_in_path, :class => 'btn btn-primary btn-large opening-button'
+            = link_to tr('Sign in'), sign_in_path, class: 'btn btn-primary btn-large opening-button'
           - else
-            = link_to tr('Request an invite'), request_invite_users_path, :class => 'btn btn-primary btn-large opening-button'
+            = link_to tr('Request an invite'), request_invite_users_path, class: 'btn btn-primary btn-large opening-button'

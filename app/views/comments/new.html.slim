@@ -1,10 +1,10 @@
 .wrapper
-  = semantic_form_for @comment, :url => polymorphic_path([@comment.commentable, :comments]) do |f|
-    = f.hidden_field :reply_to_id, :value => params[:reply_to_id]
+  = semantic_form_for @comment, url: polymorphic_path([@comment.commentable, :comments]) do |f|
+    = f.hidden_field :reply_to_id, value: params[:reply_to_id]
     = f.inputs :comment
     = f.actions
 
   - if comment = Comment.find_by_id(params[:reply_to_id])
     hr
     h3= tr('Reply to')
-    .list_view= render 'comments/parent_comment', :comment => comment, :commentable => comment.commentable
+    .list_view= render 'comments/parent_comment', comment: comment, commentable: comment.commentable

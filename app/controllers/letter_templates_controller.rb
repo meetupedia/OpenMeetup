@@ -5,7 +5,7 @@ class LetterTemplatesController < CommonController
   # authorize_resource
 
   def index
-    @letter_templates = LetterTemplate.order('name ASC').paginate :page => params[:page]
+    @letter_templates = LetterTemplate.order('name ASC').paginate page: params[:page]
   end
 
   def show
@@ -39,7 +39,7 @@ class LetterTemplatesController < CommonController
   end
 
   def create_letter
-    letter = Letter.create :subject => @letter_template.subject, :template => @letter_template.template
+    letter = Letter.create subject: @letter_template.subject, template: @letter_template.template
     redirect_to edit_letter_url(letter)
   end
 end

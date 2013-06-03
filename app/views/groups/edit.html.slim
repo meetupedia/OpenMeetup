@@ -1,7 +1,7 @@
 .wrapper
   - if can? :destroy, @group
-    .pull-right= button_to tr('Delete group'), @group, :method => :delete, :confirm => trl('Are you sure?'), :class => 'btn btn-danger'
+    .pull-right= button_to tr('Delete group'), @group, method: :delete, confirm: trl('Are you sure?'), class: 'btn btn-danger'
 
   h1= tr('Edit group')
 
-  = render 'form', :url => @group
+  = render 'form', url: @group
