@@ -70,6 +70,7 @@ group :assets do
   gem 'therubyrhino', platform: :jruby
   gem 'therubyracer', platform: :ruby
   gem 'uglifier'
+  gem 'turbo-sprockets-rails3'
 end
 
 group :development do
