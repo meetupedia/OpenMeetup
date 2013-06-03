@@ -12,5 +12,4 @@
   - else
     =' button_to %{<i class="icon-plus-sign icon-white"></i> #{tr('Request membership')}}.html_safe, group_membership_requests_path(group), method: :post, class: 'btn btn-primary'
 - else
-  =' button_to %{<i class="icon-plus-sign icon-white"></i> #{tr('Join')}}.html_safe, group_memberships_path(group), method: :post, class: 'btn btn-primary', remote: !@static_follow
-
+  =' button_to %{<i class="icon-plus-sign icon-white"></i> #{tr('Join')}}.html_safe, group_memberships_path(group), method: :post, class: 'btn btn-primary'
