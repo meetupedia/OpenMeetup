@@ -42,7 +42,6 @@ gem 'later_dude'
 gem 'rails_autolink'
 gem 'authlogic'
 gem 'fancybox-rails'
-# gem 'turbolinks'
 gem 'kaminari'
 gem 'will_filter'
 gem 'roadie'
@@ -58,8 +57,14 @@ gem 'spork-rails'
 gem 'spork-testunit'
 gem 'airbrake'
 
-gem 'sass-rails', '~> 3.2.3'
-gem 'coffee-rails', '~> 3.2.1'
+gem 'fast_xs'
+gem 'fast_blank'
+
+gem 'turbolinks'
+gem 'jquery-turbolinks'
+
+gem 'sass-rails'
+gem 'coffee-rails'
 
 group :assets do
   gem 'therubyrhino', platform: :jruby
