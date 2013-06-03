@@ -66,9 +66,9 @@ Openmeetup::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   Airbrake.configure do |config|
-    config.api_key = '3f4da7790f333d6e4297d085c622ff84'
-    config.host = 'errbit.meetupedia.com'
-    config.port = 80
+    config.api_key = Settings.errbit.api_key
+    config.host = Settings.errbit.host
+    config.port = Settings.errbit.port
     config.secure = config.port == 443
   end
 
