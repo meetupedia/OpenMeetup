@@ -363,7 +363,7 @@ DEPENDENCIES
   tilt
   tr8n!
   turbolinks
-  uglifier (>= 1.0.3)
+  uglifier
   whenever
   will_filter
   will_paginate

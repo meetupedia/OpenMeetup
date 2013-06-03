@@ -69,7 +69,7 @@ gem 'coffee-rails'
 group :assets do
   gem 'therubyrhino', platform: :jruby
   gem 'therubyracer', platform: :ruby
-  gem 'uglifier', '>= 1.0.3'
+  gem 'uglifier'
 end
 
 group :development do
