@@ -46,18 +46,12 @@ private
         if exception.class == ActiveRecord::RecordNotFound and controller_name =~ /events|groups|users/
           render "errors/no_#{controller_name}"
         else
-          begin
-            notify_airbrake(exception)
-          rescue
-          end
+          notify_airbrake(exception)
           render "errors/error_#{status}", status: status
         end
       end
       format.any do
-        begin
-          notify_airbrake(exception)
-        rescue
-        end
+        notify_airbrake(exception)
         render nothing: true, status: status
       end
     end
