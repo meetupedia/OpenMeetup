@@ -47,7 +47,7 @@ private
           render "errors/no_#{controller_name}"
         else
           begin
-            ExceptionNotifier::Notifier.exception_notification(request.env, exception, data: {message: 'an error happened'}).deliver
+            notify_airbrake(exception)
           rescue
           end
           render "errors/error_#{status}", status: status
@@ -55,7 +55,7 @@ private
       end
       format.any do
         begin
-          ExceptionNotifier::Notifier.exception_notification(request.env, exception, data: {message: 'an error happened'}).deliver
+          notify_airbrake(exception)
         rescue
         end
         render nothing: true, status: status
