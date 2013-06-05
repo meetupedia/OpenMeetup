@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.13'
 
 platform :ruby do
-  gem 'mysql2', git: 'https://github.com/brianmario/mysql2.git'
+  gem 'mysql2'
 end
 
 platform :jruby do
