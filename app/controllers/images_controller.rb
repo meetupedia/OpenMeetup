@@ -23,6 +23,11 @@ class ImagesController < CommonController
     end
   end
 
+  def destroy
+    @image.destroy
+    redirect_to @image.imageable
+  end
+
   def next
     if @image.imageable
       image = @image.imageable.images.where('id > ?', @image.id).order('id ASC').first
