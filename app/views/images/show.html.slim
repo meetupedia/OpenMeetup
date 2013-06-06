@@ -16,6 +16,8 @@
               li= link_to tr('Set as group image'), set_image_group_path(@image.imageable, image_id: @image.id), method: :post, confirm: trl('Are you sure you want to change the groups image?')
             - if @image.imageable.is_a?(Group) and can? :set_header, @image.imageable
               li= link_to tr('Set as group header'), set_header_group_path(@image.imageable, image_id: @image.id), method: :post, confirm: trl('Are you sure you want to change the groups header?')
+            - can? :destroy, @image
+              li= link_to tr('Delete image'), @image, method: :destroy, confirm: trl('Are you sure you want to delete image?')
     .center
       - if @image.imageable
         h3= link_to @image.imageable.name, url_for([@image.imageable, :images])

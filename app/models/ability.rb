@@ -42,6 +42,9 @@ class Ability
       can :create, GroupInvitation
 
       can :create, Image
+      can :destroy, Image do |image|
+        image.user_id == current_user.id or (image.imageable.is_a?(Group) and image.imageable.admins.include?(current_user)) or current_user.is_admin?
+      end
 
       can :index, Interest
       can [:create, :update], Interest if current_user.is_admin?
