@@ -58,8 +58,11 @@ class UsersController < CommonController
   end
 
   def update
-    @user.update_attributes params[:user]
-    redirect_to @user
+    if @user.update_attributes params[:user]
+      redirect_to @user
+    else
+      render :settings
+    end
   end
 
   def destroy
