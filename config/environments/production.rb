@@ -73,9 +73,9 @@ Openmeetup::Application.configure do
   end
 
   config.action_mailer.smtp_settings = {
-    address: 'localhost',
-    port: 25,
-    domain: 'meetupedia.com',
+    address: (Settings.smtp.andand.address.presence || 'localhost'),
+    port: (Settings.smtp.andand.port.presence || 25),
+    domain: (Settings.smtp.andand.domain.presence || 'meetupedia.com'),
     user_name: nil,
     password: nil,
     authentication: nil,
