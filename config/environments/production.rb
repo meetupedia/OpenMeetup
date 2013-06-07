@@ -76,10 +76,10 @@ Openmeetup::Application.configure do
     address: (Settings.smtp.andand.address.presence || 'localhost'),
     port: (Settings.smtp.andand.port.presence || 25),
     domain: (Settings.smtp.andand.domain.presence || 'meetupedia.com'),
-    user_name: nil,
-    password: nil,
-    authentication: nil,
-    enable_starttls_auto: false
+    user_name: (Settings.smtp.andand.user_name.presence || nil),
+    password: (Settings.smtp.andand.password.presence || nil),
+    authentication: (Settings.smtp.andand.authentication.presence || nil),
+    enable_starttls_auto: (Settings.smtp.andand.enable_starttls_auto.presence || false)
   }
 
   # Adding timestamp to the log lines
