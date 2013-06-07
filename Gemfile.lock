@@ -1,15 +1,12 @@
 GIT
   remote: https://github.com/berk/tr8n.git
-  revision: 7c23410a04ff5b5a7cd0f788e60eec8ff935e98b
-  ref: 7c23410a04ff5b5a7cd0f788e60eec8ff935e98b
+  revision: 973fb5277bfe25270687fba9e519b7ff1e41fd5d
+  ref: 973fb5277bfe25270687fba9e519b7ff1e41fd5d
   specs:
-    tr8n (3.2.4)
-      faraday
+    tr8n (3.2.3)
       kaminari
-      money
       rails (~> 3.2.3)
       sass
-      thor
       will_filter (~> 3.1.9)
 
 GEM
@@ -145,8 +142,6 @@ GEM
     mime-types (1.23)
     mini_record (0.3.1)
       activerecord (>= 3.2.0)
-    money (5.1.1)
-      i18n (~> 0.6.0)
     multi_json (1.7.5)
     multipart-post (1.2.0)
     mysql2 (0.3.11)
