@@ -46,7 +46,7 @@ gem 'will_filter'
 gem 'roadie'
 gem 'mail_view'
 gem 'RedCloth'
-gem 'tr8n', git: 'https://github.com/berk/tr8n.git'
+gem 'tr8n', git: 'https://github.com/berk/tr8n.git', ref: '7c23410a04ff5b5a7cd0f788e60eec8ff935e98b'
 gem 'dalli'
 gem 'sitemap_generator'
 gem 'whenever', require: false

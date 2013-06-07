@@ -1,6 +1,7 @@
 GIT
   remote: https://github.com/berk/tr8n.git
-  revision: 596abd3724de048c1434db942f6f40ec6283d31b
+  revision: 7c23410a04ff5b5a7cd0f788e60eec8ff935e98b
+  ref: 7c23410a04ff5b5a7cd0f788e60eec8ff935e98b
   specs:
     tr8n (3.2.4)
       faraday
@@ -8,6 +9,7 @@ GIT
       money
       rails (~> 3.2.3)
       sass
+      thor
       will_filter (~> 3.1.9)
 
 GEM
