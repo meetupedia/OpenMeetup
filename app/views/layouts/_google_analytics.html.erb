@@ -6,7 +6,7 @@
     _gaq.push(['_trackPageview']);
     (function() {
       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      <% if Settings.google_analytics.use_https -%>
+      <% unless Settings.google_analytics.use_https == false -%>
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
       <% else -%>
         ga.src = 'http://www.google-analytics.com/ga.js';

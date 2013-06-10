@@ -80,7 +80,7 @@ Openmeetup::Application.configure do
     password: nil,
     authentication: nil,
     enable_starttls_auto: false
-  }
+  }.merge(Settings.smtp || {})
 
   # Adding timestamp to the log lines
   config.log_tags = [ lambda {|r| DateTime.now } ]
