@@ -1,10 +1,81 @@
-= render 'header'
-
 .row
   .span4
-    - if Settings.enable_facebook_login or Settings.enable_twitter_login
+    .wrapper
+      h2= tr('Edit profile')
+      ul.nav.nav-tabs.nav-stacked
+        li= link_to tr('Edit name'), '#edit_name'
+        li= link_to tr('Change email'), '#change_email'
+        li= link_to tr('Change profile picture'), '#change_profile_picture'
+        li= link_to tr('Change password'), '#change_password'
+        - unless Settings.standalone
+          li= link_to tr('City settings'), '#city_settings'
+        - if Settings.enable_facebook_login or Settings.enable_twitter_login
+          li= link_to tr('Social settings'), '#social_settings'
+        - if Settings.multilingual
+          li= link_to tr('Change language'), '#change_language'
+        li= link_to tr('Delete profile'), '#delete_profile'
+
+  .span8
+    #edit_profile
+    .wrapper
+      h2= tr('Edit name')
+      = semantic_form_for @user do |f|
+        = f.inputs do
+          = f.input :first_name
+          = f.input :last_name
+        = f.actions do
+          =' f.action :submit, label: 'Save', button_html: {class: 'btn btn-primary', disable_with: trl('Saving...')}
+          = f.action :cancel, label: 'Cancel'
+
+    #change_email
+    .wrapper
+      h2= tr('Change email')
+      = semantic_form_for @user do |f|
+        = f.inputs do
+          = f.input :email
+        = f.actions do
+          =' f.action :submit, label: 'Save', button_html: {class: 'btn btn-primary', disable_with: trl('Saving...')}
+          = f.action :cancel, label: 'Cancel'
+
+    #change_profile_picture
+    .wrapper
+      h2= tr('Change profile picture')
+      = semantic_form_for @user do |f|
+        = f.inputs do
+          = f.input :avatar, label: tr('Profile picture')
+          = f.input :header, label: tr('Header picture')
+        = f.actions do
+          =' f.action :submit, label: 'Save', button_html: {class: 'btn btn-primary', disable_with: trl('Saving...')}
+          = f.action :cancel, label: 'Cancel'
+
+    #change_password
+    .wrapper
+      h2= tr('Change password')
+      = semantic_form_for @user do |f|
+        = f.inputs do
+          = f.input :password
+          = f.input :password_confirmation
+        = f.actions do
+          =' f.action :submit, label: 'Save', button_html: {class: 'btn btn-primary', disable_with: trl('Saving...')}
+          = f.action :cancel, label: 'Cancel'
+
+    - unless Settings.standalone
+      #city_settings
       .wrapper
-        h2= tr('Connections')
+        h2= tr('City settings')
+        = semantic_form_for @user do |f|
+          = f.inputs do
+            .control-group
+              = f.label :city_id, tr('Your default city')
+              = f.text_field :city_id, 'data-pre' => [@user.city].compact.map { |city| {id: city.id, name: city.name} }.to_json
+          = f.actions do
+            =' f.action :submit, label: 'Save', button_html: {class: 'btn btn-primary', disable_with: trl('Saving...')}
+            = f.action :cancel, label: 'Cancel'
+
+    - if Settings.enable_facebook_login or Settings.enable_twitter_login
+      #social_settings
+      .wrapper
+        h2= tr('Social settings')
         - if Settings.enable_facebook_login
           - if authentication = current_user.authentication_with(:facebook)
             - if current_user.authentications.size > 1
@@ -21,41 +92,17 @@
               p= tr('Connected with Twitter')
           - else
             p.twitter_connect= link_to image_tag('twitter_connect.png', alt: tr('Sign in with Twitter')), auth_path(:twitter)
+
     - if Settings.multilingual
+      #change_language
       .wrapper
-        h2= tr('Language')
+        h2= tr('Change language')
         .tr8n-language-selector.btn= tr8n_language_selector_tag
 
+    #delete_profile
     .wrapper
+      h2= tr('Delete profile')
       = button_to tr('Delete profile'), @user, method: :delete, confirm: tr('Are you sure?'), class: 'btn btn-danger'
-
-  .span8
-    .wrapper
-      h2= tr('Edit profile')
-      = semantic_form_for @user do |f|
-        = f.inputs do
-          = f.input :first_name
-          = f.input :last_name
-          = f.input :email
-          = f.input :avatar
-          = f.input :header
-          - unless Settings.standalone
-            .control-group
-              = f.label :city_id, tr('City')
-              = f.text_field :city_id, 'data-pre' => [@user.city].compact.map { |city| {id: city.id, name: city.name} }.to_json
-        = f.actions do
-          =' f.action :submit, label: 'Save'
-          = f.action :cancel, label: 'Cancel'
-
-    .wrapper
-      h2= tr('Edit password')
-      = semantic_form_for @user do |f|
-        = f.inputs do
-          = f.input :password
-          = f.input :password_confirmation
-        = f.actions do
-          =' f.action :submit, label: 'Save'
-          = f.action :cancel, label: 'Cancel'
 
 javascript:
   $('#user_city_id').tokenInput('/cities.json', {
