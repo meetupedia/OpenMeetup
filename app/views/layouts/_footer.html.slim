@@ -9,12 +9,6 @@
     // footer for the global version
 
     - unless Settings.standalone
-      - if current_user
-        .span8
-          h4= tr('How can we make this page better for you?')
-          = form_for Feedback.new, remote: true do |f|
-            = f.text_area :body
-            = f.submit trl('Send feedback'), class: 'btn btn-primary', disable_with: trl('Sending...')
 
       / .span2
       /   h3= tr('About')

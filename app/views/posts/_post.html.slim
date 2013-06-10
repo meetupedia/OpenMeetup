@@ -1,7 +1,6 @@
 = div_for post, class: 'list_item avatar_item' do
   - if current_user and can? :destroy, post
     .pull-right= link_to '×', post, method: :delete, remote: true, class: 'close', confirm: trl('Delete post?')
-  = render 'votes/set', item: post
   .avatar= user_avatar post.user
   =' user_link post.user
   // span.date= timeago_tag post.created_at
@@ -11,7 +10,11 @@
   = render 'comments/comments', commentable: post
 
   - if current_user
-    p= link_to_function tr('Comment'), "$('#add-post-comment-#{post.id}').toggle().find('textarea').focus()"
+    .comment_like_container
+      .comment_container
+        = link_to_function tr('Comment'), "$('#add-post-comment-#{post.id}').toggle().find('textarea').focus()"
+      = render 'votes/set', item: post
+    .div(style="clear: both;")
 
     div(id="add-post-comment-#{post.id}" style="display: none;")
       = form_for Comment.new, url: polymorphic_path([post, :comments]), remote: true do |f|

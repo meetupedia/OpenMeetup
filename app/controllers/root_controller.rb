@@ -44,7 +44,16 @@ class RootController < CommonController
         when 'members' then 'memberships_count DESC'
         else 'id ASC'
       end
-      @groups = Group.where('memberships_count > ?', 3).where('image_updated_at IS NOT ?', nil).order(order).paginate page: params[:page]
+      if Settings.group_discovery_min_member_count and Settings.group_discovery_mandatory_header_image
+        @groups = Group.where('memberships_count >= ?', Settings.group_discovery_min_member_count).where('image_updated_at IS NOT ?', nil).order(order).paginate page: params[:page]
+      elsif Settings.group_discovery_min_member_count
+        @groups = Group.where('memberships_count >= ?', Settings.group_discovery_min_member_count).order(order).paginate page: params[:page]
+      elsif Settings.group_discovery_mandatory_header_image
+        @groups = Group.where('image_updated_at IS NOT ?', nil).order(order).paginate page: params[:page]
+      else
+        @groups = Group.order(order).paginate page: params[:page]
+      end
+        
     end
   end
 

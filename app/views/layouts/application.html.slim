@@ -28,6 +28,8 @@ html
             a.close(data-dismiss="alert")×
             = flash[:alert]
         = yield
+        = render 'layouts/user_suggestions'
+
     = render 'layouts/footer'
     = yield :scripts
     - if Settings.enable_feedback_box

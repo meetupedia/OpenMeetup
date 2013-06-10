@@ -22,9 +22,9 @@ $ ->
       false
 
     .on 'ajax:before', 'a.set_vote', ->
-      $(this).parent().find('a').addClass('disabled')
+      $(this).parent().find('a').addClass('muted')
     .on 'ajax:success', 'a.set_vote', (event, data, status, xhr) ->
       $(this).parent().replaceWith(data)
 
     .on 'focus', '#new_feedback textarea', ->
-      $(this).css(height: '120px').parent().find('input').show()
+      $(this).animate({height: '120px'}).parent().find('input').show()
