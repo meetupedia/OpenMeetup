@@ -30,11 +30,12 @@
             - unless current_user.restricted_access
               li= link_to tr('Find a meetup group'), discovery_path
               li= link_to tr('Start a meetup group'), new_group_path
-              li.avatar= user_avatar current_user
               li.dropdown
                 a.dropdown-toggle(data-toggle="dropdown" href="#")
-                  = current_user.name
-                  b.caret
+                  .nav_avatar
+                    = user_avatar_img current_user
+                    = current_user.name
+                    b.caret
                 ul.dropdown-menu
                   li= link_to tr('Profile'), current_user
                   li= link_to tr('Groups'), groups_user_path(current_user)
