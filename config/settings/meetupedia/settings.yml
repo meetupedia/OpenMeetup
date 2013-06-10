@@ -32,7 +32,8 @@ enable_share_buttons: true
 
 # feedback box at the bottom
 
-enable_feedback_box: true
+enable_feedback_box: true      # uservoice
+enable_user_suggestions: true  # inbuilt box
 
 # invite module
 
