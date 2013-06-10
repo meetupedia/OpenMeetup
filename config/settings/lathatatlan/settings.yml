@@ -38,3 +38,8 @@ enable_user_suggestions: true  # inbuilt box
 # invite module
 
 enable_invite_process: false
+
+# discovery page limitations
+
+# group_discovery_min_member_count: 3
+# group_discovery_mandatory_header_image: true
