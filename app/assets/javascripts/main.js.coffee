@@ -22,7 +22,7 @@ $ ->
       false
 
     .on 'ajax:before', 'a.set_vote', ->
-      $(this).parent().find('a').addClass('disabled')
+      $(this).parent().find('a').addClass('muted')
     .on 'ajax:success', 'a.set_vote', (event, data, status, xhr) ->
       $(this).parent().replaceWith(data)
 

@@ -8,7 +8,6 @@
     p= link_to image_tag(activity.activable.image.url(:small), alt: '', height: 80, width: 80), activity.activable
 - else
   = div_for activity, class: 'list_item avatar_item' do
-    = render 'votes/set', item: activity
     .avatar= user_avatar activity.user
     - if activity.activable.class.name == 'Event'
       =' user_link activity.activable.user
@@ -47,19 +46,25 @@
       p= activity.activable.review
     - elsif activity.activable.class.name == 'User'
       =' user_link activity.activable
-      = tr('joined.')
+      = tr('joined {sitename}', "Activity: user join", {:sitename => Settings.sitename})
     - elsif activity.activable.class.name == 'Vote'
       =' user_link activity.activable.user
       = tr('liked')
       .activity_item= render activity.activable.voteable
 
-    .date= timeago_tag activity.created_at
+    //.date= timeago_tag activity.created_at
 
     - if activity.activable.class.name =~ /Event|Group|Membership|Participation|Review|UserFollow/
       = render 'comments/comments', commentable: activity
 
       - if current_user
-        p= link_to_function tr('Comment'), "$('#add-activity-comment-#{activity.id}').toggle().find('textarea').focus()"
+        .comment_like_container
+          .comment_container
+            = link_to_function tr('Comment'), "$('#add-activity-comment-#{activity.id}').toggle().find('textarea').focus()"
+          = render 'votes/set', item: activity
+        .div(style="clear: both;")
+
+        // p= link_to_function tr('Comment'), "$('#add-activity-comment-#{activity.id}').toggle().find('textarea').focus()"
 
         div(id="add-activity-comment-#{activity.id}" style="display: none;")
           = form_for Comment.new, url: polymorphic_path([activity, :comments]), remote: true do |f|
