@@ -7,7 +7,7 @@
   #more-options
     = f.input :message, label: tr('Personal message')
   = f.actions do
-    =' f.action :submit, label: trl('Send'), onclick: "_gaq.push(['_trackEvent', 'Send group invitation', 'Group invitation']);"
+    =' f.action :submit, label: trl('Send'), button_html: {class: 'btn btn-primary', disable_with: trl('Sending...')}, onclick: "_gaq.push(['_trackEvent', 'Send group invitation', 'Group invitation']);"
     = f.action :cancel, label: trl('Cancel')
 
 javascript:
