@@ -10,6 +10,7 @@ class GroupsController < CommonController
   end
 
   def new
+    @group.tags = [Tag.find_by_id(params[:tag_id])] if params[:tag_id]
   end
 
   def create
