@@ -13,10 +13,10 @@
       .nav-collapse
         - if current_user
           ul.nav
-            li= link_to waves_user_path(current_user), alt: trl('My messages'), title: trl('My messages') do
-              b.icon-envelope
+            / li= link_to waves_user_path(current_user), alt: trl('My messages'), title: trl('My messages') do
+            /   b.icon-envelope
             li= link_to notifications_path, alt: trl('My notifications'), title: trl('My notifications') do
-              b.icon-info-sign
+              b.icon-envelope
               - if current_user.notifications.size > 0
                 span.badge.badge-important= current_user.notifications.size
 

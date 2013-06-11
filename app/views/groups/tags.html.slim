@@ -1,5 +1,6 @@
 .wrapper
-  h1= tr('You can follow these interests')
+  h1= tr("Pick some new interests")
+  p= tr("We'll notify you about other meetups that match the interests you select")
 
   table.table
     - @tags.each do |tag|
@@ -9,4 +10,6 @@
         td
           .pull-right= render 'taggings/button', tag: tag
 
-  p= link_to tr('I am done'), @group, class: 'btn btn-primary'
+  p
+    =' link_to tr('Save'), @group, class: 'btn btn-primary'
+    =' link_to tr('Cancel'), @group, class: 'btn'
