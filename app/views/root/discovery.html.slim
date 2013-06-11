@@ -1,22 +1,25 @@
 .row
 
   - if Settings.standalone
-    .span2
     .span8
       .wrapper
-        #results
-          - if @groups
-            = render 'cities/search'
-            - if @groups.respond_to?(:total_pages)
-              = will_paginate @groups
-  
-  - else
-    .span2
-    .span8
-      .wrapper
+        h2= tr('Groups')
         #results
           - if @groups
             = render 'cities/search'
             - if @groups.respond_to?(:total_pages)
               = will_paginate @groups
 
+  - else
+    .span8
+      .wrapper
+        h2= tr('Groups')
+        #results
+          - if @groups
+            = render 'cities/search'
+            - if @groups.respond_to?(:total_pages)
+              = will_paginate @groups
+  .span4
+    .wrapper
+      h2= tr('Tags')
+      p= render Tag.order('name ASC')

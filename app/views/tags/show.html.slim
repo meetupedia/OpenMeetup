@@ -19,7 +19,11 @@
       - else
         p.muted= tr('No users tagged.')
   .span8
-    - unless (groups = @tag.groups).blank?
-      .wrapper
+    .wrapper
+      - unless (groups = @tag.groups).blank?
         h2= tr('Groups')
         .list_view= render groups
+      - else
+        p= tr("No groups yet, let's change this! Create a group and invite everybody who is interested in {tag}.", 'tag name',  tag: @tag.name)
+
+        p= link_to tr('Create meetup group'), new_group_path(:tag_id => @tag.id), class: 'btn btn-primary'
