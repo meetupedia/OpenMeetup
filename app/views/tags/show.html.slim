@@ -1,6 +1,7 @@
 .row
   .span12
     .wrapper
+      .breadcrumbs.clearfix= link_to tr('Back'), root_path
       .pull-right= render 'taggings/button', tag: @tag
 
       h1
