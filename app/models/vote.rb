@@ -5,6 +5,7 @@ class Vote < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :voteable, polymorphic: true, counter_cache: true
+  has_many :activities, as: :activable, dependent: :destroy
 end
 
 Vote.auto_upgrade!
