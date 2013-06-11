@@ -1,0 +1,12 @@
+.wrapper
+  h1= tr('You can follow these interests')
+
+  table.table
+    - @tags.each do |tag|
+      tr
+        td
+          h4= link_to tag.name, tag
+        td
+          .pull-right= render 'taggings/button', tag: tag
+
+  p= link_to tr('I am done'), @group, class: 'btn btn-primary'
