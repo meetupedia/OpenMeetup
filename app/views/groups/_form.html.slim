@@ -9,7 +9,8 @@
     .control-group
       = f.label :tag_tokens, tr('Tags')
       = f.text_field :tag_tokens, 'data-pre' => @group.tags.map { |tag| {id: tag.id, name: tag.name} }.to_json
-    = f.input :image, label: tr("Header image (we will resize it to 72x72)")
+    = f.input :image, label: tr("Group profile image (we will resize it to 72x72)")
+    = f.input :header, label: tr('Group header image (we will resize it to 945x200)')
   #accordion.accordion
     .accordion-group
       .accordion-heading
@@ -20,7 +21,6 @@
           = f.inputs do
             - if Settings.standalone
               = f.input :location, label: tr('City')
-            = f.input :header, label: tr('Background image (any size)')
             = f.input :permaname, label: tr('Short URL'), prepend: 'http://'+Settings.host+'/'
             = f.input :url, label: tr('Website URL'), prepend: 'http://'
             = f.input :facebook_url, label: tr('Facebook URL'), prepend: 'http://'
