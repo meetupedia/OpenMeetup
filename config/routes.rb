@@ -46,6 +46,7 @@ Openmeetup::Application.routes.draw do
       get :requested_members
       post :set_image
       post :set_header
+      get :tags
       get :waves
     end
     resources :posts, shallow: true

@@ -2,7 +2,7 @@
 
 class GroupsController < CommonController
   load_resource
-  authorize_resource except: [:index, :show, :events, :images, :members]
+  authorize_resource except: [:index, :show, :events, :images, :members, :tags]
 
   def show
     @membership_requests = @group.membership_requests.order('created_at ASC').includes(:user).paginate page: params[:page]
@@ -80,6 +80,10 @@ class GroupsController < CommonController
       @group.save
     end
     redirect_to @group, notice: trfn('Group header image changed.')
+  end
+
+  def tags
+    @tags = @group.tags.order('permalink ASC')
   end
 
   def waves

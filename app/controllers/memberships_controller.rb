@@ -23,7 +23,7 @@ class MembershipsController < CommonController
       @membership.save
       cookies.delete :add_membership_for
     end
-    redirect_to @group unless request.xhr?
+    redirect_to tags_group_path(@group) unless request.xhr?
   end
 
   def destroy

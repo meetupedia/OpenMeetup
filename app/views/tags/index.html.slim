@@ -6,7 +6,7 @@
         span.caret
       ul.dropdown-menu
         - if can? :create, Tag
-          .li= link_to tr('Add new tag'), new_tag_path
+          li= link_to tr('Add new tag'), new_tag_path
 
   h1= tr('Tags')
 
