@@ -128,6 +128,8 @@ GEM
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    kasket (3.0.0)
+      activerecord (>= 2.3.6, < 3.3)
     later_dude (0.3.3)
     libv8 (3.11.8.17)
     mail (2.5.4)
@@ -315,6 +317,7 @@ DEPENDENCIES
   jquery-rails
   json
   kaminari
+  kasket
   later_dude
   mail_view
   meta_request

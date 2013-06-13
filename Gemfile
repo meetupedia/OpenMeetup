@@ -55,6 +55,7 @@ gem 'spork-rails'
 gem 'spork-testunit'
 gem 'airbrake'
 # gem 'gmaps4rails'
+gem 'kasket'
 
 gem 'fast_xs'
 gem 'fast_blank'
