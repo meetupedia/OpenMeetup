@@ -5,7 +5,7 @@ class Participation < ActiveRecord::Base
   timestamps
 
   belongs_to :user
-  belongs_to :event
+  belongs_to :event, counter_cache: true
 
   has_many :activities, as: :activable, dependent: :destroy
   has_many :answers, dependent: :destroy

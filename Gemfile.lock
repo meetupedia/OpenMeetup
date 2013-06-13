@@ -343,7 +343,6 @@ DEPENDENCIES
   therubyracer
   therubyrhino
   thin
-  tilt
   tr8n!
   turbo-sprockets-rails3
   uglifier

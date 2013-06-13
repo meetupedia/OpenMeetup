@@ -16,6 +16,7 @@ class Event < ActiveRecord::Base
   key :start_time, as: :datetime
   key :end_time, as: :datetime
   timestamps
+  key :participations_count, as: :integer, default: 0
 
   belongs_to :city
   belongs_to :group, touch: true

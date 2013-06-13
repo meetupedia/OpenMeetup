@@ -8,12 +8,12 @@
     // if there has been votes --> display vote count
     - if item.votes_count == 1
       .like_counter_container
-        = link_to tr('You liked this.', "Like", {:votes_count => item.votes_count}), votes_path(voteable_type: item.class.name, voteable_id: item.id), class: '', rel: 'modal'
+        = link_to tr('You liked this.', "Like", {:votes_count => item.votes_count}), votes_path(voteable_type: item.class.name, voteable_id: item.id), rel: 'modal'
 
     // if there has been votes --> display vote count
     - if item.votes_count > 1
       .like_counter_container
-        = link_to tr('You and {votes_count} people liked this.', "Like", {:votes_count => item.votes_count-1}), votes_path(voteable_type: item.class.name, voteable_id: item.id), class: '', rel: 'modal'
+        = link_to tr('You and {votes_count} people liked this.', "Like", {:votes_count => item.votes_count - 1}), votes_path(voteable_type: item.class.name, voteable_id: item.id), rel: 'modal'
 
   // if the user has NOT voted for this item
   - else
@@ -25,9 +25,9 @@
     // if there has been votes --> display vote count
     - if item.votes_count == 1
       .like_counter_container
-        = link_to tr('{votes_count} user liked this.', "Like", {:votes_count => item.votes_count}), votes_path(voteable_type: item.class.name, voteable_id: item.id), class: '', rel: 'modal'
+        = link_to tr('{votes_count} user liked this.', "Like", {:votes_count => item.votes_count}), votes_path(voteable_type: item.class.name, voteable_id: item.id), rel: 'modal'
 
     // if there has been votes --> display vote count
     - if item.votes_count > 1
       .like_counter_container
-        = link_to tr('{votes_count} people liked this.', "Like", {:votes_count => item.votes_count}), votes_path(voteable_type: item.class.name, voteable_id: item.id), class: '', rel: 'modal'
+        = link_to tr('{votes_count} people liked this.', "Like", {:votes_count => item.votes_count}), votes_path(voteable_type: item.class.name, voteable_id: item.id), rel: 'modal'
