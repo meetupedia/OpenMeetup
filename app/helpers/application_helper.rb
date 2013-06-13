@@ -3,16 +3,13 @@
 module ApplicationHelper
 
   def user_avatar(user)
-    filename = 'default_avatar.png'
-    filename = "https://graph.facebook.com/#{user.facebook_id}/picture" if user.facebook_id
-    filename = user.avatar(:small) if user.avatar.file?
-    link_to(image_tag(filename, alt: user.name, height: 32, width: 32, title: user.name, class: 'avatar_image'), user)
+    link_to user_avatar_img(user), user
   end
 
   def user_avatar_img(user)
-    filename = 'default_avatar.png'
-    filename = "https://graph.facebook.com/#{user.facebook_id}/picture" if user.facebook_id
     filename = user.avatar(:small) if user.avatar.file?
+    filename ||= "https://graph.facebook.com/#{user.facebook_id}/picture" if user.facebook_id
+    filename ||= 'default_avatar.png'
     image_tag(filename, alt: user.name, height: 32, width: 32, title: user.name, class: 'avatar_image')
   end
 

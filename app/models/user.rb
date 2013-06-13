@@ -28,6 +28,7 @@ class User < ActiveRecord::Base
   key :header_content_type
   key :header_file_size, as: :integer
   key :header_updated_at, as: :datetime
+  key :facebook_id
   timestamps
   key :memberships_count, as: :integer, default: 0
   key :notifications_count, as: :integer, default: 0
@@ -136,10 +137,6 @@ class User < ActiveRecord::Base
 
   def facebook
     @facebook ||= FbGraph::User.new(facebook_id, access_token: authentication_with(:facebook).andand.facebook_access_token).fetch
-  end
-
-  def facebook_id
-    @facebook_id ||= authentication_with(:facebook).andand.uid
   end
 
   def twitter_id

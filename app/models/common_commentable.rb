@@ -5,7 +5,7 @@ module CommonCommentable
 
   def self.included(base)
     base.class_eval do
-      key :comments_count, as: :integer
+      key :comments_count, as: :integer, default: 0
       has_many :comments, as: :commentable, dependent: :destroy
 
       def commenters

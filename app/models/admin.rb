@@ -2,13 +2,18 @@
 
 class Admin
 
-  def weekly_report
+  def self.weekly_report
     User.where(is_admin: true).each do |user|
       AdminMailer.weekly_report(user.id).deliver
     end
   end
 
-  def cron_daily
+  def self.cron_daily
     Event.find_each { |event| event.set_counters :participations }
+
+    Activity.find_each { |activity| activity.set_counters :comments }
+    Event.find_each { |event| event.set_counters :comments }
+    Image.find_each { |image| image.set_counters :comments }
+    Post.find_each { |post| post.set_counters :comments }
   end
 end

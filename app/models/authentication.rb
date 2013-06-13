@@ -7,6 +7,15 @@ class Authentication < ActiveRecord::Base
   belongs_to :user
 
   validates_uniqueness_of :uid, scope: :provider
+
+  after_create :set_user_facebook_id
+  after_destroy :set_user_facebook_id
+
+  def set_user_facebook_id
+    if provider == 'facebook'
+      user.update_attributes facebook_id: self.uid
+    end
+  end
 end
 
 Authentication.auto_upgrade!
