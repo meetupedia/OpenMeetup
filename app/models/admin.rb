@@ -7,4 +7,8 @@ class Admin
       AdminMailer.weekly_report(user.id).deliver
     end
   end
+
+  def cron_daily
+    Event.find_each { |event| event.set_counters :participations }
+  end
 end
