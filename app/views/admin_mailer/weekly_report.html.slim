@@ -1,0 +1,15 @@
+h1= tr('Weekly report')
+
+h2= tr('Groups created in the last 7 days')
+- unless (groups = Group.where('created_at > ?', 1.week.ago).all).blank?
+  .list_view
+    = render groups
+- else
+  p No groups.
+
+h2= tr('Events in your groups in the next 7 days')
+- unless (events = Event.where(group_id: @recipient.joined_group_ids).where('start_time > ? AND start_time < ?', Time.now, 1.week.from_now).all).blank?
+  .list_view
+    = render events
+- else
+  p No events.
