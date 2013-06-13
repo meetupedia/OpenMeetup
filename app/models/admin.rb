@@ -10,6 +10,7 @@ class Admin
 
   def self.cron_daily
     Event.find_each { |event| event.set_counters :participations }
+    Authentication.find_each { |authentication| authentication.set_user_facebook_id }
 
     Activity.find_each { |activity| activity.set_counters :comments }
     Event.find_each { |event| event.set_counters :comments }
