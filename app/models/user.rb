@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
   key :header_file_size, as: :integer
   key :header_updated_at, as: :datetime
   key :facebook_id
+  key :enable_weekly_newsletter, default: true, index: true
   timestamps
   key :memberships_count, as: :integer, default: 0
   key :notifications_count, as: :integer, default: 0

@@ -10,7 +10,7 @@ class AdminMailer < CommonMailer
     end
   end
 
-  def weekly_report(user_id)
+  def weekly_newsletter(user_id)
     if @recipient = User.find_by_id(user_id)
       @groups = Group.where('created_at > ?', 1.week.ago).order('created_at ASC')
       @groups = @groups.where(city_id: @recipient.city_id) unless Settings.standalone
@@ -30,8 +30,8 @@ class AdminMailer < CommonMailer
       mail
     end
 
-    def weekly_report
-      mail = AdminMailer.weekly_report(User.first.id)
+    def weekly_newsletter
+      mail = AdminMailer.weekly_newsletter(User.first.id)
       mail
     end
   end

@@ -40,7 +40,7 @@
     <div class="email-footer">
       <%= tr("This message was sent to {email}.", "email footer email recipient", email: @email) %><br />
       <% if @recipient %>
-        <%= tr("Don't want activity notifications?") %> <a href="<%= settings_user_path(@recipient) %>"><%= tr('Change your email preferences') %></a>.<br />
+        <%= tr("Don't want activity notifications?") %> <a href="<%= settings_user_path(@recipient) + '#change_email' %>"><%= tr('Change your email preferences') %></a>.<br />
       <% end %>
       <%= Settings.email_footer_whois %>
     </div>

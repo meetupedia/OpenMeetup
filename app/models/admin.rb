@@ -3,7 +3,7 @@
 class Admin
 
   def self.weekly_report
-    User.find_each do |user|
+    User.where(enable_weekly_newsletter: true).find_each do |user|
       begin
         AdminMailer.weekly_report(user.id).deliver
       rescue
