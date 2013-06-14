@@ -3,7 +3,7 @@ set :output, {error: 'log/whenever-error.log'}
 
 # weekly report
 every :sunday, at: '8:00pm' do
-  Admin.weekly_newsletter
+  runner 'Admin.weekly_newsletter'
 end
 
 # sitemap refresh
