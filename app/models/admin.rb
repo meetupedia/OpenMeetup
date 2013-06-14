@@ -4,7 +4,10 @@ class Admin
 
   def self.weekly_report
     User.find_each do |user|
-      AdminMailer.weekly_report(user.id).deliver
+      begin
+        AdminMailer.weekly_report(user.id).deliver
+      rescue
+      end
     end
   end
 
