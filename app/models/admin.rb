@@ -2,10 +2,10 @@
 
 class Admin
 
-  def self.weekly_report
+  def self.weekly_newsletter
     User.where(enable_weekly_newsletter: true).find_each do |user|
       begin
-        AdminMailer.weekly_report(user.id).deliver
+        AdminMailer.weekly_newsletter(user.id).deliver
       rescue
       end
     end
