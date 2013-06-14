@@ -1,8 +1,8 @@
 - if @events.present?
   h2= tr('Events next week')
-  .list_view= render events
+  .list_view= render @events
 
 - if @groups.present?
   h2= tr('New meetup groups')
-  .list_view= render groups
+  .list_view= render @groups
 
