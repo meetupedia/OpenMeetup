@@ -3,7 +3,7 @@
 class Admin
 
   def self.weekly_report
-    User.where(is_admin: true).each do |user|
+    User.find_each do |user|
       AdminMailer.weekly_report(user.id).deliver
     end
   end
