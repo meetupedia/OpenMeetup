@@ -1,15 +1,14 @@
-h1= tr('Weekly report')
+h2= tr('Events next week')
+- unless (events = Event.where(group_id: @recipient.joined_group_ids).where('start_time > ? AND start_time < ?', Time.now, 1.week.from_now).order('start_time ASC').all).blank?
+  .list_view
+    = render events
+- else
+  p No events.
 
-h2= tr('Groups created in the last 7 days')
+h2= tr('New meetup groups')
 - unless (groups = Group.where('created_at > ?', 1.week.ago).order('created_at ASC').all).blank?
   .list_view
     = render groups
 - else
   p No groups.
 
-h2= tr('Events in your groups in the next 7 days')
-- unless (events = Event.where(group_id: @recipient.joined_group_ids).where('start_time > ? AND start_time < ?', Time.now, 1.week.from_now).order('start_time ASC').all).blank?
-  .list_view
-    = render events
-- else
-  p No events.
