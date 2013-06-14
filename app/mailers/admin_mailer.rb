@@ -14,7 +14,8 @@ class AdminMailer < CommonMailer
     if @recipient = User.find_by_id(user_id)
       @groups = Group.where('created_at > ?', 1.week.ago).order('created_at ASC')
       @groups = @groups.where(city_id: @recipient.city_id) unless Settings.standalone
-      @events = Event.where(group_id: @recipient.joined_group_ids).where('start_time > ? AND start_time < ?', Time.now, 1.week.from_now).order('start_time ASC')
+      @groups = @groups.all
+      @events = Event.where(group_id: @recipient.joined_group_ids).where('start_time > ? AND start_time < ?', Time.now, 1.week.from_now).order('start_time ASC').all
       if @groups.present? or @events.present?
         @email = @recipient.email
         mail to: @email, subject: 'Weekly report'
