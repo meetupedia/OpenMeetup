@@ -2,7 +2,7 @@
 
 class FeedbacksController < CommonController
   load_resource
-  authorize_resource except: [:create]
+  authorize_resource
 
   def index
     @feedbacks = Feedback.order('created_at DESC').paginate page: params[:page]
