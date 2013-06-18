@@ -1,7 +1,10 @@
+h1= tr('Your calendar for this week')
+p= tr("Hi {username}, here's what {sitename} looks like for you this week.", "weekly newsletter", {:username => @user.name, :sitename => Settings.title})
+
 - if @events.present?
-  h2= tr('Events next week')
+  h3= tr('Events next week')
   .list_view= render @events
 
 - if @groups.present?
-  h2= tr('New meetup groups')
+  h3= tr('New meetup groups')
   .list_view= render @groups
