@@ -38,4 +38,4 @@
     div(id="add-post-comment-#{@image.id}" style="display: none;")
       = form_for Comment.new, url: polymorphic_path([@image, :comments]), remote: true do |f|
         = f.text_area :comment
-        = f.submit trl('Add comment'), button_html: {class: 'btn btn-primary'}
+        = f.submit trl('Add comment'), class: 'btn btn-primary', disable_with: trl('Sending...')

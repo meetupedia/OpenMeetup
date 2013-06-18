@@ -88,6 +88,7 @@ class User < ActiveRecord::Base
 
   validates :email, presence: {if: :password_required?}, uniqueness: true
   validates :password, presence: {if: :password_required?}, confirmation: true
+  validates :password_confirmation, presence: {if: :password_required?}
   attr_protected :is_admin
 
   after_create do |user|
