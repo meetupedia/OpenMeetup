@@ -1,0 +1,24 @@
+- unless user == current_user
+  span(id="friendship_button_for_user_#{user.id}")
+    - if friendship = current_user.friendship_for(user)
+      .btn-group.pull-right
+        a.btn.dropdown-toggle(data-toggle="dropdown" href="#")
+          - if user.friendship_for(current_user)
+            =' %{<i class="icon-ok-sign icon-black"></i> #{tr('Friends')}}.html_safe
+          - else
+            =' %{<i class="icon-ok-sign icon-black"></i> #{tr('Friendship requested')}}.html_safe
+          span.caret
+        ul.dropdown-menu
+          li= link_to tr('Delete friendship'), friendship, method: :delete
+    - else
+      - if friendship = user.friendship_for(current_user)
+        .btn-group.pull-right
+          a.btn.dropdown-toggle(data-toggle="dropdown" href="#")
+            =' %{<i class="icon-ok-sign icon-black"></i> #{tr('Incoming friendship request')}}.html_safe
+            span.caret
+          ul.dropdown-menu
+            li= link_to tr('Accept'), set_confirmed_friendship_path(friendship), method: :post
+            li= link_to tr('Decline'), decline_friendship_path(friendship), method: :post
+            li= link_to tr('Not now'), set_delayed_friendship_path(friendship), method: :post
+      - else
+        =' button_to %{<i class="icon-plus-sign icon-black"></i> #{tr('Request friendship')}}.html_safe, user_friendships_path(user), method: :post, class: 'btn'

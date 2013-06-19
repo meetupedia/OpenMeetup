@@ -60,6 +60,11 @@ class User < ActiveRecord::Base
   has_many :wave_memberships, dependent: :destroy
   has_many :waves, through: :wave_memberships
 
+  has_many :friendships
+  has_many :friends, through: :friendships
+  has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'friend_id'
+  has_many :inverse_friends, through: :inverse_friendships, source: :user
+
   has_attached_file :avatar,
     path: ':rails_root/public/system/:class/:attachment/:style/:class_:id.:extension',
     url: '/system/:class/:attachment/:style/:class_:id.:extension',
@@ -143,6 +148,18 @@ class User < ActiveRecord::Base
 
   def twitter_id
     @twitter_id ||= authentication_with(:twitter).andand.uid
+  end
+
+  def friendship_for(user)
+    Friendship.find_by_friend_id_and_user_id(user.id, self.id)
+  end
+
+  def add_friend(user)
+    Friendship.create friend_id: user.id, user_id: self.id unless friendship_for(user)
+  end
+
+  def remove_friend(user)
+    friendship_for(user).andand.destroy
   end
 
   def user_follow_for(user)

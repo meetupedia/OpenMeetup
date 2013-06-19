@@ -27,6 +27,17 @@ class Ability
       can :index, Feedback if current_user.is_admin?
       can :create, Feedback
 
+      can :create, Friendship
+      can :destroy, Friendship do |friendship|
+        friendship.user == current_user
+      end
+      can :decline, Friendship do |friendship|
+        friendship.friend == current_user
+      end
+      can [:set_confirmed, :set_delayed], Friendship do |friendship|
+        friendship.friend == current_user
+      end
+
       can :create, Group
       can [:update, :destroy, :requested_members, :set_image, :set_header], Group do |group|
         group.admins.include?(current_user) or current_user.is_admin?

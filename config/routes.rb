@@ -37,6 +37,14 @@ Openmeetup::Application.routes.draw do
 
   resources :feedbacks
 
+  resources :friendships do
+    member do
+      post :decline
+      post :set_confirmed
+      post :set_delayed
+    end
+  end
+
   resources :groups do
     member do
       get :events
@@ -150,6 +158,7 @@ Openmeetup::Application.routes.draw do
   resource :user_sessions
 
   resources :users do
+    resources :friendships, shallow: true
     resources :user_follows, shallow: true
     collection do
       get :request_invite

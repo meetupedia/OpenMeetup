@@ -1,0 +1,1 @@
+$('#friendship_button_for_user_<%= @user.id %>').replaceWith('<%= escape_javascript(render('friendships/button', user: @user)) %>')
