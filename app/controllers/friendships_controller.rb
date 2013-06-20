@@ -7,6 +7,7 @@ class FriendshipsController < CommonController
     @friendship = Friendship.new friend_id: @user.id
     unless current_user.friendship_for(@user)
       @friendship.save
+      FriendshipMailer.new_request(@friendship.id).deliver
       create_activity @friendship
     end
     redirect_to @user unless request.xhr?
@@ -27,8 +28,10 @@ class FriendshipsController < CommonController
   end
 
   def set_confirmed
-    @friendship.update_attributes is_confirmed: true, is_delayed: false
-    @friendship.create_inverse
+    if @friendship.update_attributes is_confirmed: true, is_delayed: false
+      @friendship.create_inverse
+      FriendshipMailer.confirmed_request(@friendship.id).deliver
+    end
     redirect_to @friendship.user
   end
 
