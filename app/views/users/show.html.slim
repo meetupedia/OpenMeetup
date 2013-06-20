@@ -21,6 +21,20 @@
       .wrapper
         = render @user.tags.order('name ASC')
 
+    .wrapper
+      h2= tr('Friends')
+      - if (friends = @user.friends).present?
+        .list_view= render @user.friends
+      - else
+        p.muted= tr('No friends yet.')
+    - if @user == current_user
+      .wrapper
+        h2= tr('Friend requests')
+        - if (requested_friends = @user.inverse_requested_friends.order('friendships.is_delayed ASC, created_at DESC')).present?
+          .list_view= render @user.inverse_requested_friends
+        - else
+          p.muted= tr('No friend requests yet.')
+
   .span8
     .wrapper
       h2= tr('Activity')
