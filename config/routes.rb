@@ -159,7 +159,6 @@ Openmeetup::Application.routes.draw do
 
   resources :users do
     resources :friendships, shallow: true
-    resources :user_follows, shallow: true
     collection do
       get :request_invite
       get :recommendations
