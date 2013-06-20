@@ -20,4 +20,10 @@ class Admin
     Image.find_each { |image| image.set_counters :comments }
     Post.find_each { |post| post.set_counters :comments }
   end
+
+  def self.migration
+    UserFollow.find_each do |user_follow|
+      Friendship.create user_id: user_follow.user_id, friend_id: user_follow.followed_user_id
+    end
+  end
 end

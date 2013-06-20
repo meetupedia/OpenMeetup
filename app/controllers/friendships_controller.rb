@@ -29,7 +29,6 @@ class FriendshipsController < CommonController
 
   def set_confirmed
     if @friendship.update_attributes is_confirmed: true, is_delayed: false
-      @friendship.create_inverse
       FriendshipMailer.confirmed_request(@friendship.id).deliver
     end
     redirect_to @friendship.user

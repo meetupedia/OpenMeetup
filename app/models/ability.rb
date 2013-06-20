@@ -139,11 +139,6 @@ class Ability
       end
       can [:set_admin, :unset_admin], User if current_user.is_admin?
 
-      can :create, UserFollow
-      can :destroy, UserFollow do |user_follow|
-        user_follow.user == current_user
-      end
-
       can :set, Vote
 
       if Settings.enable_messages

@@ -42,7 +42,6 @@ class User < ActiveRecord::Base
   has_many :comments, dependent: :nullify
   has_many :event_invitations, dependent: :nullify
   has_many :events, dependent: :nullify
-  has_many :followers, through: :user_follows, source: :user
   has_many :group_invitations, dependent: :nullify
   has_many :groups, dependent: :nullify
   has_many :joined_events, through: :participations, source: :event
@@ -55,7 +54,6 @@ class User < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
   has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings
-  has_many :user_follows, dependent: :destroy
   has_many :votes, dependent: :destroy
   has_many :wave_memberships, dependent: :destroy
   has_many :waves, through: :wave_memberships
