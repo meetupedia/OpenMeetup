@@ -9,6 +9,7 @@ Openmeetup::Application.routes.draw do
   mount CommentMailer::Preview => '/comment_mailer/mail_view'
   mount EventInvitationMailer::Preview => '/event_invitation_mailer/mail_view'
   mount EventMailer::Preview => '/event_mailer/mail_view'
+  mount FriendshipMailer::Preview => '/friendship_mailer/mail_view'
   mount GroupInvitationMailer::Preview => '/group_invitation_mailer/mail_view'
   mount GroupMailer::Preview => '/group_mailer/mail_view'
   mount LetterMailer::Preview => '/letter_mailer/mail_view'
