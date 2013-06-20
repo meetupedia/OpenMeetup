@@ -19,11 +19,11 @@ class Tag < ActiveRecord::Base
   end
 
   def group_tagging_for(group)
-    GroupTagging.find_by_tag_id_and_group_id(self.id, group.id)
+    GroupTagging.find_by_tag_id_and_group_id(id, group.id)
   end
 
   def tagging_for(user)
-    Tagging.find_by_tag_id_and_user_id(self.id, user.id)
+    Tagging.find_by_tag_id_and_user_id(id, user.id)
   end
 end
 

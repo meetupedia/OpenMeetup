@@ -82,7 +82,7 @@ class Group < ActiveRecord::Base
 
   def add_tag_by_name(name)
     if tag = Tag.find_by_name(name)
-      GroupTagging.find_or_create_by_group_id_and_tag_id(self.id, tag.id)
+      GroupTagging.find_or_create_by_group_id_and_tag_id(id, tag.id)
     end
   end
 
@@ -93,19 +93,19 @@ class Group < ActiveRecord::Base
   end
 
   def follow_for(user)
-    Follow.find_by_group_id_and_user_id(self.id, user.id)
+    Follow.find_by_group_id_and_user_id(id, user.id)
   end
 
   def group_tagging_for(tag)
-    GroupTagging.find_by_group_id_and_tag_id(self.id, tag.id)
+    GroupTagging.find_by_group_id_and_tag_id(id, tag.id)
   end
 
   def membership_for(user)
-    Membership.find_by_group_id_and_user_id(self.id, user.id)
+    Membership.find_by_group_id_and_user_id(id, user.id)
   end
 
   def membership_request_for(user)
-    MembershipRequest.find_by_group_id_and_user_id(self.id, user.id)
+    MembershipRequest.find_by_group_id_and_user_id(id, user.id)
   end
 
   def next_event
@@ -113,7 +113,7 @@ class Group < ActiveRecord::Base
   end
 
   def review_for(user)
-    Review.find_by_group_id_and_user_id(self.id, user.id)
+    Review.find_by_group_id_and_user_id(id, user.id)
   end
 
   def set_city

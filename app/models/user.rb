@@ -61,9 +61,11 @@ class User < ActiveRecord::Base
   has_many :waves, through: :wave_memberships
 
   has_many :friendships
-  has_many :friends, through: :friendships
+  has_many :friends, through: :friendships, conditions: {'friendships.is_confirmed' => true}
+  has_many :requested_friends, through: :friendships, source: :friend, conditions: {'friendships.is_confirmed' => false}
   has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'friend_id'
-  has_many :inverse_friends, through: :inverse_friendships, source: :user
+  has_many :inverse_friends, through: :inverse_friendships, source: :user, conditions: {'friendships.is_confirmed' => true}
+  has_many :inverse_requested_friends, through: :inverse_friendships, source: :user, conditions: {'friendships.is_confirmed' => false}
 
   has_attached_file :avatar,
     path: ':rails_root/public/system/:class/:attachment/:style/:class_:id.:extension',
@@ -151,35 +153,15 @@ class User < ActiveRecord::Base
   end
 
   def friendship_for(user)
-    Friendship.find_by_friend_id_and_user_id(user.id, self.id)
+    Friendship.find_by_friend_id_and_user_id(user.id, id)
   end
 
   def add_friend(user)
-    Friendship.create friend_id: user.id, user_id: self.id unless friendship_for(user)
+    Friendship.create friend_id: user.id, user_id: id unless friendship_for(user)
   end
 
   def remove_friend(user)
     friendship_for(user).andand.destroy
-  end
-
-  def user_follow_for(user)
-    UserFollow.find_by_followed_user_id_and_user_id(self.id, user.id)
-  end
-
-  def follow(user)
-    UserFollow.create followed_user_id: self.id, user_id: user.id unless user_follow_for(user)
-  end
-
-  def unfollow(user)
-    user_follow_for(user).andand.destroy
-  end
-
-  def followed_users
-    User.joins('INNER JOIN user_follows ON user_follows.followed_user_id = users.id').where('user_follows.user_id' => 1)
-  end
-
-  def followed_user_ids
-    followed_users.pluck(:id)
   end
 
   def facebook_friend_ids
@@ -205,35 +187,35 @@ class User < ActiveRecord::Base
   end
 
   def get_joined_events_in_next_week(limit = 3)
-    Event.joins(:participations).where('participations.user_id' => self.id).where('events.start_time > ? AND events.end_time < ?', Time.now, 1.week.from_now).order('start_time ASC').group('events.id').limit(limit)
+    Event.joins(:participations).where('participations.user_id' => id).where('events.start_time > ? AND events.end_time < ?', Time.now, 1.week.from_now).order('start_time ASC').group('events.id').limit(limit)
   end
 
   def get_events_with_friends_in_next_week(limit = 3)
-    Event.joins(:participations).where('participations.user_id' => followed_user_ids).where('events.start_time > ? AND events.end_time < ?', Time.now, 1.week.from_now).order('start_time ASC').group('events.id').limit(limit)
+    Event.joins(:participations).where('participations.user_id' => friend_ids).where('events.start_time > ? AND events.end_time < ?', Time.now, 1.week.from_now).order('start_time ASC').group('events.id').limit(limit)
   end
 
   def get_joined_events_in_next_month(limit = 3)
-    Event.joins(:participations).where('participations.user_id' => self.id).where('events.start_time > ? AND events.end_time < ?', Time.now, 1.month.from_now).order('start_time ASC').group('events.id').limit(limit)
+    Event.joins(:participations).where('participations.user_id' => id).where('events.start_time > ? AND events.end_time < ?', Time.now, 1.month.from_now).order('start_time ASC').group('events.id').limit(limit)
   end
 
   def get_events_with_friends_in_next_month(limit = 3)
-    Event.joins(:participations).where('participations.user_id' => followed_user_ids).where('events.start_time > ? AND events.end_time < ?', Time.now, 1.month.from_now).order('start_time ASC').group('events.id').limit(limit)
+    Event.joins(:participations).where('participations.user_id' => friend_ids).where('events.start_time > ? AND events.end_time < ?', Time.now, 1.month.from_now).order('start_time ASC').group('events.id').limit(limit)
   end
 
   def friends_in_event(event)
-    event.participants.where('users.id' => followed_user_ids)
+    event.participants.where('users.id' => friend_ids)
   end
 
   def friends_in_group(group)
-    group.members.where('users.id' => followed_user_ids)
+    group.members.where('users.id' => friend_ids)
   end
 
   def recommended_users_hash(limit = 5)
-    User.joins(:user_follows).where('user_follows.followed_user_id IN (?) AND users.id NOT IN (?)', self.followed_user_ids, self.followed_user_ids + [self.id]).order('count_all DESC').group('users.id').count
+    User.joins(:user_follows).where('friendships.friend_id IN (?) AND users.id NOT IN (?)', friend_ids, friend_ids + [id]).order('count_all DESC').group('users.id').count
   end
 
   def recommended_groups_hash(limit = 5)
-    Group.joins(:memberships).where('memberships.user_id IN (?) AND groups.id NOT IN (?)', self.followed_user_ids, self.joined_group_ids).order('count_all DESC').group('groups.id').count
+    Group.joins(:memberships).where('memberships.user_id IN (?) AND groups.id NOT IN (?)', friend_ids, joined_group_ids).order('count_all DESC').group('groups.id').count
   end
 
   if Settings.customization == 'get2gather'

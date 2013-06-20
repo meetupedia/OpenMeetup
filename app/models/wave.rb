@@ -25,7 +25,7 @@ class Wave < ActiveRecord::Base
   end
 
   def add_wave_member(user)
-    WaveMembership.find_or_create_by_wave_id_and_user_id(self.id, user.id)
+    WaveMembership.find_or_create_by_wave_id_and_user_id(id, user.id)
   end
 
   def change!
@@ -33,15 +33,15 @@ class Wave < ActiveRecord::Base
   end
 
   def create_initial_membership
-    WaveMembership.create wave_id: self.id, user_id: self.user.id
+    WaveMembership.create wave_id: id, user_id: self.user.id
   end
 
   def wave_membership_for(user)
-    WaveMembership.find_by_wave_id_and_user_id(self.id, user.id)
+    WaveMembership.find_by_wave_id_and_user_id(id, user.id)
   end
 
   def wave_note_for(user)
-    WaveNote.find_by_wave_id_and_user_id(self.id, user.id)
+    WaveNote.find_by_wave_id_and_user_id(id, user.id)
   end
 
   def self.per_page

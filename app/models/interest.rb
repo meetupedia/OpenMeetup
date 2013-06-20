@@ -24,11 +24,11 @@ class Interest < ActiveRecord::Base
     convert_options: {all: '-quality 95 -strip'}
 
   def interest_tagging_for(user)
-    InterestTagging.find_by_interest_id_and_user_id(self.id, user.id)
+    InterestTagging.find_by_interest_id_and_user_id(id, user.id)
   end
 
   def invited_interest_tagging_for(invited_user)
-    InvitedInterestTagging.find_by_interest_id_and_invited_user_id(self.id, invited_user.id)
+    InvitedInterestTagging.find_by_interest_id_and_invited_user_id(id, invited_user.id)
   end
 end
 

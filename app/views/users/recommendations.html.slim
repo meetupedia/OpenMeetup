@@ -19,4 +19,4 @@ h1= tr('Recommandations')
           = render user
           .icon-container
             i.icon-chevron-up
-          = render user.followed_users & current_user.followed_users
+          = render user.friends - current_user.friends

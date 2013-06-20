@@ -63,7 +63,7 @@ class Event < ActiveRecord::Base
   end
 
   def absence_for(user)
-    Absence.find_by_event_id_and_user_id(self.id, user.id)
+    Absence.find_by_event_id_and_user_id(id, user.id)
   end
 
   def name
@@ -87,7 +87,7 @@ class Event < ActiveRecord::Base
 #  end
 
   def participation_for(user)
-    Participation.find_by_event_id_and_user_id(self.id, user.id)
+    Participation.find_by_event_id_and_user_id(id, user.id)
   end
 end
 
