@@ -35,3 +35,9 @@ html
     - if Settings.enable_feedback_box
       = render 'layouts/uservoice'
     = render 'layouts/facebook_connect'
+
+    - if flash[:code].present?
+      javascript:
+        $(function(){
+          #{flash[:code]}
+        })

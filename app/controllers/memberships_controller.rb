@@ -23,7 +23,8 @@ class MembershipsController < CommonController
       @membership.save
       cookies.delete :add_membership_for
     end
-    redirect_to tags_group_path(@group) unless request.xhr?
+    flash[:code] = "modalbox.create('#{tags_group_url(@group)}')"
+    redirect_to @group
   end
 
   def destroy
