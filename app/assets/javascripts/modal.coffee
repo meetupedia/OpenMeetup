@@ -16,7 +16,7 @@ modalbox =
       left: $(window).width() / 2 - lastWindow.outerWidth() / 2
     ).show()
     $(document).bind 'keydown.modalbox', (event) ->
-      modalbox.close()  if event.keyCode is 27
+      modalbox.close() if event.keyCode is 27
 
   create: (href) ->
     modalbox.build()
@@ -35,16 +35,16 @@ modalbox =
     lastWindow.find('input').blur()
     lastWindow.fadeOut modalbox.settings.speed, ->
       lastWindow.remove()
-      callback.call this  if typeof (callback) is 'function'
-      if $('div.modal-window').length
-        $('div.modal-window').last().find('.pjax').attr 'id', 'pjax'
-      else
+      $(document).trigger('modalbox.closed')
+      callback.call this if typeof(callback) == 'function'
+      unless $('div.modal-window').length
         $(document).unbind 'keydown.modalbox'
-        $('#content > div').attr 'id', 'pjax'
+
+  afterClose: (callback) ->
+    $(document).last().bind('modalbox.closed', callback)
 
   content: (html) ->
-    $('#pjax').attr 'id', null
-    $('div.modal-content').last().html '<div class="modal-close"><a href="#"><img src="/modal/closelabel.png" alt=""/></a></div><div class="pjax" id="pjax">' + html + '</div>'
+    $('div.modal-content').last().html '<div class="modal-close"><a href="#"><img src="/modal/closelabel.png" alt=""/></a></div>' + html
     $(document).on 'click', 'div.modal-close a', ->
       $(this).remove()
       modalbox.close()
@@ -59,7 +59,7 @@ modalbox =
       success: (html) ->
         modalbox.content html
         $(document).trigger 'modalbox.loaded'
-        callback.call this  if typeof (callback) is 'function'
+        callback.call this if typeof(callback) == 'function'
     $('div.modal-window').last().attr 'rel', href
 
   reload: ->

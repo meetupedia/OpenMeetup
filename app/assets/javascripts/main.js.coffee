@@ -9,13 +9,12 @@ $ ->
 
   initPage()
 
-  $(document).bind 'modalbox.loaded', ->
-    initPage()
-
   $(document)
     .on 'click', 'a[rel*=modal], a.modal', ->
       modalbox.create $(this).attr('href')
       false
+    .bind 'modalbox.loaded', ->
+      initPage()
 
     .on 'click', 'a.function', ->
       $(this).toggleClass('expanded')
