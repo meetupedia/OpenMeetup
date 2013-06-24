@@ -1,11 +1,11 @@
 - if activity.activable.class.name == 'Post'
   = render activity.activable
 - elsif activity.activable.class.name == 'Image'
-  = div_for activity, class: 'list_item avatar_item' do
-    = render 'votes/set', item: activity.activable
+  = div_for activity, class: 'list_item avatar_item clearfix' do
     =' user_link activity.activable.user
     = tr('uploaded a picture ')
     p= link_to image_tag(activity.activable.image.url(:small), alt: '', height: 80, width: 80), activity.activable
+    = render 'votes/set', item: activity.activable
 - else
   = div_for activity, class: 'list_item avatar_item' do
     .avatar= user_avatar activity.user
