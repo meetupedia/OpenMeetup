@@ -6,7 +6,7 @@
           - if user.friendship_for(current_user)
             =' %{<i class="icon-ok-sign icon-black"></i> #{tr('Friends')}}.html_safe
           - else
-            =' %{<i class="icon-ok-sign icon-black"></i> #{tr('Friendship requested')}}.html_safe
+            =' %{<i class="icon-ok-sign icon-black"></i> #{tr('Friendship request sent')}}.html_safe
           span.caret
         ul.dropdown-menu
           li= link_to tr('Delete friendship'), friendship, method: :delete
@@ -21,4 +21,4 @@
             li= link_to tr('Decline'), decline_friendship_path(friendship), method: :post
             li= link_to tr('Not now'), set_delayed_friendship_path(friendship), method: :post
       - else
-        =' button_to %{<i class="icon-plus-sign icon-black"></i> #{tr('Request friendship')}}.html_safe, user_friendships_path(user), method: :post, class: 'btn'
+        =' button_to %{<i class="icon-plus-sign icon-black"></i> #{tr('Add friend')}}.html_safe, user_friendships_path(user), method: :post, class: 'btn'
