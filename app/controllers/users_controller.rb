@@ -1,6 +1,7 @@
 # encoding: UTF-8
 
 class UsersController < CommonController
+  before_filter :unauthenticate, only: [:new]
   load_resource except: [:create]
   authorize_resource except: [:index, :show, :groups, :request_invite, :validate_email]
   before_filter :set_city, except: [:edit, :update, :edit_city]

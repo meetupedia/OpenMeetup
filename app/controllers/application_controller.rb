@@ -117,6 +117,12 @@ private
     end
   end
 
+  def unauthenticate
+    if current_user
+      redirect_to root_url
+    end
+  end
+
   def check_restricted_access
     if current_user.andand.restricted_access
       redirect_to root_url

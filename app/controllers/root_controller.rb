@@ -1,6 +1,7 @@
 # encoding: UTF-8
 
 class RootController < CommonController
+  before_filter :unauthenticate, only: [:sign_in]
   skip_before_filter :check_restricted_access, only: [:index, :restricted_access]
 
   def index
@@ -53,7 +54,7 @@ class RootController < CommonController
       else
         @groups = Group.order(order).paginate page: params[:page]
       end
-        
+
     end
   end
 
