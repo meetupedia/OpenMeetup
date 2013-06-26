@@ -21,4 +21,4 @@
             li= link_to tr('Decline'), decline_friendship_path(friendship), method: :post
             li= link_to tr('Not now'), set_delayed_friendship_path(friendship), method: :post
       - else
-        =' button_to %{<i class="icon-plus-sign icon-black"></i> #{tr('Add friend')}}.html_safe, user_friendships_path(user), method: :post, class: 'btn'
+        =' button_to %{<i class="icon-plus-sign icon-black"></i> #{tr('Add friend')}}.html_safe, user_friendships_path(user), method: :post, class: 'btn btn-primary'

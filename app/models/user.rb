@@ -91,7 +91,8 @@ class User < ActiveRecord::Base
     c.disable_perishable_token_maintenance = true
   end
 
-  validates :email, presence: {if: :password_required?}, uniqueness: true
+  validates :first_name, :last_name, presence: true
+  validates :email, presence: true, uniqueness: true
   validates :password, presence: {if: :password_required?}, confirmation: true
   validates :password_confirmation, presence: {if: :password_required?}
   attr_protected :is_admin

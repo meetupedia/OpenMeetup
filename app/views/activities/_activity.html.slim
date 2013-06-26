@@ -5,7 +5,19 @@
     =' user_link activity.activable.user
     = tr('uploaded a picture ')
     p= link_to image_tag(activity.activable.image.url(:small), alt: '', height: 80, width: 80), activity.activable
-    = render 'votes/set', item: activity.activable
+    = render 'comments/comments', commentable: activity.activable
+
+    - if current_user
+      .comment_like_container.clearfix
+        .comment_container
+          = link_to_function tr('Comment'), "$('#add-activity-comment-#{activity.id}').toggle().find('textarea').focus()"
+        = render 'votes/set', item: activity
+
+      div(id="add-activity-comment-#{activity.id}" style="display: none;")
+        = form_for Comment.new, url: polymorphic_path([activity.activable, :comments]), remote: true do |f|
+          = f.text_area :comment
+          = f.submit trl('Add comment'), class: 'btn btn-primary', disable_with: trl('Sending...')
+
 - else
   = div_for activity, class: 'list_item avatar_item' do
     .avatar= user_avatar activity.user
@@ -58,13 +70,10 @@
       = render 'comments/comments', commentable: activity
 
       - if current_user
-        .comment_like_container
+        .comment_like_container.clearfix
           .comment_container
             = link_to_function tr('Comment'), "$('#add-activity-comment-#{activity.id}').toggle().find('textarea').focus()"
           = render 'votes/set', item: activity
-        .div(style="clear: both;")
-
-        // p= link_to_function tr('Comment'), "$('#add-activity-comment-#{activity.id}').toggle().find('textarea').focus()"
 
         div(id="add-activity-comment-#{activity.id}" style="display: none;")
           = form_for Comment.new, url: polymorphic_path([activity, :comments]), remote: true do |f|
