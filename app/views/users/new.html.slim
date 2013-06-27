@@ -24,7 +24,7 @@
           = f.inputs do
             = f.input :first_name, label: tr('First name'), placeholder: trl('Arnold')
             = f.input :last_name, label: tr('Last name'), placeholder: trl('Schwarzenegger')
-            = f.input :email, label: tr('Email')
+            = f.input :email, {label: tr('Email')}.merge(Settings.only_for_domain.present? ? {as: :string, append: "@#{Settings.only_for_domain}", placeholder: trl('arnold.schwarznegger')} : {placeholder: 'arnold.schwarznegger@example.com'})
             = f.input :password, label: tr('Password')
             = f.input :password_confirmation, label: tr('Password again')
             - if Settings.customization == 'get2gather'

@@ -97,9 +97,17 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: {if: :password_required?}
   attr_protected :is_admin
 
+  before_validation :set_email
+
   after_create do |user|
     user.update_attributes last_notified: user.created_at
     true
+  end
+
+  def set_email
+    if Settings.only_for_domain.present?
+      self.email = self.email.gsub(/@.*/, '') + '@' + Settings.only_for_domain
+    end
   end
 
   def name
