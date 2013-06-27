@@ -20,10 +20,4 @@ class DashboardController < CommonController
     system "script/backup_translations"
     send_file 'tmp/translations.sql'
   end
-
-protected
-
-  def authenticate_as_admin
-    raise CanCan::AccessDenied unless current_user.andand.is_admin?
-  end
 end

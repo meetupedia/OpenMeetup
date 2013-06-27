@@ -123,6 +123,10 @@ private
     end
   end
 
+  def authenticate_as_admin
+    raise CanCan::AccessDenied unless current_user.andand.is_admin?
+  end
+
   def check_restricted_access
     if current_user.andand.restricted_access
       redirect_to root_url
