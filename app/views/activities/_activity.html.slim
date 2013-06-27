@@ -3,7 +3,7 @@
 - elsif activity.activable.class.name == 'Image'
   = div_for activity, class: 'list_item avatar_item clearfix' do
     =' user_link activity.activable.user
-    = tr('uploaded a picture ')
+    =' tr('uploaded a picture')
     p= link_to image_tag(activity.activable.image.url(:small), alt: '', height: 80, width: 80), activity.activable
     = render 'comments/comments', commentable: activity.activable
 
@@ -23,31 +23,31 @@
     .avatar= user_avatar activity.user
     - if activity.activable.class.name == 'Event'
       =' user_link activity.activable.user
-      = tr('created the meetup ')
+      =' tr('created the meetup')
       =' link_to activity.activable.title, activity.activable
     - elsif activity.activable.class.name == 'Group'
       =' user_link activity.activable.user
-      = tr('created the meetup group ')
+      =' tr('created the meetup group')
       =' link_to activity.activable.name, activity.activable
     - elsif activity.activable.class.name == 'Membership'
       =' user_link activity.activable.user
-      = tr('has joined the group ')
+      =' tr('has joined the group')
       =' link_to activity.activable.group.name, activity.activable.group
     - elsif activity.activable.class.name == 'Participation'
       =' user_link activity.activable.user
-      = tr('will participate at ')
+      =' tr('will participate at')
       =' link_to activity.activable.event.title, activity.activable.event
     - elsif activity.activable.class.name == 'Tagging'
       =' user_link activity.activable.user
-      = tr('follows ')
+      =' tr('follows')
       =' link_to activity.activable.tag.name, activity.activable.tag
-    - elsif activity.activable.class.name == 'UserFollow'
+    - elsif activity.activable.class.name == 'Friendship'
       =' user_link activity.activable.user
-      = tr('follows ')
-      // FIXME
+      =' tr('is friend with')
+      =' user_link activity.activable.friend
     - elsif activity.activable.class.name == 'Comment'
       =' user_link activity.activable.user
-      = tr('made ')
+      =' tr('made')
       = link_to tr('a new comment'), activity.activable.commentable, rel: 'modal'
       | .
       p= activity.activable.comment

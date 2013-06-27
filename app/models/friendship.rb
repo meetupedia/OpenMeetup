@@ -4,7 +4,8 @@ class Friendship < ActiveRecord::Base
   timestamps
 
   belongs_to :user
-  belongs_to :friend, :class_name => 'User'
+  belongs_to :friend, class_name: 'User'
+  has_many :activities, as: :activable, dependent: :destroy
 
   after_create :create_inverse
   after_update :create_inverse
@@ -14,8 +15,12 @@ class Friendship < ActiveRecord::Base
     if friendship = friend.friendship_for(user)
       update_column :is_confirmed, true
       friendship.update_column :is_confirmed, true
-    else
-      Friendship.create user_id: friend.id, friend_id: user.id, is_confirmed: true, is_delayed: false if is_confirmed?
+      Activity.create_from(self, user)
+      Activity.create_from(friendship, friend)
+    elsif is_confirmed?
+      friendship = Friendship.create user_id: friend.id, friend_id: user.id, is_confirmed: true, is_delayed: false
+      Activity.create_from(self, user)
+      Activity.create_from(friendship, friend)
     end
   end
 

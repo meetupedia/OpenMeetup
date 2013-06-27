@@ -7,7 +7,6 @@ class FriendshipsController < CommonController
     @friendship = Friendship.new friend_id: @user.id
     unless current_user.friendship_for(@user)
       @friendship.save
-      create_activity @friendship
       FriendshipMailer.new_request(@friendship.id).deliver
     end
     redirect_to @user unless request.xhr?
