@@ -163,6 +163,10 @@ class UsersController < CommonController
     redirect_to @user, notice: trfn('User header image updated.')
   end
 
+  def friend_requests
+    @friendships = @user.inverse_friendships.where(is_confirmed: false)
+  end
+
 protected
 
   def create_city

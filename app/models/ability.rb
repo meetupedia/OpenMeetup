@@ -126,7 +126,7 @@ class Ability
       can :create, Tag
 
       can [:edit_city, :recommendations], User
-      can [:facebook_groups, :set_avatar, :set_header], User do |user|
+      can [:facebook_groups, :friend_requests, :set_avatar, :set_header], User do |user|
         user == current_user
       end
       if Settings.enable_messages

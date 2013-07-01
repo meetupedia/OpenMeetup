@@ -19,6 +19,10 @@
               b.icon-envelope
               - if current_user.notifications.size > 0
                 span.badge.badge-important= current_user.notifications.size
+            - if (counter = current_user.inverse_requested_friends.size) > 0
+              li= link_to friend_requests_user_path(current_user), alt: trl('My friend requests'), title: trl('My friend requests') do
+                b.icon-user
+                span.badge.badge-important= counter
 
         form.navbar-search action='/search' method='get' onsubmit="_gaq.push(['_trackEvent', 'Search', 'Search']);"
           input type='text' class='search-query' placeholder=trl('Search') name='q'

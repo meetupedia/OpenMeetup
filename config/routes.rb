@@ -169,6 +169,7 @@ Openmeetup::Application.routes.draw do
       get :calendar
       get :edit_city
       get :facebook_groups
+      get :friend_requests
       get :groups
       get :set_admin
       post :set_admin
