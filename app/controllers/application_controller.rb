@@ -144,6 +144,14 @@ private
     session[:return_to] = nil
   end
 
+  def redirect_back(url = root_url)
+    if request.env['HTTP_REFERER'].present?
+      redirect_to :back
+    else
+      redirect_to url
+    end
+  end
+
   def current_city
     return @current_city if defined?(@current_city)
     @current_city = session[:city] || current_user.andand.city || City.first

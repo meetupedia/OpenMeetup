@@ -17,20 +17,20 @@ class FriendshipsController < CommonController
     if request.xhr?
       render :create
     else
-      redirect_to @friendship.friend
+      redirect_back @friendship.friend
     end
   end
 
   def decline
     @friendship.destroy
-    redirect_to @friendship.user
+    redirect_back @friendship.user
   end
 
   def set_confirmed
     if @friendship.update_attributes is_confirmed: true, is_delayed: false
       FriendshipMailer.confirmed_request(@friendship.id).deliver
     end
-    redirect_to @friendship.user
+    redirect_back @friendship.user
   end
 
   def set_delayed

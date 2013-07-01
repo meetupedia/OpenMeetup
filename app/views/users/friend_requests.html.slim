@@ -1,4 +1,7 @@
 .wrapper
   h1= tr('Friend requests')
 
-  .list_view= render @friendships
+  - if @friendships.present?
+    .list_view= render @friendships
+  - else
+    p.muted No friendship request.
