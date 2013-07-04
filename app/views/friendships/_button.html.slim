@@ -14,6 +14,6 @@
       - if friendship = user.friendship_for(current_user)
         .pull-right
           =' link_to tr('Delete request'), decline_friendship_path(friendship), method: :post, class: 'btn'
-          = link_to tr('Confirm friendship'), set_confirmed_friendship_path(friendship), method: :post, class: 'btn btn-primary'
+          = link_to tr('Confirm friendship'), set_confirmed_friendship_path(friendship), method: :post, onclick: "_gaq.push(['_trackEvent', 'Confirm friendship', 'Friendship']);", class: 'btn btn-primary'
       - else
-        =' button_to %{<i class="icon-plus-sign icon-white"></i> #{tr('Add friend')}}.html_safe, user_friendships_path(user), method: :post, class: 'btn btn-primary'
+        =' button_to %{<i class="icon-plus-sign icon-white"></i> #{tr('Add friend')}}.html_safe, user_friendships_path(user), method: :post, onclick: "_gaq.push(['_trackEvent', 'Add friendship', 'Friendship']);", class: 'btn btn-primary'

@@ -2,7 +2,8 @@
   = semantic_form_for @comment, url: polymorphic_path([@comment.commentable, :comments]) do |f|
     = f.hidden_field :reply_to_id, value: params[:reply_to_id]
     = f.inputs :comment
-    = f.actions
+    = f.actions do
+      = f.action :submit, label: trl('Save')), onclick: "_gaq.push(['_trackEvent', 'Create comment', 'Comment']);", button_html: {class: 'btn btn-primary', disable_with: trl('Saving...')}
 
   - if comment = Comment.find_by_id(params[:reply_to_id])
     hr
