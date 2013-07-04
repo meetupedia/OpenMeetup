@@ -19,6 +19,8 @@ class Admin
     Event.find_each { |event| event.set_counters :comments }
     Image.find_each { |image| image.set_counters :comments }
     Post.find_each { |post| post.set_counters :comments }
+
+    Tag.remove_duplications
   end
 
   def self.migration

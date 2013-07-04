@@ -25,6 +25,18 @@ class Tag < ActiveRecord::Base
   def tagging_for(user)
     Tagging.find_by_tag_id_and_user_id(id, user.id)
   end
+
+  def self.remove_duplications
+    Tag.find_each do |tag|
+      if tag.permalink =~ /-\d+$/ and original_tag = Tag.find_by_permalink(tag.permalink.gsub(/-\d+$/, ''))
+        tag.taggings.each do |tagging|
+          tagging.tag = original_tag
+          tagging.save
+        end
+        tag.reload.destroy
+      end
+    end
+  end
 end
 
 Tag.auto_upgrade!
