@@ -123,7 +123,7 @@ class User < ActiveRecord::Base
   end
 
   def password_required?
-    authentications.blank? and crypted_password.blank? and not restricted_access
+    crypted_password.present? and not restricted_access
   end
 
   def admin?
