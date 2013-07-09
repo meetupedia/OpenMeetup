@@ -5,5 +5,5 @@
         .user_suggestions
           label= tr('How can we make this page better for you?')
           = form_for Feedback.new, remote: true do |f|
-            = f.text_area :body, placeholder: trl('Your suggestions, ideas, complains will greatly help us.')
+            = f.text_area :body, placeholder: trl('Your suggestions, ideas, complaints will greatly help us.')
             = f.submit trl('Send feedback'), onclick: "_gaq.push(['_trackEvent', 'Send feedback', 'Feedback']);", class: 'btn btn-primary', disable_with: trl('Sending...')
