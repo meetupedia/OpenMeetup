@@ -125,7 +125,11 @@ private
   end
 
   def authenticate_as_admin
-    raise CanCan::AccessDenied unless current_user.andand.is_admin?
+    unless current_user
+      authenticate
+    else
+      raise CanCan::AccessDenied unless current_user.is_admin?
+    end
   end
 
   def check_restricted_access
