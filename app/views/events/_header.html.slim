@@ -12,6 +12,8 @@
         ul.dropdown-menu
           li= link_to tr('Invite friends'), new_event_event_invitation_path(@event), rel: 'modal'
           li= link_to tr('Invite all group members'), new_event_event_invitation_path(@event, invite_members: true), rel: 'modal'
+          - if can? :create, Image
+            li= link_to tr('Upload pictures'), images_event_path(@event), rel: 'modal'
           - if can? :edit, @event
             li.divider
             - if can? :users_with_emails, @event
