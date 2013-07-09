@@ -6,7 +6,9 @@ p
   = render @event
 
 - unless @message.blank?
-  h3 Személyes üzenet
+  h3= tr('Message')
   = simple_format @message
 
-p= link_to tr('Join'), set_event_participations_path(@event, invitation_code: @invitation_code), class: 'btn'
+p
+  =' link_to tr('Join'), set_event_participations_path(@event, invitation_code: @invitation_code), class: 'btn'
+  =' link_to tr('Visit event page'), @event, class: 'btn'
