@@ -21,4 +21,13 @@ class TaggingsController < CommonController
       redirect_to interests_url
     end
   end
+
+  def set
+    unless @tagging = @tag.tagging_for(current_user)
+      @tagging = Tagging.create tag: @tag
+      create_activity @tagging
+    else
+      @tagging.destroy
+    end
+  end
 end

@@ -115,7 +115,11 @@ Openmeetup::Application.routes.draw do
       end
     end
     resources :tags, shallow: true do
-      resources :taggings, shallow: true
+      resources :taggings, shallow: true do
+        collection do
+          post :set
+        end
+      end
     end
   end
 
@@ -178,6 +182,7 @@ Openmeetup::Application.routes.draw do
       post :set_avatar
       post :set_header
       get :settings
+      get :tags
       get :waves
     end
   end

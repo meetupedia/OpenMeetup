@@ -19,7 +19,8 @@
 
     - unless @user.tags.empty?
       .wrapper
-        = render @user.tags.order('name ASC')
+        p= render @user.tags.order('name ASC')
+        p= link_to 'Add new interests', tags_user_path(@user), rel: 'modal'
 
     .wrapper
       h2= tr('Friends')

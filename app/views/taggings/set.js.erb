@@ -1,0 +1,1 @@
+$('#tagging_button_for_tag_<%= @tagging.tag.id %>').replaceWith('<%= escape_javascript(render('taggings/text_button', tag: @tagging.tag)) %>')

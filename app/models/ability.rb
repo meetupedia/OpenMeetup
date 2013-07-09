@@ -118,14 +118,14 @@ class Ability
 
       can [:index, :show, :create, :update, :destroy], Setting if current_user.is_admin?
 
-      can :create, Tagging
+      can [:create, :set], Tagging
       can :destroy, Tagging do |tagging|
         tagging.user == current_user
       end
 
       can :create, Tag
 
-      can [:edit_city, :recommendations], User
+      can [:edit_city, :recommendations, :tags], User
       can [:facebook_groups, :friend_requests, :set_avatar, :set_header], User do |user|
         user == current_user
       end
