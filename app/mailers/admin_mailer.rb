@@ -2,9 +2,10 @@
 
 class AdminMailer < CommonMailer
 
-  def feedback(feedback_id, user_id, sender_id)
+  def feedback(feedback_id, user_id, sender_id, request_url)
     if @feedback = Feedback.find_by_id(feedback_id) and @recipient = User.find_by_id(user_id) and @sender = User.find_by_id(sender_id)
       if @email = @recipient.email
+        @request_url = request_url
         mail to: @email, from: @sender.email, subject: 'New feedback'
       end
     end
