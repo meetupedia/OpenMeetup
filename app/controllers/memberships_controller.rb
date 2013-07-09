@@ -23,7 +23,7 @@ class MembershipsController < CommonController
       @membership.save
       cookies.delete :add_membership_for
     end
-    flash[:code] = "modalbox.create('#{tags_group_url(@group)}')"
+    flash[:code] = "modalbox.create('#{tags_group_url(@group)}')" if @group.tags.size > 0
     redirect_to @group
   end
 
