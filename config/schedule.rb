@@ -6,6 +6,11 @@ every :sunday, at: '8:00pm' do
   runner 'Admin.weekly_newsletter'
 end
 
+# various jobs
+every 1.day, at: '5:00am' do
+  runner 'Admin.cron_daily'
+end
+
 # sitemap refresh
 # every 1.day, at: '5:00am' do
 #   rake 'sitemap:refresh'
