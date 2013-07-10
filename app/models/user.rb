@@ -93,8 +93,9 @@ class User < ActiveRecord::Base
 
   validates :first_name, :last_name, presence: true
   validates :email, presence: true, uniqueness: true
-  validates :password, presence: {if: :password_required?}, confirmation: true
-  validates :password_confirmation, presence: {if: :password_required?}
+  validates :password, presence: {if: :crypted_password_changed?}
+  validates :password, confirmation: {if: :crypted_password_changed?}
+  validates :password_confirmation, presence: {if: :crypted_password_changed?}
   attr_protected :is_admin
 
   before_validation :set_email
@@ -120,10 +121,6 @@ class User < ActiveRecord::Base
     else
       attributes['name']
     end
-  end
-
-  def password_required?
-    crypted_password.present? and not restricted_access
   end
 
   def admin?
