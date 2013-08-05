@@ -1,0 +1,12 @@
+p
+  ' You are going to
+  = link_to @event.name, @event
+  | , jipee!
+
+.list_view
+  = render @user
+
+  .icon-container
+    i.icon-chevron-down
+
+  = render @event

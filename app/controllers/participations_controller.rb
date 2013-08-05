@@ -15,6 +15,7 @@ class ParticipationsController < CommonController
       @participation.save
       cookies.delete :add_participation_for
       run_later do
+        ParticipationMailer.participation(@participation).deliver
         @participation.event.group.admins.each do |user|
           begin
             EventMailer.participation(@participation, user).deliver
