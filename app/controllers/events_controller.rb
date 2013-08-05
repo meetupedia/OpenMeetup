@@ -6,8 +6,13 @@ class EventsController < CommonController
   authorize_resource except: [:index, :show, :actual, :images, :map, :users]
 
   def show
-    events_show
-    @title = @event.name
+    respond_to do |format|
+      format.html do
+        events_show
+        @title = @event.name
+      end
+      format.ics
+    end
   end
 
   def new

@@ -89,6 +89,19 @@ class Event < ActiveRecord::Base
   def participation_for(user)
     Participation.find_by_event_id_and_user_id(id, user.id)
   end
+
+  def to_ics
+    ics = RiCal.Calendar do |cal|
+      cal.event do |event|
+        event.description "[#{Settings.title}] #{title}"
+        event.summary description if description.present?
+        event.dtstart start_time
+        event.dtend end_time
+        event.location place
+      end
+    end
+    ics.export
+  end
 end
 
 Event.auto_upgrade!

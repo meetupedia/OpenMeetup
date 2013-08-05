@@ -42,6 +42,8 @@
             ul.dropdown-menu
               li= link_to "#{tr('Going')} <i class='icon-ok'></i>".html_safe, event_participations_path(@event), method: :post, onclick: "_gaq.push(['_trackEvent', 'Event RSVP - going', 'Event RSVP']);"
               li= link_to tr('Not going'), event_absences_path(@event), method: :post, onclick: "_gaq.push(['_trackEvent', 'Event RSVP - not going', 'Event RSVP']);"
+          - if @event.start_time > Time.now
+            = link_to "<i class='icon-calendar'></i> #{tr('Export to calendar')}".html_safe, event_path(@event, format: :ics), class: 'btn'
         - if @event.start_time > Time.now
           = link_to tr('Invite friends'), new_event_event_invitation_path(@event), rel: 'modal', class: 'btn btn-primary'
 
