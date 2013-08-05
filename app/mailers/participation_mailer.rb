@@ -16,7 +16,7 @@ class ParticipationMailer < CommonMailer
 
     def participation
       participation = Participation.last
-      mail = ParticipationMailer.participation(participation, participation.event.group.admins.first)
+      mail = ParticipationMailer.participation(participation)
       mail
     end
   end
