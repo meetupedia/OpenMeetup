@@ -3,6 +3,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  before_filter :add_event
   before_filter :set_locale, :check_restricted_access, :set_invitation_code
 
   helper_method :current_city, :current_language, :current_user
@@ -124,7 +125,11 @@ private
   end
 
   def authenticate_as_admin
-    raise CanCan::AccessDenied unless current_user.andand.is_admin?
+    unless current_user
+      authenticate
+    else
+      raise CanCan::AccessDenied unless current_user.is_admin?
+    end
   end
 
   def check_restricted_access
@@ -187,6 +192,10 @@ private
     Settings.enable_invite_process and not (cookies[:invitation_code].present? and (EventInvitation.find_by_code(cookies[:invitation_code]) or GroupInvitation.find_by_code(cookies[:invitation_code]) or cookies[:invitation_code] == Settings.skip_invite_process_code))
   end
   helper_method :use_invite_process?
+
+  def add_event
+    cookies[:action] = "#{controller_name}##{action_name}" if Rails.env.production?
+  end
 
   def groups_show
     @activities = @group.activities.where('activable_type NOT IN (?)', ['Comment']).order('created_at DESC').includes(activable: :user).paginate page: params[:page]

@@ -3,9 +3,14 @@
     .control-group
       = f.label :ids, tr('Names or emails (separated with commas)')
       = f.text_field :ids
-  p= link_to_function tr('More options'), "$('#more-options').toggle()", class: 'function'
-  #more-options
-    = f.input :message, label: tr('Personal message')
+  #accordion.accordion
+    .accordion-group
+      .accordion-heading
+        a class='accordion-toggle' data-toggle='collapse' data-parent='#accordion' href='#collapse'
+          = tr('More options')
+      #collapse.accordion-body.collapse
+        .accordion-inner
+          = f.input :message, label: tr('Personal message')
   = f.actions do
     =' f.action :submit, label: trl('Send'), button_html: {class: 'btn btn-primary', disable_with: trl('Sending...')}, onclick: "_gaq.push(['_trackEvent', 'Send group invitation', 'Group invitation']);"
     = f.action :cancel, label: trl('Cancel')

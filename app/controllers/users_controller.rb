@@ -167,6 +167,10 @@ class UsersController < CommonController
     @friendships = @user.inverse_friendships.where(is_confirmed: false)
   end
 
+  def tags
+    @tags = Tag.order('permalink ASC')
+  end
+
 protected
 
   def create_city

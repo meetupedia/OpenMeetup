@@ -1,5 +1,4 @@
 .wrapper
   - unless @voteable.voters.empty?
-    .avatars
-      - @voteable.voters.each do |user|
-        =' user_avatar user
+    h2= tr('Likes')
+    .list_view= render @voteable.voters

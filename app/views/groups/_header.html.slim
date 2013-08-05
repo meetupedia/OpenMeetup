@@ -12,6 +12,8 @@
             ul.dropdown-menu
               - if current_user
                 li= link_to tr('Invite friends'), new_group_group_invitation_path(@group), rel: 'modal'
+              - if can? :create, Image
+                li= link_to tr('Upload pictures'), images_group_path(@group), rel: 'modal'
               - if membership = @group.membership_for(current_user) and can? :destroy, membership
                 li= link_to tr('Leave group'), membership, method: :delete
               - if membership = @group.membership_for(current_user) and can? :create, Event.new(group: @group)

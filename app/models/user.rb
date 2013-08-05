@@ -93,9 +93,11 @@ class User < ActiveRecord::Base
 
   validates :first_name, :last_name, presence: true
   validates :email, presence: true, uniqueness: true
-  validates :password, presence: {if: :password_required?}, confirmation: true
-  validates :password_confirmation, presence: {if: :password_required?}
+  validates :password, presence: {if: :crypted_password_changed?}
+  validates :password, confirmation: {if: :crypted_password_changed?}
+  validates :password_confirmation, presence: {if: :crypted_password_changed?}
   attr_protected :is_admin
+  attr_reader :tag_tokens
 
   before_validation :set_email
 
@@ -120,10 +122,6 @@ class User < ActiveRecord::Base
     else
       attributes['name']
     end
-  end
-
-  def password_required?
-    authentications.blank? and crypted_password.blank? and not restricted_access
   end
 
   def admin?
@@ -223,6 +221,16 @@ class User < ActiveRecord::Base
 
   def recommended_groups_hash(limit = 5)
     Group.joins(:memberships).where('memberships.user_id IN (?) AND groups.id NOT IN (?)', friend_ids, joined_group_ids).order('count_all DESC').group('groups.id').count
+  end
+
+  def tag_tokens=(names)
+    names.split(/,\s*/).each do |name|
+      tag = Tag.find_or_create_by_name(name)
+      unless tag.tagging_for(self)
+        tagging = Tagging.create tag: tag, user: self
+        Activity.create_from(tagging, self)
+      end
+    end
   end
 
   if Settings.customization == 'get2gather'

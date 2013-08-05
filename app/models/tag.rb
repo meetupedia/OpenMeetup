@@ -22,6 +22,10 @@ class Tag < ActiveRecord::Base
     GroupTagging.find_by_tag_id_and_group_id(id, group.id)
   end
 
+  def add_tag(user)
+    Tagging.where(tag: self, user: user).first_or_create
+  end
+
   def tagging_for(user)
     Tagging.find_by_tag_id_and_user_id(id, user.id)
   end

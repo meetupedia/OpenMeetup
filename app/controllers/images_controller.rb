@@ -25,7 +25,11 @@ class ImagesController < CommonController
 
   def destroy
     @image.destroy
-    redirect_to @image.imageable
+    if @image.imageable.is_a?(Group)
+      redirect_to images_group_path(@image.imageable)
+    else
+      redirect_to @image.imageable
+    end
   end
 
   def next

@@ -1,6 +1,7 @@
 # encoding: UTF-8
 
 class RootController < CommonController
+  before_filter :authenticate_as_admin, only: [:dashboard]
   before_filter :unauthenticate, only: [:sign_in]
   skip_before_filter :check_restricted_access, only: [:index, :restricted_access]
 
@@ -30,9 +31,6 @@ class RootController < CommonController
   end
 
   def dashboard
-    unless current_user.andand.is_admin?
-      redirect_to root_url
-    end
     @activities = Activity.order('created_at DESC').paginate page: params[:page]
   end
 

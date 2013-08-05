@@ -2,10 +2,16 @@ $ ->
   window.reloadPage = ->
     window.location.reload()
 
+  window.trackAction = ->
+    if $.cookie('action')
+      _gaq = _gaq || []
+      _gaq.push(['_trackEvent', $.cookie('action')], '')
+
   initPage = ->
     $('.dropdown-toggle').dropdown()
     $('a.fancybox').fancybox
       titlePosition: 'inside'
+    window.trackAction()
 
   initPage()
 

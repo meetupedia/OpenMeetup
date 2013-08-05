@@ -26,6 +26,12 @@ class GroupsController < CommonController
         rescue
         end
       end
+      @group.tags.each do |tag|
+        unless tag.tagging_for(current_user)
+          tagging = Tagging.create tag: tag
+          create_activity tagging
+        end
+      end
       redirect_to @group, notice: trfn('Group created.')
     else
       render :new

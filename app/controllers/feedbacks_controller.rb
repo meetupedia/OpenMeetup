@@ -11,7 +11,7 @@ class FeedbacksController < CommonController
   def create
     @feedback.save
     User.where(is_admin: true).each do |user|
-      AdminMailer.feedback(@feedback.id, user.id, current_user.id).deliver
+      AdminMailer.feedback(@feedback.id, user.id, current_user.id, request.url).deliver
     end
     respond_to do |format|
       format.js

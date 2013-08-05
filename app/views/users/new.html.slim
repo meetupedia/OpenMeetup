@@ -32,3 +32,8 @@
               = f.input :read_cobe, label: tr('I accept the <a href="http://www.ericsson.com/res/thecompany/docs/corporate-responsibility/2012/cobe/EN_COBE.pdf" target="_blank">code of ethics</a>.').html_safe
           = f.actions do
             = f.action :submit, label: trl('Sign up'), onclick: "_gaq.push(['_trackEvent', 'Register user', 'User']);", button_html: {class: 'btn btn-primary', disable_with: trl('Signing up...')}
+
+- if Settings.only_for_domain.present?
+  coffee:
+    $('#user_email').on 'keypress', (e) ->
+      false if e.which is 64

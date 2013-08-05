@@ -13,6 +13,7 @@
           li= link_to tr('Social settings'), '#social_settings'
         - if Settings.multilingual
           li= link_to tr('Change language'), '#change_language'
+        li= link_to tr('Email settings'), '#email_settings'
         li= link_to tr('Delete profile'), '#delete_profile'
 
   .span8
@@ -33,7 +34,6 @@
       = semantic_form_for @user do |f|
         = f.inputs do
           = f.input :email
-          = f.input :enable_weekly_newsletter, as: :boolean
         = f.actions do
           =' f.action :submit, label: 'Save', button_html: {class: 'btn btn-primary', disable_with: trl('Saving...')}
           = f.action :cancel, label: 'Cancel'
@@ -99,6 +99,16 @@
       .wrapper
         h2= tr('Change language')
         .tr8n-language-selector.btn= tr8n_language_selector_tag
+
+    #email_settings
+    .wrapper
+      h2= tr('Email settings')
+      = semantic_form_for @user do |f|
+        = f.inputs do
+          = f.input :enable_weekly_newsletter, as: :boolean
+        = f.actions do
+          =' f.action :submit, label: 'Save', button_html: {class: 'btn btn-primary', disable_with: trl('Saving...')}
+          = f.action :cancel, label: 'Cancel'
 
     #delete_profile
     .wrapper

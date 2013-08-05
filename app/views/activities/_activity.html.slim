@@ -35,7 +35,7 @@
       =' link_to activity.activable.group.name, activity.activable.group
     - elsif activity.activable.class.name == 'Participation'
       =' user_link activity.activable.user
-      =' tr('will participate at')
+      =' tr('will participate in')
       =' link_to activity.activable.event.title, activity.activable.event
     - elsif activity.activable.class.name == 'Tagging'
       =' user_link activity.activable.user
