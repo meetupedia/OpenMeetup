@@ -1,5 +1,13 @@
-.row
+/
+  .row
+    .span4
+      .wrapper= render 'menu'
+    .span8
+      .wrapper
+        h2= tr('Groups')
+        .list_view= render @groups
 
+.row
   - if Settings.standalone
     .span8
       .wrapper
@@ -9,7 +17,6 @@
             = render 'cities/search'
             - if @groups.respond_to?(:total_pages)
               = will_paginate @groups
-
   - else
     .span8
       .wrapper

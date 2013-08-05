@@ -4,6 +4,7 @@ gem 'rails', '3.2.13'
 
 platform :ruby do
   gem 'mysql2'
+  gem 'oj'
 end
 
 platform :jruby do
@@ -56,9 +57,10 @@ gem 'spork-testunit'
 gem 'airbrake'
 # gem 'gmaps4rails'
 gem 'kasket'
+gem 'ri_cal'
 
-gem 'fast_xs'
-gem 'fast_blank'
+gem 'fast_xs', platform: :ruby
+gem 'fast_blank', platform: :ruby
 
 gem 'sass-rails'
 gem 'coffee-rails'

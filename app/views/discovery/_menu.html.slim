@@ -1,0 +1,6 @@
+ul.nav.nav-pills.nav-stacked
+  li(class="#{controller.action_name == 'index' ? 'active' : ''}")= link_to tr('Groups'), discovery_path
+  li(class="#{controller.action_name == 'events' ? 'active' : ''}")= link_to tr('Events'), events_discovery_path
+  li(class="#{controller.action_name == 'interests' ? 'active' : ''}")= link_to tr('Interests'), interests_discovery_path
+  li(class="#{controller.action_name == 'friends' ? 'active' : ''}")= link_to tr('Friends'), friends_discovery_path
+  li(class="#{controller.action_name == 'newsfeed' ? 'active' : ''}")= link_to tr('News feed'), newsfeed_discovery_path

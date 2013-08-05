@@ -83,7 +83,7 @@ Openmeetup::Application.configure do
   }.merge(Settings.smtp || {})
 
   # Adding timestamp to the log lines
-  config.log_tags = [ lambda {|r| DateTime.now } ]
+  config.log_tags = [lambda { |r| DateTime.now }]
 
   # Handling error messages dynamically
   config.exceptions_app = self.routes

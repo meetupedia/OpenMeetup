@@ -170,6 +170,7 @@ GEM
       jwt (~> 0.1.4)
       multi_json (~> 1.0)
       rack (~> 1.2)
+    oj (2.1.4)
     omniauth (1.1.4)
       hashie (>= 1.2, < 3)
       rack
@@ -243,6 +244,7 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.5)
+    ri_cal (0.8.8)
     roadie (2.3.4)
       actionmailer (> 3.0.0, < 3.3.0)
       css_parser
@@ -341,6 +343,7 @@ DEPENDENCIES
   mini_record
   mysql2
   newrelic_rpm
+  oj
   omniauth-facebook
   omniauth-twitter
   paper_trail
@@ -353,6 +356,7 @@ DEPENDENCIES
   rails-timeago
   rails_autolink
   rails_config
+  ri_cal
   roadie
   rvm-capistrano
   sass-rails
