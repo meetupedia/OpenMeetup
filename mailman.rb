@@ -22,8 +22,10 @@ Mailman::Application.run do
 
   to '%group%@moly.hu' do
     puts message.inspect
-    if group = Group.find_by_permalink(params[:group])
-      group.posts.create post: message
+    if user = User.find_by_email(message[:from])
+      if group = Group.find_by_permalink(params[:group])
+        group.posts.create post: message, user: user
+      end
     end
   end
 end
