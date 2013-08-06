@@ -75,7 +75,8 @@ class Event < ActiveRecord::Base
 #  end
 
   def create_admin_participation
-    Participation.create event: self
+    participation = Participation.create event: self
+    ParticipationMailer.participation(participation).deliver
   end
 
 #  def geocode?
@@ -93,8 +94,8 @@ class Event < ActiveRecord::Base
   def to_ics
     ics = RiCal.Calendar do |cal|
       cal.event do |event|
-        event.description "[#{Settings.title}] #{title}"
-        event.summary description if description.present?
+        event.description description if description.present?
+        event.summary "[#{Settings.title}] #{title}"
         event.dtstart start_time
         event.dtend end_time
         event.location place
