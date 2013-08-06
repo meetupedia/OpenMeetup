@@ -21,7 +21,7 @@ Mailman.config.pop3 = {
 Mailman::Application.run do
 
   to '%group%@moly.hu' do
-    if user = User.find_by_email(message.sender.address)
+    if user = User.find_by_email(message.sender)
       if group = Group.find_by_permalink(params[:group])
         post = group.posts.create user: user, post: message.body.decoded
         Activity.create_from(post, user, group)
