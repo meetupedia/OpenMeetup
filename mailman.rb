@@ -24,7 +24,7 @@ Mailman::Application.run do
     puts message.inspect
     if user = User.find_by_email(message[:from])
       if group = Group.find_by_permalink(params[:group])
-        group.posts.create post: message, user: user
+        group.posts.create post: message.body, user: user
       end
     end
   end
