@@ -58,6 +58,7 @@ gem 'airbrake'
 # gem 'gmaps4rails'
 gem 'kasket'
 gem 'ri_cal'
+gem 'mailman', require: false
 
 gem 'fast_xs', platform: :ruby
 gem 'fast_blank', platform: :ruby
