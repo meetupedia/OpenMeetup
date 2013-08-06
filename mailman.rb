@@ -20,12 +20,10 @@ Mailman.config.pop3 = {
 
 Mailman::Application.run do
 
-  to 'meetupedia@moly.hu' do
-    users = [User.first]
-    users.each do |user|
-      puts user.email
-      puts message
-      MailmanMailer.forward(user, message)
+  to '%group%@moly.hu' do
+    puts message.inspect
+    if group = Group.find_by_permalink(params[:group])
+      group.posts.create post: message
     end
   end
 end
