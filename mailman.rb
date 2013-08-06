@@ -1,6 +1,3 @@
-#!/usr/bin/env ruby
-
-require 'bundler/setup'
 require 'mailman'
 
 
@@ -25,6 +22,8 @@ Mailman::Application.run do
 
   to 'meetupedia@moly.hu' do
     users = [User.first]
-    MailmanMailer.forward(user, message)
+    users.each do |user|
+      MailmanMailer.forward(user, message)
+    end
   end
 end
