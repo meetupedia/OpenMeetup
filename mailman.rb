@@ -23,6 +23,8 @@ Mailman::Application.run do
   to 'meetupedia@moly.hu' do
     users = [User.first]
     users.each do |user|
+      puts user.email
+      puts message
       MailmanMailer.forward(user, message)
     end
   end
