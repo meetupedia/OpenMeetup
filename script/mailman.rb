@@ -11,14 +11,13 @@ end
 Mailman.config.pop3 = {
   server: 'mail.meetupedia.org',
   username: 'uzenet-teszt@meetupedia.org',
-  password: 'almafa123',
-  port: 995
+  password: 'almafa123'
 }
 
 Mailman::Application.run do
 
   to '%group%@meetupedia.org' do
-    if user = User.find_by_email(message.sender)
+    if user = User.find_by_email(message.from.first)
       if group = Group.find_by_permalink(params[:group])
         post = group.posts.create user: user, post: body_reader(message)
         Activity.create_from(post, user, group)
