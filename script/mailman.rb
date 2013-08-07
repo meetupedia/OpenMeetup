@@ -4,7 +4,7 @@ require 'email_reply_parser'
 
 def body_reader(message)
   part = message.text_part || message.html_part || message
-  EmailReplyParser.parse_reply(part.body.decoded.force_encoding(part.charset).encode('UTF-8').gsub(/\r?\n\r?\n.+/, ''))
+  EmailReplyParser.parse_reply(part.body.decoded.force_encoding(part.charset).encode('UTF-8').gsub(/\r?\n\r?\n\r?\n(.|\r?\n)+/, ''))
 end
 
 
