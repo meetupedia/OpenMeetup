@@ -17,6 +17,8 @@ Mailman.config.pop3 = {
 Mailman::Application.run do
 
   to '%group%@meetupedia.org' do
+    puts message.sender.inspect
+    puts message.from.inspect
     if user = User.find_by_email(message.from.first)
       if group = Group.find_by_permalink(params[:group])
         post = group.posts.create user: user, post: body_reader(message)
