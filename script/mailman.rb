@@ -10,7 +10,7 @@ end
 
 Mailman.config.pop3 = {
   server: 'mail.meetupedia.org',
-  username: 'uzenet-teszt@meetupedia.org',
+  username: 'szimpa01',
   password: 'almafa123'
 }
 
