@@ -30,20 +30,26 @@
   </style>
 </head>
 <body>
-  <div class="wrapper-container">
-    <div class="wrapper">
-      <div class="breadcrumbs">
-        <a href="<%= Settings.host %>"><%= Settings.title %></a>
-      </div>
-      <%= yield %>
-    </div>
-    <div class="email-footer">
-      <%= tr("This message was sent to {email}.", "email footer email recipient", email: @email) %><br />
-      <% if @recipient %>
-        <%= tr("Don't want activity notifications?") %> <a href="<%= settings_user_path(@recipient) + '#change_email' %>"><%= tr('Change your email preferences') %></a>.<br />
-      <% end %>
-      <%= Settings.email_footer_whois %>
-    </div>
-  </div>
+  <table style="background: #d7dfe7;" bgcolor="#d7dfe7">
+    <tr>
+      <td>
+        <div class="wrapper-container">
+          <div class="wrapper">
+            <div class="breadcrumbs">
+              <a href="<%= Settings.host %>"><%= Settings.title %></a>
+            </div>
+            <%= yield %>
+          </div>
+          <div class="email-footer">
+            <%= tr("This message was sent to {email}.", "email footer email recipient", email: @email) %><br />
+            <% if @recipient %>
+              <%= tr("Don't want activity notifications?") %> <a href="<%= settings_user_path(@recipient) + '#change_email' %>"><%= tr('Change your email preferences') %></a>.<br />
+            <% end %>
+            <%= Settings.email_footer_whois %>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
 </body>
 </html>
