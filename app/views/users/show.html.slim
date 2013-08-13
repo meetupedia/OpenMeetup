@@ -20,13 +20,14 @@
     - unless @user.tags.empty?
       .wrapper
         p= render @user.tags.order('name ASC')
-        = semantic_form_for @user do |f|
-          .control-group
-            = f.label :tag_tokens, tr('Add new interests')
-            = f.text_field :tag_tokens
-          = f.actions do
-            = f.action :submit, label: trl('Save'), button_html: {class: 'btn btn-primary', disable_with: trl('Saving...')}
-        p= link_to 'Browse all interests', tags_user_path(@user), rel: 'modal'
+        - if current_user and @user == current_user
+          = semantic_form_for @user do |f|
+            .control-group
+              = f.label :tag_tokens, tr('Add new interests')
+              = f.text_field :tag_tokens
+            = f.actions do
+              = f.action :submit, label: trl('Save'), button_html: {class: 'btn btn-primary', disable_with: trl('Saving...')}
+          p= link_to 'Browse all interests', tags_user_path(@user), rel: 'modal'
 
         javascript:
           $('#user_tag_tokens').tokenInput('/tags.json', {

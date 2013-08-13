@@ -58,7 +58,7 @@
       p= activity.activable.review
     - elsif activity.activable.class.name == 'User'
       =' user_link activity.activable
-      = tr('joined {sitename}', "Activity: user join", {:sitename => Settings.sitename})
+      = tr('joined {sitename}', 'Activity: user join', sitename: Settings.title)
     - elsif activity.activable.class.name == 'Vote'
       =' user_link activity.activable.user
       = tr('liked')
