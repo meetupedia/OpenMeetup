@@ -17,7 +17,7 @@ ul.token-input-list-facebook {
     clear: left;
 }
 
-ul.token-input-list-facebook li input {
+ul.token-input-list-facebook li input, ul.token-input-list-facebook li input:focus {
     border: 0;
     box-shadow: none;
     width: 100px;
