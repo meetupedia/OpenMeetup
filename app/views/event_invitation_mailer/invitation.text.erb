@@ -1,0 +1,7 @@
+<%= link_to @user.name, @user %> invited you!
+
+<%= @event.title %>: <%= link_to @event.title, @event%>
+<% unless @message.blank? -%>
+
+Message: <%= @message %>
+<% end -%>
