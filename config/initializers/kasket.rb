@@ -1,5 +1,3 @@
-Kasket.setup
-
 Event.has_kasket
 Group.has_kasket
 Membership.has_kasket
