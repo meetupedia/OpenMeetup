@@ -190,7 +190,6 @@ Openmeetup::Application.routes.draw do
 
   resources :votes, only: [:index] do
     collection do
-      get :set
       post :set
     end
   end

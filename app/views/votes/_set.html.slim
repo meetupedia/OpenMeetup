@@ -20,7 +20,7 @@
 
     // lets display the gray star
     - if current_user
-      = link_to tr('Like'), set_votes_path(voteable_type: item.class.name, voteable_id: item.id), remote: true, class: 'set_vote', onclick: "_gaq.push(['_trackEvent', 'Like', 'Like']);"
+      = link_to tr('Like'), set_votes_path(voteable_type: item.class.name, voteable_id: item.id), method: :post, remote: true, class: 'set_vote', onclick: "_gaq.push(['_trackEvent', 'Like', 'Like']);"
 
     // if there has been votes --> display vote count
     - if item.votes_count == 1

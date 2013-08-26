@@ -11,6 +11,10 @@ every 1.day, at: '5:00am' do
   runner 'Admin.cron_daily'
 end
 
+every 10.minutes do
+  command './restart_mailman.sh'
+end
+
 # sitemap refresh
 # every 1.day, at: '5:00am' do
 #   rake 'sitemap:refresh'
