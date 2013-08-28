@@ -1,4 +1,9 @@
-h1= tr('Dashboard')
+.wrapper
+  h1= tr('Dashboard')
+  p= "User count: #{User.count}"
+  p= "Group count: #{Group.count}"
+  p= "Event count: #{Event.count}"
+  p= "Interest count: #{Tag.count}"
 
 .wrapper
   h2= tr('Notifications')
@@ -12,5 +17,15 @@ h1= tr('Dashboard')
   table.table= render partial: 'dashboard/user', collection: User.all, as: :user
 
 .wrapper
+  h2= tr('Groups')
+  p= render Group.all
+
+.wrapper
+  h2= tr('Events')
+  p= render Event.all
+
+
+.wrapper
   h2= tr('Interests')
   p= render Tag.all
+
