@@ -80,6 +80,10 @@ class Group < ActiveRecord::Base
     end
   end
 
+  def email_url
+    "#{permalink}@#{Settings.host}"
+  end
+
   def add_tag_by_name(name)
     if tag = Tag.find_by_name(name)
       GroupTagging.find_or_create_by_group_id_and_tag_id(id, tag.id)

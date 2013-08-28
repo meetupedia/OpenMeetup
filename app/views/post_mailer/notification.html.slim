@@ -7,4 +7,7 @@ h1 New post!
 
 .list_view= render @postable
 
-p= link_to 'View post', @post, class: 'btn'
+p
+  - if @postable.is_a?(Group)
+    =' link_to 'Reply', "mailto:#{group.email_url}", class: 'btn btn-primary'
+  = link_to 'View post', @post, class: 'btn'
