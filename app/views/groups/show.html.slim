@@ -5,8 +5,8 @@
     .wrapper
       = render 'groups/tile_menu', group: @group
 
-      - if current_user.andand.in?(@group.members)
-        p= link_to @group.email_url, "mailto:#{@group.email_url}"
+      / - if current_user.andand.in?(@group.members)
+      /   p= link_to @group.email_url, "mailto:#{@group.email_url}"
 
       - if @group.url.present?
         div
