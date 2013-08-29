@@ -1,7 +1,7 @@
 # encoding: UTF-8
 
 class RootController < CommonController
-#  before_filter :authenticate_as_admin, only: [:dashboard]
+  before_filter :authenticate_as_admin, only: [:dashboard]
   before_filter :unauthenticate, only: [:sign_in]
   skip_before_filter :check_restricted_access, only: [:index, :restricted_access]
 
