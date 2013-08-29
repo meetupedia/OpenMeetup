@@ -1,32 +1,32 @@
-/
-  .row
-    .span4
-      .wrapper= render 'menu'
-    .span8
-      .wrapper
-        h2= tr('Groups')
-        .list_view= render @groups
-
 .row
-  - if Settings.standalone
-    .span8
-      .wrapper
-        h2= tr('Groups')
-        #results
-          - if @groups
-            = render 'cities/search'
-            - if @groups.respond_to?(:total_pages)
-              = will_paginate @groups
-  - else
-    .span8
-      .wrapper
-        h2= tr('Groups')
-        #results
-          - if @groups
-            = render 'cities/search'
-            - if @groups.respond_to?(:total_pages)
-              = will_paginate @groups
   .span4
+    .wrapper= render 'menu'
+  .span8
     .wrapper
-      h2= tr('Interests')
-      p= render Tag.order('name ASC')
+
+      - unless Settings.standalone
+        .change_city
+          = semantic_form_for Group.new, url: discovery_path do |f|
+            .pull-right= f.text_field :city_id
+            .pull-right= f.label :city_id, tr('in'), class: 'change_field'
+
+        javascript:
+          $('#group_city_id').tokenInput('/cities.json', {
+            allowFreeTagging: true,
+            crossDomain: false,
+            preventDuplicates: true,
+            prePopulate: #{[@city || current_user.city].compact.map { |city| {id: city.id, name: tr(city.display_name)} }.to_json.html_safe},
+            tokenLimit: 1,
+            theme: 'facebook',
+            onAdd: function(){
+              $('#group_city_id').closest('form').submit()
+            },
+          })
+
+      h2= tr('Groups')
+
+      .list_view
+        - if @groups.present?
+          = render @groups
+        - else
+          p.muted= tr('No groups.')

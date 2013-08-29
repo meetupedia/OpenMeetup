@@ -12,15 +12,19 @@ class DiscoveryController < CommonController
         when 'members' then 'memberships_count DESC'
         else 'id ASC'
       end
+      @groups = Group.order(order)
       if Settings.group_discovery_min_member_count and Settings.group_discovery_mandatory_header_image
-        @groups = Group.where('memberships_count >= ?', Settings.group_discovery_min_member_count).where('image_updated_at IS NOT ?', nil).order(order).paginate page: params[:page]
+        @groups = @groups.where('memberships_count >= ?', Settings.group_discovery_min_member_count).where('image_updated_at IS NOT ?', nil)
       elsif Settings.group_discovery_min_member_count
-        @groups = Group.where('memberships_count >= ?', Settings.group_discovery_min_member_count).order(order).paginate page: params[:page]
+        @groups = @groups.where('memberships_count >= ?', Settings.group_discovery_min_member_count)
       elsif Settings.group_discovery_mandatory_header_image
-        @groups = Group.where('image_updated_at IS NOT ?', nil).order(order).paginate page: params[:page]
-      else
-        @groups = Group.order(order).paginate page: params[:page]
+        @groups = @groups.where('image_updated_at IS NOT ?', nil)
       end
+      unless Settings.standalone
+        @city = params[:group].andand[:city_id] ? City.find_by_id(params[:group][:city_id]) : current_user.city
+        @groups = @groups.joins(:city).where('groups.city_id' => @city.id)
+      end
+      @groups = @groups.paginate page: params[:page]
     end
   end
 
