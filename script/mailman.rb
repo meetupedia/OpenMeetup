@@ -17,17 +17,29 @@ Mailman.config.pop3 = {
 Mailman::Application.run do
 
   to '%group%@meetupedia.org' do
+    bounce = false
     if user = User.find_by_email(message.from.first)
       if group = Group.find_by_permalink(params[:group])
-        post = group.posts.create user: user, post: body_reader(message)
-        Activity.create_from(post, user, group)
-        (group.members - [user]).each do |recipient|
-          begin
-            PostMailer.notification(post.id, recipient.id).deliver
-          rescue
+        if group.members.include?(user)
+          post = group.posts.create user: user, post: body_reader(message)
+          Activity.create_from(post, user, group)
+          (group.members - [user]).each do |recipient|
+            begin
+              PostMailer.notification(post.id, recipient.id).deliver
+            rescue
+            end
           end
+        else
+          bounce = true
         end
+      else
+        bounce = true
       end
+    else
+      bounce = true
+    end
+    if bounce
+      MailmanMailer.bounce(message)
     end
   end
 end
