@@ -34,7 +34,7 @@ Openmeetup::Application.configure do
   # config.log_level = :debug
 
   # Prepend all log lines with the following tags
-  config.log_tags = [:uuid]
+  config.log_tags = [lambda { |r| DateTime.now }]
 
   # Use a different logger for distributed setups
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
@@ -81,9 +81,6 @@ Openmeetup::Application.configure do
     authentication: nil,
     enable_starttls_auto: false
   }.merge(Settings.smtp || {})
-
-  # Adding timestamp to the log lines
-  config.log_tags = [lambda { |r| DateTime.now }]
 
   # Handling error messages dynamically
   config.exceptions_app = self.routes

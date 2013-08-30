@@ -58,7 +58,5 @@ module Openmeetup
     config.assets.version = '1.0'
 
     GC::Profiler.enable
-
-    Kasket.setup
   end
 end

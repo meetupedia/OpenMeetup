@@ -1,10 +1,12 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails', '3.2.14'
 
 platform :ruby do
   gem 'mysql2'
   gem 'oj'
+  gem 'fast_xs'
+  gem 'fast_blank'
 end
 
 platform :jruby do
@@ -36,17 +38,19 @@ gem 'railhead_permalink'
 gem 'paperclip'
 gem 'mime-types', require: 'mime/types'
 gem 'paper_trail'
-gem 'globalize3'
 gem 'later_dude'
 gem 'rails_autolink'
 gem 'authlogic'
 gem 'fancybox-rails'
 gem 'kaminari'
-gem 'will_filter'
 gem 'roadie'
 gem 'mail_view'
 gem 'RedCloth'
-gem 'tr8n', git: 'https://github.com/berk/tr8n.git', ref: '973fb5277bfe25270687fba9e519b7ff1e41fd5d'
+
+gem 'will_filter'
+gem 'tr8n', git: 'https://github.com/tr8n/tr8n.git', ref: '973fb5277bfe25270687fba9e519b7ff1e41fd5d'
+
+
 gem 'dalli'
 gem 'sitemap_generator'
 gem 'whenever', require: false
@@ -55,15 +59,7 @@ gem 'rails-timeago'
 gem 'spork-rails'
 gem 'spork-testunit'
 gem 'airbrake'
-# gem 'gmaps4rails'
-gem 'kasket'
 gem 'ri_cal'
-
-gem 'mailman', require: false
-gem 'email_reply_parser', require: false
-
-gem 'fast_xs', platform: :ruby
-gem 'fast_blank', platform: :ruby
 
 gem 'sass-rails'
 gem 'coffee-rails'
@@ -77,7 +73,6 @@ end
 
 group :development do
   gem 'hirb'
-  # gem 'license_finder', require: false, git: 'https://github.com/pivotal/LicenseFinder.git'
   gem 'bullet'
   gem 'meta_request'
   gem 'quiet_assets'
@@ -91,4 +86,10 @@ group :production do
   gem 'newrelic_rpm'
 end
 
-gem 'rvm-capistrano'
+gem 'rvm-capistrano', require: false
+gem 'mailman', require: false
+gem 'email_reply_parser', require: false
+gem 'license_finder', require: false
+
+# gem 'globalize3'
+# gem 'gmaps4rails'

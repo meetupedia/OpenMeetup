@@ -44,7 +44,4 @@ Openmeetup::Application.configure do
     Bullet.bullet_logger = true
     Bullet.rails_logger = true
   end
-
-  # Adding timestamp to the log lines
-  config.log_tags = [ lambda {|r| DateTime.now } ]
 end
