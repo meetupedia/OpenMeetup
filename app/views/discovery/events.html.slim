@@ -15,7 +15,7 @@
             allowFreeTagging: true,
             crossDomain: false,
             preventDuplicates: true,
-            prePopulate: #{[{id: @city.id, name: tr(@city.display_name)}].to_json.html_safe},
+            prePopulate: #{[{id: @city.id, name: trl(@city.display_name)}].to_json.html_safe},
             tokenLimit: 1,
             theme: 'facebook',
             onAdd: function(){
