@@ -6,7 +6,7 @@
 
       - unless Settings.standalone
         .change_city
-          = semantic_form_for City.new, url: discovery_path do |f|
+          = semantic_form_for City.new, url: events_discovery_path do |f|
             .pull-right= f.text_field :id
             .pull-right= f.label :id, tr('in'), class: 'change_field'
 
@@ -23,10 +23,10 @@
             },
           })
 
-      h2= tr('Groups')
+      h2= tr('Events')
 
       .list_view
-        - if @groups.present?
-          = render @groups
+        - if @events.present?
+          = render @events
         - else
-          p.muted= tr('No groups.')
+          p.muted= tr('No events.')
