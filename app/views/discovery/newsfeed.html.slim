@@ -1,0 +1,10 @@
+.row
+  .span4
+    .wrapper= render 'menu'
+  .span8
+    .wrapper
+      h1= tr('News feed')
+      .list_view
+        = will_paginate @activities
+        = render @activities
+        = will_paginate @activities

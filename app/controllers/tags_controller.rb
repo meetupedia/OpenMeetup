@@ -4,6 +4,7 @@ class TagsController < CommonController
   load_resource :group
   load_resource :tag, through: :group, shallow: true, except: [:create]
   authorize_resource except: [:index, :show]
+  before_filter :use_city, only: [:show]
 
   def index
     respond_to do |format|
@@ -18,6 +19,10 @@ class TagsController < CommonController
   end
 
   def show
+    @groups = @tag.groups
+    @groups = @groups.joins(:city).where('groups.city_id' => @city.id) unless Settings.standalone
+    @users = @tag.users
+    @users = @users.joins(:city).where('users.city_id' => @city.id) unless Settings.standalone
   end
 
   def new

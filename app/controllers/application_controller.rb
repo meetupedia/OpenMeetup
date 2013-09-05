@@ -197,6 +197,14 @@ private
     cookies[:action] = "#{controller_name}##{action_name}" if Rails.env.production?
   end
 
+  def use_city
+    unless Settings.standalone
+      session[:city_id] ||= current_user.city_id
+      session[:city_id] = params[:city][:id] if params[:city].andand[:id]
+      @city = City.where(id: session[:city_id]).first
+    end
+  end
+
   def groups_show
     @activities = @group.activities.where('activable_type NOT IN (?)', ['Comment']).order('created_at DESC').includes(activable: :user).paginate page: params[:page]
     @title = @group.name

@@ -13,15 +13,16 @@
   .span4
     .wrapper
       h2= tr('People interested')
-      - unless (users = @tag.users).blank?
-        .list_view= render users
+      - unless @users.blank?
+        .list_view= render @users
       - else
         p.muted= tr('Nobody is interested yet.')
   .span8
     .wrapper
-      - unless (groups = @tag.groups).blank?
-        h2= tr('Groups')
-        .list_view= render groups
+      = render 'discovery/change_city'
+      h2= tr('Groups')
+      - unless @groups.blank?
+        .list_view= render @groups
         legend= tr("Do we need more groups about {tag}?", 'tag name',  tag: @tag.name)
         p= tr("Create a group and invite everybody who is interested in {tag}.", 'tag name',  tag: @tag.name)
         p= link_to tr('Create meetup group'), new_group_path(:tag_id => @tag.id), class: 'btn btn-primary'

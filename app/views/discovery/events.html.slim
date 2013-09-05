@@ -3,28 +3,8 @@
     .wrapper= render 'menu'
   .span8
     .wrapper
-
-      - unless Settings.standalone
-        .change_city
-          = semantic_form_for City.new, url: events_discovery_path do |f|
-            .pull-right= f.text_field :id
-            .pull-right= f.label :id, tr('in'), class: 'change_field'
-
-        javascript:
-          $('#city_id').tokenInput('/cities.json', {
-            allowFreeTagging: true,
-            crossDomain: false,
-            preventDuplicates: true,
-            prePopulate: #{[{id: @city.id, name: trl(@city.display_name)}].to_json.html_safe},
-            tokenLimit: 1,
-            theme: 'facebook',
-            onAdd: function(){
-              $('#city_id').closest('form').submit()
-            },
-          })
-
+      = render 'discovery/change_city'
       h2= tr('Events')
-
       .list_view
         - if @events.present?
           = render @events

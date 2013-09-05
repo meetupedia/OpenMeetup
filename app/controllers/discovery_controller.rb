@@ -2,7 +2,7 @@
 
 class DiscoveryController < CommonController
   before_filter :authenticate
-  before_filter :set_city, only: [:index, :events]
+  before_filter :use_city, only: [:index, :events, :interests]
 
   def index
     unless params[:q].blank?
@@ -26,26 +26,20 @@ class DiscoveryController < CommonController
   end
 
   def events
-    @events = Event.paginate page: params[:page]
+    @events = Event.where('start_time > ?', Time.now).paginate page: params[:page]
     @events = @events.joins(group: :city).where('groups.city_id' => @city.id) unless Settings.standalone
   end
 
   def friends
+    @users = User.where(id: current_user.friend_ids).order('name ASC').paginate page: params[:page]
   end
 
   def interests
+    @tags = Tag.order('name ASC').paginate page: params[:page]
+    @tags = @tags.joins(groups: :city).where('groups.city_id' => @city.id) unless Settings.standalone
   end
 
   def newsfeed
-  end
-
-private
-
-  def set_city
-    unless Settings.standalone
-      session[:city_id] ||= current_user.city_id
-      session[:city_id] = params[:city][:id] if params[:city].andand[:id]
-      @city = City.where(id: session[:city_id]).first
-    end
+    @activities = Activity.where(user_id: current_user.friend_ids).order('created_at DESC').paginate page: params[:page]
   end
 end
