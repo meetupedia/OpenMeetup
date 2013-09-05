@@ -4,7 +4,10 @@
   .span8
     .wrapper
       h1= tr('Friends')
-      .list_view
-        = will_paginate @users
-        = render @users
-        = will_paginate @users
+      - unless @users.blank?
+        .list_view
+          = will_paginate @users
+          = render @users
+          = will_paginate @users
+      - else
+        p.muted= tr('No friends yet.')

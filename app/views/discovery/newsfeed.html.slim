@@ -4,7 +4,10 @@
   .span8
     .wrapper
       h1= tr('News feed')
-      .list_view
-        = will_paginate @activities
-        = render @activities
-        = will_paginate @activities
+      - unless @activities.blank?
+        .list_view
+          = will_paginate @activities
+          = render @activities
+          = will_paginate @activities
+      - else
+        p.muted= tr('No activities yet.')
