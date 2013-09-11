@@ -25,9 +25,10 @@ end
 
 class CommonMailer < ActionMailer::Base
   include MailUrlizer
+  prepend_view_path Rails.root + 'app' + 'mailer_views'
   helper :common
   helper :application
-  layout 'mailer'
+  layout Settings.mailer_template || 'mailer'
   default_url_options[:host] = Settings.host
   default from: Settings.default_email
 
