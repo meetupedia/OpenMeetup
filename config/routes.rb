@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 Openmeetup::Application.routes.draw do
 
   mount WillFilter::Engine => '/will_filter'
