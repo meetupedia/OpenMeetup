@@ -7,8 +7,6 @@ class ParticipationsController < CommonController
   before_filter :set_add_participation_for, only: [:set]
   before_filter :authenticate, only: [:set]
 
-  cache_sweeper :participation_sweeper, only: [:create]
-
   def create
     unless @event.participation_for(current_user)
       @group = @event.group

@@ -10,6 +10,17 @@ class Participation < ActiveRecord::Base
   has_many :activities, as: :activable, dependent: :destroy
   has_many :answers, dependent: :destroy
   accepts_nested_attributes_for :answers
+
+  after_create do |participation|
+    Activity.create_from participation, participation.user, participation.event.group, participation.event
+    participation.event.absence_for(participation.user).andand.destroy
+    membership = participation.event.group.memberships.create user: participation.user unless participation.event.group.membership_for(participation.user)
+    run_later do
+      participation.event.group.admins.each do |user|
+        EventMailer.participation(particiation, user).deliver if user.email
+      end
+    end
+  end
 end
 
 Participation.auto_upgrade!

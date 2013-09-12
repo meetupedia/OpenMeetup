@@ -8,9 +8,6 @@ class UsersController < CommonController
   before_filter :create_city, only: [:new, :request_invite, :edit_city]
   skip_before_filter :check_restricted_access, only: [:new, :create, :request_invite]
 
-  cache_sweeper :membership_sweeper, only: [:create]
-  cache_sweeper :participation_sweeper, only: [:create]
-
   def index
     if Settings.standalone
       @users = User.where('name LIKE ? OR email LIKE ?', "%#{params[:q]}%", "%#{params[:q]}%")

@@ -1,5 +1,4 @@
 class AuthenticationsController < CommonController
-  cache_sweeper :membership_sweeper, only: [:create]
 
   def create
     omniauth = request.env['omniauth.auth']

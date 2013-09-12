@@ -7,17 +7,17 @@ class DashboardController < CommonController
   end
 
   def reload
-    system "script/reload_from_browser"
+    system 'script/reload_from_browser'
     redirect_to system_url
   end
 
   def download_database
-    system "script/backup"
+    system 'script/backup'
     send_file 'tmp/openmeetup.sql'
   end
 
   def download_translations
-    system "script/backup_translations"
+    system 'script/backup_translations'
     send_file 'tmp/translations.sql'
   end
 end
