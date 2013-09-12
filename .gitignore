@@ -7,7 +7,7 @@
 /public/system
 config/settings.yml
 config/database.yml
-public/sitemap1.xml.gz
+public/sitemap.xml.gz
 public/sitemap_index.xml.gz
 public/assets
 nohup.out

@@ -50,7 +50,6 @@ gem 'RedCloth'
 gem 'will_filter'
 gem 'tr8n', git: 'https://github.com/tr8n/tr8n.git', ref: '973fb5277bfe25270687fba9e519b7ff1e41fd5d'
 
-
 gem 'dalli'
 gem 'sitemap_generator'
 gem 'whenever', require: false
