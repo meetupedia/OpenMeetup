@@ -2,7 +2,6 @@
 
 class LettersController < CommonController
   load_resource
-  # authorize_resource
 
   def index
     @letters = Letter.order('-mailed_at ASC').paginate page: params[:page]

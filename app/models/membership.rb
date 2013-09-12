@@ -18,6 +18,7 @@ class Membership < ActiveRecord::Base
         GroupMailer.join(membership, user).deliver if user.email
       end
     end
+    true
   end
 end
 

@@ -16,6 +16,7 @@ class Comment < ActiveRecord::Base
 
   after_validation do |comment|
     comment.level = comment.reply_to.level + 1 if comment.reply_to
+    true
   end
 
   def root_comment

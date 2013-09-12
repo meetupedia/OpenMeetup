@@ -1,6 +1,5 @@
 # encoding: UTF-8
 
-
 module CommonCommentable
 
   def self.included(base)

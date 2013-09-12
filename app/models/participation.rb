@@ -20,6 +20,7 @@ class Participation < ActiveRecord::Base
         EventMailer.participation(particiation, user).deliver if user.email
       end
     end
+    true
   end
 end
 
