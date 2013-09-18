@@ -125,6 +125,11 @@ class Ability
 
       can :create, Tag
 
+      can [:index, :create], Uninterest
+      can :destroy, Uninterest do |uninterest|
+        uninterest.user == current_user
+      end
+
       can [:edit_city, :recommendations, :tags], User
       can [:facebook_groups, :friend_requests, :set_avatar, :set_header], User do |user|
         user == current_user

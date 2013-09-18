@@ -7,6 +7,8 @@
       h2= tr('Events')
       .list_view
         - if @events.present?
-          = render @events
+          - @events.each do |event|
+            .pull-right= link_to '×', uninterests_path(uninterestable_type: 'Event', uninterestable_id: event.id), method: :post, remote: true, class: 'close', title: 'Not interested', confirm: trl('Mark as uninterested?')
+            = render event
         - else
           p.muted= tr('No events.')

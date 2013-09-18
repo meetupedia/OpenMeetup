@@ -54,6 +54,9 @@ class User < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
   has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings
+  has_many :uninterests, dependent: :destroy
+  has_many :uninterested_events, through: :uninterests, source: :uninterestable, source_type: 'Event'
+  has_many :uninterested_groups, through: :uninterests, source: :uninterestable, source_type: 'Group'
   has_many :votes, dependent: :destroy
   has_many :wave_memberships, dependent: :destroy
   has_many :waves, through: :wave_memberships

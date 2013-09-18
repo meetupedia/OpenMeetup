@@ -159,6 +159,8 @@ Openmeetup::Application.routes.draw do
 
   resources :tags
 
+  resources :uninterests, only: [:index, :create, :destroy]
+
   resource :user_sessions
 
   resources :users do

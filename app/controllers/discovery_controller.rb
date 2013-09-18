@@ -23,10 +23,12 @@ class DiscoveryController < CommonController
       end
       @groups = @groups.joins(:city).where('groups.city_id' => @city.id) unless Settings.standalone
     end
+    @groups = @groups.where('groups.id NOT IN (?)', current_user.uninterested_group_ids) if current_user.uninterested_group_ids.present?
   end
 
   def events
     @events = Event.where('start_time > ?', Time.now).order('start_time ASC').paginate page: params[:page]
+    @events = @events.where('events.id NOT IN (?)', current_user.uninterested_event_ids) if current_user.uninterested_event_ids.present?
     @events = @events.joins(group: :city).where('groups.city_id' => @city.id) unless Settings.standalone
   end
 
@@ -37,9 +39,5 @@ class DiscoveryController < CommonController
   def interests
     @tags = Tag.order('name ASC').paginate page: params[:page]
     @tags = @tags.joins(groups: :city).where('groups.city_id' => @city.id) unless Settings.standalone
-  end
-
-  def newsfeed
-    @activities = Activity.where(user_id: current_user.friend_ids).order('created_at DESC').paginate page: params[:page]
   end
 end

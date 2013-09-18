@@ -1,7 +1,9 @@
 .row
   .span4
+    .wrapper= render 'discovery/menu'
+
     .wrapper
-      h2= tr('Groups')
+      h3= tr('Groups')
       .list_view
         .list_item
           = link_to notifications_path(time: @last_notified.to_i) do
@@ -17,7 +19,7 @@
   .span8
     .wrapper
       h2
-        = tr('Notifications')
+        = tr('News feed')
         - if @group
           = dot
           = link_to @group.name, @group
