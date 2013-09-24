@@ -226,6 +226,26 @@ class User < ActiveRecord::Base
     Group.joins(:memberships).where('memberships.user_id IN (?) AND groups.id NOT IN (?)', friend_ids, joined_group_ids).order('count_all DESC').group('groups.id').count
   end
 
+  def related_groups_through_memberships
+    user_ids = User.joins(:memberships).where('memberships.group_id' => self.joined_group_ids).group('users.id').pluck('users.id') - [self.id]
+    Group.joins(:memberships).where('memberships.user_id' => user_ids).select('groups.*, COUNT(groups.id) AS count').order('count DESC').group("groups.id HAVING groups.id NOT IN (#{self.joined_groups.to_s(:db)})").limit(10)
+  end
+
+  def related_tags_through_taggings
+    user_ids = User.joins(:taggings).where('taggings.tag_id' => self.tag_ids).group('users.id').pluck('users.id') - [self.id]
+    Tag.joins(:taggings).where('taggings.user_id' => user_ids).select('tags.*, COUNT(tags.id) AS count').order('count DESC').group("tags.id HAVING tags.id NOT IN (#{self.tags.to_s(:db)})").limit(10)
+  end
+
+  def related_events_on_next_week
+    events = Event.where('start_time > ? AND start_time < ?', Time.now.next_week, Time.now.next_week + 1.week).order('participations_count DESC').limit(10)
+    events = events.where("id NOT IN (#{self.joined_next_events.to_s(:db)})") if self.joined_next_events.present?
+    events
+  end
+
+  def related_images_from_last_week
+    images = Image.where('created_at > ?', Time.now.next_week - 1.week).order('votes_count DESC').limit(10)
+  end
+
   def tag_tokens=(names)
     names.split(/,\s*/).each do |name|
       tag = Tag.find_or_create_by_name(name)
