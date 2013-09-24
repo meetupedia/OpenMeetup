@@ -260,7 +260,7 @@ class User < ActiveRecord::Base
     key :read_manual, as: :boolean
     key :read_cobe, as: :boolean
 
-    validates :read_manual, :read_cobe, presence: true
+    # validates :read_manual, :read_cobe, presence: true
   end
 end
 

@@ -7,12 +7,6 @@ class UninterestsController < CommonController
     @uninterests = current_user.uninterests.order('id DESC').includes(:uninterestable)
     @uninterests = @uninterests.where(uninterestable_type: type) if type.present?
     @uninterests = @uninterests.paginate page: params[:page]
-    @title = 'Érdektelennek jelölt ' + case type
-      when 'Book' then 'könyvek'
-      when 'Campaign' then 'kihívások'
-      when 'User' then 'tagok'
-      else 'elemek'
-    end
   end
 
   def create

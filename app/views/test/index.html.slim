@@ -1,0 +1,34 @@
+.wrapper
+  h1 Teszt
+
+  h3 Csoportok
+  - if (groups = current_user.related_groups_through_memberships.all).present?
+    .list_view= render groups
+  - else
+    p.muted Nincsen ajánlható csoport.
+
+  h3 Érdeklődési körök
+  - if (tags = current_user.related_tags_through_taggings.all).present?
+    p= render tags
+  - else
+    p.muted Nincsen ajánlható érdeklődési kör
+
+  h3 Események a következő héten
+  - if (events = current_user.related_events_on_next_week.all).present?
+    .list_view= render events
+  - else
+    p.muted Nincsen ajánlható esemény a következő héten.
+
+  h3 Képek az elmúlt hétről
+  - if (images = current_user.related_images_from_last_week.all).present?
+    .list_view= render images
+  - else
+    p.muted Nincsen kép az elmúlt hétről.
+
+  h3 Címkék
+  - current_user.tags.joins(:taggings).select('tags.*, COUNT(tags.id) AS count').order('count DESC').group('tags.id').each do |tag|
+    - if tag.users.count > 1
+      p= render tag
+      .avatars
+        - (tag.users - [current_user]).each do |user|
+          =' user_avatar user
