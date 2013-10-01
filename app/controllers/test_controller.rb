@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class TestController < CommonController
 
   def index

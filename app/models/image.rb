@@ -10,6 +10,8 @@ class Image < ActiveRecord::Base
   timestamps
 
   belongs_to :imageable, polymorphic: true
+  belongs_to :event, foreign_type: 'Event', foreign_key: :imageable_id
+  belongs_to :group, foreign_type: 'Group', foreign_key: :imageable_id
   belongs_to :user
   has_many :activities, as: :activable, dependent: :destroy
 
