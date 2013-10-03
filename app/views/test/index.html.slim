@@ -3,15 +3,15 @@
 
   h3 Csoportok
   - if (groups = @user.related_groups_through_memberships.all).present?
-    .list_view= render groups
+    .list_view= render partial: 'test/group', collection: groups, as: :group
   - else
     p.muted Nincsen ajánlható csoport.
 
-  h3 Érdeklődési körök
+  h3 Ajánlott érdeklődési körök a meglévőek alapján
   - if (tags = @user.related_tags_through_taggings.all).present?
     p= render tags
   - else
-    p.muted Nincsen ajánlható érdeklődési kör
+    p.muted Nincsen ajánlható érdeklődési kör.
 
   h3 Események a következő héten
   - if (events = @user.related_events_on_next_week.all).present?
@@ -28,7 +28,19 @@
   h3 Címkék
   - @user.tags.joins(:taggings).select('tags.*, COUNT(tags.id) AS count').order('count DESC').group('tags.id').each do |tag|
     - if tag.users.count > 1
-      p= render tag
-      .avatars
-        - (tag.users - [@user]).each do |user|
-          =' user_avatar user
+      p
+        =' render tag
+        - if (common_users = (@user.virtual_friends & tag.users).sort_by { |user| user.name }).size > 0
+          - common_users.each do |user|
+            =' user_avatar user
+          br
+          =' common_users.map { |user| user_link user }.join(', ').html_safe
+        - if (uncommon_users_count = (tag.users - common_users).size) > 0
+          - if common_users.blank?
+            =' uncommon_users_count
+            ' people.
+          - else
+            ' and
+            =' uncommon_users_count
+            ' other people.
+        strong= link_to 'Create a group from them!', '#'

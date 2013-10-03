@@ -1,0 +1,20 @@
+= div_for group, class: 'list_item' do
+  .avatar= link_to(image_tag(group.image.url(:small), alt: group.name, height: 72, width: 72, title: group.name), group)
+  .item_content
+    h3= link_to group.name, group
+
+    p
+      - if (common_users = (@user.virtual_friends & group.members).sort_by { |user| user.name }).size > 0
+        - common_users.each do |user|
+          =' user_avatar user
+        br
+        =' common_users.map { |user| user_link user }.join(', ').html_safe
+      - if (uncommon_users_count = (group.members - common_users).size) > 0
+        - if common_users.blank?
+          =' uncommon_users_count
+          ' people.
+        - else
+          ' and
+          =' uncommon_users_count
+          ' other people.
+    p= link_to tr('Check it out!'), group, class: 'btn btn-primary'

@@ -226,8 +226,16 @@ class User < ActiveRecord::Base
     Group.joins(:memberships).where('memberships.user_id IN (?) AND groups.id NOT IN (?)', friend_ids, joined_group_ids).order('count_all DESC').group('groups.id').count
   end
 
+  def virtual_friends
+    User.joins(:memberships).where('memberships.group_id' => self.joined_group_ids).group('users.id').all - [self]
+  end
+
+  def virtual_friend_ids
+    User.joins(:memberships).where('memberships.group_id' => self.joined_group_ids).group('users.id').pluck('users.id') - [self.id]
+  end
+
   def related_groups_through_memberships
-    user_ids = User.joins(:memberships).where('memberships.group_id' => self.joined_group_ids).group('users.id').pluck('users.id') - [self.id]
+    user_ids = virtual_friend_ids
     groups = Group.joins(:memberships).where('memberships.user_id' => user_ids).select('groups.*, COUNT(groups.id) AS count').order('count DESC').group("groups.id HAVING groups.id NOT IN (#{self.joined_groups.to_s(:db)})").limit(10)
     groups = groups.where(city_id: self.city_id) unless Settings.standalone
     groups
@@ -246,7 +254,7 @@ class User < ActiveRecord::Base
   end
 
   def related_images_from_last_week
-    images = Image.joins(:imageable).where('created_at > ?', Time.now.next_week - 1.week).order('votes_count DESC').limit(10)
+    images = Image.where('created_at > ?', Time.now.next_week - 1.week).order('votes_count DESC').limit(10)
   end
 
   def tag_tokens=(names)
