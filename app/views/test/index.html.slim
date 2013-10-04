@@ -1,46 +1,77 @@
 .wrapper
-  h1 Teszt
+  h1
+    ' Hi,
+    = @user.name
+    | ,
 
-  h3 Csoportok
-  - if (groups = @user.related_groups_through_memberships.all).present?
+  - groups = @user.related_groups_through_memberships.all
+  - events = @user.related_events_on_next_week.all
+  - tags = @user.tags.joins(:taggings).select('tags.*, COUNT(tags.id) AS count').order('count DESC').group('tags.id').all
+  - participants = (@user.virtual_friends & (groups.map(&:members).flatten + events.map(&:participants).flatten).uniq).sort_by { rand }
+
+  - if groups.present? or events.present?
+    p
+      ' check out our
+      - if groups.present?
+        =' groups.size
+        ' recommended groups
+      - if groups.present? and events.present?
+        ' and
+      - if events.present?
+        =' events.size
+        ' recommended events
+      | for you
+      - if participants.present?
+        '
+        ' and see which events and groups
+        =' participants[0..2].map { |user| user_link user }.join(', ').html_safe
+        - if participants.size > 3
+          ' and
+          =' participants.size - 3
+          ' other friends
+        | are attending
+      - else
+        | .
+    hr
+
+  - if groups.present?
+    h3 People in your groups are also in
     .list_view= render partial: 'test/group', collection: groups, as: :group
-  - else
-    p.muted Nincsen ajánlható csoport.
 
-  h3 Ajánlott érdeklődési körök a meglévőek alapján
-  - if (tags = @user.related_tags_through_taggings.all).present?
-    p= render tags
-  - else
-    p.muted Nincsen ajánlható érdeklődési kör.
+  - if events.present?
+    h3 Events your friends attending
+    .list_view= render partial: 'test/event', collection: events, as: :event
 
-  h3 Események a következő héten
-  - if (events = @user.related_events_on_next_week.all).present?
-    .list_view= render events
-  - else
-    p.muted Nincsen ajánlható esemény a következő héten.
+  - if tags.present?
+    h3 People who share your interests without a group
+    .list_view
+      - tags.each do |tag|
+        - if tag.users.count > 1
+          .list_item
+            =' render tag
+            - if (common_users = (@user.virtual_friends & tag.users).sort_by { |user| user.name }).size > 0
+              - common_users.each do |user|
+                =' user_avatar user
+              br
+              =' common_users.map { |user| user_link user }.join(', ').html_safe
+            - if (uncommon_users_count = (tag.users - common_users).size) > 0
+              - if common_users.blank?
+                =' uncommon_users_count
+                ' people.
+              - else
+                ' and
+                =' uncommon_users_count
+                ' other people.
+            strong= link_to 'Create a group from them!', new_group_path(tag_id: tag.id)
 
-  h3 Képek az elmúlt hétről
-  - if (images = @user.related_images_from_last_week.all).present?
-    .list_view= render images
-  - else
-    p.muted Nincsen kép az elmúlt hétről.
+  / h3 Képek az elmúlt hétről
+  / - if (images = @user.related_images_from_last_week.all).present?
+  /   .list_view= render images
+  / - else
+  /   p.muted Nincsen kép az elmúlt hétről.
 
-  h3 Címkék
-  - @user.tags.joins(:taggings).select('tags.*, COUNT(tags.id) AS count').order('count DESC').group('tags.id').each do |tag|
-    - if tag.users.count > 1
-      p
-        =' render tag
-        - if (common_users = (@user.virtual_friends & tag.users).sort_by { |user| user.name }).size > 0
-          - common_users.each do |user|
-            =' user_avatar user
-          br
-          =' common_users.map { |user| user_link user }.join(', ').html_safe
-        - if (uncommon_users_count = (tag.users - common_users).size) > 0
-          - if common_users.blank?
-            =' uncommon_users_count
-            ' people.
-          - else
-            ' and
-            =' uncommon_users_count
-            ' other people.
-        strong= link_to 'Create a group from them!', '#'
+  / h3 Ajánlott érdeklődési körök a meglévőek alapján
+  / - if (tags = @user.related_tags_through_taggings.all).present?
+  /   p= render tags
+  / - else
+  /   p.muted Nincsen ajánlható érdeklődési kör.

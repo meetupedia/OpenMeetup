@@ -248,7 +248,7 @@ class User < ActiveRecord::Base
 
   def related_events_on_next_week
     events = Event.where('start_time > ? AND start_time < ?', Time.now.next_week, Time.now.next_week + 1.week).order('participations_count DESC').limit(10)
-    events = events.where("id NOT IN (#{self.joined_next_events.to_s(:db)})") if self.joined_next_events.present?
+    events = events.where("events.id NOT IN (#{self.joined_next_events.to_s(:db)})") if self.joined_next_events.present?
     events = events.where(city_id: self.city_id) unless Settings.standalone
     events
   end

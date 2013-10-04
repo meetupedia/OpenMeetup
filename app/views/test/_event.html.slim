@@ -1,0 +1,30 @@
+= div_for event, class: 'list_item' do
+  .avatar= link_to(image_tag(event.group.image.url(:small), alt: event.group.name, height: 72, width: 72, title: event.group.name), event.group)
+  .item_content
+    h3= link_to event.name, event
+    h4
+      =' tr('Organized by')
+      = link_to event.group.name, event.group
+    p
+      i.icon-calendar
+      '
+      = l event.start_time
+      = dot
+      i.icon-home
+      '
+      = event.place
+    p
+      - if (common_users = (@user.virtual_friends & event.participants).sort_by { |user| user.name }).size > 0
+        - common_users.each do |user|
+          =' user_avatar user
+        br
+        =' common_users.map { |user| user_link user }.join(', ').html_safe
+      - if (uncommon_users_count = (event.participants - common_users).size) > 0
+        - if common_users.blank?
+          =' uncommon_users_count
+          ' people.
+        - else
+          ' and
+          =' uncommon_users_count
+          ' other people.
+    p= link_to tr('Check it out!'), event, class: 'btn btn-primary'
