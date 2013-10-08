@@ -51,7 +51,8 @@
             =' render tag
             - if (common_users = (@user.virtual_friends & tag.users).sort_by { |user| user.name }).size > 0
               - common_users.each do |user|
-                =' user_avatar user
+                - if user.avatar.file?
+                  =' user_avatar user
               br
               =' common_users.map { |user| user_link user }.join(', ').html_safe
             - if (uncommon_users_count = (tag.users - common_users).size) > 0
