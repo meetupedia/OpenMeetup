@@ -16,7 +16,7 @@ class Participation < ActiveRecord::Base
     participation.event.absence_for(participation.user).andand.destroy
     membership = participation.event.group.memberships.create user: participation.user unless participation.event.group.membership_for(participation.user)
     participation.event.group.admins.each do |user|
-      EventMailer.participation(particiation, user).deliver if user.email
+      EventMailer.participation(participation, user).deliver if user.email
     end
     true
   end
