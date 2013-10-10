@@ -11,6 +11,7 @@ Openmeetup::Application.routes.draw do
   mount GroupInvitationMailer::Preview => '/group_invitation_mailer/mail_view'
   mount GroupMailer::Preview => '/group_mailer/mail_view'
   mount LetterMailer::Preview => '/letter_mailer/mail_view'
+  mount MinionMailer::Preview => '/minion_mailer/mail_view'
   mount MembershipRequestMailer::Preview => '/membership_request_mailer/mail_view'
   mount ParticipationMailer::Preview => '/participation_mailer/mail_view'
   mount PostMailer::Preview => '/post_mailer/mail_view'
