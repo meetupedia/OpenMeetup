@@ -60,6 +60,7 @@ class User < ActiveRecord::Base
   has_many :votes, dependent: :destroy
   has_many :wave_memberships, dependent: :destroy
   has_many :waves, through: :wave_memberships
+  has_many :watch_logs
 
   has_many :friendships
   has_many :friends, through: :friendships, conditions: {'friendships.is_confirmed' => true}
