@@ -1,10 +1,32 @@
 class Minion
   SETTINGS = {
-    event_reminder: {
+    participation_reminder: {
       recipients: -> { @item.user },
       run_at: -> { (@item.event.start_time - 1.day).change(hour: 3) },
       subject: -> { "Event tomorrow: #{@item.event.title}" }
     },
+
+    event_reminder_for_members: {
+      recipients: -> { @item.group.members },
+      run_at: -> { (@item.start_time - 1.day).change(hour: 3) },
+      subject: -> { "Event tomorrow: #{@item.title}" }
+    },
+
+    new_group_owner_1: {
+      subject: 'Congratulations for your first group'
+    },
+
+    write_a_review: {
+      recipients: -> { @item.user },
+      run_at: -> { @item.event.end_time + 1.hour },
+      subject: -> { "Write a review about #{@item.event.title}" }
+    },
+
+    abandoned_group_1: {
+      recipients: -> { @item.user },
+      run_at: -> { 30.days.from_now },
+      subject: ''
+    }
   }
 
   def self.set(item, *actions)

@@ -48,7 +48,12 @@ class Event < ActiveRecord::Base
   validate :check_permaname
   validate :valid_dates
 
-  after_create :create_admin_participation
+  after_create :create_admin_participation, :set_minion
+
+  def set_minion
+    Minion.set self, :event_reminder_for_members
+    Minion.reset group, :abandoned_group_1
+  end
 
   def valid_dates
     if start_time >= end_time

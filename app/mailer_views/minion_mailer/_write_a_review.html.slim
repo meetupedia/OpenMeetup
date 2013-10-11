@@ -1,0 +1,13 @@
+h1 Write review
+
+p
+  ' Hey
+  = user_link @user
+  | ,
+
+p
+  ' how was
+  = link_to @item.event.name, @item.event
+  | ? Please write a short feedback (you can make it anonymous if you want):
+
+p= link_to 'Write review', new_event_review_path(@item.event), class: 'btn'

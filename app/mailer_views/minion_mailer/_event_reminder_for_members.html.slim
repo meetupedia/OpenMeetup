@@ -1,0 +1,13 @@
+h1 Event tomorrow
+
+p
+  ' Hey
+  = user_link @user
+  | ,
+
+p
+  ' the following event is coming up tomorrow,
+  =' link_to @item.group.name, @item.group
+  | hopes that you will be there, please do respond:
+
+.list_view= render @item

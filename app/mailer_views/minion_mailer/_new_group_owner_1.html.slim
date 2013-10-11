@@ -1,0 +1,13 @@
+h1 Congratulations for your group
+
+p
+  ' Hey
+  = user_link @user
+  | ,
+
+p
+  ' congrats for your new group
+  = link_to @user.groups.first.name, @user.groups.first
+  | .
+
+p I'll send you some tips & tricks about managing a meetup group in the following days, stay tuned!

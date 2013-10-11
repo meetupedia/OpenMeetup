@@ -1,0 +1,15 @@
+h1 Abandoned group?
+
+p
+  ' Hey
+  = user_link @user
+  | ,
+
+p
+  ' just a quick reminder: 30 days passed since the members of the group
+  =' link_to @item.name, @item
+  | are waiting for a meetup.
+
+p You have to organize a face-to-face meetup every 60 days, otherwise the group admin role will be offered to somebody else in the group. Don't let them down, announce a new meetup here:
+
+p = link_to 'New event', new_group_event_path(@item), class: 'btn'

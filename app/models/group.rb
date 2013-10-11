@@ -71,7 +71,7 @@ class Group < ActiveRecord::Base
 
   validate :check_permaname
 
-  after_create :create_admin_membership, :write_language
+  after_create :create_admin_membership, :write_language, :set_minion
   after_validation :set_city
 
   def check_permaname
@@ -94,6 +94,11 @@ class Group < ActiveRecord::Base
     membership = Membership.create group: self
     membership.is_admin = true
     membership.save
+  end
+
+  def set_minion
+    Minion.set self, :abandoned_group_1
+    Minion.set user, :new_group_owner_1 if user.groups.size == 1
   end
 
   def follow_for(user)
