@@ -1,0 +1,13 @@
+h1 Event reminder
+
+p
+  ' Hey
+  = user_link @user
+  | ,
+
+p
+  ' the following event is coming up tomorrow,
+  =' link_to @item.event.group.name, @item.event.group
+  | expect you to be there:
+
+.list_view= render @item.event

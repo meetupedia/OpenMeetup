@@ -1,7 +1,9 @@
 class Minion
   SETTINGS = {
-    new_user: {
-      subject: 'Welcome to Meetupedia!'
+    event_reminder: {
+      recipients: -> { @item.user },
+      run_at: -> { (@item.event.start_time - 1.day).change(hour: 3) },
+      subject: -> { "Event tomorrow: #{@item.event.title}" }
     },
   }
 

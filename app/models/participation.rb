@@ -18,6 +18,7 @@ class Participation < ActiveRecord::Base
     participation.event.group.admins.each do |user|
       EventMailer.participation(participation, user).deliver if user.email
     end
+    Minion.set participation, :event_reminder
     true
   end
 end
