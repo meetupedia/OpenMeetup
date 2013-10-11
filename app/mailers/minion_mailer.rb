@@ -1,13 +1,10 @@
-# encoding: UTF-8
-
 class MinionMailer < CommonMailer
 
-  def job(minion_job_id)
-    if @minion_job = MinionJob.find_by_id(minion_job_id)
+  def job(minion_job_id, user_id, options = {})
+    if @minion_job = MinionJob.find_by_id(minion_job_id) and @user = User.find_by_id(user_id)
       @item = @minion_job.item
-      @user = @minion_job.user
       if @item and @user
-        mail to: @user.email, subject: Minion::SUBJECTS[@minion_job.action] || 'Message to you'
+        mail options.reverse_merge!(to: @user.email)
       end
     end
   end
@@ -15,9 +12,9 @@ class MinionMailer < CommonMailer
 
   class Preview < MailView
 
-    def post
+    def job
       minion_job = MinionJob.last
-      mail = MinionMailer.job(minion_job.id)
+      mail = MinionMailer.job(minion_job.id, 1)
       mail
     end
   end
