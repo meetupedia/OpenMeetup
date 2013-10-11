@@ -12,6 +12,11 @@ every 1.day, at: '5:00am' do
   rake 'sitemap:create'
 end
 
+# hrourly jobs
+every 1.hour do
+  runner 'Minion.run'
+end
+
 # restart halted mailman
 every 10.minutes do
   command './restart_mailman.sh'
