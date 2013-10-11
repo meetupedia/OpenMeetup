@@ -40,7 +40,7 @@ class Minion
         recipients.each do |recipient|
           if recipient.email.present?
             options = {
-              subject: "[Meetupedia] #{Minion[:subject] || 'Message to you'}",
+              subject: Minion[:subject] || 'Message to you',
               from: Minion[:from] || Settings.default_email,
             }
             options[:reply_to] = Minion[:reply_to] if Minion[:reply_to].present?
