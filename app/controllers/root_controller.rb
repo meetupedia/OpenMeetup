@@ -46,6 +46,12 @@ class RootController < CommonController
     end
   end
 
+  def terms
+  end
+
+  def privacy
+  end
+
   def undefined
     if @group = Group.find_by_permaname(params[:id])
       groups_show
