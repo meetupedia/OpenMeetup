@@ -123,7 +123,7 @@ module ActionView
         easy_select name, text, values, options
       end
 
-      def get_prepend_or_append(options, &block)
+      def handle_prepend_and_append(options, &block)
         prepend = options.delete(:prepend)
         append = options.delete(:append)
         if prepend or append
@@ -141,7 +141,7 @@ module ActionView
       def easy_text_field(name, text = nil, options = {})
         options.reverse_merge! maxlength: 255
         add_required_option(name, text, options)
-        "<div class='form-group'>#{text and label(name, text.html_safe)}#{get_prepend_or_append(options) { text_field(name, options) } }</div>".html_safe
+        "<div class='form-group'>#{text and label(name, text.html_safe)}#{handle_prepend_and_append(options) { text_field(name, options) } }</div>".html_safe
       end
 
       def easy_file_field(name, text = nil, options = {})
@@ -150,7 +150,7 @@ module ActionView
 
       def easy_email_field(name, text = nil, options = {})
         add_required_option(name, text, options)
-        "<div class='form-group'>#{text and label(name, text.html_safe)}#{get_prepend_or_append(options) { email_field(name, options) } }</div>".html_safe
+        "<div class='form-group'>#{text and label(name, text.html_safe)}#{handle_prepend_and_append(options) { email_field(name, options) } }</div>".html_safe
       end
 
       def easy_password_field(name, text = nil, options = {})

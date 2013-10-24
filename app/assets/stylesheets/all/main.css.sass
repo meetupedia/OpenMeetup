@@ -56,13 +56,16 @@ input#group_permaname, input#event_permaname
   margin: 0 -20px 20px -20px
   padding: 20px
 
-.col-lg-4
-  .wrapper
-    margin-right: 0
+.row
+  .col-lg-4, .col-lg-6, .col-lg-8
+    &:first-child
+      .wrapper
+        margin-right: 0
 
-.col-lg-8
-  .wrapper
-    margin-left: 0
+  .col-lg-4, .col-lg-6, .col-lg-8
+    &:last-child
+      .wrapper
+        margin-left: 0
 
 .modal-content .wrapper
   border: none
