@@ -7,7 +7,7 @@
 h1= tr('The next 31 days')
 
 .row
-  .span8
+  .col-lg-8
     .wrapper
       h2= tr('Your meetup groups')
       - if (events = @user.get_joined_events_in_next_month.all).present?

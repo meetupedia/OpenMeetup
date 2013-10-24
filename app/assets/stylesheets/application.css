@@ -1,9 +1,10 @@
 /*
  *= require_self
- *= require loading-bootstrap
- *= require formtastic-bootstrap
+ *= require bootstrap
+ *= require font-awesome
  *= require gmaps4rails
  *= require fancybox
  *= require token-input-facebook
+ *= require plans
  *= require_tree ./all
 */

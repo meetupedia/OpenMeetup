@@ -1,34 +1,27 @@
-= semantic_form_for @group do |f|
-  = f.semantic_errors
+= easy_form_for @group do |f|
   = f.hidden_field :facebook_uid
-  = f.inputs do
-    = f.input :name
-    = f.input :description
-    - unless Settings.standalone
-      = f.input :location, label: tr('City')
-    .control-group
-      = f.label :tag_tokens, tr('Tags')
-      = f.text_field :tag_tokens, 'data-pre' => @group.tags.map { |tag| {id: tag.id, name: tag.name} }.to_json
-    = f.input :image, label: tr("Group profile image (we will resize it to 72x72)")
-    = f.input :header, label: tr('Group header image (we will resize it to 945x200)')
-  #accordion.accordion
-    .accordion-group
-      .accordion-heading
-        a class='accordion-toggle' data-toggle='collapse' data-parent='#accordion' href='#collapse'
+  = f.input :name, tr('Name')
+  = f.input :description, tr('Description')
+  - unless Settings.standalone
+    = f.input :location, tr('City')
+    = f.input :tag_tokens, tr('Tags'), 'data-pre' => @group.tags.map { |tag| {id: tag.id, name: tag.name} }.to_json
+  = f.input :image, tr('Group profile image (we will resize it to 72x72)')
+  = f.input :header, tr('Group header image (we will resize it to 945x200)')
+  #accordion.panel-group
+    .panel.panel-default
+      .panel-heading
+        a class='panel-title accordion-toggle' data-toggle='collapse' data-parent='#accordion' href='#collapse'
           = tr('More options')
-      #collapse.accordion-body.collapse
-        .accordion-inner
-          = f.inputs do
-            - if Settings.standalone
-              = f.input :location, label: tr('City')
-            = f.input :permaname, label: tr('Short URL'), prepend: 'http://'+Settings.host+'/'
-            = f.input :url, label: tr('Website URL'), prepend: 'http://'
-            = f.input :facebook_url, label: tr('Facebook URL'), prepend: 'http://'
-            = f.input :is_closed, label: tr('Closed group (admins have to approve membership requests)')
-            = f.input :creation_letter_text, label: tr('Welcome email message to new members')
-  = f.actions do
-    =' f.action :submit, label: (@group.new_record? ? trl('Create') : trl('Save')), onclick: "_gaq.push(['_trackEvent', 'Create group', 'Group']);", button_html: {class: 'btn btn-primary', disable_with: (@group.new_record? ? trl('Creating...') : trl('Saving...'))}
-    = f.action :cancel, label: trl('Cancel')
+      #collapse.panel-collapse.collapse
+        .panel-body
+          - if Settings.standalone
+            = f.input :location, tr('City')
+          = f.input :permaname, tr('Short URL'), prepend: 'http://'+Settings.host+'/'
+          = f.input :url, tr('Website URL'), prepend: 'http://'
+          = f.input :facebook_url, tr('Facebook URL'), prepend: 'http://'
+          = f.input :is_closed, tr('Closed group (admins have to approve membership requests)')
+          = f.input :creation_letter_text, tr('Welcome email message to new members')
+  = f.action (@group.new_record? ? trl('Create') : trl('Save')), disable_with: (@group.new_record? ? trl('Creating...') : trl('Saving...')), onclick: "_gaq.push(['_trackEvent', 'Create group', 'Group']);"
 
 javascript:
   $('#group_tag_tokens').tokenInput('/tags.json', {

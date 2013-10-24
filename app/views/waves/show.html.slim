@@ -1,5 +1,5 @@
 .row
-  .span4
+  .col-lg-4
     .wrapper
       - if @wave.group or @wave.event
         .breadcrumbs.clearfix
@@ -11,7 +11,7 @@
       h1= @wave.subject
 
       p= render 'users/user_avatars', users: @wave.wave_members
-  .span8
+  .col-lg-8
     .wrapper
       = semantic_form_for @wave.wave_items.build, url: wave_wave_items_path(@wave) do |f|
         = f.inputs do

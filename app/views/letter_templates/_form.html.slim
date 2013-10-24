@@ -1,6 +1,5 @@
-= semantic_form_for @letter_template do |f|
-  = f.inputs do
-    = f.input :name
-    = f.input :subject
-    = f.input :template
-  = f.actions
+= easy_form_for @letter_template do |f|
+  = f.input :name, tr('Name')
+  = f.input :subject, tr('Subject')
+  = f.input :template, tr('Template')
+  = f.action

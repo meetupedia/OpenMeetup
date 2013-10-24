@@ -1,21 +1,21 @@
 .row
-  .span4
+  .col-lg-4
     .hero-unit(style="background: #ffffff; padding: 30px 0;")
       h1= tr('Knowledge Community Fun :)')
-  .span4(style="padding: 30px 0;")
+  .col-lg-4(style="padding: 30px 0;")
     .opening-images
       = link_to image_tag('lathatatlan/lathatatlan_2.jpg'), request_invite_users_path
-  .span4(style="padding: 30px 0;")
+  .col-lg-4(style="padding: 30px 0;")
     .opening-images
       = link_to image_tag('lathatatlan/lathatatlan_6.jpg'), request_invite_users_path
 .row
-  .span4
+  .col-lg-4
     .opening-images
       = link_to image_tag('lathatatlan/lathatatlan_4.jpg'), request_invite_users_path
-  .span4
+  .col-lg-4
     .opening-images
       = link_to image_tag('lathatatlan/lathatatlan_3.jpg'), request_invite_users_path
-  .span4
+  .col-lg-4
     .hero-unit(style="background: #ffffff; padding: 50px 15px;")
       p= tr('Soft skill trainings in higher education, worldwide.')
       - unless Settings.enable_invite_process

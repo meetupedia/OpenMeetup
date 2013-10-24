@@ -9,10 +9,10 @@
   = textilize(auto_link(comment.comment)).html_safe
   - if current_user and comment.level < 5
     div(id="add-comment-comment-#{comment.id}" style="display: none;")
-      = form_for Comment.new, url: polymorphic_path([comment.commentable, :comments]), remote: true do |f|
+      = easy_form_for Comment.new, url: polymorphic_path([comment.commentable, :comments]), remote: true do |f|
         = f.hidden_field :reply_to_id, value: comment.id
-        = f.text_area :comment
-        = f.submit trl('Add comment'), class: 'btn btn-primary', disable_with: trl('Sending...'), onclick: "_gaq.push(['_trackEvent', 'Add Comment', 'Comment']);"
+        = f.input :comment
+        = f.action trl('Add comment'), disable_with: trl('Sending...'), onclick: "_gaq.push(['_trackEvent', 'Add Comment', 'Comment']);"
 
 - comment.replies.each do |comment|
   = render comment, commentable: commentable

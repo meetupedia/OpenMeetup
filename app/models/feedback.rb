@@ -2,7 +2,7 @@
 
 class Feedback < ActiveRecord::Base
   key :email
-  key :body
+  key :body, as: :text
   timestamps
 
   belongs_to :user

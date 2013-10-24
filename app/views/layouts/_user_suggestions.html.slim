@@ -1,9 +1,6 @@
 - if can? :create, Feedback
-  .row
-    .span12
-      .wrapper
-        .user_suggestions
-          label= tr('How can we make this page better for you?')
-          = form_for Feedback.new, remote: true do |f|
-            = f.text_area :body, placeholder: trl('Your suggestions, ideas, complaints will greatly help us.')
-            = f.submit trl('Send feedback'), onclick: "_gaq.push(['_trackEvent', 'Send feedback', 'Feedback']);", class: 'btn btn-primary', disable_with: trl('Sending...')
+  .wrapper
+    .user_suggestions
+      = easy_form_for Feedback.new, remote: true do |f|
+        = f.input :body, tr('How can we make this page better for you?'), placeholder: trl('Your suggestions, ideas, complaints will greatly help us.')
+        = f.action trl('Send feedback'), disable_with: trl('Sending...'), onclick: "_gaq.push(['_trackEvent', 'Send feedback', 'Feedback']);"

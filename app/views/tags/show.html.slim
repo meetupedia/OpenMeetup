@@ -1,5 +1,5 @@
 .row
-  .span12
+  .col-lg-12
     .wrapper
       .breadcrumbs.clearfix= link_to tr('Back'), root_path
       .pull-right= render 'taggings/button', tag: @tag
@@ -10,14 +10,14 @@
         = @tag.name
 
 .row
-  .span4
+  .col-lg-4
     .wrapper
       h2= tr('People interested')
       - unless @users.blank?
         .list_view= render @users
       - else
         p.muted= tr('Nobody is interested yet.')
-  .span8
+  .col-lg-8
     .wrapper
       = render 'discovery/change_city'
       h2= tr('Groups')

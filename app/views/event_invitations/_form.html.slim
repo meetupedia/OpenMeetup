@@ -1,14 +1,9 @@
-= semantic_form_for @event_invitation, url: url do |f|
-  = f.inputs do
-    .control-event
-      = f.label :ids, tr('Names or emails (separated with commas)')
-      = f.text_field :ids
+= easy_form_for @event_invitation, url: url do |f|
+  = f.input :ids, tr('Names or emails (separated with commas)')
   p= link_to_function tr('More options'), "$('#more-options').toggle()", class: 'function'
   #more-options
-    = f.input :message, label: tr('Personal message')
-  = f.actions do
-    =' f.action :submit, label: trl('Send'), button_html: {class: 'btn btn-primary', disable_with: trl('Sending...')}, onclick: "_gaq.push(['_trackEvent', 'Send event invitation', 'Event invitation']);"
-    = f.action :cancel, label: trl('Cancel')
+    = f.input :message, tr('Personal message')
+  = f.action trl('Send'), disable_with: trl('Sending...'), onclick: "_gaq.push(['_trackEvent', 'Send event invitation', 'Event invitation']);"
 
 javascript:
   $('#event_invitation_ids').tokenInput('/users.json', {

@@ -10,20 +10,18 @@
           span.label.label-success= tr('Already check-ined.')
       hr
 
-  = semantic_form_for Post.new, url: url_for([@event.group, :posts]) do |f|
+  = easy_form_for Post.new, url: url_for([@event.group, :posts]) do |f|
     = f.hidden_field :is_live, value: true
     = f.hidden_field :event_id, value: @event.id
-    = f.inputs do
-      = f.input :post, label: trl('Write a note')
-    = f.actions
+    = f.input :post, tr('Write a note')
+    = f.action
 
   hr
 
-  = semantic_form_for Image.new, url: url_for([@event, :images]) do |f|
+  = easy_form_for Image.new, url: url_for([@event, :images]) do |f|
     = f.hidden_field :is_live, value: true
-    = f.inputs do
-      = f.input :image, label: trl('Upload image')
-    = f.actions
+    = f.input :image, tr('Upload image')
+    = f.action
 
 - unless (images = @event.images.order('created_at ASC').all).empty?
   .wrapper

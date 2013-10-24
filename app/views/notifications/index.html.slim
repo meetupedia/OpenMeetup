@@ -1,5 +1,5 @@
 .row
-  .span4
+  .col-lg-4
     .wrapper= render 'discovery/menu'
 
     .wrapper
@@ -16,7 +16,7 @@
               = group.name
               - if count = @counts[group.id]
                 span.badge.pull-right= count
-  .span8
+  .col-lg-8
     .wrapper
       h2
         = tr('News feed')

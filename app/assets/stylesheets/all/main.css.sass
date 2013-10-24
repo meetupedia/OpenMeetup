@@ -52,9 +52,17 @@ input#group_permaname, input#event_permaname
 .wrapper
   background: #ffffff
   border-radius: 5px
-  box-shadow: 0 1px 3px #9f9f9f
-  margin-bottom: 20px
+  // box-shadow: 0 1px 3px #9f9f9f
+  margin: 0 -20px 20px -20px
   padding: 20px
+
+.col-lg-4
+  .wrapper
+    margin-right: 0
+
+.col-lg-8
+  .wrapper
+    margin-left: 0
 
 .modal-content .wrapper
   border: none
@@ -184,7 +192,7 @@ div.item_view
   div.list_item
     background: #f7f7f7
 
-textarea
+textarea.form-control
   height: 160px
 
 .root
@@ -466,45 +474,6 @@ ul.tiles
 #fancybox-title-inside
   text-align: left
 
-@media all and (min-width: 1025px)
-  .container
-    max-width: 940px
-    .row
-      .span2
-        margin-left: 30px
-        max-width: 165px
-      .span4
-        margin-left: 30px
-        max-width: 310px
-      .span6
-        margin-left: 30px
-        max-width: 455px
-      .span8
-        margin-left: 30px
-        max-width: 600px
-        .row
-          margin-left: -30px
-          .span4
-            margin-left: 30px
-            max-width: 310px
-      .span12
-        margin-left: 30px
-        max-width: 940px
-  #content
-    background: #e9eaed
-    padding: 20px 0
-  #footer
-    border-top: 1px solid #e9eaed
-    margin-top: 1px
-
-@media all and (max-width: 1025px)
-  body
-    background: #e9eaed
-  #footer
-    background: #d7dfe7
-    margin: 1px -20px -20px -20px
-    padding: 10px 20px 20px 20px
-
 .new_comment
   margin-bottom: 10px
 
@@ -518,11 +487,8 @@ form.button_to
   div
     display: inline
 
-#new_feedback
-  textarea
-    height: 20px
-  input
-    display: none
+#new_feedback textarea
+  height: 34px
 
 div.list_item div.activity_item
   border-radius: 0 0 10px 0
@@ -553,3 +519,7 @@ div.like_counter_container
 form.button_to
   display: inline-block
   margin-bottom: 5px
+
+#accordion
+  margin-bottom: 15px
+

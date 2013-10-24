@@ -1,7 +1,7 @@
 = render 'header'
 
 .row
-  .span4
+  .col-lg-4
     - if @user.avatar.file?
       .wrapper.center
         = link_to image_tag(@user.avatar.url(:normal), alt: @user.name, title: @user.name), @user
@@ -21,12 +21,9 @@
       .wrapper
         p= render @user.tags.order('name ASC')
         - if current_user and @user == current_user
-          = semantic_form_for @user do |f|
-            .control-group
-              = f.label :tag_tokens, tr('Add new interests')
-              = f.text_field :tag_tokens
-            = f.actions do
-              = f.action :submit, label: trl('Save'), button_html: {class: 'btn btn-primary', disable_with: trl('Saving...')}
+          = easy_form_for @user do |f|
+            = f.input :tag_tokens, tr('Add new interests')
+            = f.action trl('Save'), disable_with: trl('Saving...')
           p= link_to 'Browse all interests', tags_user_path(@user), rel: 'modal'
 
         javascript:
@@ -54,7 +51,7 @@
         - else
           p.muted= tr('No friend requests yet.')
 
-  .span8
+  .col-lg-8
     .wrapper
       h2= tr('Activity')
       = render 'activities/activities', activities: @activities

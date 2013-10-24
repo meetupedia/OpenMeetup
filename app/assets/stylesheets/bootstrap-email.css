@@ -212,7 +212,7 @@ a:hover {
 .span9 {
   width: 700px;
 }
-.span8 {
+.col-lg-8 {
   width: 620px;
 }
 .span7 {
@@ -224,7 +224,7 @@ a:hover {
 .span5 {
   width: 380px;
 }
-.span4 {
+.col-lg-4 {
   width: 300px;
 }
 .span3 {
@@ -315,7 +315,7 @@ a:hover {
   width: 74.46808510638297%;
   *width: 74.41489361702126%;
 }
-.row-fluid .span8 {
+.row-fluid .col-lg-8 {
   width: 65.95744680851064%;
   *width: 65.90425531914893%;
 }
@@ -331,7 +331,7 @@ a:hover {
   width: 40.42553191489362%;
   *width: 40.37234042553192%;
 }
-.row-fluid .span4 {
+.row-fluid .col-lg-4 {
   width: 31.914893617021278%;
   *width: 31.861702127659576%;
 }
@@ -880,7 +880,7 @@ table [class*=span],
   width: 204px;
   margin-left: 0;
 }
-.table .span4 {
+.table .col-lg-4 {
   float: none;
   width: 284px;
   margin-left: 0;
@@ -900,7 +900,7 @@ table [class*=span],
   width: 524px;
   margin-left: 0;
 }
-.table .span8 {
+.table .col-lg-8 {
   float: none;
   width: 604px;
   margin-left: 0;
@@ -1017,7 +1017,7 @@ table [class*=span],
   *margin-right: .3em;
   line-height: 14px;
   vertical-align: text-top;
-  background-image: url("https://az340737.vo.msecnd.net/resources/glyphicons-halflings.png");
+  background-image: url("http://solarcdn.googlecode.com/files/glyphicons-halflings.png");
   background-position: 14px 14px;
   background-repeat: no-repeat;
   margin-top: 1px;
@@ -1036,7 +1036,7 @@ table [class*=span],
 .dropdown-menu > li > a:hover > [class*=" icon-"],
 .dropdown-menu > .active > a > [class^="icon-"],
 .dropdown-menu > .active > a > [class*=" icon-"] {
-  background-image: url("https://az340737.vo.msecnd.net/resources/glyphicons-halflings-white.png");
+  background-image: url("http://solarcdn.googlecode.com/files/glyphicons-halflings-white.png");
 }
 .icon-glass {
   background-position: 0      0;

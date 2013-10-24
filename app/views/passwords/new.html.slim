@@ -1,7 +1,6 @@
 .wrapper
   h1= tr('Forgot password?')
 
-  = semantic_form_for :user, url: passwords_path do |f|
-    = f.inputs :email
-    = f.actions do
-      = f.action :submit, label: trl('Request new password'), button_html: {class: 'btn btn-primary', disable_with: trl('Requesting new password...')}
+  = easy_form_for :user, url: passwords_path do |f|
+    = f.input :email, tr('Email')
+    = f.action trl('Request new password'), class: 'btn btn-primary', disable_with: trl('Requesting new password...')

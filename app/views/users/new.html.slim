@@ -2,13 +2,11 @@
   .span6
     .wrapper
       h2= tr('Existing users')
-      = semantic_form_for @user_session || UserSession.new do |f|
-        = f.inputs do
-          = f.input :email, label: tr('Email')
-          = f.input :password, label: tr('Password')
-          = f.input :remember_me, as: :boolean, label: tr('Remember me')
-        = f.actions do
-          = f.action :submit, label: trl('Sign in'), onclick: "_gaq.push(['_trackEvent', 'Sign in', 'User']);", button_html: {class: 'btn btn-primary', disable_with: trl('Signing in...')}
+      = easy_form_for @user_session || UserSession.new do |f|
+        = f.input :email, tr('Email')
+        = f.input :password, tr('Password')
+        = f.input :remember_me, tr('Remember me')
+        = f.action trl('Sign in'), disable_with: trl('Signing in...'), onclick: "_gaq.push(['_trackEvent', 'Sign in', 'User']);"
       hr
       p= link_to tr('Forgot password?'), new_password_path
   .span6
@@ -18,20 +16,18 @@
         p= link_to tr('Request an invite'), request_invite_users_path, class: 'btn btn-primary'
       - else
         h2= tr('New users')
-        = semantic_form_for @user || User.new do |f|
+        = easy_form_for @user || User.new do |f|
           - if params[:invitation_code]
             = hidden_field_tag :invitation_code, params[:invitation_code]
-          = f.inputs do
-            = f.input :first_name, label: tr('First name'), placeholder: trl('Arnold')
-            = f.input :last_name, label: tr('Last name'), placeholder: trl('Schwarzenegger')
-            = f.input :email, {label: tr('Email')}.merge(Settings.only_for_domain.present? ? {as: :string, append: "@#{Settings.only_for_domain}", placeholder: trl('arnold.schwarznegger')} : {placeholder: 'arnold.schwarznegger@example.com'})
-            = f.input :password, label: tr('Password')
-            = f.input :password_confirmation, label: tr('Password again')
-            - if Settings.customization == 'get2gather'
-              = f.input :read_manual, label: tr('I have read the <a href="http://get2gather.eth.ericsson.se/about" target="_blank">user manual</a>.').html_safe
-              = f.input :read_cobe, label: tr('I accept the <a href="http://www.ericsson.com/res/thecompany/docs/corporate-responsibility/2012/cobe/EN_COBE.pdf" target="_blank">code of ethics</a>.').html_safe
-          = f.actions do
-            = f.action :submit, label: trl('Sign up'), onclick: "_gaq.push(['_trackEvent', 'Register user', 'User']);", button_html: {class: 'btn btn-primary', disable_with: trl('Signing up...')}
+          = f.input :first_name, tr('First name'), placeholder: trl('Arnold')
+          = f.input :last_name, tr('Last name'), placeholder: trl('Schwarzenegger')
+          = f.input :email, tr('Email')#, Settings.only_for_domain.present? ? {append: "@#{Settings.only_for_domain}", placeholder: trl('arnold.schwarznegger')} : {placeholder: 'arnold.schwarznegger@example.com'}
+          = f.input :password, tr('Password')
+          = f.input :password_confirmation, tr('Password again')
+          - if Settings.customization == 'get2gather'
+            = f.input :read_manual, tr('I have read the <a href="http://get2gather.eth.ericsson.se/about" target="_blank">user manual</a>.').html_safe
+            = f.input :read_cobe, tr('I accept the <a href="http://www.ericsson.com/res/thecompany/docs/corporate-responsibility/2012/cobe/EN_COBE.pdf" target="_blank">code of ethics</a>.').html_safe
+          = f.action trl('Sign up'), disable_with: trl('Signing up...'), onclick: "_gaq.push(['_trackEvent', 'Register user', 'User']);"
 
 - if Settings.only_for_domain.present?
   coffee:

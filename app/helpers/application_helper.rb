@@ -71,3 +71,102 @@ module ApplicationHelper
     "#{tag(:form, form_options, true)}<div>#{method_tag}#{content_tag("button", name, html_options)}#{request_token_tag}</div></form>".html_safe
   end
 end
+
+
+module ActionView
+
+  module Helpers
+
+    module FormHelper
+
+      def easy_form_for(object, options = {})
+        options[:html] ||= {}
+        options[:html][:role] = 'form'
+        form_for object, options do |form|
+          yield form
+        end
+      end
+    end
+
+
+    class FormBuilder
+
+      def add_required_option(name, text, options)
+        options[:required] = 'required' if object.class.respond_to?(:validators) and object.class.validators_on(name).map { |validator| validator.class }.include?(ActiveModel::Validations::PresenceValidator)
+        text << ' <abbr title="Kötelező megadni!">*</abbr>'.html_safe if text and options[:required]
+      end
+
+      def action(name = trl('Send'), options = {})
+        easy_submit name, options.merge(class: 'btn btn-default btn-primary')
+      end
+
+      def input(*args)
+        options = args.extract_options!
+        name, text = args
+        if type = object.class.columns_hash[name.to_s].andand.type
+          case type
+            when :boolean then easy_check_box name, text, options
+            when :date then easy_date_select name, text, options.merge(class: 'form-control')
+            when :datetime then easy_datetime_select name, text, options.merge(class: 'form-control')
+            when :text then easy_text_area name, text, options.merge(class: 'form-control')
+            else easy_text_field name, text, options.merge(class: 'form-control')
+          end
+        elsif object.class.columns_hash["#{name}_file_name"]
+          easy_file_field name, text, options
+        end
+      end
+
+      def dropdown(name, text, values, options = {})
+        easy_select name, text, values, options
+      end
+
+      def easy_text_field(name, text = nil, options = {})
+        options.reverse_merge! maxlength: 255
+        add_required_option(name, text, options)
+        input_field = text_field(name, options)
+        if prepend = options.delete(:prepend)
+          input_field = "<div class='input-group'><span class='input-group-addon'>#{prepend}</span>#{input_field}</div>"
+        end
+        "<div class='form-group'>#{text and label(name, text.html_safe)}#{input_field}</div>".html_safe
+      end
+
+      def easy_file_field(name, text = nil, options = {})
+        "<div class='form-group'>#{text and label(name, text.html_safe)}#{file_field(name, options)}</div>".html_safe
+      end
+
+      def easy_password_field(name, text = nil, options = {})
+        add_required_option(name, text, options)
+        "<div class='form-group'>#{text and label(name, text.html_safe)}#{password_field(name, options)}</div>".html_safe
+      end
+
+      def easy_text_area(name, text = nil, options = {})
+        add_required_option(name, text, options)
+        "<div class='form-group'>#{text and label(name, text.html_safe)}#{text_area(name, options)}</div>".html_safe
+      end
+
+      def easy_check_box(name, text, options = {})
+        add_required_option(name, text, options)
+        "<div class='checkbox'>#{label(name, check_box(name, options) + ' ' + text)}</div>".html_safe
+      end
+
+      def easy_select(name, text, values, options = {})
+        add_required_option(name, text, options)
+        "<div class='form-group'>#{text and label(name, text.html_safe)}#{select(name, values, options)}</div>".html_safe
+      end
+
+      def easy_date_select(name, text = nil, options = {})
+        add_required_option(name, text, options)
+        "<div class='form-group'>#{text and label(name, text.html_safe) + '<br />'.html_safe}#{date_select(name, options)}</div>".html_safe
+      end
+
+      def easy_datetime_select(name, text = nil, options = {})
+        add_required_option(name, text, options)
+        "<div class='form-group'>#{text and label(name, text.html_safe) + '<br />'.html_safe}#{datetime_select(name, options)}</div>".html_safe
+      end
+
+      def easy_submit(name = 'Mentés', options = {})
+        "<div class='form-group'>#{submit(name, options)}</div>".html_safe
+      end
+    end
+  end
+end

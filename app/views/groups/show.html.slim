@@ -1,7 +1,7 @@
 = render 'groups/header'
 
 .row
-  .span4
+  .col-lg-4
     .wrapper
       = render 'groups/tile_menu', group: @group
 
@@ -46,7 +46,7 @@
         ' <div class="g-plusone" data-size="medium"></div><br/>
         ' <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
-  .span8
+  .col-lg-8
     - if event = @group.next_event
       .wrapper
         = render 'groups/next_event', event: event
@@ -54,9 +54,9 @@
     .wrapper
       h2= tr('Activity')
       - if can? :create, post = @group.posts.build
-        = form_for post, url: url_for([@group, :posts]), remote: true do |f|
-          = f.text_area :post
-          = f.submit trl('Send'), class: 'btn btn-primary', disable_with: trl('Sending...')
+        = easy_form_for post, url: url_for([@group, :posts]), remote: true do |f|
+          = f.input :post
+          = f.action trl('Send'), disable_with: trl('Sending...')
       = render 'activities/activities', activities: @activities
 
 - if Settings.enable_share_buttons

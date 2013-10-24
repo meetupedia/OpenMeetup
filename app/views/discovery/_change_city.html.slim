@@ -1,6 +1,6 @@
 - unless Settings.standalone
   .change_city
-    = semantic_form_for City.new, url: url_for(only_path: false), method: :get do |f|
+    = easy_form_for City.new, url: url_for(only_path: false), method: :get do |f|
       .pull-right= f.text_field :id
       .pull-right= f.label :id, tr('in'), class: 'change_field'
 

@@ -1,4 +1,3 @@
-= semantic_form_for @post, url: url_for([@post.postable, :posts]) do |f|
-  = f.inputs :post
-  = f.actions do
-    = f.action :submit, label: trl('Save')), onclick: "_gaq.push(['_trackEvent', 'Create post', 'Post']);", button_html: {class: 'btn btn-primary', disable_with: trl('Saving...')}
+= easy_form_for @post, url: url_for([@post.postable, :posts]) do |f|
+  = f.input :post, tr('Post')
+  = f.action trl('Save')), class: 'btn btn-primary', disable_with: trl('Saving...'), onclick: "_gaq.push(['_trackEvent', 'Create post', 'Post']);"

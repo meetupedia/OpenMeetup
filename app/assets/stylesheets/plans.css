@@ -1,0 +1,141 @@
+/* --------- PLANS & PRICING -------- */
+.licenses {
+    font-size: 14px;
+    color: #757575;
+    text-shadow: 0 1px 0 #fff;
+    list-style: none;
+}
+.licenses h2 {
+    font-size: 26px;
+    margin-bottom: 10px;
+    color: #6f6e6e;
+}
+.licenses h2 small {
+    font-size: 11px;
+    color: #c6b89c;
+    margin-left: 5px;
+    font-weight: 700;
+}
+.licenses h2 small:hover { text-decoration: underline }
+.licenses h2 small.basic { color: #8dcc44 }
+.licenses h2 small.pro { color: #87baf8 }
+.licenses h2 small.enterprise { color: #d57eed }
+.licenses a { color: #757575 }
+.licenses>li {
+    background: #f0f0f0;
+    margin: 25px 0 30px 30px;
+    padding: 5px;
+    position: relative;
+    width: 230px;
+}
+.licenses>li:hover {
+    background: #f4f4f4;
+    cursor: pointer;
+}
+.licenses>li .price {
+    width: 230px;
+    display: block;
+    color: #fff;
+    height: 125px;
+    margin: 0 -5px;
+    position: relative;
+    background-image: url('../img/pricing_sprite.png?0');
+}
+.licenses>li .price .bits {
+    display: block;
+    line-height: 1;
+    padding: 0 15px;
+    position: relative;
+    margin: 0;
+}
+.licenses>li .price .bits>* { float: left }
+.licenses>li .price .bits .currency {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 1;
+    margin-top: 18px;
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.3);
+}
+.licenses>li .price .bits .value {
+    font-weight: 700;
+    font-size: 75px;
+    height: 90px;
+    letter-spacing: -4px;
+    margin-top: 15px;
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.3);
+}
+.licenses>li .price .bits .cents {
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: .01em;
+    padding-top: 30px;
+    padding-left: 1px;
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.3);
+}
+.licenses>li .price .bits .frequency {
+    font-weight: 700;
+    font-size: 20px;
+    padding-top: 54px;
+    padding-left: 5px;
+    text-shadow: none;
+}
+.licenses>li .price .note {
+    font-weight: 700;
+    font-size: 14px;
+    position: absolute;
+    bottom: 10px;
+    left: 30px;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.4);
+}
+.licenses .features {
+    margin: 15px 0 0;
+    list-style: none;
+}
+.licenses .features>li { margin-bottom: 10px }
+.licenses .features>li:last-child { margin-bottom: 0 }
+.licenses .features>li .icon {
+    float: left;
+    margin: 0 13px 23px -35px;
+}
+.licenses .features>li strong { font-weight: 700 }
+/* 
+free #f6e5c3
+basic #80bc6b
+pro #728ee1
+enterprise #ab70bb
+*/
+.licenses .free .price { background-position: -2px -3px }
+.licenses .free .price .bits .frequency { color: #bbae93 }
+.licenses .free .price .note { color: #6f6e6e }
+.licenses .free .features .icon {
+    color: #f6e5c3;
+    text-shadow: -1px -1px 0 #c6b89c, 1px -1px 0 #c6b89c, -1px 1px 0 #c6b89c, 1px 1px 0 #c6b89c;
+}
+.licenses .basic h2 { color: #6fcc00 }
+.licenses .basic .price { background-position: -2px -140px }
+.licenses .basic .price .bits .frequency { color: #b3dc81 }
+.licenses .basic .price .note { color: #244e00 }
+.licenses .basic .features .icon { color: #5aa205 }
+.licenses .basic .features .icon.icon-core { background-color: #ccc }
+.licenses .basic .features li strong,
+.licenses .basic a strong { color: #437314 }
+.licenses .pro h2 { color: #318bff }
+.licenses .pro .price { background-position: -2px -274px }
+.licenses .pro .price .bits .frequency { color: #93bdf3 }
+.licenses .pro .price .note { color: #082554 }
+.licenses .pro .features .icon { color: #1966cc }
+.licenses .pro .features .icon.icon-core { background-color: #ccc }
+.licenses .pro .features li strong,
+.licenses .enterprise a strong { color: #194a99 }
+.licenses .enterprise h2 { color: #cc79e3 }
+.licenses .enterprise .price { background-position: -2px -409px }
+.licenses .enterprise .price .bits .frequency { color: #e285fb }
+.licenses .enterprise .price .note { color: #5d3767 }
+.licenses .enterprise .features .icon { color: #bc6fd0 }
+.licenses .enterprise .features .icon.icon-core { background-color: #ccc }
+.licenses .enterprise .features li strong,
+.licenses .enterprise a strong { color: #895199 }
+div.more-info {
+    text-align: center;
+    padding-top: 10px;
+}

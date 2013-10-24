@@ -1,9 +1,8 @@
 .wrapper
 	h2 Válassz települést!
-	= semantic_form_for @user do |f|
-		= f.inputs do
-		  = f.text_field :city_id
-		= f.actions
+	= easy_form_for @user do |f|
+    = f.text_field :city_id
+		= f.action
 
 javascript:
   $('#user_city_id').tokenInput('/cities.json', {

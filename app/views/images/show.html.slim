@@ -36,6 +36,6 @@
   - if current_user
     p= link_to_function tr('Comment'), "$('#add-post-comment-#{@image.id}').toggle().find('textarea').focus()"
     div(id="add-post-comment-#{@image.id}" style="display: none;")
-      = form_for Comment.new, url: polymorphic_path([@image, :comments]), remote: true do |f|
+      = easy_form_for Comment.new, url: polymorphic_path([@image, :comments]), remote: true do |f|
         = f.text_area :comment
-        = f.submit trl('Add comment'), class: 'btn btn-primary', disable_with: trl('Sending...')
+        = f.action trl('Add comment'), disable_with: trl('Sending...')

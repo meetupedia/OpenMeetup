@@ -1,12 +1,12 @@
 .row
-  .span4
+  .col-lg-4
     .wrapper= render 'menu'
-  .span8
+  .col-lg-8
     .wrapper
 
       - unless Settings.standalone
         .change_city
-          = semantic_form_for City.new, url: events_discovery_path do |f|
+          = easy_form_for City.new, url: events_discovery_path do |f|
             .pull-right= f.text_field :id
             .pull-right= f.label :id, tr('in'), class: 'change_field'
 

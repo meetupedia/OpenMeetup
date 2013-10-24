@@ -1,6 +1,6 @@
 .wrapper
   .change_city
-    = semantic_form_for City.new, url: jump_cities_path do |f|
+    = easy_form_for City.new, url: jump_cities_path do |f|
       .pull-right= f.text_field :id
       .pull-right= f.label :id, tr('Change city'), class: 'change_field'
 
@@ -20,7 +20,7 @@
     })
 
 .row
-  .span8
+  .col-lg-8
     .wrapper
       - if can? :create, Group
         p.pull-right= link_to tr('Create new group'), new_group_path, class: 'btn'
@@ -44,7 +44,7 @@
           = render 'search'
           - if @groups.respond_to?(:total_pages)
             = will_paginate @groups
-  .span4
+  .col-lg-4
     .wrapper
       h2= tr('Tags')
       - unless (tags = Tag.joins(groups: :city).where('cities.id' => @city.id).order('tags.name ASC').all).blank?

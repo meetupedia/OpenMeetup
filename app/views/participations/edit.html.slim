@@ -1,8 +1,8 @@
 .wrapper
   h1= tr('More information')
 
-  = semantic_form_for @participation do |f|
+  = easy_form_for @participation do |f|
     = f.fields_for :answers do |answers|
       = answers.input :question_id, as: :hidden, value: answers.object.question_id
       = answers.input :answer, label: answers.object.question.question
-    = f.actions
+    = f.action

@@ -1,19 +1,16 @@
-= semantic_form_for @group_invitation, url: url do |f|
-  = f.inputs do
-    .control-group
-      = f.label :ids, tr('Names or emails (separated with commas)')
-      = f.text_field :ids
-  #accordion.accordion
-    .accordion-group
-      .accordion-heading
-        a class='accordion-toggle' data-toggle='collapse' data-parent='#accordion' href='#collapse'
+= easy_form_for @group_invitation, url: url do |f|
+  .form-group
+    = f.label :ids, tr('Names or emails (separated with commas)')
+    = f.text_field :ids
+  #accordion.panel-group
+    .panel.panel-default
+      .panel-heading
+        a class='panel-title accordion-toggle' data-toggle='collapse' data-parent='#accordion' href='#collapse'
           = tr('More options')
-      #collapse.accordion-body.collapse
-        .accordion-inner
+      #collapse.panel-collapse.collapse
+        .panel-body
           = f.input :message, label: tr('Personal message')
-  = f.actions do
-    =' f.action :submit, label: trl('Send'), button_html: {class: 'btn btn-primary', disable_with: trl('Sending...')}, onclick: "_gaq.push(['_trackEvent', 'Send group invitation', 'Group invitation']);"
-    = f.action :cancel, label: trl('Cancel')
+  = f.action trl('Send'), disable_with: trl('Sending...'), onclick: "_gaq.push(['_trackEvent', 'Send group invitation', 'Group invitation']);"
 
 javascript:
   $('#group_invitation_ids').tokenInput('/users.json', {

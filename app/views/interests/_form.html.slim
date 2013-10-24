@@ -1,4 +1,4 @@
-= semantic_form_for @interest do |f|
-  = f.semantic_errors
-  = f.inputs :name, :image
-  = f.actions
+= easy_form_for @interest do |f|
+  = f.input :name, tr('Name')
+  = f.input :image, tr('Image')
+  = f.action

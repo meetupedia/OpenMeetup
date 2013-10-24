@@ -14,9 +14,9 @@
         = render 'votes/set', item: activity
 
       div(id="add-activity-comment-#{activity.id}" style="display: none;")
-        = form_for Comment.new, url: polymorphic_path([activity.activable, :comments]), remote: true do |f|
-          = f.text_area :comment
-          = f.submit trl('Add comment'), class: 'btn btn-primary', disable_with: trl('Sending...')
+        = easy_form_for Comment.new, url: polymorphic_path([activity.activable, :comments]), remote: true do |f|
+          = f.input :comment
+          = f.action trl('Add comment'), disable_with: trl('Sending...')
 
 - else
   = div_for activity, class: 'list_item avatar_item' do
@@ -76,6 +76,6 @@
           = render 'votes/set', item: activity
 
         div(id="add-activity-comment-#{activity.id}" style="display: none;")
-          = form_for Comment.new, url: polymorphic_path([activity, :comments]), remote: true do |f|
-            = f.text_area :comment
-            = f.submit trl('Add comment'), class: 'btn btn-primary', disable_with: trl('Sending...')
+          = easy_form_for Comment.new, url: polymorphic_path([activity, :comments]), remote: true do |f|
+            = f.input :comment
+            = f.action trl('Add comment'), disable_with: trl('Sending...')
