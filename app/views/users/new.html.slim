@@ -1,15 +1,15 @@
 .row
-  .span6
+  .col-lg-6
     .wrapper
       h2= tr('Existing users')
       = easy_form_for @user_session || UserSession.new do |f|
-        = f.input :email, tr('Email')
-        = f.input :password, tr('Password')
-        = f.input :remember_me, tr('Remember me')
+        = f.input :email, tr('Email'), as: :email
+        = f.input :password, tr('Password'), as: :password
+        = f.input :remember_me, tr('Remember me'), as: :boolean
         = f.action trl('Sign in'), disable_with: trl('Signing in...'), onclick: "_gaq.push(['_trackEvent', 'Sign in', 'User']);"
       hr
       p= link_to tr('Forgot password?'), new_password_path
-  .span6
+  .col-lg-6
     .wrapper
       - if use_invite_process?
         h2= tr('New users')
@@ -21,9 +21,9 @@
             = hidden_field_tag :invitation_code, params[:invitation_code]
           = f.input :first_name, tr('First name'), placeholder: trl('Arnold')
           = f.input :last_name, tr('Last name'), placeholder: trl('Schwarzenegger')
-          = f.input :email, tr('Email')#, Settings.only_for_domain.present? ? {append: "@#{Settings.only_for_domain}", placeholder: trl('arnold.schwarznegger')} : {placeholder: 'arnold.schwarznegger@example.com'}
-          = f.input :password, tr('Password')
-          = f.input :password_confirmation, tr('Password again')
+          = f.input :email, tr('Email'), {as: :email}.merge(Settings.only_for_domain.present? ? {append: "@#{Settings.only_for_domain}", placeholder: trl('arnold.schwarznegger')} : {placeholder: 'arnold.schwarznegger@example.com'})
+          = f.input :password, tr('Password'), as: :password
+          = f.input :password_confirmation, tr('Password again'), as: :password
           - if Settings.customization == 'get2gather'
             = f.input :read_manual, tr('I have read the <a href="http://get2gather.eth.ericsson.se/about" target="_blank">user manual</a>.').html_safe
             = f.input :read_cobe, tr('I accept the <a href="http://www.ericsson.com/res/thecompany/docs/corporate-responsibility/2012/cobe/EN_COBE.pdf" target="_blank">code of ethics</a>.').html_safe

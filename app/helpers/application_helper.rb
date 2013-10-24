@@ -103,16 +103,19 @@ module ActionView
       def input(*args)
         options = args.extract_options!
         name, text = args
-        if type = object.class.columns_hash[name.to_s].andand.type
-          case type
-            when :boolean then easy_check_box name, text, options
-            when :date then easy_date_select name, text, options.merge(class: 'form-control')
-            when :datetime then easy_datetime_select name, text, options.merge(class: 'form-control')
-            when :text then easy_text_area name, text, options.merge(class: 'form-control')
-            else easy_text_field name, text, options.merge(class: 'form-control')
-          end
-        elsif object.class.columns_hash["#{name}_file_name"]
-          easy_file_field name, text, options
+        if not type = options.delete(:as) and object.class.respond_to?(:columns_hash)
+          type = object.class.columns_hash[name.to_s].andand.type
+          type ||= :file if object.class.columns_hash["#{name}_file_name"]
+        end
+        case type
+          when :boolean then easy_check_box name, text, options
+          when :date then easy_date_select name, text, options.merge(class: 'form-control')
+          when :datetime then easy_datetime_select name, text, options.merge(class: 'form-control')
+          when :text then easy_text_area name, text, options.merge(class: 'form-control')
+          when :file then easy_file_field name, text, options
+          when :email then easy_email_field name, text, options.merge(class: 'form-control')
+          when :password then easy_password_field name, text, options.merge(class: 'form-control')
+          else easy_text_field name, text, options.merge(class: 'form-control')
         end
       end
 
@@ -120,18 +123,34 @@ module ActionView
         easy_select name, text, values, options
       end
 
+      def get_prepend_or_append(options, &block)
+        prepend = options.delete(:prepend)
+        append = options.delete(:append)
+        if prepend or append
+          output = "<div class='input-group'>"
+          output << "<span class='input-group-addon'>#{prepend}</span>" if prepend
+          output << yield
+          output << "<span class='input-group-addon'>#{append}</span>" if append
+          output << "</div>"
+          output.html_safe
+        else
+          yield
+        end
+      end
+
       def easy_text_field(name, text = nil, options = {})
         options.reverse_merge! maxlength: 255
         add_required_option(name, text, options)
-        input_field = text_field(name, options)
-        if prepend = options.delete(:prepend)
-          input_field = "<div class='input-group'><span class='input-group-addon'>#{prepend}</span>#{input_field}</div>"
-        end
-        "<div class='form-group'>#{text and label(name, text.html_safe)}#{input_field}</div>".html_safe
+        "<div class='form-group'>#{text and label(name, text.html_safe)}#{get_prepend_or_append(options) { text_field(name, options) } }</div>".html_safe
       end
 
       def easy_file_field(name, text = nil, options = {})
         "<div class='form-group'>#{text and label(name, text.html_safe)}#{file_field(name, options)}</div>".html_safe
+      end
+
+      def easy_email_field(name, text = nil, options = {})
+        add_required_option(name, text, options)
+        "<div class='form-group'>#{text and label(name, text.html_safe)}#{get_prepend_or_append(options) { email_field(name, options) } }</div>".html_safe
       end
 
       def easy_password_field(name, text = nil, options = {})
