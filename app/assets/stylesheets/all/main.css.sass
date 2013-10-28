@@ -49,30 +49,6 @@ input[type=text], textarea
 input#group_permaname, input#event_permaname
   max-width: 200px
 
-.wrapper
-  background: #ffffff
-  border-radius: 5px
-  // box-shadow: 0 1px 3px #9f9f9f
-  margin: 0 -20px 20px -20px
-  padding: 20px
-
-.row
-  .col-lg-4, .col-lg-6, .col-lg-8
-    &:first-child
-      .wrapper
-        margin-right: 0
-
-  .col-lg-4, .col-lg-6, .col-lg-8
-    &:last-child
-      .wrapper
-        margin-left: 0
-
-.modal-content .wrapper
-  border: none
-  box-shadow: none
-  margin: 0
-  padding: 0
-
 .group_header
   .avatar
     margin: -10px 20px 10px -10px
@@ -155,7 +131,7 @@ div.avatar_item
     top: 5px
 
 div.list_view
-  margin: 20px -20px
+  margin: 20px -15px
   padding: 5px 20px 10px 20px
   background: #f7f7f7
   > div.list_item, > div.notification > div.list_item
@@ -490,8 +466,11 @@ form.button_to
   div
     display: inline
 
-#new_feedback textarea
-  height: 34px
+#new_feedback
+  textarea
+    height: 34px
+  input
+    display: none
 
 div.list_item div.activity_item
   border-radius: 0 0 10px 0
@@ -525,3 +504,42 @@ form.button_to
 
 #accordion
   margin-bottom: 15px
+
+@media all and (min-width: 1025px)
+  .container
+    max-width: 960px
+  #content
+    background: #e9eaed
+    padding: 20px 0
+
+@media all and (max-width: 1024px)
+  body
+    background: #e9eaed
+  #footer
+    background: #d7dfe7
+    margin: 1px -20px -20px -20px
+    padding: 10px 20px 20px 20px
+
+.row
+  .col-lg-3, .col-lg-4, .col-lg-6, .col-lg-8
+    &:first-child
+      .wrapper
+        margin-right: 0
+
+  .col-lg-3, .col-lg-4, .col-lg-6, .col-lg-8
+    &:last-child
+      .wrapper
+        margin-left: 0
+
+.wrapper
+  background: #ffffff
+  border-radius: 5px
+  // box-shadow: 0 1px 3px #9f9f9f
+  margin: 0 -15px 15px -15px
+  padding: 15px
+
+.modal-content .wrapper
+  border: none
+  box-shadow: none
+  margin: 0
+  padding: 0

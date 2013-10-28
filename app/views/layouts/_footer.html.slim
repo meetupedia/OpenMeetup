@@ -1,4 +1,6 @@
 #footer.clearfix
+  = render 'layouts/user_suggestions'
+
   .container
 
     // google analytics custom segment for logged in users
@@ -29,7 +31,7 @@
       /     li= link_to tr('Quality Assurance'), 'http://openmeetup.org/?qualityassurance'
 
       .row
-        .span6
+        .col-lg-6
           .footer-showlove
             h3= tr('Spread the word')
             .footer-facebook
@@ -40,11 +42,13 @@
             .footer-twitter
               | <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://meetupedia.com" data-text="Wow, a free meetup.com alternative -->">Tweet</a>
               | <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-        .span6
+        .col-lg-6
           p
             =' link_to 'Privacy', privacy_path
             ' |
             = link_to 'Terms', terms_path
+            ' |
+            = link_to 'Pricing', pricing_path
 
     // footer for the standalone versions
 
