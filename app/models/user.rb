@@ -84,7 +84,7 @@ class User < ActiveRecord::Base
     url: '/system/:class/:attachment/:style/:class_:id.:extension',
     default_url: '/system/:class/missing_:style.png',
     styles: {
-      normal: ['940x200#', :jpg]
+      normal: ['960x200#', :jpg]
     },
     convert_options: {all: '-quality 95 -strip'}
 

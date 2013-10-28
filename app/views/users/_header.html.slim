@@ -5,7 +5,7 @@
     - if current_user
       - if current_user.is_admin?
         .btn-group.pull-right
-          a.btn.dropdown-toggle(data-toggle="dropdown" href="#")
+          a.btn.btn-default.dropdown-toggle(data-toggle="dropdown" href="#")
             =' image_tag 'cog.png'
             span.caret
           ul.dropdown-menu
@@ -25,4 +25,7 @@
       = render 'friendships/button', user: @user
 
 
-  h1.user= user_link @user
+  h1
+    i.icon.icon-user
+    '
+    = user_link @user

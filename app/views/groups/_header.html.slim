@@ -6,7 +6,7 @@
       - if current_user
         .button-menu
           .btn-group.pull-right
-            a.btn.dropdown-toggle(data-toggle="dropdown" href="#")
+            a.btn.btn-default.dropdown-toggle(data-toggle="dropdown" href="#")
               =' image_tag 'cog.png'
               span.caret
             ul.dropdown-menu
@@ -36,7 +36,10 @@
 
     - if @group.image.file?
       .avatar= link_to(image_tag(@group.image.url(:small), alt: @group.name, height: 96, width: 96, title: @group.name), @group)
-    h1.group= link_to @group.name, @group
+    h1
+      i.icon.icon-group
+      '
+      = link_to @group.name, @group
     - unless (tags = @group.tags).blank?
       p= render @group.tags
 

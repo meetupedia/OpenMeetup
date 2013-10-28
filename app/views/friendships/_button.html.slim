@@ -2,7 +2,7 @@
   span(id="friendship_button_for_user_#{user.id}")
     - if friendship = current_user.friendship_for(user)
       .btn-group.pull-right
-        a.btn.dropdown-toggle(data-toggle="dropdown" href="#")
+        a.btn.btn-default.dropdown-toggle(data-toggle="dropdown" href="#")
           - if user.friendship_for(current_user)
             =' %{<i class="icon-ok-sign icon-black"></i> #{tr('Friends')}}.html_safe
           - else

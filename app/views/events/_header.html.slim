@@ -6,7 +6,7 @@
       - absence = @event.absence_for(current_user)
       - participation = @event.participation_for(current_user)
       .btn-group.pull-right
-        a.btn.dropdown-toggle(data-toggle="dropdown" href="#")
+        a.btn.btn-default.dropdown-toggle(data-toggle="dropdown" href="#")
           =' image_tag 'cog.png'
           span.caret
         ul.dropdown-menu
@@ -28,7 +28,7 @@
       - if absence or participation
         - if absence
           .btn-group.pull-right
-            a.btn.dropdown-toggle(data-toggle="dropdown" href="#")
+            a.btn.btn-default.dropdown-toggle(data-toggle="dropdown" href="#")
               =' tr('Not going')
               span.caret
             ul.dropdown-menu
@@ -36,7 +36,7 @@
               li= link_to "#{tr('Not going')} <i class='icon-ok'></i>".html_safe, event_absences_path(@event), method: :post, onclick: "_gaq.push(['_trackEvent', 'Event RSVP - not going', 'Event RSVP']);"
         - if participation
           .btn-group.pull-right
-            a.btn.dropdown-toggle(data-toggle="dropdown" href="#")
+            a.btn.btn-default.dropdown-toggle(data-toggle="dropdown" href="#")
               =' tr('Going')
               span.caret
             ul.dropdown-menu

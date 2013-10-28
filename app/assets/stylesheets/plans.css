@@ -89,7 +89,7 @@
     text-shadow: 0 1px 1px rgba(255,255,255,0.4);
 }
 .licenses .features {
-    margin: 15px 0 0;
+    margin: 15px 0 0 40px;
     list-style: none;
 }
 .licenses .features>li { margin-bottom: 10px }

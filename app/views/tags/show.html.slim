@@ -23,10 +23,10 @@
       h2= tr('Groups')
       - unless @groups.blank?
         .list_view= render @groups
-        legend= tr("Do we need more groups about {tag}?", 'tag name',  tag: @tag.name)
+        h3= tr("Do we need more groups about {tag}?", 'tag name',  tag: @tag.name)
         p= tr("Create a group and invite everybody who is interested in {tag}.", 'tag name',  tag: @tag.name)
         p= link_to tr('Create meetup group'), new_group_path(:tag_id => @tag.id), class: 'btn btn-primary'
       - else
-        legend= tr("No groups yet, let's change this!")
+        h3= tr("No groups yet, let's change this!")
         p= tr("Create a group and invite everybody who is interested in {tag}.", 'tag name',  tag: @tag.name)
         p= link_to tr('Create meetup group'), new_group_path(:tag_id => @tag.id), class: 'btn btn-primary'

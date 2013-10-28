@@ -10,6 +10,8 @@ h1, h2, h3, h4
 
 h1
   font-size: 2.8em
+  i.icon
+    padding: 0 5px
 
 h2
   font-size: 2.4em
@@ -25,6 +27,9 @@ h2:nth-of-type(1)
 
 h4
   margin: 0
+
+ul
+  padding: 0
 
 a
   color: #005f8f
@@ -51,7 +56,7 @@ input#group_permaname, input#event_permaname
 
 .group_header
   .avatar
-    margin: -10px 20px 10px -10px
+    margin: 0 20px 10px 0
     position: relative
   h1
     margin: 0
@@ -78,16 +83,6 @@ div.group.list_item, div.event.list_item
 h1
   color: #000000
   margin: 25px 0 15px 0
-  &.event
-    background: url(calendar_alt_stroke_32x32.png) no-repeat 0 4px
-    padding-left: 48px
-  &.group
-    background: url(share_32x32.png) no-repeat 0 4px
-    padding-left: 48px
-  &.user
-    background: url(user_24x32.png) no-repeat 0 4px
-    margin-bottom: 10px
-    padding-left: 40px
 
 h2
   font-weight: normal
@@ -194,10 +189,11 @@ a.tag
   background: #cfcfcf
   border-radius: 3px
   color: #ffffff
+  display: inline-block
   font-size: 11px
   font-weight: normal
   margin-bottom: 3px
-  padding: 3px 6px
+  padding: 1px 6px
   white-space: nowrap
   &:hover
     background: #9f9f9f
@@ -457,9 +453,10 @@ ul.tiles
   margin-bottom: 10px
 
 .header_image
-  margin: -20px -20px 20px -20px
+  margin: -15px -15px 20px -15px
   img
     border-radius: 5px 5px 0 0
+    width: 960px
 
 form.button_to
   display: inline

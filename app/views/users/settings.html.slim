@@ -2,7 +2,7 @@
   .col-lg-4
     .wrapper
       h2= tr('Edit profile')
-      ul.nav.nav-tabs.nav-stacked
+      ul.nav.nav-pills.nav-stacked
         li= link_to tr('Edit name'), '#edit_name'
         li= link_to tr('Change email'), '#change_email'
         li= link_to tr('Change profile picture'), '#change_profile_picture'
@@ -20,58 +20,41 @@
     #edit_profile
     .wrapper
       h2= tr('Edit name')
-      = semantic_form_for @user do |f|
-        = f.inputs do
-          = f.input :first_name
-          = f.input :last_name
-        = f.actions do
-          =' f.action :submit, label: 'Save', button_html: {class: 'btn btn-primary', disable_with: trl('Saving...')}
-          = f.action :cancel, label: 'Cancel'
+      = easy_form_for @user do |f|
+        = f.input :first_name, tr('First name')
+        = f.input :last_name, tr('Last name')
+        = f.action tr('Save'), disable_with: trl('Saving...')
 
     #change_email
     .wrapper
       h2= tr('Change email')
-      = semantic_form_for @user do |f|
-        = f.inputs do
-          = f.input :email
-        = f.actions do
-          =' f.action :submit, label: 'Save', button_html: {class: 'btn btn-primary', disable_with: trl('Saving...')}
-          = f.action :cancel, label: 'Cancel'
+      = easy_form_for @user do |f|
+        = f.input :email, tr('Email')
+        = f.action trl('Save'), disable_with: trl('Saving...')
 
     #change_profile_picture
     .wrapper
       h2= tr('Change profile picture')
-      = semantic_form_for @user do |f|
-        = f.inputs do
-          = f.input :avatar, label: tr('Profile picture')
-          = f.input :header, label: tr('Header picture')
-        = f.actions do
-          =' f.action :submit, label: 'Save', button_html: {class: 'btn btn-primary', disable_with: trl('Saving...')}
-          = f.action :cancel, label: 'Cancel'
+      = easy_form_for @user do |f|
+        = f.input :avatar, tr('Profile picture')
+        = f.input :header, tr('Header picture')
+        = f.action trl('Save'), disable_with: trl('Saving...')
 
     #change_password
     .wrapper
       h2= tr('Change password')
-      = semantic_form_for @user do |f|
-        = f.inputs do
-          = f.input :password
-          = f.input :password_confirmation
-        = f.actions do
-          =' f.action :submit, label: 'Save', button_html: {class: 'btn btn-primary', disable_with: trl('Saving...')}
-          = f.action :cancel, label: 'Cancel'
+      = easy_form_for @user do |f|
+        = f.input :password, tr('Password'), as: :password
+        = f.input :password_confirmation, tr('Password confirmation'), as: :password
+        = f.action trl('Save'), disable_with: trl('Saving...')
 
     - unless Settings.standalone
       #city_settings
       .wrapper
         h2= tr('City settings')
-        = semantic_form_for @user do |f|
-          = f.inputs do
-            .control-group
-              = f.label :city_id, tr('Your default city')
-              = f.text_field :city_id, 'data-pre' => [@user.city].compact.map { |city| {id: city.id, name: city.name} }.to_json
-          = f.actions do
-            =' f.action :submit, label: 'Save', button_html: {class: 'btn btn-primary', disable_with: trl('Saving...')}
-            = f.action :cancel, label: 'Cancel'
+        = easy_form_for @user do |f|
+          = f.input :city_id, tr('Your default city'), 'data-pre' => [@user.city].compact.map { |city| {id: city.id, name: city.name} }.to_json
+          = f.action trl('Save'), disable_with: trl('Saving...')
 
     - if Settings.enable_facebook_login or Settings.enable_twitter_login
       #social_settings
@@ -103,12 +86,9 @@
     #email_settings
     .wrapper
       h2= tr('Email settings')
-      = semantic_form_for @user do |f|
-        = f.inputs do
-          = f.input :enable_weekly_newsletter, as: :boolean
-        = f.actions do
-          =' f.action :submit, label: 'Save', button_html: {class: 'btn btn-primary', disable_with: trl('Saving...')}
-          = f.action :cancel, label: 'Cancel'
+      = easy_form_for @user do |f|
+        = f.input :enable_weekly_newsletter, tr('Enable weekly newsletter')
+        = f.action tr('Save'), disable_with: trl('Saving...')
 
     #delete_profile
     .wrapper
