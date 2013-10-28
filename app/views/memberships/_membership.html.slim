@@ -9,5 +9,5 @@
   .avatar= user_avatar membership.user
   =' link_to membership.user.name, membership.user
   - if membership.is_admin?
-    span.label.label-important=' tr('group admin')
+    span.label.label-danger=' tr('group admin')
   span.date= l membership.created_at

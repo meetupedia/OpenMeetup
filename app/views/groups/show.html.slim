@@ -36,7 +36,7 @@
           = user_link user
           - if @group.admins.include?(user)
             '
-            span.label.label-important=' tr('group admin')
+            span.label.label-danger=' tr('group admin')
 
 
     - if Settings.enable_share_buttons
