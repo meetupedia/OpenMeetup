@@ -17,12 +17,12 @@ nav.navbar.navbar-default.navbar-fixed-top(role="navigation")
             i.icon.icon-large.icon-envelope
             - if current_user.notifications.size > 0
               '
-              span.badge.badge-danger= current_user.notifications.size
+              span.badge= current_user.notifications.size
           li= link_to friend_requests_user_path(current_user), alt: trl('My friend requests'), title: trl('My friend requests') do
             i.icon.icon-large.icon-user
             - if (counter = current_user.inverse_requested_friends.size) > 0
               '
-              span.badge.badge-danger= counter
+              span.badge= counter
 
       form.navbar-form.navbar-left action='/search' method='get' onsubmit="_gaq.push(['_trackEvent', 'Search', 'Search']);"
         .form-group
