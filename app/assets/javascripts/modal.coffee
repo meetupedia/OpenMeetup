@@ -4,13 +4,13 @@ modalbox =
     speed: 250
 
   loading: ->
-    $('div.modal-content').last().html '<div class="modal-loading"><img src="/modal/loading.gif" alt=""/></div>'
+    $('div.modalbox-content').last().html '<div class="modalbox-loading"><img src="/modal/loading.gif" alt=""/></div>'
 
   build: ->
-    $('div.modal-window').last().find('input').blur()
-    $('body').append '<div class="modal-background"></div><div class="modal-window"><div class="modal-content"></div></div>'
+    $('div.modalbox-window').last().find('input').blur()
+    $('body').append '<div class="modalbox-background"></div><div class="modalbox-window"><div class="modalbox-content"></div></div>'
     modalbox.loading()
-    lastWindow = $('div.modal-window').last()
+    lastWindow = $('div.modalbox-window').last()
     lastWindow.css(
       top: $(window).scrollTop() + modalbox.settings.top
       left: $(window).width() / 2 - lastWindow.outerWidth() / 2
@@ -27,25 +27,25 @@ modalbox =
     modalbox.content html
 
   close: (callback) ->
-    lastBackground = $('div.modal-background').last()
+    lastBackground = $('div.modalbox-background').last()
     lastBackground.fadeOut modalbox.settings.speed, ->
       lastBackground.remove()
 
-    lastWindow = $('div.modal-window').last()
+    lastWindow = $('div.modalbox-window').last()
     lastWindow.find('input').blur()
     lastWindow.fadeOut modalbox.settings.speed, ->
       lastWindow.remove()
       $(document).trigger('modalbox.closed')
       callback.call this if typeof(callback) == 'function'
-      unless $('div.modal-window').length
+      unless $('div.modalbox-window').length
         $(document).unbind 'keydown.modalbox'
 
   afterClose: (callback) ->
     $(document).last().bind('modalbox.closed', callback)
 
   content: (html) ->
-    $('div.modal-content').last().html '<div class="modal-close"><a href="#"><img src="/modal/closelabel.png" alt=""/></a></div>' + html
-    $(document).on 'click', 'div.modal-close a', ->
+    $('div.modalbox-content').last().html '<div class="modalbox-close"><a href="#"><img src="/modal/closelabel.png" alt=""/></a></div>' + html
+    $(document).on 'click', 'div.modalbox-close a', ->
       $(this).remove()
       modalbox.close()
       false
@@ -60,10 +60,10 @@ modalbox =
         modalbox.content html
         $(document).trigger 'modalbox.loaded'
         callback.call this if typeof(callback) == 'function'
-    $('div.modal-window').last().attr 'rel', href
+    $('div.modalbox-window').last().attr 'rel', href
 
   reload: ->
-    lastWindow = $('div.modal-window').last()
+    lastWindow = $('div.modalbox-window').last()
     if lastWindow.length
       modalbox.loading()
       modalbox.load lastWindow.attr('rel')

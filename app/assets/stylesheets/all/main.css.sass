@@ -126,7 +126,7 @@ div.avatar_item
     top: 5px
 
 div.list_view
-  margin: 20px -15px
+  margin: 15px -15px 20px -15px
   padding: 5px 20px 10px 20px
   background: #f7f7f7
   > div.list_item, > div.notification > div.list_item
@@ -138,6 +138,10 @@ div.list_view
     margin-bottom: -20px
   &.nowrapper
     margin-bottom: 20px
+
+.modalbox-content
+  div.list_view:last-child
+    border-radius: 0
 
 div.list_item div.list_item.indent0, div.list_item.indent0
   margin-left: 0
@@ -340,7 +344,7 @@ a.function
   img
     margin-top: 3px
 
-.modal-content h1
+.modalbox-content h1
   margin-top: 5px
 
 ul.token-input-list-facebook
@@ -360,7 +364,7 @@ form
     padding: 0
 
 .breadcrumbs
-  margin: -20px 0 20px -20px
+  margin: -15px 0 20px -15px
   position: relative
   z-index: 10
   a
@@ -418,7 +422,7 @@ ul.tiles
       :margin 0 5px 5px 0
       :overflow hidden
       :padding 10px 0
-      :width 83px
+      :width 88px
       :text-align center
       &:hover
         :background #4f5f6f
@@ -535,7 +539,7 @@ form.button_to
   margin: 0 -15px 15px -15px
   padding: 15px
 
-.modal-content .wrapper
+.modalbox-content .wrapper
   border: none
   box-shadow: none
   margin: 0
