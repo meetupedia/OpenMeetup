@@ -1,6 +1,6 @@
 = div_for participation.user, class: 'list_item avatar_item clearfix' do
   - if can? :destroy, participation
-    .pull-right= button_to 'Törlés', participation, method: :delete, confirm: 'Biztosan törlöd?', class: 'btn btn-danger btn-mini'
+    .pull-right= button_to 'Törlés', participation, method: :delete, confirm: 'Biztosan törlöd?', class: 'btn btn-danger btn-xs'
   .avatar= user_avatar participation.user
   =' link_to participation.user.name, participation.user
   - if participation.is_checkined?

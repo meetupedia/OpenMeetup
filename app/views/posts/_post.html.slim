@@ -17,6 +17,6 @@
     .div(style="clear: both;")
 
     div(id="add-post-comment-#{post.id}" style="display: none;")
-      = form_for Comment.new, url: polymorphic_path([post, :comments]), remote: true do |f|
-        = f.text_area :comment
-        = f.submit trl('Send'), class: 'btn btn-primary', disable_with: trl('Sending...')
+      = easy_form_for Comment.new, url: polymorphic_path([post, :comments]), remote: true do |f|
+        = f.input :comment
+        = f.action trl('Send'), disable_with: trl('Sending...')
