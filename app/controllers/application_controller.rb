@@ -199,7 +199,7 @@ private
 
   def use_city
     unless Settings.standalone
-      session[:city_id] ||= current_user.city_id
+      session[:city_id] ||= current_user.andand.city_id
       session[:city_id] = params[:city][:id] if params[:city].andand[:id]
       @city = City.where(id: session[:city_id]).first
     end
