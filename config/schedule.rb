@@ -9,7 +9,8 @@ end
 # daily jobs
 every 1.day, at: '5:00am' do
   runner 'Admin.cron_daily'
-  rake 'sitemap:create'
+  # rake 'sitemap:create'
+  runner 'SitemapGenerator::Interpreter.run'
 end
 
 # hrourly jobs
