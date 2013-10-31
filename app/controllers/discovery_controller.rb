@@ -21,7 +21,7 @@ class DiscoveryController < CommonController
       elsif Settings.group_discovery_mandatory_header_image
         @groups = @groups.where('image_updated_at IS NOT ?', nil)
       end
-      @groups = @groups.joins(:city).where('groups.city_id' => @city.id) unless Settings.standalone
+      @groups = @groups.joins(:city).where('groups.city_id' => @city.id) if @city
     end
     @groups = @groups.where('groups.id NOT IN (?)', current_user.uninterested_group_ids) if current_user.uninterested_group_ids.present?
   end

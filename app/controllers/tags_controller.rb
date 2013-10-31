@@ -20,9 +20,9 @@ class TagsController < CommonController
 
   def show
     @groups = @tag.groups
-    @groups = @groups.joins(:city).where('groups.city_id' => @city.id) unless Settings.standalone
+    @groups = @groups.joins(:city).where('groups.city_id' => @city.id) if @city
     @users = @tag.users
-    @users = @users.joins(:city).where('users.city_id' => @city.id) unless Settings.standalone
+    @users = @users.joins(:city).where('users.city_id' => @city.id) if @city
   end
 
   def new
