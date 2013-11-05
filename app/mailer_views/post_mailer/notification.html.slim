@@ -10,4 +10,4 @@ h1 New post!
 p
   - if @postable.is_a?(Group)
     =' link_to 'Reply', "mailto:#{@postable.email_url}", class: 'btn btn-primary'
-  = link_to 'View post', @post, class: 'btn'
+  = link_to 'View post', @post, class: 'btn btn-default'

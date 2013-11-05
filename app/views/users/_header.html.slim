@@ -18,7 +18,7 @@
       - if @user == current_user
         = link_to tr('Edit profile'), settings_user_path(@user), class: 'btn btn-primary'
       - elsif Settings.enable_messages
-        = link_to new_wave_path(recipient_id: @user.id), rel: 'modal', class: 'btn' do
+        = link_to new_wave_path(recipient_id: @user.id), rel: 'modal', class: 'btn btn-default' do
           b.icon-envelope
           '
           = tr('Send message')

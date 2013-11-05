@@ -23,7 +23,7 @@
   .col-lg-8
     .wrapper
       - if can? :create, Group
-        p.pull-right= link_to tr('Create new group'), new_group_path, class: 'btn'
+        p.pull-right= link_to tr('Create new group'), new_group_path, class: 'btn btn-default'
 
       h2= tr('Searching for groups')
 

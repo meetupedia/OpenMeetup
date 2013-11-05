@@ -22,13 +22,13 @@ class ApplicationController < ActionController::Base
 
     rescue_from CanCan::AccessDenied do |exception|
       unless current_user
-        flash[:alert] = 'Be kell jelentkezned!'
+        flash[:alert] = tr('Please sign in to access this page!')
         authenticate
       else
         if modal_request?
-          render text: 'Nem hozzáférhető számodra a kért oldal!'
+          render text: tr('You are not authorized to access this page!')
         else
-          flash[:alert] = 'Nem hozzáférhető számodra a kért oldal!'
+          flash[:alert] = tr('You are not authorized to access this page!')
           redirect_to root_url
         end
       end

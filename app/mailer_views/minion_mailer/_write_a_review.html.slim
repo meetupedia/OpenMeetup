@@ -8,4 +8,6 @@ p
   = link_to @item.event.name, @item.event
   | ? Please write a short feedback (you can make it anonymous if you want):
 
-p= link_to 'Write review', new_event_review_path(@item.event), class: 'btn'
+p
+  =' link_to 'Write review', new_event_review_path(@item.event), class: 'btn btn-default btn-primary'
+  =  link_to 'Visit event page', @item.event, class: 'btn btn-default'

@@ -3,7 +3,7 @@
 
 .wrapper
   - if can? :create, Event.new(group: @group)
-    .pull-right= link_to tr('New event'), new_group_event_path(@group), class: 'btn', rel: 'modal'
+    .pull-right= link_to tr('New event'), new_group_event_path(@group), class: 'btn btn-default', rel: 'modal'
 
   h2= tr('Events')
 

@@ -7,7 +7,7 @@
     = f.input :city_id, tr('City'), 'data-pre' => [@event.city].compact.map { |city| {id: city.id, name: city.name} }.to_json
     = f.input :street, tr('Street')
   - if @event.new_record?
-    = f.input :invite_all_group_members, false, as: :boolean, input_html: {checked: 'checked'}
+    = f.input :invite_all_group_members, tr('Invite all group members'), as: :boolean, checked: 'checked'
   #accordion.panel-group
     .panel.panel-default
       .panel-heading

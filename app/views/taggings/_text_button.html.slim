@@ -3,5 +3,5 @@ span(id="tagging_button_for_tag_#{tag.id}")
     - if tagging = tag.tagging_for(current_user)
       = button_to "✔ #{tag.name}", set_tag_taggings_path(tag), method: :post, class: 'btn btn-success', remote: true
     - else
-	    = button_to "+ #{tag.name}", set_tag_taggings_path(tag), method: :post, class: 'btn', remote: true
+	    = button_to "+ #{tag.name}", set_tag_taggings_path(tag), method: :post, class: 'btn btn-default', remote: true
 '

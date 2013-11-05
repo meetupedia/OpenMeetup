@@ -22,11 +22,11 @@ html
       .container(class="layout_#{controller.controller_name}" id="layout_#{controller.controller_name}_#{controller.action_name}")
         = yield :header
         - if flash[:notice]
-          .alert.alert-success
+          .alert.alert-success.alert-dismissable
             a.close(data-dismiss="alert")×
             = flash[:notice]
         - if flash[:alert]
-          .alert.alert-error
+          .alert.alert-danger.alert-dismissable
             a.close(data-dismiss="alert")×
             = flash[:alert]
         = yield

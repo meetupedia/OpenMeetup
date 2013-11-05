@@ -1,5 +1,5 @@
 .wrapper
-  p.pull-right= link_to image_tag('cog.png'), edit_letter_path(@letter), class: 'btn'
+  p.pull-right= link_to image_tag('cog.png'), edit_letter_path(@letter), class: 'btn btn-default'
 
   h1 Levél
 
@@ -12,7 +12,7 @@
       td= user_link @user
 
   p
-    =' button_to 'Teszt', mailtest_letter_path(@letter), method: :post, class: 'btn'
+    =' button_to 'Teszt', mailtest_letter_path(@letter), method: :post, class: 'btn btn-default'
     = link_to 'Levélnézet', '/letter_mailer/mail_view/letter', class: 'external'
 
   hr

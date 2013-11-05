@@ -3,4 +3,4 @@ span(id="tagging_button_for_tag_#{tag.id}")
     - if tagging = tag.tagging_for(current_user)
       = button_to %{<i class="icon-ok-sign icon-white"></i> #{tr('Following')}}.html_safe, tagging, method: :delete, class: 'btn btn-success', remote: true
     - else
-	     = button_to %{<i class="icon-plus-sign icon-white"></i> #{tr('Follow')}}.html_safe, tag_taggings_path(tag), method: :post, class: 'btn btn-primary', remote: true
+	     = button_to %{<i class="icon-plus-sign icon-white"></i> #{tr('Follow')}}.html_safe, tag_taggings_path(tag), method: :post, class: 'btn btn-primary', remote: true, , onclick: "_gaq.push(['_trackEvent', 'Add new interest', 'Interest']);"
