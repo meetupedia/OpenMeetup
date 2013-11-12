@@ -28,8 +28,8 @@ class DiscoveryController < CommonController
 
   def events
     @events = Event.where('start_time > ?', Time.now).order('start_time ASC').paginate page: params[:page]
-    @events = @events.where('events.id NOT IN (?)', current_user.uninterested_event_ids) if current_user.uninterested_event_ids.present?
-    @events = @events.joins(group: :city).where('groups.city_id' => @city.id) unless Settings.standalone
+    @events = @events.where('events.id NOT IN (?)', current_user.uninterested_event_ids) if current_user and current_user.uninterested_event_ids.present?
+    @events = @events.joins(group: :city).where('groups.city_id' => @city.id) if @city
   end
 
   def friends
@@ -38,6 +38,6 @@ class DiscoveryController < CommonController
 
   def interests
     @tags = Tag.order('name ASC').paginate page: params[:page]
-    @tags = @tags.joins(groups: :city).where('groups.city_id' => @city.id) unless Settings.standalone
+    @tags = @tags.joins(groups: :city).where('groups.city_id' => @city.id) if @city
   end
 end
