@@ -3,9 +3,8 @@
     = render comments, commentable: commentable
 
 - if current_user
-  .comment_like_container.clearfix
-    .comment_container
-      = link_to_function tr('Comment'), "$('#add-comment-#{commentable.class.name.tableize}-#{commentable.id}').toggle().find('textarea').focus()", class: 'btn btn-default btn-xs'
+  p
+    =' link_to_function tr('Comment'), "$('#add-comment-#{commentable.class.name.tableize}-#{commentable.id}').toggle().find('textarea').focus()", class: 'btn btn-default btn-xs'
     = render 'votes/set', item: commentable
 
   div(id="add-comment-#{commentable.class.name.tableize}-#{commentable.id}" style="display: none;")
