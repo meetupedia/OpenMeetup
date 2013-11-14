@@ -9,7 +9,7 @@
           = tr('More options')
       #collapse.panel-collapse.collapse
         .panel-body
-          = f.input :message, label: tr('Personal message')
+          = f.input :message, tr('Personal message')
   = f.action trl('Send'), disable_with: trl('Sending...'), onclick: "_gaq.push(['_trackEvent', 'Send group invitation', 'Group invitation']);"
 
 javascript:

@@ -3,30 +3,10 @@
     .wrapper= render 'menu'
   .col-lg-8
     .wrapper
-
-      - unless Settings.standalone
-        .change_city
-          = easy_form_for City.new, url: events_discovery_path do |f|
-            .pull-right= f.text_field :id
-            .pull-right= f.label :id, tr('in'), class: 'change_field'
-
-        javascript:
-          $('#city_id').tokenInput('/cities.json', {
-            allowFreeTagging: true,
-            crossDomain: false,
-            preventDuplicates: true,
-            prePopulate: #{[{id: @city.id, name: trl(@city.display_name)}].to_json.html_safe},
-            tokenLimit: 1,
-            theme: 'facebook',
-            onAdd: function(){
-              $('#city_id').closest('form').submit()
-            },
-          })
-
-      h2= tr('Interests')
-
+      = render 'discovery/change_city'
+      h1= tr('Interests')
       .list_view
         - if @tags.present?
-          = render @tags
+          p= render @tags
         - else
           p.muted= tr('No interests.')

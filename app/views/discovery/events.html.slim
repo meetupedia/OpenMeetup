@@ -4,11 +4,9 @@
   .col-lg-8
     .wrapper
       = render 'discovery/change_city'
-      h2= tr('Events')
+      h1= tr('Events')
       .list_view
         - if @events.present?
-          - @events.each do |event|
-            .pull-right= link_to '×', uninterests_path(uninterestable_type: 'Event', uninterestable_id: event.id), method: :post, remote: true, class: 'close', title: 'Not interested', confirm: trl('Mark as uninterested?')
-            = render event
+          = render @events
         - else
           p.muted= tr('No events.')

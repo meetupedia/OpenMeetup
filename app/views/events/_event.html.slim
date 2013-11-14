@@ -1,6 +1,6 @@
 = div_for event, class: 'list_item' do
+  - if current_user and controller.controller_name == 'discovery'
+    .pull-right= link_to '×', uninterests_path(uninterestable_type: 'Event', uninterestable_id: event.id), method: :post, remote: true, class: 'close', title: 'Not interested', confirm: trl('Mark as uninterested?')
   h4= link_to event.title, event
-  div
-    = l(event.start_time)
-  div
-    = link_to "#{event.participations.size} #{tr('participants')}".html_safe, users_event_path(event)
+  div= l(event.start_time)
+  div= link_to "#{event.participations.size} #{tr('participants')}".html_safe, users_event_path(event)

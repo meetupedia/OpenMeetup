@@ -3,7 +3,7 @@
     .wrapper= render 'menu'
   .col-lg-8
     .wrapper
-      h2= tr('Friends')
+      h1= tr('Friends')
       .list_view
         - unless @users.blank?
           = will_paginate @users

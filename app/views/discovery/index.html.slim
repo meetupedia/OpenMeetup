@@ -4,7 +4,7 @@
   .col-lg-8
     .wrapper
       = render 'discovery/change_city'
-      h2= tr('Groups')
+      h1= tr('Groups')
       .list_view
         - if @groups.present?
           = render @groups
