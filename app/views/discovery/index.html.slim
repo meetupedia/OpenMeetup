@@ -7,8 +7,6 @@
       h2= tr('Groups')
       .list_view
         - if @groups.present?
-          - @groups.each do |group|
-            .pull-right= link_to '×', uninterests_path(uninterestable_type: 'Group', uninterestable_id: group.id), method: :post, remote: true, class: 'close', title: 'Not interested', confirm: trl('Mark as uninterested?')
-            = render group
+          = render @groups
         - else
           p.muted= tr('No groups.')

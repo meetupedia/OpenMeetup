@@ -3,11 +3,11 @@
     .wrapper= render 'menu'
   .col-lg-8
     .wrapper
-      h1= tr('Friends')
-      - unless @users.blank?
-        .list_view
+      h2= tr('Friends')
+      .list_view
+        - unless @users.blank?
           = will_paginate @users
           = render @users
           = will_paginate @users
-      - else
-        p.muted= tr('No friends yet.')
+        - else
+          p.muted= tr('No friends yet.')

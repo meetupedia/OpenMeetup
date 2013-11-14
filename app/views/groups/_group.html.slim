@@ -1,4 +1,6 @@
 = div_for group, class: 'list_item' do
+  - if current_user and controller.controller_name == 'discovery'
+    .pull-right= link_to '×', uninterests_path(uninterestable_type: 'Group', uninterestable_id: group.id), method: :post, remote: true, class: 'close', title: 'Not interested', confirm: trl('Mark as uninterested?')
   .avatar= link_to(image_tag(group.image.url(:small), alt: group.name, height: 72, width: 72, title: group.name), group)
   .item_content
     - if current_user and membership = group.membership_for(current_user)

@@ -3,7 +3,7 @@
     .wrapper= render 'menu'
   .col-lg-8
     .wrapper
-      h1= tr('News feed')
+      h2= tr('News feed')
       - unless @activities.blank?
         .list_view
           = will_paginate @activities
