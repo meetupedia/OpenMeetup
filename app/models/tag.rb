@@ -13,9 +13,8 @@ class Tag < ActiveRecord::Base
 
   auto_permalink :name
 
-  before_validation do |tag|
-    tag.name = tag.name.mb_chars.downcase
-    true
+  before_validation do
+    self.name = name.mb_chars.downcase
   end
 
   def group_tagging_for(group)

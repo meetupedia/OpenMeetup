@@ -8,9 +8,8 @@ class Setting < ActiveRecord::Base
 
   auto_permalink :key
 
-  before_validation do |setting|
-    setting.key = setting.key.parameterize.gsub(/-+/, '_')
-    true
+  before_validation do
+    self.key = key.parameterize.gsub(/-+/, '_')
   end
 
   def self.[](key)

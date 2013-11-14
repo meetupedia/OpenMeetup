@@ -13,9 +13,8 @@ class GroupInvitation < ActiveRecord::Base
 
   attr_accessor :ids, :error
 
-  before_create do |group_invitation|
-    group_invitation.code = SecureRandom.hex(16)
-    true
+  before_create do
+    self.code = SecureRandom.hex(16)
   end
 end
 

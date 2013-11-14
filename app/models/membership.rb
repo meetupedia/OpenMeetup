@@ -11,12 +11,11 @@ class Membership < ActiveRecord::Base
 
   attr_protected :is_admin
 
-  after_create do |membership|
-    Activity.create_from membership, membership.user, membership.group
-    membership.group.admins.each do |user|
-      GroupMailer.join(membership, user).deliver if user.email
+  after_create do
+    group.admins.each do |user|
+      GroupMailer.join(self, user).deliver if user.email
     end
-    true
+    Activity.create_from self, user, group
   end
 end
 

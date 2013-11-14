@@ -11,16 +11,15 @@ class Participation < ActiveRecord::Base
   has_many :answers, dependent: :destroy
   accepts_nested_attributes_for :answers
 
-  after_create do |participation|
-    Activity.create_from participation, participation.user, participation.event.group, participation.event
-    participation.event.absence_for(participation.user).andand.destroy
-    membership = participation.event.group.memberships.create user: participation.user unless participation.event.group.membership_for(participation.user)
-    participation.event.group.admins.each do |user|
-      EventMailer.participation(participation, user).deliver if user.email
+  after_create do
+    event.absence_for(user).andand.destroy
+    event.group.memberships.create user: user unless event.group.membership_for(user)
+    event.group.admins.each do |user|
+      EventMailer.participation(self, user).deliver if user.email
     end
     Minion.set participation, :participation_reminder, :write_a_review
-    Minion.unset participation.event, :event_reminder_for_members
-    true
+    Minion.unset event, :event_reminder_for_members
+    Activity.create_from self, user, event.group, event
   end
 end
 

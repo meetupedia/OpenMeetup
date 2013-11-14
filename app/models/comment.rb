@@ -14,9 +14,8 @@ class Comment < ActiveRecord::Base
 
   validates_presence_of :comment
 
-  after_validation do |comment|
-    comment.level = comment.reply_to.level + 1 if comment.reply_to
-    true
+  after_validation do
+    self.level = reply_to ? reply_to.level + 1 : 0
   end
 
   def root_comment

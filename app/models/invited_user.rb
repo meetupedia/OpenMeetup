@@ -13,9 +13,8 @@ class InvitedUser < ActiveRecord::Base
 
   auto_permalink :code
 
-  before_validation on: :create do |invited_user|
-    invited_user.code = SecureRandom.hex(16)
-    true
+  before_validation on: :create do
+    self.code = SecureRandom.hex(16)
   end
 end
 

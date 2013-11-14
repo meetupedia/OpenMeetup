@@ -40,9 +40,8 @@ class Event < ActiveRecord::Base
 
   attr_accessor :invite_all_group_members
 
-  before_validation do |event|
-    event.permaname = event.permaname.parameterize
-    true
+  before_validation do
+    self.permaname = permaname.parameterize
   end
 
   validate :check_permaname
