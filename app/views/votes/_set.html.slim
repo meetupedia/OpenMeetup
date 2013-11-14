@@ -1,28 +1,29 @@
-// if the user has voted for this item already
-- if current_user and Vote.find_by_voteable_type_and_voteable_id_and_user_id(item.class.name, item.id, current_user.id)
+.vote_container
+  // if the user has voted for this item already
+  - if current_user and Vote.find_by_voteable_type_and_voteable_id_and_user_id(item.class.name, item.id, current_user.id)
 
-  // lets display the green star
-  =' link_to tr('Unlike'), set_votes_path(voteable_type: item.class.name, voteable_id: item.id), remote: true, class: 'btn btn-success btn-xs set_vote'
+    // lets display the green star
+    =' link_to tr('Unlike'), set_votes_path(voteable_type: item.class.name, voteable_id: item.id), remote: true, class: 'btn btn-success btn-xs set_vote'
 
-  // if there has been votes --> display vote count
-  - if item.votes_count == 1
-    = link_to tr('You liked this.', "Like", {:votes_count => item.votes_count}), votes_path(voteable_type: item.class.name, voteable_id: item.id), rel: 'modal', class: 'btn btn-link btn-xs'
+    // if there has been votes --> display vote count
+    - if item.votes_count == 1
+      = link_to tr('You liked this.', "Like", {:votes_count => item.votes_count}), votes_path(voteable_type: item.class.name, voteable_id: item.id), rel: 'modal', class: 'btn btn-link btn-xs'
 
-  // if there has been votes --> display vote count
-  - elsif item.votes_count > 1
-    = link_to tr('You and {votes_count} people liked this.', "Like", {:votes_count => item.votes_count - 1}), votes_path(voteable_type: item.class.name, voteable_id: item.id), rel: 'modal', class: 'btn btn-link btn-xs'
+    // if there has been votes --> display vote count
+    - elsif item.votes_count > 1
+      = link_to tr('You and {votes_count} people liked this.', "Like", {:votes_count => item.votes_count - 1}), votes_path(voteable_type: item.class.name, voteable_id: item.id), rel: 'modal', class: 'btn btn-link btn-xs'
 
-// if the user has NOT voted for this item
-- else
+  // if the user has NOT voted for this item
+  - else
 
-  // lets display the gray star
-  - if current_user
-    =' link_to tr('Like'), set_votes_path(voteable_type: item.class.name, voteable_id: item.id), method: :post, remote: true, class: 'btn btn-default btn-xs set_vote', onclick: "_gaq.push(['_trackEvent', 'Like', 'Like']);"
+    // lets display the gray star
+    - if current_user
+      =' link_to tr('Like'), set_votes_path(voteable_type: item.class.name, voteable_id: item.id), method: :post, remote: true, class: 'btn btn-default btn-xs set_vote', onclick: "_gaq.push(['_trackEvent', 'Like', 'Like']);"
 
-  // if there has been votes --> display vote count
-  - if item.votes_count == 1
-    = link_to tr('{votes_count} user liked this.', "Like", {:votes_count => item.votes_count}), votes_path(voteable_type: item.class.name, voteable_id: item.id), rel: 'modal', class: 'btn btn-link btn-xs'
+    // if there has been votes --> display vote count
+    - if item.votes_count == 1
+      = link_to tr('{votes_count} user liked this.', "Like", {:votes_count => item.votes_count}), votes_path(voteable_type: item.class.name, voteable_id: item.id), rel: 'modal', class: 'btn btn-link btn-xs'
 
-  // if there has been votes --> display vote count
-  - elsif item.votes_count > 1
-    = link_to tr('{votes_count} people liked this.', "Like", {:votes_count => item.votes_count}), votes_path(voteable_type: item.class.name, voteable_id: item.id), rel: 'modal', class: 'btn btn-link btn-xs'
+    // if there has been votes --> display vote count
+    - elsif item.votes_count > 1
+      = link_to tr('{votes_count} people liked this.', "Like", {:votes_count => item.votes_count}), votes_path(voteable_type: item.class.name, voteable_id: item.id), rel: 'modal', class: 'btn btn-link btn-xs'

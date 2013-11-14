@@ -3,7 +3,7 @@
     = render comments, commentable: commentable
 
 - if current_user
-  p
+  .paragraph
     =' link_to_function tr('Comment'), "$('#add-comment-#{commentable.class.name.tableize}-#{commentable.id}').toggle().find('textarea').focus()", class: 'btn btn-default btn-xs'
     = render 'votes/set', item: commentable
 
