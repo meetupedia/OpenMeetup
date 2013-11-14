@@ -8,15 +8,3 @@
   .text= textilize(auto_link(post.post)).html_safe
 
   = render 'comments/comments', commentable: post
-
-  - if current_user
-    .comment_like_container
-      .comment_container
-        = link_to_function tr('Comment'), "$('#add-post-comment-#{post.id}').toggle().find('textarea').focus()"
-      = render 'votes/set', item: post
-    .div(style="clear: both;")
-
-    div(id="add-post-comment-#{post.id}" style="display: none;")
-      = easy_form_for Comment.new, url: polymorphic_path([post, :comments]), remote: true do |f|
-        = f.input :comment
-        = f.action trl('Send'), disable_with: trl('Sending...')
