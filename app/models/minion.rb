@@ -68,7 +68,10 @@ class Minion
               from: Minion[:from] || Settings.default_email,
             }
             options[:reply_to] = Minion[:reply_to] if Minion[:reply_to].present?
-            MinionMailer.job(@minion_job.id, recipient.id, options).deliver
+            begin
+              MinionMailer.job(@minion_job.id, recipient.id, options).deliver
+            rescue
+            end
           end
         end
         @minion_job.update_attributes is_processed: true
