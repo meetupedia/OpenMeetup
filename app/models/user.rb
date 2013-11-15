@@ -44,6 +44,7 @@ class User < ActiveRecord::Base
   has_many :events, dependent: :nullify
   has_many :group_invitations, dependent: :nullify
   has_many :groups, dependent: :nullify
+  has_many :images, dependent: :nullify
   has_many :joined_events, through: :participations, source: :event
   has_many :joined_next_events, through: :participations, source: :event, conditions: ['start_time > ?', Time.now], order: 'start_time ASC'
   has_many :joined_groups, through: :memberships, source: :group
@@ -265,6 +266,10 @@ class User < ActiveRecord::Base
         Activity.create_from(tagging, self)
       end
     end
+  end
+
+  def used_storage
+    images.sum(:image_file_size).to_f / 1024 ** 2
   end
 
   if Settings.customization == 'get2gather'
