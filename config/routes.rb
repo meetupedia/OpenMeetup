@@ -201,19 +201,13 @@ Openmeetup::Application.routes.draw do
 
   match '/about' => 'root#about', as: :about
   match '/crash' => 'root#crash', as: :crash
-  match '/developer_dashboard' => 'root#developer_dashboard', as: :developer_dashboard
   match '/search' => 'search#index', as: :search
-  match '/dashboard' => 'root#dashboard', as: :dashboard
   match '/restricted_access' => 'root#restricted_access', as: :restricted_access
   match '/terms' => 'root#terms', as: :terms
   match '/pricing' => 'root#pricing', as: :pricing
   match '/privacy' => 'root#privacy', as: :privacy
 
   match '/discovery' => 'discovery#index', as: :discovery
-  match '/discovery/events' => 'discovery#events', as: :events_discovery
-  match '/discovery/friends' => 'discovery#friends', as: :friends_discovery
-  match '/discovery/interests' => 'discovery#interests', as: :interests_discovery
-  match '/discovery/newsfeed' => 'discovery#newsfeed', as: :newsfeed_discovery
 
   match '/system-settings' => 'dashboard#index', as: :system
   match '/reload' => 'dashboard#reload', as: :reload

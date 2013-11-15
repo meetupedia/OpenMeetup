@@ -1,0 +1,6 @@
+.row
+  = render 'sidebar'
+  .col-lg-8
+    .wrapper
+      h1= tr('Members')
+      table.table= render partial: 'dashboard/user', collection: User.all, as: :user

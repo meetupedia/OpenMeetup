@@ -12,7 +12,7 @@ class RootController < CommonController
       else
         # @user = current_user
         # render 'users/calendar'
-        redirect_to discovery_url
+        redirect_to controller: 'discovery'
       end
     elsif Settings.customization
       template = "customizations/#{Settings.customization}"
@@ -25,13 +25,6 @@ class RootController < CommonController
   end
 
   def about
-  end
-
-  def developer_dashboard
-  end
-
-  def dashboard
-    @activities = Activity.order('created_at DESC').paginate page: params[:page]
   end
 
   def restricted_access

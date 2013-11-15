@@ -1,5 +1,5 @@
 class Admin::UsersController < ApplicationController
-  before_filter :can_admin?
+  before_filter :authenticate_as_admin
   load_resource
 
   def index

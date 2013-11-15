@@ -1,0 +1,6 @@
+.row
+  = render 'sidebar'
+  .col-lg-8
+    .wrapper
+      h1= tr('Groups')
+      .list_view= render Group.all

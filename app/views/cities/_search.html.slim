@@ -1,4 +1,5 @@
-- unless @groups.blank?
-  .list_view= render @groups
-- else
-  p= tr('No groups found.')
+.list_view
+  - unless @groups.blank?
+    = render @groups
+  - else
+    p= tr('No groups found.')

@@ -1,0 +1,7 @@
+.row
+  = render 'sidebar'
+  .col-lg-8
+    .wrapper
+      h1= tr('Interests')
+      .list_view
+        p= render Tag.all

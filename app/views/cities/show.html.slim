@@ -28,7 +28,7 @@
       h2= tr('Searching for groups')
 
       form action='#{city_path(@city)}' method='get' id='discovery'
-        input type='text' placeholder=trl('Search') name='q' value="#{params[:q]}"
+        input type='text' placeholder=trl('Search') name='q' value="#{params[:q]}" class='form-control'
       #results
         - if params[:q].blank?
           p
@@ -48,7 +48,8 @@
     .wrapper
       h2= tr('Tags')
       - unless (tags = Tag.joins(groups: :city).where('cities.id' => @city.id).order('tags.name ASC').all).blank?
-        = render tags
+        .list_view
+          p= render tags
 
 javascript:
   $(function(){

@@ -1,6 +1,6 @@
 ul.nav.nav-pills.nav-stacked
   li(class="#{controller.controller_name == 'discovery' and controller.action_name == 'index' ? 'active' : ''}")= link_to tr('Groups'), discovery_path
-  li(class="#{controller.action_name == 'events' ? 'active' : ''}")= link_to tr('Events'), events_discovery_path
-  li(class="#{controller.action_name == 'interests' ? 'active' : ''}")= link_to tr('Interests'), interests_discovery_path
-  li(class="#{controller.action_name == 'friends' ? 'active' : ''}")= link_to tr('Friends'), friends_discovery_path
+  li(class="#{controller.action_name == 'events' ? 'active' : ''}")= link_to tr('Events'), controller: 'discovery', action: 'events'
+  li(class="#{controller.action_name == 'interests' ? 'active' : ''}")= link_to tr('Interests'), controller: 'discovery', action: 'interests'
+  li(class="#{controller.action_name == 'friends' ? 'active' : ''}")= link_to tr('Friends'), controller: 'discovery', action: 'friends'
   li(class="#{controller.controller_name == 'notifications' and controller.action_name == 'index' ? 'active' : ''}")= link_to tr('News feed'), notifications_path

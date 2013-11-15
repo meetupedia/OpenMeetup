@@ -1,0 +1,30 @@
+.col-lg-4
+  .wrapper
+    ul.nav.nav-pills.nav-stacked
+      li(class="#{controller.action_name == 'index' ? 'active' : ''}")= link_to tr('Dashboard'), action: 'index'
+      li(class="#{controller.action_name == 'notifications' ? 'active' : ''}")= link_to tr('Notifications'), action: 'notifications'
+      li(class="#{controller.action_name == 'members' ? 'active' : ''}")= link_to tr('Members'), action: 'members'
+      li(class="#{controller.action_name == 'groups' ? 'active' : ''}")= link_to tr('Groups'), action: 'groups'
+      li(class="#{controller.action_name == 'events' ? 'active' : ''}")= link_to tr('Events'), action: 'events'
+      li(class="#{controller.action_name == 'interests' ? 'active' : ''}")= link_to tr('Interests'), action: 'interests'
+      li(class="#{controller.action_name == 'city_groups' ? 'active' : ''}")= link_to tr('Groups in cities'), action: 'city_groups'
+      li(class="#{controller.action_name == 'city_users' ? 'active' : ''}")= link_to tr('Users in cities'), action: 'city_users'
+
+    p
+      = tr('Software version:')
+      br
+      = $revision
+
+    p= link_to tr('Manage users'), admin_users_path, class: 'btn btn-default'
+
+    p= link_to tr('System options'), settings_path, class: 'btn btn-default'
+
+    p= link_to tr('Letter template manager'), letter_templates_path, class: 'btn btn-default'
+
+    p= link_to tr('Letter manager'), letters_path, class: 'btn btn-default'
+
+    p= link_to tr('Download database'), download_database_path, class: 'btn btn-default', confirm: trl('Download database?')
+
+    p= link_to tr('Download translations'), download_translations_path, class: 'btn btn-default', confirm: trl('Download translations?')
+
+    p= link_to tr('Reload site'), reload_path, class: 'btn btn-default', confirm: trl('Reload site?')

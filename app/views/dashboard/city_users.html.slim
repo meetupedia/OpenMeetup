@@ -1,0 +1,6 @@
+.row
+  = render 'sidebar'
+  .col-lg-8
+    .wrapper
+      h1= tr('Users in cities')
+      .list_view= render @cities

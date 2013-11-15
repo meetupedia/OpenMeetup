@@ -3,7 +3,6 @@ tr
     code= setting.key
   td= setting.description
   td= setting.value
-  td
-    .pull-right
-      =' link_to tr('Edit'), edit_setting_path(setting), rel: 'modal', class: 'btn btn-default btn-xs'
-      = button_to tr('Delete'), setting_path(setting), method: :delete, confirm: tr('Are you sure?'), class: 'btn btn-danger btn-xs'
+  td.right_aligned.nowrap
+    =' link_to tr('Edit'), edit_setting_path(setting), rel: 'modal', class: 'btn btn-default btn-xs'
+    = link_to tr('Delete'), setting_path(setting), method: :delete, confirm: tr('Are you sure?'), class: 'btn btn-danger btn-xs'
