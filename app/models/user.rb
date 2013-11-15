@@ -106,7 +106,7 @@ class User < ActiveRecord::Base
   before_validation :set_email
 
   after_create do
-    update_attributes last_notified: user.created_at
+    update_attributes last_notified: created_at
   end
 
   def set_email
