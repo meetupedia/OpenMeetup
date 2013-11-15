@@ -141,26 +141,26 @@ module ActionView
       def easy_text_field(name, text = nil, options = {})
         options.reverse_merge! maxlength: 255
         add_required_option(name, text, options)
-        "<div class='form-group'>#{text and label(name, text.html_safe)}#{handle_prepend_and_append(options) { text_field(name, options) } }</div>".html_safe
+        "<div class='form-group'>#{text and label(name, text.html_safe, class: 'control-label')}#{handle_prepend_and_append(options) { text_field(name, options) } }</div>".html_safe
       end
 
       def easy_file_field(name, text = nil, options = {})
-        "<div class='form-group'>#{text and label(name, text.html_safe)}#{file_field(name, options)}</div>".html_safe
+        "<div class='form-group'>#{text and label(name, text.html_safe, class: 'control-label')}#{file_field(name, options)}</div>".html_safe
       end
 
       def easy_email_field(name, text = nil, options = {})
         add_required_option(name, text, options)
-        "<div class='form-group'>#{text and label(name, text.html_safe)}#{handle_prepend_and_append(options) { email_field(name, options) } }</div>".html_safe
+        "<div class='form-group'>#{text and label(name, text.html_safe, class: 'control-label')}#{handle_prepend_and_append(options) { email_field(name, options) } }</div>".html_safe
       end
 
       def easy_password_field(name, text = nil, options = {})
         add_required_option(name, text, options)
-        "<div class='form-group'>#{text and label(name, text.html_safe)}#{password_field(name, options)}</div>".html_safe
+        "<div class='form-group'>#{text and label(name, text.html_safe, class: 'control-label')}#{password_field(name, options)}</div>".html_safe
       end
 
       def easy_text_area(name, text = nil, options = {})
         add_required_option(name, text, options)
-        "<div class='form-group'>#{text and label(name, text.html_safe)}#{text_area(name, options)}</div>".html_safe
+        "<div class='form-group'>#{text and label(name, text.html_safe, class: 'control-label')}#{text_area(name, options)}</div>".html_safe
       end
 
       def easy_check_box(name, text, options = {})
@@ -170,17 +170,17 @@ module ActionView
 
       def easy_select(name, text, values, options = {})
         add_required_option(name, text, options)
-        "<div class='form-group'>#{text and label(name, text.html_safe)}#{select(name, values, options)}</div>".html_safe
+        "<div class='form-group'>#{text and label(name, text.html_safe, class: 'control-label')}#{select(name, values, options)}</div>".html_safe
       end
 
       def easy_date_select(name, text = nil, options = {})
         add_required_option(name, text, options)
-        "<div class='form-group'>#{text and label(name, text.html_safe) + '<br />'.html_safe}#{date_select(name, options)}</div>".html_safe
+        "<div class='form-group'>#{text and label(name, text.html_safe, class: 'control-label') + '<br />'.html_safe}#{date_select(name, options)}</div>".html_safe
       end
 
       def easy_datetime_select(name, text = nil, options = {})
         add_required_option(name, text, options)
-        "<div class='form-group'>#{text and label(name, text.html_safe) + '<br />'.html_safe}#{datetime_select(name, options)}</div>".html_safe
+        "<div class='form-group'>#{text and label(name, text.html_safe, class: 'control-label') + '<br />'.html_safe}#{datetime_select(name, options)}</div>".html_safe
       end
 
       def easy_submit(name = 'Mentés', options = {})

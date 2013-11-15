@@ -19,6 +19,9 @@ module Openmeetup
     config.assets.enabled = true
     config.assets.version = '1.0'
 
+    # bootstrap form fix
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance| "<span class='has-error'>#{html_tag}</span>".html_safe }
+
     GC::Profiler.enable
   end
 end
