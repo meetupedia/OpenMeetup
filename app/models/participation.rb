@@ -17,7 +17,7 @@ class Participation < ActiveRecord::Base
     event.group.admins.each do |user|
       EventMailer.participation(self, user).deliver if user.email
     end
-    Minion.set participation, :participation_reminder, :write_a_review
+    Minion.set self, :participation_reminder, :write_a_review
     Minion.unset event, :event_reminder_for_members
     Activity.create_from self, user, event.group, event
   end

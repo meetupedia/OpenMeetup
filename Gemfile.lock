@@ -345,6 +345,7 @@ DEPENDENCIES
   fb_graph
   geocoder
   hirb
+  httparty
   jdbc-mysql
   jquery-fileupload-rails
   jquery-rails

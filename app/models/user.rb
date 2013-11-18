@@ -153,8 +153,12 @@ class User < ActiveRecord::Base
     authentications.where(provider: provider).first
   end
 
+  def facebook_access_token
+    authentication_with(:facebook).andand.facebook_access_token
+  end
+
   def facebook
-    @facebook ||= FbGraph::User.new(facebook_id, access_token: authentication_with(:facebook).andand.facebook_access_token).fetch
+    @facebook ||= FbGraph::User.new(facebook_id, access_token: facebook_access_token).fetch
   end
 
   def twitter_id
