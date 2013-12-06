@@ -1,7 +1,7 @@
 Openmeetup::Application.routes.draw do
 
-  mount WillFilter::Engine => '/will_filter'
-  mount Tr8n::Engine => '/tr8n'
+  # mount WillFilter::Engine => '/will_filter'
+  # mount Tr8n::Engine => '/tr8n'
 
   mount AdminMailer::Preview => '/admin_mailer/mail_view'
   mount CommentMailer::Preview => '/comment_mailer/mail_view'
