@@ -10,12 +10,15 @@ class Authentication < ActiveRecord::Base
 
   validates_uniqueness_of :uid, scope: :provider
 
-  after_create :set_user_facebook_id
-  after_destroy :set_user_facebook_id
-
-  def set_user_facebook_id
+  after_create do
     if provider == 'facebook'
       user.update_attributes facebook_id: self.uid
+    end
+  end
+
+  after_destroy do
+    if provider == 'facebook'
+      user.update_attributes facebook_id: nil
     end
   end
 end

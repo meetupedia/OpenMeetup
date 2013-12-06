@@ -24,8 +24,7 @@ class Minion
 
     abandoned_group_1: {
       recipients: -> { @item.user },
-      run_at: -> { 30.days.from_now },
-      subject: ''
+      run_at: -> { 30.days.from_now }
     }
   }
 
