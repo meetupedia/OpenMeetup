@@ -44,7 +44,7 @@
     .button-menu=' link_to %{<i class="icon-plus-sign icon-white"></i> #{tr('Join')}}.html_safe, set_group_memberships_path(@group), class: 'btn btn-primary', onclick: "_gaq.push(['_trackEvent', 'Join group', 'Group']);"
 
 ul.nav.nav-tabs
-  li(class="#{current_page?(action: 'show') ? 'active' : ''}")= link_to tr('About group'), @group
+  li(class="#{current_page?(action: 'show') ? 'active' : ''}")= link_to tr('About'), @group
   li(class="#{current_page?(action: 'members') ? 'active' : ''}")= link_to "#{tr('Members')} <span class='label label-default'>#{@group.members.size}</span>".html_safe, members_group_path(@group)
   li(class="#{current_page?(action: 'events') ? 'active' : ''}")= link_to "#{tr('Events')} <span class='label label-default'>#{@group.events.size}</span>".html_safe, events_group_path(@group)
   li(class="#{current_page?(action: 'images') ? 'active' : ''}")= link_to "#{tr('Images')} <span class='label label-default'>#{@group.images.size}</span>".html_safe, images_group_path(@group)
