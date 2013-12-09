@@ -1,8 +1,8 @@
 - unless activities.blank?
-  #activities.list_view
+  #activities
     - if params[:page]
       = will_paginate activities
-    = render activities
+    .list_view= render activities
     = will_paginate activities
 - else
   #activities.list_view

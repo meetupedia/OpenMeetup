@@ -1,10 +1,19 @@
 = render 'groups/header'
 
-.row
-  .col-lg-4
-    .wrapper
-      = render 'groups/tile_menu', group: @group
+.wrapper
+  .row
+    .col-lg-8
+      - if event = @group.next_event
+        = render 'groups/next_event', event: event
 
+      h2= tr('Activity')
+      - if can? :create, post = @group.posts.build
+        = easy_form_for post, url: url_for([@group, :posts]), remote: true do |f|
+          = f.input :post
+          = f.action trl('Send'), disable_with: trl('Sending...')
+      = render 'activities/activities', activities: @activities
+
+    .col-lg-4
       / - if current_user.andand.in?(@group.members)
       /   p= link_to @group.email_url, "mailto:#{@group.email_url}"
 
@@ -16,20 +25,19 @@
         div
           = link_to tr('Facebook'), @group.facebook_url
 
-    - if @group.images.size > 0
-      .wrapper
-        = link_to image_tag(@group.images.last.image.url(:normal)), @group.images.last
+      - if @group.images.size > 0
+        h3= link_to tr('Images'), images_group_path(@group)
+        = link_to image_tag(@group.images.last.image.url(:small)), @group.images.last
         p= link_to tr('All images'), images_group_path(@group), rel: 'modal'
+        hr
 
-    - if @group.admins.include?(current_user)
-      - unless @membership_requests.blank?
-        .wrapper
+      - if @group.admins.include?(current_user)
+        - unless @membership_requests.blank?
           h2= tr('Membership requests')
           .list_view= render @membership_requests
           = will_paginate @membership_requests
 
-    .wrapper
-      h2= tr('Members')
+      h3= link_to tr('Members'), members_group_path(@group)
       - @group.members.order('memberships.created_at ASC').each do |user|
         = div_for user, class: 'list_item avatar_item' do
           .avatar= user_avatar user
@@ -38,31 +46,17 @@
             '
             span.label.label-danger=' tr('group admin')
 
-
-    - if Settings.enable_share_buttons
-      .wrapper
-        h2= tr('Sharing is caring')
+      - if Settings.enable_share_buttons
+        hr
+        h3= tr('Sharing is caring')
         ' <div class="fb-like" data-href="#{group_url(@group)}" data-send="false" data-width="450" data-layout="button_count" data-show-faces="false"></div><br/>
         ' <div class="g-plusone" data-size="medium"></div><br/>
         ' <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
-  .col-lg-8
-    - if event = @group.next_event
-      .wrapper
-        = render 'groups/next_event', event: event
-
-    .wrapper
-      h2= tr('Activity')
-      - if can? :create, post = @group.posts.build
-        = easy_form_for post, url: url_for([@group, :posts]), remote: true do |f|
-          = f.input :post
-          = f.action trl('Send'), disable_with: trl('Sending...')
-      = render 'activities/activities', activities: @activities
-
-- if Settings.enable_share_buttons
-  javascript:
-    (function() {
-      var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-      po.src = 'https://apis.google.com/js/plusone.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-    })();
+  - if Settings.enable_share_buttons
+    javascript:
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();

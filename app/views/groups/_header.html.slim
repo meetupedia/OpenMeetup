@@ -1,47 +1,50 @@
 .wrapper
   - if @group.header.file?
     .header_image= image_tag @group.header.url(:normal)
-  .group_header
-    .right
-      - if current_user
-        .button-menu
-          .btn-group.pull-right
-            a.btn.btn-default.dropdown-toggle(data-toggle="dropdown" href="#")
-              =' image_tag 'cog.png'
-              span.caret
-            ul.dropdown-menu
-              - if current_user
-                li= link_to tr('Invite friends'), new_group_group_invitation_path(@group), rel: 'modal'
-              - if can? :create, Image
-                li= link_to tr('Upload pictures'), images_group_path(@group), rel: 'modal'
-              - if membership = @group.membership_for(current_user) and can? :destroy, membership
-                li= link_to tr('Leave group'), membership, method: :delete
-              - if membership = @group.membership_for(current_user) and can? :create, Event.new(group: @group)
-                li.divider
-                li= link_to tr('New event'), new_group_event_path(@group), rel: 'modal'
-              - if can? :update, @group
-                li= link_to tr('Edit group'), edit_group_path(@group), rel: 'modal'
-              - if can? :destroy, @group
-                li= link_to tr('Delete group'), @group, method: :delete, confirm: trl('Are you sure?')
-
-          =' render 'memberships/button', group: @group
-
-          - if membership = @group.membership_for(current_user) and can? :create, Event.new(group: @group)
-            =' link_to tr('New event'), new_group_event_path(@group), rel: 'modal', class: 'btn btn-primary'
-          - if membership = @group.membership_for(current_user)
-            =' link_to tr('Invite friends'), new_group_group_invitation_path(@group), rel: 'modal', class: 'btn btn-primary'
-
-      - else
-        .button-menu=' link_to %{<i class="icon-plus-sign icon-white"></i> #{tr('Join')}}.html_safe, set_group_memberships_path(@group), class: 'btn btn-primary', onclick: "_gaq.push(['_trackEvent', 'Join group', 'Group']);"
-
+  .group_header.clearfix
     - if @group.image.file?
       .avatar= link_to(image_tag(@group.image.url(:small), alt: @group.name, height: 96, width: 96, title: @group.name), @group)
-    h1
-      i.icon.icon-group
-      '
-      = link_to @group.name, @group
+    h1= link_to @group.name, @group
     - unless (tags = @group.tags).blank?
       p= render @group.tags
 
     - unless @group.description.blank?
       = textilize(auto_link(@group.description)).html_safe
+
+- if current_user
+  .right
+    .button-menu
+      .btn-group.pull-right
+        a.btn.btn-default.dropdown-toggle(data-toggle="dropdown" href="#")
+          =' image_tag 'cog.png'
+          span.caret
+        ul.dropdown-menu
+          - if current_user
+            li= link_to tr('Invite friends'), new_group_group_invitation_path(@group), rel: 'modal'
+          - if can? :create, Image
+            li= link_to tr('Upload pictures'), images_group_path(@group), rel: 'modal'
+          - if membership = @group.membership_for(current_user) and can? :destroy, membership
+            li= link_to tr('Leave group'), membership, method: :delete
+          - if membership = @group.membership_for(current_user) and can? :create, Event.new(group: @group)
+            li.divider
+            li= link_to tr('New event'), new_group_event_path(@group), rel: 'modal'
+          - if can? :update, @group
+            li= link_to tr('Edit group'), edit_group_path(@group), rel: 'modal'
+          - if can? :destroy, @group
+            li= link_to tr('Delete group'), @group, method: :delete, confirm: trl('Are you sure?')
+
+      =' render 'memberships/button', group: @group
+
+      / - if membership = @group.membership_for(current_user) and can? :create, Event.new(group: @group)
+      /   =' link_to tr('New event'), new_group_event_path(@group), rel: 'modal', class: 'btn btn-primary'
+      / - if membership = @group.membership_for(current_user)
+      /   =' link_to tr('Invite friends'), new_group_group_invitation_path(@group), rel: 'modal', class: 'btn btn-primary'
+- else
+  .right
+    .button-menu=' link_to %{<i class="icon-plus-sign icon-white"></i> #{tr('Join')}}.html_safe, set_group_memberships_path(@group), class: 'btn btn-primary', onclick: "_gaq.push(['_trackEvent', 'Join group', 'Group']);"
+
+ul.nav.nav-tabs
+  li(class="#{current_page?(action: 'show') ? 'active' : ''}")= link_to tr('About'), @group
+  li(class="#{current_page?(action: 'members') ? 'active' : ''}")= link_to "#{tr('Members')} <span class='label label-default'>#{@group.members.size}</span>".html_safe, members_group_path(@group)
+  li(class="#{current_page?(action: 'events') ? 'active' : ''}")= link_to "#{tr('Events')} <span class='label label-default'>#{@group.events.size}</span>".html_safe, events_group_path(@group)
+  li(class="#{current_page?(action: 'images') ? 'active' : ''}")= link_to "#{tr('Images')} <span class='label label-default'>#{@group.images.size}</span>".html_safe, images_group_path(@group)

@@ -19,12 +19,6 @@ h2
 h3
   font-size: 2em
 
-h1:nth-of-type(1), h3:nth-of-type(1)
-  margin-top: 5px
-
-h2:nth-of-type(1)
-  margin-top: 0
-
 h4
   margin: 0
 
@@ -130,8 +124,8 @@ div.list_view
     border-radius: 0 5px 5px 5px
     box-shadow: 0 1px 2px #cfcfcf
   &:last-child
-    border-radius: 0 0 5px 5px
-    margin-bottom: -20px
+    border-radius: 0 0 0 5px
+    margin-bottom: -15px
   &.nowrapper
     margin-bottom: 20px
 
@@ -220,6 +214,8 @@ div.calendar
   .month_names
     font-family: Georgia, serif
     font-size: 16px
+  th
+    text-align: center
   td
     text-align: center
     &.otherMonth
@@ -228,7 +224,7 @@ div.calendar
       background: #ffffff
       border: 2px solid #f7f7f7
       display: block
-      min-width: 24px
+      min-width: 36px
       padding: 2px
       text-align: center
       &.on_day
@@ -533,3 +529,10 @@ form.button_to
 
 .nowrap
   white-space: nowrap
+
+.nav-tabs > li > a
+  background-color: #f7f7f7
+  border-bottom: 1px solid #dddddd
+  margin-right: 5px
+  &:hover
+    background-color: #ffffff

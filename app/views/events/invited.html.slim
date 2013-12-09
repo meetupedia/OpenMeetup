@@ -1,7 +1,10 @@
-- unless modal_request?
-  = render 'events/header'
+= render 'events/header'
 
 .wrapper
+  - if can? :create, EventInvitation.new(event: @event)
+    .button-menu
+      = link_to tr('Invite friends'), new_event_event_invitation_path(@event), class: 'btn btn-default btn-primary', rel: 'modal'
+
   h2= tr('Already invited')
 
   = will_paginate @event_invitations

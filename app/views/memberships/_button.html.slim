@@ -1,6 +1,6 @@
 - if membership = group.membership_for(current_user) and can? :destroy, membership
   .btn-group.pull-right
-    a.btn.btn-default.dropdown-toggle(data-toggle="dropdown" href="#")
+    a.btn.btn-success.dropdown-toggle(data-toggle="dropdown" href="#")
       =' %{<i class="icon-ok-sign icon-black"></i> #{tr('Joined')}}.html_safe
       span.caret
     ul.dropdown-menu
