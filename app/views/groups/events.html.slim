@@ -1,9 +1,8 @@
-- unless modal_request?
-  = render 'groups/header'
+= render 'groups/header'
 
 .wrapper
   - if can? :create, Event.new(group: @group)
-    .pull-right= link_to tr('New event'), new_group_event_path(@group), class: 'btn btn-default', rel: 'modal'
+    .pull-right= link_to tr('New event'), new_group_event_path(@group), class: 'btn btn-default btn-primary', rel: 'modal'
 
   h2= tr('Events')
 

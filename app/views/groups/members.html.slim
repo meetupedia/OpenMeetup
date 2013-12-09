@@ -1,10 +1,9 @@
-- unless modal_request?
-  = render 'groups/header'
+= render 'groups/header'
 
 .wrapper
 
   .button-menu
-    = link_to tr('Invite friends'), new_group_group_invitation_path(@group), class: 'btn btn-default', rel: 'modal'
+    = link_to tr('Invite friends'), new_group_group_invitation_path(@group), class: 'btn btn-default btn-primary', rel: 'modal'
 
   h2= tr('Members')
 

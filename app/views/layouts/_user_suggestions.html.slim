@@ -4,4 +4,3 @@
       = easy_form_for Feedback.new, remote: true do |f|
         = f.input :body, tr('How can we make this page better for you?'), placeholder: trl('Your suggestions, ideas, complaints will greatly help us.')
         = f.action trl('Send feedback'), disable_with: trl('Sending...'), onclick: "_gaq.push(['_trackEvent', 'Send feedback', 'Feedback']);"
-    hr

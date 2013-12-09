@@ -3,7 +3,7 @@
 class Admin
 
   def self.weekly_newsletter
-    User.where(enable_weekly_newsletter: true).find_each do |user|
+    User.where(enable_weekly_newsletter: true).where('city_id IS NOT ?', nil).find_each do |user|
       begin
         AdminMailer.weekly_newsletter(user.id).deliver
       rescue

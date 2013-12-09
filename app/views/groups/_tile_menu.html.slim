@@ -1,12 +1,6 @@
-ul.tiles
-  li= link_to "<span class='menu_count'>#{group.members.size}</span> #{tr('members')}".html_safe, members_group_path(group), rel: 'modal'
-  li= link_to "<span class='menu_count'>#{group.events.size}</span> #{tr('events')}".html_safe, events_group_path(group), rel: 'modal'
-  li= link_to "<span class='menu_count'>#{group.images.size}</span> #{tr('images')}".html_safe, images_group_path(group)
-
-/
-  - if current_user
-    - if (users = current_user.friends_in_group(group).order('users.name ASC')).empty?
-      .muted= tr('No friends in this group yet.')
-    - else
-      h3= tr('Friends')
-      p= render 'users/user_avatars', users: users
+p
+  = link_to "#{group.members.size} #{tr('members')}", members_group_path(group)
+  = dot
+  = link_to "#{group.events.size} #{tr('events')}", events_group_path(group)
+  = dot
+  = link_to "#{group.images.size} #{tr('images')}", images_group_path(group)
