@@ -77,7 +77,7 @@
       = link_to "<i class='icon-plus-sign icon-white'></i> #{tr('Join')}".html_safe, set_event_participations_path(@event), class: 'btn btn-primary'
 
 ul.nav.nav-tabs
-  li(class="#{current_page?(action: 'show') ? 'active' : ''}")= link_to tr('About'), @event
+  li(class="#{current_page?(action: 'show') ? 'active' : ''}")= link_to tr('About event'), @event
   li(class="#{current_page?(action: 'users') ? 'active' : ''}")= link_to "#{tr('Participants')} <span class='label label-default'>#{@event.participants.size}</span>".html_safe, users_event_path(@event)
   li(class="#{current_page?(action: 'invited') ? 'active' : ''}")= link_to "#{tr('Invited')} <span class='label label-default'>#{@event.event_invitations.size}</span>".html_safe, invited_event_path(@event)
   li(class="#{current_page?(action: 'images') ? 'active' : ''}")= link_to "#{tr('Images')} <span class='label label-default'>#{@event.images.size}</span>".html_safe, images_event_path(@event)
